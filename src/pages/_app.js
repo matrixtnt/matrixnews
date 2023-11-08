@@ -10,6 +10,8 @@ import { Router } from 'next/router'
 import NProgress from 'nprogress'
 import dynamic from 'next/dynamic'
 import PushNotificationLayout from 'src/components/firebaseNotification/PushNotification'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // CSS File Here
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -22,8 +24,22 @@ import 'nprogress/nprogress.css'
 import '../../public/assets/css/style.css'
 
 const LayoutNoSSR = dynamic(() => import('src/components/layout/Layout'), { ssr: false })
+
+// provide the default query function to your app with defaultOptions
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 20000,
+    },
+  },
+})
+
+
 // ** Configure JSS & ClassName
-const App = ({ Component, pageProps, data }) => {
+const App = ({ Component, pageProps }) => {
+
+  // const queryClient = new QueryClient()
+
   Router.events.on('routeChangeStart', () => {
     NProgress.start()
   })
@@ -34,23 +50,21 @@ const App = ({ Component, pageProps, data }) => {
     NProgress.done()
   })
 
+
+
   return (
     <>
-      <Head>
-        <title>{`news`}</title>
-        {/* <meta name='description' content={``} />
-        <meta name='keywords' content={``} />
-        <meta name='viewport' content='initial-scale=1, width=device-width' />
-      <link rel='shortcut icon' href={``} /> */}
-      </Head>
-      <Provider store={store}>
-        <Toaster position='top-center' containerClassName='toast-custom' />
-        <PushNotificationLayout>
-          <LayoutNoSSR>
-            <Component {...pageProps} />
-          </LayoutNoSSR>
-        </PushNotificationLayout>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+          <Provider store={store}>
+            <Toaster position='top-center' containerClassName='toast-custom' />
+            <PushNotificationLayout>
+              <LayoutNoSSR>
+                <Component {...pageProps} />
+              </LayoutNoSSR>
+            </PushNotificationLayout>
+          </Provider>
+          <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   )
 }

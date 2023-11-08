@@ -1,4 +1,4 @@
-'use client'
+
 import { deleteCommentApi, getBookmarkApi, getBreakingNewsApi, getBreakingNewsIdApi, getCategoriesApi, getCommentByNewsApi, getLiveStreamingApi, getNewsApi, getNewsByCategoryApi, getNewsByIdApi, getPagesApi, getTagApi, getVideoApi, setBookmarkApi, setCommentApi, setLikeDisLikeApi, getNewsByTagApi, DeleteUserNotificationApi, getFeatureSectionApi, getFeatureSectionByIdApi, setUserCategoriesApi, getUserCategoriesApi, getUserByIdApi, setNewsViewApi, setBreakingNewsViewApi, getAdsSpaceNewsDetailsApi, setnewsApi, deleteimageApi, deletenewsApi, getsubcategorybycategoryApi, set_comment_like_dislike_Api, set_flag_Api, register_token_api, getlocationapi } from "../../utils/api"
 import { store } from "../store"
 import { apiCallBegan } from "./apiActions"

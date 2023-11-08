@@ -1,4 +1,4 @@
-'use client'
+
 import { createSlice } from "@reduxjs/toolkit";
 import { store } from "../store";
 import { updateProfileApi, updateProfileImageApi, userSignUpApi } from "../../utils/api";

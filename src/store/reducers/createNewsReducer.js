@@ -1,4 +1,4 @@
-'use client'
+
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { store } from "../store";
 

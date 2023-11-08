@@ -1,4 +1,4 @@
-'use client'
+
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "../actions/apiActions";
 import { getLanguageJsonDataApi, getLanguagesApi } from "../../utils/api";
