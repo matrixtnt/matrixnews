@@ -1,62 +1,83 @@
-'use client'
-import React, { useEffect, useRef, useState } from 'react'
-import bookmarkIMG from '../../../public/assets/images/bookmark.png'
-import { FiCalendar } from 'react-icons/fi'
-import { BsTrash } from 'react-icons/bs'
-import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { getbookmarkApi, setbookmarkApi } from '../../store/actions/campaign'
-import { translate } from '../../utils'
-import Skeleton from 'react-loading-skeleton'
-import { useRouter } from 'next/navigation'
+"use client"
+import bookmarkIMG from '../../../public/assets/images/bookmark.png';
+import { FiCalendar } from 'react-icons/fi';
+import { BsTrash } from 'react-icons/bs';
+import BreadcrumbNav from '../breadcrumb/BreadcrumbNav';
+import { translate } from '../../utils';
+import Skeleton from 'react-loading-skeleton';
+import { useRouter } from 'next/navigation';
+import { bookmarkApi } from 'src/hooks/bookmarkApi';
+import { useQuery } from '@tanstack/react-query';
+import { access_key, getLanguage, getUser } from 'src/utils/api';
 
 const BookmarkSection = () => {
-  const navigate = useRouter()
-  const [Data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  const { id: language_id } = getLanguage();
+  const user = getUser();
+  const navigate = useRouter();
 
-  const initialData = useRef([])
+  // api call
+  const getbookmarkApi = async () => {
+    try {
+      const { data } = await bookmarkApi.getBookmark({
+        access_key: access_key,
+        user_id: user,
+        language_id: language_id,
+        offset: 0,
+        limit: '',
+      });
+      return data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  useEffect(() => {
-    initialData.current = Data
-  }, [Data])
+  const setbookmarkApi = async (news_id, status) => {
+    try {
+      const { data } = await bookmarkApi.setBookmark({
+        access_key: access_key,
+        user_id: user,
+        news_id: news_id,
+        status: status,
+      });
+      refetch()
+      return data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // get bookmark
-  useEffect(() => {
-    getbookmarkApi(
-      '0',
-      '',
-      response => {
-        setData(response.data)
-        setIsLoading(false)
-      },
-      error => {
-        setIsLoading(false)
-        if (error === 'No Data Found') {
-          setData('')
-        }
-      }
-    )
-  }, [])
+  // react query
+  const { refetch,isLoading, isError, data } = useQuery({
+    queryKey: ['getbookmark', access_key, user, language_id],
+    queryFn: getbookmarkApi,
+  });
 
-  // set bookmark for remove bookmark
-  const setbookmarkData = (e, newsid, status) => {
-    e.preventDefault()
-    setbookmarkApi(
-      newsid,
-      status,
-      response => {
-        setData(Data.filter(item => item.news_id !== newsid))
-        setIsLoading(false)
-      },
-      error => {
-        setIsLoading(false)
-        if (error === 'No Data Found') {
-          setData('')
-        }
-      }
-    )
+  const { } = useQuery({
+    queryKey: ['setbookmark'],
+    queryFn: getbookmarkApi,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="col-12 loading_data">
+        <Skeleton height={20} count={22} />
+      </div>
+    );
   }
 
+  if (isError) {
+    return (
+      <div className="col-12 no_data mt-5">
+        <div id="bs-no-main">
+          <img id="bs-no-image" src={bookmarkIMG.src} alt="" />
+          <p id="bs-no-title">
+            <b>{translate('addbookmark')}</b>
+          </p>
+          <p id="bs-no-text">{translate('dontforgetbookmark')}</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <BreadcrumbNav SecondElement={translate('bookmarkLbl')} ThirdElement='0' />
@@ -64,13 +85,8 @@ const BookmarkSection = () => {
       <div id='bs-main' className='py-5 bookmark_page'>
         <div id='bs-content' className='container'>
           <div className='row'>
-            {isLoading ? (
-              // Show skeleton loading when data is being fetched
-              <div className='col-12 loading_data'>
-                <Skeleton height={20} count={22} />
-              </div>
-            ) : Data.length > 0 ? (
-              Data.map(element => (
+            {data &&
+              data.map(element => (
                 <div className='col-md-6 col-lg-4 col-12' key={element.id}>
                   <div id='bs-card' className='card'>
                     <div className='bs_image_card'>
@@ -81,11 +97,7 @@ const BookmarkSection = () => {
                         alt='...'
                         onClick={() => navigate.push(`/news/${element.news_id}`)}
                       />
-                      <button
-                        id='bs-btnBookmark'
-                        className='btn'
-                        onClick={e => setbookmarkData(e, element.news_id, '0')}
-                      >
+                      <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
                         <BsTrash id='bs-bookmark-logo' size={18} />
                       </button>
                     </div>
@@ -112,19 +124,7 @@ const BookmarkSection = () => {
                     </div>
                   </div>
                 </div>
-              ))
-            ) : (
-              // Show "No data found" message if no data is available
-              <div className='col-12 no_data mt-5'>
-                <div id='bs-no-main'>
-                  <img id='bs-no-image' src={bookmarkIMG.src} alt='' />
-                  <p id='bs-no-title'>
-                    <b>{translate('addbookmark')}</b>
-                  </p>
-                  <p id='bs-no-text'>{translate('dontforgetbookmark')}</p>
-                </div>
-              </div>
-            )}
+              ))}
           </div>
         </div>
       </div>

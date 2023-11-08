@@ -2,43 +2,63 @@
 import React, { useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { IoArrowForwardCircleSharp } from 'react-icons/io5'
-import { useEffect } from 'react'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
-import { categoriesApi } from '../../store/actions/campaign'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import Link from 'next/link'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { translate } from '../../utils'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
+import { access_key } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
+import Skeleton from 'react-loading-skeleton'
 
 const Categories = () => {
-  const [Data, setData] = useState([])
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categoiresOnOff = useSelector(settingsData)
   const [totalLength, setTotalLength] = useState(0)
   const [offsetdata, setOffsetdata] = useState(0)
   const limit = 12
-  // console.log("test type of =============", typeof (limit))
-  useEffect(() => {
-    categoriesApi(
-      offsetdata.toString(),
-      limit.toString(),
-      currentLanguage.id,
-      response => {
-        setTotalLength(response.total)
-        const responseData = response.data
-        setData(responseData)
-      },
-      error => {
-        // console.log(error);
-      }
-    )
-  }, [currentLanguage, offsetdata])
 
   const handlePageChange = selectedPage => {
-    // console.log("select page", selectedPage)
     const newOffset = selectedPage.selected * limit
     setOffsetdata(newOffset)
+  }
+
+  // api call
+  const categoriesApi = async () => {
+    try {
+      const { data } = await CategoriesApi.getCategories({
+        access_key,
+        offset: offsetdata.toString(),
+        limit: limit.toString(),
+        language_id: currentLanguage.id
+      })
+      setTotalLength(data.total)
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, isError, data } = useQuery({
+    queryKey: ['categories', access_key, offsetdata.toString(), limit.toString(), currentLanguage.id],
+    queryFn: categoriesApi
+  })
+
+  // loading
+  if (isLoading) {
+    return (
+      <span>
+        <Skeleton height={200} count={3} />
+      </span>
+    )
+  }
+
+  // error
+  if (isError) {
+    return <span className='text-center my-5'>{translate('nodatafound')}</span>
   }
 
   return (
@@ -47,8 +67,8 @@ const Categories = () => {
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <div className='container my-5'>
           <div className='row'>
-            {Data &&
-              Data.map(element => (
+            {data &&
+              data.map(element => (
                 <div className='col-md-4 col-12 mb-4'>
                   <Link id='cat-section-card' key={element.id} className='card' href={`/categories-news/${element.id}`}>
                     <img id='cat-section-card-image' src={element.image} className='card-img' alt='...' />

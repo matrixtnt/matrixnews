@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import BreadcrumbNav from "../breadcrumb/BreadcrumbNav";
 import { useSelector } from "react-redux";
 import { selectCurrentLanguage } from "../../store/reducers/languageReducer";
@@ -15,7 +14,7 @@ const AllBreakingNews = () => {
     let { id: language_id } = getLanguage();
     useSelector(selectCurrentLanguage);
 
-    // breaking news api call
+    // api call
     const getBreakingNewsApi = async () => {
         try {
             const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id, access_key });
@@ -42,7 +41,7 @@ const AllBreakingNews = () => {
 
     // error
     if (isError) {
-        return <span>{translate("nodatafound")}</span>;
+        return <span className="text-center my-5">{translate("nodatafound")}</span>
     }
 
     return (

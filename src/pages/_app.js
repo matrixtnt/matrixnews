@@ -1,10 +1,6 @@
-// ** Next Imports
-import Head from 'next/head'
-
 // ** Store Imports
 import { Provider } from 'react-redux'
 import { store } from 'src/store/store'
-
 import { Toaster } from 'react-hot-toast'
 import { Router } from 'next/router'
 import NProgress from 'nprogress'
@@ -30,15 +26,13 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 20000,
+      refetchOnWindowFocus: false, // default: true
     },
   },
 })
 
-
 // ** Configure JSS & ClassName
 const App = ({ Component, pageProps }) => {
-
-  // const queryClient = new QueryClient()
 
   Router.events.on('routeChangeStart', () => {
     NProgress.start()
@@ -49,8 +43,6 @@ const App = ({ Component, pageProps }) => {
   Router.events.on('routeChangeComplete', () => {
     NProgress.done()
   })
-
-
 
   return (
     <>
