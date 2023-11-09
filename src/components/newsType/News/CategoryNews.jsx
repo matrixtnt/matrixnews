@@ -11,7 +11,6 @@ import { useRouter } from 'next/router.js'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
-import { useEffect } from 'react'
 
 const CategoryNews = () => {
   const router = useRouter()
@@ -44,9 +43,9 @@ const CategoryNews = () => {
   }
 
   // react query
-  const { refetch,isLoading, isError, data, error } = useQuery({
-    queryKey: ['category-news'],
-    queryFn: getNewsByCategoryApi,
+  const {  isLoading, isError, data, error } = useQuery({
+    queryKey: ['category-news',catId],
+    queryFn: getNewsByCategoryApi
   })
 
   // loading
@@ -62,10 +61,6 @@ const CategoryNews = () => {
   if (isError) {
     return <span className='text-center my-5'>{translate('nodatafound')}</span>
   }
-
-  useEffect(()=>{
-    refetch()
-  },[catId])
 
   return (
     <section className='categoryview_Section'>
@@ -90,7 +85,6 @@ const CategoryNews = () => {
                           <FiCalendar size={18} id='cv-logoCalendar' />
                           {element.date}
                         </p>
-                        {/* <Link id='btncvRead' className='btn overlay' type="button" href="/news-view" ><IoArrowForwardCircleSharp size={50}/></Link> */}
                       </div>
                     </div>
                   </Link>
