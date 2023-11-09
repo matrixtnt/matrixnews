@@ -7,11 +7,8 @@ import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
 import {
-  categoriesApi,
   deleteImageApi,
-  getLocationApi,
   getSubcategoryByCategoryApi,
-  gettagsApi,
   setNewsApi
 } from '../../store/actions/campaign'
 import { selectLanguages } from '../../store/reducers/languageReducer'
@@ -29,6 +26,12 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import { IoIosClose } from 'react-icons/io'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import managenewsimage from '../../../public/assets/images/manage-news.svg'
+import { getTagApi } from 'src/hooks/tagsApi'
+import { access_key, getLanguage } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
+import { getlocationapi } from 'src/hooks/getlocationApi'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
+import { getsubcategorybycategoryApi } from 'src/hooks/subcategoryByCategoryApi'
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
@@ -36,10 +39,8 @@ SwiperCore.use([Navigation, Pagination])
 const EditNews = () => {
   const [showCategory, setShowCategory] = useState(false)
   const [mainImage, setMainImage] = useState(null)
-  const [category, setCategory] = useState([])
   const [showUrl, setShowURl] = useState(false)
   const [videoUrl, setVideoUrl] = useState(false)
-  const [tagsData, setTagsData] = useState([])
   const [images, setImages] = useState([])
   const [nextStepScreen, setNextStepScreen] = useState(false)
   const [modalShow, setModalShow] = useState(false)
@@ -51,8 +52,9 @@ const EditNews = () => {
   const [showsubCategory, setShowsubCategory] = useState(false)
   const [videoData, setVideoData] = useState(manageNews.content_value)
   const [otherUrl, setOtherUrl] = useState(false)
-  const [locationOptions, setLocationOptions] = useState([])
-
+  let { id: language_id } = getLanguage()
+  const getLocation = useSelector(settingsData)
+  const getLocationData = getLocation?.location_news_mode
   const navigate = useRouter()
 
   const matchingObject = languagesData.find(obj => obj.id === manageNews.language_id)
@@ -228,31 +230,137 @@ const EditNews = () => {
     setNextStepScreen(true)
   }
 
-  // tag api
+  // api call
+  const getTag = async () => {
+    try {
+      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: language_id })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // api call
+  const getLocationlatlong = async () => {
+    try {
+      const { data } = await getlocationapi.getlocation({ access_key: access_key })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // api call
+  const getCategories = async () => {
+    try {
+      const { data } = await CategoriesApi.getCategories({
+        access_key: access_key,
+        offset: '',
+        limit: '70',
+        language_id: DefaultValue.languageId
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // api call
+  const getsubcategorybycategory = async () => {
+    try {
+      const { data } = await getsubcategorybycategoryApi.getsubcategorybycategory({
+        access_key: access_key,
+        category_id: manageNews.category_id,
+        language_id: language_id
+      })
+
+      setSubCategory(data.data)
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const {
+    isLoading: subbycatisloading,
+    isError: subbycatisError,
+    data: subbycategory,
+    error: subbycaterror,
+    status: subbystatus
+  } = useQuery({
+    queryKey: ['getSubcategorybycategories', DefaultValue.languageId],
+    queryFn: getsubcategorybycategory
+  })
+
+  // react query
+  const {
+    isLoading: catisloading,
+    isError: catisError,
+    data: category,
+    error: caterror
+  } = useQuery({
+    queryKey: ['getcategories', DefaultValue.languageId],
+    queryFn: getCategories
+  })
+
+  // react query
+  const {
+    isLoading,
+    isError,
+    data: tagsData,
+    error
+  } = useQuery({
+    queryKey: ['getTag', language_id, access_key],
+    queryFn: getTag
+  })
+
+  const {
+    isLoading: locloading,
+    isError: locisError,
+    data: locationOptions,
+    error: locerror
+  } = useQuery({
+    queryKey: ['getlocation', access_key],
+    queryFn: getLocationlatlong
+  })
+
+  // render first time
   useEffect(() => {
-    gettagsApi(
-      response => {
-        setTagsData(response.data)
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }, [])
-  const getLocation = useSelector(settingsData)
-  const getLocationData = getLocation?.location_news_mode
-  // location api
-  useEffect(() => {
-    getLocationApi(
-      response => {
-        // console.log(response.data)
-        setLocationOptions(response.data)
-        // console.log(locationOptions)
-      },
-      error => {
-        console.error(error)
-      }
-    )
+    if (matchingObject) {
+      setShowCategory(true)
+      setDefaultValue({ ...DefaultValue, languageId: matchingObject.id, languageName: matchingObject.language })
+    }
+    if (manageNews.content_type === 'standard_post') {
+      setDefaultValue({ ...DefaultValue, standardType: translate('stdPostLbl'), contentType: 'standard_post' })
+      setShowURl(false)
+      setVideoUrl(false)
+      setUrl(null)
+    } else if (manageNews.content_type === 'video_youtube') {
+      setDefaultValue({ ...DefaultValue, standardType: translate('videoYoutubeLbl'), contentType: 'video_youtube' })
+      setShowURl(true)
+      setVideoUrl(false)
+    } else if (manageNews.content_type === 'video_other') {
+      setDefaultValue({ ...DefaultValue, standardType: translate('videoOtherUrlLbl'), contentType: 'video_other' })
+      setShowURl(true)
+      setVideoUrl(false)
+    } else if (manageNews.content_type === 'video_upload') {
+      setDefaultValue({ ...DefaultValue, standardType: translate('videoUploadLbl'), contentType: 'video_upload' })
+      setShowURl(false)
+      setVideoUrl(true)
+    } else {
+      setShowURl(false)
+      setVideoUrl(false)
+    }
+
+    if (subbystatus === 'success') {
+      setShowsubCategory(true)
+    }
+
+    if (subbystatus === 'error') {
+      setShowsubCategory(false)
+    }
+    // eslint-disable-next-line
   }, [])
 
   // create standard post
@@ -376,26 +484,6 @@ const EditNews = () => {
     )
   }
 
-  // categories load as per language change
-  useEffect(() => {
-    // cateRef.current = null;
-
-    categoriesApi(
-      '',
-      '70',
-      DefaultValue.languageId,
-      response => {
-        const categoryData = response.data
-        setCategory(categoryData)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setCategory('')
-        }
-      }
-    )
-  }, [DefaultValue.languageId])
-
   // load language data to reducer
   const languageSelector = value => {
     setShowCategory(true)
@@ -409,49 +497,6 @@ const EditNews = () => {
       categorydefault: null
     }))
   }
-
-  // render first time
-  useEffect(() => {
-    if (matchingObject) {
-      setShowCategory(true)
-      setDefaultValue({ ...DefaultValue, languageId: matchingObject.id, languageName: matchingObject.language })
-    }
-    if (manageNews.content_type === 'standard_post') {
-      setDefaultValue({ ...DefaultValue, standardType: translate('stdPostLbl'), contentType: 'standard_post' })
-      setShowURl(false)
-      setVideoUrl(false)
-      setUrl(null)
-    } else if (manageNews.content_type === 'video_youtube') {
-      setDefaultValue({ ...DefaultValue, standardType: translate('videoYoutubeLbl'), contentType: 'video_youtube' })
-      setShowURl(true)
-      setVideoUrl(false)
-    } else if (manageNews.content_type === 'video_other') {
-      setDefaultValue({ ...DefaultValue, standardType: translate('videoOtherUrlLbl'), contentType: 'video_other' })
-      setShowURl(true)
-      setVideoUrl(false)
-    } else if (manageNews.content_type === 'video_upload') {
-      setDefaultValue({ ...DefaultValue, standardType: translate('videoUploadLbl'), contentType: 'video_upload' })
-      setShowURl(false)
-      setVideoUrl(true)
-    } else {
-      setShowURl(false)
-      setVideoUrl(false)
-    }
-
-    getSubcategoryByCategoryApi(
-      manageNews.category_id,
-      res => {
-        setSubCategory(res.data)
-        setShowsubCategory(true)
-      },
-      err => {
-        if (err === 'No Data Found') {
-          setShowsubCategory(false)
-        }
-      }
-    )
-    // eslint-disable-next-line
-  }, [])
 
   // remove image
   const handleRemoveImage = (e, id) => {
@@ -573,11 +618,12 @@ const EditNews = () => {
                             setDefaultValue({ ...DefaultValue, defualtLocationId: value, defualtLocation: value })
                           } // Update defaultValue using setDefaultValue
                         >
-                          {locationOptions.map(location => (
-                            <Select.Option key={location.id} value={location.id}>
-                              {location.location_name}
-                            </Select.Option>
-                          ))}
+                          {locationOptions &&
+                            locationOptions.map(location => (
+                              <Select.Option key={location.id} value={location.id}>
+                                {location.location_name}
+                              </Select.Option>
+                            ))}
                         </Select>
                       </div>
                     ) : null}

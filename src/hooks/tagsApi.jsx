@@ -1,0 +1,12 @@
+import Api from 'src/api/AxiosInterceptors'
+import { GET_TAG } from 'src/utils/api'
+
+export const getTagApi = {
+  getTag: requestData => {
+    const { access_key, language_id } = requestData
+    return Api.post(GET_TAG, {
+      access_key,
+      language_id
+    })
+  }
+}

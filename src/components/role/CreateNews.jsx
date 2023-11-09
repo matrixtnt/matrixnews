@@ -1,18 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
 import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
-import {
-  categoriesApi,
-  getLocationApi,
-  getSubcategoryByCategoryApi,
-  gettagsApi,
-  setNewsApi
-} from '../../store/actions/campaign'
+import { getSubcategoryByCategoryApi, setNewsApi } from '../../store/actions/campaign'
 import { selectLanguages } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import { selectcreateNewsCurrentLanguage, setCreateNewsCurrentLanguage } from '../../store/reducers/createNewsReducer'
@@ -25,20 +19,22 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import createnewsimage from '../../../public/assets/images/Create-news.svg'
+import { getTagApi } from 'src/hooks/tagsApi'
+import { access_key, getLanguage } from 'src/utils/api'
+import Skeleton from 'react-loading-skeleton'
+import { useQuery } from '@tanstack/react-query'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
+import { getlocationapi } from 'src/hooks/getlocationApi'
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
 
 const CreateNews = () => {
   const [showCategory, setShowCategory] = useState(false)
-  const [category, setCategory] = useState([])
   const [subCategory, setSubCategory] = useState([])
   const [showsubCategory, setShowsubCategory] = useState(false)
   const [showUrl, setShowURl] = useState(false)
   const [videoUrl, setVideoUrl] = useState(false)
-  const [tagsData, setTagsData] = useState([])
-  const [locationOptions, setLocationOptions] = useState([])
-
   const [images, setImages] = useState([])
   const [nextStepScreen, setNextStepScreen] = useState(false)
   const [content, setContent] = useState('')
@@ -46,6 +42,8 @@ const CreateNews = () => {
   const languagesData = useSelector(selectLanguages)
   const createNewsLanguage = useSelector(selectcreateNewsCurrentLanguage)
   const navigate = useRouter()
+  const getLocation = useSelector(settingsData)
+  let { id: language_id } = getLanguage()
   const [DefaultValue, setDefualtValue] = useState({
     defualtTitle: null,
     defualtLanguage: null,
@@ -221,51 +219,93 @@ const CreateNews = () => {
     setNextStepScreen(true)
   }
 
-  // categories load as per language change
-  useEffect(() => {
-    categoriesApi(
-      '',
-      '70',
-      createNewsLanguage.id,
-      response => {
-        const categoryData = response.data
-        setCategory(categoryData)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setCategory('')
-        }
-      }
-    )
-  }, [createNewsLanguage])
+  // api call
+  const getCategories = async () => {
+    try {
+      const { data } = await CategoriesApi.getCategories({
+        access_key: access_key,
+        offset: '',
+        limit: '70',
+        language_id: createNewsLanguage.id
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  // tag api
-  useEffect(() => {
-    gettagsApi(
-      response => {
-        setTagsData(response.data)
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }, [])
+  // api call
+  const getTag = async () => {
+    try {
+      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: language_id })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  const getLocation = useSelector(settingsData)
+  // api call
+  const getLocationlatlong = async () => {
+    try {
+      const { data } = await getlocationapi.getlocation({ access_key: access_key })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const {
+    isLoading: catisloading,
+    isError: catisError,
+    data: category,
+    error: caterror
+  } = useQuery({
+    queryKey: ['getcategories', createNewsLanguage],
+    queryFn: getCategories
+  })
+
+  // react query
+  const {
+    isLoading,
+    isError,
+    data: tagsData,
+    error
+  } = useQuery({
+    queryKey: ['getTag', language_id, access_key],
+    queryFn: getTag
+  })
+
+  const {
+    isLoading: locloading,
+    isError: locisError,
+    data: locationOptions,
+    error: locerror
+  } = useQuery({
+    queryKey: ['getlocation', access_key],
+    queryFn: getLocationlatlong
+  })
+
+  // loading
+  if (isLoading) {
+    return (
+      <span>
+        <Skeleton height={200} count={3} />
+      </span>
+    )
+  }
+
+  if (caterror === 'No Data Found') {
+    ;<span>{translate('nodatafound')}</span>
+  }
+
+  // error
+  if (isError) {
+    return <p className='text-center my-5'>{translate('nodatafound')}</p>
+  }
+
   const getLocationData = getLocation?.location_news_mode
   // console.log(getLocationData)
-  // location api
-  useEffect(() => {
-    getLocationApi(
-      response => {
-        // console.log(response.data)
-        setLocationOptions(response.data)
-      },
-      error => {
-        console.error(error)
-      }
-    )
-  }, [])
 
   // create standard post
   const standardPost = [
@@ -345,7 +385,6 @@ const CreateNews = () => {
   // main image
   const handleMainImage = e => {
     const selectedFile = e.target.files[0]
-    console.log(selectedFile)
     // Check if a file is selected
     if (!selectedFile) {
       return
