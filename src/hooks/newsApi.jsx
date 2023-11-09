@@ -1,5 +1,5 @@
 import Api from 'src/api/AxiosInterceptors'
-import { GET_NEWS } from 'src/utils/api'
+import { GET_NEWS, GET_NEWS_BY_ID, SET_NEWS_VIEW } from 'src/utils/api'
 
 export const getNewsApi = {
   getNews: requestData => {
@@ -24,6 +24,23 @@ export const getNewsApi = {
       language_id,
       latitude,
       longitude
+    })
+  },
+  getNewsById: requestData => {
+    const { access_key, news_id, user_id, language_id } = requestData
+    return Api.post(GET_NEWS_BY_ID, {
+      access_key,
+      news_id,
+      user_id,
+      language_id
+    })
+  },
+  setNewsView: requestData => {
+    const { access_key, news_id, user_id } = requestData
+    return Api.post(SET_NEWS_VIEW, {
+      access_key,
+      user_id,
+      news_id,
     })
   }
 }

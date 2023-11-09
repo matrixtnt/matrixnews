@@ -25,7 +25,7 @@ const LayoutNoSSR = dynamic(() => import('src/components/layout/Layout'), { ssr:
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 20000,
+      staleTime: 600000,
       refetchOnWindowFocus: false, // default: true
     },
   },

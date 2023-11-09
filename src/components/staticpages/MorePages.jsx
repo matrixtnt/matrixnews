@@ -1,36 +1,52 @@
 'use client'
 import React, { useState } from 'react'
 import { IoArrowForwardCircleSharp } from 'react-icons/io5'
-import { useEffect } from 'react'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { getpagesApi } from '../../store/actions/campaign'
 import { Modal } from 'antd'
 import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
+import { getpagesApi } from 'src/hooks/getPagesApi'
+import { useQuery } from '@tanstack/react-query'
+import { access_key, getLanguage } from 'src/utils/api'
 
 const MorePages = () => {
-  const [Data, setData] = useState([])
-  const currentLanguage = useSelector(selectCurrentLanguage)
-  const [loading, setLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setmodalData] = useState(null)
+  let { id: language_id } = getLanguage();
+  useSelector(selectCurrentLanguage)
 
-  useEffect(() => {
-    getpagesApi(
-      response => {
-        let allData = response.data
-        setData(allData)
-        setLoading(false)
-      },
-      error => {
-        setData('')
-        setLoading(false)
-        console.log(error)
-      }
+  // api call
+  const getpages = async () => {
+    try {
+      const { data } = await getpagesApi.getpages({
+        access_key: access_key,
+        language_id: language_id
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, isError, data, error, status } = useQuery({
+    queryKey: ['getPages'],
+    queryFn: getpages
+  })
+
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton height={200} count={3} />
+      </div>
     )
-  }, [currentLanguage])
+  }
+
+  if (status === 'error') {
+    return <div className='text-center my-5'>{translate('nodatafound')}</div>
+  }
 
   const handleModalActive = (e, element) => {
     e.preventDefault()
@@ -44,8 +60,8 @@ const MorePages = () => {
       <div className='morepages py-5 bg-white'>
         <div className='container'>
           <div className='row'>
-            {Data &&
-              Data.map(element => (
+            {data &&
+              data.map(element => (
                 <div className='col-md-4 col-12 mb-4'>
                   <div key={element.id} className='card' onClick={e => handleModalActive(e, element)}>
                     <div className='more-cat-section-card-body'>
@@ -73,21 +89,13 @@ const MorePages = () => {
         footer={false}
         id='modaltp'
       >
-        {loading ? (
-          <Skeleton height={400} />
-        ) : (
-          <div>
-            {modalData && modalData.page_content ? (
-              <p
-                id='pp-modal-body'
-                className='p-3 mb-0'
-                dangerouslySetInnerHTML={{ __html: modalData && modalData.page_content }}
-              ></p>
-            ) : (
-              <p className='noData'>{translate('nodatafound')}</p>
-            )}
-          </div>
-        )}
+        <>
+          <p
+            id='pp-modal-body'
+            className='p-3 mb-0'
+            dangerouslySetInnerHTML={{ __html: modalData && modalData.page_content }}
+          ></p>
+        </>
       </Modal>
     </>
   )
