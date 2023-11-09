@@ -12,7 +12,7 @@ import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionByIdApi } from 'src/hooks/getfeatureSectionbyidApi'
-import { getLanguage, getUser } from 'src/utils/api'
+import { access_key, getLanguage, getUser } from 'src/utils/api'
 
 const ViewAll = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -58,15 +58,15 @@ const ViewAll = () => {
 
   // slice the array to get the current posts
 
-  const currentData = Data[0]?.news
-    ? Data[0]?.news.slice(pagesVisited, pagesVisited + dataPerPage)
-    : Data[0]?.breaking_news.slice(pagesVisited, pagesVisited + dataPerPage)
+  const currentData = Data && Data[0]?.news
+    ? Data && Data[0]?.news.slice(pagesVisited, pagesVisited + dataPerPage)
+    : Data && Data[0]?.breaking_news.slice(pagesVisited, pagesVisited + dataPerPage)
 
-  const lengthdata = Data[0]?.news ? Data[0]?.news.length : Data[0]?.breaking_news.length
+  const lengthdata = Data && Data[0]?.news ? Data && Data[0]?.news.length : Data && Data[0]?.breaking_news.length
 
   return (
     <>
-      {Data[0]?.news ? (
+      {Data && Data[0]?.news ? (
         <>
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
           <div id='BNV-main'>
@@ -119,7 +119,7 @@ const ViewAll = () => {
         </>
       ) : null}
       ;
-      {Data[0]?.breaking_news ? (
+      {Data && Data[0]?.breaking_news ? (
         <>
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
           <div id='BNV-main'>
