@@ -1,56 +1,57 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate, truncateText } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { imgError } from '../../utils/index'
-import { loadNotification } from '../../store/reducers/notificationbadgeReducer'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import ReactPaginate from 'react-paginate'
 import { BsFillArrowRightCircleFill } from 'react-icons/bs'
+import { useQuery } from '@tanstack/react-query'
+import { getNotificationsApi } from 'src/hooks/getNotificationApi'
+import { access_key, getLanguage } from 'src/utils/api'
 
 const NewsNotification = () => {
-  const [Data, setData] = useState([])
-
   const currentLanguage = useSelector(selectCurrentLanguage)
-
-  const [isLoading, setIsLoading] = useState(true)
-
   const [totalLength, setTotalLength] = useState(0)
   const [offsetdata, setOffsetdata] = useState(0)
   const limit = 6
-
-  const initialData = useRef([])
-
-  useEffect(() => {
-    initialData.current = Data
-  }, [Data])
-
-  useEffect(() => {
-    loadNotification(
-      offsetdata.toString(),
-      limit.toString(),
-      response => {
-        setTotalLength(response.total)
-        setData(response.data)
-        console.log('notification', totalLength)
-        setIsLoading(false)
-      },
-      error => {
-        setIsLoading(false)
-        if (error === 'No Data Found') {
-          setData('')
-        }
-      }
-    )
-  }, [currentLanguage, offsetdata])
+  let { id: language_id } = getLanguage()
 
   const handlePageChange = selectedPage => {
-    const newOffset = selectedPage.selected * limit
+    // console.log(selectedPage)
+    const newOffset = selectedPage?.selected * limit
     setOffsetdata(newOffset)
   }
+
+  // api call
+  const getNotifications = async () => {
+    try {
+      const { data } = await getNotificationsApi.getNotifications({
+        access_key: access_key,
+        offset: offsetdata.toString(),
+        limit: limit.toString(),
+        language_id: language_id
+      })
+      setTotalLength(data.total)
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const {
+    isLoading,
+    data: Data,
+  } = useQuery({
+    queryKey: ['getNotification', currentLanguage, offsetdata],
+    queryFn: getNotifications,
+    staleTime: 0
+  })
+  
 
   // Function to format the date as "day Month year"
   const formatDate = dateString => {
@@ -82,7 +83,7 @@ const NewsNotification = () => {
               <div className='col-12 loading_data'>
                 <Skeleton height={20} count={22} />
               </div>
-            ) : Data.length > 0 ? (
+            ) : Data && Data.length > 0 ? (
               Data.map((element, index) => (
                 <Link
                   className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}

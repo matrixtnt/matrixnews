@@ -21,7 +21,6 @@ import { settingsData } from '../../store/reducers/settingsReducer'
 import createnewsimage from '../../../public/assets/images/Create-news.svg'
 import { getTagApi } from 'src/hooks/tagsApi'
 import { access_key, getLanguage } from 'src/utils/api'
-import Skeleton from 'react-loading-skeleton'
 import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
@@ -230,7 +229,9 @@ const CreateNews = () => {
       })
       return data.data
     } catch (error) {
-      console.log(error)
+      if (error === 'No Data Found') {
+        <span>{translate('nodatafound')}</span>
+      }
     }
   }
 
@@ -255,54 +256,23 @@ const CreateNews = () => {
   }
 
   // react query
-  const {
-    isLoading: catisloading,
-    isError: catisError,
-    data: category,
-    error: caterror
-  } = useQuery({
+  const { data: category } = useQuery({
     queryKey: ['getcategories', createNewsLanguage],
     queryFn: getCategories
   })
 
   // react query
   const {
-    isLoading,
-    isError,
-    data: tagsData,
-    error
+    data: tagsData
   } = useQuery({
     queryKey: ['getTag', language_id, access_key],
     queryFn: getTag
   })
 
-  const {
-    isLoading: locloading,
-    isError: locisError,
-    data: locationOptions,
-    error: locerror
-  } = useQuery({
+  const { data: locationOptions } = useQuery({
     queryKey: ['getlocation', access_key],
     queryFn: getLocationlatlong
   })
-
-  // loading
-  if (isLoading) {
-    return (
-      <span>
-        <Skeleton height={200} count={3} />
-      </span>
-    )
-  }
-
-  if (caterror === 'No Data Found') {
-    ;<span>{translate('nodatafound')}</span>
-  }
-
-  // error
-  if (isError) {
-    return <p className='text-center my-5'>{translate('nodatafound')}</p>
-  }
 
   const getLocationData = getLocation?.location_news_mode
   // console.log(getLocationData)

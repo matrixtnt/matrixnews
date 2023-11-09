@@ -43,33 +43,24 @@ const CategoryNews = () => {
   }
 
   // react query
-  const {  isLoading, isError, data, error } = useQuery({
+  const {  isLoading, data:Data } = useQuery({
     queryKey: ['category-news',catId],
     queryFn: getNewsByCategoryApi
   })
 
-  // loading
-  if (isLoading) {
-    return (
-      <span>
-        <Skeleton height={200} count={3} />
-      </span>
-    )
-  }
-
-  // error
-  if (isError) {
-    return <span className='text-center my-5'>{translate('nodatafound')}</span>
-  }
-
   return (
     <section className='categoryview_Section'>
-      <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement='0' />
-      <div id='cv-main' className='bg-white py-5'>
-        <div id='cv-content' className='my-5 container'>
+    <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement='0' />
+    <div id='cv-main' className='bg-white py-5'>
+      <div id='cv-content' className='my-5 container'>
+        {isLoading ? (
+          <div>
+            <Skeleton height={200} count={3} />
+          </div>
+        ) : (
           <div className='row'>
-            {data &&
-              data.map(element => (
+            {Data && Data.length > 0 ? (
+              Data.map(element => (
                 <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                   <Link id='Link-all' href={`/news/${element.id}`}>
                     <div id='cv-card' className='card'>
@@ -89,11 +80,15 @@ const CategoryNews = () => {
                     </div>
                   </Link>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className='text-center my-5'>{translate('nodatafound')}</div>
+            )}
           </div>
-        </div>
+        )}
       </div>
-    </section>
+    </div>
+  </section>
   )
 }
 

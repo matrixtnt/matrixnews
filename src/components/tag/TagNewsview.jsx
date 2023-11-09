@@ -1,40 +1,44 @@
 'use client'
 
 import { FiCalendar } from 'react-icons/fi'
-import { useState } from 'react'
-import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { useEffect } from 'react'
-import { getnewsbytagApi } from '../../store/actions/campaign'
 import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import { useRouter } from 'next/router'
+import { useQuery } from '@tanstack/react-query'
+import { getTagApi } from 'src/hooks/tagsApi'
+import { access_key, getLanguage, getUser } from 'src/utils/api'
 
 const TagNewsview = () => {
-  const [Data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const query = router.query
   const Tid = query.slug
   const storedLatitude = localStorage.getItem('latitude')
   const storedLongitude = localStorage.getItem('longitude')
-  useEffect(() => {
-    getnewsbytagApi(
-      Tid,
-      storedLatitude && storedLatitude ? storedLatitude : null,
-      storedLongitude && storedLongitude ? storedLongitude : null,
-      response => {
-        setData(response.data)
-        setLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-          setLoading(false)
-        }
-      }
-    ) // eslint-disable-next-line
-  }, [])
+  let user = getUser()
+  let { id: language_id } = getLanguage()
+  // api call
+  const getNewsByTag = async () => {
+    try {
+      const { data } = await getTagApi.getNewsByTag({
+        access_key: access_key,
+        user_id: user,
+        tag_id: Tid,
+        language_id: language_id,
+        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
+        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['getNewsByTag'],
+    queryFn: getNewsByTag
+  })
 
   // tags
   const tagSplit = tag => {
@@ -46,11 +50,11 @@ const TagNewsview = () => {
     <div className='py-5 tagview bg-white'>
       <div className='container'>
         <div className='row'>
-          {loading ? (
+          {isLoading ? (
             <div>
               <Skeleton height={200} count={3} />
             </div>
-          ) : Data.length > 0 ? (
+          ) : Data && Data.length > 0 ? (
             <>
               {Data &&
                 Data.map(element => (

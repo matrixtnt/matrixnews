@@ -283,10 +283,6 @@ const EditNews = () => {
 
   // react query
   const {
-    isLoading: subbycatisloading,
-    isError: subbycatisError,
-    data: subbycategory,
-    error: subbycaterror,
     status: subbystatus
   } = useQuery({
     queryKey: ['getSubcategorybycategories', DefaultValue.languageId],
@@ -295,10 +291,7 @@ const EditNews = () => {
 
   // react query
   const {
-    isLoading: catisloading,
-    isError: catisError,
     data: category,
-    error: caterror
   } = useQuery({
     queryKey: ['getcategories', DefaultValue.languageId],
     queryFn: getCategories
@@ -306,20 +299,14 @@ const EditNews = () => {
 
   // react query
   const {
-    isLoading,
-    isError,
     data: tagsData,
-    error
   } = useQuery({
     queryKey: ['getTag', language_id, access_key],
     queryFn: getTag
   })
 
   const {
-    isLoading: locloading,
-    isError: locisError,
     data: locationOptions,
-    error: locerror
   } = useQuery({
     queryKey: ['getlocation', access_key],
     queryFn: getLocationlatlong

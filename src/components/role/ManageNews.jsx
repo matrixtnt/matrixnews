@@ -36,6 +36,7 @@ const ManageNews = () => {
         latitude: null,
         longitude: null
       })
+      setData(data.data)
       return data.data
     } catch (error) {
       console.log(error)
@@ -47,18 +48,6 @@ const ManageNews = () => {
     queryKey: ['getnews', currentLanguage],
     queryFn: getNews
   })
-
-  if (isLoading) {
-    return (
-      <div>
-        <Skeleton height={200} count={3} />
-      </div>
-    )
-  }
-
-  if (status === 'error') {
-    return <div className='text-center my-5'>{translate('nodatafound')}</div>
-  }
 
   // type return
   const typeReturn = type => {
@@ -99,66 +88,77 @@ const ManageNews = () => {
       <div className='manage_news bg-white py-5'>
         <div className='container'>
           <div className='row'>
-            {data &&
-              data.map((element, id) => (
-                <div className=' col-xl-4 col-md-6 col-12' key={id}>
-                  <div className='manage-data'>
-                    <div className='manage-card'>
-                      <div className='manage-img'>
-                        <img src={element.image} alt='' onClick={() => navigate.push(`/news/${element.id}`)} />
-                      </div>
-                      <div className='manage-title'>
-                        <p onClick={() => navigate.push(`/news/${element.id}`)}>{element.category_name}</p>
-                      </div>
-                      <div className='manage-date'>
-                        <p>
-                          {new Date(element.date).toLocaleTimeString([], {
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            second: 'numeric',
-                            hour12: true
-                          })}
-                        </p>
-                      </div>
-                    </div>
-                    <div className='manage-right'>
-                      <div className='manage-title'>
-                        <p className='mb-0' onClick={() => navigate.push(`/news/${element.id}`)}>
-                          {element.title}
-                        </p>
-                      </div>
-                      <div className='manage_type'>
-                        <p className='mb-1'>
-                          {translate('contentTypeLbl')} : <span>{typeReturn(element.content_type)}</span>
-                        </p>
-                      </div>
-                      <div className='manage-tag'>
-                        {element?.tag_name?.includes(',') ? (
-                          element?.tag_name?.split(',').map((tagName, index) => (
-                            <p key={index} onClick={() => navigate.push(`/tag/${element.tag_id}`)}>
-                              {tagName}
+            {isLoading ? (
+              <div>
+                <Skeleton height={200} count={3} />
+              </div>
+            ) : (
+              <>
+                {Data && Data.length > 0 ? (
+                  Data.map((element, id) => (
+                    <div className=' col-xl-4 col-md-6 col-12' key={id}>
+                      <div className='manage-data'>
+                        <div className='manage-card'>
+                          <div className='manage-img'>
+                            <img src={element.image} alt='' onClick={() => navigate.push(`/news/${element.id}`)} />
+                          </div>
+                          <div className='manage-title'>
+                            <p onClick={() => navigate.push(`/news/${element.id}`)}>{element.category_name}</p>
+                          </div>
+                          <div className='manage-date'>
+                            <p>
+                              {new Date(element.date).toLocaleTimeString([], {
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                second: 'numeric',
+                                hour12: true
+                              })}
                             </p>
-                          ))
-                        ) : (
-                          <p onClick={() => navigate.push(`/tag/${element.tag_id}`)}>{element.tag_name}</p>
-                        )}
-                      </div>
-                      <div className='manage-buttons'>
-                        <div className='manage-button-edit'>
-                          <button className='btn btn-dark' onClick={e => editNews(element)}>
-                            {translate('editLbl')}
-                          </button>
+                          </div>
                         </div>
-                        <div className='manage-button-delete'>
-                          <button className='btn btn-dark' onClick={e => deleteNews(element)}>
-                            {translate('deleteTxt')}
-                          </button>
+                        <div className='manage-right'>
+                          <div className='manage-title'>
+                            <p className='mb-0' onClick={() => navigate.push(`/news/${element.id}`)}>
+                              {element.title}
+                            </p>
+                          </div>
+                          <div className='manage_type'>
+                            <p className='mb-1'>
+                              {translate('contentTypeLbl')} : <span>{typeReturn(element.content_type)}</span>
+                            </p>
+                          </div>
+                          <div className='manage-tag'>
+                            {element?.tag_name?.includes(',') ? (
+                              element?.tag_name?.split(',').map((tagName, index) => (
+                                <p key={index} onClick={() => navigate.push(`/tag/${element.tag_id}`)}>
+                                  {tagName}
+                                </p>
+                              ))
+                            ) : (
+                              <p onClick={() => navigate.push(`/tag/${element.tag_id}`)}>{element.tag_name}</p>
+                            )}
+                          </div>
+                          <div className='manage-buttons'>
+                            <div className='manage-button-edit'>
+                              <button className='btn btn-dark' onClick={e => editNews(element)}>
+                                {translate('editLbl')}
+                              </button>
+                            </div>
+                            <div className='manage-button-delete'>
+                              <button className='btn btn-dark' onClick={e => deleteNews(element)}>
+                                {translate('deleteTxt')}
+                              </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  ))
+                ) : (
+                  <div className='text-center my-5'>{translate('nodatafound')}</div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>

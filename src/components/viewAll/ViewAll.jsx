@@ -2,20 +2,19 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { useEffect } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { getfeaturesectionbyidApi } from '../../store/actions/campaign'
 import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
+import { useQuery } from '@tanstack/react-query'
+import { getFeatureSectionByIdApi } from 'src/hooks/getfeatureSectionbyidApi'
+import { getLanguage, getUser } from 'src/utils/api'
 
 const ViewAll = () => {
-  const [Data, setData] = useState([])
-  const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(0)
   const dataPerPage = 6 // number of posts per page
   const pagesVisited = currentPage * dataPerPage
@@ -24,7 +23,8 @@ const ViewAll = () => {
   const catid = query.slug
   const storedLatitude = localStorage.getItem('latitude')
   const storedLongitude = localStorage.getItem('longitude')
-
+  let user = getUser()
+  let { id: language_id } = getLanguage()
   // handle page change
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected)
@@ -32,26 +32,29 @@ const ViewAll = () => {
 
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  useEffect(() => {
-    getfeaturesectionbyidApi(
-      catid,
-      '',
-      '',
-      storedLatitude && storedLatitude ? storedLatitude : null,
-      storedLongitude && storedLongitude ? storedLongitude : null,
-      response => {
-        setData(response.data)
-        setLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-          setLoading(false)
-        }
-      }
-    )
-    // eslint-disable-next-line
-  }, [catid, currentLanguage])
+  const getFeatureSectionById = async () => {
+    try {
+      const { data } = await getFeatureSectionByIdApi.getFeatureSectionById({
+        access_key: access_key,
+        section_id: catid,
+        language_id: language_id,
+        user_id: user,
+        offset: '',
+        limit: '10',
+        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
+        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['viewallFeaturebyid', catid, currentLanguage],
+    queryFn: getFeatureSectionById
+  })
 
   // slice the array to get the current posts
 
@@ -68,7 +71,7 @@ const ViewAll = () => {
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
-              {loading ? (
+              {isLoading ? (
                 <div>
                   <Skeleton height={200} count={3} />
                 </div>
@@ -121,7 +124,7 @@ const ViewAll = () => {
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
-              {loading ? (
+              {isLoading ? (
                 <div>
                   <Skeleton height={200} count={3} />
                 </div>

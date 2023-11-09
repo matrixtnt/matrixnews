@@ -35,7 +35,7 @@ const TagsSection = () => {
         <div>
           <Skeleton height={200} count={3} />
         </div>
-      ) : Data.length > 0 ? (
+      ) : Data && Data.length > 0 ? (
         <div id='rns-tags-main' className='my-3'>
           <div id='tags-nav' className='navbar'>
             <h4 id='rns-nav-logo' className='mb-0'>

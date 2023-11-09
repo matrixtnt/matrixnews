@@ -60,12 +60,8 @@ const UserBasedCategories = () => {
 
     }, [offsetdata,currentLanguage])
 
-
-
-
    // handle switch
     const handleSwitchChange = (id) => {
-
         setData((prevData) => {
             // return those toggle is true
             const newData = prevData.map((element) => {

@@ -11,7 +11,6 @@ import { translate } from '../../utils'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
-import Skeleton from 'react-loading-skeleton'
 
 const Categories = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -42,24 +41,11 @@ const Categories = () => {
   }
 
   // react query
-  const { isLoading, isError, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ['categories', access_key, offsetdata.toString(), limit.toString(), currentLanguage.id],
     queryFn: categoriesApi
   })
 
-  // loading
-  if (isLoading) {
-    return (
-      <span>
-        <Skeleton height={200} count={3} />
-      </span>
-    )
-  }
-
-  // error
-  if (isError) {
-    return <span className='text-center my-5'>{translate('nodatafound')}</span>
-  }
 
   return (
     <>

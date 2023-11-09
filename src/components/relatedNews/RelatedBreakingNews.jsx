@@ -38,7 +38,7 @@ const RelatedBreakingNews = props => {
         <div>
           <Skeleton height={200} count={3} />
         </div>
-      ) : Data.length > 0 ? (
+      ) : Data && Data.length > 0 ? (
         <div id='rbn-main'>
           <div id='rbn-cat-nav' className='navbar'>
             <h4 id='nav-logo' className='mb-0'>

@@ -32,22 +32,10 @@ const LiveNews = () => {
   }
 
   // react query
-  const { isLoading, isError, data, error, status } = useQuery({
+  const { isLoading, data: Data } = useQuery({
     queryKey: ['getliveStreaming'],
     queryFn: getLiveStreaming
   })
-
-  if (isLoading) {
-    return (
-      <div>
-        <Skeleton height={200} count={3} />
-      </div>
-    )
-  }
-
-  if (status === 'error') {
-    return <div className='text-center my-5'>{translate('nodatafound')}</div>
-  }
 
   const handleLiveNewsVideoUrl = url => {
     setModalShow(true)
@@ -64,44 +52,53 @@ const LiveNews = () => {
 
       <div id='LN-main' className='py-5 bg-white'>
         <div id='LN-content' className='container'>
-          <div className='row live-news'>
-            {data &&
-              data.map(element => (
-                <div className='col-md-4 col-12' key={element.id}>
-                  <div
-                    id='LN-card'
-                    className='card'
-                    onClick={() => {
-                      handleLiveNewsVideoUrl(element.url)
-                      TypeUrl(element.type)
-                    }}
-                  >
-                    <img
-                      id='LN-card-image'
-                      src={element.image ? element.image : no_image}
-                      className='card-img'
-                      alt='...'
-                    />
-                    <div className='card-image-overlay'>
-                      <BsFillPlayFill className='line-news-circle pulse' fill='white' size={50} />
-                    </div>
+          {isLoading ? (
+            <div>
+              <Skeleton height={200} count={3} />
+            </div>
+          ) : (
+            <div className='row live-news'>
+              {Data && Data.length > 0 ? (
+                Data.map(element => (
+                  <div className='col-md-4 col-12' key={element.id}>
+                    <div
+                      id='LN-card'
+                      className='card'
+                      onClick={() => {
+                        handleLiveNewsVideoUrl(element.url)
+                        TypeUrl(element.type)
+                      }}
+                    >
+                      <img
+                        id='LN-card-image'
+                        src={element.image ? element.image : no_image}
+                        className='card-img'
+                        alt='...'
+                      />
+                      <div className='card-image-overlay'>
+                        <BsFillPlayFill className='line-news-circle pulse' fill='white' size={50} />
+                      </div>
 
-                    <div id='LN-card-body' className='card-body'>
-                      <h5 id='LN-card-title' className='card-title'>
-                        {element.title}
-                      </h5>
+                      <div id='LN-card-body' className='card-body'>
+                        <h5 id='LN-card-title' className='card-title'>
+                          {element.title}
+                        </h5>
+                      </div>
                     </div>
+                    <VideoPlayerModal
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                      keyboard={false}
+                      url={Video_url}
+                      type_url={typeUrl}
+                    />
                   </div>
-                  <VideoPlayerModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    keyboard={false}
-                    url={Video_url}
-                    type_url={typeUrl}
-                  />
-                </div>
-              ))}
-          </div>
+                ))
+              ) : (
+                <div className='text-center my-5'>{translate('nodatafound')}</div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>

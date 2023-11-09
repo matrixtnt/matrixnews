@@ -31,22 +31,10 @@ const MorePages = () => {
   }
 
   // react query
-  const { isLoading, isError, data, error, status } = useQuery({
+  const { isLoading, data:Data, } = useQuery({
     queryKey: ['getPages'],
     queryFn: getpages
   })
-
-  if (isLoading) {
-    return (
-      <div>
-        <Skeleton height={200} count={3} />
-      </div>
-    )
-  }
-
-  if (status === 'error') {
-    return <div className='text-center my-5'>{translate('nodatafound')}</div>
-  }
 
   const handleModalActive = (e, element) => {
     e.preventDefault()
@@ -60,8 +48,8 @@ const MorePages = () => {
       <div className='morepages py-5 bg-white'>
         <div className='container'>
           <div className='row'>
-            {data &&
-              data.map(element => (
+            {Data &&
+              Data.map(element => (
                 <div className='col-md-4 col-12 mb-4'>
                   <div key={element.id} className='card' onClick={e => handleModalActive(e, element)}>
                     <div className='more-cat-section-card-body'>
@@ -89,13 +77,21 @@ const MorePages = () => {
         footer={false}
         id='modaltp'
       >
-        <>
-          <p
-            id='pp-modal-body'
-            className='p-3 mb-0'
-            dangerouslySetInnerHTML={{ __html: modalData && modalData.page_content }}
-          ></p>
-        </>
+        {isLoading ? (
+          <Skeleton height={400} />
+        ) : (
+          <div>
+            {modalData && modalData.page_content ? (
+              <p
+                id='pp-modal-body'
+                className='p-3 mb-0'
+                dangerouslySetInnerHTML={{ __html: modalData && modalData.page_content }}
+              ></p>
+            ) : (
+              <p className='noData'>{translate('nodatafound')}</p>
+            )}
+          </div>
+        )}
       </Modal>
     </>
   )

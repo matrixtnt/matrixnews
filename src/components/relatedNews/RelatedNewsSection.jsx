@@ -45,7 +45,7 @@ const RelatedNewsSection = props => {
         <div>
           <Skeleton height={200} count={3} />
         </div>
-      ) : Data.length > 0 ? (
+      ) : Data && Data.length > 0 ? (
         <div id='RNews-main'>
           <div id='RNews-cat-nav' className='navbar'>
             <h4 id='nav-logo' className='mb-0'>

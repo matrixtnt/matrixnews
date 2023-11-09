@@ -145,17 +145,6 @@ const News = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  if (isLoading) {
-    return (
-      <div>
-        <Skeleton height={200} count={3} />
-      </div>
-    )
-  }
-
-  if (status === 'error') {
-    return <div className='text-center my-5'>{translate('nodatafound')}</div>
-  }
 
   // set like dislike
   const setLikeDislikeData = (id, status) => {
@@ -216,7 +205,7 @@ const News = () => {
   const readTime = calculateReadTime(text)
 
   // console.log("galary", Data[0]?.image_data)
-  const galleryPhotos = Data[0]?.image_data
+  const galleryPhotos = Data && Data[0]?.image_data
   // console.log(galleryPhotos)
 
 
@@ -232,217 +221,239 @@ const News = () => {
 
   return (
     <>
-      <BreadcrumbNav SecondElement='News Details' ThirdElement={Data && Data[0].title} />
-      <div className='news-deatail-section'>
-        <div id='nv-main' className='container news_detail'>
-          {/* ad spaces */}
-          {sponsoredads && sponsoredads.ad_spaces_top ? (
-            <div className='ad_spaces'>
-              <div
-                target='_blank'
-                onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_top.ad_url, '_blank')}
-              >
-                {<img className='adimage' src={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image} alt='ads' />}
-              </div>
-            </div>
-          ) : null}
-          <div id='nv-page' className='row'>
-            <div id='nv-body' className='col-lg-8 col-12'>
-              <button id='btnnvCatagory' className='btn btn-sm' type='button'>
-                {Data && Data[0].category_name}
-              </button>
-              <h1 id='nv-title'>{Data && Data[0].title}</h1>
-
-              <div id='nv-Header' className=''>
-                <div id='nv-left-head'>
-                  <p id='head-lables'>
-                    <FiCalendar size={18} id='head-logos' /> {Data && Data[0].date.slice(0, 10)}
-                  </p>
-                  <p id='head-lables'>
-                    <AiOutlineLike size={18} id='head-logos' /> {Data && Data[0].total_like} {translate('likes')}
-                  </p>
-
-                  <p id='head-lables' className='eye_icon'>
-                    <AiOutlineEye size={18} id='head-logos' /> {Data && Data[0].total_views}
-                  </p>
-                  <p id='head-lables' className='minute_Read'>
-                    <BiTime size={18} id='head-logos' />
-                    {readTime && readTime > 1
-                      ? ' ' + readTime + ' ' + translate('minutes') + ' ' + translate('read')
-                      : ' ' + readTime + ' ' + translate('minute') + ' ' + translate('read')}
-                  </p>
+      {isLoading ? (
+        <div>
+          <Skeleton height={200} count={3} />
+        </div>
+      ) : Data && Data.length > 0 ? (
+        <>
+          <BreadcrumbNav SecondElement='News Details' ThirdElement={Data && Data[0].title} />
+          <div className='news-deatail-section'>
+            <div id='nv-main' className='container news_detail'>
+              {/* ad spaces */}
+              {sponsoredads && sponsoredads.ad_spaces_top ? (
+                <div className='ad_spaces'>
+                  <div
+                    target='_blank'
+                    onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_top.ad_url, '_blank')}
+                  >
+                    {
+                      <img
+                        className='adimage'
+                        src={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image}
+                        alt='ads'
+                      />
+                    }
+                  </div>
                 </div>
+              ) : null}
+              <div id='nv-page' className='row'>
+                <div id='nv-body' className='col-lg-8 col-12'>
+                  <button id='btnnvCatagory' className='btn btn-sm' type='button'>
+                    {Data && Data[0].category_name}
+                  </button>
+                  <h1 id='nv-title'>{Data && Data[0].title}</h1>
 
-                <div id='nv-right-head'>
-                  <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                  <FacebookShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                    <FacebookIcon size={40} round />
-                  </FacebookShareButton>
-                  <WhatsappShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                    <WhatsappIcon size={40} round />
-                  </WhatsappShareButton>
-                  <TwitterShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                    <TwitterIcon size={40} round />
-                  </TwitterShareButton>
-                </div>
-              </div>
-              <div id='vps-body-left'>
-                <div className='vps-img-div'>
-                  <img id='nv-image' src={Data && Data[0].image} alt='...' />
-                  <div className='seeAllPhoto'>
-                    {galleryPhotos.length > 0 ? (
-                      <button onClick={e => openLightbox(e, { index: 0 })}>
-                        <FaImages size={25} style={{ color: '#fff' }} />
-                      </button>
+                  <div id='nv-Header' className=''>
+                    <div id='nv-left-head'>
+                      <p id='head-lables'>
+                        <FiCalendar size={18} id='head-logos' /> {Data && Data[0].date.slice(0, 10)}
+                      </p>
+                      <p id='head-lables'>
+                        <AiOutlineLike size={18} id='head-logos' /> {Data && Data[0].total_like} {translate('likes')}
+                      </p>
+
+                      <p id='head-lables' className='eye_icon'>
+                        <AiOutlineEye size={18} id='head-logos' /> {Data && Data[0].total_views}
+                      </p>
+                      <p id='head-lables' className='minute_Read'>
+                        <BiTime size={18} id='head-logos' />
+                        {readTime && readTime > 1
+                          ? ' ' + readTime + ' ' + translate('minutes') + ' ' + translate('read')
+                          : ' ' + readTime + ' ' + translate('minute') + ' ' + translate('read')}
+                      </p>
+                    </div>
+
+                    <div id='nv-right-head'>
+                      <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
+                      <FacebookShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                        <FacebookIcon size={40} round />
+                      </FacebookShareButton>
+                      <WhatsappShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                        <WhatsappIcon size={40} round />
+                      </WhatsappShareButton>
+                      <TwitterShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                        <TwitterIcon size={40} round />
+                      </TwitterShareButton>
+                    </div>
+                  </div>
+                  <div id='vps-body-left'>
+                    <div className='vps-img-div'>
+                      <img id='nv-image' src={Data && Data[0].image} alt='...' />
+                      <div className='seeAllPhoto'>
+                        {galleryPhotos.length > 0 ? (
+                          <button onClick={e => openLightbox(e, { index: 0 })}>
+                            <FaImages size={25} style={{ color: '#fff' }} />
+                          </button>
+                        ) : null}
+                      </div>
+                      <LightBox
+                        photos={galleryPhotos}
+                        viewerIsOpen={viewerIsOpen}
+                        currentImage={currentImage}
+                        onClose={closeLightbox}
+                      />
+                    </div>
+                    {Data && Data[0].content_value ? (
+                      <div className='text-black'>
+                        <div
+                          id='vps-btnVideo'
+                          onClick={() => {
+                            handleVideoUrl(Data && Data[0].content_value)
+                            TypeUrl(Data && Data[0].type)
+                          }}
+                        >
+                          <BsFillPlayFill id='vps-btnVideo-logo' fill='white' size={50} />
+                        </div>
+                      </div>
                     ) : null}
                   </div>
-                  <LightBox
-                    photos={galleryPhotos}
-                    viewerIsOpen={viewerIsOpen}
-                    currentImage={currentImage}
-                    onClose={closeLightbox}
-                  />
-                </div>
-                {Data && Data[0].content_value ? (
-                  <div className='text-black'>
-                    <div
-                      id='vps-btnVideo'
-                      onClick={() => {
-                        handleVideoUrl(Data && Data[0].content_value)
-                        TypeUrl(Data && Data[0].type)
-                      }}
-                    >
-                      <BsFillPlayFill id='vps-btnVideo-logo' fill='white' size={50} />
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-              {/* <CarouselSection images={Data[0].image}/> */}
+                  {/* <CarouselSection images={Data[0].image}/> */}
 
-              <div id='nv-functions' className='custom-font'>
-                <div id='nv-functions-left' className='col-md-10 col-12'>
-                  <Form.Label id='nv-font-lable'>{translate('fontsize')}</Form.Label>
-                  <Form.Range
-                    id='nv-FontRange'
-                    min={14}
-                    max={24}
-                    step={2}
-                    value={FontSize}
-                    onChange={e => setFontSize(e.target.value)}
-                  />
-                  <div className='d-flex justify-content-between'>
-                    <Form.Label id='nv-FontRange-labels'>14px</Form.Label>
-                    <Form.Label id='nv-FontRange-labels'>16px</Form.Label>
-                    <Form.Label id='nv-FontRange-labels'>18px</Form.Label>
-                    <Form.Label id='nv-FontRange-labels'>20px</Form.Label>
-                    <Form.Label id='nv-FontRange-labels'>22px</Form.Label>
-                    <Form.Label id='nv-FontRange-labels'>24px</Form.Label>
-                  </div>
-                  {/* <h1>{FontSize}</h1> */}
-                </div>
-                {isLogin() ? (
-                  <div id='nv-functions-right' className='col-md-2 col-12'>
-                    <div id='nv-function-pair'>
-                      <button
-                        id='nv-function'
-                        className='btn'
-                        onClick={() => setbookmarkData(Data && Data[0].id, !Bookmark ? 1 : 0)}
-                      >
-                        {Bookmark ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
-                      </button>
-                      <p id='nv-function-text'>{translate('saveLbl')}</p>
+                  <div id='nv-functions' className='custom-font'>
+                    <div id='nv-functions-left' className='col-md-10 col-12'>
+                      <Form.Label id='nv-font-lable'>{translate('fontsize')}</Form.Label>
+                      <Form.Range
+                        id='nv-FontRange'
+                        min={14}
+                        max={24}
+                        step={2}
+                        value={FontSize}
+                        onChange={e => setFontSize(e.target.value)}
+                      />
+                      <div className='d-flex justify-content-between'>
+                        <Form.Label id='nv-FontRange-labels'>14px</Form.Label>
+                        <Form.Label id='nv-FontRange-labels'>16px</Form.Label>
+                        <Form.Label id='nv-FontRange-labels'>18px</Form.Label>
+                        <Form.Label id='nv-FontRange-labels'>20px</Form.Label>
+                        <Form.Label id='nv-FontRange-labels'>22px</Form.Label>
+                        <Form.Label id='nv-FontRange-labels'>24px</Form.Label>
+                      </div>
+                      {/* <h1>{FontSize}</h1> */}
                     </div>
-                    <div id='nv-function-pair'>
-                      <button
-                        id='nv-function'
-                        className='btn'
-                        onClick={() => setLikeDislikeData(NewsId, !Like ? 1 : 0)}
-                      >
-                        {Like ? <AiTwotoneLike size={23} /> : <AiOutlineLike size={23} />}
-                      </button>
-
-                      <p id='nv-function-text'>{translate('likes')}</p>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-              <p
-                id='nv-description'
-                style={{ fontSize: `${FontSize}px` }}
-                dangerouslySetInnerHTML={{ __html: Data && Data[0].description }}
-              ></p>
-
-              {/* tags */}
-              {Data[0].tag_name ? (
-                <div className='tags_section_outer'>
-                  <div className='inner_tag'>
-                    <div className='tag_icon'>
-                      <GoTag />
-                    </div>
-                    <div className='tag_name'>{translate('tagLbl')} :</div>
-                    <div className='tag_data'>
-                      <span className='tags_section'>
-                        {tagSplit(Data[0].tag_name).map((tag, index) => (
-                          <p
-                            key={index}
-                            className='mb-0 me-2 new-view-tags'
-                            onClick={() => router.push(`/tag/${Data[0].tag_id}`)}
+                    {isLogin() ? (
+                      <div id='nv-functions-right' className='col-md-2 col-12'>
+                        <div id='nv-function-pair'>
+                          <button
+                            id='nv-function'
+                            className='btn'
+                            onClick={() => setbookmarkData(Data && Data[0].id, !Bookmark ? 1 : 0)}
                           >
-                            {tag}
-                          </p>
-                        ))}
-                      </span>
+                            {Bookmark ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
+                          </button>
+                          <p id='nv-function-text'>{translate('saveLbl')}</p>
+                        </div>
+                        <div id='nv-function-pair'>
+                          <button
+                            id='nv-function'
+                            className='btn'
+                            onClick={() => setLikeDislikeData(NewsId, !Like ? 1 : 0)}
+                          >
+                            {Like ? <AiTwotoneLike size={23} /> : <AiOutlineLike size={23} />}
+                          </button>
+
+                          <p id='nv-function-text'>{translate('likes')}</p>
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+                  <p
+                    id='nv-description'
+                    style={{ fontSize: `${FontSize}px` }}
+                    dangerouslySetInnerHTML={{ __html: Data && Data[0].description }}
+                  ></p>
+
+                  {/* tags */}
+                  {Data[0].tag_name ? (
+                    <div className='tags_section_outer'>
+                      <div className='inner_tag'>
+                        <div className='tag_icon'>
+                          <GoTag />
+                        </div>
+                        <div className='tag_name'>{translate('tagLbl')} :</div>
+                        <div className='tag_data'>
+                          <span className='tags_section'>
+                            {tagSplit(Data[0].tag_name).map((tag, index) => (
+                              <p
+                                key={index}
+                                className='mb-0 me-2 new-view-tags'
+                                onClick={() => router.push(`/tag/${Data[0].tag_id}`)}
+                              >
+                                {tag}
+                              </p>
+                            ))}
+                          </span>
+                        </div>
+                      </div>
                     </div>
+                  ) : null}
+
+                  {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
+                  {settingsOnOff && settingsOnOff.comments_mode === '1' ? (
+                    <CommentSection Nid={NewsId} />
+                  ) : (
+                    <>
+                      <div className='text-center my-5'>{translate('comDisable')}</div>
+                    </>
+                  )}
+                </div>
+
+                <div id='nv-right-section' className='col-lg-4 col-12'>
+                  {Data && Data[0].category_id ? (
+                    <RelatedNewsSection Cid={Data && Data[0].category_id} Nid={NewsId} />
+                  ) : null}
+                  <TagsSection />
+                </div>
+              </div>
+              <VideoPlayerModal
+                show={VideomodalShow}
+                onHide={() => setVideoModalShow(false)}
+                // backdrop="static"
+                keyboard={false}
+                url={Video_url}
+                type_url={typeUrl}
+                // title={Data[0].title}
+              />
+              <SignInModal
+                setIsLogout={setIsLogout}
+                setisloginloading={setisloginloading}
+                show={modalShow}
+                setLoginModalShow={setModalShow}
+                onHide={() => setModalShow(false)}
+              />
+              {/* ad spaces */}
+              {sponsoredads && sponsoredads.ad_spaces_bottom ? (
+                <div className='ad_spaces my-3'>
+                  <div
+                    target='_blank'
+                    onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_bottom.ad_url, '_blank')}
+                  >
+                    {
+                      <img
+                        className='adimage'
+                        src={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image}
+                        alt='ads'
+                      />
+                    }
                   </div>
                 </div>
               ) : null}
-
-              {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
-              {settingsOnOff && settingsOnOff.comments_mode === '1' ? (
-                <CommentSection Nid={NewsId} />
-              ) : (
-                <>
-                  <div className='text-center my-5'>{translate('comDisable')}</div>
-                </>
-              )}
-            </div>
-
-            <div id='nv-right-section' className='col-lg-4 col-12'>
-              {Data && Data[0].category_id ? (
-                <RelatedNewsSection Cid={Data && Data[0].category_id} Nid={NewsId} />
-              ) : null}
-              <TagsSection />
             </div>
           </div>
-          <VideoPlayerModal
-            show={VideomodalShow}
-            onHide={() => setVideoModalShow(false)}
-            // backdrop="static"
-            keyboard={false}
-            url={Video_url}
-            type_url={typeUrl}
-            // title={Data[0].title}
-          />
-          <SignInModal
-            setIsLogout={setIsLogout}
-            setisloginloading={setisloginloading}
-            show={modalShow}
-            setLoginModalShow={setModalShow}
-            onHide={() => setModalShow(false)}
-          />
-          {/* ad spaces */}
-          {sponsoredads && sponsoredads.ad_spaces_bottom ? (
-            <div className='ad_spaces my-3'>
-              <div
-                target='_blank'
-                onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_bottom.ad_url, '_blank')}
-              >
-                {<img className='adimage' src={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image} alt='ads' />}
-              </div>
-            </div>
-          ) : null}
-        </div>
-      </div>
+        </>
+      ) : (
+        <div className='text-center my-5'>{translate('nodatafound')}</div>
+      )}
     </>
   )
 }

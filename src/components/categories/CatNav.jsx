@@ -41,7 +41,7 @@ const CatNav = () => {
   }, [currentLanguage])
 
   const swiperOption = {
-    loop: Data.length > 10 ? true : false,
+    loop: Data && Data.length > 10 ? true : false,
     speed: 3000,
     spaceBetween: 10,
     slidesPerView: 'auto',
@@ -64,7 +64,7 @@ const CatNav = () => {
     <>
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <>
-          {Data.length > 0 ? (
+          {Data && Data.length > 0 ? (
             <div id='cn-main' expand='lg'>
               <div className='container py-2'>
                 {isLoading ? (
@@ -72,7 +72,7 @@ const CatNav = () => {
                     <Skeleton height={200} count={3} />
                   </div>
                 ) : (
-                  <div className={`cn-main-div ${Data.length > 10 ? 'flex-display' : 'block-display'}`}>
+                  <div className={`cn-main-div ${Data && Data.length > 10 ? 'flex-display' : 'block-display'}`}>
                     <Swiper {...swiperOption}>
                       {Data.map((element, index) => (
                         <SwiperSlide key={element.id} className='text-center'>

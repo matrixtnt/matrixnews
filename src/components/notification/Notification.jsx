@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { deleteusernotificationApi } from '../../store/actions/campaign'
@@ -12,40 +12,42 @@ import { loaduserNotification } from '../../store/reducers/notificationbadgeRedu
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import ReactPaginate from 'react-paginate'
+import { useQuery } from '@tanstack/react-query'
+import { getNotificationsApi } from 'src/hooks/getNotificationApi'
+import { getUser } from 'src/utils/api'
 
 const Notification = () => {
   const [Data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  const initialData = useRef([])
-
+  let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
-
   const [totalLength, setTotalLength] = useState(0)
   const [offsetdata, setOffsetdata] = useState(0)
   const limit = 6
 
-  useEffect(() => {
-    initialData.current = Data
-  }, [Data])
+  // api call
+  const getUserNotification = async () => {
+    try {
+      const { data } = await getNotificationsApi.getUserNotification({
+        access_key: access_key,
+        offset: offsetdata.toString(),
+        limit: limit.toString(),
+        user_id: user
+      })
+      setData(data.data)
+      setTotalLength(data.total)
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  useEffect(() => {
-    loaduserNotification(
-      offsetdata.toString(),
-      limit.toString(),
-      response => {
-        setTotalLength(response.total)
-        setData(response.data)
-        setIsLoading(false)
-      },
-      error => {
-        setIsLoading(false)
-        if (error === 'No Data Found') {
-          setData('')
-        }
-      }
-    )
-  }, [currentLanguage, offsetdata])
+  // react query
+  const { isLoading } = useQuery({
+    queryKey: ['getuserNotification', currentLanguage, offsetdata],
+    queryFn: getUserNotification,
+    staleTime: 0
+  })
+ 
 
   const handlePageChange = selectedPage => {
     const newOffset = selectedPage.selected * limit
@@ -60,7 +62,6 @@ const Notification = () => {
         // Remove the deleted notification from the state
         setData(prevData => prevData.filter(notification => notification.id !== id))
         toast.success(response.message)
-        setIsLoading(false)
         loaduserNotification(
           '0',
           '10',
@@ -69,7 +70,6 @@ const Notification = () => {
         )
       },
       error => {
-        setIsLoading(false)
         if (error === 'No Data Found') {
           setData('')
         }
@@ -111,7 +111,7 @@ const Notification = () => {
               <div className='col-12 loading_data'>
                 <Skeleton height={20} count={22} />
               </div>
-            ) : Data.length > 0 ? (
+            ) : Data && Data.length > 0 ? (
               Data.map((element, index) => (
                 <div className='card my-3' key={index}>
                   <div className='card-body bd-highlight' id='card-noti'>

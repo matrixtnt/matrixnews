@@ -296,7 +296,7 @@ const MobilesideBar = ({
                         </Link>
                       </li>
                     ))}
-                  {Data.length > 10 && (
+                  {Data && Data.length > 10 && (
                     <li className='nav-item'>
                       <Link id='catNav-links' href={'/all-categories'} onClick={handleClose}>
                         {' '}

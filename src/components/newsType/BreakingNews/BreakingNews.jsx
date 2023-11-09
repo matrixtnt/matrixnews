@@ -93,52 +93,22 @@ const BreakingNews = () => {
   }
 
   // react query
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: ['breakingNewsById', access_key, BNid, user, language_id],
     queryFn: getBreakingNewsIdApi
   })
 
-  const {
-    isLoading: viewloading,
-    isError: viewerror,
-    data: viewdata
-  } = useQuery({
+  const {} = useQuery({
     queryKey: ['setBreakingNewsView', access_key, BNid, user],
     queryFn: setBreakingNewsViewApi
   })
 
   const {
-    isLoading: adsloading,
-    isError: adserror,
     data: adsdata
   } = useQuery({
     queryKey: ['getAdsSpaceDetails', access_key],
     queryFn: getAdsSpaceNewsApi
   })
-
-  // loading
-  if (isLoading) {
-    return (
-      <div className='col-12 loading_data'>
-        <Skeleton height={20} count={22} />
-      </div>
-    )
-  }
-
-  // loading
-  if (adsloading) {
-    return (
-      <div className='col-12 loading_data'>
-        <Skeleton height={10} count={10} />
-      </div>
-    )
-  }
-
-  // error
-  if (isError) {
-    router.push('/')
-    return <span className='text-center my-5'>{translate('nodatafound')}</span>
-  }
 
   const text = extractTextFromHTML(data && data[0]?.description)
 
@@ -147,120 +117,139 @@ const BreakingNews = () => {
 
   return (
     <>
-      <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement={data[0].title} />
+      {data && data?.length > 0 ? (
+        <>
+          {isLoading ? (
+            // Show skeleton loading when data is being fetched
+            <div className='col-12 loading_data'>
+              <Skeleton height={20} count={22} />
+            </div>
+          ) : (
+            <>
+              <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement={data[0].title} />
 
-      <div className='breaking-news-section'>
-        <div id='B_NV-main' className='breaking_news_detail'>
-          <div id='B_NV-page' className='container'>
-            {/* ad spaces */}
-            {adsdata && adsdata.ad_spaces_top ? (
-              <div className='ad_spaces mb-5'>
-                <div target='_blank' onClick={() => window.open(adsdata && adsdata.ad_spaces_top.ad_url, '_blank')}>
-                  {<img className='adimage' src={adsdata && adsdata.ad_spaces_top.web_ad_image} alt='ads' />}
-                </div>
-              </div>
-            ) : null}
-            <div className='row'>
-              <div className='col-md-7 col-12'>
-                <div id='B_NV-body'>
-                  <p id='btnB_NVCatagory' className='btn btn-sm mb-0'>
-                    {translate('breakingnews')}
-                  </p>
-                  <h1 id='B_NV-title'>{data[0].title}</h1>
+              <div className='breaking-news-section'>
+                <div id='B_NV-main' className='breaking_news_detail'>
+                  <div id='B_NV-page' className='container'>
+                    {/* ad spaces */}
+                    {adsdata && adsdata.ad_spaces_top ? (
+                      <div className='ad_spaces mb-5'>
+                        <div
+                          target='_blank'
+                          onClick={() => window.open(adsdata && adsdata.ad_spaces_top.ad_url, '_blank')}
+                        >
+                          {<img className='adimage' src={adsdata && adsdata.ad_spaces_top.web_ad_image} alt='ads' />}
+                        </div>
+                      </div>
+                    ) : null}
+                    <div className='row'>
+                      <div className='col-md-7 col-12'>
+                        <div id='B_NV-body'>
+                          <p id='btnB_NVCatagory' className='btn btn-sm mb-0'>
+                            {translate('breakingnews')}
+                          </p>
+                          <h1 id='B_NV-title'>{data[0].title}</h1>
 
-                  <div id='B_NV-Header' className=''>
-                    <div id='nv-left-head'>
-                      <p id='head-lables' className='eye_icon'>
-                        <AiOutlineEye size={18} id='head-logos' /> {data && data[0].total_views}
-                      </p>
-                      <p id='head-lables' className='minute_Read'>
-                        <BiTime size={18} id='head-logos' />
-                        {readTime && readTime > 1
-                          ? ' ' + readTime + ' ' + translate('minutes') + ' ' + translate('read')
-                          : ' ' + readTime + ' ' + translate('minute') + ' ' + translate('read')}
-                      </p>
+                          <div id='B_NV-Header' className=''>
+                            <div id='nv-left-head'>
+                              <p id='head-lables' className='eye_icon'>
+                                <AiOutlineEye size={18} id='head-logos' /> {data && data[0].total_views}
+                              </p>
+                              <p id='head-lables' className='minute_Read'>
+                                <BiTime size={18} id='head-logos' />
+                                {readTime && readTime > 1
+                                  ? ' ' + readTime + ' ' + translate('minutes') + ' ' + translate('read')
+                                  : ' ' + readTime + ' ' + translate('minute') + ' ' + translate('read')}
+                              </p>
+                            </div>
+
+                            <div id='B_NV-right-head'>
+                              <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
+                              <FacebookShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
+                                <FacebookIcon size={30} round />
+                              </FacebookShareButton>
+                              <WhatsappShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
+                                <WhatsappIcon size={30} round />
+                              </WhatsappShareButton>
+                              <TwitterShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
+                                <TwitterIcon size={30} round />
+                              </TwitterShareButton>
+                            </div>
+                          </div>
+                          <div id='vps-body-left'>
+                            <img id='B_NV-image' src={data[0].image} alt='...' />
+                            {data && data[0].content_value ? (
+                              <div className='text-black'>
+                                <div id='vps-btnVideo' onClick={() => handleVideoUrl(data[0].content_value)}>
+                                  <BsFillPlayFill id='vps-btnVideo-logo' className='pulse' fill='white' size={50} />
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
+
+                          <div id='B_NV-functions' className=''>
+                            <div id='B_NV-functions-left'>
+                              <Form.Label id='B_NV-font-lable'>{translate('fontsize')}</Form.Label>
+                              <Form.Range
+                                id='B_NV-FontRange'
+                                min={14}
+                                max={24}
+                                step={2}
+                                value={FontSize}
+                                onChange={e => setFontSize(e.target.value)}
+                              />
+                              <div className='d-flex justify-content-between'>
+                                <Form.Label id='B_NV-FontRange-labels'>14px</Form.Label>
+                                <Form.Label id='B_NV-FontRange-labels'>16px</Form.Label>
+                                <Form.Label id='B_NV-FontRange-labels'>18px</Form.Label>
+                                <Form.Label id='B_NV-FontRange-labels'>20px</Form.Label>
+                                <Form.Label id='B_NV-FontRange-labels'>22px</Form.Label>
+                                <Form.Label id='B_NV-FontRange-labels'>24px</Form.Label>
+                              </div>
+                            </div>
+                            <div id='B_NV-functions-right'></div>
+                          </div>
+                          <p
+                            id='B_NV-description'
+                            style={{ fontSize: `${FontSize}px` }}
+                            dangerouslySetInnerHTML={{ __html: data[0].description }}
+                          ></p>
+                        </div>
+                      </div>
+                      <div className='col-md-5 col-12'>
+                        <div id='B_NV-right-section'>
+                          {BNid ? <RelatedBreakingNews id={BNid} /> : null}
+                          <TagsSection />
+                        </div>
+                      </div>
                     </div>
-
-                    <div id='B_NV-right-head'>
-                      <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
-                      <FacebookShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
-                        <FacebookIcon size={30} round />
-                      </FacebookShareButton>
-                      <WhatsappShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
-                        <WhatsappIcon size={30} round />
-                      </WhatsappShareButton>
-                      <TwitterShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
-                        <TwitterIcon size={30} round />
-                      </TwitterShareButton>
-                    </div>
-                  </div>
-                  <div id='vps-body-left'>
-                    <img id='B_NV-image' src={data[0].image} alt='...' />
-                    {data && data[0].content_value ? (
-                      <div className='text-black'>
-                        <div id='vps-btnVideo' onClick={() => handleVideoUrl(data[0].content_value)}>
-                          <BsFillPlayFill id='vps-btnVideo-logo' className='pulse' fill='white' size={50} />
+                    <VideoPlayerModal
+                      show={modalShow}
+                      onHide={() => setModalShow(false)}
+                      // backdrop="static"
+                      keyboard={false}
+                      url={Video_url}
+                      type_url={data[0].type}
+                      // title={data.title}
+                    />
+                    {/* ad spaces */}
+                    {adsdata && adsdata.ad_spaces_bottom ? (
+                      <div className='ad_spaces my-3'>
+                        <div
+                          target='_blank'
+                          onClick={() => window.open(adsdata && adsdata.ad_spaces_bottom.ad_url, '_blank')}
+                        >
+                          {<img className='adimage' src={adsdata && adsdata.ad_spaces_bottom.web_ad_image} alt='ads' />}
                         </div>
                       </div>
                     ) : null}
                   </div>
-
-                  <div id='B_NV-functions' className=''>
-                    <div id='B_NV-functions-left'>
-                      <Form.Label id='B_NV-font-lable'>{translate('fontsize')}</Form.Label>
-                      <Form.Range
-                        id='B_NV-FontRange'
-                        min={14}
-                        max={24}
-                        step={2}
-                        value={FontSize}
-                        onChange={e => setFontSize(e.target.value)}
-                      />
-                      <div className='d-flex justify-content-between'>
-                        <Form.Label id='B_NV-FontRange-labels'>14px</Form.Label>
-                        <Form.Label id='B_NV-FontRange-labels'>16px</Form.Label>
-                        <Form.Label id='B_NV-FontRange-labels'>18px</Form.Label>
-                        <Form.Label id='B_NV-FontRange-labels'>20px</Form.Label>
-                        <Form.Label id='B_NV-FontRange-labels'>22px</Form.Label>
-                        <Form.Label id='B_NV-FontRange-labels'>24px</Form.Label>
-                      </div>
-                    </div>
-                    <div id='B_NV-functions-right'></div>
-                  </div>
-                  <p
-                    id='B_NV-description'
-                    style={{ fontSize: `${FontSize}px` }}
-                    dangerouslySetInnerHTML={{ __html: data[0].description }}
-                  ></p>
                 </div>
               </div>
-              <div className='col-md-5 col-12'>
-                <div id='B_NV-right-section'>
-                  {BNid ? <RelatedBreakingNews id={BNid} /> : null}
-                  <TagsSection />
-                </div>
-              </div>
-            </div>
-            <VideoPlayerModal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              // backdrop="static"
-              keyboard={false}
-              url={Video_url}
-              type_url={data[0].type}
-              // title={data.title}
-            />
-            {/* ad spaces */}
-            {adsdata && adsdata.ad_spaces_bottom ? (
-              <div className='ad_spaces my-3'>
-                <div target='_blank' onClick={() => window.open(adsdata && adsdata.ad_spaces_bottom.ad_url, '_blank')}>
-                  {<img className='adimage' src={adsdata && adsdata.ad_spaces_bottom.web_ad_image} alt='ads' />}
-                </div>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </div>
+            </>
+          )}
+        </>
+      ) : null}
     </>
   )
 }
