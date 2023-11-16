@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Button, Dropdown, Offcanvas } from 'react-bootstrap'
 import { BiBell, BiUserCircle } from 'react-icons/bi'
 import { GiHamburgerMenu } from 'react-icons/gi'
@@ -20,6 +20,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import usersvg from '../../../public/assets/images/user.svg'
+import { useQuery } from '@tanstack/react-query'
 
 const MobilesideBar = ({
   isuserRole,
@@ -53,9 +54,10 @@ const MobilesideBar = ({
     setCurrentLanguage(name, code, id)
   }
 
-  useEffect(() => {
-    loadLanguageLabels(currentLanguage.code)
-  }, [currentLanguage])
+  const {} = useQuery({
+    queryKey: ['mobile-loadlanguagelables', currentLanguage],
+    queryFn: loadLanguageLabels(currentLanguage.code)
+  })
 
   const closeRef = useRef()
 

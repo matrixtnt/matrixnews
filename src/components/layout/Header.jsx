@@ -41,11 +41,11 @@ import FirebaseData from 'src/utils/Firebase'
 import { useQuery } from '@tanstack/react-query'
 import { getUserByIdApi } from 'src/hooks/getuserbyId'
 import { access_key, getUser } from 'src/utils/api'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
 
 const Header = () => {
   const userData = useSelector(selectUser)
   const { authentication } = FirebaseData()
-  const [Data, setData] = useState([])
   const [modalShow, setModalShow] = useState(false)
   const [islogout, setIsLogout] = useState(false) // eslint-disable-next-line
   const [isloginloading, setisloginloading] = useState(true) // eslint-disable-next-line
@@ -87,23 +87,28 @@ const Header = () => {
     queryFn: getUserById
   })
 
-  useEffect(() => {
-    // get categories
-    categoriesApi(
-      '0',
-      '16',
-      currentLanguage.id,
-      response => {
-        setData(response.data)
-        // console.log(Data)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-        }
-      }
-    )
+  // api call
+  const categoriesApi = async () => {
+    try {
+      const { data } = await CategoriesApi.getCategories({
+        access_key: access_key,
+        offset: '0',
+        limit: '16',
+        language_id: currentLanguage.id
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+  // react query
+  const { data: Data } = useQuery({
+    queryKey: ['header-categories', currentLanguage],
+    queryFn: categoriesApi
+  })
+
+  const initialloadLanguage = async () => {
     // language laod
     loadLanguages(
       response => {
@@ -125,9 +130,12 @@ const Header = () => {
         console.log(error)
       }
     )
+  }
 
-    // eslint-disable-next-line
-  }, [currentLanguage])
+  const {} = useQuery({
+    queryKey: ['initialloadLanguage', currentLanguage],
+    queryFn: initialloadLanguage
+  })
 
   // language change
   const languageChange = (name, code, id) => {

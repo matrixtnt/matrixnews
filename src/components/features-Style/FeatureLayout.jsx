@@ -48,7 +48,6 @@ const FeatureLayout = () => {
     queryFn: getFeatureSection
   })
 
-
   const SelectType = () => {
     return (
       Data &&
@@ -123,7 +122,7 @@ const FeatureLayout = () => {
         <div className='col-12 loading_data'>
           <Skeleton height={20} count={22} />
         </div>
-      ) : selectedComponent.length > 0 ? (
+      ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
       ) : (
         <p className='no_data_available'>{translate('noNews')}</p>

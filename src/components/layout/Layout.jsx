@@ -19,21 +19,17 @@ const FooterNoSSR = dynamic(() => import('./Footer'), { ssr: false })
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
 
-  // Set loader color theme
-  const changeLoaderColor = () => {
+  // change color loader and theme
+  const changeColors = () => {
     document.documentElement.style.setProperty('--loader-color', process.env.NEXT_PUBLIC_COLOR)
-  }
-
-  // secondary color
-  const secondaryColor = () => {
     document.documentElement.style.setProperty('--secondary-color', process.env.NEXT_PUBLIC_SECONDARY_COLOR)
   }
-
-  useEffect(() => {
-    changeLoaderColor()
-    secondaryColor()
-  }, [])
-
+  
+  const {} = useQuery({
+    queryKey: ['colors'],
+    queryFn: changeColors
+  })
+  
   // token api call
   const generateToken = async () => {
     try {
@@ -77,7 +73,7 @@ const Layout = ({ children }) => {
       )
     }
   }, [hasToken])
-  
+
   return (
     <div>
       {hasToken && settings ? (

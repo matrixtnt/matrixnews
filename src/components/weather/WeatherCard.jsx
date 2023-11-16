@@ -1,5 +1,4 @@
 'use client'
-import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
   loadLanguageLabels,
@@ -68,9 +67,10 @@ const WeatherCard = () => {
     setCurrentLanguage(name, code, id, display_name)
   }
 
-  useEffect(() => {
-    loadLanguageLabels(currentLanguage.code)
-  }, [currentLanguage])
+  const {} = useQuery({
+    queryKey: ['weather-loadlanguagelables', currentLanguage],
+    queryFn: loadLanguageLabels(currentLanguage.code)
+  })
 
   return (
     <div id='rns-weather-card'>
