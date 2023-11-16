@@ -11,7 +11,7 @@ import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
-import { getFeatureSectionByIdApi } from 'src/hooks/getfeatureSectionbyidApi'
+import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 
 const ViewAll = () => {
@@ -34,7 +34,7 @@ const ViewAll = () => {
 
   const getFeatureSectionById = async () => {
     try {
-      const { data } = await getFeatureSectionByIdApi.getFeatureSectionById({
+      const { data } = await getFeatureSectionApi.getFeatureSectionById({
         access_key: access_key,
         section_id: catid,
         language_id: language_id,

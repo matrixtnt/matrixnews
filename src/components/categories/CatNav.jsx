@@ -1,7 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { categoriesApi } from '../../store/actions/campaign'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
@@ -11,34 +9,36 @@ import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import Link from 'next/link'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
+import { access_key } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 SwiperCore.use([Navigation, Pagination])
 const CatNav = () => {
-  const [Data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-
   const navigate = useRouter()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categoiresOnOff = useSelector(settingsData)
 
-  useEffect(() => {
-    categoriesApi(
-      '0',
-      '40',
-      currentLanguage.id,
-      response => {
-        const responseData = response.data
-        setData(responseData)
-        setIsLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-          setIsLoading(false)
-        }
-      }
-    )
-  }, [currentLanguage])
+  // api call
+  const categoriesApi = async () => {
+    try {
+      const { data } = await CategoriesApi.getCategories({
+        access_key: access_key,
+        offset: '0',
+        limit: '40',
+        language_id: currentLanguage.id
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { data: Data, isLoading } = useQuery({
+    queryKey: ['categoriesNav', currentLanguage],
+    queryFn: categoriesApi
+  })
 
   const swiperOption = {
     loop: Data && Data.length > 10 ? true : false,

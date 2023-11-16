@@ -16,7 +16,7 @@ import {
   setCurrentLanguage
 } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
-import { categoriesApi, getuserbyidApi } from '../../store/actions/campaign'
+import { categoriesApi } from '../../store/actions/campaign'
 import {
   getSiblings,
   slideToggle,
@@ -38,6 +38,9 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import FirebaseData from 'src/utils/Firebase'
+import { useQuery } from '@tanstack/react-query'
+import { getUserByIdApi } from 'src/hooks/getuserbyId'
+import { access_key, getUser } from 'src/utils/api'
 
 const Header = () => {
   const userData = useSelector(selectUser)
@@ -48,7 +51,7 @@ const Header = () => {
   const [isloginloading, setisloginloading] = useState(true) // eslint-disable-next-line
   const [profileModal, setProfileModal] = useState(false)
   const [isuserRole, setisuserRole] = useState(false)
-
+  let user = getUser()
   const navigate = useRouter()
 
   const counterBadgeData = useSelector(counterData)
@@ -60,6 +63,29 @@ const Header = () => {
   const websettings = useSelector(webSettingsData)
 
   const settings = useSelector(settingsData)
+
+  // user roles api call
+  const getUserById = async () => {
+    try {
+      const { data } = await getUserByIdApi.getUserById({
+        access_key: access_key,
+        user_id: user
+      })
+      const Role = data.data.map(elem => elem.role)
+      if (Role[0] !== '0') {
+        setisuserRole(true)
+      }
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const {} = useQuery({
+    queryKey: ['userRoles'],
+    queryFn: getUserById
+  })
 
   useEffect(() => {
     // get categories
@@ -162,7 +188,7 @@ const Header = () => {
             signOut(authentication)
               .then(() => {
                 logoutUser()
-                window.recaptchaVerifier = null;
+                window.recaptchaVerifier = null
                 setIsLogout(false)
                 navigate.push('/')
               })
@@ -240,20 +266,6 @@ const Header = () => {
   const actionSearch = () => {
     store.dispatch(SetSearchPopUp(!searchPopUp))
   }
-
-  // user roles
-  useEffect(() => {
-    getuserbyidApi(
-      response => {
-        const userRole = response.data
-        const Role = userRole.map(elem => elem.role)
-        if (Role[0] !== '0') {
-          setisuserRole(true)
-        }
-      },
-      error => console.log(error)
-    )
-  }, [])
 
   return (
     <div className='Newsbar'>

@@ -1,17 +1,20 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import { useRouter } from 'next/navigation'
-import { getnewsApi } from '../../store/actions/campaign'
 import { AiOutlineClose } from 'react-icons/ai'
 import { translate, truncateText } from '../../utils'
+import { getNewsApi } from 'src/hooks/newsApi'
+import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 const SearchPopup = () => {
   const [Data, setData] = useState([])
   const searchPopUp = useSelector(state => state.clickAction.searchPopUp)
-
+  let { id: language_id } = getLanguage()
+  let user = getUser()
   const [searchValue, setSearchValue] = useState('')
 
   const navigate = useRouter()
@@ -29,30 +32,38 @@ const SearchPopup = () => {
 
   const storedLatitude = localStorage.getItem('latitude')
   const storedLongitude = localStorage.getItem('longitude')
-  // news api for search
-  useEffect(() => {
-    getnewsApi(
-      '0',
-      '5',
-      '',
-      searchValue,
-      storedLatitude && storedLatitude ? storedLatitude : null,
-      storedLongitude && storedLongitude ? storedLongitude : null,
-      response => {
-        if (searchValue !== '') {
-          setData(response.data)
-        } else {
-          setData([])
-        }
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData([])
-        }
+
+  // api call
+  const getNews = async () => {
+    try {
+      const { data } = await getNewsApi.getNews({
+        access_key: access_key,
+        offset: '0',
+        limit: '5',
+        user_id: user,
+        get_user_news: '',
+        search: searchValue, // {optional}
+        language_id: language_id,
+        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
+        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+      })
+      if (searchValue !== '') {
+        setData(data.data)
+      } else {
+        setData([])
       }
-    )
-    // eslint-disable-next-line
-  }, [searchValue])
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const {} = useQuery({
+    queryKey: ['getSearchNews', searchValue],
+    queryFn: getNews,
+    staleTime: 0
+  })
 
   // redirect news page
   const redirectPage = (e, element) => {

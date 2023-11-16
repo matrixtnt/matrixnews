@@ -1,17 +1,17 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+
 import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'react-icons/fa'
 import Link from 'next/link'
 import moment from 'moment/moment'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { categoriesApi } from '../../store/actions/campaign'
 import { translate } from '../../utils'
 import { webSettingsData } from '../../store/reducers/websettingsReducer'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
+import { useQuery } from '@tanstack/react-query'
+import { access_key } from 'src/utils/api'
 
 const Footer = () => {
-  const [Data, setData] = useState([])
-
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const websettings = useSelector(webSettingsData)
@@ -20,20 +20,26 @@ const Footer = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  useEffect(() => {
-    categoriesApi(
-      '0',
-      '8',
-      currentLanguage.id,
-      response => {
-        const responseData = response.data
-        setData(responseData)
-      },
-      error => {
-        // console.log(error);
-      }
-    )
-  }, [currentLanguage])
+  // api call
+  const categoriesApi = async () => {
+    try {
+      const { data } = await CategoriesApi.getCategories({
+        access_key: access_key,
+        offset: '0',
+        limit: '8',
+        language_id: currentLanguage.id
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { data: Data } = useQuery({
+    queryKey: ['footerCategories', currentLanguage],
+    queryFn: categoriesApi
+  })
 
   return (
     <>

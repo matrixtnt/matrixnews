@@ -1,40 +1,41 @@
 'use client'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-
-import { getbreakingNewsApi } from '../../store/actions/campaign'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
+import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
+import { access_key, getLanguage } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 const RelatedBreakingNews = props => {
-  const [Data, setData] = useState([])
+  let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    getbreakingNewsApi(
-      response => {
-        const responseData = response.data
-        const filteredData = responseData.filter(element => element.id !== props.id)
-        setData(filteredData)
-        setLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-          setLoading(false)
-        }
-      }
-    )
-  }, [currentLanguage, props.id])
+
+  // api call
+  const getBreakingNews = async () => {
+    try {
+      const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id, access_key })
+      const filteredData = data.data.filter(element => element.id !== props.id)
+      return filteredData
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['relatedBreakingNews', currentLanguage, props.id],
+    queryFn: getBreakingNews
+  })
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <div>
           <Skeleton height={200} count={3} />
         </div>

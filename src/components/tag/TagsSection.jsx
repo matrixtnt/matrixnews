@@ -1,37 +1,36 @@
 'use client'
-
-import { useState } from 'react'
-import { useEffect } from 'react'
 import Link from 'next/link'
-import { gettagsApi } from '../../store/actions/campaign'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
+import { getTagApi } from 'src/hooks/tagsApi'
+import { access_key, getLanguage } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 const TagsSection = () => {
-  const [Data, setData] = useState([])
   const currentLanguage = useSelector(selectCurrentLanguage)
-  const [loading, setLoading] = useState(true)
+  let { id: language_id } = getLanguage()
 
-  useEffect(() => {
-    gettagsApi(
-      response => {
-        setData(response.data)
-        setLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-          setLoading(false)
-        }
-      }
-    )
-  }, [currentLanguage])
+  // api call
+  const getTag = async () => {
+    try {
+      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: language_id })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['getTagSection', currentLanguage],
+    queryFn: getTag
+  })
 
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <div>
           <Skeleton height={200} count={3} />
         </div>

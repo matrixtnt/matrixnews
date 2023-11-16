@@ -8,14 +8,18 @@ import { stripHtmlTags, truncateText } from '../../utils'
 import { useEffect, useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { getfeaturesectionbyidApi } from '../../store/actions/campaign'
+import { useQuery } from '@tanstack/react-query'
+import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
+import { access_key, getLanguage, getUser } from 'src/utils/api'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
-const StyleSix = ({ isLoading, Data, setIsLoading }) => {
+const StyleSix = ({ isLoading, Data }) => {
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
-  const [sliderData, setSliderData] = useState()
   const [typeUrl, setTypeUrl] = useState(null)
+  let user = getUser();
+  let { id: language_id } = getLanguage();
 
   const Newbreakpoints = {
     320: {
@@ -64,26 +68,29 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
   const storedLatitude = localStorage.getItem('latitude')
   const storedLongitude = localStorage.getItem('longitude')
 
-  useEffect(() => {
-    getfeaturesectionbyidApi(
-      Data.id,
-      '',
-      '',
-      storedLatitude && storedLatitude ? storedLatitude : null,
-      storedLongitude && storedLongitude ? storedLongitude : null,
-      response => {
-        setSliderData(response?.data[0])
-        setIsLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setSliderData('')
-          setIsLoading(false)
-        }
-      }
-    )
-    // eslint-disable-next-line
-  }, [])
+  const getFeatureSectionById = async () => {
+    try {
+      const { data } = await getFeatureSectionApi.getFeatureSectionById({
+        access_key: access_key,
+        section_id:Data.id,
+        language_id: language_id,
+        user_id: user,
+        offset: '',
+        limit: '',
+        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
+        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { data: sliderData } = useQuery({
+    queryKey: ['styleSixFeature'],
+    queryFn: getFeatureSectionById
+  })
 
   const TypeUrl = type => {
     setTypeUrl(type)
@@ -103,7 +110,7 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
       ) : null}
 
       {/* video section */}
-      {sliderData && sliderData.videos?.length > 0 ? (
+      {sliderData && sliderData[0].videos?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
@@ -113,7 +120,7 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
                   <Skeleton height={20} count={22} />
                 </div>
               ) : (
-                sliderData.videos.map(item => (
+                sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
                     <Link href={`/news/${item.id}`}>
                       <div className='card fs-Newscard'>
@@ -130,11 +137,17 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
                             </Link>
                           ) : null}
 
-                          <div className='video_slider_button' onClick={() => {handleVideoUrl(item.content_value); TypeUrl(item.type)}}>
+                          <div
+                            className='video_slider_button'
+                            onClick={() => {
+                              handleVideoUrl(item.content_value)
+                              TypeUrl(item.type)
+                            }}
+                          >
                             <BsFillPlayFill className='pulse' fill='white' size={50} />
                           </div>
 
-                          {sliderData.videos_type === 'news' ? (
+                          {sliderData[0].videos_type === 'news' ? (
                             <div id='Top-Deatils'>
                               {item && item.date ? (
                                 <p id='Top-Posttime01'>
@@ -186,7 +199,7 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
       ) : null}
 
       {/* news section */}
-      {sliderData && sliderData.news?.length > 0 ? (
+      {sliderData && sliderData[0].news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
@@ -196,7 +209,7 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
                   <Skeleton height={20} count={22} />
                 </div>
               ) : (
-                sliderData.news.map(item => (
+                sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
                     <Link href={`/news/${item.id}`}>
                       <div className='card fs-Newscard'>
@@ -256,7 +269,7 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
       ) : null}
 
       {/* breaking news section */}
-      {sliderData && sliderData.breaking_news?.length > 0 ? (
+      {sliderData && sliderData[0].breaking_news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
@@ -266,14 +279,20 @@ const StyleSix = ({ isLoading, Data, setIsLoading }) => {
                   <Skeleton height={20} count={22} />
                 </div>
               ) : (
-                sliderData.breaking_news.map(item => (
+                sliderData[0].breaking_news.map(item => (
                   <SwiperSlide key={item.id}>
                     {/* <Link href={item.content_value ? '#' : `/breaking-news/${item.id}`}> */}
                     <div className='card fs-Newscard'>
                       <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                       <div className='card-img-overlay'>
                         {item.content_value ? (
-                          <div className='video_slider_button' onClick={() => {handleVideoUrl(item.content_value); TypeUrl(item.type)}}>
+                          <div
+                            className='video_slider_button'
+                            onClick={() => {
+                              handleVideoUrl(item.content_value)
+                              TypeUrl(item.type)
+                            }}
+                          >
                             <BsFillPlayFill className='pulse' fill='white' size={50} />
                           </div>
                         ) : null}

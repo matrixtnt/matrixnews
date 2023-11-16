@@ -1,11 +1,10 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Popover from 'react-bootstrap/Popover'
 import {
   deletecommentApi,
-  getcommentbynewsApi,
   setCommentLikeDislikeApi,
   setFlagApi,
   setcommentApi
@@ -17,38 +16,22 @@ import no_image from '../../../public/assets/images/no_image.jpeg'
 import { Modal } from 'antd'
 import { BiDotsVerticalRounded, BiSolidDislike, BiSolidFlag, BiSolidLike, BiSolidTrash } from 'react-icons/bi'
 import { toast } from 'react-toastify'
-import Link from 'next/link'
+import { getCommentByNewsApi } from 'src/hooks/commentsApi'
+import { access_key, getUser } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 const CommentsView = props => {
   const [LoadComments, setLoadComments] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
-  const [Data, setData] = useState([])
   const [Comment, setComment] = useState('')
   const Nid = props.Nid
+  let user = getUser()
   const replyRef = useRef()
   const userData = useSelector(selectUser)
   const [modalOpen, setModalOpen] = useState(false)
   const [dotModal, setDotModal] = useState(false)
   const [CommentID, setCommentID] = useState(null)
   const [message, setMessage] = useState(null)
-
-  useEffect(() => {
-    getcommentbynewsApi(
-      Nid,
-      '0',
-      '10',
-      response => {
-        if (response.data === undefined) {
-          setData([])
-        } else {
-          setData(response.data)
-        }
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }, [Nid, props.LoadComments, LoadComments, refreshKey])
 
   // set comment
   const setCommentData = (e, id) => {
@@ -168,11 +151,33 @@ const CommentsView = props => {
     )
   }
 
+  // api call
+  const getCommentByNews = async () => {
+    try {
+      const { data } = await getCommentByNewsApi.getCommentByNews({
+        access_key: access_key,
+        user_id: user,
+        news_id: Nid,
+        offset: '0',
+        limit: '10'
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { data:Data, isLoading } = useQuery({
+    queryKey: ['getCommentByNews', Nid, props.LoadComments, LoadComments, refreshKey],
+    queryFn: getCommentByNews,
+  })
+
   return (
     <>
       {userData && userData.data ? (
         <div>
-          {Data.length === 0 ? null : <h2>{translate('comment')}</h2>}
+          {Data && Data.length === 0 ? null : <h2>{translate('comment')}</h2>}
           {Data &&
             Data.map(element => (
               <div key={element.id}>
@@ -245,14 +250,12 @@ const CommentsView = props => {
                       <b>
                         <h5>{ele.name}</h5>
                       </b>
-                      {/* <Link id="cdbtnReport">Report</Link> */}
                       <p id='cs-card-text' className='card-text'>
                         {ele.message}
                       </p>
                       {['bottom-end'].map(placement => (
                         <>
                           <div className='comment_data'>
-                            {/* {console.log("place", element)} */}
                             <div className='comment_like'>
                               <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
                               {ele.like > 0 ? ele.like : null}

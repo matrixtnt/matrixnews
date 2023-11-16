@@ -6,6 +6,9 @@ import { selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
 import { loadToken, tokenApi, tokenData } from 'src/store/reducers/tokenReducer'
 import { laodwebsettingsApi } from 'src/store/reducers/websettingsReducer'
 import dynamic from 'next/dynamic'
+import { generateTokenApi } from 'src/hooks/tokenApi'
+import { access_key } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 const SearchPopupNoSSR = dynamic(() => import('../search/SearchPopup'), { ssr: false })
 const WeatherCardNoSSR = dynamic(() => import('../weather/WeatherCard'), { ssr: false })
@@ -31,18 +34,24 @@ const Layout = ({ children }) => {
     secondaryColor()
   }, [])
 
-  useEffect(() => {
-    // token fetch
-    tokenApi(
-      response => {
-        let token = response.data
-        loadToken(token)
-      },
-      error => {
-        console.log(error)
-      }
-    )
-  }, [])
+  // token api call
+  const generateToken = async () => {
+    try {
+      const { data } = await generateTokenApi.generateToken({
+        access_key: access_key
+      })
+      loadToken(data.data)
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const {} = useQuery({
+    queryKey: ['token'],
+    queryFn: generateToken
+  })
 
   useSelector(selectCurrentLanguageLabels)
 
@@ -68,6 +77,7 @@ const Layout = ({ children }) => {
       )
     }
   }, [hasToken])
+  
   return (
     <div>
       {hasToken && settings ? (

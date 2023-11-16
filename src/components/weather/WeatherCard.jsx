@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
   loadLanguageLabels,
@@ -12,31 +12,39 @@ import { SlCalender } from 'react-icons/sl'
 import { HiArrowLongUp, HiArrowLongDown } from 'react-icons/hi2'
 import { Dropdown } from 'react-bootstrap'
 import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'react-icons/fa'
+import { useQuery } from '@tanstack/react-query'
+import Skeleton from 'react-loading-skeleton'
 
 const WeatherCard = () => {
-  const [weather, setWeather] = useState(null)
-  // eslint-disable-next-line
-  const [loading, setLoading] = useState(true)
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  useEffect(() => {
-    // eslint-disable-next-line
-    navigator.geolocation.getCurrentPosition(async position => {
-      const { latitude, longitude } = position.coords
+  const weatherApi = async () => {
+    return new Promise((resolve, reject) => {
+      try {
+        navigator.geolocation.getCurrentPosition(async position => {
+          const { latitude, longitude } = position.coords
 
-      // Store location data in local storage
-      localStorage.setItem('latitude', latitude)
-      localStorage.setItem('longitude', longitude)
+          localStorage.setItem('latitude', latitude)
+          localStorage.setItem('longitude', longitude)
 
-      // get weather information
-      const response = await axios.get(
-        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage.code}`
-      )
+          const response = await axios.get(
+            `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage.code}`
+          )
 
-      setWeather(response.data)
-      setLoading(false)
+          resolve(response.data) // Resolve the promise with the fetched data
+        })
+      } catch (error) {
+        reject(error) // Reject the promise if an error occurs
+      }
     })
-  }, [currentLanguage])
+  }
+
+  // react query
+  const { isLoading, data: weather } = useQuery({
+    queryKey: ['weather', currentLanguage],
+    queryFn: weatherApi,
+    staleTime: 0
+  })
 
   // to get today weekday nameselectLanguages
   const today = new Date()
@@ -77,24 +85,29 @@ const WeatherCard = () => {
                   {`${dayOfMonth}`},{`${year}`}
                 </p>
               </div>
-
-              {weather && (
+              {isLoading ? (
                 <>
-                  <img src={weather && weather.current.condition.icon} alt='news' className='weather_icon' />
-                  <b className='me-2'>{weather && weather.current.temp_c}°C</b>
-                  <div className='left-state'>
-                    <p className='location-wcard mb-0 '>
-                      {weather && weather.location && weather.location.name},
-                      {weather && weather.location && weather.location.region},
-                      {weather && weather.location && weather.location.country}
-                    </p>
-                    <p className='day-Wtype-wcard mb-0 '>
-                      <HiArrowLongUp />
-                      {maxTempC}°C <HiArrowLongDown />
-                      {minTempC}°C
-                    </p>
-                  </div>
+                  <Skeleton height={5} count={3} />
                 </>
+              ) : (
+                weather && (
+                  <>
+                    <img src={weather && weather.current.condition.icon} alt='news' className='weather_icon' />
+                    <b className='me-2'>{weather && weather.current.temp_c}°C</b>
+                    <div className='left-state'>
+                      <p className='location-wcard mb-0 '>
+                        {weather && weather.location && weather.location.name},
+                        {weather && weather.location && weather.location.region},
+                        {weather && weather.location && weather.location.country}
+                      </p>
+                      <p className='day-Wtype-wcard mb-0 '>
+                        <HiArrowLongUp />
+                        {maxTempC}°C <HiArrowLongDown />
+                        {minTempC}°C
+                      </p>
+                    </div>
+                  </>
+                )
               )}
             </div>
           </div>

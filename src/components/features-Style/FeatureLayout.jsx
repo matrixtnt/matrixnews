@@ -1,8 +1,6 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { getfeaturesectionApi } from '../../store/actions/campaign'
 import StyleOne from './StyleOne'
 import StyleTwo from './StyleTwo'
 import StyleThree from './StyleThree'
@@ -11,13 +9,14 @@ import StyleFive from './StyleFive'
 import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
+import { useQuery } from '@tanstack/react-query'
+import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 
 const FeatureLayout = () => {
-  // state
-  const [Data, setData] = useState([])
+  let user = getUser()
 
-  // loader state
-  const [isLoading, setIsLoading] = useState(true)
+  let { id: language_id } = getLanguage()
 
   // current language
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -26,27 +25,29 @@ const FeatureLayout = () => {
   const storedLatitude = localStorage.getItem('latitude')
   const storedLongitude = localStorage.getItem('longitude')
 
-  // breaking news api call
-  useEffect(() => {
-    getfeaturesectionApi(
-      null,
-      null,
-      storedLatitude && storedLatitude ? storedLatitude : null,
-      storedLongitude && storedLongitude ? storedLongitude : null,
-      response => {
-        const responseData = response.data
-        setData(responseData)
-        setIsLoading(false)
-      },
-      error => {
-        setIsLoading(false)
-        if (error === 'No Data Found') {
-          setData('')
-        }
-      }
-    )
-    // eslint-disable-next-line
-  }, [currentLanguage])
+  const getFeatureSection = async () => {
+    try {
+      const { data } = await getFeatureSectionApi.getFeatureSection({
+        access_key: access_key,
+        language_id: language_id,
+        user_id: user,
+        offset: null,
+        limit: null,
+        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
+        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+      })
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['mainfeatureSection', currentLanguage],
+    queryFn: getFeatureSection
+  })
+
 
   const SelectType = () => {
     return (
@@ -64,7 +65,7 @@ const FeatureLayout = () => {
           } else if (item.style_web === 'style_5') {
             return <StyleFive key={index} isLoading={isLoading} Data={item} />
           } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} visLoading={isLoading} Data={item} setIsLoading={setIsLoading} />
+            return <StyleSix key={index} visLoading={isLoading} Data={item} />
           }
         } else if (item.news_type === 'breaking_news') {
           if (item.style_web === 'style_1') {
@@ -78,7 +79,7 @@ const FeatureLayout = () => {
           } else if (item.style_web === 'style_5') {
             return <StyleFive key={index} isLoading={isLoading} Data={item} />
           } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} isLoading={isLoading} Data={item} setIsLoading={setIsLoading} />
+            return <StyleSix key={index} isLoading={isLoading} Data={item} />
           }
         } else if (item.news_type === 'videos') {
           if (item.style_web === 'style_1') {
@@ -92,7 +93,7 @@ const FeatureLayout = () => {
           } else if (item.style_web === 'style_5') {
             return <StyleFive key={index} isLoading={isLoading} Data={item} />
           } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} isLoading={isLoading} Data={item} setIsLoading={setIsLoading} />
+            return <StyleSix key={index} isLoading={isLoading} Data={item} />
           }
         } else if (item.news_type === 'user_choice') {
           if (item.style_web === 'style_1') {
@@ -106,7 +107,7 @@ const FeatureLayout = () => {
           } else if (item.style_web === 'style_5') {
             return <StyleFive key={index} isLoading={isLoading} Data={item} />
           } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} isLoading={isLoading} Data={item} setIsLoading={setIsLoading} />
+            return <StyleSix key={index} isLoading={isLoading} Data={item} />
           }
         }
         return null

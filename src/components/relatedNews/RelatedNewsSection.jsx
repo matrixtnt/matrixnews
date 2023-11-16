@@ -1,47 +1,53 @@
 'use client'
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { getnewsbycategoryApi } from '../../store/actions/campaign'
 import { translate, truncateText } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
+import { CategoriesApi } from 'src/hooks/categoriesApi'
+import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { useQuery } from '@tanstack/react-query'
 
 const RelatedNewsSection = props => {
-  const [Data, setData] = useState([])
   const catid = props.Cid
-  const [loading, setLoading] = useState(true)
+  let user = getUser()
+  let { id: language_id } = getLanguage()
 
   const storedLatitude = localStorage.getItem('latitude')
   const storedLongitude = localStorage.getItem('longitude')
-  useEffect(() => {
-    getnewsbycategoryApi(
-      catid,
-      '',
-      '0',
-      '10',
-      storedLatitude && storedLatitude ? storedLatitude : null,
-      storedLongitude && storedLongitude ? storedLongitude : null,
-      response => {
-        // Filter out elements with the same id as props.Cid
-        const filteredData = response.data.filter(element => element.id !== props.Nid)
-        setData(filteredData)
-        setLoading(false)
-      },
-      error => {
-        if (error === 'No Data Found') {
-          setData('')
-          setLoading(false)
-        }
-      }
-    )
-    // eslint-disable-next-line
-  }, [catid, props.Nid])
+
+  // api call
+  const getNewsByCategoryApi = async () => {
+    try {
+      const { data } = await CategoriesApi.getNewsByCategory({
+        access_key: access_key,
+        category_id: catid,
+        subcategory_id: '',
+        offset: '0',
+        limit: '10',
+        user_id: user,
+        language_id: language_id,
+        latitude: storedLatitude ? storedLatitude : null,
+        longitude: storedLongitude ? storedLongitude : null
+      })
+      // Filter out elements with the same id as props.Cid
+      const filteredData = data.data.filter(element => element.id !== props.Nid)
+      return filteredData
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // react query
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['realated-news-section', catid, props.Nid],
+    queryFn: getNewsByCategoryApi
+  })
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
   return (
     <div>
-      {loading ? (
+      {isLoading ? (
         <div>
           <Skeleton height={200} count={3} />
         </div>
