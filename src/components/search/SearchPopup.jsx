@@ -9,9 +9,13 @@ import { translate, truncateText } from '../../utils'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { message } from 'antd'
 
 const SearchPopup = () => {
   const [Data, setData] = useState([])
+  const [total, setTotal] = useState(null)
+  const [dataLimit, setDataLimit] = useState(5) // Initial data limit
   const searchPopUp = useSelector(state => state.clickAction.searchPopUp)
   let { id: language_id } = getLanguage()
   let user = getUser()
@@ -39,7 +43,7 @@ const SearchPopup = () => {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
         offset: '0',
-        limit: '5',
+        limit: dataLimit.toString(),
         user_id: user,
         get_user_news: '',
         search: searchValue, // {optional}
@@ -47,10 +51,26 @@ const SearchPopup = () => {
         latitude: storedLatitude && storedLatitude ? storedLatitude : null,
         longitude: storedLongitude && storedLongitude ? storedLongitude : null
       })
-      if (searchValue !== '') {
-        setData(data.data)
-      } else {
+
+      // Check if the total count of loaded data exceeds the total count from the API
+      const totalItemsFromAPI = parseInt(data.total) // Assuming 'total' is the total count from API response
+      const loadedItemsCount = data.length + parseInt(dataLimit)
+
+      if (data.error) {
         setData([])
+        setTotal(0)
+      }
+
+      if (loadedItemsCount > totalItemsFromAPI) {
+        // If loaded items exceed the total count, set Data to empty array
+        setData([])
+      } else {
+        if (searchValue !== '') {
+          setTotal(data.total)
+          setData(data)
+        } else {
+          setData([])
+        }
       }
       return data.data
     } catch (error) {
@@ -59,7 +79,7 @@ const SearchPopup = () => {
   }
 
   // react query
-  const {} = useQuery({
+  const { refetch } = useQuery({
     queryKey: ['getSearchNews', searchValue],
     queryFn: getNews,
     staleTime: 0
@@ -72,6 +92,15 @@ const SearchPopup = () => {
     navigate.push(`/news/${element.id}`)
     setSearchValue('')
   }
+
+  const handleLoadMore = () => {
+    setDataLimit(prevLimit => prevLimit + 5) // Increment data limit by 5
+  }
+
+  // UseEffect to call getNews whenever dataLimit changes
+  useEffect(() => {
+    refetch()
+  }, [dataLimit])
 
   return (
     <>
@@ -94,14 +123,21 @@ const SearchPopup = () => {
           <button type='submit' className='submit-btn' onClick={() => setSearchValue('')}>
             <AiOutlineClose />
           </button>
-          <div id='ts-main' className='search_bar'>
+          <div
+            id='ts-main'
+            className='search_bar'
+            style={{
+              height: (Data && Data?.error === "true") || searchValue === '' ? 'auto' : '500px', 
+              overflowY: (Data && Data?.error === "true") || searchValue === '' ? 'visible' : 'scroll' 
+            }}
+          >
             <div id='ts-content' className=''>
               <div className='row mx-auto'>
                 {searchValue !== '' &&
                   Data &&
-                  Data.length > 0 &&
-                  Data.map(element => (
-                    <div className='col-12' key={element.id}>
+                  Data.data?.length > 0 &&
+                  Data.data.map(element => (
+                    <div className='col-12 px-0' key={element.id}>
                       <div id='Link-all' onClick={e => redirectPage(e, element)}>
                         <div id='ts-card' className='card'>
                           <img id='ts-card-image' src={element.image} className='card-img' alt='...' />
@@ -114,9 +150,12 @@ const SearchPopup = () => {
                       </div>
                     </div>
                   ))}
-                {searchValue !== '' && Data && Data.length === 0 && (
-                  <p className='text-dark bg-white p-4 text-center'>{translate('nodatafound')}</p>
+                {searchValue !== '' && Data?.data?.length > 0 && (
+                  <div className='load-more-btn text-center'>
+                    {Data && Data?.data.length < parseInt(total) && <button onClick={handleLoadMore}>Load More</button>}
+                  </div>
                 )}
+                {Data && Data?.error === 'true' && <p className='text-dark bg-white p-4 text-center'>No data found</p>}
               </div>
             </div>
           </div>

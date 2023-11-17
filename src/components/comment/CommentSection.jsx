@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import CommentsView from './CommentsView'
 import { setcommentApi } from '../../store/actions/campaign'
 import { isLogin, translate } from '../../utils'
-import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 
 const CommentSection = props => {
   const [Comment, setComment] = useState('')

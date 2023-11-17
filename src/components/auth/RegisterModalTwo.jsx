@@ -6,11 +6,10 @@ import { eyeSlash } from "react-icons-kit/fa/eyeSlash";
 import Modal from "react-bootstrap/Modal";
 import { useRouter } from "next/navigation";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
-
 import { translate } from "../../utils";
-import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { webSettingsData } from "../../store/reducers/websettingsReducer";
+import toast from "react-hot-toast";
 
 const RagisterModalTwo = (props) => {
     const initialValues = {
@@ -317,7 +316,7 @@ const RagisterModalTwo = (props) => {
                                         </div>
                                         <div className="form-floating mb-3">
                                             <input type={type2} className="form-control" id="floatingPassword" placeholder="Password" name="confirmpassword" value={formValues.confirmPassword} onChange={handleConfirmpassword} />
-                                            <label htmlFor="floatingConfirmPassword">{translate("confpassLbl")}</label>
+                                            <label htmlFor="floatingConfirmPassword" className="confirmpss">{translate("confpassLbl")}</label>
                                             <span onClick={handleCtoggle} className="Cpassword-icon">
                                                 <Icon icon={icon2} size={19} />
                                             </span>

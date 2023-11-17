@@ -12,13 +12,12 @@ import PhoneLoginTwo from "./PhoneLoginTwo";
 import RagisterModalTwo from "./RegisterModalTwo";
 import ForgotPasswordTwo from "./ForgotPasswordTwo";
 import { translate } from "../../utils";
-import { toast } from "react-toastify";
 import { webSettingsData } from "../../store/reducers/websettingsReducer";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setRegisterTokenApi } from "../../store/actions/campaign";
-import { getToken } from "firebase/messaging";
 import FirebaseData from "src/utils/Firebase";
+import toast from "react-hot-toast";
 
 const SignInModal = (props) => {
     const { authentication,messaging } = FirebaseData();

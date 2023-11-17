@@ -7,7 +7,7 @@ import { translate } from '../../utils';
 import ReactPaginate from 'react-paginate';
 import { useSelector } from 'react-redux';
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 const UserBasedCategories = () => {
     const [data, setData] = useState([]);

@@ -1,7 +1,7 @@
 
 import axios from "axios";
-import {toast} from 'react-toastify';
 import * as actions from "../actions/apiActions";
+import toast from "react-hot-toast";
 
 /**
  *

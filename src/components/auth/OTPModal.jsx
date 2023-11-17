@@ -13,8 +13,8 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { loadMobileType, register } from '../../store/reducers/userReducer'
 import { useSelector } from 'react-redux'
 import { webSettingsData } from '../../store/reducers/websettingsReducer'
-import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 const OTPModal = (props) => {
   const [OTP, setOTP] = useState('') // eslint-disable-next-line

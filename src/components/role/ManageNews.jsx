@@ -8,11 +8,11 @@ import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/navigation'
 import { loadManageToEdit } from '../../store/reducers/createNewsReducer'
-import { toast } from 'react-toastify'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
+import toast from 'react-hot-toast'
 
 const ManageNews = () => {
   const navigate = useRouter()

@@ -4,7 +4,6 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { deleteusernotificationApi } from '../../store/actions/campaign'
 import { translate } from '../../utils'
-import { toast } from 'react-toastify'
 import Skeleton from 'react-loading-skeleton'
 import { MdMessage } from 'react-icons/md'
 import { IoMdThumbsUp } from 'react-icons/io'
@@ -15,6 +14,7 @@ import ReactPaginate from 'react-paginate'
 import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { getUser } from 'src/utils/api'
+import toast from 'react-hot-toast'
 
 const Notification = () => {
   const [Data, setData] = useState([])

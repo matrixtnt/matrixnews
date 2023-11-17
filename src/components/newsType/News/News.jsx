@@ -70,6 +70,7 @@ const News = () => {
         user_id: user,
         language_id: currentLanguage.id
       })
+
       if (data.data[0].bookmark === '0') {
         setBookmark(false)
       } else {
@@ -124,6 +125,7 @@ const News = () => {
   })
 
   const {
+    refetch,
     isLoading,
     isError,
     data: Data,
@@ -131,7 +133,8 @@ const News = () => {
     status
   } = useQuery({
     queryKey: ['getNewsbyId', NewsId, currentLanguage],
-    queryFn: getNewsById
+    queryFn: getNewsById,
+    staleTime:0
   })
 
   const {} = useQuery({
@@ -153,6 +156,7 @@ const News = () => {
         id,
         status,
         response => {
+          refetch()
           setLike(!Like)
         },
         error => {
@@ -171,6 +175,7 @@ const News = () => {
         newsid,
         status,
         response => {
+          refetch()
           setBookmark(!Bookmark)
         },
         error => {
@@ -349,6 +354,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setbookmarkData(Data && Data[0].id, !Bookmark ? 1 : 0)}
                           >
+                            {console.log(Bookmark)}
                             {Bookmark ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
                           </button>
                           <p id='nv-function-text'>{translate('saveLbl')}</p>
@@ -400,7 +406,7 @@ const News = () => {
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
                   {settingsOnOff && settingsOnOff.comments_mode === '1' ? (
-                    <CommentSection Nid={NewsId} />
+                    <CommentSection Nid={NewsId}/>
                   ) : (
                     <>
                       <div className='text-center my-5'>{translate('comDisable')}</div>

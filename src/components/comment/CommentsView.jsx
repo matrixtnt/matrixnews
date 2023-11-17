@@ -15,12 +15,13 @@ import { translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { Modal } from 'antd'
 import { BiDotsVerticalRounded, BiSolidDislike, BiSolidFlag, BiSolidLike, BiSolidTrash } from 'react-icons/bi'
-import { toast } from 'react-toastify'
 import { getCommentByNewsApi } from 'src/hooks/commentsApi'
 import { access_key, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
 
 const CommentsView = props => {
+  console.log(props);
   const [LoadComments, setLoadComments] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
   const [Comment, setComment] = useState('')

@@ -9,11 +9,14 @@ import { useRouter } from 'next/navigation'
 import { bookmarkApi } from 'src/hooks/bookmarkApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { useState } from 'react'
 
 const BookmarkSection = () => {
   const { id: language_id } = getLanguage()
   const user = getUser()
+  const [Data, setData] = useState([])
   const navigate = useRouter()
+  // const initialData = useRef([])
 
   // api call
   const getbookmarkApi = async () => {
@@ -25,7 +28,7 @@ const BookmarkSection = () => {
         offset: 0,
         limit: ''
       })
-      return data.data
+      setData(data.data)
     } catch (error) {
       console.log(error)
     }
@@ -39,22 +42,21 @@ const BookmarkSection = () => {
         news_id: news_id,
         status: status
       })
-      refetch()
-      return data.data
+      setData(Data.filter(item => item.news_id !== news_id))
     } catch (error) {
       console.log(error)
     }
   }
 
   // react query
-  const { refetch, isLoading, data:Data } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ['getbookmark', access_key, user, language_id],
-    queryFn: getbookmarkApi
+    queryFn: getbookmarkApi,
   })
 
   const {} = useQuery({
     queryKey: ['setbookmark'],
-    queryFn: setbookmarkApi
+    queryFn: setbookmarkApi,
   })
 
   return (
@@ -81,11 +83,7 @@ const BookmarkSection = () => {
                         alt='...'
                         onClick={() => navigate.push(`/news/${element.news_id}`)}
                       />
-                      <button
-                        id='bs-btnBookmark'
-                        className='btn'
-                        onClick={e => setbookmarkApi(element.news_id, '0')}
-                      >
+                      <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
                         <BsTrash id='bs-bookmark-logo' size={18} />
                       </button>
                     </div>

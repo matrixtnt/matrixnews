@@ -14,13 +14,11 @@ import {
 import { FaAngleDown } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../store/reducers/userReducer'
-import { counterData } from '../../store/reducers/notificationbadgeReducer'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import usersvg from '../../../public/assets/images/user.svg'
-import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
 const MobilesideBar = ({
@@ -44,8 +42,6 @@ const MobilesideBar = ({
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const languagesData = useSelector(selectLanguages)
-
-  const counterBadgeData = useSelector(counterData)
 
   const settingsOnOff = useSelector(settingsData)
 
@@ -183,7 +179,7 @@ const MobilesideBar = ({
                   onClick={handleClose}
                 >
                   <BiBell size={23} />
-                  <span className='noti_badge_data'>{counterBadgeData && counterBadgeData.counter}</span>
+                  <span className='noti_badge_data'></span>
                 </Link>
               ) : null}
             </li>
@@ -294,7 +290,7 @@ const MobilesideBar = ({
                           onClick={handleClose}
                         >
                           {' '}
-                          <b>{truncateText(element.category_name, 8)}</b>{' '}
+                          <b>{truncateText(element.category_name, 17)}</b>{' '}
                         </Link>
                       </li>
                     ))}

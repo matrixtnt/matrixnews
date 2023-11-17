@@ -18,7 +18,6 @@ import Dropzone from 'react-dropzone'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ReactQuill from 'react-quill'
-import { toast } from 'react-toastify'
 import { selectManageNews } from '../../store/reducers/createNewsReducer'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useRouter } from 'next/navigation'
@@ -32,6 +31,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getlocationapi } from 'src/hooks/getlocationApi'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getsubcategorybycategoryApi } from 'src/hooks/subcategoryByCategoryApi'
+import toast from 'react-hot-toast'
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])

@@ -28,9 +28,7 @@ import {
 } from '../../utils/index'
 import { logoutUser, selectUser } from '../../store/reducers/userReducer'
 import SignInModal from '../auth/SignInModal'
-import { toast } from 'react-toastify'
 import { webSettingsData } from '../../store/reducers/websettingsReducer'
-import { counterData, loadNotification, loaduserNotification } from '../../store/reducers/notificationbadgeReducer'
 import MobilesideBar from '../mobileNavbar/MobilesideBar'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -41,6 +39,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getUserByIdApi } from 'src/hooks/getuserbyId'
 import { access_key, getUser } from 'src/utils/api'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
+import toast from 'react-hot-toast'
 
 const Header = () => {
   const userData = useSelector(selectUser)
@@ -53,8 +52,6 @@ const Header = () => {
   let user = getUser()
   const navigate = useRouter()
 
-  const counterBadgeData = useSelector(counterData)
-  // console.log(counterBadgeData)
   const languagesData = useSelector(selectLanguages)
 
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -145,36 +142,6 @@ const Header = () => {
       setisloginloading(true)
     } // eslint-disable-next-line
   }, [])
-
-  // user notification
-  const getusernotification = () => {
-    loaduserNotification(
-      '0',
-      '',
-      response => {},
-      error => {}
-    )
-  }
-
-  const getnotification = () => {
-    loadNotification(
-      '0',
-      '',
-      response => {},
-      error => {}
-    )
-  }
-
-  useEffect(() => {
-    // Make API calls here based on route change
-    if (window.location.pathname === '/') {
-      getusernotification()
-    } else if (window.location.pathname === '/persnol-notification') {
-      getusernotification()
-    } else if (window.location.pathname === '/news-notification') {
-      getnotification()
-    } // eslint-disable-next-line
-  }, [window.location.pathname, isLogin()])
 
   const logout = () => {
     handleClose()
@@ -410,7 +377,7 @@ const Header = () => {
                 {isLogin() ? (
                   <Link href='/personal-notification' id='btnNotification' type='button' className='btn'>
                     <BiBell size={23} />
-                    <span className='noti_badge_data'>{counterBadgeData && counterBadgeData.counter}</span>
+                    <span className='noti_badge_data'></span>
                   </Link>
                 ) : null}
 

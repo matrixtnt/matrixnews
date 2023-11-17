@@ -3,12 +3,12 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser, updateProfileData, updateProfileImage } from '../../store/reducers/userReducer'
 import { FaCamera } from 'react-icons/fa'
-import { toast } from 'react-toastify'
 import { profileimgError, translate } from '../../utils'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import validator from 'validator'
 import profilesvg from '../../../public/assets/images/Profile.svg'
 import usersvg from '../../../public/assets/images/user.svg'
+import toast from 'react-hot-toast'
 
 const ProfileUpdate = () => {
   const userData = useSelector(selectUser)

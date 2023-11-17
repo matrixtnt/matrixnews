@@ -15,7 +15,6 @@ import Dropzone from 'react-dropzone'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import ReactQuill from 'react-quill'
-import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import createnewsimage from '../../../public/assets/images/Create-news.svg'
@@ -24,6 +23,7 @@ import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
+import toast from 'react-hot-toast'
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
@@ -504,7 +504,7 @@ const CreateNews = () => {
                           placeholder='Select Location'
                           onChange={value => setDefualtValue({ ...DefaultValue, defualtLocation: value })}
                         >
-                          {locationOptions.map(location => (
+                          {locationOptions && locationOptions.map(location => (
                             <Select.Option key={location.id} value={location.id}>
                               {location.location_name}
                             </Select.Option>
