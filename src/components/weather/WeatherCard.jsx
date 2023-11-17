@@ -69,7 +69,7 @@ const WeatherCard = () => {
   }
 
   useEffect(()=>{
-    loadLanguageLabels(currentLanguage.code)
+    loadLanguageLabels(currentLanguage?.code)
   },[currentLanguage])
 
   return (
@@ -117,7 +117,7 @@ const WeatherCard = () => {
                 <li>
                   <Dropdown>
                     <Dropdown.Toggle className='language_drop'>
-                      {currentLanguage.displayName ? currentLanguage.displayName : currentLanguage.name}
+                      {currentLanguage?.displayName ? currentLanguage?.displayName : currentLanguage?.name}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>

@@ -154,7 +154,7 @@ const MobilesideBar = ({
             <li id='Nav-btns'>
               <Dropdown>
                 <Dropdown.Toggle id='btnSignIn' className=''>
-                  {currentLanguage.name}
+                  {currentLanguage?.name}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>

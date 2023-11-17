@@ -50,7 +50,7 @@ export const GET_LOCATION ="get_location"
 
 //get language from storage
 export const getLanguage = () => {
-  let language = store.getState().languages.currentLanguage;
+  let language = store.getState().languages?.currentLanguage;
 
   if (language) {
     return language;

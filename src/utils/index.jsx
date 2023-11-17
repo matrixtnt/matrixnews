@@ -113,8 +113,8 @@ export const translate = (label) => {
 
   /*Set default Label only if you want custom label */
   let langLabel =
-    store.getState().languages.currentLanguageLabels.data &&
-    store.getState().languages.currentLanguageLabels.data[label];
+    store.getState().languages?.currentLanguageLabels.data &&
+    store.getState().languages?.currentLanguageLabels.data[label];
   let enTranslation = localeTranslations
 
 
