@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { laodSettingsApi, settingsData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
-import { loadToken, tokenApi, tokenData } from 'src/store/reducers/tokenReducer'
+import { loadToken, tokenData } from 'src/store/reducers/tokenReducer'
 import { laodwebsettingsApi } from 'src/store/reducers/websettingsReducer'
 import dynamic from 'next/dynamic'
 import { generateTokenApi } from 'src/hooks/tokenApi'
@@ -19,17 +19,21 @@ const FooterNoSSR = dynamic(() => import('./Footer'), { ssr: false })
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
 
+  const hasToken = useSelector(tokenData)
+
+  useSelector(selectCurrentLanguageLabels)
+
   // change color loader and theme
   const changeColors = () => {
     document.documentElement.style.setProperty('--loader-color', process.env.NEXT_PUBLIC_COLOR)
     document.documentElement.style.setProperty('--secondary-color', process.env.NEXT_PUBLIC_SECONDARY_COLOR)
   }
-  
+
   const {} = useQuery({
     queryKey: ['colors'],
     queryFn: changeColors
   })
-  
+
   // token api call
   const generateToken = async () => {
     try {
@@ -49,9 +53,6 @@ const Layout = ({ children }) => {
     queryFn: generateToken
   })
 
-  useSelector(selectCurrentLanguageLabels)
-
-  const hasToken = useSelector(tokenData)
   // web settings load
   useEffect(() => {
     if (hasToken) {
@@ -75,7 +76,7 @@ const Layout = ({ children }) => {
   }, [hasToken])
 
   return (
-    <div>
+    <>
       {hasToken && settings ? (
         <div>
           <SearchPopupNoSSR />
@@ -90,7 +91,7 @@ const Layout = ({ children }) => {
           <div className='loader'></div>
         </div>
       )}
-    </div>
+    </>
   )
 }
 export default Layout

@@ -105,7 +105,6 @@ const CommentsView = props => {
 
   // dots
   const popupDots = (e, elem) => {
-    console.log(elem)
     e.preventDefault()
     setModalOpen(true)
     // console.log("popupDots",elem.user_id)
@@ -171,6 +170,7 @@ const CommentsView = props => {
   const { data:Data, isLoading } = useQuery({
     queryKey: ['getCommentByNews', Nid, props.LoadComments, LoadComments, refreshKey],
     queryFn: getCommentByNews,
+    staleTime:0
   })
 
   return (

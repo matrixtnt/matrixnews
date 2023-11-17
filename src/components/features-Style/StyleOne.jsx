@@ -33,12 +33,10 @@ const StyleOne = ({ isLoading, Data }) => {
 
   const handleVideoUrl = url => {
     setModalShow(true)
-    console.log("asxcasc",url)
     setVideo_url(url)
   }
 
   const TypeUrl = type => {
-    console.log("type", type)
     setTypeUrl(type)
   }
 

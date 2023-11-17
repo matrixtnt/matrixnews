@@ -254,7 +254,6 @@ const Header = () => {
   const selectedLang = languagesData && languagesData.find(lang => lang.code === currentLanguage.code)
   useEffect(() => {
     if (selectedLang && selectedLang.isRTL === '1') {
-      console.log('RTLLL', document.documentElement.dir)
       document.documentElement.dir = 'rtl'
       document.documentElement.lang = `${selectedLang && selectedLang.code}`
     } else {

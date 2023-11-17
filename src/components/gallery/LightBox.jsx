@@ -2,7 +2,6 @@
 import Carousel, { Modal, ModalGateway } from 'react-images'
 
 const LightBox = ({ photos, viewerIsOpen, currentImage, onClose }) => {
-  console.log(photos)
 
   if (!photos || photos.length === 0) {
     // Handle the case when photos is undefined or empty.
