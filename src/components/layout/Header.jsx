@@ -107,8 +107,13 @@ const Header = () => {
     queryFn: categoriesApi
   })
 
-  const initialloadLanguage = async () => {
-    // language laod
+  // language change
+  const languageChange = (name, code, id) => {
+    loadLanguageLabels(code)
+    setCurrentLanguage(name, code, id)
+  }
+
+  useEffect(() => {
     loadLanguages(
       response => {
         if (currentLanguage.code == null) {
@@ -129,18 +134,7 @@ const Header = () => {
         console.log(error)
       }
     )
-  }
-
-  const {} = useQuery({
-    queryKey: ['initialloadLanguage', currentLanguage],
-    queryFn: initialloadLanguage
-  })
-
-  // language change
-  const languageChange = (name, code, id) => {
-    loadLanguageLabels(code)
-    setCurrentLanguage(name, code, id)
-  }
+  }, [currentLanguage])
 
   useEffect(() => {
     if (userData.data !== null) {

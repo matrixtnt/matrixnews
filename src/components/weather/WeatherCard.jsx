@@ -13,6 +13,7 @@ import { Dropdown } from 'react-bootstrap'
 import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'react-icons/fa'
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
+import { useEffect } from 'react'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -67,10 +68,9 @@ const WeatherCard = () => {
     setCurrentLanguage(name, code, id, display_name)
   }
 
-  const {} = useQuery({
-    queryKey: ['weather-loadlanguagelables', currentLanguage],
-    queryFn: loadLanguageLabels(currentLanguage.code)
-  })
+  useEffect(()=>{
+    loadLanguageLabels(currentLanguage.code)
+  },[currentLanguage])
 
   return (
     <div id='rns-weather-card'>

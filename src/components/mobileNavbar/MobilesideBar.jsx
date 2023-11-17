@@ -21,6 +21,7 @@ import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import usersvg from '../../../public/assets/images/user.svg'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 const MobilesideBar = ({
   isuserRole,
@@ -54,10 +55,9 @@ const MobilesideBar = ({
     setCurrentLanguage(name, code, id)
   }
 
-  const {} = useQuery({
-    queryKey: ['mobile-loadlanguagelables', currentLanguage],
-    queryFn: loadLanguageLabels(currentLanguage.code)
-  })
+  useEffect(()=>{
+    loadLanguageLabels(currentLanguage.code)
+  },[currentLanguage])
 
   const closeRef = useRef()
 

@@ -83,7 +83,6 @@ export const loadLanguages = (onSuccess, onError, onStart) => {
 };
 
 export const loadLanguageLabels = (code, onSuccess, onError, onStart) => {
-
     store.dispatch(apiCallBegan({
         ...getLanguageJsonDataApi(code),
         displayToast: false,
