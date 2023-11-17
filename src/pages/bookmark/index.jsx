@@ -1,15 +1,12 @@
-import Head from 'next/head'
 import BookmarkSection from 'src/components/bookmark/BookmarkSection'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>bookmark</title>
-        <meta property='og:title' content='bookmark' key='bookmark' />
-      </Head>
+    <>
+      <Meta title="bookmark" description="" keywords="" ogImage="" pathName="" schema=""/>
       <BookmarkSection/>
-    </div>
+    </>
   )
 }
 

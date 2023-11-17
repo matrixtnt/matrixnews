@@ -1,17 +1,13 @@
-import dynamic from "next/dynamic"
-import Head from "next/head"
-// import CreateNews from "src/components/role/CreateNews"
+import dynamic from 'next/dynamic'
+import Meta from 'src/components/seo/Meta'
 const CreateNewsNoSSR = dynamic(() => import('src/components/role/CreateNews'), { ssr: false })
-const index = () => {
 
+const index = () => {
   return (
-    <div>
-      <Head>
-        <title>create news</title>
-        <meta property='og:title' content='create news' key='create news' />
-      </Head>
-      <CreateNewsNoSSR/>
-    </div>
+    <>
+      <Meta title='create news' description='' keywords='' ogImage='' pathName='' schema='' />
+      <CreateNewsNoSSR />
+    </>
   )
 }
 

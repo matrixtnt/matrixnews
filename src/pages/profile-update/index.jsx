@@ -1,15 +1,12 @@
-import Head from "next/head"
-import ProfileUpdate from "src/components/profile/ProfileUpdate"
+import ProfileUpdate from 'src/components/profile/ProfileUpdate'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>profile update</title>
-        <meta property='og:title' content='profile update' key='profile update' />
-      </Head>
-      <ProfileUpdate/>
-    </div>
+    <>
+      <Meta title='profile update' description='' keywords='' ogImage='' pathName='' schema='' />
+      <ProfileUpdate />
+    </>
   )
 }
 

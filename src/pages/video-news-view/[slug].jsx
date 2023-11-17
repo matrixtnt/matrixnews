@@ -1,16 +1,12 @@
-import Head from 'next/head'
-
 import VideoNewsview from 'src/components/newsType/VideoNews/VideoNewsview'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>video news </title>
-        <meta property='og:title' content='video news ' key='video news ' />
-      </Head>
+    <>
+      <Meta title='video news' description='' keywords='' ogImage='' pathName='' schema='' />
       <VideoNewsview />
-    </div>
+    </>
   )
 }
 

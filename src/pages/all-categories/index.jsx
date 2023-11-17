@@ -1,16 +1,12 @@
-import Head from 'next/head'
-
 import Categories from 'src/components/categories/Categories'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>all categories</title>
-        <meta property='og:title' content='all categories' key='all categories' />
-      </Head>
+    <>
+      <Meta title="all categories" description="" keywords="" ogImage="" pathName="" schema=""/>
       <Categories />
-    </div>
+    </>
   )
 }
 

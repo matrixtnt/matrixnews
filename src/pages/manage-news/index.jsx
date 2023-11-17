@@ -1,15 +1,12 @@
-import Head from "next/head"
-import ManageNews from "src/components/role/ManageNews"
+import ManageNews from 'src/components/role/ManageNews'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>manage news</title>
-        <meta property='og:title' content='manage news' key='manage news' />
-      </Head>
-      <ManageNews/>
-    </div>
+    <>
+      <Meta title='manage news' description='' keywords='' ogImage='' pathName='' schema='' />
+      <ManageNews />
+    </>
   )
 }
 

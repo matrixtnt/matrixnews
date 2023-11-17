@@ -1,15 +1,12 @@
-import Head from 'next/head'
+import Meta from 'src/components/seo/Meta'
 import ViewAll from 'src/components/viewAll/ViewAll'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>view all</title>
-        <meta property='og:title' content='view all' key='view all' />
-      </Head>
+    <>
+      <Meta title='view all' description='' keywords='' ogImage='' pathName='' schema='' />
       <ViewAll />
-    </div>
+    </>
   )
 }
 

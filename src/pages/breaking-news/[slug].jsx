@@ -1,15 +1,12 @@
-import Head from 'next/head'
 import BreakingNews from 'src/components/newsType/BreakingNews/BreakingNews'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>breaking news</title>
-        <meta property='og:title' content='breaking news' key='breaking news' />
-      </Head>
+    <>
+      <Meta title="breaking news" description="" keywords="" ogImage="" pathName="" schema=""/>
       <BreakingNews/>
-    </div>
+    </>
   )
 }
 

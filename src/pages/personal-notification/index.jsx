@@ -1,15 +1,12 @@
-import Head from 'next/head'
 import Notification from 'src/components/notification/Notification'
+import Meta from 'src/components/seo/Meta'
 
 const index = () => {
   return (
-    <div>
-      <Head>
-        <title>personal notification</title>
-        <meta property='og:title' content='personal notification' key='personal notification' />
-      </Head>
+    <>
+      <Meta title='personal notification' description='' keywords='' ogImage='' pathName='' schema='' />
       <Notification />
-    </div>
+    </>
   )
 }
 
