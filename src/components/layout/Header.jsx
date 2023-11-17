@@ -16,7 +16,6 @@ import {
   setCurrentLanguage
 } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
-import { categoriesApi } from '../../store/actions/campaign'
 import {
   getSiblings,
   slideToggle,
