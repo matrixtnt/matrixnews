@@ -1,6 +1,7 @@
-import CategoryNews from 'src/components/newsType/News/CategoryNews'
-import Meta from 'src/components/seo/Meta'
 
+import dynamic from 'next/dynamic'
+import Meta from 'src/components/seo/Meta'
+const CategoryNews = dynamic(() => import('src/components/newsType/News/CategoryNews'), { ssr: false })
 const index = () => {
   return (
     <>

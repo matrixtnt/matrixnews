@@ -1,6 +1,6 @@
-import VideoNewsview from 'src/components/newsType/VideoNews/VideoNewsview'
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-
+const VideoNewsview = dynamic(() => import('src/components/newsType/VideoNews/VideoNewsview'), { ssr: false })
 const index = () => {
   return (
     <>

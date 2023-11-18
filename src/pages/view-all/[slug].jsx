@@ -1,6 +1,6 @@
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-import ViewAll from 'src/components/viewAll/ViewAll'
-
+const ViewAll = dynamic(() => import('src/components/viewAll/ViewAll'), { ssr: false })
 const index = () => {
   return (
     <>

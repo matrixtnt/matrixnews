@@ -1,6 +1,6 @@
-import News from 'src/components/newsType/News/News'
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-
+const News = dynamic(() => import('src/components/newsType/News/News'), { ssr: false })
 const index = () => {
   return (
     <>
