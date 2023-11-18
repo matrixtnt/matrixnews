@@ -35,6 +35,7 @@ import { useRouter } from 'next/router.js'
 import { useQuery } from '@tanstack/react-query'
 import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
+import Layout from 'src/components/layout/Layout.jsx'
 
 const News = () => {
   let user = getUser()
@@ -225,7 +226,7 @@ const News = () => {
   }
 
   return (
-    <>
+    <Layout>
       {isLoading ? (
         <div>
           <Skeleton height={200} count={3} />
@@ -460,7 +461,7 @@ const News = () => {
       ) : (
         <div className='text-center my-5'>{translate('nodatafound')}</div>
       )}
-    </>
+    </Layout>
   )
 }
 

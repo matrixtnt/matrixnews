@@ -5,7 +5,7 @@ const index = () => {
   return (
     <>
       <Meta title="all breaking news" description="" keywords="" ogImage="" pathName="" schema=""/>
-      <AllBreakingNews />
+        <AllBreakingNews />
     </>
   )
 }

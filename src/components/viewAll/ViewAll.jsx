@@ -13,6 +13,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
+import Layout from '../layout/Layout'
 
 const ViewAll = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -65,7 +66,7 @@ const ViewAll = () => {
   const lengthdata = Data && Data[0]?.news ? Data && Data[0]?.news.length : Data && Data[0]?.breaking_news.length
 
   return (
-    <>
+    <Layout>
       {Data && Data[0]?.news ? (
         <>
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
@@ -172,7 +173,7 @@ const ViewAll = () => {
         </>
       ) : null}
       ;
-    </>
+    </Layout>
   )
 }
 

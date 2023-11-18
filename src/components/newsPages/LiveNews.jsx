@@ -11,6 +11,7 @@ import no_image from '../../../public/assets/images/no_image.jpeg'
 import { useQuery } from '@tanstack/react-query'
 import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
 import { access_key, getLanguage } from 'src/utils/api'
+import Layout from '../layout/Layout'
 
 const LiveNews = () => {
   const [Video_url, setVideo_url] = useState()
@@ -47,7 +48,7 @@ const LiveNews = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('liveNews')} ThirdElement='0' />
 
       <div id='LN-main' className='py-5 bg-white'>
@@ -101,7 +102,7 @@ const LiveNews = () => {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

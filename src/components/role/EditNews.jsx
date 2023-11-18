@@ -32,6 +32,7 @@ import { getlocationapi } from 'src/hooks/getlocationApi'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getsubcategorybycategoryApi } from 'src/hooks/subcategoryByCategoryApi'
 import toast from 'react-hot-toast'
+import Layout from '../layout/Layout'
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
@@ -507,7 +508,7 @@ const EditNews = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('editNewsLbl')} ThirdElement='0' />
       <div className='create_news py-5 bg-white'>
         <div className='container'>
@@ -833,7 +834,7 @@ const EditNews = () => {
           // title={Data[0].title}
         />
       </div>
-    </>
+    </Layout>
   )
 }
 

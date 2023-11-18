@@ -1,6 +1,7 @@
-import Home from 'src/components/home/Home'
+// import Home from 'src/components/home/Home'
+import dynamic from 'next/dynamic';
 import Head from 'next/head'
-
+const Home = dynamic(() => import('src/components/home/Home'), { ssr: false })
 const Index = ({ data }) => {
   console.log(data);
   return (

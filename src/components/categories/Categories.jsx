@@ -11,6 +11,7 @@ import { translate } from '../../utils'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import Layout from '../layout/Layout'
 
 const Categories = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -48,7 +49,7 @@ const Categories = () => {
 
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement='Categories' ThirdElement='0' />
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <div className='container my-5'>
@@ -91,7 +92,7 @@ const Categories = () => {
           <div className='text-center my-5'>{translate('disabledCategory')}</div>
         </>
       )}
-    </>
+    </Layout>
   )
 }
 

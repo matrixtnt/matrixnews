@@ -15,6 +15,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { getUser } from 'src/utils/api'
 import toast from 'react-hot-toast'
+import Layout from '../layout/Layout'
 
 const Notification = () => {
   const [Data, setData] = useState([])
@@ -90,7 +91,7 @@ const Notification = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('notificationLbl')} ThirdElement='0' />
 
       <div className='personal_Sec py-5 bg-white'>
@@ -159,7 +160,7 @@ const Notification = () => {
           ) : null}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

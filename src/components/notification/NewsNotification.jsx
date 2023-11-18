@@ -12,6 +12,7 @@ import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { access_key, getLanguage } from 'src/utils/api'
+import Layout from '../layout/Layout'
 
 const NewsNotification = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -66,7 +67,7 @@ const NewsNotification = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('notificationLbl')} ThirdElement='0' />
       <div className='new_noti-sec py-5 bg-white'>
         <div className='container new_notification'>
@@ -130,7 +131,7 @@ const NewsNotification = () => {
           ) : null}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

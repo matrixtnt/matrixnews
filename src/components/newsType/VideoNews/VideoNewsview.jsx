@@ -12,6 +12,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
+import Layout from 'src/components/layout/Layout'
 
 const VideoNewsview = () => {
   const [Video_url, setVideo_url] = useState()
@@ -61,7 +62,7 @@ const VideoNewsview = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={'Video News'} ThirdElement='0' />
       <div className='py-5 video_section_all'>
         <div className='container'>
@@ -120,7 +121,7 @@ const VideoNewsview = () => {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

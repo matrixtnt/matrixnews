@@ -13,6 +13,7 @@ import { getNewsApi } from 'src/hooks/newsApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import toast from 'react-hot-toast'
+import Layout from '../layout/Layout'
 
 const ManageNews = () => {
   const navigate = useRouter()
@@ -82,7 +83,7 @@ const ManageNews = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('manageNewsLbl')} ThirdElement='0' />
 
       <div className='manage_news bg-white py-5'>
@@ -162,7 +163,7 @@ const ManageNews = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

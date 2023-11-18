@@ -25,6 +25,7 @@ import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
+import Layout from 'src/components/layout/Layout'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
@@ -116,7 +117,7 @@ const BreakingNews = () => {
   const readTime = calculateReadTime(text)
 
   return (
-    <>
+    <Layout>
       {data && data?.length > 0 ? (
         <>
           {isLoading ? (
@@ -250,7 +251,7 @@ const BreakingNews = () => {
           )}
         </>
       ) : null}
-    </>
+    </Layout>
   )
 }
 

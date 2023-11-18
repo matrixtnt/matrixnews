@@ -10,6 +10,7 @@ import { translate } from '../../utils'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
+import Layout from '../layout/Layout'
 
 const MorePages = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -43,7 +44,7 @@ const MorePages = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement='0' />
       <div className='morepages py-5 bg-white'>
         <div className='container'>
@@ -93,7 +94,7 @@ const MorePages = () => {
           </div>
         )}
       </Modal>
-    </>
+    </Layout>
   )
 }
 

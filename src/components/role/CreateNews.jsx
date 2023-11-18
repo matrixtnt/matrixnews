@@ -24,6 +24,7 @@ import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
 import toast from 'react-hot-toast'
+import Layout from '../layout/Layout'
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
@@ -408,7 +409,7 @@ const CreateNews = () => {
 
   // console.log("video",DefaultValue.defaultVideoData)
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('createNewsLbl')} ThirdElement='0' />
       <div className='create_news py-5 bg-white'>
         <div className='container'>
@@ -699,7 +700,7 @@ const CreateNews = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

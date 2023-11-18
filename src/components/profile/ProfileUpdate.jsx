@@ -9,6 +9,7 @@ import validator from 'validator'
 import profilesvg from '../../../public/assets/images/Profile.svg'
 import usersvg from '../../../public/assets/images/user.svg'
 import toast from 'react-hot-toast'
+import Layout from '../layout/Layout'
 
 const ProfileUpdate = () => {
   const userData = useSelector(selectUser)
@@ -128,7 +129,7 @@ const ProfileUpdate = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('profile')} ThirdElement='0' />
       <section className='profile py-5 bg-white'>
         <div className='container'>
@@ -233,7 +234,7 @@ const ProfileUpdate = () => {
           </div>
         </div>
       </section>
-    </>
+    </Layout>
   )
 }
 

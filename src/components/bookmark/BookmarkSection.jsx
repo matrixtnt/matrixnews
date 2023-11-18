@@ -10,6 +10,7 @@ import { bookmarkApi } from 'src/hooks/bookmarkApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useState } from 'react'
+import Layout from '../layout/Layout'
 
 const BookmarkSection = () => {
   const { id: language_id } = getLanguage()
@@ -60,7 +61,7 @@ const BookmarkSection = () => {
   })
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('bookmarkLbl')} ThirdElement='0' />
 
       <div id='bs-main' className='py-5 bookmark_page'>
@@ -126,7 +127,7 @@ const BookmarkSection = () => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

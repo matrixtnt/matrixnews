@@ -9,6 +9,7 @@ import no_image from '../../../public/assets/images/no_image.jpeg'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import Layout from '../layout/Layout'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()
@@ -31,7 +32,7 @@ const AllBreakingNews = () => {
   })
 
   return (
-    <>
+    <Layout>
       <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement='0' />
       <div id='BNV-main'>
         <div id='BNV-content' className='container'>
@@ -68,7 +69,7 @@ const AllBreakingNews = () => {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

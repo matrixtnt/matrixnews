@@ -8,6 +8,7 @@ import ReactPaginate from 'react-paginate';
 import { useSelector } from 'react-redux';
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer';
 import toast from 'react-hot-toast';
+import Layout from '../layout/Layout';
 
 const UserBasedCategories = () => {
     const [data, setData] = useState([]);
@@ -110,7 +111,7 @@ const UserBasedCategories = () => {
     };
 
   return (
-    <>
+    <Layout>
       <section className="manage_preferences py-5">
         <div className="container">
           {loading ? (
@@ -168,7 +169,7 @@ const UserBasedCategories = () => {
           />
         </div>
       </section>
-    </>
+    </Layout>
   );
 };
 

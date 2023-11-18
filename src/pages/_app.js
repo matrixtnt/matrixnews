@@ -4,7 +4,6 @@ import { store } from 'src/store/store'
 import { Toaster } from 'react-hot-toast'
 import { Router } from 'next/router'
 import NProgress from 'nprogress'
-import dynamic from 'next/dynamic'
 import PushNotificationLayout from 'src/components/firebaseNotification/PushNotification'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -17,8 +16,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 import 'react-quill/dist/quill.snow.css'
 import 'nprogress/nprogress.css'
 import '../../public/assets/css/style.css'
-
-const LayoutNoSSR = dynamic(() => import('src/components/layout/Layout'), { ssr: false })
 
 // provide the default query function to your app with defaultOptions
 const queryClient = new QueryClient({
@@ -49,9 +46,7 @@ const App = ({ Component, pageProps }) => {
           <Provider store={store}>
             <Toaster position='top-center' containerClassName='toast-custom' />
             <PushNotificationLayout>
-              <LayoutNoSSR>
                 <Component {...pageProps} />
-              </LayoutNoSSR>
             </PushNotificationLayout>
           </Provider>
           <ReactQueryDevtools initialIsOpen={false} />
