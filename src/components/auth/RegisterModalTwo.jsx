@@ -93,6 +93,7 @@ const RagisterModalTwo = (props) => {
         e.preventDefault();
         signup(formValues.email, formValues.password)
             .then((response) => {
+                toast.success(translate("loginMsg"))
                 navigate.push("/");
             })
             .catch((err) => {
@@ -100,91 +101,8 @@ const RagisterModalTwo = (props) => {
             });
     };
 
-    //         setIsSubmit(true);
-    //         const auth = getAuth();
-    //         createUserWithEmailAndPassword(auth, formValues.email, formValues.password)
-    //             .then((userCredential) => {
-    //                 // send verification mail.
 
-    //                 const user = userCredential.user;
-    //                 console.log("new user or not", user)
-    //                 sendEmailVerification(auth.currentUser)
-    //                     .then((response) => {
-    //                         console.log("sendemail res", response)
-    //                         toast.success("Email sent")
-    //                         const name = formValues.username;
-    //                         const Email = formValues.email;
-    //                         // const Id = formValues.id;
-
-    //                         // register(
-    //                         //     user.uid,
-    //                         //     name,
-    //                         //     Email,
-    //                         //     "",
-    //                         //     "email",
-    //                         //     file,
-    //                         //     "1",
-    //                         //     "",
-    //                         //     (response) => {
-    //                         //         console.log("new user response ", response)
-    //                         //         loadMobileType(false)
-    //                         //         if (response.data.is_login === "1") {
-    //                         //             //If new User then show the Update Profile Screen
-    //                         //             navigate.push("/profile-update")
-    //                         //         }
-    //                         //         updateProfile(user, {
-    //                         //             displayName: response.id,
-    //                         //         })
-    //                         //             .then(() => {
-    //                         //                 // Profile updated!
-    //                         //                 // ...
-    //                         //             })
-    //                         //             .catch((error) => {
-    //                         //                 // An error occurred
-    //                         //                 // ...
-    //                         //             });
-
-    //                         //         // props.setIsLogout(true)
-    //                         //         props.onHide();
-    //                         //         props.setLoginModalShow(true);
-    //                         //     },
-    //                         //     (error) => {
-    //                         //         console.log(error);
-    //                         //     }
-    //                         // );
-    //                     }).catch((error) =>
-    //                     console.log(error)
-    //                     );
-
-    //             })
-
-    //             .catch(function (error) {
-    //                 var errorCode = error.code;
-    //                 var errorMessage;
-    //                 switch (errorCode) {
-    //                     case 'auth/email-already-in-use':
-    //                         errorMessage = 'Email already in use.';
-    //                         // Display a message to the user indicating that the email is already in use
-    //                         break;
-    //                     case 'auth/invalid-email':
-    //                         errorMessage = 'Invalid email address.';
-    //                         // Display a message to the user indicating that the email address is not valid
-    //                         break;
-    //                     case 'auth/weak-password':
-    //                         errorMessage = 'Password is too weak.';
-    //                         // Display a message to the user indicating that the password is too weak
-    //                         break;
-    //                     default:
-    //                         errorMessage = 'An error occurred:';
-    //                 }
-    //                 toast.error(errorMessage);
-    //             });
-    //     }
-
-    //     // eslint-disable-next-line
-    // }, [isValidForm]);
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {s
         e.preventDefault();
         handleSignup(e);
         setFormErrors(validate(formValues));
@@ -278,16 +196,6 @@ const RagisterModalTwo = (props) => {
                                             {translate("register-daily-news")}
                                         </div>
                                     </div>
-                                    {/* <div id='textwithimage'>
-                                        <div className="my-3">
-                                            <h5>Add Profile:</h5>
-                                            <input className='input mx-1' type="file" name="image" onChange={handleChange1} required />
-
-                                        </div>
-                                        <div>
-                                            <img src={file} className="imageInput rounded float-end" alt="..."></img>
-                                        </div>
-                                    </div> */}
                                 </div>
 
                                 <form className="" onSubmit={handleSubmit}>

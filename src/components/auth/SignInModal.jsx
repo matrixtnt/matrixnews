@@ -109,12 +109,13 @@ const SignInModal = (props) => {
                     "1",
                     fcmtoken,
                     (success) => {
+                        toast.success(translate("loginMsg"))
                         setRegisterTokenApi(
                             fcmtoken,
                             storedLatitude && storedLatitude ? storedLatitude : null,
                             storedLongitude && storedLongitude ? storedLongitude : null,
                             (success) => {
-                                console.log(success);
+                                // console.log(success);
                             },
                             (error) => {
                                 console.log(error);
