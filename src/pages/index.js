@@ -6,7 +6,8 @@ const Index = ({ data }) => {
   return (
     <>
       <Head>
-        <meta property='og:title' content={data} />
+        {/* <meta property='og:title' content={data} /> */}
+        <meta name='description' content={data} />
       </Head>
       <Home />
     </>
