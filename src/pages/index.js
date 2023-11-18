@@ -1,15 +1,25 @@
 import Home from 'src/components/home/Home'
-import generateRssFeed from '../../scripts/generaterRssFeed.mjs'
+import Head from 'next/head'
 
-export const getStaticProps = async () => {
-  await generateRssFeed()
-  return {
-    props: {}
-  }
+const Index = ({ data }) => {
+  console.log(data);
+  return (
+    <>
+      <Head>
+        <meta property='og:title' content={data} />
+      </Head>
+      <Home />
+    </>
+  );
+};
+
+export async function getServerSideProps() {
+  // Fetch data from external API or perform any necessary operations
+  const fetchedData = 'hello';
+
+  // Pass data to the page via props
+  return { props: { data: fetchedData } };
 }
 
-const index = () => {
-  return <Home />
-}
+export default Index;
 
-export default index

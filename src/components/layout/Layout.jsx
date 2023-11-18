@@ -16,6 +16,7 @@ const HeaderNoSSR = dynamic(() => import('./Header'), { ssr: false })
 const CatNavNoSSR = dynamic(() => import('../categories/CatNav'), { ssr: false })
 const FooterNoSSR = dynamic(() => import('./Footer'), { ssr: false })
 
+
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
 
@@ -74,6 +75,7 @@ const Layout = ({ children }) => {
       )
     }
   }, [hasToken])
+  
 
   return (
     <>
