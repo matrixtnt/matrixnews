@@ -1,6 +1,6 @@
-import BreakingNews from 'src/components/newsType/BreakingNews/BreakingNews'
-import Meta from 'src/components/seo/Meta'
 
+import Meta from 'src/components/seo/Meta'
+const BreakingNews = dynamic(() => import('src/components/newsType/BreakingNews/BreakingNews'), { ssr: false })
 const index = () => {
   return (
     <>
