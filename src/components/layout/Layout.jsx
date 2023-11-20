@@ -86,7 +86,7 @@ const Layout = ({ children }) => {
         router.replace(window.location.pathname + window.location.search)
       }
     }
-  }, [])
+  }, [process.env.NEXT_PUBLIC_SEO])
 
   return (
     <>
