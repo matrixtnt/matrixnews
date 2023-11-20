@@ -18,7 +18,7 @@ const LiveNews = () => {
   const [modalShow, setModalShow] = useState(false)
   const [typeUrl, setTypeUrl] = useState(null)
   let { id: language_id } = getLanguage()
-  useSelector(selectCurrentLanguage)
+  const currentLanguage = useSelector(selectCurrentLanguage)
   // api call
   const getLiveStreaming = async () => {
     try {
@@ -34,7 +34,7 @@ const LiveNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['getliveStreaming'],
+    queryKey: ['getliveStreaming',currentLanguage],
     queryFn: getLiveStreaming
   })
 
@@ -49,7 +49,7 @@ const LiveNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('liveNews')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('livenews')} ThirdElement='0' />
 
       <div id='LN-main' className='py-5 bg-white'>
         <div id='LN-content' className='container'>

@@ -37,7 +37,7 @@ const TagNewsview = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['getNewsByTag'],
+    queryKey: ['getNewsByTag',Tid,query],
     queryFn: getNewsByTag
   })
 

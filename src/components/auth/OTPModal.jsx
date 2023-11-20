@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Modal from 'react-bootstrap/Modal'
 import photo from '../../../public/assets/images/Login.jpg'
 import React, { useEffect, useState } from 'react'
@@ -16,7 +16,7 @@ import { webSettingsData } from '../../store/reducers/websettingsReducer'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 
-const OTPModal = (props) => {
+const OTPModal = props => {
   const [OTP, setOTP] = useState('') // eslint-disable-next-line
   const { authentication } = FirebaseData()
   const [error, setError] = useState(
@@ -30,8 +30,12 @@ const OTPModal = (props) => {
 
   const websettings = useSelector(webSettingsData)
 
-  const resendOTP = () => {
-    if (props.phonenum !== null) generateOTP(props.phonenum)
+  const resendOTP = e => {
+    e.preventDefault()
+    if (props.phonenum !== null) {
+      generateOTP(props.phonenum)
+      toast.success('OTP resent successfully!')
+    }
   }
 
   const generateRecaptcha = () => {
@@ -46,55 +50,53 @@ const OTPModal = (props) => {
             }
           },
           authentication
-        );
+        )
       }
     }
-  };
-
-
+  }
 
   useEffect(() => {
-      generateRecaptcha();
-      return () => {
-        // Clear the recaptcha container
-        const recaptchaContainer = document.getElementById("recaptcha-container");
-        if (recaptchaContainer) {
-            recaptchaContainer.innerHTML = "";
-        }
+    generateRecaptcha()
+    return () => {
+      // Clear the recaptcha container
+      const recaptchaContainer = document.getElementById('recaptcha-container')
+      if (recaptchaContainer) {
+        recaptchaContainer.innerHTML = ''
+      }
 
-        if (window.recaptchaVerifier) {
-            window.recaptchaVerifier.clear();
-        }
-    };
-  }, []);
+      if (window.recaptchaVerifier) {
+        window.recaptchaVerifier.clear()
+      }
+    }
+  }, [])
 
   const generateOTP = phonenum => {
     // OTP Generation
-      generateRecaptcha();
-      let appVerifier = window.recaptchaVerifier;
-      signInWithPhoneNumber(authentication, phonenum, appVerifier)
-        .then(confirmationResult => {
-          window.confirmationResult = confirmationResult;
-          loadMobileType(true);
-        })
-        .catch(error => {
-          let errorMessage = '';
-          switch (error.code) {
-            case 'auth/too-many-requests':
-              errorMessage = 'Too many requests. Please try again later.';
-              break;
-            case 'auth/invalid-phone-number':
-              errorMessage = 'Invalid phone number. Please enter a valid phone number.';
-              break;
-            default:
-              errorMessage = 'An error occurred. Please try again.';
-              break;
-          }
-          // Display error message in a toast or alert
-          toast.error(errorMessage);
-        });
-
-  };
+    generateRecaptcha()
+    let appVerifier = window.recaptchaVerifier
+    signInWithPhoneNumber(authentication, phonenum, appVerifier)
+      .then(confirmationResult => {
+        window.confirmationResult = confirmationResult
+        loadMobileType(true)
+      })
+      .catch(error => {
+        console.log(error)
+        let errorMessage = ''
+        switch (error.code) {
+          case 'auth/too-many-requests':
+            errorMessage = 'Too many requests. Please try again later.'
+            break
+          case 'auth/invalid-phone-number':
+            errorMessage = 'Invalid phone number. Please enter a valid phone number.'
+            break
+          default:
+            errorMessage = 'An error occurred. Please try again.'
+            break
+        }
+        // Display error message in a toast or alert
+        toast.error(errorMessage)
+      })
+  }
   useEffect(() => {
     if (props.phonenum !== null) {
       generateOTP(props.phonenum)
@@ -191,13 +193,13 @@ const OTPModal = (props) => {
                         autoFocus
                         numInputs={6}
                         disabled={false}
-                        containerStyle={"otpbox"}
+                        containerStyle={'otpbox'}
                         renderSeparator={<span className='space'></span>}
-                        renderInput={(props) => <input {...props} className="custom-input-class"></input>}
+                        renderInput={props => <input {...props} className='custom-input-class'></input>}
                       />
                       <p className='error-msg'>{error}</p>
                       <div>
-                        <button onClick={resendOTP} id='resendbutton' className='btn ps-0'>
+                        <button onClick={e => resendOTP(e)} id='resendbutton' className='btn ps-0'>
                           {translate('resendLbl')}
                         </button>
                       </div>

@@ -16,7 +16,7 @@ const MorePages = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setmodalData] = useState(null)
   let { id: language_id } = getLanguage();
-  useSelector(selectCurrentLanguage)
+  const currentLanguage = useSelector(selectCurrentLanguage)
 
   // api call
   const getpages = async () => {
@@ -33,7 +33,7 @@ const MorePages = () => {
 
   // react query
   const { isLoading, data:Data, } = useQuery({
-    queryKey: ['getPages'],
+    queryKey: ['getPages',currentLanguage],
     queryFn: getpages
   })
 

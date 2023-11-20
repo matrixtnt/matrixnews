@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic'
 import { generateTokenApi } from 'src/hooks/tokenApi'
 import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
 const SearchPopupNoSSR = dynamic(() => import('../search/SearchPopup'), { ssr: false })
 const WeatherCardNoSSR = dynamic(() => import('../weather/WeatherCard'), { ssr: false })
@@ -20,6 +21,8 @@ const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
 
   const hasToken = useSelector(tokenData)
+
+  const router = useRouter();
 
   useSelector(selectCurrentLanguageLabels)
 
@@ -74,7 +77,14 @@ const Layout = ({ children }) => {
       )
     }
   }, [hasToken])
-  
+
+  // client side rendering route get
+  useEffect(() => {
+    // Check if the slug is present in the URL
+    if (router.pathname && process.env.NEXT_PUBLIC_SEO === "false") {
+      router.replace(window.location.pathname + window.location.search)
+    }
+  }, [])
 
   return (
     <>

@@ -13,7 +13,7 @@ import Layout from '../layout/Layout'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()
-  useSelector(selectCurrentLanguage)
+  const currentlanguage = useSelector(selectCurrentLanguage)
 
   // api call
   const getBreakingNewsApi = async () => {
@@ -27,7 +27,7 @@ const AllBreakingNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['all-breaking-news', language_id, access_key],
+    queryKey: ['all-breaking-news', language_id, access_key,currentlanguage],
     queryFn: getBreakingNewsApi
   })
 

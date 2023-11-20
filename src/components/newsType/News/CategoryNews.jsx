@@ -21,7 +21,7 @@ const CategoryNews = () => {
   const storedLongitude = localStorage.getItem('longitude')
   let user = getUser()
   let { id: language_id } = getLanguage()
-  useSelector(selectCurrentLanguage)
+  const changelanguage = useSelector(selectCurrentLanguage)
 
   // api call
   const getNewsByCategoryApi = async () => {
@@ -45,7 +45,7 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId],
+    queryKey: ['category-news', catId,changelanguage],
     queryFn: getNewsByCategoryApi
   })
 

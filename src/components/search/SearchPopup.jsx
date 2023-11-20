@@ -127,8 +127,9 @@ const SearchPopup = () => {
             id='ts-main'
             className='search_bar'
             style={{
-              height: (Data && Data?.error === "true") || searchValue === '' ? 'auto' : '500px', 
-              overflowY: (Data && Data?.error === "true") || searchValue === '' ? 'visible' : 'scroll' 
+              height: total < 3 || (Data && Data?.error === 'true') || searchValue === '' ? 'auto' : '500px',
+              overflowY:
+                total < 3 || (Data && total > 3 && Data?.error === 'true') || searchValue === '' ? 'visible' : 'scroll'
             }}
           >
             <div id='ts-content' className=''>
@@ -151,7 +152,12 @@ const SearchPopup = () => {
                     </div>
                   ))}
                 {searchValue !== '' && Data?.data?.length > 0 && (
-                  <div className='load-more-btn text-center'>
+                  <div
+                    className='load-more-btn text-center'
+                    style={{
+                      padding: total < 3 || (Data && Data?.error === 'true') || searchValue === '' ? '0px' : '15px'
+                    }}
+                  >
                     {Data && Data?.data.length < parseInt(total) && <button onClick={handleLoadMore}>Load More</button>}
                   </div>
                 )}

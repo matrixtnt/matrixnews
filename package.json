@@ -25,6 +25,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-switch-button-react": "^1.2.0",
     "date-fns": "^2.30.0",
+    "dotenv": "^16.3.1",
     "feed": "^4.2.2",
     "firebase": "9.15.0",
     "globby": "11.0.1",

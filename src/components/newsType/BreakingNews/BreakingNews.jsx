@@ -37,7 +37,7 @@ const BreakingNews = () => {
   const shareUrl = window.location.href
   let { id: language_id } = getLanguage()
   let user = getUser()
-  useSelector(selectCurrentLanguage)
+  const currentLanguage = useSelector(selectCurrentLanguage)
 
   const handleVideoUrl = url => {
     setModalShow(true)
@@ -95,19 +95,19 @@ const BreakingNews = () => {
 
   // react query
   const { isLoading, data } = useQuery({
-    queryKey: ['breakingNewsById', access_key, BNid, user, language_id],
+    queryKey: ['breakingNewsById', access_key, BNid, user, language_id,currentLanguage],
     queryFn: getBreakingNewsIdApi
   })
 
   const {} = useQuery({
-    queryKey: ['setBreakingNewsView', access_key, BNid, user],
+    queryKey: ['setBreakingNewsView', access_key, BNid, user,currentLanguage],
     queryFn: setBreakingNewsViewApi
   })
 
   const {
     data: adsdata
   } = useQuery({
-    queryKey: ['getAdsSpaceDetails', access_key],
+    queryKey: ['getAdsSpaceDetails', access_key,currentLanguage],
     queryFn: getAdsSpaceNewsApi
   })
 

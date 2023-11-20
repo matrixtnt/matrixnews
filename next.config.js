@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require('path');
+const path = require('path')
+require('dotenv').config()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
-  // Optional: Change the output directory `out` -> `dist`
-  // distDir: 'dist',
   images: {
     domains: ['news.wrteam.me']
   },
@@ -13,14 +11,19 @@ const nextConfig = {
   reactStrictMode: false,
   webpack: (config, { isServer }) => {
     if (isServer) {
-      require('./scripts/sitemap-generator');
+      require('./scripts/sitemap-generator')
     }
     config.resolve.alias = {
       ...config.resolve.alias,
       apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    };
-    return config;
-  },
-};
+    }
+    return config
+  }
+}
 
-module.exports = nextConfig;
+// Conditionally set the output based on the environment
+if (process.env.NEXT_PUBLIC_SEO === 'true') {
+  nextConfig.output = 'export'
+}
+
+module.exports = nextConfig
