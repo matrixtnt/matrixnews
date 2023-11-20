@@ -1,25 +1,24 @@
-'use client'
-import generateRssFeed from '../../scripts/generaterRssFeed.mjs'
+"use client"
+import generateRssFeed from "../../scripts/generaterRssFeed.mjs"
 
-// export const getStaticProps = async () => {
-//   await generateRssFeed()
-//   return {
-//     props: {}
-//   }
-// }
+export const getStaticProps = async () => {
+  await generateRssFeed()
+  return {
+    props: {}
+  }
+}
 
 // export async function getStaticProps({ params }) {
-//   let data = null
+//   let data = null;
 //   try {
-//     data = await generateRssFeed(params.slug)
-//   } catch (err) {}
+//     data = await generateRssFeed(params.slug);
+//   } catch (err) { };
 
 //   return {
 //     props: {
-//       data
-//     }
-//   }
-// }
+//       data,
+//     },
+//   };
 
 const rss = () => {
   return <div>rss</div>
