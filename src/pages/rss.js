@@ -1,3 +1,4 @@
+"use client"
 import generateRssFeed from "../../scripts/generaterRssFeed.mjs"
 
 export const getStaticProps = async () => {
