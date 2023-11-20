@@ -82,6 +82,9 @@ const Layout = ({ children }) => {
   useEffect(() => {
     // Check if the slug is present in the URL
     if (process.env.NEXT_PUBLIC_SEO === 'false') {
+      console.log("router",router)
+      console.log("path",router.pathname)
+      console.log("replce",window.location.pathname,window.location.search)
       if (router.pathname) {
         router.replace(window.location.pathname + window.location.search)
       }
