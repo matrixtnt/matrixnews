@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
 
   const hasToken = useSelector(tokenData)
 
-  const router = useRouter();
+  const router = useRouter()
 
   useSelector(selectCurrentLanguageLabels)
 
@@ -81,8 +81,10 @@ const Layout = ({ children }) => {
   // client side rendering route get
   useEffect(() => {
     // Check if the slug is present in the URL
-    if (router.pathname && process.env.NEXT_PUBLIC_SEO === "false") {
-      router.replace(window.location.pathname + window.location.search)
+    if (process.env.NEXT_PUBLIC_SEO === 'false') {
+      if (router.pathname) {
+        router.replace(window.location.pathname + window.location.search)
+      }
     }
   }, [])
 
