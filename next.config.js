@@ -22,7 +22,7 @@ const nextConfig = {
 }
 
 // Conditionally set the output based on the environment
-if (process.env.NEXT_PUBLIC_SEO === 'true') {
+if (process.env.NEXT_PUBLIC_SEO === 'false') {
   nextConfig.output = 'export'
 }
 
