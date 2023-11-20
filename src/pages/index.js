@@ -18,25 +18,25 @@ const Index = ({ data }) => {
   )
 }
 
-let serverSidePropsFunction = null
+// let serverSidePropsFunction = null
 
-if (process.env.NEXT_PUBLIC_SEO === 'true') {
-  serverSidePropsFunction = async () => {
-    // Fetch data from external API or perform any necessary operations
-    const fetchedData = {
-      title: 'hello',
-      description: 'desc',
-      keywords: 'keywords',
-      ogImage: '',
-      pathName: '',
-      schema: ''
-    }
+// if (process.env.NEXT_PUBLIC_SEO === 'true') {
+//   serverSidePropsFunction = async () => {
+//     // Fetch data from external API or perform any necessary operations
+//     const fetchedData = {
+//       title: 'hello',
+//       description: 'desc',
+//       keywords: 'keywords',
+//       ogImage: '',
+//       pathName: '',
+//       schema: ''
+//     }
 
-    // Pass data to the page via props
-    return { props: { data: fetchedData } }
-  }
-}
+//     // Pass data to the page via props
+//     return { props: { data: fetchedData } }
+//   }
+// }
 
-export const getServerSideProps = serverSidePropsFunction
+// export const getServerSideProps = serverSidePropsFunction
 
 export default Index
