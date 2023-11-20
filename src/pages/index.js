@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 const Home = dynamic(() => import('src/components/home/Home'), { ssr: false })
 const Index = ({ data }) => {
-
   return (
     <>
       <Meta
@@ -18,25 +17,25 @@ const Index = ({ data }) => {
   )
 }
 
-// let serverSidePropsFunction = null
+let serverSidePropsFunction = null
+if (process.env.NEXT_PUBLIC_SEO === 'true') {
+  serverSidePropsFunction = async () => {
+    // Fetch data from external API or perform any necessary operations
+    const fetchedData = {
+      title: 'hello',
+      description: 'desc',
+      keywords: 'keywords',
+      ogImage: '',
+      pathName: '',
+      schema: ''
+    }
 
-// if (process.env.NEXT_PUBLIC_SEO === 'true') {
-//   serverSidePropsFunction = async () => {
-//     // Fetch data from external API or perform any necessary operations
-//     const fetchedData = {
-//       title: 'hello',
-//       description: 'desc',
-//       keywords: 'keywords',
-//       ogImage: '',
-//       pathName: '',
-//       schema: ''
-//     }
+    // Pass data to the page via props
+    return { props: { data: fetchedData } }
+  }
+}
 
-//     // Pass data to the page via props
-//     return { props: { data: fetchedData } }
-//   }
-// }
-
-// export const getServerSideProps = serverSidePropsFunction
+// Conditional assignment based on the environment variable
+export const getServerSideProps = process.env.NEXT_PUBLIC_SEO === 'true' ? serverSidePropsFunction : null
 
 export default Index
