@@ -1,7 +1,5 @@
 'use client'
-import { useEffect } from 'react'
 import generateRssFeed from '../../scripts/generaterRssFeed.mjs'
-import { useRouter } from 'next/router'
 
 export const getStaticProps = async () => {
   await generateRssFeed()
@@ -23,18 +21,8 @@ export const getStaticProps = async () => {
 //   };
 // }
 
-const Rss = () => {
-  const router = useRouter()
-  // client side rendering route get
-  useEffect(() => {
-    // Check if the slug is present in the URL
-    if (process.env.NEXT_PUBLIC_SEO === 'false') {
-      if (router.pathname) {
-        router.replace(window.location.pathname + window.location.search)
-      }
-    }
-  }, [])
+const rss = () => {
   return <div>rss</div>
 }
 
-export default Rss
+export default rss
