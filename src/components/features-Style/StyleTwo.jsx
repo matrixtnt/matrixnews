@@ -32,7 +32,7 @@ const StyleTwo = ({ Data }) => {
         <div className='new_video_style_two'>
           <div className='container'>
             {/* ad spaces */}
-            {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
+            {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
               <div className='ad_spaces'>
                 <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
                   {Data.ad_spaces.web_ad_image && (
@@ -165,9 +165,10 @@ const StyleTwo = ({ Data }) => {
       {/* news */}
       {Data && Data.news?.length > 0 ? (
         <div className='new_video_style_two'>
+          {/* {console.log("mews")} */}
           <div className='container'>
             {/* ad spaces */}
-            {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
+            {Data && Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
               <div className='ad_spaces'>
                 <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
                   {Data.ad_spaces.web_ad_image && (
@@ -274,9 +275,7 @@ const StyleTwo = ({ Data }) => {
         <div className='new_video_style_two'>
           <div className='container'>
             {/* ad spaces */}
-            {Data.ad_spaces &&
-            Data.id === Data.ad_spaces.ad_featured_section_id &&
-            Data.news_type === 'breaking_news' ? (
+            {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
               <div className='ad_spaces'>
                 <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
                   {Data.ad_spaces.web_ad_image && (

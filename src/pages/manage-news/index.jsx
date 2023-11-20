@@ -1,6 +1,6 @@
-import ManageNews from 'src/components/role/ManageNews'
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-
+const ManageNews = dynamic(() => import('src/components/role/ManageNews'), { ssr: false })
 const index = () => {
   return (
     <>

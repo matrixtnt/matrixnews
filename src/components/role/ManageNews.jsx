@@ -47,7 +47,8 @@ const ManageNews = () => {
   // react query
   const { isLoading, isError, data, error, status } = useQuery({
     queryKey: ['getnews', currentLanguage],
-    queryFn: getNews
+    queryFn: getNews,
+    staleTime:0
   })
 
   // type return

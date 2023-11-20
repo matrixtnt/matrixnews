@@ -1,6 +1,6 @@
-import LiveNews from 'src/components/newsPages/LiveNews'
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-
+const LiveNews = dynamic(() => import('src/components/newsPages/LiveNews'), { ssr: false })
 const index = () => {
   return (
     <>

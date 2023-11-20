@@ -1,6 +1,6 @@
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-import MorePages from 'src/components/staticpages/MorePages'
-
+const MorePages = dynamic(() => import('src/components/staticpages/MorePages'), { ssr: false })
 const index = () => {
   return (
     <>

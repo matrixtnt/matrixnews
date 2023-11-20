@@ -24,7 +24,8 @@ import {
   isLogin,
   translate,
   truncateText,
-  profileimgError
+  profileimgError,
+  profileimg
 } from '../../utils/index'
 import { logoutUser, selectUser } from '../../store/reducers/userReducer'
 import SignInModal from '../auth/SignInModal'
@@ -79,8 +80,9 @@ const Header = () => {
 
   // react query
   const {} = useQuery({
-    queryKey: ['userRoles'],
-    queryFn: getUserById
+    queryKey: ['userRoles',user],
+    queryFn: getUserById,
+    staleTime:0
   })
 
   // api call
@@ -312,7 +314,7 @@ const Header = () => {
                     <Dropdown.Toggle id='btnSignIn' className='me-2'>
                       <img
                         className='profile_photo'
-                        src={userData.data && userData.data.profile}
+                        src={userData.data && userData.data.profile ? userData.data.profile : profileimg}
                         onError={profileimgError}
                         alt='profile'
                       />

@@ -1,6 +1,6 @@
-import ProfileUpdate from 'src/components/profile/ProfileUpdate'
+import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-
+const ProfileUpdate = dynamic(() => import('src/components/profile/ProfileUpdate'), { ssr: false })
 const index = () => {
   return (
     <>

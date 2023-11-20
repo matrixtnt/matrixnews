@@ -153,6 +153,8 @@ export const profileimgError = (e) => {
   e.target.src = "/assets/images/user.svg"
 }
 
+export const profileimg = "/assets/images/user.svg"
+
 // slug
 export const convertToSlug = (title) => {
   return slugify(title, {

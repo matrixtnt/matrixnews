@@ -93,7 +93,7 @@ const RagisterModalTwo = (props) => {
         e.preventDefault();
         signup(formValues.email, formValues.password)
             .then((response) => {
-                toast.success(translate("loginMsg"))
+                console.log(response);
                 navigate.push("/");
             })
             .catch((err) => {
@@ -102,7 +102,7 @@ const RagisterModalTwo = (props) => {
     };
 
 
-    const handleSubmit = async (e) => {s
+    const handleSubmit = async (e) => {
         e.preventDefault();
         handleSignup(e);
         setFormErrors(validate(formValues));
