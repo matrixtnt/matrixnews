@@ -8,18 +8,18 @@ import generateRssFeed from '../../scripts/generaterRssFeed.mjs'
 //   }
 // }
 
-export async function getStaticProps({ params }) {
-  let data = null
-  try {
-    data = await generateRssFeed(params.slug)
-  } catch (err) {}
+// export async function getStaticProps({ params }) {
+//   let data = null
+//   try {
+//     data = await generateRssFeed(params.slug)
+//   } catch (err) {}
 
-  return {
-    props: {
-      data
-    }
-  }
-}
+//   return {
+//     props: {
+//       data
+//     }
+//   }
+// }
 
 const rss = () => {
   return <div>rss</div>
