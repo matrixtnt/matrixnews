@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 const Home = dynamic(() => import('src/components/home/Home'), { ssr: false })
-const Index = ({ data }) => {
+const index = ({ data }) => {
   return (
     <>
       <Meta
@@ -38,4 +38,4 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
 // Conditional assignment based on the environment variable
 export const getServerSideProps = process.env.NEXT_PUBLIC_SEO === 'true' ? serverSidePropsFunction : null
 
-export default Index
+export default index
