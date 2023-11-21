@@ -1,17 +1,16 @@
 'use client'
-
 import { FiCalendar } from 'react-icons/fi'
 import Link from 'next/link'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import Layout from 'src/components/layout/Layout'
+import Card from 'src/components/skeletons/Card'
 
 const CategoryNews = () => {
   const router = useRouter()
@@ -45,7 +44,7 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId,changelanguage],
+    queryKey: ['category-news', catId, changelanguage],
     queryFn: getNewsByCategoryApi
   })
 
@@ -56,8 +55,12 @@ const CategoryNews = () => {
         <div id='cv-main' className='bg-white py-5'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (
-              <div>
-                <Skeleton height={200} count={3} />
+              <div className='row'>
+                {[...Array(3)].map((_, index) => (
+                  <div className='col-md-4 col-12' key={index}>
+                    <Card isLoading={true} />
+                  </div>
+                ))}
               </div>
             ) : (
               <div className='row'>

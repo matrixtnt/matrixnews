@@ -11,6 +11,7 @@ import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useState } from 'react'
 import Layout from '../layout/Layout'
+import Card from '../skeletons/Card'
 
 const BookmarkSection = () => {
   const { id: language_id } = getLanguage()
@@ -53,11 +54,13 @@ const BookmarkSection = () => {
   const { isLoading } = useQuery({
     queryKey: ['getbookmark', access_key, user, language_id],
     queryFn: getbookmarkApi,
+    staleTime: 0
   })
 
   const {} = useQuery({
     queryKey: ['setbookmark'],
     queryFn: setbookmarkApi,
+    staleTime: 0
   })
 
   return (
@@ -68,9 +71,12 @@ const BookmarkSection = () => {
         <div id='bs-content' className='container'>
           <div className='row'>
             {isLoading ? (
-              // Show skeleton loading when data is being fetched
-              <div className='col-12 loading_data'>
-                <Skeleton height={20} count={22} />
+              <div className='row'>
+                {[...Array(3)].map((_, index) => (
+                  <div className='col-md-4 col-12' key={index}>
+                    <Card isLoading={true} />
+                  </div>
+                ))}
               </div>
             ) : Data && Data.length > 0 ? (
               Data.map(element => (

@@ -5,13 +5,13 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { useQuery } from '@tanstack/react-query'
 import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
+import Card from '../skeletons/Card'
 
 const LiveNews = () => {
   const [Video_url, setVideo_url] = useState()
@@ -54,8 +54,12 @@ const LiveNews = () => {
       <div id='LN-main' className='py-5 bg-white'>
         <div id='LN-content' className='container'>
           {isLoading ? (
-            <div>
-              <Skeleton height={200} count={3} />
+            <div className='row'>
+             {[...Array(3)].map((_, index) => (
+                <div className='col-md-4 col-12' key={index}>
+                  <Card isLoading={true} />
+                </div>
+              ))}
             </div>
           ) : (
             <div className='row live-news'>

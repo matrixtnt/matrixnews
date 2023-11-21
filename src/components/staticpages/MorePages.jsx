@@ -11,11 +11,12 @@ import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
+import Card from '../skeletons/Card'
 
 const MorePages = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setmodalData] = useState(null)
-  let { id: language_id } = getLanguage();
+  let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   // api call
@@ -32,8 +33,8 @@ const MorePages = () => {
   }
 
   // react query
-  const { isLoading, data:Data, } = useQuery({
-    queryKey: ['getPages',currentLanguage],
+  const { isLoading, data: Data } = useQuery({
+    queryKey: ['getPages', currentLanguage],
     queryFn: getpages
   })
 
@@ -48,23 +49,33 @@ const MorePages = () => {
       <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement='0' />
       <div className='morepages py-5 bg-white'>
         <div className='container'>
-          <div className='row'>
-            {Data &&
-              Data.map(element => (
-                <div className='col-md-4 col-12 mb-4'>
-                  <div key={element.id} className='card' onClick={e => handleModalActive(e, element)}>
-                    <div className='more-cat-section-card-body'>
-                      <h5 id='cat-card-text' className='card-text mb-0'>
-                        {element.title}
-                      </h5>
-                      <button id='btn-cat-more' className='btn' type='button'>
-                        <IoArrowForwardCircleSharp size={40} />
-                      </button>
-                    </div>
-                  </div>
+          {isLoading ? (
+            <div className='row'>
+              {[...Array(3)].map((_, index) => (
+                <div className='col-md-4 col-12' key={index}>
+                  <Card isLoading={true} />
                 </div>
               ))}
-          </div>
+            </div>
+          ) : (
+            <div className='row'>
+              {Data &&
+                Data.map(element => (
+                  <div className='col-md-4 col-12 mb-4'>
+                    <div key={element.id} className='card' onClick={e => handleModalActive(e, element)}>
+                      <div className='more-cat-section-card-body'>
+                        <h5 id='cat-card-text' className='card-text mb-0'>
+                          {element.title}
+                        </h5>
+                        <button id='btn-cat-more' className='btn' type='button'>
+                          <IoArrowForwardCircleSharp size={40} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
       </div>
 

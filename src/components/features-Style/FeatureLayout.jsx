@@ -119,8 +119,10 @@ const FeatureLayout = () => {
   return (
     <>
       {isLoading ? (
-        <div className='col-12 loading_data'>
-          <Skeleton height={20} count={22} />
+        <div className='container'>
+          <div className='col-12 loading_data'>
+            <Skeleton height={20} count={22} />
+          </div>
         </div>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent

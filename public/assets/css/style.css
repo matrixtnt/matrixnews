@@ -730,7 +730,7 @@ a {
   padding: 4%;
   background-color: #fff;
   border-radius: 10px;
-  height: 35rem;
+  height: 30rem;
   width: 55rem;
   justify-content: center;
   display: flex;
@@ -858,7 +858,7 @@ a {
 
 @media (min-width: 1200px) {
   #fs-Newscard-image {
-    height: 45rem !important;
+    height: 35rem !important;
   }
 }
 #fs-Newscard-image {

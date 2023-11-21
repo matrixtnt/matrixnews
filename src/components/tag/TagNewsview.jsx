@@ -2,13 +2,13 @@
 
 import { FiCalendar } from 'react-icons/fi'
 import Link from 'next/link'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getTagApi } from 'src/hooks/tagsApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from '../layout/Layout'
+import Card from '../skeletons/Card'
 
 const TagNewsview = () => {
   const router = useRouter()
@@ -37,7 +37,7 @@ const TagNewsview = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['getNewsByTag',Tid,query],
+    queryKey: ['getNewsByTag', Tid, query],
     queryFn: getNewsByTag
   })
 
@@ -53,8 +53,12 @@ const TagNewsview = () => {
         <div className='container'>
           <div className='row'>
             {isLoading ? (
-              <div>
-                <Skeleton height={200} count={3} />
+              <div className='row'>
+                {[...Array(3)].map((_, index) => (
+                  <div className='col-md-4 col-12' key={index}>
+                    <Card isLoading={true} />
+                  </div>
+                ))}
               </div>
             ) : Data && Data.length > 0 ? (
               <>

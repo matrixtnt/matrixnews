@@ -4,7 +4,6 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../../utils'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import no_image from '../../../../public/assets/images/no_image.jpeg'
@@ -13,6 +12,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
+import Card from 'src/components/skeletons/Card'
 
 const VideoNewsview = () => {
   const [Video_url, setVideo_url] = useState()
@@ -68,7 +68,13 @@ const VideoNewsview = () => {
         <div className='container'>
           {isLoading ? (
             <div>
-              <Skeleton height={200} count={3} />
+              <div className='row'>
+                {[...Array(3)].map((_, index) => (
+                  <div className='col-md-4 col-12' key={index}>
+                    <Card isLoading={true} />
+                  </div>
+                ))}
+              </div>
             </div>
           ) : (
             <div className='row'>

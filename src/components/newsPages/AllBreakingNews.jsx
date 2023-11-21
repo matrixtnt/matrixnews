@@ -3,13 +3,13 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
+import Card from '../skeletons/Card'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()
@@ -27,7 +27,7 @@ const AllBreakingNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['all-breaking-news', language_id, access_key,currentlanguage],
+    queryKey: ['all-breaking-news', language_id, access_key, currentlanguage],
     queryFn: getBreakingNewsApi
   })
 
@@ -37,8 +37,12 @@ const AllBreakingNews = () => {
       <div id='BNV-main'>
         <div id='BNV-content' className='container'>
           {isLoading ? (
-            <div>
-              <Skeleton height={200} count={3} />
+            <div className='row'>
+              {[...Array(3)].map((_, index) => (
+                <div className='col-md-4 col-12' key={index}>
+                  <Card isLoading={true} />
+                </div>
+              ))}
             </div>
           ) : (
             <div className='row my-5'>

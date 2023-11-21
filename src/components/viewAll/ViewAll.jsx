@@ -5,7 +5,6 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
@@ -14,6 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from '../layout/Layout'
+import Card from '../skeletons/Card'
 
 const ViewAll = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -59,9 +59,10 @@ const ViewAll = () => {
 
   // slice the array to get the current posts
 
-  const currentData = Data && Data[0]?.news
-    ? Data && Data[0]?.news.slice(pagesVisited, pagesVisited + dataPerPage)
-    : Data && Data[0]?.breaking_news.slice(pagesVisited, pagesVisited + dataPerPage)
+  const currentData =
+    Data && Data[0]?.news
+      ? Data && Data[0]?.news.slice(pagesVisited, pagesVisited + dataPerPage)
+      : Data && Data[0]?.breaking_news.slice(pagesVisited, pagesVisited + dataPerPage)
 
   const lengthdata = Data && Data[0]?.news ? Data && Data[0]?.news.length : Data && Data[0]?.breaking_news.length
 
@@ -73,8 +74,12 @@ const ViewAll = () => {
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
               {isLoading ? (
-                <div>
-                  <Skeleton height={200} count={3} />
+                <div className='row'>
+                  {[...Array(3)].map((_, index) => (
+                    <div className='col-md-4 col-12' key={index}>
+                      <Card isLoading={true} />
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <div className='row'>
@@ -126,8 +131,12 @@ const ViewAll = () => {
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
               {isLoading ? (
-                <div>
-                  <Skeleton height={200} count={3} />
+                <div className='row'>
+                  {[...Array(3)].map((_, index) => (
+                    <div className='col-md-4 col-12' key={index}>
+                      <Card isLoading={true} />
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <div className='row'>

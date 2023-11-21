@@ -22,14 +22,13 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 600000,
-      refetchOnWindowFocus: false, // default: true
-    },
-  },
+      refetchOnWindowFocus: false // default: true
+    }
+  }
 })
 
 // ** Configure JSS & ClassName
 const App = ({ Component, pageProps }) => {
-
   Router.events.on('routeChangeStart', () => {
     NProgress.start()
   })
@@ -43,13 +42,13 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-          <Provider store={store}>
-            <Toaster position='top-center' containerClassName='toast-custom' />
-            <PushNotificationLayout>
-                <Component {...pageProps} />
-            </PushNotificationLayout>
-          </Provider>
-          <ReactQueryDevtools initialIsOpen={false} />
+        <Provider store={store}>
+          <Toaster position='top-center' containerClassName='toast-custom' />
+          <PushNotificationLayout>
+            <Component {...pageProps} />
+          </PushNotificationLayout>
+        </Provider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   )
