@@ -78,15 +78,15 @@ const Layout = ({ children }) => {
     }
   }, [hasToken])
 
-  // client side rendering route get
-  // useEffect(() => {
-  //   // Check if the slug is present in the URL
-  //   if (process.env.NEXT_PUBLIC_SEO === 'false') {
-  //     if (router.pathname) {
-  //       router.replace(window.location.pathname + window.location.search)
-  //     }
-  //   }
-  // }, [])
+  // client side rendering route get and this is only for vercel deploy logic
+  useEffect(() => {
+    // Check if the slug is present in the URL
+    if (process.env.NEXT_PUBLIC_SEO === 'false') {
+      if (router.pathname) {
+        router.replace(window.location.pathname + window.location.search)
+      }
+    }
+  }, [])
 
   return (
     <>
