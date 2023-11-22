@@ -2,14 +2,18 @@
 import { FaArrowLeft } from 'react-icons/fa'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import errorimage from '../../public/assets/images/error.svg'
+import Image from 'next/image'
+
 const Layout = dynamic(() => import('src/components/layout/Layout'), { ssr: false })
 const NotFound = () => {
+  // client side rendering route get
   return (
     <Layout>
       <section className='error_page'>
         <div className='container'>
           <div className='image_error'>
-            <img src='' alt='404' />
+            <Image loading='lazy' src={errorimage} alt='404' />
           </div>
           <div className='title_error'>
             <h1>{'Oops, looks like the page is lost'}</h1>
