@@ -14,9 +14,12 @@ import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'reac
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
 import { useEffect } from 'react'
+import { settingsData } from 'src/store/reducers/settingsReducer'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
+  const getLocation = useSelector(settingsData)
+  const getLocationData = getLocation?.location_news_mode
 
   const weatherApi = async () => {
     return new Promise((resolve, reject) => {
@@ -24,8 +27,11 @@ const WeatherCard = () => {
         navigator.geolocation.getCurrentPosition(async position => {
           const { latitude, longitude } = position.coords
 
-          localStorage.setItem('latitude', latitude)
-          localStorage.setItem('longitude', longitude)
+          if (getLocationData) {
+            // Store location data in local storage
+            localStorage.setItem('latitude', latitude)
+            localStorage.setItem('longitude', longitude)
+          }
 
           const response = await axios.get(
             `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage.code}`
@@ -68,9 +74,9 @@ const WeatherCard = () => {
     setCurrentLanguage(name, code, id, display_name)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     loadLanguageLabels(currentLanguage?.code)
-  },[currentLanguage])
+  }, [currentLanguage])
 
   return (
     <div id='rns-weather-card'>
