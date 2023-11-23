@@ -26,3 +26,7 @@ messaging.onBackgroundMessage(function (payload) {
 
   self.registration.showNotification(notificationTitle, notificationOptions)
 })
+
+// self.addEventListener("install", function (event) {
+//   console.log("Hello world from the Service Worker 🤙");
+// });

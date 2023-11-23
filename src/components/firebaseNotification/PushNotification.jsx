@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useEffect, useState } from 'react'
 import 'firebase/messaging'
 import { toast } from 'react-hot-toast'
@@ -25,6 +25,22 @@ const PushNotificationLayout = ({ children }) => {
       //userToken = window.localStorage.getItem('token')
     }
   }, [userToken])
+
+  // service worker
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(
+          function (registration) {
+            console.log('Service Worker registration successful with scope: ', registration.scope)
+          },
+          function (err) {
+            console.log('Service Worker registration failed: ', err)
+          }
+        )
+      })
+    }
+  }, [])
 
   useEffect(() => {
     onMessageListener()
