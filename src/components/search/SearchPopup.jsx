@@ -5,12 +5,12 @@ import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import { useRouter } from 'next/navigation'
 import { AiOutlineClose } from 'react-icons/ai'
-import { translate, truncateText } from '../../utils'
+import { truncateText } from '../../utils'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
-import { message } from 'antd'
+
 
 const SearchPopup = () => {
   const [Data, setData] = useState([])

@@ -4,7 +4,7 @@ import { BiBell, BiUserCircle } from 'react-icons/bi'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Button from 'react-bootstrap/Button'
-import { signOut } from 'firebase/auth'
+import { getAuth, signOut } from 'firebase/auth'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import Dropdown from 'react-bootstrap/Dropdown'
@@ -41,6 +41,7 @@ import { getUserByIdApi } from 'src/hooks/getuserbyId'
 import { access_key, getUser } from 'src/utils/api'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import toast from 'react-hot-toast'
+import { accountDeleteApi } from 'src/store/actions/campaign'
 
 const Header = () => {
   const userData = useSelector(selectUser)
@@ -52,6 +53,7 @@ const Header = () => {
   const [isuserRole, setisuserRole] = useState(false)
   let user = getUser()
   const navigate = useRouter()
+  const auth = getAuth()
 
   const languagesData = useSelector(selectLanguages)
 
@@ -67,22 +69,36 @@ const Header = () => {
       const { data } = await getUserByIdApi.getUserById({
         access_key: access_key,
         user_id: user
-      })
-      const Role = data.data.map(elem => elem.role)
-      if (Role[0] !== '0') {
-        setisuserRole(true)
+      });
+  
+      if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
+        const roles = data.data.map(elem => elem.role);
+        if (roles[0] !== '0') {
+          setisuserRole(true);
+        }
+        return data.data;
+      } else {
+        // Handle the case when data or data.data is undefined or empty
+        // Return an appropriate value or handle the situation accordingly
+        // For example:
+        // setisuserRole(false);
+        return [];
       }
-      return data.data
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      // Handle the error gracefully
+      // For example:
+      // setErrorState(true);
+      // Handle error state in the component
     }
-  }
+  };
+  
 
   // react query
   const {} = useQuery({
-    queryKey: ['userRoles',user],
+    queryKey: ['userRoles', user],
     queryFn: getUserById,
-    staleTime:0
+    staleTime: 0
   })
 
   // api call
@@ -236,6 +252,61 @@ const Header = () => {
     store.dispatch(SetSearchPopUp(!searchPopUp))
   }
 
+  // delete account
+  const deleteAccount = e => {
+    e.preventDefault()
+
+    confirmAlert({
+      title: 'Delete Account',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            const user = auth.currentUser
+
+            if (user) {
+              user
+                .delete()
+                .then(() => {
+                  accountDeleteApi(
+                    res => {
+                      signOut(authentication)
+                        .then(() => {
+                          logoutUser()
+                          window.recaptchaVerifier = null
+                          setIsLogout(false)
+                          navigate.push('/')
+                        })
+                        .catch(error => {
+                          toast.error(error)
+                          // An error happened.
+                        })
+                    },
+                    err => {
+                      console.log(err)
+                    }
+                  )
+                  // Handle any additional steps after deletion (e.g., redirect, sign out, etc.)
+                })
+                .catch(error => {
+                  console.error('Error deleting user account:', error)
+                  // Handle error (display error message, etc.)
+                })
+            } else {
+              console.error('No user signed in.')
+              // Handle case where no user is signed in
+            }
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    })
+  }
+
   return (
     <div className='Newsbar'>
       <div className='container'>
@@ -353,9 +424,9 @@ const Header = () => {
                           {translate('update-profile')}
                         </Link>
                       </Dropdown.Item>
-                      {/*<Dropdown.Item id='btnLogout' onClick={changePassword}>*/}
-                      {/*    Change Password*/}
-                      {/*</Dropdown.Item>*/}
+                      <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
+                        {translate('deleteAcc')}
+                      </Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item onClick={logout} id='btnLogout' className=''>
                         {translate('logout')}

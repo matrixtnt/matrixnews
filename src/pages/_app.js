@@ -7,6 +7,7 @@ import NProgress from 'nprogress'
 import PushNotificationLayout from 'src/components/firebaseNotification/PushNotification'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import ThemeProvider from 'src/components/themeProvider/ThemeProvider'
 
 // CSS File Here
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -43,10 +44,12 @@ const App = ({ Component, pageProps }) => {
     <>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <Toaster position='top-center' containerClassName='toast-custom' />
-          <PushNotificationLayout>
-            <Component {...pageProps} />
-          </PushNotificationLayout>
+          <ThemeProvider>
+            <Toaster position='top-center' containerClassName='toast-custom' />
+            <PushNotificationLayout>
+              <Component {...pageProps} />
+            </PushNotificationLayout>
+          </ThemeProvider>
         </Provider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

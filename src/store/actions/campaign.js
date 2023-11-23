@@ -1,5 +1,5 @@
 
-import { deleteCommentApi, getBookmarkApi, getBreakingNewsApi, getBreakingNewsIdApi, getCategoriesApi, getCommentByNewsApi, getLiveStreamingApi, getNewsApi, getNewsByCategoryApi, getNewsByIdApi, getPagesApi, getTagApi, getVideoApi, setBookmarkApi, setCommentApi, setLikeDisLikeApi, getNewsByTagApi, DeleteUserNotificationApi, getFeatureSectionApi, getFeatureSectionByIdApi, setUserCategoriesApi, getUserCategoriesApi, getUserByIdApi, setNewsViewApi, setBreakingNewsViewApi, getAdsSpaceNewsDetailsApi, setnewsApi, deleteimageApi, deletenewsApi, getsubcategorybycategoryApi, set_comment_like_dislike_Api, set_flag_Api, register_token_api, getlocationapi } from "../../utils/api"
+import { accountdeleteApi, deleteCommentApi, getBookmarkApi, getBreakingNewsApi, getBreakingNewsIdApi, getCategoriesApi, getCommentByNewsApi, getLiveStreamingApi, getNewsApi, getNewsByCategoryApi, getNewsByIdApi, getPagesApi, getTagApi, getVideoApi, setBookmarkApi, setCommentApi, setLikeDisLikeApi, getNewsByTagApi, DeleteUserNotificationApi, getFeatureSectionApi, getFeatureSectionByIdApi, setUserCategoriesApi, getUserCategoriesApi, getUserByIdApi, setNewsViewApi, setBreakingNewsViewApi, getAdsSpaceNewsDetailsApi, setnewsApi, deleteimageApi, deletenewsApi, getsubcategorybycategoryApi, set_comment_like_dislike_Api, set_flag_Api, register_token_api, getlocationapi } from "../../utils/api"
 import { store } from "../store"
 import { apiCallBegan } from "./apiActions"
 
@@ -370,6 +370,17 @@ export const setRegisterTokenApi = (token,latitude,longitude, onSuccess, onError
 export const getLocationApi = (onSuccess, onError, onStart) => {
     store.dispatch(apiCallBegan({
         ...getlocationapi(),
+        displayToast: false,
+        onStart,
+        onSuccess,
+        onError,
+    }));
+};
+
+// 35. delete account
+export const accountDeleteApi = (onSuccess, onError, onStart) => {
+    store.dispatch(apiCallBegan({
+        ...accountdeleteApi(),
         displayToast: false,
         onStart,
         onSuccess,
