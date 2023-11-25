@@ -6,7 +6,6 @@ import FirebaseData from 'src/utils/Firebase'
 
 const PushNotificationLayout = ({ children }) => {
   const [notification, setNotification] = useState(null)
-  const [userToken, setUserToken] = useState(null)
   const [isTokenFound, setTokenFound] = useState(false)
   const [fcmToken, setFcmToken] = useState('')
   const { fetchToken, onMessageListener } = FirebaseData()
@@ -16,16 +15,8 @@ const PushNotificationLayout = ({ children }) => {
   }, [])
 
   const handleFetchToken = async () => {
-    let data = await fetchToken(setTokenFound, setFcmToken)
-    console.log(data)
+    await fetchToken(setTokenFound, setFcmToken)
   }
-
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      setUserToken(localStorage.getItem('token'))
-      //userToken = window.localStorage.getItem('token')
-    }
-  }, [userToken])
 
   // service worker
   useEffect(() => {

@@ -3,6 +3,7 @@ import { initializeApp, getApps, getApp } from 'firebase/app'
 import { getMessaging, getToken, onMessage, isSupported } from 'firebase/messaging'
 import firebase from "firebase/compat/app"
 import { getAuth } from "firebase/auth";
+import { loadFcmToken } from 'src/store/reducers/settingsReducer';
 
 const FirebaseData = () => {
   let firebaseConfig = {
@@ -50,7 +51,7 @@ const FirebaseData = () => {
     })
       .then((currentToken) => {
         if (currentToken) {
-          localStorage.setItem("token",currentToken);
+          loadFcmToken(currentToken)
           setTokenFound(true);
           setFcmToken(currentToken);
   

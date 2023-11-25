@@ -9,6 +9,7 @@ const initialState = {
     loading: false,
     lat:null,
     long:null,
+    fcmtoken:"",
 }
 
 export const settingsSlice = createSlice({
@@ -30,13 +31,16 @@ export const settingsSlice = createSlice({
             let {lat,long} = action.payload;
             websettings.lat = lat
             websettings.long = long
+        },
+        fcmToken:(websettings,action)=>{
+            websettings.fcmtoken = action.payload.data
         }
 
     }
 })
 
 
-export const { settingsRequested,settingsSuccess,settingsFailed,latlong } = settingsSlice.actions;
+export const { settingsRequested,settingsSuccess,settingsFailed,latlong,fcmToken } = settingsSlice.actions;
 export default settingsSlice.reducer;
 
 // load websettings api call
@@ -62,6 +66,11 @@ export const locationData = createSelector(
     state => state.settings,
     settings => settings
 )
+
+// load fcmToken
+export const loadFcmToken = (data) => {
+    store.dispatch(fcmToken({data}))
+}
 
 // Selector Functions
 export const settingsData = createSelector(

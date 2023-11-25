@@ -15,10 +15,12 @@ import { useSelector } from 'react-redux'
 import { webSettingsData } from '../../store/reducers/websettingsReducer'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { locationData } from 'src/store/reducers/settingsReducer'
 
 const OTPModal = props => {
   const [OTP, setOTP] = useState('') // eslint-disable-next-line
   const { authentication } = FirebaseData()
+  const location = useSelector(locationData)
   const [error, setError] = useState(
     '',
     setTimeout(() => {
@@ -124,7 +126,7 @@ const OTPModal = props => {
         'mobile',
         '',
         '1',
-        '',
+        location.fcmtoken,
         response => {
           if (response.data.is_login === '1') {
             // If new User then show the Update Profile Screen

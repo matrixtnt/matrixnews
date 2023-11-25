@@ -32,8 +32,8 @@ const FeatureLayout = () => {
         access_key: access_key,
         language_id: language_id,
         user_id: user,
-        offset: null,
-        limit: null,
+        offset: "",
+        limit: "",
         latitude: storedLatitude,
         longitude: storedLongitude
       })
