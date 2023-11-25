@@ -5,14 +5,15 @@ import Skeleton from 'react-loading-skeleton'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import { locationData } from 'src/store/reducers/settingsReducer'
 
 const RelatedNewsSection = props => {
   const catid = props.Cid
   let user = getUser()
   let { id: language_id } = getLanguage()
-
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
 
   // api call
   const getNewsByCategoryApi = async () => {
@@ -25,8 +26,8 @@ const RelatedNewsSection = props => {
         limit: '10',
         user_id: user,
         language_id: language_id,
-        latitude: storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
       // Filter out elements with the same id as props.Cid
       const filteredData = data.data.filter(element => element.id !== props.Nid)

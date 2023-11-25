@@ -9,13 +9,16 @@ import { getTagApi } from 'src/hooks/tagsApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import { locationData } from 'src/store/reducers/settingsReducer'
+import { useSelector } from 'react-redux'
 
 const TagNewsview = () => {
   const router = useRouter()
   const query = router.query
   const Tid = query.slug
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
   let user = getUser()
   let { id: language_id } = getLanguage()
   // api call
@@ -26,8 +29,8 @@ const TagNewsview = () => {
         user_id: user,
         tag_id: Tid,
         language_id: language_id,
-        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
       return data.data
     } catch (error) {

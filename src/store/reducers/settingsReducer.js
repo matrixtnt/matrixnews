@@ -7,6 +7,8 @@ import { getSettingsApi } from "../../utils/api";
 const initialState = {
     data: null,
     loading: false,
+    lat:null,
+    long:null,
 }
 
 export const settingsSlice = createSlice({
@@ -24,12 +26,17 @@ export const settingsSlice = createSlice({
         settingsFailed: (websettings, action) => {
             websettings.loading = false;
         },
+        latlong:(websettings,action)=>{
+            let {lat,long} = action.payload;
+            websettings.lat = lat
+            websettings.long = long
+        }
 
     }
 })
 
 
-export const { settingsRequested,settingsSuccess,settingsFailed } = settingsSlice.actions;
+export const { settingsRequested,settingsSuccess,settingsFailed,latlong } = settingsSlice.actions;
 export default settingsSlice.reducer;
 
 // load websettings api call
@@ -46,6 +53,15 @@ export const laodSettingsApi = (onSuccess, onError, onStart) => {
     }))
 };
 
+// load location
+export const loadLocation = (lat,long) => {
+    store.dispatch(latlong({lat,long}))
+}
+
+export const locationData = createSelector(
+    state => state.settings,
+    settings => settings
+)
 
 // Selector Functions
 export const settingsData = createSelector(

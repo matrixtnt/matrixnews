@@ -128,30 +128,26 @@ export const getBreakingNewsApi = () => {
 
 // 5. get news
 export const getNewsApi = (offset, limit, get_user_news, search, latitude, longitude) => {
-  let { id: language_id } = getLanguage()
-  let user = getUser()
-  // let location = store.getState().settings.data.location_news_mode
-  // console.log("get location",location)
-
-  let data = {
-    access_key: access_key,
-    offset: offset,
-    limit: limit,
-    user_id: user,
-    get_user_news: get_user_news,
-    search: search, // {optional}
-    language_id: language_id,
-    latitude: latitude,
-    longitude: longitude
-  }
-
+  let { id: language_id } = getLanguage();
+  let user = getUser();
+  let data = new FormData()
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('user_id', user);
+  data.append('offset', offset);
+  data.append('limit', limit);
+  data.append('get_user_news', get_user_news);
+  data.append('search', search);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
+  
   return {
     url: `${GET_NEWS}`,
-    method: 'POST',
-    data: data,
-    authorizationHeader: true
-  }
-}
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
+};
 
 // 6. get video
 export const getVideoApi = () => {
@@ -169,26 +165,25 @@ export const getVideoApi = () => {
 
 // 7. get news by category
 export const getNewsByCategoryApi = (category_id, subcategory_id, offset, limit, latitude, longitude) => {
-  let user = getUser()
-  let { id: language_id } = getLanguage()
+  let user = getUser();
+  let { id: language_id } = getLanguage();
+  let data = new FormData();
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('user_id', user);
+  data.append('category_id', category_id);
+  data.append('subcategory_id', subcategory_id);
+  data.append('offset', offset);
+  data.append('limit', limit);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
   return {
     url: `${GET_NEWS_BY_CATEGORY}`,
-    method: 'POST',
-    data: {
-      access_key: access_key,
-      category_id: category_id,
-      subcategory_id: subcategory_id,
-      offset: offset,
-      limit: limit,
-      user_id: user,
-      language_id: language_id,
-      latitude: latitude,
-      longitude: longitude
-    },
-    authorizationHeader: true
-  }
-}
-
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
+};
 // 8. get breaking news id
 export const getBreakingNewsIdApi = breaking_news_id => {
   let { id: language_id } = getLanguage()
@@ -417,22 +412,22 @@ export const setLikeDisLikeApi = (news_id, status) => {
 
 //22. get news by tag
 export const getNewsByTagApi = (tag_id, latitude, longitude) => {
-  let user = getUser()
-  let { id: language_id } = getLanguage()
+  let user = getUser();
+  let { id: language_id } = getLanguage();
+  let data = new FormData();
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('user_id', user);
+  data.append('tag_id', tag_id);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
   return {
     url: `${GET_NEWS_BY_TAG}`,
-    method: 'POST',
-    data: {
-      access_key: access_key,
-      user_id: user,
-      tag_id: tag_id,
-      language_id: language_id,
-      latitude: latitude,
-      longitude: longitude
-    },
-    authorizationHeader: true
-  }
-}
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
+};
 
 //23. get web settings
 export const getWebSettingsApi = () => {
@@ -477,44 +472,44 @@ export const DeleteUserNotificationApi = id => {
 
 //26. get feature sections
 export const getFeatureSectionApi = (offset, limit, latitude, longitude) => {
-  let user = getUser()
-  let { id: language_id } = getLanguage()
+  let user = getUser();
+  let { id: language_id } = getLanguage();
+  let data = new FormData();
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('user_id', user);
+  data.append('offset', offset);
+  data.append('limit', limit);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
   return {
     url: `${GET_FEATURE_SECTION}`,
-    method: 'POST',
-    data: {
-      access_key: access_key,
-      language_id: language_id,
-      user_id: user,
-      offset: offset,
-      limit: limit,
-      latitude: latitude,
-      longitude: longitude
-    },
-    authorizationHeader: true
-  }
-}
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
+};
 
 // 27. get feature section by id
 export const getFeatureSectionByIdApi = (section_id, offset, limit, latitude, longitude) => {
-  let user = getUser()
-  let { id: language_id } = getLanguage()
+  let user = getUser();
+  let data = new FormData();
+  let { id: language_id } = getLanguage();
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('user_id', user);
+  data.append('section_id', section_id);
+  data.append('offset', offset);
+  data.append('limit', limit);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
   return {
     url: `${GET_FEATURE_SECTION_ID}`,
-    method: 'POST',
-    data: {
-      access_key: access_key,
-      section_id: section_id,
-      language_id: language_id,
-      user_id: user,
-      offset: offset,
-      limit: limit,
-      latitude: latitude,
-      longitude: longitude
-    },
-    authorizationHeader: true
-  }
-}
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
+};
 
 // 28. set user categories
 export const setUserCategoriesApi = category_id => {
@@ -777,22 +772,21 @@ export const set_flag_Api = (comment_id, news_id, message) => {
 }
 
 // 43. register token
-
 export const register_token_api = (token, latitude, longitude) => {
-  let { id: language_id } = getLanguage()
+  let { id: language_id } = getLanguage();
+  let data = new FormData()
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('token', token);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
   return {
     url: `${REGISTER_TOKEN}`,
-    method: 'POST',
-    data: {
-      access_key: access_key,
-      token: token,
-      language_id: language_id,
-      latitude: latitude,
-      longitude: longitude
-    },
-    authorizationHeader: true
-  }
-}
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
+};
 
 // 44. get tag
 export const getlocationapi = () => {

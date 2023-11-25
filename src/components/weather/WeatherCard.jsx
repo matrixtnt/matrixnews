@@ -14,7 +14,8 @@ import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'reac
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
 import { useEffect } from 'react'
-import { settingsData } from 'src/store/reducers/settingsReducer'
+import { loadLocation, settingsData } from 'src/store/reducers/settingsReducer'
+import toast from 'react-hot-toast'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -24,22 +25,27 @@ const WeatherCard = () => {
   const weatherApi = async () => {
     return new Promise((resolve, reject) => {
       try {
-        navigator.geolocation.getCurrentPosition(async position => {
-          const { latitude, longitude } = position.coords
+        if ('geolocation' in navigator) {
+          navigator.geolocation.getCurrentPosition(async position => {
+            const { latitude, longitude } = position.coords
 
-          if (getLocationData) {
-            // Store location data in local storage
-            localStorage.setItem('latitude', latitude)
-            localStorage.setItem('longitude', longitude)
-          }
+            if (getLocationData === '1') {
+              loadLocation(latitude, longitude)
+            } else {
+              loadLocation(null, null)
+            }
 
-          const response = await axios.get(
-            `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage.code}`
-          )
+            const response = await axios.get(
+              `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage.code}`
+            )
 
-          resolve(response.data) // Resolve the promise with the fetched data
-        })
+            resolve(response.data) // Resolve the promise with the fetched data
+          })
+        } else {
+          toast.error('Geolocation not supported')
+        }
       } catch (error) {
+        loadLocation(null, null)
         reject(error) // Reject the promise if an error occurs
       }
     })
@@ -47,7 +53,7 @@ const WeatherCard = () => {
 
   // react query
   const { isLoading, data: weather } = useQuery({
-    queryKey: ['weather', currentLanguage],
+    queryKey: ['weather', currentLanguage,getLocationData],
     queryFn: weatherApi,
     staleTime: 0
   })

@@ -12,6 +12,7 @@ import StyleSix from './StyleSix'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
+import { locationData } from 'src/store/reducers/settingsReducer'
 
 const FeatureLayout = () => {
   let user = getUser()
@@ -20,10 +21,10 @@ const FeatureLayout = () => {
 
   // current language
   const currentLanguage = useSelector(selectCurrentLanguage)
-  // console.log("offset data", offsetdata)
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
 
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
 
   const getFeatureSection = async () => {
     try {
@@ -33,8 +34,8 @@ const FeatureLayout = () => {
         user_id: user,
         offset: null,
         limit: null,
-        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
       return data.data
     } catch (error) {
@@ -44,7 +45,7 @@ const FeatureLayout = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['mainfeatureSection', currentLanguage],
+    queryKey: ['mainfeatureSection', currentLanguage,location],
     queryFn: getFeatureSection
   })
 

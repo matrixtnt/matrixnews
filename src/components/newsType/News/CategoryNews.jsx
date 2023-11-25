@@ -11,16 +11,18 @@ import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
+import { locationData } from 'src/store/reducers/settingsReducer'
 
 const CategoryNews = () => {
   const router = useRouter()
   const query = router.query
   const catId = query.slug
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
   let user = getUser()
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
 
   // api call
   const getNewsByCategoryApi = async () => {
@@ -33,8 +35,8 @@ const CategoryNews = () => {
         limit: '10',
         user_id: user,
         language_id: language_id,
-        latitude: storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
       return data.data
     } catch (error) {

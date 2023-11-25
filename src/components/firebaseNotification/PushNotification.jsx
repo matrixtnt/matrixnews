@@ -16,7 +16,8 @@ const PushNotificationLayout = ({ children }) => {
   }, [])
 
   const handleFetchToken = async () => {
-    await fetchToken(setTokenFound, setFcmToken)
+    let data = await fetchToken(setTokenFound, setFcmToken)
+    console.log(data)
   }
 
   useEffect(() => {

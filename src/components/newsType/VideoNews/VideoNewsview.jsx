@@ -13,6 +13,7 @@ import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
+import { locationData } from 'src/store/reducers/settingsReducer'
 
 const VideoNewsview = () => {
   const [Video_url, setVideo_url] = useState()
@@ -22,8 +23,9 @@ const VideoNewsview = () => {
   const query = router.query
   const catid = query.slug
   const currentLanguage = useSelector(selectCurrentLanguage)
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
   let user = getUser()
   let { id: language_id } = getLanguage()
 
@@ -37,8 +39,8 @@ const VideoNewsview = () => {
         user_id: user,
         offset: '',
         limit: '10',
-        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
       return data.data
     } catch (error) {

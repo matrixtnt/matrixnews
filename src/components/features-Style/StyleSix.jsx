@@ -10,6 +10,8 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { locationData } from 'src/store/reducers/settingsReducer'
+import { useSelector } from 'react-redux'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -17,8 +19,11 @@ const StyleSix = ({ isLoading, Data }) => {
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
   const [typeUrl, setTypeUrl] = useState(null)
-  let user = getUser();
-  let { id: language_id } = getLanguage();
+  let user = getUser()
+  let { id: language_id } = getLanguage()
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
 
   const Newbreakpoints = {
     320: {
@@ -64,20 +69,17 @@ const StyleSix = ({ isLoading, Data }) => {
     setVideo_url(url)
   }
 
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
-
   const getFeatureSectionById = async () => {
     try {
       const { data } = await getFeatureSectionApi.getFeatureSectionById({
         access_key: access_key,
-        section_id:Data.id,
+        section_id: Data.id,
         language_id: language_id,
         user_id: user,
         offset: '',
         limit: '',
-        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
       return data.data
     } catch (error) {
@@ -87,7 +89,7 @@ const StyleSix = ({ isLoading, Data }) => {
 
   // react query
   const { data: sliderData } = useQuery({
-    queryKey: ['styleSixFeature'],
+    queryKey: ['styleSixFeature',location],
     queryFn: getFeatureSectionById
   })
 

@@ -10,6 +10,7 @@ import { getNewsApi } from 'src/hooks/newsApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
+import { locationData } from 'src/store/reducers/settingsReducer'
 
 
 const SearchPopup = () => {
@@ -20,7 +21,9 @@ const SearchPopup = () => {
   let { id: language_id } = getLanguage()
   let user = getUser()
   const [searchValue, setSearchValue] = useState('')
-
+  const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
   const navigate = useRouter()
 
   // popup
@@ -34,9 +37,6 @@ const SearchPopup = () => {
     setSearchValue(event.target.value)
   }
 
-  const storedLatitude = localStorage.getItem('latitude')
-  const storedLongitude = localStorage.getItem('longitude')
-
   // api call
   const getNews = async () => {
     try {
@@ -48,8 +48,8 @@ const SearchPopup = () => {
         get_user_news: '',
         search: searchValue, // {optional}
         language_id: language_id,
-        latitude: storedLatitude && storedLatitude ? storedLatitude : null,
-        longitude: storedLongitude && storedLongitude ? storedLongitude : null
+        latitude: storedLatitude,
+        longitude: storedLongitude
       })
 
       // Check if the total count of loaded data exceeds the total count from the API
