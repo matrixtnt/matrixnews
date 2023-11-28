@@ -46,7 +46,7 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage],
+    queryKey: ['category-news', catId, changelanguage,location],
     queryFn: getNewsByCategoryApi
   })
 

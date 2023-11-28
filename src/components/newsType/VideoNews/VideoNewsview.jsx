@@ -50,7 +50,7 @@ const VideoNewsview = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['getFeatureSectionById', catid, currentLanguage],
+    queryKey: ['getFeatureSectionById', catid, currentLanguage,location],
     queryFn: getFeatureSectionById
   })
 

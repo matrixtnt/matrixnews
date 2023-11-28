@@ -39,7 +39,7 @@ const RelatedNewsSection = props => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['realated-news-section', catid, props.Nid],
+    queryKey: ['realated-news-section', catid, props.Nid,location],
     queryFn: getNewsByCategoryApi
   })
 

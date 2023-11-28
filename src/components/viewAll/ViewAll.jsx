@@ -55,7 +55,7 @@ const ViewAll = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['viewallFeaturebyid', catid, currentLanguage],
+    queryKey: ['viewallFeaturebyid', catid, currentLanguage,location],
     queryFn: getFeatureSectionById
   })
 
