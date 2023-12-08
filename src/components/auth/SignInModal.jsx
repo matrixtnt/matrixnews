@@ -222,10 +222,6 @@ const SignInModal = props => {
             <div className='logo-img-overlay'>
               <img src={websettings && websettings.web_header_logo} alt='' id='logo1' />
             </div>
-            <div className='logo-text'>
-              <h4>{translate('beautifulltheme')}</h4>
-              <p> {translate('bestinvestment')}</p>
-            </div>
           </div>
           <div id='modal-content'>
             <Modal.Header closeButton>

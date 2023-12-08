@@ -75,10 +75,6 @@ const ForgotPasswordTwo = props => {
             <div className='logo-img-overlay'>
               <img id='NewsLogo' src={websettings && websettings.web_header_logo} alt='' />
             </div>
-            <div className='logo-text2'>
-              <h4> {translate('beautifulltheme')}</h4>
-              <p> {translate('bestinvestment')}</p>
-            </div>
           </div>
 
           <div id='modal-content2'>
