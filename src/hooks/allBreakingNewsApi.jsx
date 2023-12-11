@@ -4,14 +4,16 @@ import { GET_BREAKING_NEWS, GET_BREAKING_NEWS_ID, SET_BREAKING_NEWS_VIEW } from 
 export const AllBreakingNewsApi = {
   getBreakingNews: requestData => {
     const { language_id, access_key } = requestData
-    return Api.post(GET_BREAKING_NEWS, {
+    return Api.get(GET_BREAKING_NEWS, {
+      params: {
       language_id,
       access_key
+      }
     })
   },
   getBreakingNewsId: requestData => {
     const { access_key,breaking_news_id,user_id,language_id } = requestData
-    return Api.post(GET_BREAKING_NEWS_ID, {
+    return Api.get(GET_BREAKING_NEWS_ID, {
       access_key,
       breaking_news_id,
       user_id,

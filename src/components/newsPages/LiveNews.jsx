@@ -35,7 +35,7 @@ const LiveNews = () => {
   // react query
   const { isLoading, data: Data } = useQuery({
     queryKey: ['getliveStreaming',currentLanguage],
-    queryFn: getLiveStreaming
+    queryFn: getLiveStreaming,
   })
 
   const handleLiveNewsVideoUrl = url => {

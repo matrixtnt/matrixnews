@@ -2,133 +2,133 @@
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
     <loc>https://next-js-news-nu.vercel.app/404</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.585Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/loading</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/rss</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/all-breaking-news</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/all-categories</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/bookmark</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/breaking-news/[slug]</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/categories-news/[slug]</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/create-news</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/edit-news</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/live-news</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/manage-news</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/more-pages</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/news/[slug]</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/news-notification</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/personal-notification</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/profile-update</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/tag/[slug]</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/user-based-categories</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/video-news-view/[slug]</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://next-js-news-nu.vercel.app/view-all/[slug]</loc>
-    <lastmod>2023-12-01T09:33:08.570Z</lastmod>
+    <lastmod>2023-12-11T04:03:11.586Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

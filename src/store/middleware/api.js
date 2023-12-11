@@ -27,7 +27,7 @@ const api = ({ dispatch, getState }) => next => async action => {
     if (typeof authorizationHeader === "undefined" || authorizationHeader === true) {
         headers = {
             ...headers,
-            "Authorization": "Bearer " + getState().token.token,
+            "Authorization": "Bearer " + getState().user?.data?.token,
         };
     }
 
@@ -40,7 +40,7 @@ const api = ({ dispatch, getState }) => next => async action => {
     try {
         // API Call
         const response = await axios.request({
-            baseURL: `${process.env.NEXT_PUBLIC_API_URL}/Api/`,
+            baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/`,
             url,
             method,
             data,

@@ -25,7 +25,6 @@ const BookmarkSection = () => {
     try {
       const { data } = await bookmarkApi.getBookmark({
         access_key: access_key,
-        user_id: user,
         language_id: language_id,
         offset: 0,
         limit: ''
@@ -40,7 +39,6 @@ const BookmarkSection = () => {
     try {
       const { data } = await bookmarkApi.setBookmark({
         access_key: access_key,
-        user_id: user,
         news_id: news_id,
         status: status
       })

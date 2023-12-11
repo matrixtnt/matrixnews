@@ -6,7 +6,7 @@ import moment from 'moment/moment'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { translate } from '../../utils'
-import { webSettingsData } from '../../store/reducers/websettingsReducer'
+import { settingsData } from '../../store/reducers/settingsReducer'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key } from 'src/utils/api'
@@ -14,7 +14,7 @@ import { access_key } from 'src/utils/api'
 const Footer = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  const websettings = useSelector(webSettingsData)
+  const settings = useSelector(settingsData)
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -49,12 +49,12 @@ const Footer = () => {
             <div className='col-lg-3 col-12'>
               <div className='News'>
                 <Link href='/'>
-                  <img id='NewsLogo' src={websettings && websettings.web_footer_logo} alt='' />
+                  <img id='NewsLogo' src={settings && settings.web_setting.web_footer_logo} alt='' />
                 </Link>
               </div>
               <div className='Lorem-text'>
                 <p className='lorem'>
-                  {websettings && websettings.web_footer_description}
+                  {settings && settings.web_setting.web_footer_description}
                   <br />
                 </p>
               </div>
@@ -152,7 +152,7 @@ const Footer = () => {
           <div className='d-flex copyright' id='copyright1'>
             <p id='footer-Copyright' className='h6 p-2'>
               {translate('copyright')} © {moment().year()} {translate('allrights')}{' '}
-              {websettings && websettings.web_name}
+              {settings && settings.web_setting.web_name}
             </p>
           </div>
         </div>

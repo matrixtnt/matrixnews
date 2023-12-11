@@ -12,7 +12,7 @@ import FirebaseData from '../../utils/Firebase'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { loadMobileType, register } from '../../store/reducers/userReducer'
 import { useSelector } from 'react-redux'
-import { webSettingsData } from '../../store/reducers/websettingsReducer'
+import { settingsData } from '../../store/reducers/settingsReducer'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { locationData } from 'src/store/reducers/settingsReducer'
@@ -30,7 +30,7 @@ const OTPModal = props => {
 
   const navigate = useRouter()
 
-  const websettings = useSelector(webSettingsData)
+  const settings = useSelector(settingsData)
 
   const resendOTP = e => {
     e.preventDefault()
@@ -159,7 +159,7 @@ const OTPModal = props => {
             <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img5'>
               <img className='ModalImg5' src={photo.src} alt='' />
               <div className='logo-img-overlay'>
-                <img src={websettings && websettings.web_header_logo} alt='' id='logo5' />
+                <img src={settings && settings.web_setting.web_header_logo} alt='' id='logo5' />
               </div>
             </div>
 

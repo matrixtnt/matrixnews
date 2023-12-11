@@ -3,20 +3,20 @@ import { GET_BOOKMARK, SET_BOOKMARK } from 'src/utils/api'
 
 export const bookmarkApi = {
   getBookmark: requestData => {
-    const { access_key, user_id, language_id, offset, limit } = requestData
-    return Api.post(GET_BOOKMARK, {
-      access_key,
-      user_id,
-      language_id,
-      offset,
-      limit
+    const { access_key, language_id, offset, limit } = requestData
+    return Api.get(GET_BOOKMARK, {
+      params: {
+        access_key,
+        language_id,
+        offset,
+        limit
+      }
     })
   },
   setBookmark: requestData => {
-    const { access_key, user_id, news_id, status } = requestData
+    const { access_key, news_id, status } = requestData
     return Api.post(SET_BOOKMARK, {
       access_key,
-      user_id,
       news_id,
       status  //1-bookmark, 0-unbookmark
     })

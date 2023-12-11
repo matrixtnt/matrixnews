@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signOut } from "firebase/auth";
 import { translate } from "../../utils";
 import { useSelector } from "react-redux";
-import { webSettingsData } from "../../store/reducers/websettingsReducer";
+import { settingsData } from '../../store/reducers/settingsReducer'
 import toast from "react-hot-toast";
 
 const RagisterModalTwo = (props) => {
@@ -32,7 +32,7 @@ const RagisterModalTwo = (props) => {
     const [icon, setIcon] = useState(eyeSlash);
     const [icon2, setIcon2] = useState(eyeSlash);
     const auth = getAuth();
-    const websettings = useSelector(webSettingsData);
+    const settings = useSelector(settingsData);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -172,7 +172,7 @@ const RagisterModalTwo = (props) => {
                     <div style={{ width: "100%", objectFit: "cover", borderRadius: "20px" }} id="login_img3">
                         <img className="ModalImg3" src={photo.src} alt="" />
                         <div className="logo-img-overlay">
-                            <img src={websettings && websettings.web_header_logo} alt="" id="logo3" />
+                            <img src={settings && settings.web_setting.web_header_logo} alt="" id="logo3" />
                         </div>
                     </div>
 

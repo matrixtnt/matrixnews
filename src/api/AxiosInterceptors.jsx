@@ -2,7 +2,7 @@ import axios from 'axios'
 import { store } from 'src/store/store'
 
 const Api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/Api/`
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/`
 })
 
 Api.interceptors.request.use(function (config) {
@@ -10,7 +10,7 @@ Api.interceptors.request.use(function (config) {
 
 
   if (typeof window !== 'undefined') {
-    token = store.getState()?.token?.token
+    token = store.getState()?.user?.data?.token
   }
 
   if (token) config.headers.authorization = `Bearer ${token}`

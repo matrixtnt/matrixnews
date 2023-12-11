@@ -18,7 +18,7 @@ import PhoneLoginTwo from './PhoneLoginTwo'
 import RagisterModalTwo from './RegisterModalTwo'
 import ForgotPasswordTwo from './ForgotPasswordTwo'
 import { translate } from '../../utils'
-import { webSettingsData } from '../../store/reducers/websettingsReducer'
+import { settingsData } from '../../store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { setRegisterTokenApi } from '../../store/actions/campaign'
@@ -47,7 +47,7 @@ const SignInModal = props => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
 
-  const websettings = useSelector(webSettingsData)
+  const settings = useSelector(settingsData)
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -220,7 +220,7 @@ const SignInModal = props => {
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
             <img className='ModalImg' src={photo.src} alt='' />
             <div className='logo-img-overlay'>
-              <img src={websettings && websettings.web_header_logo} alt='' id='logo1' />
+              <img src={settings && settings.web_setting.web_header_logo} alt='' id='logo1' />
             </div>
           </div>
           <div id='modal-content'>

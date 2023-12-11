@@ -24,6 +24,7 @@ export const userSlice = createSlice({
             user = initialState;
             return user;
         },
+
         imageUploadSuccess: (user, action) => {
             user.data.profile = action.payload.file_path;
         },

@@ -16,7 +16,7 @@ export const settingsSlice = createSlice({
     name: "settings",
     initialState,
     reducers: {
-        settingsRequested: (settings, action) => {
+        settingsRequested: (settings) => {
             settings.loading = true;
         },
         settingsSuccess: (settings, action) => {
@@ -24,16 +24,16 @@ export const settingsSlice = createSlice({
             settings.loading = false;
             // token.data = action.payload.data
         },
-        settingsFailed: (websettings, action) => {
-            websettings.loading = false;
+        settingsFailed: (settings) => {
+            settings.loading = false;
         },
-        latlong:(websettings,action)=>{
+        latlong:(settings,action)=>{
             let {lat,long} = action.payload;
-            websettings.lat = lat
-            websettings.long = long
+            settings.lat = lat
+            settings.long = long
         },
-        fcmToken:(websettings,action)=>{
-            websettings.fcmtoken = action.payload.data
+        fcmToken:(settings,action)=>{
+            settings.fcmtoken = action.payload.data
         }
 
     }
@@ -44,9 +44,9 @@ export const { settingsRequested,settingsSuccess,settingsFailed,latlong,fcmToken
 export default settingsSlice.reducer;
 
 // load websettings api call
-export const laodSettingsApi = (onSuccess, onError, onStart) => {
+export const laodSettingsApi = (type,onSuccess, onError, onStart) => {
     store.dispatch(apiCallBegan({
-        ...getSettingsApi(),
+        ...getSettingsApi(type),
         displayToast: false,
         onStartDispatch: settingsRequested.type,
         onSuccessDispatch: settingsSuccess.type,

@@ -6,7 +6,7 @@ import validator from "validator";
 import Modal from "react-bootstrap/Modal";
 import { translate } from "../../utils";
 import { useSelector } from "react-redux";
-import { webSettingsData } from "../../store/reducers/websettingsReducer";
+import { settingsData } from '../../store/reducers/settingsReducer'
 import dynamic from "next/dynamic";
 const OTPModalNoSSR = dynamic(() => import('./OTPModal'), { ssr: false })
 const PhoneLoginTwo = (props) => {
@@ -23,7 +23,7 @@ const PhoneLoginTwo = (props) => {
         }, 5000)
     );
 
-    const websettings = useSelector(webSettingsData);
+    const settings = useSelector(settingsData)
 
     const handleGetOtp = () => {
         if (value === undefined) {
@@ -43,7 +43,7 @@ const PhoneLoginTwo = (props) => {
                     <div style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "20px" }} id="login_img4">
                         <img className="ModalImg4" src={photo.src} alt="" />
                         <div className="logo-img-overlay">
-                            <img src={websettings && websettings.web_header_logo} alt="" id="logo4" />
+                            <img src={settings && settings.web_setting.web_header_logo} alt="" id="logo4" />
                         </div>
                     </div>
 

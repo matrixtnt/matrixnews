@@ -29,7 +29,6 @@ import {
 } from '../../utils/index'
 import { logoutUser, selectUser } from '../../store/reducers/userReducer'
 import SignInModal from '../auth/SignInModal'
-import { webSettingsData } from '../../store/reducers/websettingsReducer'
 import MobilesideBar from '../mobileNavbar/MobilesideBar'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -58,8 +57,6 @@ const Header = () => {
   const languagesData = useSelector(selectLanguages)
 
   const currentLanguage = useSelector(selectCurrentLanguage)
-
-  const websettings = useSelector(webSettingsData)
 
   const settings = useSelector(settingsData)
 
@@ -137,7 +134,7 @@ const Header = () => {
           let index =
             response &&
             response.data.filter(data => {
-              if (data.code === settings.default_language[0].code) {
+              if (data.code === settings.default_language.code) {
                 return { code: data.code, name: data.language, id: data.id }
               }
             })
@@ -313,7 +310,7 @@ const Header = () => {
         <div className='navbar_content'>
           <div id='News-logo' className='News-logo'>
             <Link href='/' activeclassname='active' exact='true'>
-              <img id='NewsLogo' src={websettings && websettings.web_header_logo} alt='logo' />
+              <img id='NewsLogo' src={settings && settings.web_setting.web_header_logo} alt='logo' />
             </Link>
           </div>
 

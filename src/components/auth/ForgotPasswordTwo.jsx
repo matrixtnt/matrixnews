@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import { translate } from '../../utils'
 import { useSelector } from 'react-redux'
-import { webSettingsData } from '../../store/reducers/websettingsReducer'
+import { settingsData } from '../../store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
 
 const ForgotPasswordTwo = props => {
@@ -18,7 +18,7 @@ const ForgotPasswordTwo = props => {
   )
   const [isSubmit, setIsSubmit] = useState(false)
 
-  const websettings = useSelector(webSettingsData)
+  const settings = useSelector(settingsData)
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -73,7 +73,7 @@ const ForgotPasswordTwo = props => {
           >
             <img className='ModalImg' id='ModalImg2' src={photo.src} alt='' />
             <div className='logo-img-overlay'>
-              <img id='NewsLogo' src={websettings && websettings.web_header_logo} alt='' />
+              <img id='NewsLogo' src={settings && settings.web_setting.web_header_logo} alt='' />
             </div>
           </div>
 
