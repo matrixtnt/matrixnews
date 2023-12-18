@@ -68,8 +68,8 @@ const Header = () => {
         user_id: user
       });
   
-      if (data && data.data && Array.isArray(data.data) && data.data.length > 0) {
-        const roles = data.data.map(elem => elem.role);
+      if (data && data.data) {
+        const roles = data.data.role;
         if (roles[0] !== '0') {
           setisuserRole(true);
         }
@@ -303,6 +303,7 @@ const Header = () => {
       ]
     })
   }
+
 
   return (
     <div className='Newsbar'>

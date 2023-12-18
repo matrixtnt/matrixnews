@@ -4,7 +4,7 @@
         <title>Your Blog name</title>
         <link>https://next-js-news-nu.vercel.app</link>
         <description>Your Blog description</description>
-        <lastBuildDate>Wed, 22 Nov 2023 08:08:16 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 11 Dec 2023 10:34:43 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -18,8 +18,17 @@
             <link>https://next-js-news-nu.vercel.app/blog/sample-blog-post-2</link>
             <guid>https://next-js-news-nu.vercel.app/blog/sample-blog-post-2</guid>
             <pubDate>Sun, 19 Feb 2023 18:30:00 GMT</pubDate>
-            <description><![CDATA[This is the second sample blog post.]]></description>
-            <content:encoded><![CDATA[This is the second sample blog post.]]></content:encoded>
+            <description><![CDATA[This is the second sample blog post]]></description>
+            <content:encoded><![CDATA[This is the second sample blog postt.]]></content:encoded>
+            <author>example@gmail.com (John Doe)</author>
+        </item>
+        <item>
+            <title><![CDATA[Sample Blog Post 3]]></title>
+            <link>https://next-js-news-nu.vercel.app/blog/sample-blog-post-3</link>
+            <guid>https://next-js-news-nu.vercel.app/blog/sample-blog-post-3</guid>
+            <pubDate>Sun, 19 Feb 2023 18:30:00 GMT</pubDate>
+            <description><![CDATA[This is the 3 sample blog post]]></description>
+            <content:encoded><![CDATA[This is the 3 sample blog postt.]]></content:encoded>
             <author>example@gmail.com (John Doe)</author>
         </item>
         <item>
@@ -27,8 +36,8 @@
             <link>https://next-js-news-nu.vercel.app/blog/sample-blog-post-1</link>
             <guid>https://next-js-news-nu.vercel.app/blog/sample-blog-post-1</guid>
             <pubDate>Sat, 14 Jan 2023 18:30:00 GMT</pubDate>
-            <description><![CDATA[This is the first sample blog post.]]></description>
-            <content:encoded><![CDATA[This is the first sample blog post.]]></content:encoded>
+            <description><![CDATA[This is the first sample blog post]]></description>
+            <content:encoded><![CDATA[This is the first sample blog postt.]]></content:encoded>
             <author>example@gmail.com (John Doe)</author>
         </item>
     </channel>
