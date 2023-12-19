@@ -40,7 +40,7 @@ const api = ({ dispatch, getState }) => next => async action => {
     try {
         // API Call
         const response = await axios.request({
-            baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/`,
+            baseURL: `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/`,
             url,
             method,
             data,
