@@ -6,14 +6,14 @@ export const getFeatureSectionApi = {
     const { access_key, section_id, language_id, user_id, offset, limit, latitude, longitude } = requestData
     return Api.get(GET_FEATURE_SECTION_ID, {
       params: {
-      access_key,
-      section_id,
-      language_id,
-      user_id,
-      offset,
-      limit,
-      latitude,
-      longitude
+        access_key,
+        section_id,
+        language_id,
+        user_id,
+        offset,
+        limit,
+        latitude,
+        longitude
       }
     })
   },
@@ -21,13 +21,13 @@ export const getFeatureSectionApi = {
     const { access_key, language_id, user_id, offset, limit, latitude, longitude } = requestData
     return Api.get(GET_FEATURE_SECTION, {
       params: {
-      access_key,
-      language_id,
-      user_id,
-      offset,
-      limit,
-      latitude,
-      longitude
+        access_key,
+        language_id,
+        user_id,
+        offset,
+        limit,
+        latitude,
+        longitude
       }
     })
   }

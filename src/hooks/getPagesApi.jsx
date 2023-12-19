@@ -6,8 +6,8 @@ export const getpagesApi = {
     const { access_key, language_id } = requestData
     return Api.get(GET_PAGES, {
       params: {
-      access_key,
-      language_id
+        access_key,
+        language_id
       }
     })
   }

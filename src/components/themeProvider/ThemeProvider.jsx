@@ -1,19 +1,23 @@
-'use client'
-
-import { useQuery } from '@tanstack/react-query'
+"use client"
+import React, { useEffect } from 'react';
 
 const ThemeProvider = ({ children }) => {
-  // change color loader and theme
-  const changeColors = () => {
-    document.documentElement.style.setProperty('--loader-color', process.env.NEXT_PUBLIC_COLOR)
-    document.documentElement.style.setProperty('--secondary-color', process.env.NEXT_PUBLIC_SECONDARY_COLOR)
-  }
+  useEffect(() => {
+    const changeColors = () => {
+      // Replace process.env with hardcoded values for illustration purposes
+      // Replace these with your actual environment variable usage
+      const loaderColor = process.env.NEXT_PUBLIC_COLOR; // process.env.NEXT_PUBLIC_COLOR
+      const secondaryColor = process.env.NEXT_PUBLIC_SECONDARY_COLOR; // process.env.NEXT_PUBLIC_SECONDARY_COLOR
 
-  const {} = useQuery({
-    queryKey: ['colors'],
-    queryFn: changeColors
-  })
-  return <div>{children}</div>
-}
+      document.documentElement.style.setProperty('--loader-color', loaderColor)
+      document.documentElement.style.setProperty('--secondary-color', secondaryColor)
+    };
 
-export default ThemeProvider
+    changeColors(); // Call the function when the component mounts or updates
+  }, []); // Empty dependency array ensures it only runs once when the component mounts
+
+  return <div>{children}</div>;
+};
+
+export default ThemeProvider;
+

@@ -58,7 +58,7 @@ const BreakingNews = () => {
         language_id: language_id
       })
 
-      return data.data
+      return data.data ?? null
     } catch (error) {
       console.log(error)
     }
@@ -73,7 +73,7 @@ const BreakingNews = () => {
         breaking_news_id: BNid
       })
 
-      return data.data
+      return data.data ?? null
     } catch (error) {
       console.log(error)
     }
@@ -86,8 +86,7 @@ const BreakingNews = () => {
         access_key: access_key,
         language_id: language_id
       })
-
-      return data.data
+      return data.data ?? null
     } catch (error) {
       console.log(error)
     }
@@ -96,7 +95,8 @@ const BreakingNews = () => {
   // react query
   const { isLoading, data } = useQuery({
     queryKey: ['breakingNewsById', access_key, BNid, user, language_id,currentLanguage],
-    queryFn: getBreakingNewsIdApi
+    queryFn: getBreakingNewsIdApi,
+    
   })
 
   const {} = useQuery({

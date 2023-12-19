@@ -18,7 +18,7 @@ export const bookmarkApi = {
     return Api.post(SET_BOOKMARK, {
       access_key,
       news_id,
-      status  //1-bookmark, 0-unbookmark
+      status //1-bookmark, 0-unbookmark
     })
-  },
+  }
 }

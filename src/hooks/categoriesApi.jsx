@@ -6,10 +6,10 @@ export const CategoriesApi = {
     const { access_key, offset, limit, language_id } = requestData
     return Api.get(GET_CATEGORIES, {
       params: {
-      access_key,
-      offset,
-      limit,
-      language_id
+        access_key,
+        offset,
+        limit,
+        language_id
       }
     })
   },
@@ -18,15 +18,15 @@ export const CategoriesApi = {
       requestData
     return Api.get(GET_NEWS_BY_CATEGORY, {
       params: {
-      access_key: access_key,
-      category_id,
-      subcategory_id,
-      offset,
-      limit,
-      user_id,
-      language_id,
-      latitude,
-      longitude
+        access_key: access_key,
+        category_id,
+        subcategory_id,
+        offset,
+        limit,
+        user_id,
+        language_id,
+        latitude,
+        longitude
       }
     })
   }

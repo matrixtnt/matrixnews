@@ -16,15 +16,15 @@ export const getNewsApi = {
     } = requestData
     return Api.get(GET_NEWS, {
       params: {
-      access_key,
-      offset,
-      limit,
-      user_id,
-      get_user_news,
-      search, // {optional}
-      language_id,
-      latitude,
-      longitude
+        access_key,
+        offset,
+        limit,
+        user_id,
+        get_user_news,
+        search, // {optional}
+        language_id,
+        latitude,
+        longitude
       }
     })
   },
@@ -32,10 +32,10 @@ export const getNewsApi = {
     const { access_key, news_id, user_id, language_id } = requestData
     return Api.get(GET_NEWS_BY_ID, {
       params: {
-      access_key,
-      news_id,
-      user_id,
-      language_id
+        access_key,
+        news_id,
+        user_id,
+        language_id
       }
     })
   },
@@ -44,7 +44,7 @@ export const getNewsApi = {
     return Api.post(SET_NEWS_VIEW, {
       access_key,
       user_id,
-      news_id,
+      news_id
     })
   }
 }
