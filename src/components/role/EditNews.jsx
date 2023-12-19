@@ -777,7 +777,7 @@ const EditNews = () => {
                     </div>
                     <div className='image_slider'>
                       <Swiper {...swiperOption}>
-                        {DefaultValue.multipleImage.map((file, index) => (
+                        {DefaultValue?.multipleImage?.map((file, index) => (
                           <SwiperSlide key={index}>
                             <img src={file.other_image} alt={`Uploaded ${index}`} className='all_images' />
                             <button onClick={e => handleRemoveImage(e, file.id)} className='close-btn'>

@@ -25,8 +25,7 @@ const UserBasedCategories = () => {
       response => {
         const useridData = response.data
         // user categories
-        const alluserIds = useridData.map(elem => elem.category_id)
-
+        const alluserIds = useridData.user_category.map(category => category.category_id);
         // common id get
         const CommanID = []
         for (let i = 0; i < alluserIds.length; i++) {
