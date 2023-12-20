@@ -35,15 +35,15 @@ const ViewAll = () => {
 
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  const getFeatureSectionById = async () => {
+  const getFeatureSection = async () => {
     try {
-      const { data } = await getFeatureSectionApi.getFeatureSectionById({
+      const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
         section_id: catid,
         language_id: language_id,
-        user_id: user,
         offset: '',
         limit: '10',
+        slug:catid,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -55,8 +55,8 @@ const ViewAll = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['viewallFeaturebyid', catid, currentLanguage,location],
-    queryFn: getFeatureSectionById
+    queryKey: ['viewallFeaturebyslug', catid, currentLanguage,location],
+    queryFn: getFeatureSection
   })
 
   // slice the array to get the current posts
@@ -88,7 +88,7 @@ const ViewAll = () => {
                   {currentData ? (
                     currentData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={`/news/${element.id}`}>
+                        <Link id='Link-all' href={`/news/${element.slug}`}>
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'
@@ -126,7 +126,6 @@ const ViewAll = () => {
           </div>
         </>
       ) : null}
-      ;
       {Data && Data[0]?.breaking_news ? (
         <>
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
@@ -145,7 +144,7 @@ const ViewAll = () => {
                   {currentData ? (
                     currentData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={`/breaking-news/${element.id}`}>
+                        <Link id='Link-all' href={`/breaking-news/${element.slug}`}>
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'
@@ -183,7 +182,6 @@ const ViewAll = () => {
           </div>
         </>
       ) : null}
-      ;
     </Layout>
   )
 }

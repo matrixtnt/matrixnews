@@ -49,7 +49,7 @@ const StyleTwo = ({ Data }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='hns-Viewmore' href={`/video-news-view/${Data.id}`} onClick={() => scrollToTop()}>
+                <Link id='hns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -186,7 +186,7 @@ const StyleTwo = ({ Data }) => {
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
 
-                <Link id='hns-Viewmore' href={`/view-all/${Data.id}`} onClick={() => scrollToTop()}>
+                <Link id='hns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -292,7 +292,7 @@ const StyleTwo = ({ Data }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='hns-Viewmore' href={`/view-all/${Data.id}`} onClick={() => scrollToTop()}>
+                <Link id='hns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -302,7 +302,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[0] ? (
                   <div
                     className='video_first_top card card_hover'
-                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[0].id}`)}
+                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[0].slug}`)}
                   >
                     <img
                       src={Data.breaking_news[0] && Data.breaking_news[0].image}
@@ -319,7 +319,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[1] ? (
                   <div
                     className='video_seond_top card card_hover'
-                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[1].id}`)}
+                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[1].slug}`)}
                   >
                     <img
                       src={Data.breaking_news[1] && Data.breaking_news[1].image}
@@ -337,7 +337,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[2] ? (
                   <div
                     className='video_center card card_hover'
-                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[2].id}`)}
+                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[2].slug}`)}
                   >
                     <img
                       src={Data.breaking_news[2] && Data.breaking_news[2].image}
@@ -355,7 +355,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[3] ? (
                   <div
                     className='video_top_right card card_hover'
-                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[3].id}`)}
+                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[3].slug}`)}
                   >
                     <img
                       src={Data.breaking_news[3] && Data.breaking_news[3].image}
@@ -372,7 +372,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[4] ? (
                   <div
                     className='video_bottom_right card card_hover'
-                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[4].id}`)}
+                    onClick={() => navigate.push(`/breaking-news/${Data.breaking_news[4].slug}`)}
                   >
                     <img
                       src={Data.breaking_news[4] && Data.breaking_news[4].image}

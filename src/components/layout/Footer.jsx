@@ -66,7 +66,7 @@ const Footer = () => {
                   {Data.map((element, index) => {
                     return (
                       <li key={index}>
-                        <Link href={`/categories-news/${element.id}`} onClick={scrollToTop}>
+                        <Link href={`/categories-news/${element.slug}`} onClick={scrollToTop}>
                           {element.category_name}{' '}
                         </Link>
                       </li>

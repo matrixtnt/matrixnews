@@ -146,7 +146,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       id='btnbnsViewAll'
                       className='btn'
                       type='button'
-                      href={`/video-news-view/${Data.id}`}
+                      href={`/video-news-view/${Data.slug}`}
                       onClick={() => scrollToTop()}
                     >
                       {translate('viewall')}
@@ -248,7 +248,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       id='btnbnsViewAll'
                       className='btn'
                       type='button'
-                      href={`/view-all/${Data.id}`}
+                      href={`/view-all/${Data.slug}`}
                       onClick={() => scrollToTop()}
                     >
                       {translate('viewall')}
@@ -268,7 +268,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       Data.news.map(element => (
                         <SwiperSlide key={element.id}>
                           <div id='bns-card' className='card' key={element.id}>
-                            <Link id='Link-all' href={`/news/${element.id}`}>
+                            <Link id='Link-all' href={`/news/${element.slug}`}>
                               <img
                                 id='bns-image'
                                 src={element.image}
@@ -281,7 +281,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                   id='btnbnsCatagory'
                                   className='btn btn-sm'
                                   type='button'
-                                  href={`/news/${element.id}`}
+                                  href={`/news/${element.slug}`}
                                 >
                                   {truncateText(element.category_name, 10)}
                                 </Link>
@@ -338,7 +338,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       id='btnbnsViewAll'
                       className='btn'
                       type='button'
-                      href={`/view-all/${Data.id}`}
+                      href={`/view-all/${Data.slug}`}
                       onClick={() => scrollToTop()}
                     >
                       {translate('viewall')}
@@ -358,7 +358,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       Data.breaking_news.map(element => (
                         <SwiperSlide key={element.id}>
                           <div id='bns-card' className='card' key={element.id}>
-                            <Link id='Link-all' href={`/breaking-news/${element.id}`}>
+                            <Link id='Link-all' href={`/breaking-news/${element.slug}`}>
                               <img
                                 id='bns-image'
                                 src={element.image}

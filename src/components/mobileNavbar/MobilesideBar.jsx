@@ -286,7 +286,7 @@ const MobilesideBar = ({
                         <Link
                           id='catNav-links'
                           key={index}
-                          href={`/categories-news/${element.id}`}
+                          href={`/categories-news/${element.slug}`}
                           onClick={handleClose}
                         >
                           {' '}

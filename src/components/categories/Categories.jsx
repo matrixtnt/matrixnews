@@ -57,7 +57,7 @@ const Categories = () => {
             {data &&
               data.map(element => (
                 <div className='col-md-4 col-12 mb-4'>
-                  <Link id='cat-section-card' key={element.id} className='card' href={`/categories-news/${element.id}`}>
+                  <Link id='cat-section-card' key={element.id} className='card' href={`/categories-news/${element.slug}`}>
                     <img id='cat-section-card-image' src={element.image} className='card-img' alt='...' />
                     <div id='cat-section-card-body' className='card-img-overlay'>
                       <h5 id='cat-card-text' className='card-text mb-0'>

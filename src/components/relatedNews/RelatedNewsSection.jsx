@@ -61,7 +61,7 @@ const RelatedNewsSection = props => {
           </div>
           {Data &&
             Data.map(element => (
-              <Link id='Link-all' href={`/news/${element.id}`} key={element.id}>
+              <Link id='Link-all' href={`/news/${element.slug}`} key={element.id}>
                 <div id='RNews-card' className='card' onClick={() => scrollToTop()}>
                   <img id='RNews-image' src={element.image} className='card-img-top' alt='...' />
                   <div id='RNews-card-body' className='RNews-card-body'>

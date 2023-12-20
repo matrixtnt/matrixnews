@@ -48,7 +48,7 @@ const StyleThree = ({ Data }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/video-news-view/${Data.id}`}>
+                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/video-news-view/${Data.slug}`}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -178,7 +178,7 @@ const StyleThree = ({ Data }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/view-all/${Data.id}`}>
+                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/view-all/${Data.slug}`}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -187,7 +187,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-left'>
                   {Data.news[0] ? (
-                    <Link href={`/news/${Data.news[0].id}`}>
+                    <Link href={`/news/${Data.news[0].slug}`}>
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img id='vps-main-image' src={Data.news[0].image} alt='news' onError={placeholderImage} />
                       </Card>
@@ -202,7 +202,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-right'>
                   {Data.news[1] ? (
-                    <Link href={`/news/${Data.news[1].id}`}>
+                    <Link href={`/news/${Data.news[1].slug}`}>
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -223,7 +223,7 @@ const StyleThree = ({ Data }) => {
                   ) : null}
 
                   {Data.news[2] ? (
-                    <Link href={`/news/${Data.news[2].id}`}>
+                    <Link href={`/news/${Data.news[2].slug}`}>
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -272,7 +272,7 @@ const StyleThree = ({ Data }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/view-all/${Data.id}`}>
+                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/view-all/${Data.slug}`}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -281,7 +281,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-left'>
                   {Data.breaking_news[0] ? (
-                    <Link href={`/breaking-news/${Data.breaking_news[0].id}`}>
+                    <Link href={`/breaking-news/${Data.breaking_news[0].slug}`}>
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img
                           id='vps-main-image'
@@ -300,7 +300,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-right'>
                   {Data.breaking_news[1] ? (
-                    <Link href={`/breaking-news/${Data.breaking_news[1].id}`}>
+                    <Link href={`/breaking-news/${Data.breaking_news[1].slug}`}>
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -318,7 +318,7 @@ const StyleThree = ({ Data }) => {
                   ) : null}
 
                   {Data.breaking_news[2] ? (
-                    <Link href={`/breaking-news/${Data.breaking_news[2].id}`}>
+                    <Link href={`/breaking-news/${Data.breaking_news[2].slug}`}>
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
                           id='vps-secondry-images'

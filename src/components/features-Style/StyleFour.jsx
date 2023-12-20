@@ -51,7 +51,7 @@ const StyleFour = ({ Data }) => {
                     <div className='short_desc'>{Data && Data.short_description}</div>
                   </div>
 
-                  <Link id='rns-Viewmore' href={`/video-news-view/${Data.id}`} onClick={() => scrollToTop()}>
+                  <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
                     {translate('viewMore')}
                   </Link>
                 </div>
@@ -131,7 +131,7 @@ const StyleFour = ({ Data }) => {
                     <div className='short_desc'>{Data && Data.short_description}</div>
                   </div>
 
-                  <Link id='rns-Viewmore' href={`/view-all/${Data.id}`} onClick={() => scrollToTop()}>
+                  <Link id='rns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
                     {translate('viewMore')}
                   </Link>
                 </div>
@@ -140,7 +140,7 @@ const StyleFour = ({ Data }) => {
                   {Data.news.map((value, index) => {
                     return (
                       <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'>
-                        <Link id='rns-card' className='card card_hover_two' key={index.id} href={`/news/${value.id}`}>
+                        <Link id='rns-card' className='card card_hover_two' key={index.id} href={`/news/${value.slug}`}>
                           <div className='banner_thumb'>
                             <img
                               id='rns-image'
@@ -197,7 +197,7 @@ const StyleFour = ({ Data }) => {
                     </h4>
                     <div className='short_desc'>{Data && Data.short_description}</div>
                   </div>
-                  <Link id='rns-Viewmore' href={`/view-all/${Data.id}`} onClick={() => scrollToTop()}>
+                  <Link id='rns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
                     {translate('viewMore')}
                   </Link>
                 </div>
@@ -210,7 +210,7 @@ const StyleFour = ({ Data }) => {
                           id='rns-card'
                           className='card card_hover_two'
                           key={index.id}
-                          href={`/breaking-news/${value.id}`}
+                          href={`/breaking-news/${value.slug}`}
                         >
                           <div className='banner_thumb'>
                             <img

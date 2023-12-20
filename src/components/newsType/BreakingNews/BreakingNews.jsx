@@ -48,14 +48,14 @@ const BreakingNews = () => {
     window.scrollTo(0, 0)
   }, [])
 
+  // console.log(query);
   // api call
   const getBreakingNewsIdApi = async () => {
     try {
-      const { data } = await AllBreakingNewsApi.getBreakingNewsId({
-        access_key: access_key,
-        breaking_news_id: BNid,
-        user_id: user,
-        language_id: language_id
+      const { data } = await AllBreakingNewsApi.getBreakingNews({
+        language_id:language_id,
+        access_key:access_key,
+        slug:query.slug,
       })
 
       return data.data ?? null

@@ -123,7 +123,7 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={`/news/${item.id}`}>
+                    <Link href={`/news/${item.slug}`}>
                       <div className='card fs-Newscard'>
                         <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
@@ -132,7 +132,7 @@ const StyleSix = ({ isLoading, Data }) => {
                               id='btnCatagory'
                               className='btn'
                               type='button'
-                              href={`/categories-news/${item.category_id}`}
+                              href={`/categories-news/${item.slug}`}
                             >
                               {truncateText(item.category_name, 25)}
                             </Link>
@@ -162,7 +162,7 @@ const StyleSix = ({ isLoading, Data }) => {
                                 </p>
                               ) : null}
 
-                              <Link href={`/news/${item.id}`} id='Top-Title01'>
+                              <Link href={`/news/${item.slug}`} id='Top-Title01'>
                                 {truncateText(item.title, 30)} <br />
                                 {stripHtmlTags(item.description.slice(0, 600))} ...
                               </Link>
@@ -212,7 +212,7 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={`/news/${item.id}`}>
+                    <Link href={`/news/${item.slug}`}>
                       <div className='card fs-Newscard'>
                         <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
@@ -220,7 +220,7 @@ const StyleSix = ({ isLoading, Data }) => {
                             id='btnCatagory'
                             className='btn'
                             type='button'
-                            href={`/categories-news/${item.category_id}`}
+                            href={`/categories-news/${item.slug}`}
                           >
                             {truncateText(item.category_name, 25)}
                           </Link>
@@ -234,7 +234,7 @@ const StyleSix = ({ isLoading, Data }) => {
                                   })
                                 : ''}
                             </p>
-                            <Link href={`/news/${item.id}`} id='Top-Title01'>
+                            <Link href={`/news/${item.slug}`} id='Top-Title01'>
                               {truncateText(item.title, 30)}
                             </Link>
                           </div>
@@ -282,7 +282,7 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].breaking_news.map(item => (
                   <SwiperSlide key={item.id}>
-                    {/* <Link href={item.content_value ? '#' : `/breaking-news/${item.id}`}> */}
+                    {/* <Link href={item.content_value ? '#' : `/breaking-news/${item.slug}`}> */}
                     <div className='card fs-Newscard'>
                       <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                       <div className='card-img-overlay'>
@@ -298,7 +298,7 @@ const StyleSix = ({ isLoading, Data }) => {
                           </div>
                         ) : null}
                         <div id='Top-Deatils'>
-                          <Link href={`/breaking-news/${item.id}`} id='Top-Title01'>
+                          <Link href={`/breaking-news/${item.slug}`} id='Top-Title01'>
                             {truncateText(item.title, 30)}
                             {stripHtmlTags(item.description.slice(0, 600))} ...
                           </Link>

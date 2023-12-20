@@ -68,7 +68,7 @@ const TagNewsview = () => {
                 {Data &&
                   Data.map(element => (
                     <div className='col-md-4 col-12' key={element.id}>
-                      <Link id='Link-all' href={`/news/${element.id}`}>
+                      <Link id='Link-all' href={`/news/${element.slug}`}>
                         <div id='ts-card' className='card'>
                           <img id='ts-card-image' src={element.image} className='card-img' alt='...' />
 

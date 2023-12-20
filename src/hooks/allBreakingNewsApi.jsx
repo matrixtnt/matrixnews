@@ -3,11 +3,12 @@ import { GET_BREAKING_NEWS, GET_BREAKING_NEWS_ID, SET_BREAKING_NEWS_VIEW } from 
 
 export const AllBreakingNewsApi = {
   getBreakingNews: requestData => {
-    const { language_id, access_key } = requestData
+    const { language_id, access_key,slug } = requestData
     return Api.get(GET_BREAKING_NEWS, {
       params: {
         language_id,
-        access_key
+        access_key,
+        slug
       }
     })
   },
