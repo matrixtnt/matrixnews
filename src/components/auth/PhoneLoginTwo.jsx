@@ -2,7 +2,6 @@ import photo from "../../../public/assets/images/Login.jpg";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import React, { useState } from "react";
-import validator from "validator";
 import Modal from "react-bootstrap/Modal";
 import { translate } from "../../utils";
 import { useSelector } from "react-redux";
@@ -25,10 +24,23 @@ const PhoneLoginTwo = (props) => {
 
     const settings = useSelector(settingsData)
 
+    // Load the libphonenumber library
+    const phoneUtil = require("google-libphonenumber").PhoneNumberUtil.getInstance();
+
+    // Validate a phone number
+    const validatePhoneNumber = (phone_number) => {
+        try {
+            const parsedNumber = phoneUtil.parse(phone_number);
+            return phoneUtil.isValidNumber(parsedNumber);
+        } catch (err) {
+            return false;
+        }
+    };
+
     const handleGetOtp = () => {
         if (value === undefined) {
             setError("Please enter phone number!");
-        } else if (validator.isMobilePhone(value)) {
+        } else if (validatePhoneNumber(value)) {
             setPhonenum(value);
             setPhoneOTPModalShow(true);
         } else {

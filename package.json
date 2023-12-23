@@ -29,6 +29,7 @@
     "feed": "^4.2.2",
     "firebase": "9.15.0",
     "globby": "11.0.1",
+    "google-libphonenumber": "^3.2.33",
     "hls.js": "^1.4.12",
     "moment": "^2.29.4",
     "next": "14.0.3",

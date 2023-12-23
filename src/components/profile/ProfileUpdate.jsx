@@ -93,6 +93,19 @@ const ProfileUpdate = () => {
     }
   }
 
+  // Load the libphonenumber library
+  const phoneUtil = require("google-libphonenumber").PhoneNumberUtil.getInstance();
+
+  // Validate a phone number
+  const validatePhoneNumber = (phone_number) => {
+      try {
+          const parsedNumber = phoneUtil.parse(phone_number);
+          return phoneUtil.isValidNumber(parsedNumber);
+      } catch (err) {
+          return false;
+      }
+  };
+
   // validate
   const validateNumber = e => {
     const enteredValue = e.target.value
@@ -107,7 +120,7 @@ const ProfileUpdate = () => {
       setProfileData(prevState => ({ ...prevState, mobile: enteredValue }))
 
       // Validate mobile if the entered value is not empty
-      setIsMobileValid(validator.isMobilePhone(enteredValue)) // Set the mobile number validity flag
+      setIsMobileValid(validatePhoneNumber(enteredValue)) // Set the mobile number validity flag
     }
   }
 
