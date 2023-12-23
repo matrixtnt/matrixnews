@@ -37,70 +37,74 @@ const CommentsView = props => {
   // set comment
   const setCommentData = (e, id) => {
     e.preventDefault()
-    setcommentApi(
-      id,
-      Nid,
-      Comment,
-      response => {
+    setcommentApi({
+      parent_id:id,
+      news_id:Nid,
+      message:Comment,
+      onSuccess:response => {
         setLoadComments(true)
         setTimeout(() => {
           setLoadComments(false)
         }, 1000)
       },
-      error => {
+      onError:error => {
         console.log(error)
       }
+    }
     )
   }
 
   // set replay comment
   const setreplyComment = (e, id) => {
     e.preventDefault()
-    setcommentApi(
-      id,
-      Nid,
-      Comment,
-      response => {
+    setcommentApi({
+      parent_id:id,
+      news_id:Nid,
+      message:Comment,
+      onSuccess:response => {
         setLoadComments(true)
         setTimeout(() => {
           setLoadComments(false)
         }, 1000)
       },
-      error => {
+      onError:error => {
         console.log(error)
       }
+    }
     )
   }
 
   // like button
   const LikeButton = (e, elem) => {
     e.preventDefault()
-    setCommentLikeDislikeApi(
-      elem.id,
-      elem.like === '1' ? '0' : '1',
-      res => {
+    setCommentLikeDislikeApi({
+      comment_id:elem.id,
+      status:elem.like === '1' ? '0' : '1',
+      onSuccess:res => {
         // console.log(res);
         setRefreshKey(prevKey => prevKey + 1)
       },
-      err => {
+      onError:err => {
         console.log(err)
       }
+    }
     )
   }
 
   // dislike
   const dislikebutton = (e, elem) => {
     e.preventDefault()
-    setCommentLikeDislikeApi(
-      elem.id,
-      elem.dislike === '1' ? '0' : '2',
-      res => {
+    setCommentLikeDislikeApi({
+      comment_id:elem.id,
+      status:elem.dislike === '1' ? '0' : '2',
+      onSuccess:res => {
         // console.log(res);
         setRefreshKey(prevKey => prevKey + 1)
       },
-      err => {
+      onError:err => {
         console.log(err)
       }
+    }
     )
   }
 
@@ -118,17 +122,18 @@ const CommentsView = props => {
 
   const deleteComment = e => {
     e.preventDefault()
-    deletecommentApi(
-      CommentID,
-      res => {
+    deletecommentApi({
+      comment_id:CommentID,
+      onSuccess:res => {
         setLoadComments(true)
         setRefreshKey(prevKey => prevKey + 1)
         setModalOpen(false)
         toast.success(translate('comDelSucc'))
       },
-      err => {
+      onError:err => {
         console.log(err)
       }
+    }
     )
   }
 

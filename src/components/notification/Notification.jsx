@@ -57,9 +57,9 @@ const Notification = () => {
 
   const handleDeleteComment = (e, id) => {
     e.preventDefault()
-    deleteusernotificationApi(
-      id,
-      response => {
+    deleteusernotificationApi({
+      id:id,
+      onSuccess:response => {
         // Remove the deleted notification from the state
         setData(prevData => prevData.filter(notification => notification.id !== id))
         toast.success(response.message)
@@ -70,11 +70,12 @@ const Notification = () => {
           () => {}
         )
       },
-      error => {
+      onError:error => {
         if (error === 'No Data Found') {
           setData('')
         }
       }
+    }
     )
   }
 

@@ -70,16 +70,17 @@ const ManageNews = () => {
   }
 
   const deleteNews = data => {
-    deleteNewsApi(
-      data.id,
-      res => {
+    deleteNewsApi({
+      news_id:data.id,
+      onSuccess:res => {
         toast.success(res.message)
         const updatedData = Data.filter(item => item.id !== data.id)
         setData(updatedData)
       },
-      err => {
+      onError:err => {
         toast.error(err.message)
       }
+    }
     )
   }
 

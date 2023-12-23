@@ -20,8 +20,8 @@ const UserBasedCategories = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
   // get user by id
   useEffect(() => {
-    getuserbyidApi(
-      response => {
+    getuserbyidApi({
+      onSuccess:response => {
         const useridData = response.data
         // user categories
         const alluserIds = useridData.user_category.map(category => category.category_id);
@@ -35,11 +35,11 @@ const UserBasedCategories = () => {
         }
 
         // category api call
-        categoriesApi(
-          offsetdata.toString(),
-          limit.toString(),
-          currentLanguage.id,
-          response => {
+        categoriesApi({
+          offset:offsetdata.toString(),
+          limit:limit.toString(),
+          language_id:currentLanguage.id,
+          onSuccess:response => {
             setTotalLength(response.total)
             const toggledData = response.data.map(element => {
               // here set isToggleOn has boolean with actual data
@@ -49,17 +49,19 @@ const UserBasedCategories = () => {
             setData(toggledData)
             setLoading(false)
           },
-          error => {
+          onError:error => {
             if (error === 'No Data Found') {
               setData('')
               setLoading(false)
             }
           }
+        }
         )
       },
-      error => {
+      onError:error => {
         console.error(error)
       }
+    }
     )
   }, [offsetdata, currentLanguage])
 
@@ -85,14 +87,15 @@ const UserBasedCategories = () => {
   // here final submit button
   const finalSubmit = e => {
     e.preventDefault()
-    setusercategoriesApi(
-      finalToggleID,
-      response => {
+    setusercategoriesApi({
+      category_id:finalToggleID,
+      onSuccess:response => {
         toast.success(response.message)
       },
-      error => {
+      onError:error => {
         toast.error(error)
       }
+    }
     )
   }
 

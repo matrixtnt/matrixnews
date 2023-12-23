@@ -151,16 +151,17 @@ const News = () => {
   // set like dislike
   const setLikeDislikeData = (id, status) => {
     if (user !== null) {
-      setlikedislikeApi(
-        id,
-        status,
-        response => {
+      setlikedislikeApi({
+        news_id:id,
+        status:status,
+        onSuccess:response => {
           refetch()
           setLike(!Like)
         },
-        error => {
+        onError:error => {
           console.log(error)
         }
+      }
       )
     } else {
       setModalShow(true)
@@ -170,17 +171,17 @@ const News = () => {
   // set bookmark
   const setbookmarkData = (newsid, status) => {
     if (user !== null) {
-      setbookmarkApi(
-        newsid,
-        status,
-        response => {
+      setbookmarkApi({
+        news_id:newsid,
+        status:status,
+        onStart:response => {
           refetch()
           setBookmark(!Bookmark)
         },
-        error => {
+        onError:error => {
           console.log(error)
         }
-      )
+    })
     } else {
       setModalShow(true)
     }

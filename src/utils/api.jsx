@@ -94,99 +94,6 @@ export const getCategoriesApi = (offset, limit, language_id) => {
     };
 };
 
-// 3. get breaking news
-export const getBreakingNewsApi = () => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_BREAKING_NEWS}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
-// 4. get news
-export const getNewsApi = (offset, limit, get_user_news, search, latitude, longitude) => {
-    let { id: language_id } = getLanguage();
-    let user = getUser();
-    let data = new FormData();
-    data.append("access_key", access_key);
-    data.append("language_id", language_id);
-    data.append("user_id", user);
-    data.append("offset", offset);
-    data.append("limit", limit);
-    data.append("get_user_news", get_user_news);
-    data.append("search", search);
-    if (latitude != null) data.append("latitude", latitude);
-    if (longitude != null) data.append("longitude", longitude);
-
-    return {
-        url: `${GET_NEWS}`,
-        method: "GET",
-        data,
-        authorizationHeader: true,
-    };
-};
-
-// 5. get video
-export const getVideoApi = () => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_VIDEO}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-        },
-        authorizationHeader: false,
-    };
-};
-
-// 6. get tag
-export const getTagApi = () => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_TAG}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
-//7. get pages
-export const getPagesApi = () => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_PAGES}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-        },
-        authorizationHeader: false,
-    };
-};
-
-//8. get live streaming
-export const getLiveStreamingApi = () => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_LIVE_STREAMING}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
 //9. user signup
 export const userSignUpApi = (firebase_id, name, email, mobile, type, profile, status, fcm_id) => {
     return {
@@ -220,22 +127,6 @@ export const getLanguageJsonDataApi = (code) => {
     };
 };
 
-//11. get bookmark
-export const getBookmarkApi = (offset, limit) => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_BOOKMARK}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-            offset: offset,
-            limit: limit,
-        },
-        authorizationHeader: true,
-    };
-};
-
 //12. set bookmark
 export const setBookmarkApi = (news_id, status) => {
     let user = getUser();
@@ -266,23 +157,6 @@ export const setCommentApi = (parent_id, news_id, message) => {
             news_id: news_id,
             message: message,
             language_id: language_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
-// 14. get comment
-export const getCommentByNewsApi = (news_id, offset, limit) => {
-    let user = getUser();
-    return {
-        url: `${GET_COMMENT_BY_NEWS}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            user_id: user,
-            news_id: news_id,
-            offset: offset,
-            limit: limit,
         },
         authorizationHeader: true,
     };
@@ -364,24 +238,6 @@ export const DeleteUserNotificationApi = (id) => {
     };
 };
 
-//20. get feature sections
-export const getFeatureSectionApi = (offset, limit, latitude, longitude) => {
-    let { id: language_id } = getLanguage();
-    let data = new FormData();
-    data.append("access_key", access_key);
-    data.append("language_id", language_id);
-    data.append("offset", offset);
-    data.append("limit", limit);
-    if (latitude != null) data.append("latitude", latitude);
-    if (longitude != null) data.append("longitude", longitude);
-    return {
-        url: `${GET_FEATURE_SECTION}`,
-        method: "GET",
-        data,
-        authorizationHeader: false,
-    };
-};
-
 // 21. set user categories
 export const setUserCategoriesApi = (category_id) => {
     let user = getUser();
@@ -392,25 +248,6 @@ export const setUserCategoriesApi = (category_id) => {
             access_key: access_key,
             user_id: user,
             category_id: category_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
-// 22. get user categories
-export const getUserCategoriesApi = (category_id, offset, limit) => {
-    let user = getUser();
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_USER_CATEGORIES}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            user_id: user,
-            category_id: category_id,
-            offset: offset,
-            limit: limit,
-            language_id: language_id,
         },
         authorizationHeader: true,
     };
@@ -428,36 +265,6 @@ export const getUserByIdApi = () => {
     };
 };
 
-// 24. set news view
-export const setNewsViewApi = (news_id) => {
-    let user = getUser();
-    return {
-        url: `${SET_NEWS_VIEW}`,
-        method: "POST",
-        data: {
-            access_key: access_key,
-            user_id: user,
-            news_id: news_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
-// 25. set breaking news view
-export const setBreakingNewsViewApi = (breaking_news_id) => {
-    let user = getUser();
-    return {
-        url: `${SET_BREAKING_NEWS_VIEW}`,
-        method: "POST",
-        data: {
-            access_key: access_key,
-            user_id: user,
-            breaking_news_id: breaking_news_id,
-        },
-        authorizationHeader: true,
-    };
-};
-
 // 26. get settings
 export const getSettingsApi = (type) => {
     return {
@@ -468,20 +275,6 @@ export const getSettingsApi = (type) => {
             type: type, //optional
         },
         authorizationHeader: false,
-    };
-};
-
-// 27. get ad space news details
-export const getAdsSpaceNewsDetailsApi = () => {
-    let { id: language_id } = getLanguage();
-    return {
-        url: `${GET_AD_SPACE_NEWS_DETAILS}`,
-        method: "GET",
-        params: {
-            access_key: access_key,
-            language_id: language_id,
-        },
-        authorizationHeader: true,
     };
 };
 

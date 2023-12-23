@@ -15,20 +15,21 @@ const CommentSection = props => {
       toast.error('please login first to comment')
       return
     }
-    setcommentApi(
-      '0',
-      Nid,
-      Comment,
-      response => {
+    setcommentApi({
+      parent_id:'0',
+      news_id:Nid,
+      message:Comment,
+      onSuccess:response => {
         setLoadComments(true)
         setComment('')
         setTimeout(() => {
           setLoadComments(false)
         }, 1000)
       },
-      error => {
+      onError:error => {
         console.log(error)
       }
+    }
     )
   }
 

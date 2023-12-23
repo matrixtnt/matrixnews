@@ -115,17 +115,18 @@ const EditNews = () => {
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
     setDefaultValue({ ...DefaultValue, categorydefault: option.label, categoryID: categoryID })
-    getSubcategoryByCategoryApi(
-      categoryID,
-      res => {
+    getSubcategoryByCategoryApi({
+      category_id:categoryID,
+      onSuccess:res => {
         setSubCategory(res.data)
         setShowsubCategory(true)
       },
-      err => {
+      onError:err => {
         if (err === 'No Data Found') {
           setShowsubCategory(false)
         }
       }
+    }
     )
   }
 
@@ -448,27 +449,28 @@ const EditNews = () => {
   // final submit data
   const finalSubmit = e => {
     e.preventDefault()
-    setNewsApi(
-      2,
-      DefaultValue.categoryID,
-      DefaultValue.subcategoryID,
-      DefaultValue.tagsid,
-      DefaultValue.defualTitle,
-      DefaultValue.contentType,
-      url,
-      DefaultValue.descriptionValue,
-      DefaultValue.imagedefault,
+    setNewsApi({
+      action_type:2,
+      category_id:DefaultValue.categoryID,
+      subcategory_id:DefaultValue.subcategoryID,
+      tag_id:DefaultValue.tagsid,
+      title:DefaultValue.defualTitle,
+      content_type:DefaultValue.contentType,
+      content_data:url,
+      description:DefaultValue.descriptionValue,
+      image:DefaultValue.imagedefault,
       images,
-      DefaultValue.dateValue.toISOString().split('T')[0],
-      DefaultValue.languageId,
-      DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
-      response => {
+      ofile:DefaultValue.dateValue.toISOString().split('T')[0],
+      language_id:DefaultValue.languageId,
+      location_id:DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
+      onSuccess:response => {
         toast.success(response.message)
         navigate.push('/manage-news')
       },
-      error => {
+      onError:error => {
         console.log('error', error)
       }
+    }
     )
   }
 
@@ -489,16 +491,17 @@ const EditNews = () => {
   // remove image
   const handleRemoveImage = (e, id) => {
     e.preventDefault()
-    deleteImageApi(
-      id,
-      res => {
+    deleteImageApi({
+      image_id:id,
+      onSuccess:res => {
         toast.success(res.message)
         const updatedImages = DefaultValue.multipleImage.filter(image => image.id !== id)
         setDefaultValue(prevState => ({ ...prevState, multipleImage: updatedImages }))
       },
-      err => {
+      onError:err => {
         toast.error(err.message)
       }
+    }
     )
   }
 

@@ -94,17 +94,18 @@ const CreateNews = () => {
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtCategoryID: categoryID, defualtCategory: option.label })
-    getSubcategoryByCategoryApi(
-      categoryID,
-      res => {
+    getSubcategoryByCategoryApi({
+      category_id:categoryID,
+      onSuccess:res => {
         setSubCategory(res.data)
         setShowsubCategory(true)
       },
-      err => {
+      onError:err => {
         if (err === 'No Data Found') {
           setShowsubCategory(false)
         }
       }
+    }
     )
   }
 
@@ -377,28 +378,29 @@ const CreateNews = () => {
   // final submit data
   const finalSubmit = e => {
     e.preventDefault()
-    setNewsApi(
-      1,
-      DefaultValue.defualtCategoryID,
-      DefaultValue.defualtSubCategoryID,
-      DefaultValue.defualtTag,
-      DefaultValue.defualtTitle,
-      DefaultValue.defaultType,
-      DefaultValue.defualtUrl,
-      content,
-      DefaultValue.defaultImagefile,
-      images,
-      DefaultValue.defualtStartDate.toISOString().split('T')[0],
-      createNewsLanguage.id,
-      DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
-      response => {
+    setNewsApi({
+      action_type:1,
+      category_id:DefaultValue.defualtCategoryID,
+      subcategory_id:DefaultValue.defualtSubCategoryID,
+      tag_id:DefaultValue.defualtTag,
+      title:DefaultValue.defualtTitle,
+      content_type:DefaultValue.defaultType,
+      content_data:DefaultValue.defualtUrl,
+      description:content,
+      image:DefaultValue.defaultImagefile,
+      ofile:images,
+      show_till:DefaultValue.defualtStartDate.toISOString().split('T')[0],
+      language_id:createNewsLanguage.id,
+      location_id:DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
+      onSuccess:response => {
         // console.log(response)
         toast.success(response.message)
         navigate.push('/manage-news')
       },
-      error => {
+      onError:error => {
         console.log('error', error)
       }
+    }
     )
   }
 
