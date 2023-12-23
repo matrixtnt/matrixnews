@@ -6,18 +6,17 @@ import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
 import { translate } from '../../../utils'
 import { useRouter } from 'next/router.js'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
-import { CategoriesApi } from 'src/hooks/categoriesApi'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { getNewsApi } from 'src/hooks/newsApi'
 
 const CategoryNews = () => {
   const router = useRouter()
   const query = router.query
   const catId = query.slug
-  let user = getUser()
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
@@ -27,14 +26,16 @@ const CategoryNews = () => {
   // api call
   const getNewsByCategoryApi = async () => {
     try {
-      const { data } = await CategoriesApi.getNewsByCategory({
+      const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        category_id: catId,
-        subcategory_id: '',
         offset: '0',
         limit: '10',
-        user_id: user,
+        get_user_news:"",
+        search:"",
         language_id: language_id,
+        category_id: catId,
+        subcategory_id: '',
+        tag_id:"",
         latitude: storedLatitude,
         longitude: storedLongitude
       })

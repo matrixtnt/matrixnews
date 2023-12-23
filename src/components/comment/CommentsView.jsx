@@ -156,7 +156,6 @@ const CommentsView = props => {
     try {
       const { data } = await getCommentByNewsApi.getCommentByNews({
         access_key: access_key,
-        user_id: user,
         news_id: Nid,
         offset: '0',
         limit: '10'

@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form'
 import { AiOutlineLike, AiTwotoneLike, AiOutlineEye } from 'react-icons/ai'
 import { BsBookmark, BsFillBookmarkFill, BsFillPlayFill } from 'react-icons/bs'
 import { FiCalendar } from 'react-icons/fi'
-
 import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx'
 import TagsSection from '../../tag/TagsSection.jsx'
 import CommentSection from '../../comment/CommentSection.jsx'
@@ -65,10 +64,9 @@ const News = () => {
   // api call
   const getNewsById = async () => {
     try {
-      const { data } = await getNewsApi.getNewsById({
+      const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        news_id: NewsId,
-        user_id: user,
+        id: NewsId,
         language_id: currentLanguage.id
       })
 

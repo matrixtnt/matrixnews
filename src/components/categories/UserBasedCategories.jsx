@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import SwitchButton from 'bootstrap-switch-button-react'
 import { categoriesApi, getuserbyidApi, setusercategoriesApi } from '../../store/actions/campaign'
-import Skeleton from 'react-loading-skeleton'
 import { translate } from '../../utils'
 import ReactPaginate from 'react-paginate'
 import { useSelector } from 'react-redux'

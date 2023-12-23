@@ -12,11 +12,10 @@ export const getTagApi = {
     })
   },
   getNewsByTag: requestData => {
-    const { access_key, user_id, tag_id, language_id, latitude, longitude } = requestData
+    const { access_key, tag_id, language_id, latitude, longitude } = requestData
     return Api.get(GET_NEWS_BY_TAG, {
       params: {
         access_key,
-        user_id,
         tag_id,
         language_id,
         latitude,

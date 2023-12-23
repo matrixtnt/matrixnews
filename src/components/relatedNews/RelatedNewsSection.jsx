@@ -3,13 +3,12 @@ import Link from 'next/link'
 import { translate, truncateText } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { locationData } from 'src/store/reducers/settingsReducer'
 
 const RelatedNewsSection = props => {
   const catid = props.Cid
-  let user = getUser()
   let { id: language_id } = getLanguage()
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
@@ -18,14 +17,12 @@ const RelatedNewsSection = props => {
   // api call
   const getNewsByCategoryApi = async () => {
     try {
-      const { data } = await CategoriesApi.getNewsByCategory({
+      const { data } = await CategoriesApi.getNews({
         access_key: access_key,
-        category_id: catid,
-        subcategory_id: '',
         offset: '0',
         limit: '10',
-        user_id: user,
         language_id: language_id,
+        category_id: catid,
         latitude: storedLatitude,
         longitude: storedLongitude
       })

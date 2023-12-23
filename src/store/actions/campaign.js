@@ -1,5 +1,5 @@
 
-import { accountdeleteApi, deleteCommentApi, getBookmarkApi, getBreakingNewsApi, getBreakingNewsIdApi, getCategoriesApi, getCommentByNewsApi, getLiveStreamingApi, getNewsApi, getNewsByCategoryApi, getNewsByIdApi, getPagesApi, getTagApi, getVideoApi, setBookmarkApi, setCommentApi, setLikeDisLikeApi, getNewsByTagApi, DeleteUserNotificationApi, getFeatureSectionApi, getFeatureSectionByIdApi, setUserCategoriesApi, getUserCategoriesApi, getUserByIdApi, setNewsViewApi, setBreakingNewsViewApi, getAdsSpaceNewsDetailsApi, setnewsApi, deleteimageApi, deletenewsApi, getsubcategorybycategoryApi, set_comment_like_dislike_Api, set_flag_Api, register_token_api, getlocationapi } from "../../utils/api"
+import { accountdeleteApi, deleteCommentApi, getBookmarkApi, getBreakingNewsApi, getCategoriesApi, getCommentByNewsApi, getLiveStreamingApi, getNewsApi, getPagesApi, getTagApi, getVideoApi, setBookmarkApi, setCommentApi, setLikeDisLikeApi, DeleteUserNotificationApi, getFeatureSectionApi, setUserCategoriesApi, getUserCategoriesApi, getUserByIdApi, setNewsViewApi, setBreakingNewsViewApi, getAdsSpaceNewsDetailsApi, setnewsApi, deleteimageApi, deletenewsApi, getsubcategorybycategoryApi, set_comment_like_dislike_Api, set_flag_Api, register_token_api, getlocationapi } from "../../utils/api"
 import { store } from "../store"
 import { apiCallBegan } from "./apiActions"
 
@@ -40,28 +40,6 @@ export const getnewsApi = (offset, limit, get_user_news, search,latitude, longit
 export const getvideoApi = (onSuccess, onError, onStart) => {
     store.dispatch(apiCallBegan({
         ...getVideoApi(),
-        displayToast: false,
-        onStart,
-        onSuccess,
-        onError,
-    }));
-};
-
-// 5. get news by category
-export const getnewsbycategoryApi = (category_id, subcategory_id, offset, limit, latitude, longitude, onSuccess, onError, onStart) => {
-    store.dispatch(apiCallBegan({
-        ...getNewsByCategoryApi(category_id, subcategory_id, offset, limit, latitude, longitude),
-        displayToast: false,
-        onStart,
-        onSuccess,
-        onError,
-    }));
-};
-
-// 6. get breaking news by id
-export const getbreakingnewsidApi = (breaking_news_id, onSuccess, onError, onStart) => {
-    store.dispatch(apiCallBegan({
-        ...getBreakingNewsIdApi(breaking_news_id),
         displayToast: false,
         onStart,
         onSuccess,
@@ -157,32 +135,10 @@ export const deletecommentApi = (comment_id, onSuccess, onError, onStart) => {
     }));
 };
 
-// 14. get news by id
-export const getnewsbyApi = (news_id, language_id, onSuccess, onError, onStart) => {
-    store.dispatch(apiCallBegan({
-        ...getNewsByIdApi(news_id, language_id),
-        displayToast: false,
-        onStart,
-        onSuccess,
-        onError,
-    }));
-};
-
 // 15. set likedislike
 export const setlikedislikeApi = (news_id, status, onSuccess, onError, onStart) => {
     store.dispatch(apiCallBegan({
         ...setLikeDisLikeApi(news_id, status),
-        displayToast: false,
-        onStart,
-        onSuccess,
-        onError,
-    }));
-};
-
-// 16. get news by tag
-export const getnewsbytagApi = (tag_id, latitude, longitude, onSuccess, onError, onStart) => {
-    store.dispatch(apiCallBegan({
-        ...getNewsByTagApi(tag_id, latitude, longitude),
         displayToast: false,
         onStart,
         onSuccess,
@@ -205,17 +161,6 @@ export const deleteusernotificationApi = (id, onSuccess, onError, onStart) => {
 export const getfeaturesectionApi = (offset, limit, latitude, longitude, onSuccess, onError, onStart) => {
     store.dispatch(apiCallBegan({
         ...getFeatureSectionApi(offset, limit, latitude, longitude),
-        displayToast: false,
-        onStart,
-        onSuccess,
-        onError,
-    }));
-};
-
-// 19. get feature section by id
-export const getfeaturesectionbyidApi = (section_id, offset, limit, latitude, longitude, onSuccess, onError, onStart) => {
-    store.dispatch(apiCallBegan({
-        ...getFeatureSectionByIdApi(section_id, offset, limit, latitude, longitude),
         displayToast: false,
         onStart,
         onSuccess,

@@ -1,5 +1,5 @@
 import Api from 'src/api/AxiosInterceptors'
-import { GET_BREAKING_NEWS, GET_BREAKING_NEWS_ID, SET_BREAKING_NEWS_VIEW } from 'src/utils/api'
+import { GET_BREAKING_NEWS, SET_BREAKING_NEWS_VIEW } from 'src/utils/api'
 
 export const AllBreakingNewsApi = {
   getBreakingNews: requestData => {
@@ -9,17 +9,6 @@ export const AllBreakingNewsApi = {
         language_id,
         access_key,
         slug
-      }
-    })
-  },
-  getBreakingNewsId: requestData => {
-    const { access_key, breaking_news_id, user_id, language_id } = requestData
-    return Api.get(GET_BREAKING_NEWS_ID, {
-      params: {
-        access_key,
-        breaking_news_id,
-        user_id,
-        language_id
       }
     })
   },

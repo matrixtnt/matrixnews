@@ -5,12 +5,12 @@ import Link from 'next/link'
 import { translate } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
-import { getTagApi } from 'src/hooks/tagsApi'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
+import { getNewsApi } from 'src/hooks/newsApi'
 
 const TagNewsview = () => {
   const router = useRouter()
@@ -19,14 +19,12 @@ const TagNewsview = () => {
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
-  let user = getUser()
   let { id: language_id } = getLanguage()
   // api call
   const getNewsByTag = async () => {
     try {
-      const { data } = await getTagApi.getNewsByTag({
+      const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        user_id: user,
         tag_id: Tid,
         language_id: language_id,
         latitude: storedLatitude,

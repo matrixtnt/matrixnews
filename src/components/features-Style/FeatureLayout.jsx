@@ -30,9 +30,6 @@ const FeatureLayout = () => {
       const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
         language_id: language_id,
-        offset: "",
-        limit: "",
-        slug:"",
         latitude: storedLatitude,
         longitude: storedLongitude
       })
