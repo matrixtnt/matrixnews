@@ -137,9 +137,8 @@ const OTPModal = props => {
       }
       )
     } catch (error) {
-      console.log(error)
       // User couldn't sign in (bad verification code?)
-      setError('Invalid Code')
+      setError(error.code)
     }
   }
 
@@ -176,10 +175,7 @@ const OTPModal = props => {
                       {props.phonenum}{' '}
                     </div>
                   </div>
-                  <form
-                    onSubmit={e => {
-                      e.preventDefault()
-                    }}
+                  <form onClick={e => submitOTP(e)}
                   >
                     <div className='mb-3 my-3'>
                       <OTPInput
@@ -206,7 +202,7 @@ const OTPModal = props => {
                         type='submit'
                         className='btn   btn-lg  w-100'
                         id='submitbutton'
-                        onClick={e => submitOTP(e)}
+                       
                       >
                         {translate('submitBtn')}
                       </button>

@@ -37,7 +37,8 @@ const PhoneLoginTwo = (props) => {
         }
     };
 
-    const handleGetOtp = () => {
+    const handleGetOtp = (e) => {
+        e.preventDefault();
         if (value === undefined) {
             setError("Please enter phone number!");
         } else if (validatePhoneNumber(value)) {
@@ -74,7 +75,10 @@ const PhoneLoginTwo = (props) => {
                                         {translate("six-didgit-code")}
                                     </div>
                                 </div>
-                                <form className="my-2">
+                                <form className="my-2"  onClick={(e) => {
+                                                // props.onHide()
+                                                handleGetOtp(e);
+                                            }}>
                                     <div className="mb-3">
                                         <PhoneInput className="phoneInput" placeholder="Enter your phone number" defaultCountry={process.env.NEXT_PUBLIC_DEFAULT_COUNTRY} international value={value} onChange={setValue} />
                                     </div>
@@ -82,13 +86,10 @@ const PhoneLoginTwo = (props) => {
                                     <div className="py-3">
                                         <p className="error-msg">{error}</p>
                                         <button
-                                            type="button"
+                                            type="submit"
                                             className="btn   btn-lg  w-100"
                                             id="submitbutton"
-                                            onClick={() => {
-                                                // props.onHide()
-                                                handleGetOtp();
-                                            }}
+                                           
                                         >
                                             {translate("reqOtpLbl")}
                                         </button>
