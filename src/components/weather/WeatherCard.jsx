@@ -76,12 +76,12 @@ const WeatherCard = () => {
 
   // language change
   const languageChange = (name, code, id, display_name) => {
-    loadLanguageLabels(code)
+    loadLanguageLabels({code:code})
     setCurrentLanguage(name, code, id, display_name)
   }
 
   useEffect(() => {
-    loadLanguageLabels(currentLanguage?.code)
+    loadLanguageLabels({code:currentLanguage?.code})
   }, [currentLanguage])
 
   return (

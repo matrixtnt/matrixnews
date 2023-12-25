@@ -47,12 +47,12 @@ const MobilesideBar = ({
 
   // language change
   const languageChange = (name, code, id) => {
-    loadLanguageLabels(code)
+    loadLanguageLabels({code:code})
     setCurrentLanguage(name, code, id)
   }
 
   useEffect(()=>{
-    loadLanguageLabels(currentLanguage.code)
+    loadLanguageLabels({code:currentLanguage.code})
   },[currentLanguage])
 
   const closeRef = useRef()

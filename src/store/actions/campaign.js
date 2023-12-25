@@ -1,34 +1,20 @@
 import {
   accountdeleteApi,
   deleteCommentApi,
-  getBookmarkApi,
-  getBreakingNewsApi,
   getCategoriesApi,
-  getCommentByNewsApi,
-  getLiveStreamingApi,
-  getNewsApi,
-  getPagesApi,
-  getTagApi,
-  getVideoApi,
   setBookmarkApi,
   setCommentApi,
   setLikeDisLikeApi,
   DeleteUserNotificationApi,
-  getFeatureSectionApi,
   setUserCategoriesApi,
-  getUserCategoriesApi,
   getUserByIdApi,
-  setNewsViewApi,
-  setBreakingNewsViewApi,
-  getAdsSpaceNewsDetailsApi,
   setnewsApi,
   deleteimageApi,
   deletenewsApi,
   getsubcategorybycategoryApi,
   set_comment_like_dislike_Api,
   set_flag_Api,
-  register_token_api,
-  getlocationapi
+  register_token_api
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -53,7 +39,7 @@ export const categoriesApi = ({
   )
 }
 
-// 10. set bookmark
+// 2. set bookmark
 export const setbookmarkApi = ({
   news_id = '',
   status = '',
@@ -72,7 +58,7 @@ export const setbookmarkApi = ({
   )
 }
 
-// 11. set comment
+// 3. set comment
 export const setcommentApi = ({
   parent_id = '',
   news_id = '',
@@ -92,7 +78,7 @@ export const setcommentApi = ({
   )
 }
 
-//13. delete comment
+// 4. delete comment
 export const deletecommentApi = ({ comment_id = '', onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
   store.dispatch(
     apiCallBegan({
@@ -105,7 +91,7 @@ export const deletecommentApi = ({ comment_id = '', onSuccess = () => {}, onErro
   )
 }
 
-// 15. set likedislike
+// 5. set likedislike
 export const setlikedislikeApi = ({
   news_id = '',
   status = '',
@@ -124,7 +110,7 @@ export const setlikedislikeApi = ({
   )
 }
 
-// 17. delete user notification
+// 6. delete user notification
 export const deleteusernotificationApi = ({
   id = '',
   onSuccess = () => {},
@@ -142,7 +128,7 @@ export const deleteusernotificationApi = ({
   )
 }
 
-// 20. set user categories
+// 7. set user categories
 export const setusercategoriesApi = ({
   category_id = '',
   onSuccess = () => {},
@@ -160,7 +146,7 @@ export const setusercategoriesApi = ({
   )
 }
 
-// 22. get user by id
+// 8. get user by id
 export const getuserbyidApi = ({ onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
   store.dispatch(
     apiCallBegan({
@@ -173,7 +159,7 @@ export const getuserbyidApi = ({ onSuccess = () => {}, onError = () => {}, onSta
   )
 }
 
-// 26. set news
+// 9. set news
 export const setNewsApi = ({
   action_type = '',
   category_id = '',
@@ -217,7 +203,7 @@ export const setNewsApi = ({
   )
 }
 
-// 27. delete new images
+// 10. delete new images
 export const deleteImageApi = ({ image_id = '', onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
   store.dispatch(
     apiCallBegan({
@@ -230,7 +216,7 @@ export const deleteImageApi = ({ image_id = '', onSuccess = () => {}, onError = 
   )
 }
 
-// 28. delete news
+// 11. delete news
 export const deleteNewsApi = ({ news_id = '', onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
   store.dispatch(
     apiCallBegan({
@@ -243,7 +229,7 @@ export const deleteNewsApi = ({ news_id = '', onSuccess = () => {}, onError = ()
   )
 }
 
-// 29. subcategory by category
+// 12. subcategory by category
 export const getSubcategoryByCategoryApi = ({
   category_id = '',
   onSuccess = () => {},
@@ -261,7 +247,7 @@ export const getSubcategoryByCategoryApi = ({
   )
 }
 
-// 30. set comment like dislike
+// 13. set comment like dislike
 export const setCommentLikeDislikeApi = ({
   comment_id = '',
   status = '',
@@ -280,8 +266,15 @@ export const setCommentLikeDislikeApi = ({
   )
 }
 
-// 31. set flag
-export const setFlagApi = (comment_id, news_id, message, onSuccess, onError, onStart) => {
+// 14. set flag
+export const setFlagApi = ({
+  comment_id = '',
+  news_id = '',
+  message = '',
+  onSuccess = () => {},
+  onError = () => {},
+  onStart = () => {}
+}) => {
   store.dispatch(
     apiCallBegan({
       ...set_flag_Api(comment_id, news_id, message),
@@ -293,8 +286,15 @@ export const setFlagApi = (comment_id, news_id, message, onSuccess, onError, onS
   )
 }
 
-// 32. register_token
-export const setRegisterTokenApi = (token, latitude, longitude, onSuccess, onError, onStart) => {
+// 15. register_token
+export const setRegisterTokenApi = ({
+  token = '',
+  latitude = '',
+  longitude = '',
+  onSuccess = () => {},
+  onError = () => {},
+  onStart = () => {}
+}) => {
   store.dispatch(
     apiCallBegan({
       ...register_token_api(token, latitude, longitude),
@@ -306,21 +306,8 @@ export const setRegisterTokenApi = (token, latitude, longitude, onSuccess, onErr
   )
 }
 
-// 34. get tags
-export const getLocationApi = (onSuccess, onError, onStart) => {
-  store.dispatch(
-    apiCallBegan({
-      ...getlocationapi(),
-      displayToast: false,
-      onStart,
-      onSuccess,
-      onError
-    })
-  )
-}
-
-// 35. delete account
-export const accountDeleteApi = (onSuccess, onError, onStart) => {
+// 16. delete account
+export const accountDeleteApi = ({ onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
   store.dispatch(
     apiCallBegan({
       ...accountdeleteApi(),

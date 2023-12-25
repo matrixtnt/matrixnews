@@ -121,13 +121,13 @@ const Header = () => {
 
   // language change
   const languageChange = (name, code, id) => {
-    loadLanguageLabels(code)
+    loadLanguageLabels({code:code})
     setCurrentLanguage(name, code, id)
   }
 
   useEffect(() => {
-    loadLanguages(
-      response => {
+    loadLanguages({
+      onSuccess:response => {
         if (currentLanguage.code == null) {
           // eslint-disable-next-line
           // eslint-disable-next-line
@@ -142,9 +142,10 @@ const Header = () => {
           setCurrentLanguage(index[0].language, index[0].code, index[0].id)
         }
       },
-      error => {
+      onError:error => {
         console.log(error)
       }
+    }
     )
   }, [currentLanguage])
 
@@ -266,8 +267,8 @@ const Header = () => {
               user
                 .delete()
                 .then(() => {
-                  accountDeleteApi(
-                    res => {
+                  accountDeleteApi({
+                    onSuccess:res => {
                       signOut(authentication)
                         .then(() => {
                           logoutUser()
@@ -280,9 +281,10 @@ const Header = () => {
                           // An error happened.
                         })
                     },
-                    err => {
+                    onError:err => {
                       console.log(err)
                     }
+                  }
                   )
                   // Handle any additional steps after deletion (e.g., redirect, sign out, etc.)
                 })

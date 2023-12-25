@@ -44,7 +44,7 @@ export const { settingsRequested,settingsSuccess,settingsFailed,latlong,fcmToken
 export default settingsSlice.reducer;
 
 // load websettings api call
-export const laodSettingsApi = (type,onSuccess, onError, onStart) => {
+export const laodSettingsApi = ({type="",onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
         ...getSettingsApi(type),
         displayToast: false,

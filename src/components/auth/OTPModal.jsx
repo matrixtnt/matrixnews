@@ -118,25 +118,23 @@ const OTPModal = props => {
       props.setIsLogout(true)
       props.onHide()
 
-      register(
-        response.user.uid,
-        '',
-        '',
-        response.user.phoneNumber,
-        'mobile',
-        '',
-        '1',
-        location.fcmtoken,
-        response => {
+      register({
+        firebase_id:response.user.uid,
+        mobile:response.user.phoneNumber,
+        type:'mobile',
+        status:'1',
+        fcm_id:location.fcmtoken,
+        onSuccess:response => {
           if (response.data.is_login === '1') {
             // If new User then show the Update Profile Screen
             navigate.push('/profile-update')
           }
           props.setisloginloading(false)
         },
-        error => {
+        onError:error => {
           toast.error(translate('deactiveMsg'))
         }
+      }
       )
     } catch (error) {
       console.log(error)

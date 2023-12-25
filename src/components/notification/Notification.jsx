@@ -63,12 +63,12 @@ const Notification = () => {
         // Remove the deleted notification from the state
         setData(prevData => prevData.filter(notification => notification.id !== id))
         toast.success(response.message)
-        loaduserNotification(
-          '0',
-          '10',
-          () => {},
-          () => {}
-        )
+        loaduserNotification({
+          offset:'0',
+          limit:'10',
+          onSuccess:() => {},
+          onError:() => {}
+      })
       },
       onError:error => {
         if (error === 'No Data Found') {

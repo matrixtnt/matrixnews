@@ -139,20 +139,21 @@ const CommentsView = props => {
 
   const submitBtn = e => {
     e.preventDefault()
-    setFlagApi(
-      CommentID,
-      Nid,
-      message,
-      res => {
+    setFlagApi({
+      comment_id:CommentID,
+      news_id:Nid,
+      message:message,
+      onSuccess:res => {
         setRefreshKey(prevKey => prevKey + 1)
         setModalOpen(false)
         setLoadComments(true)
         setMessage('')
         toast.success(translate('flag'))
       },
-      err => {
+      onError:err => {
         console.log(err)
       }
+    }
     )
   }
 

@@ -50,16 +50,17 @@ const ProfileUpdate = () => {
     }
 
     if (!JSON.parse(process.env.NEXT_PUBLIC_DEMO)) {
-      updateProfileData(
-        profileData.name,
-        profileData.mobile,
-        profileData.email,
-        success => {
+      updateProfileData({
+        name:profileData.name,
+        mobile:profileData.mobile,
+        email:profileData.email,
+        onSuccess:success => {
           toast.success('successfully updated')
         },
-        error => {
+        onError:error => {
           toast.error(error)
         }
+      }
       )
     } else {
       toast.error(translate('Profile update is not allowed in demo version.'))
@@ -83,12 +84,13 @@ const ProfileUpdate = () => {
     }
 
     if (!JSON.parse(process.env.NEXT_PUBLIC_DEMO)) {
-      updateProfileImage(
-        e.target.files[0],
-        () => {},
-        error => {
+      updateProfileImage({
+        image:e.target.files[0],
+        onSuccess:() => {},
+        onError:error => {
           console.log(error)
         }
+      }
       )
     }
   }

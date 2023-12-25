@@ -69,7 +69,7 @@ export const {
 export default languageSlice.reducer
 
 // API Calls
-export const loadLanguages = (onSuccess, onError, onStart) => {
+export const loadLanguages = ({onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
   // const { lastFetch } = store.getState().languages
   // const diffInMinutes = moment().diff(moment(lastFetch), 'minutes')
   // // If API data is fetched within last 10 minutes then don't call the API again
@@ -88,7 +88,7 @@ export const loadLanguages = (onSuccess, onError, onStart) => {
   )
 }
 
-export const loadLanguageLabels = (code, onSuccess, onError, onStart) => {
+export const loadLanguageLabels = ({code="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
   store.dispatch(
     apiCallBegan({
       ...getLanguageJsonDataApi(code),

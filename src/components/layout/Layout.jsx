@@ -20,12 +20,13 @@ const Layout = ({ children }) => {
 
   // web settings load
   useEffect(() => {
-      laodSettingsApi("",
-        (res) => 
+      laodSettingsApi({type:"",
+        onSuccess:(res) => 
         document.documentElement.style.setProperty('--primary-color', res && res.data.web_setting.web_color_code),
-        error => {
+        onError:error => {
           console.log(error)
         }
+      }
       )
       // language laod
   }, [])

@@ -47,7 +47,7 @@ export default userSlice.reducer;
 // api calls
 
 // register
-export const register = (firebase_id, name, email, mobile, type, profile, status, fcm_id, onSuccess, onError, onStart) => {
+export const register = ({firebase_id="", name="", email="", mobile="", type="", profile="", status="", fcm_id="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
         ...userSignUpApi(firebase_id, name, email, mobile, type, profile, status, fcm_id),
         displayToast: false,
@@ -59,7 +59,7 @@ export const register = (firebase_id, name, email, mobile, type, profile, status
 };
 
 // profile image update
-export const updateProfileImage = (image, onSuccess, onError, onStart) => {
+export const updateProfileImage = ({image="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
         ...updateProfileImageApi(image),
         displayToast: false,
@@ -71,7 +71,7 @@ export const updateProfileImage = (image, onSuccess, onError, onStart) => {
 };
 
 // update profile data
-export const updateProfileData = (name, mobile, email, onSuccess, onError, onStart) => {
+export const updateProfileData = ({name="", mobile="", email="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
         ...updateProfileApi(name, mobile, email),
         displayToast: false,

@@ -105,27 +105,27 @@ const SignInModal = props => {
         // console.log("google resonse",response)
         props.onHide()
         props.setIsLogout(true)
-        register(
-          response.user.uid,
-          response.user.displayName,
-          response.user.email,
-          '',
-          'gmail',
-          response.user.photoURL,
-          '1',
-          location.fcmtoken,
-          success => {
+        register({
+          firebase_id:response.user.uid,
+          name:response.user.displayName,
+          email:response.user.email,
+          type:'gmail',
+          profile:response.user.photoURL,
+          status:'1',
+          fcm_id:location.fcmtoken,
+          onSuccess:success => {
             toast.success(translate('loginMsg'))
-            setRegisterTokenApi(
-              location.fcmtoken,
-              storedLatitude,
-              storedLongitude,
-              success => {
+            setRegisterTokenApi({
+              token:location.fcmtoken,
+              latitude:storedLatitude,
+              longitude:storedLongitude,
+              onSuccess:success => {
                 // console.log(success);
               },
-              error => {
+              onError:error => {
                 console.log(error)
               }
+            }
             )
             if (success.data.is_login === '1') {
               //If new User then show the Update Profile Screen
@@ -133,9 +133,10 @@ const SignInModal = props => {
             }
             props.setisloginloading(false)
           },
-          error => {
+          onError:error => {
             toast.error(translate('deactiveMsg'))
           }
+        }
         )
       })
       .catch(err => {
@@ -153,16 +154,13 @@ const SignInModal = props => {
         // Signed in
         const user = userCredential.user
         if (user.emailVerified) {
-          register(
-            user.uid,
-            '',
-            formValues.email,
-            '',
-            'email',
-            '',
-            '1',
-            location.fcmtoken,
-            success => {
+          register({
+            firebase_id:user.uid,
+            email:formValues.email,
+            type:'email',
+            status:'1',
+            fcm_id:location.fcmtoken,
+            onSuccess:success => {
               if (success.data.is_login === '1') {
                 //If new User then show the Update Profile Screen
                 navigate.push('/profile-update')
@@ -170,9 +168,10 @@ const SignInModal = props => {
               loadMobileType(false)
               props.setisloginloading(false)
             },
-            error => {
+            onError:error => {
               toast.error(translate('deactiveMsg'))
             }
+          }
           )
           props.setIsLogout(true)
         } else {
