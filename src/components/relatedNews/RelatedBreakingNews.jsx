@@ -16,7 +16,7 @@ const RelatedBreakingNews = props => {
   const getBreakingNews = async () => {
     try {
       const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id, access_key })
-      const filteredData = data.data.filter(element => element.id !== props.id)
+      const filteredData = data.data.filter(element => element.slug !== props.id)
       return filteredData
     } catch (error) {
       console.log(error)
