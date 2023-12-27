@@ -21,7 +21,6 @@ import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 
 const CommentsView = props => {
-  console.log(props);
   const [LoadComments, setLoadComments] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
   const [Comment, setComment] = useState('')

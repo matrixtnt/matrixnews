@@ -268,7 +268,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       Data.news.map(element => (
                         <SwiperSlide key={element.id}>
                           <div id='bns-card' className='card' key={element.id}>
-                            <Link id='Link-all' href={`/news/${element.slug}`}>
+                            <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                               <img
                                 id='bns-image'
                                 src={element.image}
@@ -281,7 +281,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                   id='btnbnsCatagory'
                                   className='btn btn-sm'
                                   type='button'
-                                  href={`/news/${element.slug}`}
+                                  href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}
                                 >
                                   {truncateText(element.category_name, 10)}
                                 </Link>

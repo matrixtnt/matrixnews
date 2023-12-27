@@ -70,7 +70,7 @@ const CategoryNews = () => {
                 {Data && Data.length > 0 ? (
                   Data.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                      <Link id='Link-all' href={`/news/${element.slug}`}>
+                      <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                         <div id='cv-card' className='card'>
                           <img id='cv-card-image' src={element.image} className='card-img' alt='...' />
                           <div id='cv-card-body' className='card-body'>

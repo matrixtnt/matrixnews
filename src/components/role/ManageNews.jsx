@@ -48,7 +48,7 @@ const ManageNews = () => {
   const { isLoading, isError, data, error, status } = useQuery({
     queryKey: ['getnews', currentLanguage],
     queryFn: getNews,
-    staleTime:0
+    staleTime: 0
   })
 
   // type return
@@ -71,17 +71,16 @@ const ManageNews = () => {
 
   const deleteNews = data => {
     deleteNewsApi({
-      news_id:data.id,
-      onSuccess:res => {
+      news_id: data.id,
+      onSuccess: res => {
         toast.success(res.message)
         const updatedData = Data.filter(item => item.id !== data.id)
         setData(updatedData)
       },
-      onError:err => {
+      onError: err => {
         toast.error(err.message)
       }
-    }
-    )
+    })
   }
 
   return (
@@ -103,10 +102,28 @@ const ManageNews = () => {
                       <div className='manage-data'>
                         <div className='manage-card'>
                           <div className='manage-img'>
-                            <img src={element.image} alt='' onClick={() => navigate.push(`/news/${element.id}`)} />
+                            <img
+                              src={element.image}
+                              alt=''
+                              onClick={() =>
+                                navigate.push({
+                                  pathname: `/news/${element.slug}`,
+                                  query: { language_id: element.language_id }
+                                })
+                              }
+                            />
                           </div>
                           <div className='manage-title'>
-                            <p onClick={() => navigate.push(`/news/${element.id}`)}>{element.category_name}</p>
+                            <p
+                              onClick={() =>
+                                navigate.push({
+                                  pathname: `/news/${element.slug}`,
+                                  query: { language_id: element.language_id }
+                                })
+                              }
+                            >
+                              {element.category_name}
+                            </p>
                           </div>
                           <div className='manage-date'>
                             <p>
@@ -121,7 +138,15 @@ const ManageNews = () => {
                         </div>
                         <div className='manage-right'>
                           <div className='manage-title'>
-                            <p className='mb-0' onClick={() => navigate.push(`/news/${element.id}`)}>
+                            <p
+                              className='mb-0'
+                              onClick={() =>
+                                navigate.push({
+                                  pathname: `/news/${element.slug}`,
+                                  query: { language_id: element.language_id }
+                                })
+                              }
+                            >
                               {element.title}
                             </p>
                           </div>

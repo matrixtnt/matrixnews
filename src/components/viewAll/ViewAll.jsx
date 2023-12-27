@@ -88,7 +88,7 @@ const ViewAll = () => {
                   {currentData ? (
                     currentData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={`/news/${element.slug}`}>
+                        <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'

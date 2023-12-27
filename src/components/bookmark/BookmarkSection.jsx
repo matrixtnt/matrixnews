@@ -86,7 +86,9 @@ const BookmarkSection = () => {
                         src={element.image}
                         className='card-img'
                         alt='...'
-                        onClick={() => navigate.push(`/news/${element.news_id}`)}
+                        onClick={() =>
+                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
+                        }
                       />
                       <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
                         <BsTrash id='bs-bookmark-logo' size={18} />
@@ -97,14 +99,18 @@ const BookmarkSection = () => {
                         id='bs-btnCatagory'
                         className='btn btn-sm'
                         type='button'
-                        onClick={() => navigate.push(`/news/${element.news_id}`)}
+                        onClick={() =>
+                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
+                        }
                       >
                         {element.category_name}
                       </button>
                       <h5
                         id='bs-card-title'
                         className='card-title'
-                        onClick={() => navigate.push(`/news/${element.news_id}`)}
+                        onClick={() =>
+                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
+                        }
                       >
                         {element.title}
                       </h5>

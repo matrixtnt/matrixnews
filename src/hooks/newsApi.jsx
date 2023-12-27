@@ -13,6 +13,7 @@ export const getNewsApi = {
       language_id,
       category_id,
       subcategory_id,
+      slug,
       tag_id,
       latitude,
       longitude
@@ -28,6 +29,7 @@ export const getNewsApi = {
         language_id,
         category_id,
         subcategory_id,
+        slug,
         tag_id,
         latitude,
         longitude

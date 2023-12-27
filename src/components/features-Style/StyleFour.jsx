@@ -140,7 +140,7 @@ const StyleFour = ({ Data }) => {
                   {Data.news.map((value, index) => {
                     return (
                       <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'>
-                        <Link id='rns-card' className='card card_hover_two' key={index.id} href={`/news/${value.slug}`}>
+                        <Link id='rns-card' className='card card_hover_two' key={index.id}href={{pathname:`/news/${value.slug}`,query: { language_id: value.language_id}}}>
                           <div className='banner_thumb'>
                             <img
                               id='rns-image'

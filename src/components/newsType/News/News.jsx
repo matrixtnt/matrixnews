@@ -60,13 +60,13 @@ const News = () => {
   let { id: language_id } = getLanguage()
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
-  
+
   // api call
   const getNewsById = async () => {
     try {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        id: NewsId,
+        slug: NewsId,
         language_id: currentLanguage.id
       })
 
@@ -95,8 +95,7 @@ const News = () => {
     try {
       const { data } = await getNewsApi.setNewsView({
         access_key: access_key,
-        news_id: NewsId,
-        user_id: user
+        news_id: NewsId
       })
       return data.data
     } catch (error) {
@@ -131,9 +130,9 @@ const News = () => {
     error,
     status
   } = useQuery({
-    queryKey: ['getNewsbyId', NewsId, currentLanguage],
+    queryKey: ['getNewsbyId', NewsId, currentLanguage.id],
     queryFn: getNewsById,
-    staleTime:0
+    staleTime: 0
   })
 
   const {} = useQuery({
@@ -141,28 +140,33 @@ const News = () => {
     queryFn: setNewsView
   })
 
+  // this logic actually for seo purpose to move to home page otherwise crawling is not working
+  useEffect(() => {
+    if (currentLanguage.id !== Number(query.language_id)) {
+      router.push('/')
+    }
+  }, [currentLanguage.id])
+
   useEffect(() => {}, [userData.data])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-
   // set like dislike
   const setLikeDislikeData = (id, status) => {
     if (user !== null) {
       setlikedislikeApi({
-        news_id:id,
-        status:status,
-        onSuccess:response => {
+        news_id: id,
+        status: status,
+        onSuccess: response => {
           refetch()
           setLike(!Like)
         },
-        onError:error => {
+        onError: error => {
           console.log(error)
         }
-      }
-      )
+      })
     } else {
       setModalShow(true)
     }
@@ -172,16 +176,16 @@ const News = () => {
   const setbookmarkData = (newsid, status) => {
     if (user !== null) {
       setbookmarkApi({
-        news_id:newsid,
-        status:status,
-        onStart:response => {
+        news_id: newsid,
+        status: status,
+        onStart: response => {
           refetch()
           setBookmark(!Bookmark)
         },
-        onError:error => {
+        onError: error => {
           console.log(error)
         }
-    })
+      })
     } else {
       setModalShow(true)
     }
@@ -212,7 +216,6 @@ const News = () => {
   // console.log("galary", Data[0]?.image_data)
   const galleryPhotos = Data && Data[0]?.image_data
   // console.log(galleryPhotos)
-
 
   const openLightbox = (event, { index }) => {
     setCurrentImage(index)
@@ -296,7 +299,7 @@ const News = () => {
                     <div className='vps-img-div'>
                       <img id='nv-image' src={Data && Data[0].image} alt='...' />
                       <div className='seeAllPhoto'>
-                        {galleryPhotos.length > 0 ? (
+                        {galleryPhotos && galleryPhotos.length > 0 ? (
                           <button onClick={e => openLightbox(e, { index: 0 })}>
                             <FaImages size={25} style={{ color: '#fff' }} />
                           </button>
@@ -354,7 +357,6 @@ const News = () => {
                             className='btn'
                             onClick={() => setbookmarkData(Data && Data[0].id, !Bookmark ? 1 : 0)}
                           >
-                            {console.log(Bookmark)}
                             {Bookmark ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
                           </button>
                           <p id='nv-function-text'>{translate('saveLbl')}</p>
@@ -406,7 +408,7 @@ const News = () => {
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
                   {settingsOnOff && settingsOnOff.comments_mode === '1' ? (
-                    <CommentSection Nid={NewsId}/>
+                    <CommentSection Nid={NewsId} />
                   ) : (
                     <>
                       <div className='text-center my-5'>{translate('comDisable')}</div>

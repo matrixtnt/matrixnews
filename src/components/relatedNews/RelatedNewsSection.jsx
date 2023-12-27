@@ -2,10 +2,11 @@
 import Link from 'next/link'
 import { translate, truncateText } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
-import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { useSelector } from 'react-redux'
+import { getNewsApi } from 'src/hooks/newsApi'
 
 const RelatedNewsSection = props => {
   const catid = props.Cid
@@ -17,7 +18,7 @@ const RelatedNewsSection = props => {
   // api call
   const getNewsByCategoryApi = async () => {
     try {
-      const { data } = await CategoriesApi.getNews({
+      const { data } = await getNewsApi.getNews({
         access_key: access_key,
         offset: '0',
         limit: '10',
@@ -58,7 +59,7 @@ const RelatedNewsSection = props => {
           </div>
           {Data &&
             Data.map(element => (
-              <Link id='Link-all' href={`/news/${element.slug}`} key={element.id}>
+              <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}} key={element.id}>
                 <div id='RNews-card' className='card' onClick={() => scrollToTop()}>
                   <img id='RNews-image' src={element.image} className='card-img-top' alt='...' />
                   <div id='RNews-card-body' className='RNews-card-body'>

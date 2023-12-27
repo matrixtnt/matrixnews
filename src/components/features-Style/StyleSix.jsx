@@ -123,7 +123,7 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={`/news/${item.slug}`}>
+                    <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
                       <div className='card fs-Newscard'>
                         <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
@@ -162,7 +162,7 @@ const StyleSix = ({ isLoading, Data }) => {
                                 </p>
                               ) : null}
 
-                              <Link href={`/news/${item.slug}`} id='Top-Title01'>
+                              <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}} id='Top-Title01'>
                                 {truncateText(item.title, 30)} <br />
                                 {stripHtmlTags(item.description.slice(0, 600))} ...
                               </Link>
@@ -212,7 +212,7 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={`/news/${item.slug}`}>
+                    <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
                       <div className='card fs-Newscard'>
                         <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
@@ -234,7 +234,7 @@ const StyleSix = ({ isLoading, Data }) => {
                                   })
                                 : ''}
                             </p>
-                            <Link href={`/news/${item.slug}`} id='Top-Title01'>
+                            <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}} id='Top-Title01'>
                               {truncateText(item.title, 30)}
                             </Link>
                           </div>

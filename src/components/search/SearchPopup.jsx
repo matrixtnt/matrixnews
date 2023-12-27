@@ -89,7 +89,10 @@ const SearchPopup = () => {
   const redirectPage = (e, element) => {
     actionSearch()
     e.preventDefault()
-    navigate.push(`/news/${element.id}`)
+    navigate.push({
+      pathname: `/news/${element.slug}`,
+      query: { language_id: element.language_id }
+    })
     setSearchValue('')
   }
 

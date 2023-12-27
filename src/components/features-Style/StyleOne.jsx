@@ -143,13 +143,13 @@ const StyleOne = ({ isLoading, Data }) => {
                     <div className='row'>
                       <div className='col-xl-7 order-1 order-xl-0 col-12 d-flex'>
                         <div id='Left-first-section' className='my-auto'>
-                          <Link id='btnCatagory' className='btn' type='button' href={`/news/${item.slug}`}>
+                          <Link id='btnCatagory' className='btn' type='button'href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
                             {truncateText(item.category_name, 10)}
                           </Link>
                           <div className='my-3 top-title'>{truncateText(item.title, 60)}</div>
                           <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
                           <div className='d-flex flex-wrap'>
-                            <Link id='btnReadMore' className='btn mb-0' type='button' href={`/news/${item.slug}`}>
+                            <Link id='btnReadMore' className='btn mb-0' type='button'href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
                               <b>{translate('readmore')}</b>
                             </Link>
                             {item.content_value ? (

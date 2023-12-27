@@ -196,7 +196,9 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[0] ? (
                   <div
                     className='video_first_top card card_hover'
-                    onClick={() => navigate.push(`/news/${Data.news[0].slug}`)}
+                    onClick={() =>
+                      navigate.push({ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id}})
+                    }
                   >
                     <img src={Data.news[0] && Data.news[0].image} alt='news' onError={placeholderImage} />
 
@@ -210,7 +212,9 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[1] ? (
                   <div
                     className='video_seond_top card card_hover'
-                    onClick={() => navigate.push(`/news/${Data.news[1].slug}`)}
+                    onClick={() =>
+                      navigate.push({ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id}})
+                    }
                   >
                     <img src={Data.news[1] && Data.news[1].image} alt='news' onError={placeholderImage} />
 
@@ -225,7 +229,9 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[2] ? (
                   <div
                     className='video_center card card_hover'
-                    onClick={() => navigate.push(`/news/${Data.news[2].slug}`)}
+                    onClick={() =>
+                      navigate.push({ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id}})
+                    }
                   >
                     <img src={Data.news[2] && Data.news[2].image} alt='news' onError={placeholderImage} />
 
@@ -240,7 +246,9 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[3] ? (
                   <div
                     className='video_top_right card card_hover'
-                    onClick={() => navigate.push(`/news/${Data.news[3].slug}`)}
+                    onClick={() =>
+                      navigate.push({ pathname: `/news/${Data.news[3].slug}`, query: { language_id: Data.news[3].language_id}})
+                    }
                   >
                     <img src={Data.news[3] && Data.news[3].image} alt='news' onError={placeholderImage} />
 
@@ -254,7 +262,9 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[4] ? (
                   <div
                     className='video_bottom_right card card_hover'
-                    onClick={() => navigate.push(`/news/${Data.news[4].slug}`)}
+                    onClick={() =>
+                      navigate.push({ pathname: `/news/${Data.news[4].slug}`, query: { language_id: Data.news[4].language_id}})
+                    }
                   >
                     <img src={Data.news[4] && Data.news[4].image} alt='news' onError={placeholderImage} />
 
