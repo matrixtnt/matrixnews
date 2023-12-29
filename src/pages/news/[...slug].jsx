@@ -1,6 +1,7 @@
 import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
+import { extractJSONFromMarkup } from 'src/utils'
 import { GET_NEWS, access_key } from 'src/utils/api'
 const News = dynamic(() => import('src/components/newsType/News/News'), { ssr: false })
 
@@ -17,6 +18,12 @@ const fetchDataFromSeo = async (id,language_id) => {
 };
 
 const Index = ({ seoData, currentURL  }) => {
+  let schema = null;
+
+  if (seoData && seoData.data[0].schema_markup) {
+    const schemaString = seoData.data[0].schema_markup;
+    schema = extractJSONFromMarkup(schemaString);
+  }
   return (
     <>
         <Meta
@@ -25,7 +32,7 @@ const Index = ({ seoData, currentURL  }) => {
           keywords={seoData && seoData.data[0].meta_keyword}
           ogImage={seoData && seoData.data[0].image}
           pathName={currentURL}
-          schema={seoData && seoData.data[0].schema_markup}
+          schema={schema}
         />
       <News/>
     </>
