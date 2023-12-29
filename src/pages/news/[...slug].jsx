@@ -8,9 +8,7 @@ const News = dynamic(() => import('src/components/newsType/News/News'), { ssr: f
 const fetchDataFromSeo = async (id,language_id) => {
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_NEWS}?access_key=${access_key}&language_id=${language_id}&slug=${id}`);
-    
     const data = response.data;
-console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -19,8 +17,8 @@ console.log(data);
 };
 
 const Index = ({ seoData }) => {
-  console.log(seoData && seoData.data[0].image)
-  // const currentURL = typeof window !== 'undefined' ? window.location.href : ''; // Check if window is defined
+  const currentURL = typeof window !== 'undefined' ? window.location.href : ''; 
+  console.log(currentURL)// Check if window is defined
   return (
     <>
         <Meta
