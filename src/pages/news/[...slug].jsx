@@ -26,7 +26,7 @@ const Index = ({ seoData }) => {
           description={seoData && seoData.data[0].meta_description}
           keywords={seoData && seoData.data[0].meta_keyword}
           ogImage={seoData && seoData.data[0].image}
-          pathName={""}
+          pathName={currentURL}
           schema={seoData && seoData.data[0].schema_markup}
         />
       <News/>
