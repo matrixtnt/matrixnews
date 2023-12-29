@@ -24,7 +24,7 @@ const Index = ({ seoData }) => {
     <>
         <Meta
           title={seoData && seoData.data[0].meta_title}
-          description={{__html: seoData && seoData.data[0].meta_description}}
+          description={seoData && seoData.data[0].meta_description}
           keywords={seoData && seoData.data[0].meta_keyword}
           ogImage={seoData && seoData.data[0].image}
           pathName={currentURL}
