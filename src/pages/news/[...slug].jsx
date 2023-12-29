@@ -16,9 +16,7 @@ const fetchDataFromSeo = async (id,language_id) => {
   }
 };
 
-const Index = ({ seoData }) => {
-  const currentURL = typeof window !== 'undefined' ? window.location.href : ''; 
-  console.log(currentURL)// Check if window is defined
+const Index = ({ seoData, currentURL  }) => {
   return (
     <>
         <Meta
@@ -41,14 +39,17 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
   serverSidePropsFunction = async (context) => {
 
   // Retrieve the slug from the URL query parameters
-  const { query } = context;
+  const { query, req } = context; // Extract query and request object from context
+
+  const currentURL = `${req.headers.host}${req.url}`; 
 
   const seoData = await fetchDataFromSeo(query.slug[0],query.language_id)
 
   // Pass the fetched data as props to the page component
   return {
     props: {
-      seoData
+      seoData,
+      currentURL
     }
   }
   }
