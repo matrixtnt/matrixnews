@@ -19,7 +19,8 @@ console.log(data);
 };
 
 const Index = ({ seoData }) => {
-  const currentURL = typeof window !== 'undefined' ? window.location.href : ''; // Check if window is defined
+  console.log(seoData && seoData.data[0].image)
+  // const currentURL = typeof window !== 'undefined' ? window.location.href : ''; // Check if window is defined
   return (
     <>
         <Meta
@@ -27,7 +28,7 @@ const Index = ({ seoData }) => {
           description={seoData && seoData.data[0].meta_description}
           keywords={seoData && seoData.data[0].meta_keyword}
           ogImage={seoData && seoData.data[0].image}
-          pathName={currentURL}
+          pathName={""}
           schema={seoData && seoData.data[0].schema_markup}
         />
       <News/>
