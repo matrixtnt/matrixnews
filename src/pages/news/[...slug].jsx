@@ -10,7 +10,7 @@ const fetchDataFromSeo = async (id,language_id) => {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_NEWS}?access_key=${access_key}&language_id=${language_id}&slug=${id}`);
     
     const data = response.data;
-
+console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -19,15 +19,15 @@ const fetchDataFromSeo = async (id,language_id) => {
 };
 
 const Index = ({ seoData }) => {
-  // const currentURL = window.location.href;
+  const currentURL = typeof window !== 'undefined' ? window.location.href : ''; // Check if window is defined
   return (
     <>
         <Meta
-          title={seoData && seoData.data[0].title}
-          description={{__html: seoData && seoData.data[0].description}}
+          title={seoData && seoData.data[0].meta_title}
+          description={{__html: seoData && seoData.data[0].meta_description}}
           keywords={seoData && seoData.data[0].meta_keyword}
           ogImage={seoData && seoData.data[0].image}
-          pathName={""}
+          pathName={currentURL}
           schema={seoData && seoData.data[0].schema_markup}
         />
       <News/>
