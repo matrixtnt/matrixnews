@@ -210,7 +210,7 @@ const StyleFour = ({ Data }) => {
                           id='rns-card'
                           className='card card_hover_two'
                           key={index.id}
-                          href={`/breaking-news/${value.slug}`}
+                          href={{pathname:`/breaking-news/${value.slug}`,query: { language_id: value.language_id}}}
                         >
                           <div className='banner_thumb'>
                             <img

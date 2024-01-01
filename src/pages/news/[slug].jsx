@@ -50,7 +50,7 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
 
   const currentURL = `${req.headers.host}${req.url}`; 
 
-  const seoData = await fetchDataFromSeo(query.slug[0],query.language_id)
+  const seoData = await fetchDataFromSeo(query.slug,query.language_id)
 
   // Pass the fetched data as props to the page component
   return {

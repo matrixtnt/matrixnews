@@ -56,7 +56,7 @@ const BookmarkSection = () => {
   })
 
   const {} = useQuery({
-    queryKey: ['setbookmark'],
+    queryKey: ['setbookmark',Data],
     queryFn: setbookmarkApi,
     staleTime: 0
   })

@@ -226,8 +226,7 @@ const StyleOne = ({ isLoading, Data }) => {
                               id='btnReadMore'
                               className='btn mb-0'
                               type='button'
-                              href={`/breaking-news/${item.slug}`}
-                            >
+                              href={{pathname:`/breaking-news/${item.slug}`,query: { language_id: item.language_id}}}>
                               <b>{translate('readmore')}</b>
                             </Link>
                             {item.content_value ? (

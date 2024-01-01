@@ -28,7 +28,7 @@ const RelatedNewsSection = props => {
         longitude: storedLongitude
       })
       // Filter out elements with the same id as props.Cid
-      const filteredData = data.data.filter(element => element.id !== props.Nid)
+      const filteredData = data.data.filter(element => element.slug !== props.Nid)
       return filteredData
     } catch (error) {
       console.log(error)

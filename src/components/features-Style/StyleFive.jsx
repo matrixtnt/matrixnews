@@ -358,7 +358,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       Data.breaking_news.map(element => (
                         <SwiperSlide key={element.id}>
                           <div id='bns-card' className='card' key={element.id}>
-                            <Link id='Link-all' href={`/breaking-news/${element.slug}`}>
+                            <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`,query: { language_id: element.language_id}}}>
                               <img
                                 id='bns-image'
                                 src={element.image}

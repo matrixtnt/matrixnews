@@ -33,7 +33,9 @@ const BreakingNews = () => {
   const [modalShow, setModalShow] = useState(false)
   const router = useRouter()
   const query = router.query
+
   const BNid = query.slug
+
   const shareUrl = window.location.href
   let { id: language_id } = getLanguage()
   let user = getUser()

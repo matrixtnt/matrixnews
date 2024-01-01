@@ -154,13 +154,13 @@ const News = () => {
   }, [])
 
   // set like dislike
-  const setLikeDislikeData = (id, status) => {
+  const setLikeDislikeData = async(id, status) => {
     if (user !== null) {
       setlikedislikeApi({
         news_id: id,
         status: status,
-        onSuccess: response => {
-          refetch()
+        onSuccess: async response => {
+          await refetch()
           setLike(!Like)
         },
         onError: error => {
@@ -173,13 +173,13 @@ const News = () => {
   }
 
   // set bookmark
-  const setbookmarkData = (newsid, status) => {
+  const setbookmarkData = async(newsid, status) => {
     if (user !== null) {
       setbookmarkApi({
         news_id: newsid,
         status: status,
-        onStart: response => {
-          refetch()
+        onStart: async response => {
+          await refetch()
           setBookmark(!Bookmark)
         },
         onError: error => {

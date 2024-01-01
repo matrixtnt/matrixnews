@@ -298,7 +298,7 @@ const StyleSix = ({ isLoading, Data }) => {
                           </div>
                         ) : null}
                         <div id='Top-Deatils'>
-                          <Link href={`/breaking-news/${item.slug}`} id='Top-Title01'>
+                          <Link href={{pathname:`/breaking-news/${item.slug}`,query: { language_id: item.language_id}}} id='Top-Title01'>
                             {truncateText(item.title, 30)}
                             {stripHtmlTags(item.description.slice(0, 600))} ...
                           </Link>

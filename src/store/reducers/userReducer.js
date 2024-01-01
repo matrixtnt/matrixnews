@@ -1,7 +1,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { store } from "../store";
-import { updateProfileApi, updateProfileImageApi, userSignUpApi } from "../../utils/api";
+import { updateProfileApi, userSignUpApi } from "../../utils/api";
 import { apiCallBegan } from "../actions/apiActions";
 
 // state
@@ -29,7 +29,7 @@ export const userSlice = createSlice({
             user.data.profile = action.payload.file_path;
         },
         profileUpdateDataSuccess: (user, action) => {
-            let data  = action.payload.requestData;
+            let data  = action.payload.data;
             user.data.name = data.name;
             user.data.mobile = data.mobile
             user.data.email = data.email
@@ -59,9 +59,9 @@ export const register = ({firebase_id="", name="", email="", mobile="", type="",
 };
 
 // profile image update
-export const updateProfileImage = ({image="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const updateProfileImage = ({name="",mobile="",email="",image="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
-        ...updateProfileImageApi(image),
+        ...updateProfileApi(name,mobile,email,image),
         displayToast: false,
         onSuccessDispatch: imageUploadSuccess.type,
         onStart,
@@ -71,9 +71,9 @@ export const updateProfileImage = ({image="", onSuccess=()=>{}, onError=()=>{}, 
 };
 
 // update profile data
-export const updateProfileData = ({name="", mobile="", email="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const updateProfileData = ({name="", mobile="", email="",image="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
-        ...updateProfileApi(name, mobile, email),
+        ...updateProfileApi(name, mobile, email,image),
         displayToast: false,
         onSuccessDispatch: profileUpdateDataSuccess.type,
         onStart,

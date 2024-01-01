@@ -32,7 +32,7 @@ export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
 export const SET_NEWS_VIEW = 'set_news_view'
 export const SET_BREAKING_NEWS_VIEW = 'set_breaking_news_view'
-export const SET_PROFILE_IMAGE = 'set_profile_image'
+export const UPDATE_PROFILE = 'update_profile'
 export const SET_NEWS = 'set_news'
 export const SET_COMMENT_LIKE_DISLIKE = 'set_comment_like_dislike'
 export const SET_FLAG = 'set_flag'
@@ -41,7 +41,6 @@ export const SET_FLAG = 'set_flag'
 export const USER_SIGNUP = 'user_signup'
 export const DELETE_USER_NOTIFICATION = 'delete_user_notification'
 export const DELETE_COMMENT = 'delete_comment'
-export const UPDATE_PROFILE = 'update_profile'
 export const DELETE_IMAGES = 'delete_news_images'
 export const DELETE_NEWS = 'delete_news'
 export const REGISTER_TOKEN = 'register_token'
@@ -278,32 +277,16 @@ export const getSettingsApi = type => {
   }
 }
 
-// 15. update profile
-export const updateProfileApi = (name, mobile, email) => {
-  let user = getUser()
-  return {
-    url: `${UPDATE_PROFILE}`,
-    method: 'POST',
-    data: {
-      access_key: access_key,
-      user_id: user,
-      name: name,
-      mobile: mobile, //{optional}
-      email: email //{optional}
-    },
-    authorizationHeader: true
-  }
-}
-
 // 16. update profile image
-export const updateProfileImageApi = image => {
-  let user = getUser()
+export const updateProfileApi = (name,mobile,email,image) => {
   let data = new FormData()
   data.append('access_key', access_key)
-  data.append('user_id', user)
+  data.append('name', name)
+  data.append('mobile', mobile)
+  data.append('email', email)
   data.append('image', image)
   return {
-    url: `${SET_PROFILE_IMAGE}`,
+    url: `${UPDATE_PROFILE}`,
     method: 'POST',
     data,
     authorizationHeader: true
