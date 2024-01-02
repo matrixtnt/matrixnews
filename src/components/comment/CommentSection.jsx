@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CommentsView from './CommentsView'
 import { setcommentApi } from '../../store/actions/campaign'
 import { isLogin, translate } from '../../utils'
@@ -9,21 +9,21 @@ const CommentSection = props => {
   const [Comment, setComment] = useState('')
   const [LoadComments, setLoadComments] = useState(false)
   const Nid = props.Nid
-  const setCommentData = e => {
+  const setCommentData = async (e) => {
     e.preventDefault()
     if (!isLogin()) {
       toast.error('please login first to comment')
       return
     }
     setcommentApi({
-      parent_id:'0',
+      parent_id:0,
       news_id:Nid,
       message:Comment,
-      onSuccess:response => {
+      onSuccess:  response => {
         setLoadComments(true)
         setComment('')
         setTimeout(() => {
-          setLoadComments(false)
+          setLoadComments(true)
         }, 1000)
       },
       onError:error => {
@@ -32,6 +32,7 @@ const CommentSection = props => {
     }
     )
   }
+
 
   return (
     <div>

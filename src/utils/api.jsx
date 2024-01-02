@@ -144,14 +144,12 @@ export const setBookmarkApi = (news_id, status) => {
 
 // 6. set comment
 export const setCommentApi = (parent_id, news_id, message) => {
-  let user = getUser()
   let { id: language_id } = getLanguage()
   return {
     url: `${SET_COMMENT}`,
     method: 'POST',
     data: {
       access_key: access_key,
-      user_id: user,
       parent_id: parent_id, //if not exists, set 0
       news_id: news_id,
       message: message,

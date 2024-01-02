@@ -64,7 +64,7 @@ const RelatedNewsSection = props => {
                   <img id='RNews-image' src={element.image} className='card-img-top' alt='...' />
                   <div id='RNews-card-body' className='RNews-card-body'>
                     <button id='btnRNewsCatagory' className='btn btn-sm' type='button'>
-                      {element.category_name}
+                      {element.category.category_name}
                     </button>
                     <h6 id='RNews-card-text' className='card-text'>
                       {truncateText(element.title, 100)}

@@ -173,9 +173,9 @@ const CommentsView = props => {
 
   // react query
   const { data:Data, isLoading } = useQuery({
-    queryKey: ['getCommentByNews', Nid, props.LoadComments, LoadComments, refreshKey],
+    queryKey: ['getCommentByNews ', Nid, props.LoadComments, LoadComments, refreshKey],
     queryFn: getCommentByNews,
-    staleTime:0
+    staleTime:0,
   })
 
   return (

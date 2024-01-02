@@ -70,13 +70,13 @@ const News = () => {
         language_id: currentLanguage.id
       })
 
-      if (data.data[0].bookmark === '0') {
+      if (data.data[0].bookmark === 0) {
         setBookmark(false)
       } else {
         setBookmark(true)
       }
 
-      if (data.data[0].like === '0') {
+      if (data.data[0].like === 0) {
         setLike(false)
       } else {
         setLike(true)
@@ -258,7 +258,7 @@ const News = () => {
               <div id='nv-page' className='row'>
                 <div id='nv-body' className='col-lg-8 col-12'>
                   <button id='btnnvCatagory' className='btn btn-sm' type='button'>
-                    {Data && Data[0].category_name}
+                    {Data && Data[0].category.category_name}
                   </button>
                   <h1 id='nv-title'>{Data && Data[0].title}</h1>
 
@@ -365,7 +365,7 @@ const News = () => {
                           <button
                             id='nv-function'
                             className='btn'
-                            onClick={() => setLikeDislikeData(NewsId, !Like ? 1 : 0)}
+                            onClick={() => setLikeDislikeData(Data && Data[0].id, !Like ? 1 : 0)}
                           >
                             {Like ? <AiTwotoneLike size={23} /> : <AiOutlineLike size={23} />}
                           </button>
@@ -408,7 +408,7 @@ const News = () => {
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
                   {settingsOnOff && settingsOnOff.comments_mode === '1' ? (
-                    <CommentSection Nid={NewsId} />
+                    <CommentSection Nid={Data && Data[0].id}/>
                   ) : (
                     <>
                       <div className='text-center my-5'>{translate('comDisable')}</div>
