@@ -27,6 +27,19 @@ messaging.onBackgroundMessage(function (payload) {
   self.registration.showNotification(notificationTitle, notificationOptions)
 })
 
-// self.addEventListener("install", function (event) {
-//   console.log("Hello world from the Service Worker 🤙");
+// self.addEventListener('install', function (event) {
+//   console.log('Hello world from the Service Worker :call_me_hand:');
 // });
+
+// Handle background messages
+self.addEventListener('push', function (event) {
+  const payload = event.data.json();
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(notificationTitle, notificationOptions)
+  );
+});
