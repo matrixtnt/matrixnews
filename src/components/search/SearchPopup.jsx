@@ -12,7 +12,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { locationData } from 'src/store/reducers/settingsReducer'
 
-
 const SearchPopup = () => {
   const [Data, setData] = useState([])
   const [total, setTotal] = useState(null)
