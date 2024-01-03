@@ -1,50 +1,56 @@
 'use client'
 import { store } from '../store/store'
 
+// access key get from env
 export const access_key = process.env.NEXT_PUBLIC_ACCESS_KEY
 
-// get request
+// General Api
+export const GET_SETTINGS = 'get_settings'
 export const GET_CATEGORIES = 'get_category'
-export const GET_BREAKING_NEWS = 'get_breaking_news'
-export const GET_NEWS = 'get_news'
-export const GET_VIDEO = 'get_videos'
+export const GET_LIVE_STREAMING = 'get_live_streaming'
+export const GET_SUBCATEGORY_BY_CATEGORY = 'get_subcategory_by_category'
 export const GET_TAG = 'get_tag'
 export const GET_PAGES = 'get_pages'
-export const GET_LIVE_STREAMING = 'get_live_streaming'
-export const GET_LANGUAGE_LIST = 'get_languages_list'
-export const GET_LANGUAGE_JSON_DATA = 'get_language_json_data'
-export const GET_BOOKMARK = 'get_bookmark'
-export const SET_BOOKMARK = 'set_bookmark'
-export const SET_COMMENT = 'set_comment'
-export const GET_COMMENT_BY_NEWS = 'get_comment_by_news'
 export const GET_NOTIFICATIONS = 'get_notification'
-export const GET_USER_CATEGORIES = 'get_news_by_user_category'
-export const GET_USER_BY_ID = 'get_user_by_id'
-export const GET_USER_NOTIFICATION = 'get_user_notification'
+export const GET_VIDEO = 'get_videos'
 export const GET_FEATURE_SECTION = 'get_featured_sections'
-export const GET_SETTINGS = 'get_settings'
-export const GET_AD_SPACE_NEWS_DETAILS = 'get_ad_space_news_details'
-export const GET_SUBCATEGORY_BY_CATEGORY = 'get_subcategory_by_category'
 export const GET_LOCATION = 'get_location'
-
-// post request
 export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
-export const SET_NEWS_VIEW = 'set_news_view'
-export const SET_BREAKING_NEWS_VIEW = 'set_breaking_news_view'
-export const UPDATE_PROFILE = 'update_profile'
-export const SET_NEWS = 'set_news'
-export const SET_COMMENT_LIKE_DISLIKE = 'set_comment_like_dislike'
 export const SET_FLAG = 'set_flag'
+export const REGISTER_TOKEN = 'register_token'
 
-// other mix
+// User Api
+export const GET_USER_BY_ID = 'get_user_by_id'
+export const GET_USER_NOTIFICATION = 'get_user_notification'
 export const USER_SIGNUP = 'user_signup'
+export const UPDATE_PROFILE = 'update_profile'
 export const DELETE_USER_NOTIFICATION = 'delete_user_notification'
-export const DELETE_COMMENT = 'delete_comment'
+export const DELETE_ACCOUNT = 'delete_user'
+
+// News Api
+export const GET_AD_SPACE_NEWS_DETAILS = 'get_ad_space_news_details'
+export const GET_NEWS = 'get_news'
+export const GET_BREAKING_NEWS = 'get_breaking_news'
+export const SET_NEWS = 'set_news'
 export const DELETE_IMAGES = 'delete_news_images'
 export const DELETE_NEWS = 'delete_news'
-export const REGISTER_TOKEN = 'register_token'
-export const DELETE_ACCOUNT = 'delete_user'
+export const SET_NEWS_VIEW = 'set_news_view'
+export const SET_BREAKING_NEWS_VIEW = 'set_breaking_news_view'
+
+// Languages Api
+export const GET_LANGUAGE_LIST = 'get_languages_list'
+export const GET_LANGUAGE_JSON_DATA = 'get_language_json_data'
+
+// Comment Api
+export const GET_COMMENT_BY_NEWS = 'get_comment_by_news'
+export const SET_COMMENT = 'set_comment'
+export const SET_COMMENT_LIKE_DISLIKE = 'set_comment_like_dislike'
+export const DELETE_COMMENT = 'delete_comment'
+
+// Bookmark Api
+export const GET_BOOKMARK = 'get_bookmark'
+export const SET_BOOKMARK = 'set_bookmark'
 
 //get language from storage
 export const getLanguage = () => {
