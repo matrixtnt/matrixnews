@@ -10,7 +10,7 @@ import { getSubcategoryByCategoryApi, setNewsApi } from '../../store/actions/cam
 import { selectLanguages } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import { selectcreateNewsCurrentLanguage, setCreateNewsCurrentLanguage } from '../../store/reducers/createNewsReducer'
-import { Select, Space } from 'antd'
+import { Alert, Select, Space } from 'antd'
 import Dropzone from 'react-dropzone'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -50,7 +50,7 @@ const CreateNews = () => {
     defualtTitle: null,
     defaultMetatitle: null,
     defaultMetaDescription: null,
-    defaultMetaKeyword:null,
+    defaultMetaKeyword: null,
     defaultSlug: null,
     defualtLanguage: null,
     defualtCategory: null,
@@ -377,7 +377,39 @@ const CreateNews = () => {
     // setMainImage(URL.createObjectURL(file));
   }
 
-  
+  // meta description condition
+  // const handleMetaDescriptionChange = e => {
+  //   const maxLength = 160
+  //   const minLength = 50 // Set your desired maximum length
+  //   const inputValue = e.target.value
+
+  //   // Check if the input value exceeds the maxLength or is less than the minLength
+  //   if (inputValue.length > maxLength) {
+  //     const truncatedValue = inputValue.slice(0, maxLength)
+  //     setDefualtValue({ ...DefaultValue, defaultMetaDescription: truncatedValue })
+  //     toast.error('Meta Description length should not exceed 160 characters')
+  //   } else if (inputValue.length < minLength) {
+  //     setDefualtValue({ ...DefaultValue, defaultMetaDescription: inputValue })
+  //     toast.error('Meta Description length should be at least 50 characters')
+  //   } else {
+  //     setDefualtValue({ ...DefaultValue, defaultMetaDescription: inputValue })
+  //   }
+  // }
+
+  // // meta title condition
+  // const handleMetaTitleChange = e => {
+  //   const maxLength = 60
+  //   const inputValue = e.target.value
+
+  //   // Check if the input value exceeds the maxLength or is less than the minLength
+  //   if (inputValue.length > maxLength) {
+  //     const truncatedValue = inputValue.slice(0, maxLength)
+  //     setDefualtValue({ ...DefaultValue, defaultMetatitle: truncatedValue })
+  //     toast.error('Title length should not exceed 60 characters')
+  //   } else {
+  //     setDefualtValue({ ...DefaultValue, defaultMetatitle: inputValue })
+  //   }
+  // }
 
   // final submit data
   const finalSubmit = e => {
@@ -454,6 +486,13 @@ const CreateNews = () => {
                         required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
                       />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Meta Title length should not exceed 60 characters'
+                        type='warning'
+                      />
                     </div>
                     <div className='input_form mb-2'>
                       <TextArea
@@ -463,6 +502,13 @@ const CreateNews = () => {
                         defaultValue={DefaultValue.defaultMetaDescription}
                         required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
+                      />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Meta Description length should between in 50 to 160 characters'
+                        type='warning'
                       />
                     </div>
                     <div className='input_form mb-2'>
@@ -474,6 +520,14 @@ const CreateNews = () => {
                         required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
                       />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Meta Keywords are not more than 10 keyword phrases.'
+                        type='warning'
+                      />
+                      
                     </div>
                     <div className='input_form mb-2'>
                       <input
@@ -481,6 +535,13 @@ const CreateNews = () => {
                         defaultValue={DefaultValue.defaultSlug}
                         required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultSlug: e.target.value })}
+                      />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Slug only accept lowercase letters, numbers, and hyphens. No spaces or special characters allowed.'
+                        type='warning'
                       />
                     </div>
                     <div className='dropdown_form mb-2'>

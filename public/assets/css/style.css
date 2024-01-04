@@ -6204,3 +6204,7 @@ span {
   text-align: center;
   margin: 50px auto;
 }
+
+.create_news .ant-alert-message{
+  font-size: x-small;
+}

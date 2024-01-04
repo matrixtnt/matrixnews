@@ -6,14 +6,10 @@ import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
-import {
-  deleteImageApi,
-  getSubcategoryByCategoryApi,
-  setNewsApi
-} from '../../store/actions/campaign'
+import { deleteImageApi, getSubcategoryByCategoryApi, setNewsApi } from '../../store/actions/campaign'
 import { selectLanguages } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
-import { Select, Space } from 'antd'
+import { Alert, Select, Space } from 'antd'
 import Dropzone from 'react-dropzone'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -66,7 +62,7 @@ const EditNews = () => {
     defualTitle: manageNews.title,
     defaultMetatitle: manageNews.meta_title,
     defaultMetaDescription: manageNews.meta_description,
-    defaultMetaKeyword:manageNews.meta_keyword,
+    defaultMetaKeyword: manageNews.meta_keyword,
     defaultSlug: manageNews.slug,
     categorydefault: manageNews.category?.category_name,
     standardType: manageNews.content_type,
@@ -119,18 +115,17 @@ const EditNews = () => {
     const categoryID = JSON.parse(value)
     setDefaultValue({ ...DefaultValue, categorydefault: option.label, categoryID: categoryID })
     getSubcategoryByCategoryApi({
-      category_id:categoryID,
-      onSuccess:res => {
+      category_id: categoryID,
+      onSuccess: res => {
         setSubCategory(res.data)
         setShowsubCategory(true)
       },
-      onError:err => {
+      onError: err => {
         if (err === 'No Data Found') {
           setShowsubCategory(false)
         }
       }
-    }
-    )
+    })
   }
 
   const subcategorySelector = (value, option) => {
@@ -287,32 +282,24 @@ const EditNews = () => {
   }
 
   // react query
-  const {
-    status: subbystatus
-  } = useQuery({
+  const { status: subbystatus } = useQuery({
     queryKey: ['getSubcategorybycategories', DefaultValue.languageId],
     queryFn: getsubcategorybycategory
   })
 
   // react query
-  const {
-    data: category,
-  } = useQuery({
+  const { data: category } = useQuery({
     queryKey: ['getcategories', DefaultValue.languageId],
     queryFn: getCategories
   })
 
   // react query
-  const {
-    data: tagsData,
-  } = useQuery({
+  const { data: tagsData } = useQuery({
     queryKey: ['getTag', language_id, access_key],
     queryFn: getTag
   })
 
-  const {
-    data: locationOptions,
-  } = useQuery({
+  const { data: locationOptions } = useQuery({
     queryKey: ['getlocation', access_key],
     queryFn: getLocationlatlong
   })
@@ -453,32 +440,31 @@ const EditNews = () => {
   const finalSubmit = e => {
     e.preventDefault()
     setNewsApi({
-      action_type:2,
-      category_id:DefaultValue.categoryID,
-      subcategory_id:DefaultValue.subcategoryID,
-      tag_id:DefaultValue.tagsid,
-      title:DefaultValue.defualTitle,
+      action_type: 2,
+      category_id: DefaultValue.categoryID,
+      subcategory_id: DefaultValue.subcategoryID,
+      tag_id: DefaultValue.tagsid,
+      title: DefaultValue.defualTitle,
       meta_title: DefaultValue.defaultMetatitle,
       meta_description: DefaultValue.defaultMetaDescription,
       meta_keyword: DefaultValue.defaultMetaKeyword,
       slug: DefaultValue.defaultSlug,
-      content_type:DefaultValue.contentType,
-      content_data:url,
-      description:DefaultValue.descriptionValue,
-      image:DefaultValue.imagedefault,
+      content_type: DefaultValue.contentType,
+      content_data: url,
+      description: DefaultValue.descriptionValue,
+      image: DefaultValue.imagedefault,
       images,
-      ofile:DefaultValue.dateValue.toISOString().split('T')[0],
-      language_id:DefaultValue.languageId,
-      location_id:DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
-      onSuccess:response => {
+      ofile: DefaultValue.dateValue.toISOString().split('T')[0],
+      language_id: DefaultValue.languageId,
+      location_id: DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
+      onSuccess: response => {
         toast.success(response.message)
         navigate.push('/manage-news')
       },
-      onError:error => {
+      onError: error => {
         console.log('error', error)
       }
-    }
-    )
+    })
   }
 
   // load language data to reducer
@@ -499,17 +485,16 @@ const EditNews = () => {
   const handleRemoveImage = (e, id) => {
     e.preventDefault()
     deleteImageApi({
-      image_id:id,
-      onSuccess:res => {
+      image_id: id,
+      onSuccess: res => {
         toast.success(res.message)
         const updatedImages = DefaultValue.multipleImage.filter(image => image.id !== id)
         setDefaultValue(prevState => ({ ...prevState, multipleImage: updatedImages }))
       },
-      onError:err => {
+      onError: err => {
         toast.error(err.message)
       }
-    }
-    )
+    })
   }
 
   // back button
@@ -536,6 +521,15 @@ const EditNews = () => {
                   </div>
 
                   <div className='form_details'>
+                    <div className='input_form mb-2'>
+                      <input
+                        type='text'
+                        defaultValue={DefaultValue.defualTitle}
+                        placeholder={translate('titleLbl')}
+                        required
+                        onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
+                      />
+                    </div>
                     <div className='input_form textarea mb-2'>
                       <TextArea
                         rows={2}
@@ -544,6 +538,13 @@ const EditNews = () => {
                         defaultValue={DefaultValue.defaultMetatitle}
                         required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
+                      />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Meta Title length should not exceed 60 characters'
+                        type='warning'
                       />
                     </div>
                     <div className='input_form mb-2'>
@@ -555,6 +556,13 @@ const EditNews = () => {
                         required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
                       />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Meta Description length should between in 50 to 160 characters'
+                        type='warning'
+                      />
                     </div>
                     <div className='input_form mb-2'>
                       <TextArea
@@ -565,6 +573,13 @@ const EditNews = () => {
                         required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
                       />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Meta Keywords are not more than 10 keyword phrases.'
+                        type='warning'
+                      />
                     </div>
                     <div className='input_form mb-2'>
                       <input
@@ -572,6 +587,13 @@ const EditNews = () => {
                         defaultValue={DefaultValue.defaultSlug}
                         required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultSlug: e.target.value })}
+                      />
+                      <Alert
+                        closable
+                        showIcon
+                        className='mt-2'
+                        message='Slug only accept lowercase letters, numbers, and hyphens. No spaces or special characters allowed.'
+                        type='warning'
                       />
                     </div>
                     <div className='input_form mb-2'>
