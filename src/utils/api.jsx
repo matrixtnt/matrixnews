@@ -277,17 +277,17 @@ export const setnewsApi = (
   title,
   meta_title,
   meta_description,
+  meta_keyword,
+  slug,
   content_type,
   content_data,
   description,
   image,
   ofile,
-  slug,
   show_till,
   language_id,
   location_id
 ) => {
-  let user = getUser()
   let data = new FormData()
   let createToEdit = store.getState().createNews.createToEdit
   let news_id = createToEdit ? createToEdit.id : null
@@ -296,26 +296,27 @@ export const setnewsApi = (
     data.append('news_id', news_id)
   }
   data.append('action_type', action_type) //1-add, 2-update if action_type- 2 => news_id:1
-  data.append('user_id', user)
   data.append('category_id', category_id)
   data.append('subcategory_id', subcategory_id)
   data.append('tag_id', tag_id)
   data.append('title', title)
   data.append('meta_title', meta_title)
   data.append('meta_description', meta_description)
+  data.append('meta_keyword', meta_keyword)
   data.append('slug', slug)
   data.append('content_type', content_type)
   data.append('content_data', content_data)
   data.append('description', description)
   data.append('image', image)
-  console.log(ofile)
-  ofile.forEach(element => {
-
-    data.append('ofile[]', element)
-  })
+  if (Array.isArray(ofile)) {
+    ofile.forEach((elem, key) => {
+      data.append('ofile[]', elem)
+    })
+  }
   data.append('show_till', show_till)
   data.append('language_id', language_id)
   data.append('location_id', location_id)
+
   return {
     url: `${SET_NEWS}`,
     method: 'POST',

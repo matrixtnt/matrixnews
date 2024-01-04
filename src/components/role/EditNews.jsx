@@ -33,6 +33,8 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getsubcategorybycategoryApi } from 'src/hooks/subcategoryByCategoryApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
+import { Input } from 'antd'
+const { TextArea } = Input
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
@@ -62,7 +64,11 @@ const EditNews = () => {
   // console.log(manageNews)
   const [DefaultValue, setDefaultValue] = useState({
     defualTitle: manageNews.title,
-    categorydefault: manageNews.category_name,
+    defaultMetatitle: manageNews.meta_title,
+    defaultMetaDescription: manageNews.meta_description,
+    defaultMetaKeyword:manageNews.meta_keyword,
+    defaultSlug: manageNews.slug,
+    categorydefault: manageNews.category?.category_name,
     standardType: manageNews.content_type,
     contentValue: manageNews.content_value,
     tagValue: manageNews.tag_name?.split(','),
@@ -72,17 +78,14 @@ const EditNews = () => {
     categoryID: manageNews.category_id,
     tagsid: manageNews.tag_id,
     contentType: manageNews.content_type,
-    multipleImage: manageNews.image_data,
-    subcategorydefault: manageNews.subcategory_name,
+    multipleImage: manageNews.images,
+    subcategorydefault: manageNews?.sub_category?.subcategory_name,
     subcategoryID: manageNews.subcategory_id,
     languageName: matchingObject.language,
     descriptionValue: manageNews.description,
     defualtLocationId: manageNews.location_id,
     defualtLocation: manageNews.location_name
   })
-
-  // console.log(DefaultValue)
-  // console.log("defauklt", DefaultValue);
 
   const handleDate = date => {
     setDefaultValue({ ...DefaultValue, dateValue: date })
@@ -455,6 +458,10 @@ const EditNews = () => {
       subcategory_id:DefaultValue.subcategoryID,
       tag_id:DefaultValue.tagsid,
       title:DefaultValue.defualTitle,
+      meta_title: DefaultValue.defaultMetatitle,
+      meta_description: DefaultValue.defaultMetaDescription,
+      meta_keyword: DefaultValue.defaultMetaKeyword,
+      slug: DefaultValue.defaultSlug,
       content_type:DefaultValue.contentType,
       content_data:url,
       description:DefaultValue.descriptionValue,
@@ -529,6 +536,44 @@ const EditNews = () => {
                   </div>
 
                   <div className='form_details'>
+                    <div className='input_form textarea mb-2'>
+                      <TextArea
+                        rows={2}
+                        placeholder={translate('meta-title')}
+                        maxLength={2}
+                        defaultValue={DefaultValue.defaultMetatitle}
+                        required
+                        onChange={e => setDefaultValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form mb-2'>
+                      <TextArea
+                        rows={2}
+                        maxLength={2}
+                        placeholder={translate('meta-description')}
+                        defaultValue={DefaultValue.defaultMetaDescription}
+                        required
+                        onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form mb-2'>
+                      <TextArea
+                        rows={2}
+                        maxLength={2}
+                        placeholder={translate('meta-keywords')}
+                        defaultValue={DefaultValue.defaultMetaKeyword}
+                        required
+                        onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form mb-2'>
+                      <input
+                        placeholder={translate('slug')}
+                        defaultValue={DefaultValue.defaultSlug}
+                        required
+                        onChange={e => setDefaultValue({ ...DefaultValue, defaultSlug: e.target.value })}
+                      />
+                    </div>
                     <div className='input_form mb-2'>
                       <input
                         type='text'

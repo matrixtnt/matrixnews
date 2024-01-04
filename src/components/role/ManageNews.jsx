@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { deleteNewsApi } from '../../store/actions/campaign'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../store/reducers/userReducer'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
@@ -11,28 +10,22 @@ import { loadManageToEdit } from '../../store/reducers/createNewsReducer'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { access_key, getLanguage } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 
 const ManageNews = () => {
   const navigate = useRouter()
-  const userData = useSelector(selectUser)
   const [Data, setData] = useState([])
   const currentLanguage = useSelector(selectCurrentLanguage)
   let { id: language_id } = getLanguage()
-  let user = getUser()
 
   // api call
   const getNews = async () => {
     try {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        offset: '',
-        limit: '',
-        user_id: user,
         get_user_news: 1,
-        search: '', // {optional}
         language_id: language_id,
         latitude: null,
         longitude: null

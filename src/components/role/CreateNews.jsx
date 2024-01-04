@@ -50,6 +50,7 @@ const CreateNews = () => {
     defualtTitle: null,
     defaultMetatitle: null,
     defaultMetaDescription: null,
+    defaultMetaKeyword:null,
     defaultSlug: null,
     defualtLanguage: null,
     defualtCategory: null,
@@ -86,7 +87,6 @@ const CreateNews = () => {
   const handleChangeContent = value => {
     setContent(value)
   }
-
   // load language data to reducer
   const languageSelector = value => {
     setShowCategory(true)
@@ -377,6 +377,8 @@ const CreateNews = () => {
     // setMainImage(URL.createObjectURL(file));
   }
 
+  
+
   // final submit data
   const finalSubmit = e => {
     e.preventDefault()
@@ -388,6 +390,7 @@ const CreateNews = () => {
       title: DefaultValue.defualtTitle,
       meta_title: DefaultValue.defaultMetatitle,
       meta_description: DefaultValue.defaultMetaDescription,
+      meta_keyword: DefaultValue.defaultMetaKeyword,
       slug: DefaultValue.defaultSlug,
       content_type: DefaultValue.defaultType,
       content_data: DefaultValue.defualtUrl,
@@ -460,6 +463,16 @@ const CreateNews = () => {
                         defaultValue={DefaultValue.defaultMetaDescription}
                         required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form mb-2'>
+                      <TextArea
+                        rows={2}
+                        maxLength={2}
+                        placeholder={translate('meta-keywords')}
+                        defaultValue={DefaultValue.defaultMetaKeyword}
+                        required
+                        onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
                       />
                     </div>
                     <div className='input_form mb-2'>
