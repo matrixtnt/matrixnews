@@ -31,7 +31,7 @@ const ManageNews = () => {
         offset: '',
         limit: '',
         user_id: user,
-        get_user_news: userData.data.id,
+        get_user_news: 1,
         search: '', // {optional}
         language_id: language_id,
         latitude: null,

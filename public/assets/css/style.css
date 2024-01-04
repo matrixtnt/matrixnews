@@ -432,7 +432,7 @@ a {
     list-style-type: none;
   }
   #Nav-btns {
-    margin-top: 10%!important;
+    margin-top: 10% !important;
     list-style-type: none;
   }
 
@@ -2680,14 +2680,14 @@ a#social_platforms svg:hover {
 
 #B_NV-Header {
   display: flex;
-    justify-content: space-between;
-    background-color: #ffffff;
-    color: var(--secondary-color);
-    border-top: 1px solid #c0c5d0;
-    border-bottom: 1px solid #c0c5d0;
-    font-family: 'Roboto', sans-serif;
-    padding: 15px 0;
-    flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: var(--secondary-color);
+  border-top: 1px solid #c0c5d0;
+  border-bottom: 1px solid #c0c5d0;
+  font-family: 'Roboto', sans-serif;
+  padding: 15px 0;
+  flex-wrap: wrap;
 }
 
 #B_NV-left-head {
@@ -5680,6 +5680,22 @@ span {
   padding-left: 15px;
 }
 
+.create_news .input_form input::placeholder{
+  color: #dedede;
+}
+
+.create_news .input_form textarea {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  padding-left: 15px;
+}
+
+.create_news .input_form textarea::placeholder{
+  color: #dedede;
+  font-size: 14px;
+}
+
 .create_news .show_date {
   position: relative;
 }
@@ -6180,11 +6196,11 @@ span {
   }
 }
 
-.error_button a{
-  border: none!important;
+.error_button a {
+  border: none !important;
 }
 
-.error_page{
+.error_page {
   text-align: center;
   margin: 50px auto;
 }

@@ -253,6 +253,9 @@
    "comDelSucc": "Comment Delete Successfully...",
    "comDisable": "Comments Disabled by Admin !!!",   
    "disabledCategory": "Category Disabled by Admin",
-   "More >>":"More >>"
+   "More >>":"More >>",
+   "meta-title":"Meta Title",
+   "meta-description":"Meta Description",
+   "slug":"slug"
  
  }

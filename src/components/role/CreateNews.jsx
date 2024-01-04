@@ -25,6 +25,8 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
+import { Input } from 'antd'
+const { TextArea } = Input
 
 const { Option } = Select
 SwiperCore.use([Navigation, Pagination])
@@ -46,6 +48,9 @@ const CreateNews = () => {
   let { id: language_id } = getLanguage()
   const [DefaultValue, setDefualtValue] = useState({
     defualtTitle: null,
+    defaultMetatitle: null,
+    defaultMetaDescription: null,
+    defaultSlug: null,
     defualtLanguage: null,
     defualtCategory: null,
     defualtCategoryID: null,
@@ -95,18 +100,17 @@ const CreateNews = () => {
     const categoryID = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtCategoryID: categoryID, defualtCategory: option.label })
     getSubcategoryByCategoryApi({
-      category_id:categoryID,
-      onSuccess:res => {
+      category_id: categoryID,
+      onSuccess: res => {
         setSubCategory(res.data)
         setShowsubCategory(true)
       },
-      onError:err => {
+      onError: err => {
         if (err === 'No Data Found') {
           setShowsubCategory(false)
         }
       }
-    }
-    )
+    })
   }
 
   const subcategorySelector = (value, option) => {
@@ -232,7 +236,7 @@ const CreateNews = () => {
       return data.data
     } catch (error) {
       if (error === 'No Data Found') {
-        <span>{translate('nodatafound')}</span>
+        ;<span>{translate('nodatafound')}</span>
       }
     }
   }
@@ -264,9 +268,7 @@ const CreateNews = () => {
   })
 
   // react query
-  const {
-    data: tagsData
-  } = useQuery({
+  const { data: tagsData } = useQuery({
     queryKey: ['getTag', language_id, access_key],
     queryFn: getTag
   })
@@ -379,29 +381,31 @@ const CreateNews = () => {
   const finalSubmit = e => {
     e.preventDefault()
     setNewsApi({
-      action_type:1,
-      category_id:DefaultValue.defualtCategoryID,
-      subcategory_id:DefaultValue.defualtSubCategoryID,
-      tag_id:DefaultValue.defualtTag,
-      title:DefaultValue.defualtTitle,
-      content_type:DefaultValue.defaultType,
-      content_data:DefaultValue.defualtUrl,
-      description:content,
-      image:DefaultValue.defaultImagefile,
-      ofile:images,
-      show_till:DefaultValue.defualtStartDate.toISOString().split('T')[0],
-      language_id:createNewsLanguage.id,
-      location_id:DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
-      onSuccess:response => {
+      action_type: 1,
+      category_id: DefaultValue.defualtCategoryID,
+      subcategory_id: DefaultValue.defualtSubCategoryID,
+      tag_id: DefaultValue.defualtTag,
+      title: DefaultValue.defualtTitle,
+      meta_title: DefaultValue.defaultMetatitle,
+      meta_description: DefaultValue.defaultMetaDescription,
+      slug: DefaultValue.defaultSlug,
+      content_type: DefaultValue.defaultType,
+      content_data: DefaultValue.defualtUrl,
+      description: content,
+      image: DefaultValue.defaultImagefile,
+      ofile: images,
+      show_till: DefaultValue.defualtStartDate.toISOString().split('T')[0],
+      language_id: createNewsLanguage.id,
+      location_id: DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
+      onSuccess: response => {
         // console.log(response)
         toast.success(response.message)
         navigate.push('/manage-news')
       },
-      onError:error => {
+      onError: error => {
         console.log('error', error)
       }
-    }
-    )
+    })
   }
 
   // back button
@@ -436,6 +440,34 @@ const CreateNews = () => {
                         defaultValue={DefaultValue.defualtTitle}
                         required
                         onChange={e => setDefualtValue({ ...DefaultValue, defualtTitle: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form textarea mb-2'>
+                      <TextArea
+                        rows={2}
+                        placeholder={translate('meta-title')}
+                        maxLength={2}
+                        defaultValue={DefaultValue.defaultMetatitle}
+                        required
+                        onChange={e => setDefualtValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form mb-2'>
+                      <TextArea
+                        rows={2}
+                        maxLength={2}
+                        placeholder={translate('meta-description')}
+                        defaultValue={DefaultValue.defaultMetaDescription}
+                        required
+                        onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
+                      />
+                    </div>
+                    <div className='input_form mb-2'>
+                      <input
+                        placeholder={translate('slug')}
+                        defaultValue={DefaultValue.defaultSlug}
+                        required
+                        onChange={e => setDefualtValue({ ...DefaultValue, defaultSlug: e.target.value })}
                       />
                     </div>
                     <div className='dropdown_form mb-2'>
@@ -507,11 +539,12 @@ const CreateNews = () => {
                           placeholder='Select Location'
                           onChange={value => setDefualtValue({ ...DefaultValue, defualtLocation: value })}
                         >
-                          {locationOptions && locationOptions.map(location => (
-                            <Select.Option key={location.id} value={location.id}>
-                              {location.location_name}
-                            </Select.Option>
-                          ))}
+                          {locationOptions &&
+                            locationOptions.map(location => (
+                              <Select.Option key={location.id} value={location.id}>
+                                {location.location_name}
+                              </Select.Option>
+                            ))}
                         </Select>
                       </div>
                     ) : null}

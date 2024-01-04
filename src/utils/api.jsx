@@ -179,23 +179,7 @@ export const deleteCommentApi = comment_id => {
   }
 }
 
-// 8. get notification
-export const getNotificationsApi = (offset, limit) => {
-  let { id: language_id } = getLanguage()
-  return {
-    url: `${GET_NOTIFICATIONS}`,
-    method: 'GET',
-    params: {
-      access_key: access_key,
-      offset: offset,
-      limit: limit,
-      language_id: language_id
-    },
-    authorizationHeader: true
-  }
-}
-
-// 9. set likedislike
+// 8. set likedislike
 export const setLikeDisLikeApi = (news_id, status) => {
   let user = getUser()
   return {
@@ -211,7 +195,7 @@ export const setLikeDisLikeApi = (news_id, status) => {
   }
 }
 
-// 10. get user notification
+// 9. get user notification
 export const getUserNotificationApi = (offset, limit) => {
   let user = getUser()
   return {
@@ -227,7 +211,7 @@ export const getUserNotificationApi = (offset, limit) => {
   }
 }
 
-// 11. delete user notification
+// 10. delete user notification
 export const DeleteUserNotificationApi = id => {
   return {
     url: `${DELETE_USER_NOTIFICATION}`,
@@ -240,7 +224,7 @@ export const DeleteUserNotificationApi = id => {
   }
 }
 
-// 12. set user categories
+// 11. set user categories
 export const setUserCategoriesApi = category_id => {
   let user = getUser()
   return {
@@ -255,7 +239,7 @@ export const setUserCategoriesApi = category_id => {
   }
 }
 
-// 14. get settings
+// 12. get settings
 export const getSettingsApi = type => {
   return {
     url: `${GET_SETTINGS}`,
@@ -268,8 +252,8 @@ export const getSettingsApi = type => {
   }
 }
 
-// 16. update profile image
-export const updateProfileApi = (name,mobile,email,image) => {
+// 13. update profile image
+export const updateProfileApi = (name, mobile, email, image) => {
   let data = new FormData()
   data.append('access_key', access_key)
   data.append('name', name)
@@ -284,18 +268,21 @@ export const updateProfileApi = (name,mobile,email,image) => {
   }
 }
 
-// 17. set news
+// 14. set news
 export const setnewsApi = (
   action_type,
   category_id,
   subcategory_id,
   tag_id,
   title,
+  meta_title,
+  meta_description,
   content_type,
   content_data,
   description,
   image,
   ofile,
+  slug,
   show_till,
   language_id,
   location_id
@@ -314,11 +301,16 @@ export const setnewsApi = (
   data.append('subcategory_id', subcategory_id)
   data.append('tag_id', tag_id)
   data.append('title', title)
+  data.append('meta_title', meta_title)
+  data.append('meta_description', meta_description)
+  data.append('slug', slug)
   data.append('content_type', content_type)
   data.append('content_data', content_data)
   data.append('description', description)
   data.append('image', image)
+  console.log(ofile)
   ofile.forEach(element => {
+
     data.append('ofile[]', element)
   })
   data.append('show_till', show_till)
@@ -332,7 +324,7 @@ export const setnewsApi = (
   }
 }
 
-// 18. delete image for news
+// 15. delete image for news
 export const deleteimageApi = image_id => {
   return {
     url: `${DELETE_IMAGES}`,
@@ -345,7 +337,7 @@ export const deleteimageApi = image_id => {
   }
 }
 
-// 19. delete news
+// 16. delete news
 export const deletenewsApi = news_id => {
   return {
     url: `${DELETE_NEWS}`,
@@ -358,7 +350,7 @@ export const deletenewsApi = news_id => {
   }
 }
 
-// 20. subcatgory by category
+// 17. subcatgory by category
 export const getsubcategorybycategoryApi = category_id => {
   let { id: language_id } = getLanguage()
   return {
@@ -373,7 +365,7 @@ export const getsubcategorybycategoryApi = category_id => {
   }
 }
 
-// 21. set comment like dislike
+// 18. set comment like dislike
 export const set_comment_like_dislike_Api = (comment_id, status) => {
   let { id: language_id } = getLanguage()
   let user = getUser()
@@ -391,7 +383,7 @@ export const set_comment_like_dislike_Api = (comment_id, status) => {
   }
 }
 
-// 22. set flag
+// 19. set flag
 export const set_flag_Api = (comment_id, news_id, message) => {
   let user = getUser()
   return {
@@ -408,7 +400,7 @@ export const set_flag_Api = (comment_id, news_id, message) => {
   }
 }
 
-// 24. acccount delete
+// 20. acccount delete
 export const accountdeleteApi = () => {
   let user = getUser()
   return {
