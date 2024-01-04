@@ -277,14 +277,12 @@ const StyleFive = ({ isLoading, Data }) => {
                                 onError={placeholderImage}
                               />
                               <div id='bns-card-body' className='card-body ps-0'>
-                                <Link
+                                <div
                                   id='btnbnsCatagory'
                                   className='btn btn-sm'
-                                  type='button'
-                                  href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}
                                 >
                                   {truncateText(element.category_name, 10)}
-                                </Link>
+                                </div>
                                 <h5 id='bns-card-text' className=''>
                                   {element.title}
                                 </h5>

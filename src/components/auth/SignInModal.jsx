@@ -21,7 +21,6 @@ import { translate } from '../../utils'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
-import { setRegisterTokenApi } from '../../store/actions/campaign'
 import FirebaseData from 'src/utils/Firebase'
 import toast from 'react-hot-toast'
 import { locationData } from 'src/store/reducers/settingsReducer'
@@ -98,14 +97,14 @@ const SignInModal = props => {
   }
 
   // sign in google
-  const signInWithGoogle = () => {
+  const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider()
-    signInWithPopup(authentication, provider)
+     await signInWithPopup(authentication, provider)
       .then(async response => {
         // console.log("google resonse",response)
         props.onHide()
         props.setIsLogout(true)
-        register({
+        await register({
           firebase_id:response.user.uid,
           name:response.user.displayName,
           email:response.user.email,
@@ -113,21 +112,9 @@ const SignInModal = props => {
           profile:response.user.photoURL,
           status:'1',
           fcm_id:location.fcmtoken,
-          onSuccess:success => {
+          onSuccess: async (res) => {
             toast.success(translate('loginMsg'))
-            setRegisterTokenApi({
-              token:location.fcmtoken,
-              latitude:storedLatitude,
-              longitude:storedLongitude,
-              onSuccess:success => {
-                // console.log(success);
-              },
-              onError:error => {
-                console.log(error)
-              }
-            }
-            )
-            if (success.data.is_login === '1') {
+            if (res.data.is_login === '1') {
               //If new User then show the Update Profile Screen
               navigate.push('/profile-update')
             }

@@ -47,7 +47,7 @@ export default userSlice.reducer;
 // api calls
 
 // register
-export const register = ({firebase_id="", name="", email="", mobile="", type="", profile="", status="", fcm_id="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const register = async ({firebase_id="", name="", email="", mobile="", type="", profile="", status="", fcm_id="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
     store.dispatch(apiCallBegan({
         ...userSignUpApi(firebase_id, name, email, mobile, type, profile, status, fcm_id),
         displayToast: false,

@@ -28,6 +28,7 @@ const api = ({ dispatch, getState }) => next => async action => {
         headers = {
             ...headers,
             "Authorization": "Bearer " + getState().user?.data?.token,
+            "Content-Type": "application/json",
         };
     }
 

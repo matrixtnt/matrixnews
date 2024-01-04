@@ -60,12 +60,12 @@ const Header = () => {
 
   const settings = useSelector(settingsData)
 
-  // user roles api call
+  // user roles api call 
   const getUserById = async () => {
+    if(!userData.data.firebase_id) return false 
     try {
       const { data } = await getUserByIdApi.getUserById({
         access_key: access_key,
-        user_id: user
       });
   
       if (data && data.data) {
@@ -82,18 +82,13 @@ const Header = () => {
         return [];
       }
     } catch (error) {
-      console.log(error);
-      // Handle the error gracefully
-      // For example:
-      // setErrorState(true);
-      // Handle error state in the component
     }
   };
   
 
   // react query
   const {} = useQuery({
-    queryKey: ['userRoles', user],
+    queryKey: ['userRoles',userData],
     queryFn: getUserById,
     staleTime: 0
   })

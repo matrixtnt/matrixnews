@@ -18,7 +18,6 @@ export const GET_LOCATION = 'get_location'
 export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
 export const SET_FLAG = 'set_flag'
-export const REGISTER_TOKEN = 'register_token'
 
 // User Api
 export const GET_USER_BY_ID = 'get_user_by_id'
@@ -256,18 +255,6 @@ export const setUserCategoriesApi = category_id => {
   }
 }
 
-// 13. get user by id
-export const getUserByIdApi = () => {
-  return {
-    url: `${GET_USER_BY_ID}`,
-    method: 'GET',
-    params: {
-      access_key: access_key
-    },
-    authorizationHeader: true
-  }
-}
-
 // 14. get settings
 export const getSettingsApi = type => {
   return {
@@ -417,23 +404,6 @@ export const set_flag_Api = (comment_id, news_id, message) => {
       news_id: news_id, // 1=like, 2=dislike, 0=none
       message: message
     },
-    authorizationHeader: true
-  }
-}
-
-// 23. register token
-export const register_token_api = (token, latitude, longitude) => {
-  let { id: language_id } = getLanguage()
-  let data = new FormData()
-  data.append('access_key', access_key)
-  data.append('language_id', language_id)
-  data.append('token', token)
-  if (latitude != null) data.append('latitude', latitude)
-  if (longitude != null) data.append('longitude', longitude)
-  return {
-    url: `${REGISTER_TOKEN}`,
-    method: 'POST',
-    data,
     authorizationHeader: true
   }
 }

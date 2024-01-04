@@ -7,14 +7,12 @@ import {
   setLikeDisLikeApi,
   DeleteUserNotificationApi,
   setUserCategoriesApi,
-  getUserByIdApi,
   setnewsApi,
   deleteimageApi,
   deletenewsApi,
   getsubcategorybycategoryApi,
   set_comment_like_dislike_Api,
   set_flag_Api,
-  register_token_api
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -146,19 +144,6 @@ export const setusercategoriesApi = ({
   )
 }
 
-// 8. get user by id
-export const getuserbyidApi = ({ onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
-  store.dispatch(
-    apiCallBegan({
-      ...getUserByIdApi(),
-      displayToast: false,
-      onStart,
-      onSuccess,
-      onError
-    })
-  )
-}
-
 // 9. set news
 export const setNewsApi = ({
   action_type = '',
@@ -278,26 +263,6 @@ export const setFlagApi = ({
   store.dispatch(
     apiCallBegan({
       ...set_flag_Api(comment_id, news_id, message),
-      displayToast: false,
-      onStart,
-      onSuccess,
-      onError
-    })
-  )
-}
-
-// 15. register_token
-export const setRegisterTokenApi = ({
-  token = '',
-  latitude = '',
-  longitude = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
-}) => {
-  store.dispatch(
-    apiCallBegan({
-      ...register_token_api(token, latitude, longitude),
       displayToast: false,
       onStart,
       onSuccess,

@@ -59,11 +59,10 @@ const StyleFour = ({ Data }) => {
                 <div className='row'>
                   {Data.videos.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                         <div
                           id='rns-card'
                           className='card card_hover_two'
-                          key={index.id}
                           onClick={() => {
                             handleVideoUrl(value.content_value)
                             TypeUrl(value.type)
@@ -139,8 +138,8 @@ const StyleFour = ({ Data }) => {
                 <div className='row'>
                   {Data.news.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'>
-                        <Link id='rns-card' className='card card_hover_two' key={index.id}href={{pathname:`/news/${value.slug}`,query: { language_id: value.language_id}}}>
+                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'  key={value.id}>
+                        <Link id='rns-card' className='card card_hover_two' href={{pathname:`/news/${value.slug}`,query: { language_id: value.language_id}}}>
                           <div className='banner_thumb'>
                             <img
                               id='rns-image'
@@ -203,13 +202,12 @@ const StyleFour = ({ Data }) => {
                 </div>
 
                 <div className='row'>
-                  {Data.breaking_news.map((value, index) => {
+                  {Data && Data.breaking_news.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'>
+                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                         <Link
                           id='rns-card'
                           className='card card_hover_two'
-                          key={index.id}
                           href={{pathname:`/breaking-news/${value.slug}`,query: { language_id: value.language_id}}}
                         >
                           <div className='banner_thumb'>

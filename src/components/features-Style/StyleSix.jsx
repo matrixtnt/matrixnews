@@ -12,6 +12,7 @@ import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -24,6 +25,7 @@ const StyleSix = ({ isLoading, Data }) => {
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
+  const router = useRouter()
 
   const Newbreakpoints = {
     320: {
@@ -71,13 +73,10 @@ const StyleSix = ({ isLoading, Data }) => {
 
   const getFeatureSectionById = async () => {
     try {
-      const { data } = await getFeatureSectionApi.getFeatureSectionById({
+      const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
         section_id: Data.id,
         language_id: language_id,
-        user_id: user,
-        offset: '',
-        limit: '',
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -89,7 +88,7 @@ const StyleSix = ({ isLoading, Data }) => {
 
   // react query
   const { data: sliderData } = useQuery({
-    queryKey: ['styleSixFeature',location],
+    queryKey: ['styleSixFeature', location],
     queryFn: getFeatureSectionById
   })
 
@@ -123,19 +122,24 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
+                    <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
                       <div className='card fs-Newscard'>
                         <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
                           {item && item.category_name ? (
-                            <Link
+                            <div
+                              onClick={() =>
+                                router.push({
+                                  pathname: `/categories-news/${item.slug}`,
+                                  query: { language_id: item.language_id }
+                                })
+                              }
                               id='btnCatagory'
                               className='btn'
                               type='button'
-                              href={`/categories-news/${item.slug}`}
                             >
                               {truncateText(item.category_name, 25)}
-                            </Link>
+                            </div>
                           ) : null}
 
                           <div
@@ -162,10 +166,18 @@ const StyleSix = ({ isLoading, Data }) => {
                                 </p>
                               ) : null}
 
-                              <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}} id='Top-Title01'>
+                              <div
+                                onClick={() =>
+                                  router.push({
+                                    pathname: `/news/${item.slug}`,
+                                    query: { language_id: item.language_id }
+                                  })
+                                }
+                                id='Top-Title01'
+                              >
                                 {truncateText(item.title, 30)} <br />
                                 {stripHtmlTags(item.description.slice(0, 600))} ...
-                              </Link>
+                              </div>
                             </div>
                           ) : null}
                         </div>
@@ -212,18 +224,23 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
+                    <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
                       <div className='card fs-Newscard'>
                         <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
-                          <Link
+                          <div
                             id='btnCatagory'
                             className='btn'
-                            type='button'
+                            onClick={() =>
+                              router.push({
+                                pathname: `/categories-news/${item.slug}`,
+                                query: { language_id: item.language_id }
+                              })
+                            }
                             href={`/categories-news/${item.slug}`}
                           >
                             {truncateText(item.category_name, 25)}
-                          </Link>
+                          </div>
                           <div id='Top-Deatils'>
                             <p id='Top-Posttime01'>
                               {item.date
@@ -234,9 +251,17 @@ const StyleSix = ({ isLoading, Data }) => {
                                   })
                                 : ''}
                             </p>
-                            <Link href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}} id='Top-Title01'>
+                            <div
+                              onClick={() =>
+                                router.push({
+                                  pathname: `/news/${item.slug}`,
+                                  query: { language_id: item.language_id }
+                                })
+                              }
+                              id='Top-Title01'
+                            >
                               {truncateText(item.title, 30)}
-                            </Link>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -298,7 +323,10 @@ const StyleSix = ({ isLoading, Data }) => {
                           </div>
                         ) : null}
                         <div id='Top-Deatils'>
-                          <Link href={{pathname:`/breaking-news/${item.slug}`,query: { language_id: item.language_id}}} id='Top-Title01'>
+                          <Link
+                            href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}
+                            id='Top-Title01'
+                          >
                             {truncateText(item.title, 30)}
                             {stripHtmlTags(item.description.slice(0, 600))} ...
                           </Link>
