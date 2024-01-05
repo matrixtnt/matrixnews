@@ -392,6 +392,16 @@ const CreateNews = () => {
     return true // Return true if the validation passes
   }
 
+  // slug 
+  const slugConverter = () => {
+    let slug = DefaultValue.defaultSlug
+    slug = slug.replace(/[^a-zA-Z0-9-]/g, '-')
+    slug = slug.replace(/-+/g, '-')
+    slug = slug.replace(/^-+/, '')
+    slug = slug.replace(/-+$/, '')
+    return slug
+  }
+
   // meta title condition
   const handleMetaTitleChange = () => {
     const maxLength = 60
@@ -404,7 +414,7 @@ const CreateNews = () => {
   }
 
   // final submit data
-  const finalSubmit = e => {
+  const finalSubmit = async e => {
     e.preventDefault()
     // meta title validation
     // const isMetaTitleValid = handleMetaTitleChange()
@@ -418,7 +428,9 @@ const CreateNews = () => {
     //   return // Stop execution if meta description validation fails
     // }
 
-    setNewsApi({
+    const slugValue = await slugConverter()
+
+    await setNewsApi({
       action_type: 1,
       category_id: DefaultValue.defualtCategoryID,
       subcategory_id: DefaultValue.defualtSubCategoryID,
@@ -427,7 +439,7 @@ const CreateNews = () => {
       meta_title: DefaultValue.defaultMetatitle,
       meta_description: DefaultValue.defaultMetaDescription,
       meta_keyword: DefaultValue.defaultMetaKeyword,
-      slug: DefaultValue.defaultSlug,
+      slug: slugValue,
       content_type: DefaultValue.defaultType,
       content_data: DefaultValue.defualtUrl,
       description: content,

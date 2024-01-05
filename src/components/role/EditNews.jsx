@@ -436,10 +436,22 @@ const EditNews = () => {
     setDefaultValue({ ...DefaultValue, imagedefault: file })
     setMainImage(URL.createObjectURL(file))
   }
+
+  // slug 
+  const slugConverter = () => {
+    let slug = DefaultValue.defaultSlug
+    slug = slug.replace(/[^a-zA-Z0-9-]/g, '-')
+    slug = slug.replace(/-+/g, '-')
+    slug = slug.replace(/^-+/, '')
+    slug = slug.replace(/-+$/, '')
+    return slug
+  }
+
   // final submit data
-  const finalSubmit = e => {
+  const finalSubmit = async e => {
     e.preventDefault()
-    setNewsApi({
+    const slugValue = await slugConverter()
+    await setNewsApi({
       action_type: 2,
       category_id: DefaultValue.categoryID,
       subcategory_id: DefaultValue.subcategoryID,
@@ -448,7 +460,7 @@ const EditNews = () => {
       meta_title: DefaultValue.defaultMetatitle,
       meta_description: DefaultValue.defaultMetaDescription,
       meta_keyword: DefaultValue.defaultMetaKeyword,
-      slug: DefaultValue.defaultSlug,
+      slug: slugValue,
       content_type: DefaultValue.contentType,
       content_data: url,
       description: DefaultValue.descriptionValue,

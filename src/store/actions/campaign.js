@@ -145,7 +145,7 @@ export const setusercategoriesApi = ({
 }
 
 // 9. set news
-export const setNewsApi = ({
+export const setNewsApi = async ({
   action_type = '',
   category_id = '',
   subcategory_id = '',
