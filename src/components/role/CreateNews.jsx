@@ -378,42 +378,46 @@ const CreateNews = () => {
   }
 
   // meta description condition
-  // const handleMetaDescriptionChange = e => {
-  //   const maxLength = 160
-  //   const minLength = 50 // Set your desired maximum length
-  //   const inputValue = e.target.value
+  const handleMetaDescriptionChange = e => {
+    const maxLength = 160
+    const minLength = 50 // Set your desired maximum length
+    // Check if the input value exceeds the maxLength or is less than the minLength
+    if (DefaultValue.defaultMetaDescription.length > maxLength) {
+      toast.error('Meta Description length should not exceed 160 characters')
+      return false
+    } else if (DefaultValue.defaultMetaDescription.length < minLength) {
+      toast.error('Meta Description length should be at least 50 characters')
+      return false
+    }
+    return true // Return true if the validation passes
+  }
 
-  //   // Check if the input value exceeds the maxLength or is less than the minLength
-  //   if (inputValue.length > maxLength) {
-  //     const truncatedValue = inputValue.slice(0, maxLength)
-  //     setDefualtValue({ ...DefaultValue, defaultMetaDescription: truncatedValue })
-  //     toast.error('Meta Description length should not exceed 160 characters')
-  //   } else if (inputValue.length < minLength) {
-  //     setDefualtValue({ ...DefaultValue, defaultMetaDescription: inputValue })
-  //     toast.error('Meta Description length should be at least 50 characters')
-  //   } else {
-  //     setDefualtValue({ ...DefaultValue, defaultMetaDescription: inputValue })
-  //   }
-  // }
-
-  // // meta title condition
-  // const handleMetaTitleChange = e => {
-  //   const maxLength = 60
-  //   const inputValue = e.target.value
-
-  //   // Check if the input value exceeds the maxLength or is less than the minLength
-  //   if (inputValue.length > maxLength) {
-  //     const truncatedValue = inputValue.slice(0, maxLength)
-  //     setDefualtValue({ ...DefaultValue, defaultMetatitle: truncatedValue })
-  //     toast.error('Title length should not exceed 60 characters')
-  //   } else {
-  //     setDefualtValue({ ...DefaultValue, defaultMetatitle: inputValue })
-  //   }
-  // }
+  // meta title condition
+  const handleMetaTitleChange = () => {
+    const maxLength = 60
+    // Check if the input value exceeds the maxLength or is less than the minLength
+    if (DefaultValue.defaultMetatitle.length > maxLength) {
+      toast.error('Title length should not exceed 60 characters')
+      return false
+    }
+    return true // Return true if the validation passes
+  }
 
   // final submit data
   const finalSubmit = e => {
     e.preventDefault()
+    // meta title validation
+    // const isMetaTitleValid = handleMetaTitleChange()
+    // if (!isMetaTitleValid) {
+    //   return // Stop execution if meta title validation fails
+    // }
+
+    // meta description validation
+    // const isMetaDescriptionValid = handleMetaDescriptionChange()
+    // if (!isMetaDescriptionValid) {
+    //   return // Stop execution if meta description validation fails
+    // }
+
     setNewsApi({
       action_type: 1,
       category_id: DefaultValue.defualtCategoryID,
@@ -527,7 +531,6 @@ const CreateNews = () => {
                         message='Meta Keywords are not more than 10 keyword phrases.'
                         type='warning'
                       />
-                      
                     </div>
                     <div className='input_form mb-2'>
                       <input
