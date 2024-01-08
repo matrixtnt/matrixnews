@@ -474,7 +474,7 @@ const EditNews = () => {
         navigate.push('/manage-news')
       },
       onError: error => {
-        console.log('error', error)
+        toast.error(error.message)
       }
     })
   }
