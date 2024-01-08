@@ -1,14 +1,19 @@
 'use client'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'firebase/messaging'
 import { toast } from 'react-hot-toast'
+import { useSelector } from 'react-redux'
+import { locationData } from 'src/store/reducers/settingsReducer'
 import FirebaseData from 'src/utils/Firebase'
 
 const PushNotificationLayout = ({ children }) => {
   const [notification, setNotification] = useState(null)
+  const [userToken, setUserToken] = useState(null)
   const [isTokenFound, setTokenFound] = useState(false)
   const [fcmToken, setFcmToken] = useState('')
   const { fetchToken, onMessageListener } = FirebaseData()
+
+  const getfcmToken = useSelector(locationData)
 
   useEffect(() => {
     handleFetchToken()
@@ -16,23 +21,14 @@ const PushNotificationLayout = ({ children }) => {
 
   const handleFetchToken = async () => {
     await fetchToken(setTokenFound, setFcmToken)
+
   }
 
-  // service worker
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(
-          function (registration) {
-            console.log('Service Worker registration successful with scope: ', registration.scope)
-          },
-          function (err) {
-            console.log('Service Worker registration failed: ', err)
-          }
-        )
-      })
+    if (typeof window !== undefined) {
+      setUserToken(getfcmToken.fcmtoken)
     }
-  }, [])
+  }, [userToken])
 
   useEffect(() => {
     onMessageListener()
@@ -47,7 +43,22 @@ const PushNotificationLayout = ({ children }) => {
       });
   }, [notification]);
 
-  return <>{children}</>
+  // / service worker
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js').then(
+          function (registration) {
+            console.log('Service Worker registration successful with scope: ', registration.scope)
+          },
+          function (err) {
+            console.log('Service Worker registration failed: ', err)
+          }
+        )
+      })
+    }
+  }, [])
+  return <div>{React.cloneElement(children)}</div>;
 }
 
 export default PushNotificationLayout
