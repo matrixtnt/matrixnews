@@ -14,13 +14,19 @@ import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'reac
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
 import { useEffect } from 'react'
-import { loadLocation, settingsData } from 'src/store/reducers/settingsReducer'
+import { loadLocation, locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
+import { registerFcmTokenApi } from 'src/store/actions/campaign'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
   const getLocation = useSelector(settingsData)
+  const location = useSelector(locationData)
   const getLocationData = getLocation?.location_news_mode
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
+
+
 
   const weatherApi = async () => {
     return new Promise((resolve, reject) => {
@@ -75,9 +81,19 @@ const WeatherCard = () => {
   const languagesData = useSelector(selectLanguages)
 
   // language change
-  const languageChange = (name, code, id, display_name) => {
+  const languageChange = async (name, code, id, display_name) => {
     loadLanguageLabels({code:code})
     setCurrentLanguage(name, code, id, display_name)
+    await registerFcmTokenApi({
+      token: location.fcmtoken,
+      latitude: storedLatitude,
+      longitude: storedLongitude,
+      onSuccess: async res => {
+      },
+      onError: async err => {
+        console.log(err)
+      }
+    })
   }
 
   useEffect(() => {

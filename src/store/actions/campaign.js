@@ -12,7 +12,8 @@ import {
   deletenewsApi,
   getsubcategorybycategoryApi,
   set_comment_like_dislike_Api,
-  set_flag_Api
+  set_flag_Api,
+  register_Fcmtoken_Api
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -153,13 +154,13 @@ export const setNewsApi = async ({
   title = '',
   meta_title = '',
   meta_description = '',
-  meta_keyword="",
+  meta_keyword = '',
   slug = '',
   content_type = '',
   content_data = '',
   description = '',
   image = '',
-  ofile ="",
+  ofile = '',
   show_till = '',
   language_id = '',
   location_id = '',
@@ -284,6 +285,26 @@ export const accountDeleteApi = ({ onSuccess = () => {}, onError = () => {}, onS
   store.dispatch(
     apiCallBegan({
       ...accountdeleteApi(),
+      displayToast: false,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
+}
+
+// 17. register token
+export const registerFcmTokenApi = async ({
+  token = '',
+  latitude = '',
+  longitude = '',
+  onSuccess = () => {},
+  onError = () => {},
+  onStart = () => {}
+}) => {
+  store.dispatch(
+    apiCallBegan({
+      ...register_Fcmtoken_Api(token, latitude, longitude),
       displayToast: false,
       onStart,
       onSuccess,

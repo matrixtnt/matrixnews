@@ -18,6 +18,7 @@ export const GET_LOCATION = 'get_location'
 export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
 export const SET_FLAG = 'set_flag'
+export const REGISTER_TOKEN = "register_token"
 
 // User Api
 export const GET_USER_BY_ID = 'get_user_by_id'
@@ -413,4 +414,21 @@ export const accountdeleteApi = () => {
     },
     authorizationHeader: true
   }
+}
+
+// 21. register token
+export const register_Fcmtoken_Api = (token,latitude,longitude) => {
+  let { id: language_id } = getLanguage();
+  let data = new FormData()
+  data.append('access_key', access_key);
+  data.append('language_id', language_id);
+  data.append('token', token);
+  if(latitude != null) data.append('latitude', latitude);
+  if(longitude != null) data.append('longitude', longitude)
+  return {
+    url: `${REGISTER_TOKEN}`,
+    method: "POST",
+    data,
+    authorizationHeader: true,
+  };
 }
