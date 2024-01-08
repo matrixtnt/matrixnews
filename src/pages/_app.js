@@ -8,6 +8,7 @@ import PushNotificationLayout from 'src/components/firebaseNotification/PushNoti
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import ThemeProvider from 'src/components/themeProvider/ThemeProvider'
+import InspectElement from 'src/components/inspect-element/InspectElement'
 
 // CSS File Here
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -46,9 +47,11 @@ const App = ({ Component, pageProps }) => {
         <Provider store={store}>
           <ThemeProvider>
             <Toaster position='top-center' containerClassName='toast-custom' />
-            <PushNotificationLayout>
-              <Component {...pageProps} />
-            </PushNotificationLayout>
+            <InspectElement>
+              <PushNotificationLayout>
+                <Component {...pageProps} />
+              </PushNotificationLayout>
+            </InspectElement>
           </ThemeProvider>
         </Provider>
         <ReactQueryDevtools initialIsOpen={false} />
