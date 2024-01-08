@@ -165,7 +165,6 @@ const StyleTwo = ({ Data }) => {
       {/* news */}
       {Data && Data.news?.length > 0 ? (
         <div className='new_video_style_two'>
-          {/* {console.log("mews")} */}
           <div className='container'>
             {/* ad spaces */}
             {Data && Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (

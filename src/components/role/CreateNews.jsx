@@ -279,7 +279,6 @@ const CreateNews = () => {
   })
 
   const getLocationData = getLocation?.location_news_mode
-  // console.log(getLocationData)
 
   // create standard post
   const standardPost = [
@@ -449,7 +448,6 @@ const CreateNews = () => {
       language_id: createNewsLanguage.id,
       location_id: DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
       onSuccess: response => {
-        // console.log(response)
         toast.success(response.message)
         navigate.push('/manage-news')
       },
@@ -463,8 +461,7 @@ const CreateNews = () => {
   const Back = () => {
     setNextStepScreen(false)
   }
-
-  // console.log("video",DefaultValue.defaultVideoData)
+  
   return (
     <Layout>
       <BreadcrumbNav SecondElement={translate('createNewsLbl')} ThirdElement='0' />

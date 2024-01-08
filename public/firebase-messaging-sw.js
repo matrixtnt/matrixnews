@@ -21,7 +21,7 @@ firebase?.initializeApp(firebaseConfig)
 const messaging = firebase.messaging();
 
 self.addEventListener('install', function (event) {
-  console.log('Hello world from the Service Worker :call_me_hand:');
+  // console.log('Hello world from the Service Worker :call_me_hand:');
 });
 
 // Handle background messages

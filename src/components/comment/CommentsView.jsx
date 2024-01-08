@@ -80,7 +80,6 @@ const CommentsView = props => {
       comment_id:elem.id,
       status:elem.like === '1' ? '0' : '1',
       onSuccess:res => {
-        // console.log(res);
         setRefreshKey(prevKey => prevKey + 1)
       },
       onError:err => {
@@ -97,7 +96,7 @@ const CommentsView = props => {
       comment_id:elem.id,
       status:elem.dislike === '1' ? '0' : '2',
       onSuccess:res => {
-        // console.log(res);
+
         setRefreshKey(prevKey => prevKey + 1)
       },
       onError:err => {
@@ -111,7 +110,6 @@ const CommentsView = props => {
   const popupDots = (e, elem) => {
     e.preventDefault()
     setModalOpen(true)
-    // console.log("popupDots",elem.user_id)
     if (userData.data.id === elem.user_id) {
       setDotModal(true)
     } else {
@@ -199,7 +197,6 @@ const CommentsView = props => {
                     {['bottom-end'].map(placement => (
                       <>
                         <div className='comment_data'>
-                          {/* {console.log("place", element)} */}
                           <div className='comment_like'>
                             <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
                             {element.like > 0 ? element.like : null}

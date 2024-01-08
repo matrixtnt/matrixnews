@@ -102,7 +102,6 @@ const SignInModal = props => {
     const provider = new GoogleAuthProvider()
     await signInWithPopup(authentication, provider)
       .then(async response => {
-        // console.log("google resonse",response)
         props.onHide()
         props.setIsLogout(true)
         await register({
@@ -115,7 +114,6 @@ const SignInModal = props => {
           fcm_id: location.fcmtoken,
           onSuccess: async res => {
             toast.success(translate('loginMsg'))
-            // if(location.fcmtoken === res.data.fcm_id){
             setTimeout(async () => {
               await registerFcmTokenApi({
                 token: res.data.fcm_id,
@@ -129,7 +127,6 @@ const SignInModal = props => {
               })
             }, [1000])
 
-            // }
             if (res.data.is_login === '1') {
               //If new User then show the Update Profile Screen
               navigate.push('/profile-update')

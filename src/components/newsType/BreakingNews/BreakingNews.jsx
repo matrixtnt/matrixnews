@@ -50,7 +50,6 @@ const BreakingNews = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  // console.log(query);
   // api call
   const getBreakingNewsIdApi = async () => {
     try {

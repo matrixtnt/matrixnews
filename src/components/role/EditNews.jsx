@@ -57,7 +57,7 @@ const EditNews = () => {
   const navigate = useRouter()
 
   const matchingObject = languagesData.find(obj => obj.id === manageNews.language_id)
-  // console.log(manageNews)
+
   const [DefaultValue, setDefaultValue] = useState({
     defualTitle: manageNews.title,
     defaultMetatitle: manageNews.meta_title,

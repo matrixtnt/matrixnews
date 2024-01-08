@@ -22,7 +22,6 @@ const NewsNotification = () => {
   let { id: language_id } = getLanguage()
 
   const handlePageChange = selectedPage => {
-    // console.log(selectedPage)
     const newOffset = selectedPage?.selected * limit
     setOffsetdata(newOffset)
   }

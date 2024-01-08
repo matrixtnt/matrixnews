@@ -213,9 +213,7 @@ const News = () => {
   // Calculate read time
   const readTime = calculateReadTime(text)
 
-  // console.log("galary", Data[0]?.image_data)
   const galleryPhotos = Data && Data[0]?.image_data
-  // console.log(galleryPhotos)
 
   const openLightbox = (event, { index }) => {
     setCurrentImage(index)

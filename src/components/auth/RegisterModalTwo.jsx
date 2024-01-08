@@ -93,7 +93,6 @@ const RagisterModalTwo = (props) => {
         e.preventDefault();
         signup(formValues.email, formValues.password)
             .then((response) => {
-                console.log(response);
                 navigate.push("/");
             })
             .catch((err) => {

@@ -31,8 +31,6 @@ const AllBreakingNews = () => {
     queryFn: getBreakingNewsApi
   })
 
-  console.log(Data)
-
   return (
     <Layout>
       <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement='0' />

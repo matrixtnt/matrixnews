@@ -119,7 +119,6 @@ export const translate = (label) => {
 
 
   if (langLabel) {
-    // console.log(langLabel)
     return langLabel;
 
   } else {

@@ -37,7 +37,6 @@ export const languageSlice = createSlice({
       languages.loading = false
     },
     languageChanged: (languages, action) => {
-      // console.log("=============================",action)
       languages.currentLanguage.code = action.payload.code
       languages.currentLanguage.name = action.payload.name
       languages.currentLanguage.id = action.payload.id

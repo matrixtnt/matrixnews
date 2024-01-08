@@ -64,8 +64,6 @@ const StyleSix = ({ isLoading, Data }) => {
     // pagination: { clickable: true },
   }
 
-  // console.log(Data)
-
   const handleVideoUrl = url => {
     setModalShow(true)
     setVideo_url(url)
