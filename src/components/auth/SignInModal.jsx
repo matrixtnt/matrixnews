@@ -24,6 +24,7 @@ import { useRouter } from 'next/navigation'
 import FirebaseData from 'src/utils/Firebase'
 import toast from 'react-hot-toast'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { registerFcmTokenApi } from 'src/store/actions/campaign'
 
 const SignInModal = props => {
   const { authentication, messaging } = FirebaseData()
@@ -99,32 +100,46 @@ const SignInModal = props => {
   // sign in google
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider()
-     await signInWithPopup(authentication, provider)
+    await signInWithPopup(authentication, provider)
       .then(async response => {
         // console.log("google resonse",response)
         props.onHide()
         props.setIsLogout(true)
         await register({
-          firebase_id:response.user.uid,
-          name:response.user.displayName,
-          email:response.user.email,
-          type:'gmail',
-          profile:response.user.photoURL,
-          status:'1',
-          fcm_id:location.fcmtoken,
-          onSuccess: async (res) => {
+          firebase_id: response.user.uid,
+          name: response.user.displayName,
+          email: response.user.email,
+          type: 'gmail',
+          profile: response.user.photoURL,
+          status: '1',
+          fcm_id: location.fcmtoken,
+          onSuccess: async res => {
             toast.success(translate('loginMsg'))
+            // if(location.fcmtoken === res.data.fcm_id){
+            setTimeout(async () => {
+              await registerFcmTokenApi({
+                token: res.data.fcm_id,
+                latitude: storedLatitude,
+                longitude: storedLongitude,
+                onSuccess: async res => {
+                },
+                onError: async err => {
+                  console.log(err)
+                }
+              })
+            }, [1000])
+
+            // }
             if (res.data.is_login === '1') {
               //If new User then show the Update Profile Screen
               navigate.push('/profile-update')
             }
             props.setisloginloading(false)
           },
-          onError:error => {
+          onError: error => {
             toast.error(translate('deactiveMsg'))
           }
-        }
-        )
+        })
       })
       .catch(err => {
         console.log(err.message)
@@ -142,12 +157,24 @@ const SignInModal = props => {
         const user = userCredential.user
         if (user.emailVerified) {
           register({
-            firebase_id:user.uid,
-            email:formValues.email,
-            type:'email',
-            status:'1',
-            fcm_id:location.fcmtoken,
-            onSuccess:success => {
+            firebase_id: user.uid,
+            email: formValues.email,
+            type: 'email',
+            status: '1',
+            fcm_id: location.fcmtoken,
+            onSuccess: success => {
+              setTimeout(async () => {
+                await registerFcmTokenApi({
+                  token: success.data.fcm_id,
+                  latitude: storedLatitude,
+                  longitude: storedLongitude,
+                  onSuccess: async res => {
+                  },
+                  onError: async err => {
+                    console.log(err)
+                  }
+                })
+              }, [1000])
               if (success.data.is_login === '1') {
                 //If new User then show the Update Profile Screen
                 navigate.push('/profile-update')
@@ -155,11 +182,10 @@ const SignInModal = props => {
               loadMobileType(false)
               props.setisloginloading(false)
             },
-            onError:error => {
+            onError: error => {
               toast.error(translate('deactiveMsg'))
             }
-          }
-          )
+          })
           props.setIsLogout(true)
         } else {
           toast.error('Not Verified')

@@ -16,11 +16,14 @@ import { settingsData } from '../../store/reducers/settingsReducer'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { registerFcmTokenApi } from 'src/store/actions/campaign'
 
 const OTPModal = props => {
   const [OTP, setOTP] = useState('') // eslint-disable-next-line
   const { authentication } = FirebaseData()
   const location = useSelector(locationData)
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
   const [error, setError] = useState(
     '',
     setTimeout(() => {
@@ -125,6 +128,18 @@ const OTPModal = props => {
         status:'1',
         fcm_id:location.fcmtoken,
         onSuccess:response => {
+          setTimeout(async () => {
+            await registerFcmTokenApi({
+              token: response.data.fcm_id,
+              latitude: storedLatitude,
+              longitude: storedLongitude,
+              onSuccess: async res => {
+              },
+              onError: async err => {
+                console.log(err)
+              }
+            })
+          }, [1000])
           if (response.data.is_login === '1') {
             // If new User then show the Update Profile Screen
             navigate.push('/profile-update')
