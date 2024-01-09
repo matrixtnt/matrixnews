@@ -34,7 +34,7 @@ const Index = ({ seoData, currentURL  }) => {
           pathName={currentURL}
           schema={schema}
         />
-      <News/>
+      <News currentUrL={currentURL}/>
     </>
   )
 }
@@ -49,6 +49,8 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
   const { query, req } = context; // Extract query and request object from context
 
   const currentURL = `${req.headers.host}${req.url}`; 
+
+  console.log(currentURL)
 
   const seoData = await fetchDataFromSeo(query.slug,query.language_id)
 

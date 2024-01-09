@@ -36,7 +36,8 @@ import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
 import Layout from 'src/components/layout/Layout.jsx'
 
-const News = () => {
+const News = ({currentUrL}) => {
+  console.log(currentUrL)
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const userData = useSelector(selectUser)
@@ -53,7 +54,6 @@ const News = () => {
   const [typeUrl, setTypeUrl] = useState(null)
   const query = router.query
   const NewsId = query.slug
-  const shareUrl = window.location.href
   // eslint-disable-next-line
   const [islogout, setIsLogout] = useState(false) // eslint-disable-next-line
   const [isloginloading, setisloginloading] = useState(true) // eslint-disable-next-line
@@ -282,13 +282,13 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      <FacebookShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <FacebookShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <FacebookIcon size={40} round />
                       </FacebookShareButton>
-                      <WhatsappShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <WhatsappIcon size={40} round />
                       </WhatsappShareButton>
-                      <TwitterShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <TwitterShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <TwitterIcon size={40} round />
                       </TwitterShareButton>
                     </div>
