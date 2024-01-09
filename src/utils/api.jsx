@@ -19,6 +19,7 @@ export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
 export const SET_FLAG = 'set_flag'
 export const REGISTER_TOKEN = "register_token"
+export const GET_WEB_SEO_PAGES = "get_web_seo_pages"
 
 // User Api
 export const GET_USER_BY_ID = 'get_user_by_id'

@@ -290,7 +290,7 @@ const MobilesideBar = ({
                           onClick={handleClose}
                         >
                           {' '}
-                          <b>{truncateText(element.category_name, 17)}</b>{' '}
+                          <b>{element.category_name}</b>{' '}
                         </Link>
                       </li>
                     ))}

@@ -43,8 +43,8 @@ const Categories = () => {
 
   // react query
   const { data } = useQuery({
-    queryKey: ['categories', access_key, offsetdata.toString(), limit.toString(), currentLanguage.id],
-    queryFn: categoriesApi
+    queryKey: ['categories', offsetdata.toString(), limit.toString(), currentLanguage.id],
+    queryFn: categoriesApi,
   })
 
 

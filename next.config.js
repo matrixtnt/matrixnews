@@ -26,7 +26,7 @@ const nextConfig = {
 
 // Conditionally set the output based on the environment
 if (process.env.NEXT_PUBLIC_SEO === 'false') {
-  ;(nextConfig.output = 'export'), (nextConfig.images.unoptimized = true)
+  (nextConfig.output = 'export'), (nextConfig.images.unoptimized = true)
 }
 // console.log(nextConfig)
 module.exports = nextConfig
