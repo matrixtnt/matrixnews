@@ -23,17 +23,17 @@ const fetchDataFromSeo = async () => {
 const Index = ({seoData,currentURL}) => {
   let schema = null
 
-  if (seoData?.data && seoData?.data[0].schema_markup) {
+  if (seoData?.data[0] && seoData?.data[0].schema_markup) {
     const schemaString = seoData?.data[0].schema_markup;
     schema = extractJSONFromMarkup(schemaString);
   }
   return (
     <>
        <Meta
-          title={seoData.data && seoData.data[0].meta_title}
-          description={seoData.data && seoData.data[0].meta_description}
-          keywords={seoData.data && seoData.data[0].meta_keyword}
-          ogImage={seoData.data && seoData.data[0].image}
+          title={seoData?.data[0] && seoData.data[0].meta_title}
+          description={seoData?.data[0] && seoData.data[0].meta_description}
+          keywords={seoData?.data[0] && seoData.data[0].meta_keyword}
+          ogImage={seoData?.data[0] && seoData.data[0].image}
           pathName={currentURL}
           schema={schema}
         />
@@ -47,7 +47,7 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
   serverSidePropsFunction = async context => {
     // Retrieve the slug from the URL query parameters
     const { req } = context // Extract query and request object from context
-    const currentURL = `${req.headers.host}${req.url}`
+    const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL;
 
     const seoData = await fetchDataFromSeo()
 
