@@ -36,12 +36,15 @@ import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
 import Layout from 'src/components/layout/Layout.jsx'
 
-const News = ({currentUrL}) => {
+const News = () => {
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const userData = useSelector(selectUser)
   const settingsOnOff = useSelector(settingsData)
   const router = useRouter()
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
+
+  // Rest of your code...
   // eslint-disable-next-line
   const [CheckLike, setCheckLike] = useState(false)
   const [Like, setLike] = useState(CheckLike) // eslint-disable-next-line
