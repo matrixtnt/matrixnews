@@ -23,20 +23,20 @@ const fetchDataFromSeo = async () => {
 const Index = ({seoData,currentURL}) => {
   let schema = null
 
-  if (seoData && seoData.data[0].schema_markup) {
-    const schemaString = seoData.data[0].schema_markup
-    schema = extractJSONFromMarkup(schemaString)
+  if (seoData?.data && seoData?.data[0].schema_markup) {
+    const schemaString = seoData?.data[0].schema_markup;
+    schema = extractJSONFromMarkup(schemaString);
   }
   return (
     <>
-       <Meta
-        title={seoData && seoData.data[0].meta_title}
-        description={seoData && seoData.data[0].meta_description}
-        keywords={seoData && seoData.data[0].meta_keyword}
-        ogImage={seoData && seoData.data[0].image}
-        pathName={currentURL}
-        schema={schema}
-      />
+        <Meta
+          title={seoData.data && seoData.data[0].meta_title}
+          description={seoData.data && seoData.data[0].meta_description}
+          keywords={seoData.data && seoData.data[0].meta_keyword}
+          ogImage={seoData.data && seoData.data[0].image}
+          pathName={currentURL}
+          schema={schema}
+        />
       <Notification />
     </>
   )

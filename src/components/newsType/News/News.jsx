@@ -37,7 +37,6 @@ import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
 import Layout from 'src/components/layout/Layout.jsx'
 
 const News = ({currentUrL}) => {
-  console.log(currentUrL)
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const userData = useSelector(selectUser)

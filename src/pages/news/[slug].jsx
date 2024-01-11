@@ -20,17 +20,17 @@ const fetchDataFromSeo = async (id,language_id) => {
 const Index = ({ seoData, currentURL  }) => {
   let schema = null;
 
-  if (seoData && seoData.data[0].schema_markup) {
-    const schemaString = seoData.data[0].schema_markup;
+  if (seoData?.data && seoData?.data[0].schema_markup) {
+    const schemaString = seoData?.data[0].schema_markup;
     schema = extractJSONFromMarkup(schemaString);
   }
   return (
     <>
         <Meta
-          title={seoData && seoData.data[0].meta_title}
-          description={seoData && seoData.data[0].meta_description}
-          keywords={seoData && seoData.data[0].meta_keyword}
-          ogImage={seoData && seoData.data[0].image}
+          title={seoData.data && seoData.data[0].meta_title}
+          description={seoData.data && seoData.data[0].meta_description}
+          keywords={seoData.data && seoData.data[0].meta_keyword}
+          ogImage={seoData.data && seoData.data[0].image}
           pathName={currentURL}
           schema={schema}
         />
@@ -49,8 +49,6 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
   const { query, req } = context; // Extract query and request object from context
 
   const currentURL = `${req.headers.host}${req.url}`; 
-
-  console.log(currentURL)
 
   const seoData = await fetchDataFromSeo(query.slug,query.language_id)
 
