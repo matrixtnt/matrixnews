@@ -17,7 +17,7 @@ const fetchDataFromSeo = async (id,language_id) => {
   }
 };
 
-const Index = ({ seoData  }) => {
+const Index = ({ seoData,currentURL  }) => {
   let schema = null;
 
   if (seoData?.data && seoData?.data[0].schema_markup) {
@@ -31,6 +31,7 @@ const Index = ({ seoData  }) => {
           description={seoData.data && seoData.data[0].meta_description}
           keywords={seoData.data && seoData.data[0].meta_keyword}
           ogImage={seoData.data && seoData.data[0].image}
+          pathName={currentURL}
           schema={schema}
         />
       <News/>
