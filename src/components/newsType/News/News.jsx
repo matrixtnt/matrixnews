@@ -42,7 +42,7 @@ const News = () => {
   const userData = useSelector(selectUser)
   const settingsOnOff = useSelector(settingsData)
   const router = useRouter()
-  const shareUrl = window.location.href
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
 
   // Rest of your code...
   // eslint-disable-next-line
@@ -284,13 +284,13 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      <FacebookShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <FacebookShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <FacebookIcon size={40} round />
                       </FacebookShareButton>
-                      <WhatsappShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <WhatsappIcon size={40} round />
                       </WhatsappShareButton>
-                      <TwitterShareButton url={shareUrl} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <TwitterShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <TwitterIcon size={40} round />
                       </TwitterShareButton>
                     </div>
