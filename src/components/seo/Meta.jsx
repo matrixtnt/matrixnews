@@ -5,7 +5,7 @@ const Meta = ({ title, description, keywords, ogImage, pathName, schema }) => {
   return (
     <Head>
       {/* title */}
-      <title>{title}</title>
+      <title>{title ? title : process.env.NEXT_PUBLIC_TITLE}</title>
 
       {/*<!-- Google / Search Engine Tags -->*/}
       <meta name='name' content={title ? title : process.env.NEXT_PUBLIC_TITLE} />
