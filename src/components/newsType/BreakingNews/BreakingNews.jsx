@@ -33,10 +33,8 @@ const BreakingNews = () => {
   const [modalShow, setModalShow] = useState(false)
   const router = useRouter()
   const query = router.query
-
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
   const BNid = query.slug
-
-  const shareUrl = window.location.href
   let { id: language_id } = getLanguage()
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -167,13 +165,13 @@ const BreakingNews = () => {
 
                             <div id='B_NV-right-head'>
                               <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
-                              <FacebookShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
+                              <FacebookShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
                                 <FacebookIcon size={30} round />
                               </FacebookShareButton>
-                              <WhatsappShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
+                              <WhatsappShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
                                 <WhatsappIcon size={30} round />
                               </WhatsappShareButton>
-                              <TwitterShareButton url={shareUrl} title={data[0].title + ' - News'} hashtag={'News'}>
+                              <TwitterShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
                                 <TwitterIcon size={30} round />
                               </TwitterShareButton>
                             </div>

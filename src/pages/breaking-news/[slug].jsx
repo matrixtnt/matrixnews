@@ -45,10 +45,16 @@ let serverSidePropsFunction = null
 if (process.env.NEXT_PUBLIC_SEO === 'true') {
   serverSidePropsFunction = async context => {
     // Retrieve the slug from the URL query parameters
-    const { query, req } = context // Extract query and request object from context
-    const currentURL = `${req.headers.host}${req.url}`
+    // Retrieve the slug from the URL query parameters
+  const { req } = context; // Extract query and request object from context
 
-    const seoData = await fetchDataFromSeo(query.slug, query.language_id)
+  const { params } = req[Symbol.for('NextInternalRequestMeta')].match;
+
+  const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL;
+
+  const {language_id} = req[Symbol.for('NextInternalRequestMeta')].initQuery;
+
+  const seoData = await fetchDataFromSeo(params.slug,language_id)
 
     // Pass the fetched data as props to the page component
     return {
