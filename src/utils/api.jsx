@@ -433,3 +433,18 @@ export const register_Fcmtoken_Api = (token,latitude,longitude) => {
     authorizationHeader: true,
   };
 }
+
+
+// 22. get user by id
+export const getUserByIdApi = () => {
+  let user = getUser();
+  return {
+    url: `${GET_USER_BY_ID}`,
+    method: "POST",
+    data: {
+      access_key: access_key,
+      user_id: user,
+    },
+    authorizationHeader: true,
+  };
+};

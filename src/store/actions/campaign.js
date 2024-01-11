@@ -13,7 +13,8 @@ import {
   getsubcategorybycategoryApi,
   set_comment_like_dislike_Api,
   set_flag_Api,
-  register_Fcmtoken_Api
+  register_Fcmtoken_Api,
+  getUserByIdApi
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -305,6 +306,19 @@ export const registerFcmTokenApi = async ({
   store.dispatch(
     apiCallBegan({
       ...register_Fcmtoken_Api(token, latitude, longitude),
+      displayToast: false,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
+}
+
+// 18. get user by id
+export const getuserbyidApi = ({ onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
+  store.dispatch(
+    apiCallBegan({
+      ...getUserByIdApi(),
       displayToast: false,
       onStart,
       onSuccess,
