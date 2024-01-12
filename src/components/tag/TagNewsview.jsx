@@ -25,7 +25,7 @@ const TagNewsview = () => {
     try {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        tag_id: Tid,
+        slug: Tid,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude
