@@ -62,6 +62,7 @@ const News = () => {
   let { id: language_id } = getLanguage()
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // api call
   const getNewsById = async () => {
@@ -208,6 +209,13 @@ const News = () => {
     return tags
   }
 
+  const LoaderComponent = () => (
+    <div className="loader">
+      {/* Add your loader UI here */}
+      Loading...
+    </div>
+  );
+
   // const readTime = calculateReadTime(text);
 
   const text = extractTextFromHTML(Data && Data[0]?.description)
@@ -284,11 +292,12 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
+                      {!imageLoaded && <LoaderComponent />}
                       <FacebookShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                        <FacebookIcon size={40} round />
+                        <FacebookIcon size={40} round onLoad={() => setImageLoaded(true)} />
                       </FacebookShareButton>
                       <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                        <WhatsappIcon size={40} round />
+                        <WhatsappIcon size={40} round onLoad={() => setImageLoaded(true)} />
                       </WhatsappShareButton>
                       <TwitterShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <TwitterIcon size={40} round />
