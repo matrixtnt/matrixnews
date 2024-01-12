@@ -167,13 +167,13 @@ const BreakingNews = () => {
 
                             <div id='B_NV-right-head'>
                               <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
-                              <FacebookShareButton url={currentUrL} title={data[0].title + SettingsData && SettingsData.web_setting.web_name}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
+                              <FacebookShareButton url={currentUrL} title={`${data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                                 <FacebookIcon size={30} round />
                               </FacebookShareButton>
-                              <WhatsappShareButton url={currentUrL} title={data[0].title + SettingsData && SettingsData.web_setting.web_name}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
+                              <WhatsappShareButton url={currentUrL} title={`${data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                                 <WhatsappIcon size={30} round />
                               </WhatsappShareButton>
-                              <TwitterShareButton url={currentUrL} title={data[0].title + SettingsData && SettingsData.web_setting.web_name}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
+                              <TwitterShareButton url={currentUrL} title={`${data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                                 <XIcon size={30} round />
                               </TwitterShareButton>
                             </div>
