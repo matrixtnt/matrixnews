@@ -8,7 +8,7 @@ const Meta = ({ title, description, keywords, ogImage, pathName, schema }) => {
         <title>{title ? title : process.env.NEXT_PUBLIC_TITLE}</title>
 
         {/*<!-- Google / Search Engine Tags -->*/}
-        <meta name='name' content={title ? title : process.env.NEXT_PUBLIC_TITLE} />
+        <meta name='name' content={process.env.NEXT_PUBLIC_WEB_URL} />
         <meta name='description' content={description ? description : process.env.NEXT_PUBLIC_DESCRIPTION} />
         <meta name='keywords' content={keywords ? keywords : process.env.NEXT_PUBLIC_kEYWORDS} />
         <meta name='image' content={ogImage ? ogImage : null} />
@@ -22,6 +22,8 @@ const Meta = ({ title, description, keywords, ogImage, pathName, schema }) => {
         <meta property='og:image:height' content='608' />
         <meta property='og:url' content={pathName ? pathName : process.env.NEXT_PUBLIC_PATHNAME} />
         <meta property='og:type' content='website' />
+        <meta property='og:locale' content='en_US' />
+        <meta property='og:site_name' content={process.env.NEXT_PUBLIC_WEB_URL} />
 
         {/*<!-- Twitter Meta Tags -->*/}
         <meta name='twitter:title' content={title ? title : process.env.NEXT_PUBLIC_TITLE} />
