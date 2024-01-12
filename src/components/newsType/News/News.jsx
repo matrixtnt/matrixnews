@@ -209,13 +209,6 @@ const News = () => {
     return tags
   }
 
-  const WhatsappLoaderComponent = () => (
-    <div className="loader12">
-      {/* Add your loader UI here */}
-      Loading ...
-    </div>
-  );
-
   // const readTime = calculateReadTime(text);
 
   const text = extractTextFromHTML(Data && Data[0]?.description)
@@ -292,7 +285,6 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      {!whatsappImageLoaded && <WhatsappLoaderComponent />}
                       <FacebookShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <FacebookIcon size={40} round  />
                       </FacebookShareButton>
