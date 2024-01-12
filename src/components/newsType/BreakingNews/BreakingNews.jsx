@@ -26,6 +26,7 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
 import Layout from 'src/components/layout/Layout'
+import { settingsData } from 'src/store/reducers/settingsReducer'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
@@ -33,6 +34,7 @@ const BreakingNews = () => {
   const [modalShow, setModalShow] = useState(false)
   const router = useRouter()
   const query = router.query
+  const SettingsData = useSelector(settingsData)
   const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
   const BNid = query.slug
   let { id: language_id } = getLanguage()
@@ -165,13 +167,13 @@ const BreakingNews = () => {
 
                             <div id='B_NV-right-head'>
                               <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
-                              <FacebookShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
+                              <FacebookShareButton url={currentUrL} title={data[0].title + SettingsData && SettingsData.web_setting.web_name}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                                 <FacebookIcon size={30} round />
                               </FacebookShareButton>
-                              <WhatsappShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
+                              <WhatsappShareButton url={currentUrL} title={data[0].title + SettingsData && SettingsData.web_setting.web_name}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                                 <WhatsappIcon size={30} round />
                               </WhatsappShareButton>
-                              <TwitterShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
+                              <TwitterShareButton url={currentUrL} title={data[0].title + SettingsData && SettingsData.web_setting.web_name}  hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                                 <XIcon size={30} round />
                               </TwitterShareButton>
                             </div>

@@ -40,7 +40,7 @@ const News = () => {
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const userData = useSelector(selectUser)
-  const settingsOnOff = useSelector(settingsData)
+  const SettingsData = useSelector(settingsData)
   const router = useRouter()
   const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
 
@@ -285,13 +285,13 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      <FacebookShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <FacebookShareButton url={currentUrL} title={Data && Data[0].title + SettingsData && SettingsData.web_setting.web_name} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                         <FacebookIcon size={40} round  />
                       </FacebookShareButton>
-                      <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'} beforeOnClick={() => setWhatsappImageLoaded(false)}>
+                      <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + SettingsData && SettingsData.web_setting.web_name} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`} beforeOnClick={() => setWhatsappImageLoaded(false)}>
                         <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
                       </WhatsappShareButton>
-                      <TwitterShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
+                      <TwitterShareButton url={currentUrL} title={Data && Data[0].title + SettingsData && SettingsData.web_setting.web_name} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
                         <XIcon size={40} round />
                       </TwitterShareButton>
                     </div>
@@ -408,7 +408,7 @@ const News = () => {
                   ) : null}
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
-                  {settingsOnOff && settingsOnOff.comments_mode === '1' ? (
+                  {SettingsData && SettingsData.comments_mode === '1' ? (
                     <CommentSection Nid={Data && Data[0].id}/>
                   ) : (
                     <>
