@@ -62,7 +62,7 @@ const News = () => {
   let { id: language_id } = getLanguage()
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false);
 
   // api call
   const getNewsById = async () => {
@@ -209,10 +209,10 @@ const News = () => {
     return tags
   }
 
-  const LoaderComponent = () => (
-    <div className="loader">
+  const WhatsappLoaderComponent = () => (
+    <div className="loader12">
       {/* Add your loader UI here */}
-      Loading...
+      Loading ...
     </div>
   );
 
@@ -292,12 +292,12 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      {!imageLoaded && <LoaderComponent />}
+                      {!whatsappImageLoaded && <WhatsappLoaderComponent />}
                       <FacebookShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                        <FacebookIcon size={40} round onLoad={() => setImageLoaded(true)} />
+                        <FacebookIcon size={40} round  />
                       </FacebookShareButton>
-                      <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                        <WhatsappIcon size={40} round onLoad={() => setImageLoaded(true)} />
+                      <WhatsappShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'} beforeOnClick={() => setWhatsappImageLoaded(false)}>
+                        <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
                       </WhatsappShareButton>
                       <TwitterShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
                         <TwitterIcon size={40} round />
