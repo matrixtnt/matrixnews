@@ -11,10 +11,10 @@ import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav.jsx'
 import {
   FacebookIcon,
   WhatsappIcon,
-  TwitterIcon,
   TwitterShareButton,
   WhatsappShareButton,
-  FacebookShareButton
+  FacebookShareButton,
+  XIcon
 } from 'react-share'
 import SignInModal from '../../auth/SignInModal.jsx'
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js'
@@ -292,7 +292,7 @@ const News = () => {
                         <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
                       </WhatsappShareButton>
                       <TwitterShareButton url={currentUrL} title={Data && Data[0].title + ' - News'} hashtag={'News'}>
-                        <TwitterIcon size={40} round />
+                        <XIcon size={40} round />
                       </TwitterShareButton>
                     </div>
                   </div>

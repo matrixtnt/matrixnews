@@ -5,10 +5,10 @@ import TagsSection from '../../tag/TagsSection'
 import {
   FacebookIcon,
   WhatsappIcon,
-  TwitterIcon,
   TwitterShareButton,
   WhatsappShareButton,
-  FacebookShareButton
+  FacebookShareButton,
+  XIcon
 } from 'react-share'
 import RelatedBreakingNews from '../../relatedNews/RelatedBreakingNews'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
@@ -172,7 +172,7 @@ const BreakingNews = () => {
                                 <WhatsappIcon size={30} round />
                               </WhatsappShareButton>
                               <TwitterShareButton url={currentUrL} title={data[0].title + ' - News'} hashtag={'News'}>
-                                <TwitterIcon size={30} round />
+                                <XIcon size={30} round />
                               </TwitterShareButton>
                             </div>
                           </div>
