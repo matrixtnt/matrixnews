@@ -132,7 +132,7 @@ const UserBasedCategories = () => {
                         <div className='manage_card'>
                           <div className='inner_manage'>
                             <div className='manage_image'>
-                              <img src={element.image} alt='news' />
+                              <img src={element.image} alt={element.category_name} />
                             </div>
                             <div className='manage_title'>
                               <p className='mb-0'>{element.category_name}</p>

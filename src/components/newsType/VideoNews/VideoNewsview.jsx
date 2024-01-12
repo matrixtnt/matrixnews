@@ -95,7 +95,7 @@ const VideoNewsview = () => {
                         id='vnv-card-image'
                         src={element.image ? element.image : no_image}
                         className='card-img'
-                        alt='...'
+                        alt= {element.title}
                       />
                       <div className='card-image-overlay' id='vnv-btnVideo'>
                         <BsFillPlayFill id='vnv-btnVideo-logo' className='pulse' fill='white' size={50} />

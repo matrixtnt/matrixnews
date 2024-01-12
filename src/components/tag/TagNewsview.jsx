@@ -68,7 +68,7 @@ const TagNewsview = () => {
                     <div className='col-md-4 col-12' key={element.id}>
                       <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                         <div id='ts-card' className='card'>
-                          <img id='ts-card-image' src={element.image} className='card-img' alt='...' />
+                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} />
 
                           <div id='ts-card-body' className='card-body'>
                             <div className='tag_button'>

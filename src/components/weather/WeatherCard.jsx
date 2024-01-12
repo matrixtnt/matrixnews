@@ -120,7 +120,7 @@ const WeatherCard = () => {
               ) : (
                 weather && (
                   <>
-                    <img src={weather && weather.current.condition.icon} alt='news' className='weather_icon' />
+                    <img src={weather && weather.current.condition.icon} alt='weather news' className='weather_icon' />
                     <b className='me-2'>{weather && weather.current.temp_c}°C</b>
                     <div className='left-state'>
                       <p className='location-wcard mb-0 '>

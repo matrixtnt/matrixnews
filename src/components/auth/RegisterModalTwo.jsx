@@ -169,9 +169,9 @@ const RagisterModalTwo = (props) => {
             <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="border-radius-2">
                 <div className="ModalWrapper" id="ModalWrapper22">
                     <div style={{ width: "100%", objectFit: "cover", borderRadius: "20px" }} id="login_img3">
-                        <img className="ModalImg3" src={photo.src} alt="" />
+                        <img className="ModalImg3" src={photo.src} alt="register image" />
                         <div className="logo-img-overlay">
-                            <img src={settings && settings.web_setting.web_header_logo} alt="" id="logo3" />
+                            <img src={settings && settings.web_setting.web_header_logo} alt="logo image" id="logo3" />
                         </div>
                     </div>
 

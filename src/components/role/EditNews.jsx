@@ -823,7 +823,7 @@ const EditNews = () => {
                           <img
                             src={mainImage && mainImage}
                             onClick={() => document.getElementById('file').click()}
-                            alt=''
+                            alt='edit news'
                           />
                         </div>
                       )}
@@ -833,7 +833,7 @@ const EditNews = () => {
                           <img
                             src={DefaultValue.imagedefault}
                             onClick={() => document.getElementById('file').click()}
-                            alt=''
+                            alt='edit news'
                           />
                         </div>
                       )}

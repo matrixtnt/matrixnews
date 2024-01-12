@@ -97,7 +97,7 @@ const ManageNews = () => {
                           <div className='manage-img'>
                             <img
                               src={element.image}
-                              alt=''
+                              alt='manage news'
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,

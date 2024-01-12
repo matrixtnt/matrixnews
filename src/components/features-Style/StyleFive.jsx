@@ -115,7 +115,7 @@ const StyleFive = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature ads news image' />}
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ const StyleFive = ({ isLoading, Data }) => {
                     id='bns-main-image'
                     src={breakingNews2_jpg}
                     className='card-img'
-                    alt='news'
+                    alt={Data.title}
                     onError={placeholderImage}
                   />
                   <div id='bns-main-text' className='card-img-overlay'>
@@ -177,7 +177,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                 id='bns-image'
                                 src={element.image}
                                 className='card-img-top'
-                                alt='news'
+                                alt={element.title}
                                 onError={placeholderImage}
                               />
                               <div id='rns-img-overlay' className=' card-inverse'>
@@ -234,7 +234,7 @@ const StyleFive = ({ isLoading, Data }) => {
                     id='bns-main-image'
                     src={breakingNews2_jpg}
                     className='card-img'
-                    alt='news'
+                    alt={Data.title}
                     onError={placeholderImage}
                   />
                   <div id='bns-main-text' className='card-img-overlay'>
@@ -273,7 +273,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                 id='bns-image'
                                 src={element.image}
                                 className='card-img-top'
-                                alt='news'
+                                alt={element.title}
                                 onError={placeholderImage}
                               />
                               <div id='bns-card-body' className='card-body ps-0'>
@@ -305,7 +305,7 @@ const StyleFive = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -322,7 +322,7 @@ const StyleFive = ({ isLoading, Data }) => {
                     id='bns-main-image'
                     src={breakingNews2_jpg}
                     className='card-img'
-                    alt='news'
+                    alt={Data.title}
                     onError={placeholderImage}
                   />
                   <div id='bns-main-text' className='card-img-overlay'>
@@ -361,7 +361,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                 id='bns-image'
                                 src={element.image}
                                 className='card-img-top'
-                                alt='news'
+                                alt={element.title}
                                 onError={placeholderImage}
                               />
                               <div id='bns-card-body' className='card-body ps-0'>

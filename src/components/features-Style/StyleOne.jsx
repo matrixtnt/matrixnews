@@ -47,7 +47,7 @@ const StyleOne = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@ const StyleOne = ({ isLoading, Data }) => {
                             className='float-end fs-Newscard-image h-auto'
                             id='fs-Newscard-image'
                             fallback={<Breathing width={800} height={600} />}
-                            alt='news'
+                            alt='style one video news image'
                             onError={placeholderImage}
                           />
                           <div className='circle'>
@@ -120,7 +120,7 @@ const StyleOne = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ const StyleOne = ({ isLoading, Data }) => {
                             className='float-end fs-Newscard-image h-auto'
                             id='fs-Newscard-image'
                             fallback={<Breathing width={800} height={600} />}
-                            alt='news'
+                            alt={item.title}
                             onError={placeholderImage}
                           />
                         </div>
@@ -194,7 +194,7 @@ const StyleOne = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -244,7 +244,7 @@ const StyleOne = ({ isLoading, Data }) => {
                             className='float-end fs-Newscard-image h-auto'
                             id='fs-Newscard-image'
                             fallback={<Breathing width={800} height={600} />}
-                            alt='news'
+                            alt={item.title}
                             onError={placeholderImage}
                           />
                         </div>

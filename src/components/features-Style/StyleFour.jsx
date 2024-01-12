@@ -31,7 +31,7 @@ const StyleFour = ({ Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ const StyleFour = ({ Data }) => {
                               id='rns-image'
                               src={value.image}
                               className='card-img-top'
-                              alt='news'
+                              alt={value.title}
                               onError={placeholderImage}
                             />
                           </div>
@@ -110,7 +110,7 @@ const StyleFour = ({ Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@ const StyleFour = ({ Data }) => {
                               id='rns-image'
                               src={value.image}
                               className='card-img-top'
-                              alt='news'
+                              alt={value.title}
                               onError={placeholderImage}
                             />
                           </div>
@@ -177,7 +177,7 @@ const StyleFour = ({ Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@ const StyleFour = ({ Data }) => {
                               id='rns-image'
                               src={value.image}
                               className='card-img-top'
-                              alt='news'
+                              alt={value.title}
                               onError={placeholderImage}
                             />
                           </div>

@@ -55,7 +55,7 @@ const AllBreakingNews = () => {
                           id='BNV-card-image'
                           src={element.image ? element.image : no_image}
                           className='card-img'
-                          alt='...'
+                          alt='breaking news image'
                         />
                         <div id='BNV-card-body' className='card-body'>
                           <h5 id='BNV-card-title' className='card-title'>

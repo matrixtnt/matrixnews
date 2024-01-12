@@ -85,7 +85,7 @@ const BookmarkSection = () => {
                         id='bs-card-image'
                         src={element.image}
                         className='card-img'
-                        alt='...'
+                        alt='bookmark news'
                         onClick={() =>
                           navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
                         }
@@ -126,7 +126,7 @@ const BookmarkSection = () => {
               // Show "No data found" message if no data is available
               <div className='col-12 no_data mt-5'>
                 <div id='bs-no-main'>
-                  <img id='bs-no-image' src={bookmarkIMG.src} alt='' />
+                  <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' />
                   <p id='bs-no-title'>
                     <b>{translate('addbookmark')}</b>
                   </p>

@@ -54,9 +54,9 @@ const PhoneLoginTwo = (props) => {
             <Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered dialogClassName="border-radius-2">
                 <div className="ModalWrapper44" id="ModalWrapper44">
                     <div style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "20px" }} id="login_img4">
-                        <img className="ModalImg4" src={photo.src} alt="" />
+                        <img className="ModalImg4" src={photo.src} alt="mobile-login" />
                         <div className="logo-img-overlay">
-                            <img src={settings && settings.web_setting.web_header_logo} alt="" id="logo4" />
+                            <img src={settings && settings.web_setting.web_header_logo} alt="logo" id="logo4" />
                         </div>
                     </div>
 

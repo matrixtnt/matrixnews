@@ -49,7 +49,7 @@ const Footer = () => {
             <div className='col-lg-3 col-12'>
               <div className='News'>
                 <Link href='/'>
-                  <img id='NewsLogo' src={settings && settings.web_setting.web_footer_logo} alt='' />
+                  <img id='NewsLogo' src={settings && settings.web_setting.web_footer_logo} alt='footer logo image' />
                 </Link>
               </div>
               <div className='Lorem-text'>

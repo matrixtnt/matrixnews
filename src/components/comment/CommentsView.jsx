@@ -185,7 +185,7 @@ const CommentsView = props => {
             Data.map(element => (
               <div key={element.id}>
                 <div id='cv-comment' onClick={() => setCommentID(element.id)}>
-                  <img id='cs-profile' src={element.profile ? element.profile : no_image} alt='' />
+                  <img id='cs-profile' src={element.profile ? element.profile : no_image} alt='comment user profile news image' />
                   <div id='cs-card' className='card'>
                     <b>
                       <h5>{element.name}</h5>
@@ -247,7 +247,7 @@ const CommentsView = props => {
                 </div>
                 {element.replay.map(ele => (
                   <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-                    <img id='cs-profile' src={ele.profile ? ele.profile : no_image} alt='' />
+                    <img id='cs-profile' src={ele.profile ? ele.profile : no_image} alt='replay comment user news image' />
                     <div id='cs-Rcard' className='card'>
                       <b>
                         <h5>{ele.name}</h5>

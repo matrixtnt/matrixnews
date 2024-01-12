@@ -51,7 +51,7 @@ const RelatedBreakingNews = props => {
               <div key={element.id}>
                 <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`,query: { language_id: element.language_id}}} onClick={scrollToTop}>
                   <div id='rbn-card' className='card'>
-                    <img id='rbn-image' src={element.image} className='card-img-top' alt='...' />
+                    <img id='rbn-image' src={element.image} className='card-img-top' alt={element.title} />
                     <div id='rbn-card-body' className='rbn-card-body'>
                       <div id='btnrbnCatagory' className='btn btn-sm' type='button'>
                         {translate('breakingnews')}

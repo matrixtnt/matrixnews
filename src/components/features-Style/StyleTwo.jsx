@@ -36,7 +36,7 @@ const StyleTwo = ({ Data }) => {
               <div className='ad_spaces'>
                 <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
                   {Data.ad_spaces.web_ad_image && (
-                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />
+                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
                   )}
                 </div>
               </div>
@@ -64,7 +64,7 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[0].type)
                     }}
                   >
-                    <img src={Data.videos[0] && Data.videos[0].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.videos[0] && Data.videos[0].image} alt={Data.videos[0] && Data.videos[0].title} onError={placeholderImage} />
                     <div className='video_button'>
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
@@ -82,7 +82,7 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[1].type)
                     }}
                   >
-                    <img src={Data.videos[1] && Data.videos[1].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.videos[1] && Data.videos[1].image} alt={Data.videos[1] && Data.videos[1].title} onError={placeholderImage} />
                     <div className='video_button'>
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
@@ -101,7 +101,7 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[2].type)
                     }}
                   >
-                    <img src={Data.videos[2] && Data.videos[2].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.videos[2] && Data.videos[2].image} alt={Data.videos[2] && Data.videos[2].title} onError={placeholderImage} />
                     <div className='video_button'>
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
@@ -120,7 +120,7 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[3].type)
                     }}
                   >
-                    <img src={Data.videos[3] && Data.videos[3].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.videos[3] && Data.videos[3].image} alt={Data.videos[3] && Data.videos[3].title} onError={placeholderImage} />
                     <div className='video_button'>
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
@@ -138,7 +138,7 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[4].type)
                     }}
                   >
-                    <img src={Data.videos[4] && Data.videos[4].image} alt='news' />
+                    <img src={Data.videos[4] && Data.videos[4].image} alt={Data.videos[4] && Data.videos[4].title} />
                     <div className='video_button'>
                       <BsFillPlayFill className='pulse' fill='white' size={50} onError={placeholderImage} />
                     </div>
@@ -171,7 +171,7 @@ const StyleTwo = ({ Data }) => {
               <div className='ad_spaces'>
                 <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
                   {Data.ad_spaces.web_ad_image && (
-                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />
+                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
                   )}
                 </div>
               </div>
@@ -199,7 +199,7 @@ const StyleTwo = ({ Data }) => {
                       navigate.push({ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id}})
                     }
                   >
-                    <img src={Data.news[0] && Data.news[0].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.news[0] && Data.news[0].image} alt={truncateText(Data.news[0].category_name, 10)} onError={placeholderImage} />
 
                     <div className='content'>
                       <span>{truncateText(Data.news[0].category_name, 10)}</span>
@@ -215,7 +215,7 @@ const StyleTwo = ({ Data }) => {
                       navigate.push({ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id}})
                     }
                   >
-                    <img src={Data.news[1] && Data.news[1].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.news[1] && Data.news[1].image} alt={truncateText(Data.news[1].category_name, 10)} onError={placeholderImage} />
 
                     <div className='content'>
                       <span>{truncateText(Data.news[1].category_name, 10)}</span>
@@ -232,7 +232,7 @@ const StyleTwo = ({ Data }) => {
                       navigate.push({ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id}})
                     }
                   >
-                    <img src={Data.news[2] && Data.news[2].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.news[2] && Data.news[2].image} alt={truncateText(Data.news[2].category_name, 10)} onError={placeholderImage} />
 
                     <div className='content'>
                       <span>{truncateText(Data.news[2].category_name, 10)}</span>
@@ -249,7 +249,7 @@ const StyleTwo = ({ Data }) => {
                       navigate.push({ pathname: `/news/${Data.news[3].slug}`, query: { language_id: Data.news[3].language_id}})
                     }
                   >
-                    <img src={Data.news[3] && Data.news[3].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.news[3] && Data.news[3].image} alt={truncateText(Data.news[3].category_name, 10)} onError={placeholderImage} />
 
                     <div className='content'>
                       <span>{truncateText(Data.news[3].category_name, 10)}</span>
@@ -265,7 +265,7 @@ const StyleTwo = ({ Data }) => {
                       navigate.push({ pathname: `/news/${Data.news[4].slug}`, query: { language_id: Data.news[4].language_id}})
                     }
                   >
-                    <img src={Data.news[4] && Data.news[4].image} alt='news' onError={placeholderImage} />
+                    <img src={Data.news[4] && Data.news[4].image} alt={truncateText(Data.news[4].category_name, 10)} onError={placeholderImage} />
 
                     <div className='content'>
                       <span>{truncateText(Data.news[4].category_name, 10)}</span>
@@ -316,7 +316,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <img
                       src={Data.breaking_news[0] && Data.breaking_news[0].image}
-                      alt='news'
+                      alt={Data.breaking_news[0] && Data.breaking_news[0].title}
                       onError={placeholderImage}
                     />
 
@@ -333,7 +333,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <img
                       src={Data.breaking_news[1] && Data.breaking_news[1].image}
-                      alt='news'
+                      alt={Data.breaking_news[1] && Data.breaking_news[1].title}
                       onError={placeholderImage}
                     />
 
@@ -351,7 +351,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <img
                       src={Data.breaking_news[2] && Data.breaking_news[2].image}
-                      alt='news'
+                      alt={Data.breaking_news[2] && Data.breaking_news[2].title}
                       onError={placeholderImage}
                     />
 
@@ -369,7 +369,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <img
                       src={Data.breaking_news[3] && Data.breaking_news[3].image}
-                      alt='news'
+                      alt={Data.breaking_news[3] && Data.breaking_news[3].title}
                       onError={placeholderImage}
                     />
 
@@ -386,7 +386,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <img
                       src={Data.breaking_news[4] && Data.breaking_news[4].image}
-                      alt='news'
+                      alt={Data.breaking_news[4] && Data.breaking_news[4].title}
                       onError={placeholderImage}
                     />
 

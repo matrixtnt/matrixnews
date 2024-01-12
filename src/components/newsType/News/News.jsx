@@ -250,7 +250,7 @@ const News = () => {
                       <img
                         className='adimage'
                         src={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image}
-                        alt='ads'
+                        alt='feature sponsored ads news image'
                       />
                     }
                   </div>
@@ -298,7 +298,7 @@ const News = () => {
                   </div>
                   <div id='vps-body-left'>
                     <div className='vps-img-div'>
-                      <img id='nv-image' src={Data && Data[0].image} alt='...' />
+                      <img id='nv-image' src={Data && Data[0].image} alt={Data && Data[0].title} />
                       <div className='seeAllPhoto'>
                         {galleryPhotos && galleryPhotos.length > 0 ? (
                           <button onClick={e => openLightbox(e, { index: 0 })}>
@@ -451,7 +451,7 @@ const News = () => {
                       <img
                         className='adimage'
                         src={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image}
-                        alt='ads'
+                        alt='feature sponsored ads news '
                       />
                     }
                   </div>

@@ -143,7 +143,7 @@ const SearchPopup = () => {
                     <div className='col-12 px-0' key={element.id}>
                       <div id='Link-all' onClick={e => redirectPage(e, element)}>
                         <div id='ts-card' className='card'>
-                          <img id='ts-card-image' src={element.image} className='card-img' alt='...' />
+                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} />
                           <div id='ts-card-body' className='card-body'>
                             <h5 id='ts-card-title' className='card-title'>
                               {truncateText(element.title, 150)}

@@ -101,7 +101,7 @@ const StyleSix = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style six feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ const StyleSix = ({ isLoading, Data }) => {
                   <SwiperSlide key={item.id}>
                     <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
                       <div className='card fs-Newscard'>
-                        <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
+                        <img src={item.image} alt={item.title} className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
                           {item && item.category_name ? (
                             <div
@@ -203,7 +203,7 @@ const StyleSix = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style six feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@ const StyleSix = ({ isLoading, Data }) => {
                   <SwiperSlide key={item.id}>
                     <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
                       <div className='card fs-Newscard'>
-                        <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
+                        <img src={item.image} alt={item.title} className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                         <div className='card-img-overlay'>
                           <div
                             id='btnCatagory'
@@ -286,7 +286,7 @@ const StyleSix = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature sponsored ads news image' />}
             </div>
           </div>
         </div>
@@ -307,7 +307,7 @@ const StyleSix = ({ isLoading, Data }) => {
                   <SwiperSlide key={item.id}>
                     {/* <Link href={item.content_value ? '#' : `/breaking-news/${item.slug}`}> */}
                     <div className='card fs-Newscard'>
-                      <img src={item.image} alt='' className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
+                      <img src={item.image} alt={item.title} className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
                       <div className='card-img-overlay'>
                         {item.content_value ? (
                           <div

@@ -94,7 +94,7 @@ const ViewAll = () => {
                               id='BNV-card-image'
                               src={element.image ? element.image : no_image}
                               className='card-img'
-                              alt='...'
+                              alt= {element.title}
                             />
                             <div id='BNV-card-body' className='card-body'>
                               {/* <button id='BNV-btnCatagory' className='btn btn-sm' type="button" >{element.category_name}</button> */}
@@ -150,7 +150,7 @@ const ViewAll = () => {
                               id='BNV-card-image'
                               src={element.image ? element.image : no_image}
                               className='card-img'
-                              alt='...'
+                              alt= {element.title}
                             />
                             <div id='BNV-card-body' className='card-body'>
                               {/* <button id='BNV-btnCatagory' className='btn btn-sm' type="button" >{element.category_name}</button> */}

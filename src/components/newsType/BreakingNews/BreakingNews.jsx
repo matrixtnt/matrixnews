@@ -140,7 +140,7 @@ const BreakingNews = () => {
                           target='_blank'
                           onClick={() => window.open(adsdata && adsdata.ad_spaces_top.ad_url, '_blank')}
                         >
-                          {<img className='adimage' src={adsdata && adsdata.ad_spaces_top.web_ad_image} alt='ads' />}
+                          {<img className='adimage' src={adsdata && adsdata.ad_spaces_top.web_ad_image} alt='feature sponsored ads news image' />}
                         </div>
                       </div>
                     ) : null}
@@ -179,7 +179,7 @@ const BreakingNews = () => {
                             </div>
                           </div>
                           <div id='vps-body-left'>
-                            <img id='B_NV-image' src={data[0].image} alt='...' />
+                            <img id='B_NV-image' src={data[0].image} alt={data[0].title} />
                             {data && data[0].content_value ? (
                               <div className='text-black'>
                                 <div id='vps-btnVideo' onClick={() => handleVideoUrl(data[0].content_value)}>
@@ -241,7 +241,7 @@ const BreakingNews = () => {
                           target='_blank'
                           onClick={() => window.open(adsdata && adsdata.ad_spaces_bottom.ad_url, '_blank')}
                         >
-                          {<img className='adimage' src={adsdata && adsdata.ad_spaces_bottom.web_ad_image} alt='ads' />}
+                          {<img className='adimage' src={adsdata && adsdata.ad_spaces_bottom.web_ad_image} alt='feature sponsored ads news image' />}
                         </div>
                       </div>
                     ) : null}

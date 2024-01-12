@@ -78,7 +78,7 @@ const LiveNews = () => {
                         id='LN-card-image'
                         src={element.image ? element.image : no_image}
                         className='card-img'
-                        alt='...'
+                        alt={element.title}
                       />
                       <div className='card-image-overlay'>
                         <BsFillPlayFill className='line-news-circle pulse' fill='white' size={50} />

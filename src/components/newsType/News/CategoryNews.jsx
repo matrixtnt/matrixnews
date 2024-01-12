@@ -72,7 +72,7 @@ const CategoryNews = () => {
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                         <div id='cv-card' className='card'>
-                          <img id='cv-card-image' src={element.image} className='card-img' alt='...' />
+                          <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} />
                           <div id='cv-card-body' className='card-body'>
                             <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
                               {element.category_name}
