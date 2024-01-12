@@ -555,7 +555,7 @@ const EditNews = () => {
                         closable
                         showIcon
                         className='mt-2'
-                        message='Meta Title length should not exceed 60 characters'
+                        message={translate("metaTitleWarningLbl")}
                         type='warning'
                       />
                     </div>
@@ -572,7 +572,7 @@ const EditNews = () => {
                         closable
                         showIcon
                         className='mt-2'
-                        message='Meta Description length should between in 50 to 160 characters'
+                        message={translate("metaDescriptionWarningLbl")}
                         type='warning'
                       />
                     </div>
@@ -589,7 +589,7 @@ const EditNews = () => {
                         closable
                         showIcon
                         className='mt-2'
-                        message='Meta Keywords are not more than 10 keyword phrases.'
+                        message={translate("metaKeywordWarningLbl")}
                         type='warning'
                       />
                     </div>
@@ -604,7 +604,7 @@ const EditNews = () => {
                         closable
                         showIcon
                         className='mt-2'
-                        message='Slug only accept lowercase letters, numbers, and hyphens. No spaces or special characters allowed.'
+                        message={translate("slugWarningLbl")}
                         type='warning'
                       />
                     </div>

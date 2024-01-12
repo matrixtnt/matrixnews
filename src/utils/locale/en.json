@@ -257,5 +257,9 @@
   "meta-title": "Meta Title",
   "meta-description": "Meta Description",
   "slug": "slug",
-  "meta-keywords": "Meta Keywords"
+  "meta-keywords": "Meta Keywords",
+  "metaTitleWarningLbl": "Meta Title length should not exceed 60 characters.",
+  "metaDescriptionWarningLbl": "Meta Description length should between 50 to 160 characters.",
+  "metaKeywordWarningLbl": "Meta Keywords are not more than 10 keyword phrases & should be comma separated.",
+  "slugWarningLbl": "Slug only accept lowercase letters, numbers, and hyphens. No spaces or special characters allowed."
 }
