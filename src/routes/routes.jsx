@@ -1,25 +1,26 @@
 export const publicRoutes = [
   '/',
-  '/categories-news',
-  '/tag',
+  '/all-breaking-news',
+  '/all-categories',
   '/breaking-news',
-  '/video-news-view',
-  '/bookmark',
-  '/news',
-  '/view-all',
-  '/categories',
+  '/categories-news',
   '/live-news',
-  '/notification',
-  '/news-notification',
-  '/persnol-notification',
-  '/user-based-categories',
   '/more-pages',
-  '/create-news',
-  '/manage-news',
-  '/edit-news',
-  '/profile-update'
+  '/news',
+  '/news-notification',
+  '/tag',
+  '/video-news-view',
+  '/view-all'
 ]
 
 export const authRoutes = []
 
-export const protectedRoutes = []
+export const protectedRoutes = [
+  '/bookmark',
+  '/create-news',
+  '/edit-news',
+  '/manage-news',
+  '/user-based-categories',
+  "/personal-notification",
+  '/profile-update',
+]
