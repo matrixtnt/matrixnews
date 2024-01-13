@@ -221,7 +221,7 @@ const BreakingNews = () => {
                       <div className='col-md-5 col-12'>
                         <div id='B_NV-right-section'>
                           {BNid ? <RelatedBreakingNews id={BNid} /> : null}
-                          <TagsSection />
+                          {/* <TagsSection /> */}
                         </div>
                       </div>
                     </div>
