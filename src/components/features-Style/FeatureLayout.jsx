@@ -33,6 +33,7 @@ const FeatureLayout = () => {
         latitude: storedLatitude,
         longitude: storedLongitude
       })
+      console.log("apiData in feature compo ", data)
       return data.data
     } catch (error) {
       console.log(error)
@@ -41,10 +42,10 @@ const FeatureLayout = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['mainfeatureSection', currentLanguage,location],
+    queryKey: ['mainfeatureSection', currentLanguage, location],
     queryFn: getFeatureSection
   })
-
+  console.log("feature section data ", Data)
   const SelectType = () => {
     return (
       Data &&

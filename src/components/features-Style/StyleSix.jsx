@@ -8,11 +8,11 @@ import { stripHtmlTags, truncateText } from '../../utils'
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useQuery } from '@tanstack/react-query'
-import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
+import { getFeatureSectionByIdApi } from 'src/hooks/getFeatureSectionByIDApi'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -71,7 +71,8 @@ const StyleSix = ({ isLoading, Data }) => {
 
   const getFeatureSectionById = async () => {
     try {
-      const { data } = await getFeatureSectionApi.getFeatureSection({
+
+      const { data } = await getFeatureSectionByIdApi.getFeatureSectionById({
         access_key: access_key,
         section_id: Data.id,
         language_id: language_id,
@@ -96,6 +97,7 @@ const StyleSix = ({ isLoading, Data }) => {
 
   return (
     <div id='first-section'>
+
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
         <div className='ad_spaces'>
@@ -156,10 +158,10 @@ const StyleSix = ({ isLoading, Data }) => {
                                 <p id='Top-Posttime01'>
                                   {item.date
                                     ? new Date(item.date).toLocaleString('en-us', {
-                                        month: 'short',
-                                        day: 'numeric',
-                                        year: 'numeric'
-                                      })
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric'
+                                    })
                                     : ''}
                                 </p>
                               ) : null}
@@ -191,7 +193,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </Swiper>
           </div>
@@ -243,10 +245,10 @@ const StyleSix = ({ isLoading, Data }) => {
                             <p id='Top-Posttime01'>
                               {item.date
                                 ? new Date(item.date).toLocaleString('en-us', {
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric'
-                                  })
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric'
+                                })
                                 : ''}
                             </p>
                             <div
@@ -267,6 +269,7 @@ const StyleSix = ({ isLoading, Data }) => {
                   </SwiperSlide>
                 ))
               )}
+
               <VideoPlayerModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -274,7 +277,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </Swiper>
           </div>
@@ -342,7 +345,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </Swiper>
           </div>
