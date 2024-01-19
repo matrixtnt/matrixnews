@@ -26,7 +26,7 @@ const StyleSix = ({ isLoading, Data }) => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
   const router = useRouter()
-
+  console.log("Data", Data)
   const Newbreakpoints = {
     320: {
       slidesPerView: 1
@@ -74,11 +74,12 @@ const StyleSix = ({ isLoading, Data }) => {
 
       const { data } = await getFeatureSectionByIdApi.getFeatureSectionById({
         access_key: access_key,
-        section_id: Data.id,
+        section_id: Data?.id,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
+      console.log(data)
       return data.data
     } catch (error) {
       console.log(error)
@@ -87,7 +88,7 @@ const StyleSix = ({ isLoading, Data }) => {
 
   // react query
   const { data: sliderData } = useQuery({
-    queryKey: ['styleSixFeature', location],
+    queryKey: ['styleSixFeature', location, Data?.id],
     queryFn: getFeatureSectionById
   })
 
@@ -112,6 +113,7 @@ const StyleSix = ({ isLoading, Data }) => {
       {/* video section */}
       {sliderData && sliderData[0].videos?.length > 0 ? (
         <div className='container'>
+
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
@@ -298,6 +300,7 @@ const StyleSix = ({ isLoading, Data }) => {
       {/* breaking news section */}
       {sliderData && sliderData[0].breaking_news?.length > 0 ? (
         <div className='container'>
+
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
