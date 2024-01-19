@@ -15,58 +15,65 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
+// ... (existing imports)
 
 const ViewAll = () => {
-  const [currentPage, setCurrentPage] = useState(0)
-  const dataPerPage = 6 // number of posts per page
-  const pagesVisited = currentPage * dataPerPage
-  const router = useRouter()
-  const query = router.query
-  const catid = query.slug
-  const location = useSelector(locationData)
-  const storedLatitude = location && location.lat
-  const storedLongitude = location && location.long
-  let user = getUser()
-  let { id: language_id } = getLanguage()
+  const [currentPage, setCurrentPage] = useState(0);
+  const dataPerPage = 6; // number of posts per page
+  const router = useRouter();
+  const query = router.query;
+  const catid = query.slug;
+  const location = useSelector(locationData);
+  const storedLatitude = location && location.lat;
+  const storedLongitude = location && location.long;
+  let user = getUser();
+  let { id: language_id } = getLanguage();
+
   // handle page change
   const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected)
-  }
+    const newOffset = selected * dataPerPage;
+    setCurrentPage(selected);
 
-  const currentLanguage = useSelector(selectCurrentLanguage)
+    // Refetch data with the new offset
+    queryData.refetch({ offset: newOffset });
+  };
 
-  const getFeatureSection = async () => {
+  const currentLanguage = useSelector(selectCurrentLanguage);
+
+  const getFeatureSection = async ({ queryKey }) => {
+    const [, catid, currentLanguage, location, query] = queryKey;
+
     try {
       const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
-        section_id: catid,
         language_id: language_id,
-        offset: '',
-        limit: '10',
-        slug:catid,
+        offset: query.offset || '0',
+        limit: dataPerPage.toString(),
+        slug: catid,
         latitude: storedLatitude,
-        longitude: storedLongitude
-      })
-      return data.data
+        longitude: storedLongitude,
+      });
+      return data.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['viewallFeaturebyslug', catid, currentLanguage,location],
-    queryFn: getFeatureSection
-  })
+  const queryData = useQuery({
+    queryKey: ['viewallFeaturebyslug', catid, currentLanguage, location, router.query],
+    queryFn: getFeatureSection,
+  });
 
-  // slice the array to get the current posts
+  const { isLoading, data: Data } = queryData;
 
+  const pagesVisited = currentPage * dataPerPage;
   const currentData =
     Data && Data[0]?.news
       ? Data && Data[0]?.news.slice(pagesVisited, pagesVisited + dataPerPage)
-      : Data && Data[0]?.breaking_news.slice(pagesVisited, pagesVisited + dataPerPage)
+      : Data && Data[0]?.breaking_news.slice(pagesVisited, pagesVisited + dataPerPage);
 
-  const lengthdata = Data && Data[0]?.news ? Data && Data[0]?.news.length : Data && Data[0]?.breaking_news.length
+  const lengthdata = Data && Data[0]?.news ? Data && Data[0]?.news.length : Data && Data[0]?.breaking_news.length;
 
   return (
     <Layout>
@@ -86,15 +93,18 @@ const ViewAll = () => {
               ) : (
                 <div className='row'>
                   {currentData ? (
-                    currentData.map(element => (
+                    currentData.map((element) => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
+                        <Link
+                          id='Link-all'
+                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        >
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'
                               src={element.image ? element.image : no_image}
                               className='card-img'
-                              alt= {element.title}
+                              alt={element.title}
                             />
                             <div id='BNV-card-body' className='card-body'>
                               {/* <button id='BNV-btnCatagory' className='btn btn-sm' type="button" >{element.category_name}</button> */}
@@ -121,6 +131,7 @@ const ViewAll = () => {
                 nextLinkClassName={'pagination__link'}
                 disabledClassName={'pagination__link--disabled'}
                 activeClassName={'pagination__link--active'}
+                forcePage={currentPage}
               />
             </div>
           </div>
@@ -142,15 +153,18 @@ const ViewAll = () => {
               ) : (
                 <div className='row'>
                   {currentData ? (
-                    currentData.map(element => (
+                    currentData.map((element) => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`,query: { language_id: element.language_id}}}>
+                        <Link
+                          id='Link-all'
+                          href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
+                        >
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'
                               src={element.image ? element.image : no_image}
                               className='card-img'
-                              alt= {element.title}
+                              alt={element.title}
                             />
                             <div id='BNV-card-body' className='card-body'>
                               {/* <button id='BNV-btnCatagory' className='btn btn-sm' type="button" >{element.category_name}</button> */}
@@ -177,13 +191,14 @@ const ViewAll = () => {
                 nextLinkClassName={'pagination__link'}
                 disabledClassName={'pagination__link--disabled'}
                 activeClassName={'pagination__link--active'}
+                forcePage={currentPage}
               />
             </div>
           </div>
         </>
       ) : null}
     </Layout>
-  )
-}
+  );
+};
 
-export default ViewAll
+export default ViewAll;
