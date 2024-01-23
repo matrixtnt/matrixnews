@@ -12,7 +12,7 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
-import { getFeatureSectionByIdApi } from 'src/hooks/getFeatureSectionByIDApi'
+import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -26,7 +26,7 @@ const StyleSix = ({ isLoading, Data }) => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
   const router = useRouter()
-  console.log("Data", Data)
+  console.log('Data', Data)
   const Newbreakpoints = {
     320: {
       slidesPerView: 1
@@ -71,8 +71,7 @@ const StyleSix = ({ isLoading, Data }) => {
 
   const getFeatureSectionById = async () => {
     try {
-
-      const { data } = await getFeatureSectionByIdApi.getFeatureSectionById({
+      const { data } = await getFeatureSectionApi.getFeatureSectionById({
         access_key: access_key,
         section_id: Data?.id,
         language_id: language_id,
@@ -98,13 +97,18 @@ const StyleSix = ({ isLoading, Data }) => {
 
   return (
     <div id='first-section'>
-
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style six feature sponsored ads news image' />}
+              {Data.ad_spaces.web_ad_image && (
+                <img
+                  className='adimage'
+                  src={Data.ad_spaces.web_ad_image}
+                  alt='style six feature sponsored ads news image'
+                />
+              )}
             </div>
           </div>
         </div>
@@ -113,7 +117,6 @@ const StyleSix = ({ isLoading, Data }) => {
       {/* video section */}
       {sliderData && sliderData[0].videos?.length > 0 ? (
         <div className='container'>
-
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
@@ -126,7 +129,12 @@ const StyleSix = ({ isLoading, Data }) => {
                   <SwiperSlide key={item.id}>
                     <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
                       <div className='card fs-Newscard'>
-                        <img src={item.image} alt={item.title} className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className='fs-Newscard-image h-auto'
+                          id='fs-Newscard-image01'
+                        />
                         <div className='card-img-overlay'>
                           {item && item.category_name ? (
                             <div
@@ -160,10 +168,10 @@ const StyleSix = ({ isLoading, Data }) => {
                                 <p id='Top-Posttime01'>
                                   {item.date
                                     ? new Date(item.date).toLocaleString('en-us', {
-                                      month: 'short',
-                                      day: 'numeric',
-                                      year: 'numeric'
-                                    })
+                                        month: 'short',
+                                        day: 'numeric',
+                                        year: 'numeric'
+                                      })
                                     : ''}
                                 </p>
                               ) : null}
@@ -195,7 +203,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-              // title={Data[0].title}
+                // title={Data[0].title}
               />
             </Swiper>
           </div>
@@ -207,7 +215,13 @@ const StyleSix = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style six feature sponsored ads news image' />}
+              {Data.ad_spaces.web_ad_image && (
+                <img
+                  className='adimage'
+                  src={Data.ad_spaces.web_ad_image}
+                  alt='style six feature sponsored ads news image'
+                />
+              )}
             </div>
           </div>
         </div>
@@ -228,7 +242,12 @@ const StyleSix = ({ isLoading, Data }) => {
                   <SwiperSlide key={item.id}>
                     <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
                       <div className='card fs-Newscard'>
-                        <img src={item.image} alt={item.title} className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className='fs-Newscard-image h-auto'
+                          id='fs-Newscard-image01'
+                        />
                         <div className='card-img-overlay'>
                           <div
                             id='btnCatagory'
@@ -247,10 +266,10 @@ const StyleSix = ({ isLoading, Data }) => {
                             <p id='Top-Posttime01'>
                               {item.date
                                 ? new Date(item.date).toLocaleString('en-us', {
-                                  month: 'short',
-                                  day: 'numeric',
-                                  year: 'numeric'
-                                })
+                                    month: 'short',
+                                    day: 'numeric',
+                                    year: 'numeric'
+                                  })
                                 : ''}
                             </p>
                             <div
@@ -279,7 +298,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-              // title={Data[0].title}
+                // title={Data[0].title}
               />
             </Swiper>
           </div>
@@ -291,7 +310,9 @@ const StyleSix = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature sponsored ads news image' />}
+              {Data.ad_spaces.web_ad_image && (
+                <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature sponsored ads news image' />
+              )}
             </div>
           </div>
         </div>
@@ -300,7 +321,6 @@ const StyleSix = ({ isLoading, Data }) => {
       {/* breaking news section */}
       {sliderData && sliderData[0].breaking_news?.length > 0 ? (
         <div className='container'>
-
           <div id='style-six-body-section'>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
@@ -313,7 +333,12 @@ const StyleSix = ({ isLoading, Data }) => {
                   <SwiperSlide key={item.id}>
                     {/* <Link href={item.content_value ? '#' : `/breaking-news/${item.slug}`}> */}
                     <div className='card fs-Newscard'>
-                      <img src={item.image} alt={item.title} className='fs-Newscard-image h-auto' id='fs-Newscard-image01' />
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className='fs-Newscard-image h-auto'
+                        id='fs-Newscard-image01'
+                      />
                       <div className='card-img-overlay'>
                         {item.content_value ? (
                           <div
@@ -348,7 +373,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-              // title={Data[0].title}
+                // title={Data[0].title}
               />
             </Swiper>
           </div>

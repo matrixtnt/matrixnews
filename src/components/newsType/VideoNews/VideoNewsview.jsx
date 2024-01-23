@@ -9,7 +9,7 @@ import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import no_image from '../../../../public/assets/images/no_image.jpeg'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
-import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
+import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
@@ -50,7 +50,7 @@ const VideoNewsview = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['getFeatureSectionById', catid, currentLanguage,location],
+    queryKey: ['getFeatureSectionById', catid, currentLanguage, location],
     queryFn: getFeatureSectionById
   })
 
@@ -95,7 +95,7 @@ const VideoNewsview = () => {
                         id='vnv-card-image'
                         src={element.image ? element.image : no_image}
                         className='card-img'
-                        alt= {element.title}
+                        alt={element.title}
                       />
                       <div className='card-image-overlay' id='vnv-btnVideo'>
                         <BsFillPlayFill id='vnv-btnVideo-logo' className='pulse' fill='white' size={50} />

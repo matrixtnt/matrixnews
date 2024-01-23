@@ -11,11 +11,10 @@ import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
-import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 
 const FeatureLayout = () => {
-
   let { id: language_id } = getLanguage()
 
   // current language
@@ -23,7 +22,6 @@ const FeatureLayout = () => {
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
-
 
   const getFeatureSection = async () => {
     try {

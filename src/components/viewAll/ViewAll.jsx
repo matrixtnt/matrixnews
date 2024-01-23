@@ -10,11 +10,11 @@ import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
-import { getFeatureSectionApi } from 'src/hooks/getfeatureSectionbyidApi'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 
 const ViewAll = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -34,7 +34,7 @@ const ViewAll = () => {
 
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  const getFeatureSection = async (page) => {
+  const getFeatureSection = async page => {
     try {
       const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
@@ -43,27 +43,28 @@ const ViewAll = () => {
         limit: dataPerPage,
         slug: catid,
         latitude: storedLatitude,
-        longitude: storedLongitude,
-      });
-      return data.data;
+        longitude: storedLongitude
+      })
+      return data.data
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   // react query
   const { isLoading, data: Data } = useQuery({
     queryKey: ['viewallFeaturebyslug', catid, currentLanguage, location, currentPage], // Include currentPage in the queryKey
-    queryFn: () => getFeatureSection(currentPage),
-  });
+    queryFn: () => getFeatureSection(currentPage)
+  })
 
   // slice the array to get the current posts
-  const currentData = Data && Data[0]?.news
-    ? Data && Data[0]?.news.slice(0, dataPerPage)
-    : Data && Data[0]?.breaking_news.slice(0, dataPerPage);
+  const currentData =
+    Data && Data[0]?.news
+      ? Data && Data[0]?.news.slice(0, dataPerPage)
+      : Data && Data[0]?.breaking_news.slice(0, dataPerPage)
 
-  const lengthdata = Data && Data[0]?.news_total || 0;
-  console.log("lengthdata", lengthdata)
+  const lengthdata = (Data && Data[0]?.news_total) || 0
+  console.log('lengthdata', lengthdata)
   return (
     <Layout>
       {Data && Data[0]?.news ? (
@@ -84,7 +85,10 @@ const ViewAll = () => {
                   {currentData ? (
                     currentData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}>
+                        <Link
+                          id='Link-all'
+                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        >
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'
@@ -108,7 +112,7 @@ const ViewAll = () => {
                 </div>
               )}
               <ReactPaginate
-               initialPage={currentPage}
+                initialPage={currentPage}
                 previousLabel={translate('previous')}
                 nextLabel={translate('next')}
                 pageCount={Math.ceil(lengthdata / dataPerPage)}
@@ -141,7 +145,13 @@ const ViewAll = () => {
                   {currentData ? (
                     currentData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>
-                        <Link id='Link-all' href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}>
+                        <Link
+                          id='Link-all'
+                          href={{
+                            pathname: `/breaking-news/${element.slug}`,
+                            query: { language_id: element.language_id }
+                          }}
+                        >
                           <div id='BNV-card' className='card'>
                             <img
                               id='BNV-card-image'
@@ -165,7 +175,7 @@ const ViewAll = () => {
                 </div>
               )}
               <ReactPaginate
-               initialPage={currentPage}
+                initialPage={currentPage}
                 previousLabel={translate('previous')}
                 nextLabel={translate('next')}
                 pageCount={Math.ceil(lengthdata / dataPerPage)}
