@@ -88,7 +88,7 @@ const NewsNotification = () => {
                 <Link
                   className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}
                   key={index}
-                  href={{pathname:`/news/${element.news.slug}`,query: { language_id: element.language_id}}}
+                  href={{pathname:`/news/${element.news?.slug}`,query: { language_id: element.language_id}}}
                 >
                   <div className='card-body bd-highlight' id='card-noti'>
                     <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
