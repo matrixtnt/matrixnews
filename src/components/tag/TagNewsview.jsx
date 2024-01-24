@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
-import { getTagApi } from 'src/hooks/tagsApi'
+import { getNewsApi } from 'src/hooks/newsApi'
 
 const TagNewsview = () => {
   const router = useRouter()
@@ -18,10 +18,10 @@ const TagNewsview = () => {
   // api call
   const getNewsByTag = async () => {
     try {
-      const { data } = await getTagApi.getTag({
+      const { data } = await getNewsApi.getNews({
         access_key: access_key,
         language_id: language_id,
-        slug: Tid,
+        tag_id: Tid,
       })
       return data
     } catch (error) {
@@ -37,8 +37,12 @@ const TagNewsview = () => {
 
   // tags
   const tagSplit = tag => {
-    let tags = tag.split(',')
-    return tags
+    if (tag && typeof tag === 'string') {
+      return tag.split(',');
+    } else {
+      // Handle the case where tag is not a string or is undefined
+      return [];
+    }
   }
 
   return (
@@ -54,10 +58,10 @@ const TagNewsview = () => {
                   </div>
                 ))}
               </div>
-            ) : Data && Data.data[0].news.length > 0 ? (
+            ) : Data && Data.error !== "true" ? (
               <>
                 {Data &&
-                  Data.data[0]?.news.map(element => (
+                  Data.data.map(element => (
                     <div className='col-md-4 col-12' key={element.id}>
                       <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                         <div id='ts-card' className='card'>

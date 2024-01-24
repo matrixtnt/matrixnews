@@ -205,7 +205,8 @@ const News = () => {
 
   // tags
   const tagSplit = tag => {
-    let tags = tag.split(',')
+    let tags = tag?.split(',')
+    console.log(tags)
     return tags
   }
 

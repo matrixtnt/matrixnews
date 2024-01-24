@@ -76,7 +76,15 @@ const CatNav = () => {
                     <Swiper {...swiperOption}>
                       {Data.map((element, index) => (
                         <SwiperSlide key={element.id} className='text-center'>
-                          <Link id='catNav-links' href={`/categories-news/${element.slug}`}>
+                          <Link
+                            id='catNav-links'
+                            href={{
+                              pathname: `/categories-news/${element.slug}`,
+                              query: {
+                                category_id: element.id
+                              }
+                            }}
+                          >
                             <b>{element.category_name}</b>
                           </Link>
                         </SwiperSlide>

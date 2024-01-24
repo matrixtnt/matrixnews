@@ -16,7 +16,7 @@ import { getNewsApi } from 'src/hooks/newsApi'
 const CategoryNews = () => {
   const router = useRouter()
   const query = router.query
-  const catId = query.slug
+  const catId = query.category_id
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
@@ -75,7 +75,7 @@ const CategoryNews = () => {
                           <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} />
                           <div id='cv-card-body' className='card-body'>
                             <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
-                              {element.category_name}
+                              {element.category.category_name}
                             </button>
                             <p id='cv-card-title' className='card-title'>
                               {element.title}
