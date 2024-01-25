@@ -70,7 +70,7 @@ const Header = () => {
   
       if (data && data.data) {
         const roles = data.data.role;
-        if (roles[0] !== '0') {
+        if (roles !== 0) {
           setisuserRole(true);
         }
         return data.data;

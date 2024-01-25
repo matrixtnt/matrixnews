@@ -35,6 +35,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
 import Layout from 'src/components/layout/Layout.jsx'
+import FsLightbox from 'fslightbox-react'
 
 const News = () => {
   let user = getUser()
@@ -138,7 +139,7 @@ const News = () => {
     staleTime: 0
   })
 
-  const {} = useQuery({
+  const { } = useQuery({
     queryKey: ['setNewsView', NewsId],
     queryFn: setNewsView
   })
@@ -150,14 +151,14 @@ const News = () => {
     }
   }, [currentLanguage.id])
 
-  useEffect(() => {}, [userData.data])
+  useEffect(() => { }, [userData.data])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   // set like dislike
-  const setLikeDislikeData = async(id, status) => {
+  const setLikeDislikeData = async (id, status) => {
     if (user !== null) {
       setlikedislikeApi({
         news_id: id,
@@ -176,7 +177,7 @@ const News = () => {
   }
 
   // set bookmark
-  const setbookmarkData = async(newsid, status) => {
+  const setbookmarkData = async (newsid, status) => {
     if (user !== null) {
       setbookmarkApi({
         news_id: newsid,
@@ -206,7 +207,7 @@ const News = () => {
   // tags
   const tagSplit = tag => {
     let tags = tag?.split(',')
-    console.log(tags)
+    // console.log(tags)
     return tags
   }
 
@@ -217,17 +218,19 @@ const News = () => {
   // Calculate read time
   const readTime = calculateReadTime(text)
 
-  const galleryPhotos = Data && Data[0]?.image_data
+  const galleryPhotos = Data && Data[0]?.images;
 
-  const openLightbox = (event, { index }) => {
-    setCurrentImage(index)
-    setViewerIsOpen(true)
-  }
+
+  const openLightbox = (index) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  };
 
   const closeLightbox = () => {
-    setCurrentImage(0)
-    setViewerIsOpen(false)
-  }
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
+
 
   return (
     <Layout>
@@ -287,7 +290,7 @@ const News = () => {
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
                       <FacebookShareButton url={currentUrL} title={`${Data && Data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
-                        <FacebookIcon size={40} round  />
+                        <FacebookIcon size={40} round />
                       </FacebookShareButton>
                       <WhatsappShareButton url={currentUrL} title={`${Data && Data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`} beforeOnClick={() => setWhatsappImageLoaded(false)}>
                         <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
@@ -302,16 +305,16 @@ const News = () => {
                       <img id='nv-image' src={Data && Data[0].image} alt={Data && Data[0].title} />
                       <div className='seeAllPhoto'>
                         {galleryPhotos && galleryPhotos.length > 0 ? (
-                          <button onClick={e => openLightbox(e, { index: 0 })}>
+                          <button onClick={() => openLightbox(0)}>
                             <FaImages size={25} style={{ color: '#fff' }} />
                           </button>
                         ) : null}
                       </div>
-                      <LightBox
-                        photos={galleryPhotos}
-                        viewerIsOpen={viewerIsOpen}
-                        currentImage={currentImage}
-                        onClose={closeLightbox}
+                      <FsLightbox
+                        toggler={viewerIsOpen}
+                        sources={galleryPhotos.map((photo) => photo.other_image)}
+                        sourceIndex={currentImage}
+                        onClose={() => setViewerIsOpen(false)}
                       />
                     </div>
                     {Data && Data[0].content_value ? (
@@ -410,7 +413,7 @@ const News = () => {
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
                   {SettingsData && SettingsData.comments_mode === '1' ? (
-                    <CommentSection Nid={Data && Data[0].id}/>
+                    <CommentSection Nid={Data && Data[0].id} />
                   ) : (
                     <>
                       <div className='text-center my-5'>{translate('comDisable')}</div>
@@ -432,7 +435,7 @@ const News = () => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
               <SignInModal
                 setIsLogout={setIsLogout}
