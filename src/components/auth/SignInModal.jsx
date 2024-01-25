@@ -119,8 +119,7 @@ const SignInModal = props => {
                 token: res.data.fcm_id,
                 latitude: storedLatitude,
                 longitude: storedLongitude,
-                onSuccess: async res => {
-                },
+                onSuccess: async res => {},
                 onError: async err => {
                   console.log(err)
                 }
@@ -165,8 +164,7 @@ const SignInModal = props => {
                   token: success.data.fcm_id,
                   latitude: storedLatitude,
                   longitude: storedLongitude,
-                  onSuccess: async res => {
-                  },
+                  onSuccess: async res => {},
                   onError: async err => {
                     console.log(err)
                   }

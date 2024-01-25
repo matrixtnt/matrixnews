@@ -26,7 +26,6 @@ const StyleSix = ({ isLoading, Data }) => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
   const router = useRouter()
-  console.log('Data', Data)
   const Newbreakpoints = {
     320: {
       slidesPerView: 1
@@ -78,7 +77,6 @@ const StyleSix = ({ isLoading, Data }) => {
         latitude: storedLatitude,
         longitude: storedLongitude
       })
-      console.log(data)
       return data.data
     } catch (error) {
       console.log(error)
