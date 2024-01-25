@@ -261,6 +261,7 @@ const RagisterModalTwo = props => {
                         aria-describedby='Username'
                         value={formValues.username}
                         onChange={handleChange}
+                        required
                       />
                       <p className='error-msg'> {formErrors.username}</p>
                       <label htmlFor='floatingInput' name='name'>
@@ -277,6 +278,7 @@ const RagisterModalTwo = props => {
                         aria-describedby='emailHelp'
                         value={formValues.email}
                         onChange={handleChange}
+                        required
                       />
                       <p className='error-msg'> {formErrors.email}</p>
                       <label htmlFor='floatingInput' name='Email'>
@@ -292,6 +294,7 @@ const RagisterModalTwo = props => {
                         name='password'
                         value={formValues.password}
                         onChange={handleChange}
+                        required
                       />
                       <label htmlFor='floatingPassword'>{translate('passLbl')}</label>
                       <span onClick={handletoggle} className='password-icon'>
@@ -306,8 +309,9 @@ const RagisterModalTwo = props => {
                         id='floatingPassword'
                         placeholder='Password'
                         name='confirmpassword'
-                        value={formValues.confirmPassword}
+                        value={formValues.confirmpassword}
                         onChange={handleConfirmpassword}
+                        required
                       />
                       <label htmlFor='floatingConfirmPassword' className='confirmpss'>
                         {translate('confpassLbl')}
