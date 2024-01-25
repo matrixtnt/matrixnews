@@ -183,7 +183,7 @@ const SignInModal = props => {
           })
           props.setIsLogout(true)
         } else {
-          toast.error('Not Verified')
+          toast.error('please first verify your email address!!!')
           sendEmailVerification(auth.currentUser)
         }
         // props.setIsLogout(true)

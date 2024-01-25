@@ -1,6 +1,6 @@
 'use client'
 
-import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'react-icons/fa'
+import { FaFacebookSquare, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import Link from 'next/link'
 import moment from 'moment/moment'
 import { useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ import { settingsData } from '../../store/reducers/settingsReducer'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key } from 'src/utils/api'
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -141,7 +142,7 @@ const Footer = () => {
                     href={process.env.NEXT_PUBLIC_TWITTER}
                     rel='noreferrer'
                   >
-                    <FaTwitterSquare /> {translate('twitter')}
+                    <FaSquareXTwitter /> {translate('twitter')}
                   </a>
                 ) : null}
               </div>

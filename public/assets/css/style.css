@@ -3238,7 +3238,7 @@ a#social_platforms svg:hover {
 
   #loginbutton {
     color: #ffffff;
-    background: var(--secondary-color);
+    background: var(--primary-color);
   }
   #forgot {
     font: 'small-caption';
@@ -3825,6 +3825,7 @@ a#social_platforms svg:hover {
     text-align: center;
     margin-right: 20px;
   }
+
   #login_img5 {
     display: none;
   }
@@ -3842,7 +3843,7 @@ a#social_platforms svg:hover {
     align-items: center;
     justify-content: center;
     position: relative;
-    left: 25%;
+    /* left: 25%; */
   }
   #resendbutton:hover {
     background-color: #fff;
@@ -4207,7 +4208,7 @@ a#social_platforms svg:hover {
 
 #loginbutton2 {
   color: #ffffff;
-  background: var(--secondary-color);
+  background: var(--primary-color);
   width: 100%;
 }
 
@@ -6088,7 +6089,18 @@ span {
   width: 60px !important;
   height: 60px;
 }
-
+@media only screen and (max-width:575px) {
+  .otp-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .custom-input-class{
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
 .otpbox {
   gap: 8px;
   display: flex;

@@ -10,7 +10,9 @@ import axios from 'axios'
 import { SlCalender } from 'react-icons/sl'
 import { HiArrowLongUp, HiArrowLongDown } from 'react-icons/hi2'
 import { Dropdown } from 'react-bootstrap'
-import { FaFacebookSquare, FaInstagram, FaLinkedin, FaTwitterSquare } from 'react-icons/fa'
+import { FaFacebookSquare, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaSquareXTwitter } from "react-icons/fa6";
+
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
 import { useEffect } from 'react'
@@ -208,7 +210,7 @@ const WeatherCard = () => {
                     href={process.env.NEXT_PUBLIC_TWITTER}
                     rel='noreferrer'
                   >
-                    <FaTwitterSquare />
+                    <FaSquareXTwitter />
                   </a>
                 ) : null}
               </div>

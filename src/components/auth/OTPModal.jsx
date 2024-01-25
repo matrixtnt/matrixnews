@@ -192,7 +192,7 @@ const OTPModal = props => {
                   </div>
                   <form onClick={e => submitOTP(e)}
                   >
-                    <div className='mb-3 my-3'>
+                    <div className='mb-3 my-3 otp-content'>
                       <OTPInput
                         className='otp-container'
                         value={OTP}
