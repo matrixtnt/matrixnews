@@ -71,21 +71,22 @@ const ProfileUpdate = () => {
   const handleImageChange = e => {
     e.preventDefault()
     const selectedFile = e.target.files[0]
+    console.log(selectedFile)
 
-    // Check if a file is selected
-    if (!selectedFile) {
-      return
-    }
+    // // Check if a file is selected
+    // if (!selectedFile) {
+    //   return
+    // }
 
-    // Check if the selected file type is an image
-    if (!selectedFile.type.startsWith('image/')) {
-      toast.error('Please select an image file.')
-      return
-    }
+    // // Check if the selected file type is an image
+    // if (!selectedFile.type.startsWith('image/')) {
+    //   toast.error('Please select an image file.')
+    //   return
+    // }
 
     if (!JSON.parse(process.env.NEXT_PUBLIC_DEMO)) {
       updateProfileImage({
-        image:e.target.files[0],
+        image:selectedFile,
         onSuccess:() => {},
         onError:error => {
           console.log(error)

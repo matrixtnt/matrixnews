@@ -20,23 +20,24 @@ const fetchDataFromSeo = async (id,language_id) => {
 const Index = ({ seoData,currentURL  }) => {
   let schema = null;
 
-  if (seoData?.data[0] && seoData?.data[0].schema_markup) {
-    const schemaString = seoData?.data[0].schema_markup;
+  if (seoData && seoData.data && seoData.data.length > 0 && seoData.data[0].schema_markup) {
+    const schemaString = seoData.data[0].schema_markup;
     schema = extractJSONFromMarkup(schemaString);
   }
+
   return (
     <>
-        <Meta
-          title={seoData?.data[0] && seoData.data[0].meta_title}
-          description={seoData?.data[0] && seoData.data[0].meta_description}
-          keywords={seoData?.data[0] && seoData.data[0].meta_keyword}
-          ogImage={seoData?.data[0] && seoData.data[0].image}
-          pathName={currentURL}
-          schema={schema}
-        />
-      <News/>
+      <Meta
+        title={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_title}
+        description={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_description}
+        keywords={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_keyword}
+        ogImage={seoData?.data && seoData.data.length > 0 && seoData.data[0].image}
+        pathName={currentURL}
+        schema={schema}
+      />
+      <News />
     </>
-  )
+  );
 }
 
 let serverSidePropsFunction = null

@@ -3507,7 +3507,7 @@ a#social_platforms svg:hover {
   object-fit: cover;
   border-radius: 10px;
 }
-
+/* 
 #cs-profile:before {
   content: '!';
   font-size: 64px;
@@ -3516,7 +3516,7 @@ a#social_platforms svg:hover {
   display: block;
   width: 200px;
   height: 200px;
-}
+} */
 
 #cs-card {
   padding: 1%;
