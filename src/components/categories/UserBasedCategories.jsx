@@ -21,10 +21,10 @@ const UserBasedCategories = () => {
   // get user by id
   useEffect(() => {
     getuserbyidApi({
-      onSuccess:response => {
+      onSuccess: response => {
         const useridData = response.data
         // user categories
-        const alluserIds = useridData.user_category.map(category => category.category_id);
+        const alluserIds = useridData.user_category.map(category => category.category_id)
         // common id get
         const CommanID = []
         for (let i = 0; i < alluserIds.length; i++) {
@@ -36,10 +36,10 @@ const UserBasedCategories = () => {
 
         // category api call
         categoriesApi({
-          offset:offsetdata.toString(),
-          limit:limit.toString(),
-          language_id:currentLanguage.id,
-          onSuccess:response => {
+          offset: offsetdata.toString(),
+          limit: limit.toString(),
+          language_id: currentLanguage.id,
+          onSuccess: response => {
             setTotalLength(response.total)
             const toggledData = response.data.map(element => {
               // here set isToggleOn has boolean with actual data
@@ -49,20 +49,18 @@ const UserBasedCategories = () => {
             setData(toggledData)
             setLoading(false)
           },
-          onError:error => {
+          onError: error => {
             if (error === 'No Data Found') {
               setData('')
               setLoading(false)
             }
           }
-        }
-        )
+        })
       },
-      onError:error => {
+      onError: error => {
         console.error(error)
       }
-    }
-    )
+    })
   }, [offsetdata, currentLanguage])
 
   // handle switch
@@ -87,16 +85,21 @@ const UserBasedCategories = () => {
   // here final submit button
   const finalSubmit = e => {
     e.preventDefault()
-    setusercategoriesApi({
-      category_id:finalToggleID,
-      onSuccess:response => {
-        toast.success(response.message)
-      },
-      onError:error => {
-        toast.error(error)
-      }
+    // Check if there are any changes in the toggle state
+    if (finalToggleID !== '') {
+      setusercategoriesApi({
+        category_id: finalToggleID,
+        onSuccess: response => {
+          toast.success(response.message)
+        },
+        onError: error => {
+          toast.error(error)
+        }
+      })
+    } else {
+      // No changes in toggle state, you can handle this case (optional)
+      toast.error('Please select categories')
     }
-    )
   }
 
   const handlePageChange = selectedPage => {
