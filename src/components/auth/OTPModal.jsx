@@ -85,7 +85,6 @@ const OTPModal = props => {
         loadMobileType(true)
       })
       .catch(error => {
-        console.log(error)
         let errorMessage = ''
         switch (error.code) {
           case 'auth/too-many-requests':
@@ -206,7 +205,7 @@ const OTPModal = props => {
                       />
                       <p className='error-msg'>{error}</p>
                       <div>
-                        <button onClick={e => resendOTP(e)} id='resendbutton' className='btn ps-0'>
+                        <button onClick={e => resendOTP(e)} id='resendbutton' className='btn'>
                           {translate('resendLbl')}
                         </button>
                       </div>

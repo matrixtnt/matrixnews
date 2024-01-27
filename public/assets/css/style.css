@@ -6100,8 +6100,8 @@ span {
     align-items: center;
   }
   .custom-input-class{
-    width: 30px !important;
-    height: 30px !important;
+    width: 50px !important;
+    height: 50px !important;
   }
 }
 .otpbox {

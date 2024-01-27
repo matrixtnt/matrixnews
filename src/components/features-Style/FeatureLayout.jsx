@@ -32,7 +32,6 @@ const FeatureLayout = () => {
         longitude: storedLongitude
       })
       return data.data
-      console.log(data)
     } catch (error) {
       console.log(error)
     }

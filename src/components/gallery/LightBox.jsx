@@ -13,7 +13,6 @@ const LightBox = ({ photos, viewerIsOpen, currentImage, onClose }) => {
     };
   });
 
-  console.log("viewerIsOpen", viewerIsOpen)
   return (
 
     <FSLightbox

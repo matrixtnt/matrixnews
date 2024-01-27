@@ -64,7 +64,6 @@ const ViewAll = () => {
       : Data && Data[0]?.breaking_news.slice(0, dataPerPage)
 
   const lengthdata = (Data && Data[0]?.news_total) || 0
-  console.log('lengthdata', lengthdata)
   return (
     <Layout>
       {Data && Data[0]?.news ? (
