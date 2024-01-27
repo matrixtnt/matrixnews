@@ -206,6 +206,31 @@ const EditNews = () => {
   const nextStep = e => {
     e.preventDefault()
 
+    if (!DefaultValue.defualTitle) {
+      toast.error('Title is required.')
+      return
+    }
+
+    if (!DefaultValue.defaultMetatitle){
+      toast.error('Meta Title is required.')
+      return
+    }
+
+    if (!DefaultValue.defaultMetaDescription){
+      toast.error('Meta Description is required.')
+      return
+    }
+
+    if(!DefaultValue.defaultMetaKeyword){
+      toast.error('Meta Keyword is required.')
+      return
+    }
+
+    if (!DefaultValue.defaultSlug){
+      toast.error('Slug is required.')
+      return
+    }
+
     if (DefaultValue.standardType === translate('videoUploadLbl')) {
       setUrl(videoData)
     }
@@ -538,7 +563,6 @@ const EditNews = () => {
                         type='text'
                         defaultValue={DefaultValue.defualTitle}
                         placeholder={translate('titleLbl')}
-                        required
                         onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
                       />
                     </div>
@@ -548,7 +572,6 @@ const EditNews = () => {
                         placeholder={translate('meta-title')}
                         maxLength={2}
                         defaultValue={DefaultValue.defaultMetatitle}
-                        required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
                       />
                       <Alert
@@ -565,7 +588,6 @@ const EditNews = () => {
                         maxLength={2}
                         placeholder={translate('meta-description')}
                         defaultValue={DefaultValue.defaultMetaDescription}
-                        required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
                       />
                       <Alert
@@ -582,7 +604,6 @@ const EditNews = () => {
                         maxLength={2}
                         placeholder={translate('meta-keywords')}
                         defaultValue={DefaultValue.defaultMetaKeyword}
-                        required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
                       />
                       <Alert
@@ -597,7 +618,6 @@ const EditNews = () => {
                       <input
                         placeholder={translate('slug')}
                         defaultValue={DefaultValue.defaultSlug}
-                        required
                         onChange={e => setDefaultValue({ ...DefaultValue, defaultSlug: e.target.value })}
                       />
                       <Alert
@@ -613,7 +633,6 @@ const EditNews = () => {
                         type='text'
                         defaultValue={DefaultValue.defualTitle}
                         placeholder={translate('titleLbl')}
-                        required
                         onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
                       />
                     </div>

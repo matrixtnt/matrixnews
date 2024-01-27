@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
-import { Button } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
@@ -25,7 +25,7 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
-import { Input,Form } from 'antd'
+import { Input } from 'antd'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -188,13 +188,31 @@ const CreateNews = () => {
   const nextStep = e => {
     e.preventDefault()
 
-    console.log("hello")
+    if (!DefaultValue.defualtTitle) {
+      toast.error('Title is required.')
+      return
+    }
 
-     // Check if title is provided
-  if (!DefaultValue.defualtTitle) {
-    toast.error('Title is required.');
-    return;
-  }
+    if (!DefaultValue.defaultMetatitle){
+      toast.error('Meta Title is required.')
+      return
+    }
+
+    if (!DefaultValue.defaultMetaDescription){
+      toast.error('Meta Description is required.')
+      return
+    }
+
+    if(!DefaultValue.defaultMetaKeyword){
+      toast.error('Meta Keyword is required.')
+      return
+    }
+
+    if (!DefaultValue.defaultSlug){
+      toast.error('Slug is required.')
+      return
+    }
+
 
     if (DefaultValue.defaultType === 'video_upload') {
       setDefualtValue({ ...DefaultValue, defualtUrl: DefaultValue.defaultVideoData })
@@ -276,8 +294,8 @@ const CreateNews = () => {
 
   // react query
   const { data: tagsData } = useQuery({
-    queryKey: ['getTag', access_key,createNewsLanguage.id],
-    queryFn: getTag,
+    queryKey: ['getTag', access_key, createNewsLanguage.id],
+    queryFn: getTag
   })
 
   const { data: locationOptions } = useQuery({
@@ -398,7 +416,7 @@ const CreateNews = () => {
     return true // Return true if the validation passes
   }
 
-  // slug 
+  // slug
   const slugConverter = () => {
     let slug = DefaultValue.defaultSlug
     slug = slug.replace(/[^a-zA-Z0-9-]/g, '-')
@@ -468,7 +486,7 @@ const CreateNews = () => {
   const Back = () => {
     setNextStepScreen(false)
   }
-  
+
   return (
     <Layout>
       <BreadcrumbNav SecondElement={translate('createNewsLbl')} ThirdElement='0' />
@@ -481,7 +499,7 @@ const CreateNews = () => {
 
             <div className='col-md-5 col-12'>
               {!nextStepScreen ? (
-                <Form onSubmit={nextStep}>
+                <Form onSubmit={e => nextStep(e)}>
                   <div className='form_title'>
                     <p className='mb-2'>{translate('createNewsLbl')}</p>
                     <span className='mb-2'>{translate('step1Of2Lbl')}</span>
@@ -493,7 +511,6 @@ const CreateNews = () => {
                         type='text'
                         placeholder={translate('titleLbl')}
                         defaultValue={DefaultValue.defualtTitle}
-                        required
                         onChange={e => setDefualtValue({ ...DefaultValue, defualtTitle: e.target.value })}
                       />
                     </div>
@@ -503,14 +520,13 @@ const CreateNews = () => {
                         placeholder={translate('meta-title')}
                         maxLength={2}
                         defaultValue={DefaultValue.defaultMetatitle}
-                        required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
                       />
                       <Alert
                         closable
                         showIcon
                         className='mt-2'
-                        message={translate("metaTitleWarningLbl")}
+                        message={translate('metaTitleWarningLbl')}
                         type='warning'
                       />
                     </div>
@@ -520,14 +536,13 @@ const CreateNews = () => {
                         maxLength={2}
                         placeholder={translate('meta-description')}
                         defaultValue={DefaultValue.defaultMetaDescription}
-                        required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
                       />
                       <Alert
                         closable
                         showIcon
                         className='mt-2'
-                        message={translate("metaDescriptionWarningLbl")}
+                        message={translate('metaDescriptionWarningLbl')}
                         type='warning'
                       />
                     </div>
@@ -537,14 +552,13 @@ const CreateNews = () => {
                         maxLength={2}
                         placeholder={translate('meta-keywords')}
                         defaultValue={DefaultValue.defaultMetaKeyword}
-                        required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
                       />
                       <Alert
                         closable
                         showIcon
                         className='mt-2'
-                        message={translate("metaKeywordWarningLbl")}
+                        message={translate('metaKeywordWarningLbl')}
                         type='warning'
                       />
                     </div>
@@ -552,16 +566,9 @@ const CreateNews = () => {
                       <input
                         placeholder={translate('slug')}
                         defaultValue={DefaultValue.defaultSlug}
-                        required
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultSlug: e.target.value })}
                       />
-                      <Alert
-                        closable
-                        showIcon
-                        className='mt-2'
-                        message={translate("slugWarningLbl")}
-                        type='warning'
-                      />
+                      <Alert closable showIcon className='mt-2' message={translate('slugWarningLbl')} type='warning' />
                     </div>
                     <div className='dropdown_form mb-2'>
                       <Select
