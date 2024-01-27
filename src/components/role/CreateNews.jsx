@@ -189,27 +189,27 @@ const CreateNews = () => {
     e.preventDefault()
 
     if (!DefaultValue.defualtTitle) {
-      toast.error('Title is required.')
+      toast.error(translate("titlerequired"))
       return
     }
 
     if (!DefaultValue.defaultMetatitle){
-      toast.error('Meta Title is required.')
+      toast.error(translate("metaTitlerequired"))
       return
     }
 
     if (!DefaultValue.defaultMetaDescription){
-      toast.error('Meta Description is required.')
+      toast.error(translate("metaDescriptionrequired"))
       return
     }
 
     if(!DefaultValue.defaultMetaKeyword){
-      toast.error('Meta Keyword is required.')
+      toast.error(translate("metaKeywordsrequired"))
       return
     }
 
     if (!DefaultValue.defaultSlug){
-      toast.error('Slug is required.')
+      toast.error(translate("slugrequired"))
       return
     }
 
