@@ -45,7 +45,6 @@ const CreateNews = () => {
   const createNewsLanguage = useSelector(selectcreateNewsCurrentLanguage)
   const navigate = useRouter()
   const getLocation = useSelector(settingsData)
-  let { id: language_id } = getLanguage()
   const [DefaultValue, setDefualtValue] = useState({
     defualtTitle: null,
     defaultMetatitle: null,
@@ -244,7 +243,7 @@ const CreateNews = () => {
   // api call
   const getTag = async () => {
     try {
-      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: language_id })
+      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: createNewsLanguage.id })
       return data.data
     } catch (error) {
       console.log(error)
@@ -269,8 +268,8 @@ const CreateNews = () => {
 
   // react query
   const { data: tagsData } = useQuery({
-    queryKey: ['getTag', language_id, access_key],
-    queryFn: getTag
+    queryKey: ['getTag', access_key,createNewsLanguage.id],
+    queryFn: getTag,
   })
 
   const { data: locationOptions } = useQuery({
