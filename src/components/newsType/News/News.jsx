@@ -380,11 +380,16 @@ const News = () => {
                       </div>
                     ) : null}
                   </div>
+                  <div>
                   <p
                     id='nv-description'
-                    style={{ fontSize: `${FontSize}px` }}
+                    style={{ fontSize: `${FontSize}px`, wordWrap: 'break-word' }}
                     dangerouslySetInnerHTML={{ __html: Data && Data[0].description }}
                   ></p>
+                  </div>
+                
+
+                 
 
                   {/* tags */}
                   {Data[0].tag_name ? (

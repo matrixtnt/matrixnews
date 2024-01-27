@@ -213,7 +213,7 @@ const BreakingNews = () => {
                           </div>
                           <p
                             id='B_NV-description'
-                            style={{ fontSize: `${FontSize}px` }}
+                            style={{ fontSize: `${FontSize}px`, wordWrap: 'break-word' }}
                             dangerouslySetInnerHTML={{ __html: data[0].description }}
                           ></p>
                         </div>
