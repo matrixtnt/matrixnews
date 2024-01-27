@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
-import { Button, Form } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
@@ -25,7 +25,7 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
-import { Input } from 'antd'
+import { Input,Form } from 'antd'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -187,6 +187,14 @@ const CreateNews = () => {
   // next screen step 2
   const nextStep = e => {
     e.preventDefault()
+
+    console.log("hello")
+
+     // Check if title is provided
+  if (!DefaultValue.defualtTitle) {
+    toast.error('Title is required.');
+    return;
+  }
 
     if (DefaultValue.defaultType === 'video_upload') {
       setDefualtValue({ ...DefaultValue, defualtUrl: DefaultValue.defaultVideoData })
@@ -473,7 +481,7 @@ const CreateNews = () => {
 
             <div className='col-md-5 col-12'>
               {!nextStepScreen ? (
-                <Form onSubmit={e => nextStep(e)}>
+                <Form onSubmit={nextStep}>
                   <div className='form_title'>
                     <p className='mb-2'>{translate('createNewsLbl')}</p>
                     <span className='mb-2'>{translate('step1Of2Lbl')}</span>
