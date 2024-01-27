@@ -22,20 +22,20 @@ const fetchDataFromSeo = async (id, language_id) => {
 const Index = ({ seoData, currentURL }) => {
   let schema = null
 
-  if (seoData?.data[0] && seoData?.data[0].schema_markup) {
-    const schemaString = seoData?.data[0].schema_markup;
-    schema = extractJSONFromMarkup(schemaString);
+  if (seoData && seoData.data && seoData.data.length > 0 && seoData.data[0].schema_markup) {
+    const schemaString = seoData.data[0].schema_markup
+    schema = extractJSONFromMarkup(schemaString)
   }
   return (
     <>
       <Meta
-          title={seoData?.data[0] && seoData.data[0].meta_title}
-          description={seoData?.data[0] && seoData.data[0].meta_description}
-          keywords={seoData?.data[0] && seoData.data[0].meta_keyword}
-          ogImage={seoData?.data[0] && seoData.data[0].image}
-          pathName={currentURL}
-          schema={schema}
-        />
+        title={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_title}
+        description={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_description}
+        keywords={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_keyword}
+        ogImage={seoData?.data && seoData.data.length > 0 && seoData.data[0].image}
+        pathName={currentURL}
+        schema={schema}
+      />
       <BreakingNews />
     </>
   )
@@ -46,15 +46,15 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
   serverSidePropsFunction = async context => {
     // Retrieve the slug from the URL query parameters
     // Retrieve the slug from the URL query parameters
-  const { req } = context; // Extract query and request object from context
+    const { req } = context // Extract query and request object from context
 
-  const { params } = req[Symbol.for('NextInternalRequestMeta')].match;
+    const { params } = req[Symbol.for('NextInternalRequestMeta')].match
 
-  const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL;
+    const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
 
-  const {language_id} = req[Symbol.for('NextInternalRequestMeta')].initQuery;
+    const { language_id } = req[Symbol.for('NextInternalRequestMeta')].initQuery
 
-  const seoData = await fetchDataFromSeo(params.slug,language_id)
+    const seoData = await fetchDataFromSeo(params.slug, language_id)
 
     // Pass the fetched data as props to the page component
     return {
