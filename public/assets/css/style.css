@@ -4061,6 +4061,9 @@ a#social_platforms svg:hover {
   padding-top: 0;
   cursor: pointer;
 }
+#ModalWrapper22 .form-floating>.form-control:focus~label::after{
+  background-color: transparent!important;
+}
 
 @media screen and (min-width: 992px) {
   .bordert {
