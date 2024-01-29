@@ -70,10 +70,9 @@ const SignInModal = props => {
   // validate email
   const validate = values => {
     const errors = {}
-    const regex = /^[^\s@]+@[^s]+\.[^\s@]{2,}$/i
     if (!values.email) {
       errors.email = 'Email is required!'
-    } else if (!regex.test(values.email)) {
+    } else if (values.email) {
       errors.email = 'Enter Valid email'
     }
     if (!values.password) {
@@ -256,7 +255,7 @@ const SignInModal = props => {
                   <form className='my-2' onSubmit={handleSubmit}>
                     <div className='form-floating mb-3'>
                       <input
-                        type='text'
+                        type="email"
                         className='form-control'
                         name='email'
                         id='floatingInput'
