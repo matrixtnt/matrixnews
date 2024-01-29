@@ -98,6 +98,9 @@ const CreateNews = () => {
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtCategoryID: categoryID, defualtCategory: option.label })
+    // Reset subCategory to an empty array
+    console.log("Clearing subCategory");
+    setSubCategory([]);
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
@@ -107,14 +110,14 @@ const CreateNews = () => {
       onError: err => {
         if (err === 'No Data Found') {
           setShowsubCategory(false)
+          setSubCategory("")
         }
       }
     })
+
   }
 
-  useEffect(() => {
 
-  },[showCategory])
 
   const subcategorySelector = (value, option) => {
     const subcategoryID = JSON.parse(value)
@@ -214,6 +217,11 @@ const CreateNews = () => {
 
     if (!DefaultValue.defaultSlug){
       toast.error(translate("slugrequired"))
+      return
+    }
+
+    if(!DefaultValue.defaultType){
+      toast.error(translate("contentTyperequired"))
       return
     }
 
@@ -456,6 +464,11 @@ const CreateNews = () => {
     //   return // Stop execution if meta description validation fails
     // }
 
+    if(!content){
+      toast.error(translate('descriptionrequired'))
+      return
+    }
+
     const slugValue = await slugConverter()
 
     await setNewsApi({
@@ -679,6 +692,7 @@ const CreateNews = () => {
                           placeholder={translate('youtubeUrlLbl')}
                           defaultValue={DefaultValue.defualtUrl}
                           onChange={e => setDefualtValue({ ...DefaultValue, defualtUrl: e.target.value })}
+                          required
                         />
                       </div>
                     ) : null}
@@ -702,6 +716,7 @@ const CreateNews = () => {
                           name='video'
                           accept='video/*'
                           onChange={e => handleVideo(e)}
+                          required
                         />
                         <label htmlFor='videoInput'>
                           {' '}

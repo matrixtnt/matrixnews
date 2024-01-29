@@ -266,5 +266,7 @@
   "metaTitlerequired":"Meta Title is required",
   "metaDescriptionrequired":"Meta Description is required",
   "metaKeywordsrequired":"Meta Keyword is required",
-  "slugrequired":"Slug is required"
+  "slugrequired":"Slug is required",
+  "contentTyperequired":"Please select content type",
+  "descriptionrequired":"Please select description"
 }
