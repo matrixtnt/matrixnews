@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
 import { Button, Form } from 'react-bootstrap'
@@ -111,6 +111,10 @@ const CreateNews = () => {
       }
     })
   }
+
+  useEffect(() => {
+
+  },[showCategory])
 
   const subcategorySelector = (value, option) => {
     const subcategoryID = JSON.parse(value)
