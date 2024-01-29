@@ -71,6 +71,7 @@ const ProfileUpdate = () => {
   const handleImageChange = e => {
     e.preventDefault()
     const selectedFile = e.target.files[0]
+    console.log(selectedFile)
 
     // // Check if a file is selected
     // if (!selectedFile) {
