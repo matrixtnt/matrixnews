@@ -2644,6 +2644,7 @@ a#social_platforms svg:hover {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  word-break: break-word;
 }
 
 #B_NV-main {
@@ -3302,6 +3303,7 @@ a#social_platforms svg:hover {
 #nv-title {
   margin-top: 1%;
   text-transform: capitalize;
+  word-break: break-word;
 }
 
 /* ------------------------------------------------------------------- */
