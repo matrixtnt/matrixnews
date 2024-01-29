@@ -2675,6 +2675,7 @@ a#social_platforms svg:hover {
 
 #B_NV-title {
   margin-top: 10px;
+  word-break: break-word;
 }
 
 /* ------------------------------------------------------------------- */
