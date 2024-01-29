@@ -214,6 +214,13 @@ const SignInModal = props => {
       })
   }
 
+  const signInwithPhone = e => {
+    e.preventDefault()
+    props.onHide()
+    setPhoneModalShow(true)
+    setModalShow(false)
+    setForgotModalShow(false)
+  }
   return (
     <>
       <Modal
@@ -309,16 +316,7 @@ const SignInModal = props => {
                       </button>
                     </div>
                     <div className='col-lg-6 col-12'>
-                      <Button
-                        id='login-social3'
-                        type='button'
-                        onClick={() => {
-                          props.onHide()
-                          setModalShow(false)
-                          setPhoneModalShow(true)
-                          setForgotModalShow(false)
-                        }}
-                      >
+                      <Button id='login-social3' type='button' onClick={e => signInwithPhone(e)}>
                         <FaMobileAlt />
                         <p>{translate('signin-with-phone')}</p>
                       </Button>

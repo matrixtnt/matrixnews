@@ -24,12 +24,6 @@ const OTPModal = props => {
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
-  const [error, setError] = useState(
-    '',
-    setTimeout(() => {
-      if (error !== '') setError('')
-    }, 5000)
-  )
 
   const navigate = useRouter()
 
@@ -62,17 +56,6 @@ const OTPModal = props => {
 
   useEffect(() => {
     generateRecaptcha()
-    return () => {
-      // Clear the recaptcha container
-      const recaptchaContainer = document.getElementById('recaptcha-container')
-      if (recaptchaContainer) {
-        recaptchaContainer.innerHTML = ''
-      }
-
-      if (window.recaptchaVerifier) {
-        window.recaptchaVerifier.clear()
-      }
-    }
   }, [])
 
   const generateOTP = phonenum => {
@@ -108,6 +91,39 @@ const OTPModal = props => {
     // eslint-disable-next-line
   }, [props.phonenum])
 
+  // handle otp error codes
+  const handleAuthenticationError = errorCode => {
+    switch (errorCode) {
+      case 'auth/missing-verification-code':
+        toast.error('Missing verification code. Please enter the code.')
+        break
+
+      case 'auth/code-expired':
+        toast.error('The verification code has expired. Please generate a new one.')
+        break
+
+      case 'auth/invalid-verification-code':
+        toast.error('Invalid verification code. Please enter a valid code.')
+        break
+
+      case 'auth/invalid-verification-id':
+        toast.error('Invalid verification ID. Please try again with a valid ID.')
+        break
+
+      case 'auth/session-expired':
+        toast.error('The session has expired. Please sign in again.')
+        break
+
+      case 'auth/quota-exceeded':
+        toast.error('Quota exceeded. Please wait before sending a new verification code.')
+        break
+
+      default:
+        toast.error('An unknown authentication error occurred.')
+        break
+    }
+  }
+
   const submitOTP = async e => {
     e.preventDefault()
 
@@ -121,19 +137,18 @@ const OTPModal = props => {
       props.onHide()
 
       register({
-        firebase_id:response.user.uid,
-        mobile:response.user.phoneNumber,
-        type:'mobile',
-        status:'1',
-        fcm_id:location.fcmtoken,
-        onSuccess:response => {
+        firebase_id: response.user.uid,
+        mobile: response.user.phoneNumber,
+        type: 'mobile',
+        status: '1',
+        fcm_id: location.fcmtoken,
+        onSuccess: response => {
           setTimeout(async () => {
             await registerFcmTokenApi({
               token: response.data.fcm_id,
               latitude: storedLatitude,
               longitude: storedLongitude,
-              onSuccess: async res => {
-              },
+              onSuccess: async res => {},
               onError: async err => {
                 console.log(err)
               }
@@ -145,15 +160,32 @@ const OTPModal = props => {
           }
           props.setisloginloading(false)
         },
-        onError:error => {
+        onError: error => {
           toast.error(translate('deactiveMsg'))
         }
-      }
-      )
+      })
     } catch (error) {
-      // User couldn't sign in (bad verification code?)
-      setError(error.code)
+      handleAuthenticationError(error.code)
     }
+  }
+
+  const recaptchaClear = async () => {
+    const recaptchaContainer = document.getElementById('recaptcha-container')
+    if (recaptchaContainer) {
+      recaptchaContainer.innerHTML = ''
+    }
+
+    if (window.recaptchaVerifier) {
+      window?.recaptchaVerifier?.recaptcha?.reset()
+    }
+  }
+
+  const onHandleClose = async () => {
+    props.onHide()
+    props.setisloginloading(false)
+    await recaptchaClear()
+    props.setPhonenum(null);
+    props.setValue(null);
   }
 
   return (
@@ -165,6 +197,7 @@ const OTPModal = props => {
           aria-labelledby='contained-modal-title-vcenter'
           centered
           dialogClassName='border-radius-2'
+          onHide={onHandleClose}
         >
           <div className='ModalWrapper55' id='ModalWrapper'>
             <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img5'>
@@ -189,35 +222,27 @@ const OTPModal = props => {
                       {props.phonenum}{' '}
                     </div>
                   </div>
-                  <form onClick={e => submitOTP(e)}
-                  >
-                    <div className='mb-3 my-3 otp-content'>
-                      <OTPInput
-                        className='otp-container'
-                        value={OTP}
-                        onChange={setOTP}
-                        autoFocus
-                        numInputs={6}
-                        disabled={false}
-                        containerStyle={'otpbox'}
-                        renderSeparator={<span className='space'></span>}
-                        renderInput={props => <input {...props} className='custom-input-class'></input>}
-                      />
-                      <p className='error-msg'>{error}</p>
-                      <div>
-                        <button onClick={e => resendOTP(e)} id='resendbutton' className='btn'>
-                          {translate('resendLbl')}
-                        </button>
-                      </div>
+                  <div className='mb-3 my-3 otp-content'>
+                    <OTPInput
+                      className='otp-container'
+                      value={OTP}
+                      onChange={setOTP}
+                      autoFocus
+                      numInputs={6}
+                      disabled={false}
+                      containerStyle={'otpbox'}
+                      renderSeparator={<span className='space'></span>}
+                      renderInput={props => <input {...props} className='custom-input-class'></input>}
+                    />
+                    <div>
+                      <button onClick={e => resendOTP(e)} id='resendbutton' className='btn'>
+                        {translate('resendLbl')}
+                      </button>
                     </div>
-
+                  </div>
+                  <form onClick={e => submitOTP(e)}>
                     <div className='py-3'>
-                      <button
-                        type='submit'
-                        className='btn   btn-lg  w-100'
-                        id='submitbutton'
-                       
-                      >
+                      <button type='submit' className='btn   btn-lg  w-100' id='submitbutton'>
                         {translate('submitBtn')}
                       </button>
                     </div>

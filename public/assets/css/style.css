@@ -3835,7 +3835,6 @@ a#social_platforms svg:hover {
   .PhoneInput {
     display: flex;
     align-items: center;
-    margin-top: 17%;
   }
   #resendbutton {
     color: var(--secondary-color);
@@ -3860,9 +3859,6 @@ a#social_platforms svg:hover {
     flex-direction: row;
     border-radius: 7px;
     background-color: #fff;
-  }
-  .phoneInput {
-    margin-top: 15%;
   }
 
   #logo4 {
@@ -4123,9 +4119,7 @@ a#social_platforms svg:hover {
   [dir='rtl'] .ModalImg3 {
     border-radius: 0px 20px 20px 0px;
   }
-  .my-2 {
-    margin-top: -2.5rem !important;
-  }
+
 
   .ModelHeader {
     position: relative;
