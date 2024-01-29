@@ -47,43 +47,6 @@ const RagisterModalTwo = props => {
 
   const navigate = useRouter()
 
-  const signup = async (email, password) => {
-    if (isValidForm) {
-      let promise = await new Promise(function (resolve, reject) {
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(userCredential => {
-            const user = userCredential.user
-            sendEmailVerification(user)
-            signOut(auth)
-            toast.success('Email sent! Please check Email')
-            resolve(userCredential)
-          })
-          .catch(function (error) {
-            var errorCode = error.code
-            var errorMessage
-            switch (errorCode) {
-              case 'auth/email-already-in-use':
-                errorMessage = 'Email already in use.'
-                // Display a message to the user indicating that the email is already in use
-                break
-              case 'auth/invalid-email':
-                errorMessage = 'Invalid email address.'
-                // Display a message to the user indicating that the email address is not valid
-                break
-              case 'auth/weak-password':
-                errorMessage = 'Password is too weak.'
-                // Display a message to the user indicating that the password is too weak
-                break
-              default:
-                errorMessage = 'An error occurred:'
-            }
-            toast.error(errorMessage)
-          })
-      })
-      return promise
-    }
-  }
-
   const handleSignup = async (email, password) => {
     // Set form errors
     setFormErrors(validate(formValues))
@@ -170,17 +133,10 @@ const RagisterModalTwo = props => {
 
   const validate = values => {
     const errors = {} // eslint-disable-next-line
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
 
     // const password_pattern = /^(?=.*\d)(?=.*\[a-z])(?=.*\[A-Z])[a-zA-Z0-9]{8,}$/
     if (!values.username) {
       errors.username = ' User Name is reqired! '
-    }
-
-    if (!values.email) {
-      errors.email = 'Email is required!'
-    } else if (!regex.test(values.email)) {
-      errors.email = 'Enter a Valid EMail'
     }
     if (!values.password) {
       errors.password = 'Password is required!'
@@ -270,7 +226,7 @@ const RagisterModalTwo = props => {
                     </div>
                     <div className='form-floating mb-3'>
                       <input
-                        type='text'
+                        type='email'
                         className='form-control'
                         name='email'
                         id='floatingInput'

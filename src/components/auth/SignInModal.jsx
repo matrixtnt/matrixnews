@@ -70,11 +70,6 @@ const SignInModal = props => {
   // validate email
   const validate = values => {
     const errors = {}
-    if (!values.email) {
-      errors.email = 'Email is required!'
-    } else if (values.email) {
-      errors.email = 'Enter Valid email'
-    }
     if (!values.password) {
       errors.password = 'Password is required!'
     } else if (values.password.length < 6) {
@@ -263,6 +258,7 @@ const SignInModal = props => {
                         aria-describedby='emailHelp'
                         value={formValues.email}
                         onChange={handleChange}
+                        required
                       />
                       <p className='error-msg'> {formErrors.email}</p>
                       <label htmlFor='floatingInput'>{translate('emailaddress')}</label>

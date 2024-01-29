@@ -58,11 +58,11 @@ const OTPModal = props => {
     generateRecaptcha()
   }, [])
 
-  const generateOTP = phonenum => {
+  const generateOTP = async phonenum => {
     // OTP Generation
     generateRecaptcha()
     let appVerifier = window.recaptchaVerifier
-    signInWithPhoneNumber(authentication, phonenum, appVerifier)
+    await signInWithPhoneNumber(authentication, phonenum, appVerifier)
       .then(confirmationResult => {
         window.confirmationResult = confirmationResult
         loadMobileType(true)
