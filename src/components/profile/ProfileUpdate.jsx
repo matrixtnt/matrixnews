@@ -71,8 +71,6 @@ const ProfileUpdate = () => {
   const handleImageChange = e => {
     e.preventDefault()
     const selectedFile = e.target.files[0]
-    console.log(selectedFile)
-
     // // Check if a file is selected
     // if (!selectedFile) {
     //   return
@@ -87,12 +85,13 @@ const ProfileUpdate = () => {
     if (!JSON.parse(process.env.NEXT_PUBLIC_DEMO)) {
       updateProfileImage({
         image:selectedFile,
-        onSuccess:() => {},
+        onSuccess:success => {
+         
+        },
         onError:error => {
-          console.log(error)
+          
         }
-      }
-      )
+      })
     }
   }
 

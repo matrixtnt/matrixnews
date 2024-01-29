@@ -262,7 +262,7 @@ export const updateProfileApi = (name, mobile, email, image) => {
   data.append('name', name)
   data.append('mobile', mobile)
   data.append('email', email)
-  data.append('image', image)
+  data.append('profile', image)
   return {
     url: `${UPDATE_PROFILE}`,
     method: 'POST',
