@@ -490,8 +490,8 @@ const EditNews = () => {
       content_data: url,
       description: DefaultValue.descriptionValue,
       image: DefaultValue.imagedefault,
-      images,
-      ofile: DefaultValue.dateValue.toISOString().split('T')[0],
+      ofile:images,
+      show_till: DefaultValue.dateValue.toISOString().split('T')[0],
       language_id: DefaultValue.languageId,
       location_id: DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
       onSuccess: response => {
@@ -876,6 +876,7 @@ const EditNews = () => {
                         )}
                       </Dropzone>
                     </div>
+                    {console.log(images)}
                     <div className='image_slider'>
                       <Swiper {...swiperOption}>
                         {DefaultValue?.multipleImage?.map((file, index) => (
