@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
-import { Button } from 'react-bootstrap'
+import { Button,Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
@@ -29,7 +29,7 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getsubcategorybycategoryApi } from 'src/hooks/subcategoryByCategoryApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
-import { Input,Form } from 'antd'
+import { Input } from 'antd'
 const { TextArea } = Input
 
 const { Option } = Select
