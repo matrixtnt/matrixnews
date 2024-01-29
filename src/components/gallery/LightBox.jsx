@@ -1,28 +1,38 @@
 import React from 'react';
-import FSLightbox from 'fslightbox-react';
+import Carousel, { Modal, ModalGateway } from "react-images";
 
 const LightBox = ({ photos, viewerIsOpen, currentImage, onClose }) => {
-  if (!photos || photos.length === 0) {
-    // Handle the case when photos is undefined or empty.
-    return null;
-  }
-  const lightboxPhotos = photos.map((photo) => {
-    return {
-      src: photo?.other_image || '', // Use the correct property for image URL
-      alt: photo?.id || '', // Provide a default alt value if 'id' is undefined
-    };
-  });
+ console.log(photos)
 
-  return (
+    if (!photos || photos.length === 0) {
+        // Handle the case when photos is undefined or empty.
+        return null
+    }
 
-    <FSLightbox
-      toggler={viewerIsOpen}
-      sources={lightboxPhotos.map((photo) => photo.src)}
-      sourceIndex={currentImage}
-      onClose={onClose}
-    />
-
-  );
-};
+    return (
+        <div>
+        
+            <ModalGateway>
+                {viewerIsOpen ? (
+                    <Modal onClose={onClose}>
+                        <Carousel
+                            currentIndex={currentImage}
+                            views={photos.map((photo, index) => {
+                                // Check if the 'regular' property exists before accessing it
+                                const regularSrc = photo.other_image || ''; // Provide a default value if 'regular' doesn't exist
+                                return {
+                                    ...photo,
+                                    src: regularSrc,
+                                    srcset: `${regularSrc} ${index + 1}`,
+                                    caption: `${photo.caption || ''} ${index + 1}` // Provide a default caption if it doesn't exist
+                                };
+                            })}
+                        />
+                    </Modal>
+                ) : null}
+            </ModalGateway>
+        </div>
+    );
+}
 
 export default LightBox;

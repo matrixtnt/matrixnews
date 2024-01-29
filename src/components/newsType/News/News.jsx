@@ -35,7 +35,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
 import Layout from 'src/components/layout/Layout.jsx'
-import FsLightbox from 'fslightbox-react'
 
 const News = () => {
   let user = getUser()
@@ -310,12 +309,13 @@ const News = () => {
                           </button>
                         ) : null}
                       </div>
-                      <FsLightbox
+                      {/* <FsLightbox
                         toggler={viewerIsOpen}
                         sources={galleryPhotos.map((photo) => photo.other_image)}
                         sourceIndex={currentImage}
                         onClose={() => setViewerIsOpen(false)}
-                      />
+                      /> */}
+                      <LightBox photos={galleryPhotos} viewerIsOpen={viewerIsOpen} currentImage={currentImage} onClose={closeLightbox} />
                     </div>
                     {Data && Data[0].content_value ? (
                       <div className='text-black'>
