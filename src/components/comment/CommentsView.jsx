@@ -185,11 +185,10 @@ const CommentsView = props => {
             Data.map(element => (
               <div key={element.id}>
                 <div id='cv-comment' onClick={() => setCommentID(element.id)}>
-                  
-                  <img id='cs-profile' src={userData?.data?.profile} onError={imgError} alt='comment user profile news image' />
+                  <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
                   <div id='cs-card' className='card'>
                     <b>
-                      <h5>{element.name}</h5>
+                      <h5>{element?.user?.name}</h5>
                     </b>
                     {/* <Link id="cdbtnReport">Report</Link> */}
                     <p id='cs-card-text' className='card-text'>
