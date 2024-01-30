@@ -66,7 +66,7 @@ const ManageNews = () => {
 
   const deleteNews = data => {
     confirm({
-      title: 'Do you want to delete these items?',
+      title: 'Do you want to delete these news?',
       centered: true,
       async onOk() {
         try {
