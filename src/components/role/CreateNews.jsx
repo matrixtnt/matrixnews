@@ -99,11 +99,15 @@ const CreateNews = () => {
     const categoryID = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtCategoryID: categoryID, defualtCategory: option.label })
     // Reset subCategory to an empty array
-    console.log("Clearing subCategory");
     setSubCategory([]);
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
+        if(res.data.length === 0){
+          setSubCategory([]);
+          setShowsubCategory(false)
+          return
+        }
         setSubCategory(res.data)
         setShowsubCategory(true)
       },
