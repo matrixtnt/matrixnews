@@ -70,7 +70,7 @@ const ManageNews = () => {
       centered: true,
       async onOk() {
         try {
-          return new Promise((resolve, reject) => {
+          await new Promise((resolve, reject) => {
             deleteNewsApi({
               news_id: data.id,
               onSuccess: res => {
@@ -85,7 +85,7 @@ const ManageNews = () => {
             setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
           });
         } catch (e) {
-          return console.log('Oops errors!');
+           console.log('Oops errors!');
         }
       },
       onCancel() {},

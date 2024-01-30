@@ -154,34 +154,33 @@ const Header = () => {
     } // eslint-disable-next-line
   }, [])
 
-  const logout = () => {
+  const logout = async () => {
     confirm({
       title: 'Logout',
       content:"Are you sure to do this?",
       centered: true,
       async onOk() {
         try {
-          return new Promise((resolve, reject) => {
+          await new Promise((resolve, reject) => {
             signOut(authentication)
               .then(() => {
                 logoutUser()
                 window.recaptchaVerifier = null
                 setIsLogout(false)
                 navigate.push('/')
+                resolve(); // Resolve the promise when signOut is successful
               })
               .catch(error => {
                 toast.error(error)
-                // An error happened.
-              })
-            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+                reject(error); // Reject the promise if there's an error
+              });
           });
         } catch (e) {
-          return console.log('Oops errors!');
+          console.log('Oops errors!');
         }
       },
       onCancel() {},
     });
-
   }
 
   const [show, setShow] = useState(false)
@@ -253,7 +252,7 @@ const Header = () => {
       centered: true,
       async onOk() {
         try {
-          return new Promise((resolve, reject) => {
+          await new Promise((resolve, reject) => {
             const user = auth.currentUser
 
             if (user) {
@@ -289,7 +288,7 @@ const Header = () => {
             setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
           });
         } catch (e) {
-          return console.log('Oops errors!');
+           console.log('Oops errors!');
         }
       },
       onCancel() {},
