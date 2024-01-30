@@ -1,6 +1,4 @@
 "use client"
-
-import slugify from "slugify";
 import { store } from "../store/store";
 import localeTranslations from './locale/en.json';
 
@@ -154,13 +152,6 @@ export const profileimgError = (e) => {
 
 export const profileimg = "/assets/images/user.svg"
 
-// slug
-export const convertToSlug = (title) => {
-  return slugify(title, {
-    lower: true,
-    strict: true,
-  });
-}
 
 // minute read
 export const calculateReadTime = (text) => {

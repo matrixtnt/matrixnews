@@ -13,6 +13,8 @@ import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
+import { Modal } from 'antd';
+const { confirm } = Modal;
 
 const ManageNews = () => {
   const navigate = useRouter()
@@ -63,17 +65,32 @@ const ManageNews = () => {
   }
 
   const deleteNews = data => {
-    deleteNewsApi({
-      news_id: data.id,
-      onSuccess: res => {
-        toast.success(res.message)
-        const updatedData = Data.filter(item => item.id !== data.id)
-        setData(updatedData)
+    confirm({
+      title: 'Do you want to delete these items?',
+      centered: true,
+      async onOk() {
+        try {
+          return new Promise((resolve, reject) => {
+            deleteNewsApi({
+              news_id: data.id,
+              onSuccess: res => {
+                toast.success(res.message)
+                const updatedData = Data.filter(item => item.id !== data.id)
+                setData(updatedData)
+              },
+              onError: err => {
+                toast.error(err.message)
+              }
+            })
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+          });
+        } catch (e) {
+          return console.log('Oops errors!');
+        }
       },
-      onError: err => {
-        toast.error(err.message)
-      }
-    })
+      onCancel() {},
+    });
+    
   }
 
   return (

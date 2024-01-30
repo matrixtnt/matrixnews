@@ -117,6 +117,11 @@ const EditNews = () => {
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
+        if(res.data.length === 0){
+          setSubCategory([]);
+          setShowsubCategory(false)
+          return
+        }
         setSubCategory(res.data)
         setShowsubCategory(true)
       },
@@ -228,6 +233,11 @@ const EditNews = () => {
 
     if (!DefaultValue.defaultSlug){
       toast.error(translate("slugrequired"))
+      return
+    }
+
+    if(!DefaultValue.defaultType){
+      toast.error(translate("contentTyperequired"))
       return
     }
 
@@ -475,6 +485,12 @@ const EditNews = () => {
   // final submit data
   const finalSubmit = async e => {
     e.preventDefault()
+
+    if(!DefaultValue.descriptionValue){
+      toast.error(translate('descriptionrequired'))
+      return
+    }
+
     const slugValue = await slugConverter()
     await setNewsApi({
       action_type: 2,
@@ -499,7 +515,7 @@ const EditNews = () => {
         navigate.push('/manage-news')
       },
       onError: error => {
-        toast.error(error.message)
+        toast.error(error)
       }
     })
   }

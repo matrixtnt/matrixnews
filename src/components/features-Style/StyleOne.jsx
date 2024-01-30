@@ -1,6 +1,5 @@
 import { BsFillPlayFill, BsPlayCircle } from 'react-icons/bs'
 import Link from 'next/link'
-import { Breathing } from 'react-shimmer'
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
@@ -88,7 +87,6 @@ const StyleOne = ({ isLoading, Data }) => {
                             src={item.image}
                             className='float-end fs-Newscard-image h-auto'
                             id='fs-Newscard-image'
-                            fallback={<Breathing width={800} height={600} />}
                             alt='style one video news image'
                             onError={placeholderImage}
                           />
@@ -166,7 +164,6 @@ const StyleOne = ({ isLoading, Data }) => {
                             src={item.image}
                             className='float-end fs-Newscard-image h-auto'
                             id='fs-Newscard-image'
-                            fallback={<Breathing width={800} height={600} />}
                             alt={item.title}
                             onError={placeholderImage}
                           />
@@ -243,7 +240,6 @@ const StyleOne = ({ isLoading, Data }) => {
                             src={item.image}
                             className='float-end fs-Newscard-image h-auto'
                             id='fs-Newscard-image'
-                            fallback={<Breathing width={800} height={600} />}
                             alt={item.title}
                             onError={placeholderImage}
                           />

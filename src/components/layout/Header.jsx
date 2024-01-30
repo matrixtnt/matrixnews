@@ -5,8 +5,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Button from 'react-bootstrap/Button'
 import { getAuth, signOut } from 'firebase/auth'
-import { confirmAlert } from 'react-confirm-alert'
-import 'react-confirm-alert/src/react-confirm-alert.css'
 import Dropdown from 'react-bootstrap/Dropdown'
 import {
   loadLanguageLabels,
@@ -41,6 +39,8 @@ import { access_key, getUser } from 'src/utils/api'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import toast from 'react-hot-toast'
 import { accountDeleteApi } from 'src/store/actions/campaign'
+import { Modal } from 'antd';
+const { confirm } = Modal;
 
 const Header = () => {
   const userData = useSelector(selectUser)
@@ -156,14 +156,13 @@ const Header = () => {
 
   const logout = () => {
     handleClose()
-
-    confirmAlert({
+    confirm({
       title: 'Logout',
-      message: 'Are you sure to do this.',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
+      content:"Are you sure to do this?",
+      centered: true,
+      async onOk() {
+        try {
+          return new Promise((resolve, reject) => {
             signOut(authentication)
               .then(() => {
                 logoutUser()
@@ -175,14 +174,15 @@ const Header = () => {
                 toast.error(error)
                 // An error happened.
               })
-          }
-        },
-        {
-          label: 'No',
-          onClick: () => {}
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+          });
+        } catch (e) {
+          return console.log('Oops errors!');
         }
-      ]
-    })
+      },
+      onCancel() {},
+    });
+
   }
 
   const [show, setShow] = useState(false)
@@ -248,14 +248,13 @@ const Header = () => {
   // delete account
   const deleteAccount = e => {
     e.preventDefault()
-
-    confirmAlert({
+    confirm({
       title: 'Delete Account',
-      message: 'Are you sure to do this.',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
+      content:"Are you sure to do this?",
+      centered: true,
+      async onOk() {
+        try {
+          return new Promise((resolve, reject) => {
             const user = auth.currentUser
 
             if (user) {
@@ -287,18 +286,15 @@ const Header = () => {
                   console.error('Error deleting user account:', error)
                   // Handle error (display error message, etc.)
                 })
-            } else {
-              console.error('No user signed in.')
-              // Handle case where no user is signed in
-            }
-          }
-        },
-        {
-          label: 'No',
-          onClick: () => {}
+            } 
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+          });
+        } catch (e) {
+          return console.log('Oops errors!');
         }
-      ]
-    })
+      },
+      onCancel() {},
+    });
   }
 
 

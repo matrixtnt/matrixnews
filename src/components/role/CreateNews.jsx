@@ -98,8 +98,6 @@ const CreateNews = () => {
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtCategoryID: categoryID, defualtCategory: option.label })
-    // Reset subCategory to an empty array
-    setSubCategory([]);
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
@@ -498,7 +496,7 @@ const CreateNews = () => {
         navigate.push('/manage-news')
       },
       onError: error => {
-        toast.error(error.message)
+        toast.error(error)
       }
     })
   }
