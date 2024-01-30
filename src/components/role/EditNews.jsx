@@ -114,11 +114,13 @@ const EditNews = () => {
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
     setDefaultValue({ ...DefaultValue, categorydefault: option.label, categoryID: categoryID })
+    setSubCategory([]);
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
         if(res.data.length === 0){
           setSubCategory([]);
+          setDefaultValue({ ...DefaultValue, subcategorydefault: ""})
           setShowsubCategory(false)
           return
         }
@@ -128,6 +130,7 @@ const EditNews = () => {
       onError: err => {
         if (err === 'No Data Found') {
           setShowsubCategory(false)
+          setSubCategory("")
         }
       }
     })
@@ -233,11 +236,6 @@ const EditNews = () => {
 
     if (!DefaultValue.defaultSlug){
       toast.error(translate("slugrequired"))
-      return
-    }
-
-    if(!DefaultValue.defaultType){
-      toast.error(translate("contentTyperequired"))
       return
     }
 

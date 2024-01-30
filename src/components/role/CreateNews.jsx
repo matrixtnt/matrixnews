@@ -98,6 +98,7 @@ const CreateNews = () => {
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtCategoryID: categoryID, defualtCategory: option.label })
+    setSubCategory([]);
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
