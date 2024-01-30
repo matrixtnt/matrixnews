@@ -155,7 +155,6 @@ const Header = () => {
   }, [])
 
   const logout = () => {
-    handleClose()
     confirm({
       title: 'Logout',
       content:"Are you sure to do this?",
