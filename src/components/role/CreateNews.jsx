@@ -87,11 +87,13 @@ const CreateNews = () => {
     setContent(value)
   }
   // load language data to reducer
-  const languageSelector = value => {
+  const languageSelector = async value => {
     setShowCategory(true)
     const selectedData = JSON.parse(value)
     setDefualtValue({ ...DefaultValue, defualtLanguage: selectedData.language })
     setCreateNewsCurrentLanguage(selectedData.language, selectedData.code, selectedData.id)
+    setDefualtValue({ ...DefaultValue, defualtCategoryID:null, defualtCategory: null })
+    setShowsubCategory(false)
   }
 
   // select category
@@ -117,10 +119,7 @@ const CreateNews = () => {
         }
       }
     })
-
   }
-
-
 
   const subcategorySelector = (value, option) => {
     const subcategoryID = JSON.parse(value)

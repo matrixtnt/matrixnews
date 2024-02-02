@@ -12,8 +12,12 @@ import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
+import ReactPaginate from 'react-paginate'
+import { useState } from 'react'
 
 const CategoryNews = () => {
+  const [currentPage, setCurrentPage] = useState(0)
+  const dataPerPage = 8 // number of posts per page
   const router = useRouter()
   const query = router.query
   const catId = query.category_id
@@ -23,23 +27,28 @@ const CategoryNews = () => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
 
+  // handle page change
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected)
+  }
+
   // api call
-  const getNewsByCategoryApi = async () => {
+  const getNewsByCategoryApi = async page => {
     try {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        offset: '0',
-        limit: '10',
-        get_user_news:"",
-        search:"",
+        offset: page * dataPerPage,
+        limit: dataPerPage,
+        get_user_news: '',
+        search: '',
         language_id: language_id,
         category_id: catId,
         subcategory_id: '',
-        tag_id:"",
+        tag_id: '',
         latitude: storedLatitude,
         longitude: storedLongitude
       })
-      return data.data
+      return data
     } catch (error) {
       console.log(error)
     }
@@ -47,9 +56,14 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage,location],
-    queryFn: getNewsByCategoryApi
+    queryKey: ['category-news', catId, changelanguage, location, currentPage],
+    queryFn: () => getNewsByCategoryApi(currentPage)
   })
+
+  // slice the array to get the current posts
+  const currentData = Data && Data.data && Data.data.slice(0, dataPerPage)
+
+  const lengthdata = (Data && Data.total) || 0
 
   return (
     <Layout>
@@ -67,10 +81,13 @@ const CategoryNews = () => {
               </div>
             ) : (
               <div className='row'>
-                {Data && Data.length > 0 ? (
-                  Data.map(element => (
+                {currentData && currentData.length > 0 ? (
+                  currentData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                      <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
+                      <Link
+                        id='Link-all'
+                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                      >
                         <div id='cv-card' className='card'>
                           <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} />
                           <div id='cv-card-body' className='card-body'>
@@ -92,6 +109,20 @@ const CategoryNews = () => {
                 ) : (
                   <div className='text-center my-5'>{translate('nodatafound')}</div>
                 )}
+                {lengthdata != 0 ? (
+                  <ReactPaginate
+                    initialPage={currentPage}
+                    previousLabel={translate('previous')}
+                    nextLabel={translate('next')}
+                    pageCount={Math.ceil(lengthdata / dataPerPage)}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination'}
+                    previousLinkClassName={'pagination__link'}
+                    nextLinkClassName={'pagination__link'}
+                    disabledClassName={'pagination__link--disabled'}
+                    activeClassName={'pagination__link--active'}
+                  />
+                ) : null}
               </div>
             )}
           </div>
