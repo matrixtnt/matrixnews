@@ -13,6 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const NewsNotification = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -107,7 +108,7 @@ const NewsNotification = () => {
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <p className='text-center'>{translate('nodatafound')}</p>
+                <NoDataFound/>
               </div>
             )}
           </div>

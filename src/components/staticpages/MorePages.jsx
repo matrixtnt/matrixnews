@@ -12,6 +12,7 @@ import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const MorePages = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -47,7 +48,7 @@ const MorePages = () => {
   return (
     <Layout>
       <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement='0' />
-      <div className='morepages py-5 bg-white'>
+      <div className='morepages bg-white'>
         <div className='container'>
           {isLoading ? (
             <div className='row'>
@@ -100,7 +101,7 @@ const MorePages = () => {
                 dangerouslySetInnerHTML={{ __html: modalData && modalData.page_content }}
               ></p>
             ) : (
-              <p className='noData'>{translate('nodatafound')}</p>
+              <NoDataFound/>
             )}
           </div>
         )}

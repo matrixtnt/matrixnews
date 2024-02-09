@@ -14,6 +14,7 @@ import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useState } from 'react'
+import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const CategoryNews = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -108,7 +109,7 @@ const CategoryNews = () => {
                     </div>
                   ))
                 ) : (
-                  <div className='text-center my-5'>{translate('nodatafound')}</div>
+                  <NoDataFound/>
                 )}
                 {lengthdata != 0 ? (
                   <ReactPaginate

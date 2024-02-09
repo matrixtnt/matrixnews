@@ -13,6 +13,7 @@ import { access_key } from 'src/utils/api'
 import { FaSquareXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
+
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const settings = useSelector(settingsData)

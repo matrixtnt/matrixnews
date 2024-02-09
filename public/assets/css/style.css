@@ -4703,6 +4703,10 @@ a#social_platforms svg:hover {
   margin: auto;
 }
 
+.morepages{
+  padding: 130px 0;
+}
+
 .morepages .card {
   background-color: #dbdbdb;
   color: #000;
@@ -6223,4 +6227,11 @@ span {
 
 .create_news .ant-alert-message{
   font-size: x-small;
+}
+
+.no_data_found{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
 }

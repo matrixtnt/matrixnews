@@ -16,6 +16,7 @@ import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { access_key, getUser } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const Notification = () => {
   const [Data, setData] = useState([])
@@ -137,7 +138,7 @@ const Notification = () => {
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <p className='text-center'>{translate('nodatafound')}</p>
+                <NoDataFound/>
               </div>
             )}
           </div>

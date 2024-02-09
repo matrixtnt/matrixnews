@@ -275,7 +275,7 @@ const CreateNews = () => {
       return data.data
     } catch (error) {
       if (error === 'No Data Found') {
-        ;<span>{translate('nodatafound')}</span>
+        <span>{translate('nodatafound')}</span>
       }
     }
   }

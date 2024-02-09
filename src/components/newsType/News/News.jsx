@@ -35,6 +35,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
 import Layout from 'src/components/layout/Layout.jsx'
+import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
 
 const News = () => {
   let user = getUser()
@@ -421,7 +422,7 @@ const News = () => {
                     <CommentSection Nid={Data && Data[0].id} />
                   ) : (
                     <>
-                      <div className='text-center my-5'>{translate('comDisable')}</div>
+                      <NoDataFound/>
                     </>
                   )}
                 </div>
@@ -470,7 +471,7 @@ const News = () => {
           </div>
         </>
       ) : (
-        <div className='text-center my-5'>{translate('nodatafound')}</div>
+        <NoDataFound/>
       )}
     </Layout>
   )

@@ -14,6 +14,7 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const VideoNewsview = () => {
   const [Video_url, setVideo_url] = useState()
@@ -123,7 +124,7 @@ const VideoNewsview = () => {
                   </div>
                 ))
               ) : (
-                <div className='text-center my-5'>{translate('nodatafound')}</div>
+                <NoDataFound/>
               )}
             </div>
           )}

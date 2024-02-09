@@ -12,6 +12,7 @@ import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const LiveNews = () => {
   const [Video_url, setVideo_url] = useState()
@@ -100,7 +101,7 @@ const LiveNews = () => {
                   </div>
                 ))
               ) : (
-                <div className='text-center my-5'>{translate('nodatafound')}</div>
+                <NoDataFound/>
               )}
             </div>
           )}

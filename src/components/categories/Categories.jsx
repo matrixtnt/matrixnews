@@ -13,6 +13,7 @@ import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const Categories = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -98,7 +99,7 @@ const Categories = () => {
                   </div>
                 ))
               ) : (
-                <div className='text-center my-5'>{translate('nodatafound')}</div>
+                <NoDataFound/>
               )}
               {lengthdata != 0 ? (
                 <ReactPaginate
@@ -118,7 +119,7 @@ const Categories = () => {
           )}
         </div>
       ) : (
-        <div className='text-center my-5'>{translate('nodatafound')}</div>
+        <NoDataFound/>
       )}
     </Layout>
   )

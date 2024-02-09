@@ -10,6 +10,7 @@ import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()
@@ -67,7 +68,7 @@ const AllBreakingNews = () => {
                   </div>
                 ))
               ) : (
-                <div className='text-center my-5'>{translate('nodatafound')}</div>
+                <NoDataFound/>
               )}
             </div>
           )}

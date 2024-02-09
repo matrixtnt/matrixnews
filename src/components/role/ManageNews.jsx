@@ -14,6 +14,7 @@ import { access_key, getLanguage } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Modal } from 'antd';
+import NoDataFound from '../noDataFound/NoDataFound'
 const { confirm } = Modal;
 
 const ManageNews = () => {
@@ -193,7 +194,7 @@ const ManageNews = () => {
                     </div>
                   ))
                 ) : (
-                  <div className='text-center my-5'>{translate('nodatafound')}</div>
+                  <NoDataFound/>
                 )}
               </>
             )}

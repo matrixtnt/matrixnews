@@ -15,6 +15,7 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
+import NoDataFound from '../noDataFound/NoDataFound'
 
 const ViewAll = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -106,7 +107,7 @@ const ViewAll = () => {
                       </div>
                     ))
                   ) : (
-                    <div className='text-center my-5'>{translate('nodatafound')}</div>
+                    <NoDataFound/>
                   )}
                 </div>
               )}
@@ -169,7 +170,7 @@ const ViewAll = () => {
                       </div>
                     ))
                   ) : (
-                    <div className='text-center my-5'>{translate('nodatafound')}</div>
+                    <NoDataFound/>
                   )}
                 </div>
               )}
