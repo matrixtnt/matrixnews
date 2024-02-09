@@ -139,7 +139,7 @@ const StyleSix = ({ isLoading, Data }) => {
                               onClick={() =>
                                 router.push({
                                   pathname: `/categories-news/${item.slug}`,
-                                  query: { language_id: item.language_id }
+                                  query: { category_id: item.id }
                                 })
                               }
                               id='btnCatagory'
@@ -253,10 +253,9 @@ const StyleSix = ({ isLoading, Data }) => {
                             onClick={() =>
                               router.push({
                                 pathname: `/categories-news/${item.slug}`,
-                                query: { language_id: item.language_id }
+                                query: { category_id: item.id }
                               })
                             }
-                            href={`/categories-news/${item.slug}`}
                           >
                             {truncateText(item.category_name, 25)}
                           </div>

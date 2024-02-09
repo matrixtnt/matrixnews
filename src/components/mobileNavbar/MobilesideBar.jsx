@@ -47,13 +47,13 @@ const MobilesideBar = ({
 
   // language change
   const languageChange = (name, code, id) => {
-    loadLanguageLabels({code:code})
+    loadLanguageLabels({ code: code })
     setCurrentLanguage(name, code, id)
   }
 
-  useEffect(()=>{
-    loadLanguageLabels({code:currentLanguage.code})
-  },[currentLanguage])
+  useEffect(() => {
+    loadLanguageLabels({ code: currentLanguage.code })
+  }, [currentLanguage])
 
   const closeRef = useRef()
 
@@ -286,7 +286,12 @@ const MobilesideBar = ({
                         <Link
                           id='catNav-links'
                           key={index}
-                          href={`/categories-news/${element.slug}`}
+                          href={{
+                            pathname: `/categories-news/${element.slug}`,
+                            query: {
+                              category_id: element.id
+                            }
+                          }}
                           onClick={handleClose}
                         >
                           {' '}

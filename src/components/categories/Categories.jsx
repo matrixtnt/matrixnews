@@ -73,7 +73,12 @@ const Categories = () => {
                       id='cat-section-card'
                       key={element.id}
                       className='card'
-                      href={`/categories-news/${element.slug}`}
+                      href={{
+                        pathname: `/categories-news/${element.slug}`,
+                        query: {
+                          category_id: element.id
+                        }
+                      }}
                     >
                       <img
                         id='cat-section-card-image'
