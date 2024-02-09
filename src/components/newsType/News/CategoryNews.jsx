@@ -45,6 +45,7 @@ const CategoryNews = () => {
         category_id: catId,
         subcategory_id: '',
         tag_id: '',
+        slug:query.slug,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -56,7 +57,7 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage, location, currentPage],
+    queryKey: ['category-news', catId, changelanguage, location, currentPage,query],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
 
