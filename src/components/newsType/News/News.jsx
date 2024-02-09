@@ -231,6 +231,24 @@ const News = () => {
     setViewerIsOpen(false);
   };
 
+  const formatDate = (originalDate) => {
+    if (!originalDate) return ""; // Handle the case when the date is not available
+  
+    // Create a new Date object with the given string
+    const parsedDate = new Date(originalDate);
+  
+    // Extract day, month, and year
+    const day = parsedDate.getDate();
+    const month = parsedDate.getMonth() + 1; // Month is zero-based, so add 1
+    const year = parsedDate.getFullYear();
+  
+    // Create the formatted date string in the desired format
+    const formattedDate = `${day < 10 ? '0' : ''}${day}-${month < 10 ? '0' : ''}${month}-${year}`;
+  
+    return formattedDate;
+  };
+  
+
 
   return (
     <Layout>
@@ -270,7 +288,7 @@ const News = () => {
                   <div id='nv-Header' className=''>
                     <div id='nv-left-head'>
                       <p id='head-lables'>
-                        <FiCalendar size={18} id='head-logos' /> {Data && Data[0].date.slice(0, 10)}
+                        <FiCalendar size={18} id='head-logos' /> {formatDate(Data && Data[0].date)}
                       </p>
                       <p id='head-lables'>
                         <AiOutlineLike size={18} id='head-logos' /> {Data && Data[0].total_like} {translate('likes')}
