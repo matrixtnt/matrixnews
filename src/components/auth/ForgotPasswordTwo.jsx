@@ -38,8 +38,20 @@ const ForgotPasswordTwo = props => {
         props.setLoginModalShow(true)
       })
       .catch(error => {
-        console.log(error)
-        // ..
+        switch (error.code) {
+          case 'auth/invalid-email':
+            toast.error('Invalid email address. Please enter a valid email.');
+            break;
+          case 'auth/user-not-found':
+            toast.error('User not found. Please check the entered email address.');
+            break;
+          case 'auth/missing-email':
+            toast.error('Email address is missing. Please enter your email.');
+            break;
+          default:
+            toast.error('An error occurred. Please try again later.');
+            break;
+        }
       })
   }
   useEffect(() => {
