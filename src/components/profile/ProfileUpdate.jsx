@@ -169,7 +169,7 @@ const ProfileUpdate = () => {
                   </div>
                 </div>
                 <div className='profile_name'>
-                  <label htmlFor='name'>{translate('your-name')}</label>
+                  <h2><label htmlFor='name'>{translate('your-name')}</label></h2>
                   <input
                     type='text'
                     name='name'
@@ -182,7 +182,7 @@ const ProfileUpdate = () => {
                   />
                 </div>
                 <div className='profile_name email'>
-                  <label htmlFor='email'>{translate('emailLbl')}</label>
+                  <h2><label htmlFor='email'>{translate('emailLbl')}</label></h2>
                   {userData && userData.mobileLoginType ? (
                     <input
                       type='text'
@@ -205,7 +205,7 @@ const ProfileUpdate = () => {
                   )}
                 </div>
                 <div className='profile_name mobile'>
-                  <label htmlFor='mobile'>{translate('mobileLbl')}</label>
+                  <h2><label htmlFor='mobile'>{translate('mobileLbl')}</label></h2>
                   {userData && userData.mobileLoginType ? (
                     <input
                       type='number'
