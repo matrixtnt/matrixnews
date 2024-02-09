@@ -84,11 +84,8 @@ const ForgotPasswordTwo = props => {
             <Modal.Body style={{ marginTop: '12%' }}>
               <div className='AC'>
                 <div className='welcom-back2'>
-                  <h5 className='mb-3'>
-                    <strong>{translate('enteremail')} </strong>
-                  </h5>
                   <div id='Welcom' className='mb-2'>
-                    {translate('createnewpassword')}
+                    {translate('enteremail')}
                   </div>
                 </div>
                 <form onSubmit={handleSubmit}>
