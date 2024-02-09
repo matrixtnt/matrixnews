@@ -46,7 +46,7 @@ const CategoryNews = () => {
         category_id: catId,
         subcategory_id: '',
         tag_id: '',
-        slug:query.slug,
+        slug:"",
         latitude: storedLatitude,
         longitude: storedLongitude
       })
