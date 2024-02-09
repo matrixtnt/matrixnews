@@ -4,7 +4,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { translate } from '../../../utils'
+import { formatDate, translate } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -101,7 +101,7 @@ const CategoryNews = () => {
                             </p>
                             <p id='cv-card-date'>
                               <FiCalendar size={18} id='cv-logoCalendar' />
-                              {element.date}
+                                {formatDate(element.date)}
                             </p>
                           </div>
                         </div>

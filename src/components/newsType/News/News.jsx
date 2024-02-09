@@ -19,13 +19,13 @@ import {
 import SignInModal from '../../auth/SignInModal.jsx'
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js'
 import { access_key, getLanguage, getUser } from '../../../utils/api.jsx'
-import { calculateReadTime, extractTextFromHTML, isLogin, translate } from '../../../utils/index.jsx'
+import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, translate } from '../../../utils/index.jsx'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx'
-import { selectCurrentLanguage } from '../../../store/reducers/languageReducer.js'
+import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import { selectUser } from '../../../store/reducers/userReducer.js'
-import { settingsData } from '../../../store/reducers/settingsReducer.js'
+import { settingsData } from '../../../store/reducers/settingsReducer'
 import { GoTag } from 'react-icons/go'
 import { BiTime } from 'react-icons/bi'
 import LightBox from '../../gallery/LightBox.jsx'
@@ -33,9 +33,9 @@ import { FaImages } from 'react-icons/fa'
 import { useRouter } from 'next/router.js'
 import { useQuery } from '@tanstack/react-query'
 import { getNewsApi } from 'src/hooks/newsApi.jsx'
-import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi.jsx'
+import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
 import Layout from 'src/components/layout/Layout.jsx'
-import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
+import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const News = () => {
   let user = getUser()
@@ -229,23 +229,6 @@ const News = () => {
   const closeLightbox = () => {
     setCurrentImage(0);
     setViewerIsOpen(false);
-  };
-
-  const formatDate = (originalDate) => {
-    if (!originalDate) return ""; // Handle the case when the date is not available
-  
-    // Create a new Date object with the given string
-    const parsedDate = new Date(originalDate);
-  
-    // Extract day, month, and year
-    const day = parsedDate.getDate();
-    const month = parsedDate.getMonth() + 1; // Month is zero-based, so add 1
-    const year = parsedDate.getFullYear();
-  
-    // Create the formatted date string in the desired format
-    const formattedDate = `${day < 10 ? '0' : ''}${day}-${month < 10 ? '0' : ''}${month}-${year}`;
-  
-    return formattedDate;
   };
   
 
