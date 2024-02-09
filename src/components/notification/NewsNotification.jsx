@@ -86,25 +86,34 @@ const NewsNotification = () => {
               </div>
             ) : Data && Data.length > 0 ? (
               Data.map((element, index) => (
-                <Link
-                  className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}
-                  key={index}
-                  href={{pathname:`/news/${element.news?.slug}`,query: { language_id: element.language_id}}}
-                >
+                <div key={index} className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}>
+                {element.type === 'category' ? (
+                  <Link href={{ pathname: `/news/${element.news?.slug}`, query: { language_id: element.language_id } }}>
+                    <div className='card-body bd-highlight' id='card-noti'>
+                      {/** Content inside the link */}
+                      <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
+                      <div className='Noti-text'>
+                        <p className='bd-highlight bd-title'>{truncateText(element.title, 100)}</p>
+                        <p className='bd-highlight bd-title message-title'>{truncateText(element.message, 550)}</p>
+                        <p className='bd-highlight mb-0 text-dark'> {formatDate(element.date_sent)}</p>
+                      </div>
+                      <p className='redirect_arrow'>
+                        <BsFillArrowRightCircleFill />
+                      </p>
+                    </div>
+                  </Link>
+                ) : (
                   <div className='card-body bd-highlight' id='card-noti'>
+                    {/** Content without the link */}
                     <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
                     <div className='Noti-text'>
                       <p className='bd-highlight bd-title'>{truncateText(element.title, 100)}</p>
                       <p className='bd-highlight bd-title message-title'>{truncateText(element.message, 550)}</p>
                       <p className='bd-highlight mb-0'> {formatDate(element.date_sent)}</p>
                     </div>
-                    {element.category_id !== '0' ? (
-                      <p className='redirect_arrow'>
-                        <BsFillArrowRightCircleFill />
-                      </p>
-                    ) : null}
                   </div>
-                </Link>
+                )}
+              </div>
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
