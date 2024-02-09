@@ -39,8 +39,8 @@ import { access_key, getUser } from 'src/utils/api'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import toast from 'react-hot-toast'
 import { accountDeleteApi } from 'src/store/actions/campaign'
-import { Modal } from 'antd';
-const { confirm } = Modal;
+import { Modal } from 'antd'
+const { confirm } = Modal
 
 const Header = () => {
   const userData = useSelector(selectUser)
@@ -60,35 +60,33 @@ const Header = () => {
 
   const settings = useSelector(settingsData)
 
-  // user roles api call 
+  // user roles api call
   const getUserById = async () => {
-    if(!userData.data.firebase_id) return false 
+    if (!userData.data.firebase_id) return false
     try {
       const { data } = await getUserByIdApi.getUserById({
-        access_key: access_key,
-      });
-  
+        access_key: access_key
+      })
+
       if (data && data.data) {
-        const roles = data.data.role;
+        const roles = data.data.role
         if (roles !== 0) {
-          setisuserRole(true);
+          setisuserRole(true)
         }
-        return data.data;
+        return data.data
       } else {
         // Handle the case when data or data.data is undefined or empty
         // Return an appropriate value or handle the situation accordingly
         // For example:
         // setisuserRole(false);
-        return [];
+        return []
       }
-    } catch (error) {
-    }
-  };
-  
+    } catch (error) {}
+  }
 
   // react query
   const {} = useQuery({
-    queryKey: ['userRoles',userData],
+    queryKey: ['userRoles', userData],
     queryFn: getUserById,
     staleTime: 0
   })
@@ -116,13 +114,13 @@ const Header = () => {
 
   // language change
   const languageChange = (name, code, id) => {
-    loadLanguageLabels({code:code})
+    loadLanguageLabels({ code: code })
     setCurrentLanguage(name, code, id)
   }
 
   useEffect(() => {
     loadLanguages({
-      onSuccess:response => {
+      onSuccess: response => {
         if (currentLanguage.code == null) {
           // eslint-disable-next-line
           // eslint-disable-next-line
@@ -137,11 +135,10 @@ const Header = () => {
           setCurrentLanguage(index[0].language, index[0].code, index[0].id)
         }
       },
-      onError:error => {
+      onError: error => {
         console.log(error)
       }
-    }
-    )
+    })
   }, [currentLanguage])
 
   useEffect(() => {
@@ -157,7 +154,7 @@ const Header = () => {
   const logout = async () => {
     confirm({
       title: 'Logout',
-      content:"Are you sure to do this?",
+      content: 'Are you sure to do this?',
       centered: true,
       async onOk() {
         try {
@@ -168,19 +165,19 @@ const Header = () => {
                 window.recaptchaVerifier = null
                 setIsLogout(false)
                 navigate.push('/')
-                resolve(); // Resolve the promise when signOut is successful
+                resolve() // Resolve the promise when signOut is successful
               })
               .catch(error => {
                 toast.error(error)
-                reject(error); // Reject the promise if there's an error
-              });
-          });
+                reject(error) // Reject the promise if there's an error
+              })
+          })
         } catch (e) {
-          console.log('Oops errors!');
+          console.log('Oops errors!')
         }
       },
-      onCancel() {},
-    });
+      onCancel() {}
+    })
   }
 
   const [show, setShow] = useState(false)
@@ -244,11 +241,11 @@ const Header = () => {
   }
 
   // delete account
-  const deleteAccount = e => {
+  const deleteAccount = async e => {
     e.preventDefault()
     confirm({
       title: 'Delete Account',
-      content:"Are you sure to do this?",
+      content: 'Are you sure to do this?',
       centered: true,
       async onOk() {
         try {
@@ -260,7 +257,7 @@ const Header = () => {
                 .delete()
                 .then(() => {
                   accountDeleteApi({
-                    onSuccess:res => {
+                    onSuccess: res => {
                       signOut(authentication)
                         .then(() => {
                           logoutUser()
@@ -269,32 +266,34 @@ const Header = () => {
                           navigate.push('/')
                         })
                         .catch(error => {
-                          toast.error(error)
-                          // An error happened.
+                          toast.error(error.message || 'An error occurred while signing out.')
                         })
                     },
-                    onError:err => {
+                    onError: err => {
                       console.log(err)
                     }
-                  }
-                  )
-                  // Handle any additional steps after deletion (e.g., redirect, sign out, etc.)
+                  })
                 })
                 .catch(error => {
                   console.error('Error deleting user account:', error)
-                  // Handle error (display error message, etc.)
+
+                  // Check if the error is "auth/requires-recent-login"
+                  if (error.code === 'auth/requires-recent-login') {
+                    toast.error('Authentication error: Please log in again before deleting your account.')
+                  } else {
+                    toast.error('An error occurred while deleting user account.')
+                  }
                 })
-            } 
-            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-          });
-        } catch (e) {
-           console.log('Oops errors!');
+            }
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
+          })
+        } catch (error) {
+          console.log(error)
         }
       },
-      onCancel() {},
-    });
+      onCancel() {}
+    })
   }
-
 
   return (
     <div className='Newsbar'>

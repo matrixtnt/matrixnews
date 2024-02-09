@@ -65,22 +65,25 @@ const UserBasedCategories = () => {
 
   // handle switch
   const handleSwitchChange = id => {
-    setData(prevData => {
-      // return those toggle is true
-      const newData = prevData.map(element => {
+    setData((prevData) => {
+      const newData = prevData.map((element) => {
         if (element.id === id) {
-          return { ...element, isToggledOn: !element.isToggledOn }
+          return { ...element, isToggledOn: !element.isToggledOn };
         }
-        return element
-      })
-      const toggledIds = newData.filter(element => element.isToggledOn).map(element => element.id)
+        return element;
+      });
+  
+      const toggledIds = newData
+        .filter((element) => element.isToggledOn)
+        .map((element) => element.id);
+  
+      const finalToggleID = toggledIds.length === 0 ? 0 : toggledIds.join(',');
+      setFinalToggleID(finalToggleID);
+  
+      return newData;
+    });
+  };
 
-      const finalToggleID = toggledIds.length === 0 ? 0 : toggledIds.join(',')
-
-      setFinalToggleID(finalToggleID)
-      return newData
-    })
-  }
 
   // here final submit button
   const finalSubmit = e => {
@@ -103,7 +106,7 @@ const UserBasedCategories = () => {
   }
 
   const handlePageChange = selectedPage => {
-    const newOffset = selectedPage.selected * limit
+    const newOffset = selectedPage?.selected * limit
     setOffsetdata(newOffset)
   }
 
@@ -130,8 +133,8 @@ const UserBasedCategories = () => {
             <>
               <div className='row'>
                 {data && data.length > 0
-                  ? data.map((element, index) => (
-                      <div className='col-md-4 col-12' key={index}>
+                  ? data.map((element) => (
+                      <div className='col-md-4 col-12' key={element.id}>
                         <div className='manage_card'>
                           <div className='inner_manage'>
                             <div className='manage_image'>

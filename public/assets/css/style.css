@@ -2910,6 +2910,12 @@ a#social_platforms svg:hover {
   border: none;
 }
 
+#btn-cat-more img{
+  object-fit: contain;
+  width: 50px;
+  height: 50px;
+}
+
 #cv-main {
   font-family: 'Roboto', sans-serif;
 }

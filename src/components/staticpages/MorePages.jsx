@@ -69,7 +69,7 @@ const MorePages = () => {
                           {element.title}
                         </h5>
                         <button id='btn-cat-more' className='btn' type='button'>
-                          <IoArrowForwardCircleSharp size={40} />
+                          <img src={element.page_icon} alt="icon" />
                         </button>
                       </div>
                     </div>
