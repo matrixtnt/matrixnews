@@ -890,7 +890,6 @@ const EditNews = () => {
                         )}
                       </Dropzone>
                     </div>
-                    {console.log(images)}
                     <div className='image_slider'>
                       <Swiper {...swiperOption}>
                         {DefaultValue?.multipleImage?.map((file, index) => (

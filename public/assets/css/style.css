@@ -6239,5 +6239,10 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
+  height: 20vh;
+}
+
+.personal_Sec{
+  padding-bottom: 150px;
+  padding-top: 100px;
 }
