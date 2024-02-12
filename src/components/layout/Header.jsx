@@ -68,6 +68,19 @@ const Header = () => {
         access_key: access_key
       })
 
+      if (data && data.data.status === 0) {
+        toast.error("You are deactivated by admin!")
+        signOut(authentication)
+          .then(() => {
+            logoutUser()
+            navigate.push('/')
+          })
+          .catch(error => {
+            toast.error(error)
+          })
+        return false
+      }
+
       if (data && data.data) {
         const roles = data.data.role
         if (roles !== 0) {
@@ -85,11 +98,15 @@ const Header = () => {
   }
 
   // react query
-  const {} = useQuery({
+  const {refetch} = useQuery({
     queryKey: ['userRoles', userData],
     queryFn: getUserById,
-    staleTime: 0
+    staleTime: 0,
   })
+
+  useEffect(()=>{
+    refetch()
+  },[])
 
   // api call
   const categoriesApi = async () => {
