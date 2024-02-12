@@ -9,6 +9,7 @@ import notificationbadgeReducer from './reducers/notificationbadgeReducer';
 import settingsReducer from './reducers/settingsReducer';
 import clickActionReducer from "./stateSlice/clickActionSlice";
 import createNewsReducer from './reducers/createNewsReducer';
+import tempDataReducer from './reducers/tempDataReducer';
 
 const persistConfig = {
     key: 'root',
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     settings: settingsReducer,
     clickAction: clickActionReducer,
     createNews: createNewsReducer,
+    tempdata:tempDataReducer,
 });
 
 export const store = configureStore({

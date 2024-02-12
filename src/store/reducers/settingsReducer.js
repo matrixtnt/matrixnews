@@ -34,7 +34,7 @@ export const settingsSlice = createSlice({
         },
         fcmToken:(settings,action)=>{
             settings.fcmtoken = action.payload.data
-        }
+        },
 
     }
 })

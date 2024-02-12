@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
+import { loadCategoryCount } from 'src/store/reducers/tempDataReducer'
 
 SwiperCore.use([Navigation, Pagination])
 const CatNav = () => {
@@ -28,9 +29,10 @@ const CatNav = () => {
         limit: '40',
         language_id: currentLanguage.id
       })
+      loadCategoryCount({ categoryCount: data?.total });
       return data.data
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 

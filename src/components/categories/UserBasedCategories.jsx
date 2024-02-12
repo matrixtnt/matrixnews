@@ -3,21 +3,21 @@ import React, { useEffect, useState } from 'react'
 import SwitchButton from 'bootstrap-switch-button-react'
 import { categoriesApi, getuserbyidApi, setusercategoriesApi } from '../../store/actions/campaign'
 import { translate } from '../../utils'
-import ReactPaginate from 'react-paginate'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import { categoryCountSelector } from 'src/store/reducers/tempDataReducer'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [finalToggleID, setFinalToggleID] = useState('')
-  const [totalLength, setTotalLength] = useState(0)
-  const [offsetdata, setOffsetdata] = useState(0)
-  const limit = 6
+
   const currentLanguage = useSelector(selectCurrentLanguage)
+  const categorieslength = useSelector(categoryCountSelector)
+
   // get user by id
   useEffect(() => {
     getuserbyidApi({
@@ -36,17 +36,17 @@ const UserBasedCategories = () => {
 
         // category api call
         categoriesApi({
-          offset: offsetdata.toString(),
-          limit: limit.toString(),
+          offset: 0,
+          limit: categorieslength,
           language_id: currentLanguage.id,
           onSuccess: response => {
-            setTotalLength(response.total)
             const toggledData = response.data.map(element => {
               // here set isToggleOn has boolean with actual data
               const isToggledOn = CommanID.includes(element.id.toString())
               return { ...element, isToggledOn }
             })
-            setData(toggledData)
+            // Combine paginated data with existing data
+            setData(prevData => [...prevData, ...toggledData])
             setLoading(false)
           },
           onError: error => {
@@ -61,7 +61,7 @@ const UserBasedCategories = () => {
         console.error(error)
       }
     })
-  }, [offsetdata, currentLanguage])
+  }, [currentLanguage])
 
   // handle switch
   const handleSwitchChange = id => {
@@ -79,6 +79,7 @@ const UserBasedCategories = () => {
   
       const finalToggleID = toggledIds.length === 0 ? 0 : toggledIds.join(',');
       setFinalToggleID(finalToggleID);
+
   
       return newData;
     });
@@ -103,11 +104,6 @@ const UserBasedCategories = () => {
       // No changes in toggle state, you can handle this case (optional)
       toast.error('Please select categories')
     }
-  }
-
-  const handlePageChange = selectedPage => {
-    const newOffset = selectedPage?.selected * limit
-    setOffsetdata(newOffset)
   }
 
   // button style
@@ -165,21 +161,7 @@ const UserBasedCategories = () => {
               </button>
             </>
           )}
-          <ReactPaginate
-            previousLabel={translate('previous')}
-            nextLabel={translate('next')}
-            breakLabel='...'
-            breakClassName='break-me'
-            pageCount={Math.ceil(totalLength / limit)}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageChange}
-            containerClassName={'pagination'}
-            previousLinkClassName={'pagination__link'}
-            nextLinkClassName={'pagination__link'}
-            disabledClassName={'pagination__link--disabled'}
-            activeClassName={'pagination__link--active'}
-          />
+         
         </div>
       </section>
     </Layout>
