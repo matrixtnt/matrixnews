@@ -251,7 +251,7 @@ const CommentsView = props => {
                     <img id='cs-profile' src={ele.user.profile} onError={imgError} alt='replay comment user news image' />
                     <div id='cs-Rcard' className='card'>
                       <b>
-                        <h5>{ele.name}</h5>
+                        <h5>{ele.user.name}</h5>
                       </b>
                       <p id='cs-card-text' className='card-text'>
                         {ele.message}
