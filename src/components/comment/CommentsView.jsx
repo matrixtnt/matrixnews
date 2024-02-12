@@ -188,7 +188,7 @@ const CommentsView = props => {
                   <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
                   <div id='cs-card' className='card'>
                     <b>
-                      <h5>{element?.user?.name}</h5>
+                      <h5>{element?.user?.name ? element?.user?.name : element?.user?.mobile}</h5>
                     </b>
                     {/* <Link id="cdbtnReport">Report</Link> */}
                     <p id='cs-card-text' className='card-text'>
@@ -251,7 +251,7 @@ const CommentsView = props => {
                     <img id='cs-profile' src={ele.user.profile} onError={imgError} alt='replay comment user news image' />
                     <div id='cs-Rcard' className='card'>
                       <b>
-                        <h5>{ele.user.name}</h5>
+                        <h5>{ele?.user?.name ? ele?.user?.name : ele?.user?.mobile}</h5>
                       </b>
                       <p id='cs-card-text' className='card-text'>
                         {ele.message}
