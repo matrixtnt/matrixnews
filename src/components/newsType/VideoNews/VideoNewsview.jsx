@@ -81,7 +81,7 @@ const VideoNewsview = () => {
             </div>
           ) : (
             <div className='row'>
-              {Data && Data[0].videos?.length > 0 ? (
+              {Data && Data[0]?.videos?.length > 0 ? (
                 Data[0].videos.map(element => (
                   <div className='col-md-4 col-12' key={element.id}>
                     <div

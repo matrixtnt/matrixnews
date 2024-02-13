@@ -2,133 +2,133 @@
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
     <loc>https://news-ssr-two.vercel.app/404</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/loading</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/rss</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/all-breaking-news</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/all-categories</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://news-ssr-two.vercel.app/bookmark</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://news-ssr-two.vercel.app/categories-news/[slug]</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://news-ssr-two.vercel.app/create-news</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/breaking-news/[slug]</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://news-ssr-two.vercel.app/create-news</loc>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://news-ssr-two.vercel.app/bookmark</loc>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/edit-news</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://news-ssr-two.vercel.app/categories-news/[slug]</loc>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/live-news</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/manage-news</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/more-pages</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/news/[slug]</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://news-ssr-two.vercel.app/news-notification</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/personal-notification</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/profile-update</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://news-ssr-two.vercel.app/news-notification</loc>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/tag/[slug]</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/user-based-categories</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/video-news-view/[slug]</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://news-ssr-two.vercel.app/view-all/[slug]</loc>
-    <lastmod>2024-02-13T11:00:35.923Z</lastmod>
+    <lastmod>2024-02-13T12:26:20.652Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

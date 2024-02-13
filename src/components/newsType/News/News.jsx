@@ -43,7 +43,7 @@ const News = () => {
   const userData = useSelector(selectUser)
   const SettingsData = useSelector(settingsData)
   const router = useRouter()
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
 
   // Rest of your code...
   // eslint-disable-next-line
@@ -63,7 +63,7 @@ const News = () => {
   let { id: language_id } = getLanguage()
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
   const [currentImage, setCurrentImage] = useState(0)
-  const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false);
+  const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false)
 
   // api call
   const getNewsById = async () => {
@@ -139,7 +139,7 @@ const News = () => {
     staleTime: 0
   })
 
-  const { } = useQuery({
+  const {} = useQuery({
     queryKey: ['setNewsView', NewsId],
     queryFn: setNewsView
   })
@@ -151,7 +151,7 @@ const News = () => {
     }
   }, [currentLanguage.id])
 
-  useEffect(() => { }, [userData.data])
+  useEffect(() => {}, [userData.data])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -218,20 +218,17 @@ const News = () => {
   // Calculate read time
   const readTime = calculateReadTime(text)
 
-  const galleryPhotos = Data && Data[0]?.images;
+  const galleryPhotos = Data && Data[0]?.images
 
-
-  const openLightbox = (index) => {
-    setCurrentImage(index);
-    setViewerIsOpen(true);
-  };
+  const openLightbox = index => {
+    setCurrentImage(index)
+    setViewerIsOpen(true)
+  }
 
   const closeLightbox = () => {
-    setCurrentImage(0);
-    setViewerIsOpen(false);
-  };
-  
-
+    setCurrentImage(0)
+    setViewerIsOpen(false)
+  }
 
   return (
     <Layout>
@@ -241,7 +238,7 @@ const News = () => {
         </div>
       ) : Data && Data.length > 0 ? (
         <>
-          <BreadcrumbNav SecondElement='News Details' ThirdElement={Data && Data[0].title} />
+          <BreadcrumbNav SecondElement='News Details' ThirdElement={Data && Data[0]?.title} />
           <div className='news-deatail-section'>
             <div id='nv-main' className='container news_detail'>
               {/* ad spaces */}
@@ -264,21 +261,21 @@ const News = () => {
               <div id='nv-page' className='row'>
                 <div id='nv-body' className='col-lg-8 col-12'>
                   <button id='btnnvCatagory' className='btn btn-sm' type='button'>
-                    {Data && Data[0].category.category_name}
+                    {Data && Data[0]?.category.category_name}
                   </button>
-                  <h1 id='nv-title'>{Data && Data[0].title}</h1>
+                  <h1 id='nv-title'>{Data && Data[0]?.title}</h1>
 
                   <div id='nv-Header' className=''>
                     <div id='nv-left-head'>
                       <p id='head-lables'>
-                        <FiCalendar size={18} id='head-logos' /> {formatDate(Data && Data[0].date)}
+                        <FiCalendar size={18} id='head-logos' /> {formatDate(Data && Data[0]?.date)}
                       </p>
                       <p id='head-lables'>
-                        <AiOutlineLike size={18} id='head-logos' /> {Data && Data[0].total_like} {translate('likes')}
+                        <AiOutlineLike size={18} id='head-logos' /> {Data && Data[0]?.total_like} {translate('likes')}
                       </p>
 
                       <p id='head-lables' className='eye_icon'>
-                        <AiOutlineEye size={18} id='head-logos' /> {Data && Data[0].total_views}
+                        <AiOutlineEye size={18} id='head-logos' /> {Data && Data[0]?.total_views}
                       </p>
                       <p id='head-lables' className='minute_Read'>
                         <BiTime size={18} id='head-logos' />
@@ -290,20 +287,33 @@ const News = () => {
 
                     <div id='nv-right-head'>
                       <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      <FacebookShareButton url={currentUrL} title={`${Data && Data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
+                      <FacebookShareButton
+                        url={currentUrL}
+                        title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData.web_setting.web_name}`}
+                        hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}
+                      >
                         <FacebookIcon size={40} round />
                       </FacebookShareButton>
-                      <WhatsappShareButton url={currentUrL} title={`${Data && Data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`} beforeOnClick={() => setWhatsappImageLoaded(false)}>
+                      <WhatsappShareButton
+                        url={currentUrL}
+                        title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData.web_setting.web_name}`}
+                        hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}
+                        beforeOnClick={() => setWhatsappImageLoaded(false)}
+                      >
                         <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
                       </WhatsappShareButton>
-                      <TwitterShareButton url={currentUrL} title={`${Data && Data[0].title} - ${SettingsData && SettingsData.web_setting.web_name}`} hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}>
+                      <TwitterShareButton
+                        url={currentUrL}
+                        title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData.web_setting.web_name}`}
+                        hashtag={`${SettingsData && SettingsData.web_setting.web_name}`}
+                      >
                         <XIcon size={40} round />
                       </TwitterShareButton>
                     </div>
                   </div>
                   <div id='vps-body-left'>
                     <div className='vps-img-div'>
-                      <img id='nv-image' src={Data && Data[0].image} alt={Data && Data[0].title} />
+                      <img id='nv-image' src={Data && Data[0]?.image} alt={Data && Data[0]?.title} />
                       <div className='seeAllPhoto'>
                         {galleryPhotos && galleryPhotos.length > 0 ? (
                           <button onClick={() => openLightbox(0)}>
@@ -317,15 +327,20 @@ const News = () => {
                         sourceIndex={currentImage}
                         onClose={() => setViewerIsOpen(false)}
                       /> */}
-                      <LightBox photos={galleryPhotos} viewerIsOpen={viewerIsOpen} currentImage={currentImage} onClose={closeLightbox} />
+                      <LightBox
+                        photos={galleryPhotos}
+                        viewerIsOpen={viewerIsOpen}
+                        currentImage={currentImage}
+                        onClose={closeLightbox}
+                      />
                     </div>
-                    {Data && Data[0].content_value ? (
+                    {Data && Data[0]?.content_value ? (
                       <div className='text-black'>
                         <div
                           id='vps-btnVideo'
                           onClick={() => {
-                            handleVideoUrl(Data && Data[0].content_value)
-                            TypeUrl(Data && Data[0].type)
+                            handleVideoUrl(Data && Data[0]?.content_value)
+                            TypeUrl(Data && Data[0]?.type)
                           }}
                         >
                           <BsFillPlayFill id='vps-btnVideo-logo' fill='white' size={50} />
@@ -362,7 +377,7 @@ const News = () => {
                           <button
                             id='nv-function'
                             className='btn'
-                            onClick={() => setbookmarkData(Data && Data[0].id, !Bookmark ? 1 : 0)}
+                            onClick={() => setbookmarkData(Data && Data[0]?.id, !Bookmark ? 1 : 0)}
                           >
                             {Bookmark ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
                           </button>
@@ -372,7 +387,7 @@ const News = () => {
                           <button
                             id='nv-function'
                             className='btn'
-                            onClick={() => setLikeDislikeData(Data && Data[0].id, !Like ? 1 : 0)}
+                            onClick={() => setLikeDislikeData(Data && Data[0]?.id, !Like ? 1 : 0)}
                           >
                             {Like ? <AiTwotoneLike size={23} /> : <AiOutlineLike size={23} />}
                           </button>
@@ -383,15 +398,12 @@ const News = () => {
                     ) : null}
                   </div>
                   <div>
-                  <p
-                    id='nv-description'
-                    style={{ fontSize: `${FontSize}px`, wordWrap: 'break-word' }}
-                    dangerouslySetInnerHTML={{ __html: Data && Data[0].description }}
-                  ></p>
+                    <p
+                      id='nv-description'
+                      style={{ fontSize: `${FontSize}px`, wordWrap: 'break-word' }}
+                      dangerouslySetInnerHTML={{ __html: Data && Data[0]?.description }}
+                    ></p>
                   </div>
-                
-
-                 
 
                   {/* tags */}
                   {Data[0].tag_name ? (
@@ -420,17 +432,17 @@ const News = () => {
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
                   {SettingsData && SettingsData.comments_mode === '1' ? (
-                    <CommentSection Nid={Data && Data[0].id} />
+                    <CommentSection Nid={Data && Data[0]?.id} />
                   ) : (
                     <>
-                      <NoDataFound/>
+                      <NoDataFound />
                     </>
                   )}
                 </div>
 
                 <div id='nv-right-section' className='col-lg-4 col-12'>
-                  {Data && Data[0].category_id ? (
-                    <RelatedNewsSection Cid={Data && Data[0].category_id} Nid={NewsId} />
+                  {Data && Data[0]?.category_id ? (
+                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} />
                   ) : null}
                   <TagsSection />
                 </div>
@@ -442,7 +454,7 @@ const News = () => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-              // title={Data[0].title}
+                // title={Data[0].title}
               />
               <SignInModal
                 setIsLogout={setIsLogout}
@@ -472,7 +484,7 @@ const News = () => {
           </div>
         </>
       ) : (
-        <NoDataFound/>
+        <NoDataFound />
       )}
     </Layout>
   )
