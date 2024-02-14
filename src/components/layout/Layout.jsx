@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
     laodSettingsApi({
       type: '',
       onSuccess: res =>
-        document.documentElement.style.setProperty('--primary-color', res && res.data.web_setting.web_color_code),
+        document.documentElement.style.setProperty('--primary-color', res && res?.data?.web_setting?.web_color_code),
       onError: error => {
         console.log(error)
       }

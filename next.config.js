@@ -5,7 +5,7 @@ require('dotenv').config()
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['news.wrteam.me']
+    domains: [`${process.env.NEXT_PUBLIC_API_URL}`]
   },
   devIndicators: {
     buildActivity: false

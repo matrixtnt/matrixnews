@@ -10,10 +10,9 @@ import { settingsData } from '../../store/reducers/settingsReducer'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key } from 'src/utils/api'
-import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaSquareXTwitter } from 'react-icons/fa6'
 
 const Footer = () => {
-
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const settings = useSelector(settingsData)
@@ -51,12 +50,12 @@ const Footer = () => {
             <div className='col-lg-3 col-12'>
               <div className='News'>
                 <Link href='/'>
-                  <img id='NewsLogo' src={settings && settings.web_setting.web_footer_logo} alt='footer logo image' />
+                  <img id='NewsLogo' src={settings && settings?.web_setting?.web_footer_logo} alt='footer logo image' />
                 </Link>
               </div>
               <div className='Lorem-text'>
                 <p className='lorem'>
-                  {settings && settings.web_setting.web_footer_description}
+                  {settings && settings?.web_setting?.web_footer_description}
                   <br />
                 </p>
               </div>
@@ -68,12 +67,15 @@ const Footer = () => {
                   {Data.map((element, index) => {
                     return (
                       <li key={index}>
-                        <Link href={{
-                              pathname: `/categories-news/${element.slug}`,
-                              query: {
-                                category_id: element.id
-                              }
-                            }} onClick={scrollToTop}>
+                        <Link
+                          href={{
+                            pathname: `/categories-news/${element.slug}`,
+                            query: {
+                              category_id: element.id
+                            }
+                          }}
+                          onClick={scrollToTop}
+                        >
                           {element.category_name}{' '}
                         </Link>
                       </li>
@@ -159,7 +161,7 @@ const Footer = () => {
           <div className='d-flex copyright' id='copyright1'>
             <p id='footer-Copyright' className='h6 p-2'>
               {translate('copyright')} © {moment().year()} {translate('allrights')}{' '}
-              {settings && settings.web_setting.web_name}
+              {settings && settings?.web_setting?.web_name}
             </p>
           </div>
         </div>

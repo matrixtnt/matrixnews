@@ -69,7 +69,7 @@ const Header = () => {
       })
 
       if (data && data.data.status === 0) {
-        toast.error("You are deactivated by admin!")
+        toast.error('You are deactivated by admin!')
         signOut(authentication)
           .then(() => {
             logoutUser()
@@ -98,15 +98,15 @@ const Header = () => {
   }
 
   // react query
-  const {refetch} = useQuery({
+  const { refetch } = useQuery({
     queryKey: ['userRoles', userData],
     queryFn: getUserById,
-    staleTime: 0,
+    staleTime: 0
   })
 
-  useEffect(()=>{
+  useEffect(() => {
     refetch()
-  },[])
+  }, [])
 
   // api call
   const categoriesApi = async () => {
@@ -318,7 +318,7 @@ const Header = () => {
         <div className='navbar_content'>
           <div id='News-logo' className='News-logo'>
             <Link href='/' activeclassname='active' exact='true'>
-              <img id='NewsLogo' src={settings && settings.web_setting.web_header_logo} alt='logo' />
+              <img id='NewsLogo' src={settings && settings?.web_setting?.web_header_logo} alt='logo' />
             </Link>
           </div>
 

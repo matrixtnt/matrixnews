@@ -184,8 +184,8 @@ const OTPModal = props => {
     props.onHide()
     props.setisloginloading(false)
     await recaptchaClear()
-    props.setPhonenum(null);
-    props.setValue(null);
+    props.setPhonenum(null)
+    props.setValue(null)
   }
 
   return (
@@ -203,7 +203,7 @@ const OTPModal = props => {
             <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img5'>
               <img className='ModalImg5' src={photo.src} alt='otp modal image' />
               <div className='logo-img-overlay'>
-                <img src={settings && settings.web_setting.web_header_logo} alt='logo image' id='logo5' />
+                <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo5' />
               </div>
             </div>
 

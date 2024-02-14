@@ -85,7 +85,7 @@ const ForgotPasswordTwo = props => {
           >
             <img className='ModalImg' id='ModalImg2' src={photo.src} alt='forgot password images news' />
             <div className='logo-img-overlay'>
-              <img id='NewsLogo' src={settings && settings.web_setting.web_header_logo} alt='news logo' />
+              <img id='NewsLogo' src={settings && settings?.web_setting?.web_header_logo} alt='news logo' />
             </div>
           </div>
 

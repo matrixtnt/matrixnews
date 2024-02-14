@@ -228,7 +228,7 @@ const SignInModal = props => {
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
             <img className='ModalImg' src={photo.src} alt='login image' />
             <div className='logo-img-overlay'>
-              <img src={settings && settings.web_setting.web_header_logo} alt='logo image' id='logo1' />
+              <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo1' />
             </div>
           </div>
           <div id='modal-content'>
@@ -250,7 +250,7 @@ const SignInModal = props => {
                   <form className='my-2' onSubmit={handleSubmit}>
                     <div className='form-floating mb-3'>
                       <input
-                        type="email"
+                        type='email'
                         className='form-control'
                         name='email'
                         id='floatingInput'
