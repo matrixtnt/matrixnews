@@ -47,11 +47,11 @@ const App = ({ Component, pageProps }) => {
         <Provider store={store}>
           <ThemeProvider>
             <Toaster position='top-center' containerClassName='toast-custom' />
-            {/* <InspectElement> */}
+            <InspectElement>
               <PushNotificationLayout>
                 <Component {...pageProps} />
               </PushNotificationLayout>
-            {/* </InspectElement> */}
+            </InspectElement>
           </ThemeProvider>
         </Provider>
         <ReactQueryDevtools initialIsOpen={false} />

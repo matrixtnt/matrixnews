@@ -79,7 +79,7 @@ const SearchPopup = () => {
 
   // react query
   const { refetch } = useQuery({
-    queryKey: ['getSearchNews', searchValue,location],
+    queryKey: ['getSearchNews', searchValue,location,language_id],
     queryFn: getNews,
     staleTime: 0
   })
