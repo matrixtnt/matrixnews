@@ -284,32 +284,34 @@ const News = () => {
                           : ' ' + readTime + ' ' + translate('minute') + ' ' + translate('read')}
                       </p>
                     </div>
+                    {process.env.NEXT_PUBLIC_SEO === 'true' ? (
+                      <div id='nv-right-head'>
+                        <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
 
-                    <div id='nv-right-head'>
-                      <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      <FacebookShareButton
-                        url={currentUrL}
-                        title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                        hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                      >
-                        <FacebookIcon size={40} round />
-                      </FacebookShareButton>
-                      <WhatsappShareButton
-                        url={currentUrL}
-                        title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                        hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                        beforeOnClick={() => setWhatsappImageLoaded(false)}
-                      >
-                        <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
-                      </WhatsappShareButton>
-                      <TwitterShareButton
-                        url={currentUrL}
-                        title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                        hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                      >
-                        <XIcon size={40} round />
-                      </TwitterShareButton>
-                    </div>
+                        <FacebookShareButton
+                          url={currentUrL}
+                          title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                          hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
+                        >
+                          <FacebookIcon size={40} round />
+                        </FacebookShareButton>
+                        <WhatsappShareButton
+                          url={currentUrL}
+                          title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                          hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
+                          beforeOnClick={() => setWhatsappImageLoaded(false)}
+                        >
+                          <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
+                        </WhatsappShareButton>
+                        <TwitterShareButton
+                          url={currentUrL}
+                          title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                          hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
+                        >
+                          <XIcon size={40} round />
+                        </TwitterShareButton>
+                      </div>
+                    ) : null}
                   </div>
                   <div id='vps-body-left'>
                     <div className='vps-img-div'>

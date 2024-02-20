@@ -167,31 +167,32 @@ const BreakingNews = () => {
                                   : ' ' + readTime + ' ' + translate('minute') + ' ' + translate('read')}
                               </p>
                             </div>
-
-                            <div id='B_NV-right-head'>
-                              <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
-                              <FacebookShareButton
-                                url={currentUrL}
-                                title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                              >
-                                <FacebookIcon size={30} round />
-                              </FacebookShareButton>
-                              <WhatsappShareButton
-                                url={currentUrL}
-                                title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                              >
-                                <WhatsappIcon size={30} round />
-                              </WhatsappShareButton>
-                              <TwitterShareButton
-                                url={currentUrL}
-                                title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                              >
-                                <XIcon size={30} round />
-                              </TwitterShareButton>
-                            </div>
+                            {process.env.NEXT_PUBLIC_SEO === 'true' ? (
+                              <div id='B_NV-right-head'>
+                                <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
+                                <FacebookShareButton
+                                  url={currentUrL}
+                                  title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                  hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                >
+                                  <FacebookIcon size={30} round />
+                                </FacebookShareButton>
+                                <WhatsappShareButton
+                                  url={currentUrL}
+                                  title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                  hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                >
+                                  <WhatsappIcon size={30} round />
+                                </WhatsappShareButton>
+                                <TwitterShareButton
+                                  url={currentUrL}
+                                  title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                  hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                >
+                                  <XIcon size={30} round />
+                                </TwitterShareButton>
+                              </div>
+                            ) : null}
                           </div>
                           <div id='vps-body-left'>
                             <img id='B_NV-image' src={data[0].image} alt={data[0].title} />
