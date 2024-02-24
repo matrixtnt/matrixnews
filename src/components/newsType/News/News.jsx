@@ -334,6 +334,8 @@ const News = () => {
                         viewerIsOpen={viewerIsOpen}
                         currentImage={currentImage}
                         onClose={closeLightbox}
+                        setCurrentImage={setCurrentImage}
+                        title_image={Data && Data[0]?.image}
                       />
                     </div>
                     {Data && Data[0]?.content_value ? (

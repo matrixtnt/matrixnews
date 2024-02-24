@@ -17,6 +17,7 @@ import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
 const StyleSix = ({ isLoading, Data }) => {
+
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
   const [typeUrl, setTypeUrl] = useState(null)
@@ -93,6 +94,7 @@ const StyleSix = ({ isLoading, Data }) => {
     setTypeUrl(type)
   }
 
+
   return (
     <div id='first-section'>
       {/* ad spaces */}
@@ -166,10 +168,10 @@ const StyleSix = ({ isLoading, Data }) => {
                                 <p id='Top-Posttime01'>
                                   {item.date
                                     ? new Date(item.date).toLocaleString('en-us', {
-                                        month: 'short',
-                                        day: 'numeric',
-                                        year: 'numeric'
-                                      })
+                                      month: 'short',
+                                      day: 'numeric',
+                                      year: 'numeric'
+                                    })
                                     : ''}
                                 </p>
                               ) : null}
@@ -201,7 +203,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </Swiper>
           </div>
@@ -263,10 +265,10 @@ const StyleSix = ({ isLoading, Data }) => {
                             <p id='Top-Posttime01'>
                               {item.date
                                 ? new Date(item.date).toLocaleString('en-us', {
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric'
-                                  })
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric'
+                                })
                                 : ''}
                             </p>
                             <div
@@ -295,7 +297,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </Swiper>
           </div>
@@ -370,7 +372,7 @@ const StyleSix = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </Swiper>
           </div>

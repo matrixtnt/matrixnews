@@ -20,6 +20,7 @@ const LiveNews = () => {
   const [typeUrl, setTypeUrl] = useState(null)
   let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
+  
   // api call
   const getLiveStreaming = async () => {
     try {

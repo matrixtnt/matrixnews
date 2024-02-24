@@ -7,6 +7,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import VideoPlayer from './HLSPlayer'
 
 const VideoPlayerModal = props => {
+
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const VideoPlayerModal = props => {
     return url?.endsWith('.m3u8')
   }
 
-  
+
 
   return (
     <Modal {...props} className='video_modal' size='xl' aria-labelledby='contained-modal-title-vcenter' centered>
