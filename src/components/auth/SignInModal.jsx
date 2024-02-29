@@ -120,10 +120,12 @@ const SignInModal = props => {
               })
             }, [1000])
 
-            if (res.data.is_login === '1') {
+            console.log('resLog',res)
+
+            if (res.data.is_login === '0') {
               //If new User then show the Update Profile Screen
               navigate.push('/profile-update')
-            }
+            } 
             props.setisloginloading(false)
           },
           onError: error => {

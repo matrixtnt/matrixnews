@@ -4,7 +4,7 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import Skeleton from 'react-loading-skeleton'
-import { stripHtmlTags, truncateText } from '../../utils'
+import { placeholderImage, stripHtmlTags, truncateText } from '../../utils'
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useQuery } from '@tanstack/react-query'
@@ -107,6 +107,7 @@ const StyleSix = ({ isLoading, Data }) => {
                   className='adimage'
                   src={Data.ad_spaces.web_ad_image}
                   alt='style six feature sponsored ads news image'
+                  onError={placeholderImage}
                 />
               )}
             </div>
@@ -134,6 +135,7 @@ const StyleSix = ({ isLoading, Data }) => {
                           alt={item.title}
                           className='fs-Newscard-image h-auto'
                           id='fs-Newscard-image01'
+                          onError={placeholderImage}
                         />
                         <div className='card-img-overlay'>
                           {item && item.category_name ? (
@@ -247,6 +249,7 @@ const StyleSix = ({ isLoading, Data }) => {
                           alt={item.title}
                           className='fs-Newscard-image h-auto'
                           id='fs-Newscard-image01'
+                          onError={placeholderImage}
                         />
                         <div className='card-img-overlay'>
                           <div
@@ -337,6 +340,7 @@ const StyleSix = ({ isLoading, Data }) => {
                         alt={item.title}
                         className='fs-Newscard-image h-auto'
                         id='fs-Newscard-image01'
+                        onError={placeholderImage}
                       />
                       <div className='card-img-overlay'>
                         {item.content_value ? (

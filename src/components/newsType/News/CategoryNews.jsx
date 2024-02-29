@@ -4,7 +4,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { formatDate, translate } from '../../../utils'
+import { formatDate, placeholderImage, translate } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -15,6 +15,7 @@ import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useState } from 'react'
 import NoDataFound from 'src/components/noDataFound/NoDataFound'
+import { subCategorySelector } from 'src/store/reducers/tempDataReducer'
 
 const CategoryNews = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -27,6 +28,8 @@ const CategoryNews = () => {
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
+
+  const subCategories = useSelector(subCategorySelector)
 
   // handle page change
   const handlePageChange = ({ selected }) => {
@@ -46,10 +49,11 @@ const CategoryNews = () => {
         category_id: catId,
         subcategory_id: '',
         tag_id: '',
-        slug:"",
+        slug: "",
         latitude: storedLatitude,
         longitude: storedLongitude
       })
+      console.log('categories', data)
       return data
     } catch (error) {
       console.log(error)
@@ -58,7 +62,7 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage, location, currentPage,query],
+    queryKey: ['category-news', catId, changelanguage, location, currentPage, query],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
 
@@ -83,6 +87,19 @@ const CategoryNews = () => {
               </div>
             ) : (
               <div className='row'>
+                <div className="col-12 mb-5">
+                  <div className="row">
+                    {
+                      subCategories?.map((subCat) => {
+                        return (
+                          <div className="col-2 mt-1">
+                            <span>{subCat?.subcategory_name}</span>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                </div>
                 {currentData && currentData.length > 0 ? (
                   currentData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
@@ -91,7 +108,7 @@ const CategoryNews = () => {
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                       >
                         <div id='cv-card' className='card'>
-                          <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} />
+                          <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
                           <div id='cv-card-body' className='card-body'>
                             <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
                               {element.category.category_name}
@@ -101,7 +118,7 @@ const CategoryNews = () => {
                             </p>
                             <p id='cv-card-date'>
                               <FiCalendar size={18} id='cv-logoCalendar' />
-                                {formatDate(element.date)}
+                              {formatDate(element.date)}
                             </p>
                           </div>
                         </div>
@@ -109,7 +126,7 @@ const CategoryNews = () => {
                     </div>
                   ))
                 ) : (
-                  <NoDataFound/>
+                  <NoDataFound />
                 )}
                 {lengthdata != 0 ? (
                   <ReactPaginate

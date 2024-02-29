@@ -148,13 +148,14 @@ const OTPModal = props => {
               token: response.data.fcm_id,
               latitude: storedLatitude,
               longitude: storedLongitude,
-              onSuccess: async res => {},
+              onSuccess: async res => { },
               onError: async err => {
                 console.log(err)
               }
             })
           }, [1000])
-          if (response.data.is_login === '1') {
+          // console.log('phoneRes', response.data)
+          if (response.data.is_login === '0') {
             // If new User then show the Update Profile Screen
             navigate.push('/profile-update')
           }
@@ -166,6 +167,7 @@ const OTPModal = props => {
       })
     } catch (error) {
       handleAuthenticationError(error.code)
+
     }
   }
 

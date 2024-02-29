@@ -537,7 +537,7 @@ const CreateNews = () => {
                       <TextArea
                         rows={2}
                         placeholder={translate('meta-title')}
-                        maxLength={2}
+                        // maxLength={2}
                         defaultValue={DefaultValue.defaultMetatitle}
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
                       />
@@ -552,7 +552,7 @@ const CreateNews = () => {
                     <div className='input_form mb-2'>
                       <TextArea
                         rows={2}
-                        maxLength={2}
+                        // maxLength={2}
                         placeholder={translate('meta-description')}
                         defaultValue={DefaultValue.defaultMetaDescription}
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
@@ -568,7 +568,7 @@ const CreateNews = () => {
                     <div className='input_form mb-2'>
                       <TextArea
                         rows={2}
-                        maxLength={2}
+                        // maxLength={2}
                         placeholder={translate('meta-keywords')}
                         defaultValue={DefaultValue.defaultMetaKeyword}
                         onChange={e => setDefualtValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
