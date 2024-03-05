@@ -143,7 +143,7 @@ const Notification = () => {
             )}
           </div>
 
-          {totalLength > 0 ? (
+          {totalLength > 7 ? (
             <ReactPaginate
               previousLabel={translate('previous')}
               nextLabel={translate('next')}

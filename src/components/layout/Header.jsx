@@ -23,7 +23,8 @@ import {
   translate,
   truncateText,
   profileimgError,
-  profileimg
+  profileimg,
+  placeholderImage
 } from '../../utils/index'
 import { logoutUser, selectUser } from '../../store/reducers/userReducer'
 import SignInModal from '../auth/SignInModal'
@@ -318,7 +319,7 @@ const Header = () => {
         <div className='navbar_content'>
           <div id='News-logo' className='News-logo'>
             <Link href='/' activeclassname='active' exact='true'>
-              <img id='NewsLogo' src={settings && settings?.web_setting?.web_header_logo} alt='logo' />
+              <img id='NewsLogo' src={settings && settings?.web_setting?.web_header_logo} onError={placeholderImage} alt='logo' />
             </Link>
           </div>
 

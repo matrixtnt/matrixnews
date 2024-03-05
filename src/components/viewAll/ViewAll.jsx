@@ -5,7 +5,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
@@ -95,6 +95,7 @@ const ViewAll = () => {
                               src={element.image ? element.image : no_image}
                               className='card-img'
                               alt={element.title}
+                              onError={placeholderImage}
                             />
                             <div id='BNV-card-body' className='card-body'>
                               {/* <button id='BNV-btnCatagory' className='btn btn-sm' type="button" >{element.category_name}</button> */}
@@ -107,22 +108,28 @@ const ViewAll = () => {
                       </div>
                     ))
                   ) : (
-                    <NoDataFound/>
+                    <NoDataFound />
                   )}
                 </div>
               )}
-              <ReactPaginate
-                initialPage={currentPage}
-                previousLabel={translate('previous')}
-                nextLabel={translate('next')}
-                pageCount={Math.ceil(lengthdata / dataPerPage)}
-                onPageChange={handlePageChange}
-                containerClassName={'pagination'}
-                previousLinkClassName={'pagination__link'}
-                nextLinkClassName={'pagination__link'}
-                disabledClassName={'pagination__link--disabled'}
-                activeClassName={'pagination__link--active'}
-              />
+              {
+                lengthdata > 7 ? (
+
+
+                  <ReactPaginate
+                    initialPage={currentPage}
+                    previousLabel={translate('previous')}
+                    nextLabel={translate('next')}
+                    pageCount={Math.ceil(lengthdata / dataPerPage)}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination'}
+                    previousLinkClassName={'pagination__link'}
+                    nextLinkClassName={'pagination__link'}
+                    disabledClassName={'pagination__link--disabled'}
+                    activeClassName={'pagination__link--active'}
+                  />
+                ) : null
+              }
             </div>
           </div>
         </>
@@ -170,10 +177,14 @@ const ViewAll = () => {
                       </div>
                     ))
                   ) : (
-                    <NoDataFound/>
+                    <NoDataFound />
                   )}
                 </div>
               )}
+              {
+                lengthdata > 7 ? (
+
+              
               <ReactPaginate
                 initialPage={currentPage}
                 previousLabel={translate('previous')}
@@ -186,6 +197,8 @@ const ViewAll = () => {
                 disabledClassName={'pagination__link--disabled'}
                 activeClassName={'pagination__link--active'}
               />
+              ) : null
+            }
             </div>
           </div>
         </>

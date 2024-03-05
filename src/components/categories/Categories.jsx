@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import Link from 'next/link'
 import { settingsData } from '../../store/reducers/settingsReducer'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -86,6 +86,7 @@ const Categories = () => {
                         src={element.image}
                         className='categories card news image'
                         alt={element.category_name}
+                        onError={placeholderImage}
                       />
                       <div id='cat-section-card-body' className='card-img-overlay'>
                         <h5 id='cat-card-text' className='card-text mb-0'>
@@ -101,7 +102,7 @@ const Categories = () => {
               ) : (
                 <NoDataFound/>
               )}
-              {lengthdata != 0 ? (
+              {lengthdata > 10 ? (
                 <ReactPaginate
                   initialPage={currentPage}
                   previousLabel={translate('previous')}

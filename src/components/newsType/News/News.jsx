@@ -19,7 +19,7 @@ import {
 import SignInModal from '../../auth/SignInModal.jsx'
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js'
 import { access_key, getLanguage, getUser } from '../../../utils/api.jsx'
-import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, translate } from '../../../utils/index.jsx'
+import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate } from '../../../utils/index.jsx'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
@@ -315,7 +315,7 @@ const News = () => {
                   </div>
                   <div id='vps-body-left'>
                     <div className='vps-img-div'>
-                      <img id='nv-image' src={Data && Data[0]?.image} alt={Data && Data[0]?.title} />
+                      <img id='nv-image' src={Data && Data[0]?.image} alt={Data && Data[0]?.title} onError={placeholderImage} />
                       <div className='seeAllPhoto'>
                         {galleryPhotos && galleryPhotos.length > 0 ? (
                           <button onClick={() => openLightbox(0)}>

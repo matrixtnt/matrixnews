@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { Modal } from 'antd'
 import Skeleton from 'react-loading-skeleton'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
@@ -69,7 +69,7 @@ const MorePages = () => {
                           {element.title}
                         </h5>
                         <button id='btn-cat-more' className='btn' type='button'>
-                          <img src={element.page_icon} alt="icon" />
+                          <img src={element.page_icon} onError={placeholderImage} alt="icon" />
                         </button>
                       </div>
                     </div>

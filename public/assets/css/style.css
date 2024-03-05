@@ -6490,3 +6490,16 @@ span {
     display: none;
   }
 }
+
+.categoryview_Section .subCatTitle {
+  color: var(--secondary-color);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+} 
+
+.categoryview_Section .subcategoryWrapper{
+  margin-top: -18px;
+}

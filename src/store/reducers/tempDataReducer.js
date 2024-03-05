@@ -21,7 +21,7 @@ export const tempdataSlice = createSlice({
       // console.log("In reducer-> ",action.payload.data)
     },
     setSubCategories: (state, action) => {
-      const { subCategories } = action.payload.data
+      const { subCategories  } = action.payload.data
       // console.log("In reducer-> ",action.payload.data)
       state.data.subCategories = subCategories
     }

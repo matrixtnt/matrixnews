@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { translate, truncateText } from '../../utils'
+import { placeholderImage, translate, truncateText } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -61,7 +61,7 @@ const RelatedNewsSection = props => {
             Data.map(element => (
               <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}} key={element.id}>
                 <div id='RNews-card' className='card' onClick={() => scrollToTop()}>
-                  <img id='RNews-image' src={element.image} className='card-img-top' alt={element.title} />
+                  <img id='RNews-image' src={element.image} className='card-img-top' alt={element.title} onError={placeholderImage}/>
                   <div id='RNews-card-body' className='RNews-card-body'>
                     <button id='btnRNewsCatagory' className='btn btn-sm' type='button'>
                       {element.category.category_name}

@@ -4,7 +4,7 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { translate } from '../../../utils'
+import { placeholderImage, translate } from '../../../utils'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import no_image from '../../../../public/assets/images/no_image.jpeg'
 import { useRouter } from 'next/router'
@@ -35,11 +35,11 @@ const VideoNewsview = () => {
     try {
       const { data } = await getFeatureSectionApi.getFeatureSectionById({
         access_key: access_key,
-        section_id: catid,
         language_id: language_id,
         user_id: user,
         offset: '',
         limit: '10',
+        slug:catid,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -97,6 +97,7 @@ const VideoNewsview = () => {
                         src={element.image ? element.image : no_image}
                         className='card-img'
                         alt={element.title}
+                        onError={placeholderImage}
                       />
                       <div className='card-image-overlay' id='vnv-btnVideo'>
                         <BsFillPlayFill id='vnv-btnVideo-logo' className='pulse' fill='white' size={50} />

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import moment from 'moment/moment'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
@@ -50,7 +50,7 @@ const Footer = () => {
             <div className='col-lg-3 col-12'>
               <div className='News'>
                 <Link href='/'>
-                  <img id='NewsLogo' src={settings && settings?.web_setting?.web_footer_logo} alt='footer logo image' />
+                  <img id='NewsLogo' src={settings && settings?.web_setting?.web_footer_logo} onError={placeholderImage} alt='footer logo image' />
                 </Link>
               </div>
               <div className='Lorem-text'>
@@ -60,9 +60,9 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-            <div className='col-lg-3 col-12'>
-              <p id='footer-nav'>{translate('newscategories')}</p>
               {Data && Data.length > 0 ? (
+            <div className='col-lg-3 col-12'>
+              <p id='footer-nav'>{translate('categories')}</p>
                 <ul className='newscate'>
                   {Data.map((element, index) => {
                     return (
@@ -82,8 +82,8 @@ const Footer = () => {
                     )
                   })}
                 </ul>
-              ) : null}
             </div>
+              ) : null}
 
             <div className='col-lg-3 col-12'>
               <p id='footer-nav'>{translate('usefulllinks')}</p>
@@ -106,55 +106,61 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className='col-lg-3 col-12'>
-              <p id='footer-nav'>{translate('followus')} </p>
-              <div className='social_media'>
-                {process.env.NEXT_PUBLIC_FACEBOOK ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='btn btn-outline-white'
-                    href={process.env.NEXT_PUBLIC_FACEBOOK}
-                    rel='noreferrer'
-                  >
-                    <FaFacebookSquare /> {translate('facebook')}
-                  </a>
-                ) : null}
-                {process.env.NEXT_PUBLIC_INSTAGRAM ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='btn btn-outline-white'
-                    href={process.env.NEXT_PUBLIC_INSTAGRAM}
-                    rel='noreferrer'
-                  >
-                    <FaInstagram /> {translate('instagram')}
-                  </a>
-                ) : null}
-                {process.env.NEXT_PUBLIC_LINKEDIN ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='btn btn-outline-white'
-                    href={process.env.NEXT_PUBLIC_LINKEDIN}
-                    rel='noreferrer'
-                  >
-                    <FaLinkedin /> {translate('linkedin')}
-                  </a>
-                ) : null}
-                {process.env.NEXT_PUBLIC_TWITTER ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='btn btn-outline-white'
-                    href={process.env.NEXT_PUBLIC_TWITTER}
-                    rel='noreferrer'
-                  >
-                    <FaSquareXTwitter /> {translate('twitter')}
-                  </a>
-                ) : null}
+            {
+              process.env.NEXT_PUBLIC_FACEBOOK || process.env.NEXT_PUBLIC_INSTAGRAM || process.env.NEXT_PUBLIC_LINKEDIN || process.env.NEXT_PUBLIC_TWITTER ? ( <div className='col-lg-3 col-12'>
+                <p id='footer-nav'>{translate('followus')} </p>
+                <div className='social_media'>
+                  {process.env.NEXT_PUBLIC_FACEBOOK ? (
+                    <a
+                      target='_blank'
+                      id='social_platforms'
+                      className='btn btn-outline-white'
+                      href={process.env.NEXT_PUBLIC_FACEBOOK}
+                      rel='noreferrer'
+                    >
+                      <FaFacebookSquare /> {translate('facebook')}
+                    </a>
+                  ) : null}
+                  {process.env.NEXT_PUBLIC_INSTAGRAM ? (
+                    <a
+                      target='_blank'
+                      id='social_platforms'
+                      className='btn btn-outline-white'
+                      href={process.env.NEXT_PUBLIC_INSTAGRAM}
+                      rel='noreferrer'
+                    >
+                      <FaInstagram /> {translate('instagram')}
+                    </a>
+                  ) : null}
+                  {process.env.NEXT_PUBLIC_LINKEDIN ? (
+                    <a
+                      target='_blank'
+                      id='social_platforms'
+                      className='btn btn-outline-white'
+                      href={process.env.NEXT_PUBLIC_LINKEDIN}
+                      rel='noreferrer'
+                    >
+                      <FaLinkedin /> {translate('linkedin')}
+                    </a>
+                  ) : null}
+                  {process.env.NEXT_PUBLIC_TWITTER ? (
+                    <a
+                      target='_blank'
+                      id='social_platforms'
+                      className='btn btn-outline-white'
+                      href={process.env.NEXT_PUBLIC_TWITTER}
+                      rel='noreferrer'
+                    >
+                      <FaSquareXTwitter /> {translate('twitter')}
+                    </a>
+                  ) : null}
+                </div>
               </div>
-            </div>
+              ) : null
+
+            }
+
+
           </div>
           <hr className='hr_line' />
 

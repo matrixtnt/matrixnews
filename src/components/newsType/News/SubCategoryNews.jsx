@@ -15,28 +15,19 @@ import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useState } from 'react'
 import NoDataFound from 'src/components/noDataFound/NoDataFound'
-import { subCategorySelector } from 'src/store/reducers/tempDataReducer'
-import SwiperCore, { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination])
 
-const CategoryNews = () => {
+const SubCategory = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const dataPerPage = 8 // number of posts per page
   const router = useRouter()
   const query = router.query
   const catId = query.category_id
-  const slug = query.slug
+  const subCatId = query.slug
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
-
-  const subCategories = useSelector(subCategorySelector)
-
-  // console.log('router ==== ',subCategories)
 
   // handle page change
   const handlePageChange = ({ selected }) => {
@@ -54,13 +45,13 @@ const CategoryNews = () => {
         search: '',
         language_id: language_id,
         category_id: catId,
-        subcategory_id: '',
+        subcategory_id: subCatId,
         tag_id: '',
         slug: "",
         latitude: storedLatitude,
         longitude: storedLongitude
       })
-      // console.log('categories', data)
+      console.log('categories', data)
       return data
     } catch (error) {
       console.log(error)
@@ -78,36 +69,10 @@ const CategoryNews = () => {
 
   const lengthdata = (Data && Data.total) || 0
 
-  const swiperOption = {
-    loop: subCategories.length > 10 ? true: false,
-    speed: 3000,
-    spaceBetween: 10,
-    slidesPerView: 'auto',
-    navigation: false,
-    freeMode: true,
-    observer: true,
-    observeParents: true,
-    parallax: true,
-    breakpoints: {
-      0:{
-        slidesPerView: 2.5
-      },
-      575:{
-        slidesPerView: 4
-      },
-      1200: {
-        slidesPerView: 10
-      }
-    },
-    autoplay: {
-      delay: 0
-    }
-  }
-
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={slug} />
+        <BreadcrumbNav SecondElement={'category' ? 'Sub-Category' : ''} ThirdElement={query.slug} />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (
@@ -120,34 +85,6 @@ const CategoryNews = () => {
               </div>
             ) : (
               <div className='row'>
-                {
-                  subCategories.length > 0 ?
-
-                    <div className="col-12 mb-5 subcategoryWrapper">
-                      <h4 className='subCatTitle'>Sub-Categories :</h4>
-
-                      <Swiper {...swiperOption}>
-                        {
-                          subCategories.map((subCat) => {
-                            return (
-                              <SwiperSlide className='text-center'
-                                key={subCat.id}
-                              >
-                                <Link href={{
-                                  pathname: `/categories-news/sub-category/${subCat.id}`,
-                                }}
-                                  id='catNav-links'
-                                ><b>{subCat?.subcategory_name}</b></Link>
-                              </SwiperSlide>
-                            )
-                          })
-                        }
-
-                      </Swiper>
-                    </div>
-                    : null
-                }
-
                 {currentData && currentData.length > 0 ? (
                   currentData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
@@ -199,4 +136,19 @@ const CategoryNews = () => {
   )
 }
 
-export default CategoryNews
+// const SubCategory = () => {
+
+//     const router = useRouter()
+//     const query = router.query
+//     console.log(query.slug,'subCatId')
+
+//     return (
+//         <div>
+// Hellooo
+//         </div>
+//     )
+// }
+
+
+
+export default SubCategory
