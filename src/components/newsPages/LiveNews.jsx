@@ -5,7 +5,7 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { useQuery } from '@tanstack/react-query'
 import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
@@ -81,6 +81,7 @@ const LiveNews = () => {
                         src={element.image ? element.image : no_image}
                         className='card-img'
                         alt={element.title}
+                        onError={placeholderImage}
                       />
                       <div className='card-image-overlay'>
                         <BsFillPlayFill className='line-news-circle pulse' fill='white' size={50} />

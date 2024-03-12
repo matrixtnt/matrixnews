@@ -33,9 +33,10 @@ const FirebaseData = () => {
   ? initializeApp(firebaseConfig)
   : getApp();
   
-  const messagingIntance = (async () => {
+  const messagingIntance = async () => {
     try {
       const isSupportedBrowser = await isSupported();
+      // console.log(isSupportedBrowser,'isSupported')
       if (isSupportedBrowser) {
         return getMessaging(firebaseApp);
       }
@@ -43,7 +44,7 @@ const FirebaseData = () => {
     } catch (err) {
       return null;
     }
-  })();
+  };
   
   const fetchToken = async (setTokenFound, setFcmToken) => {
     return getToken(await messagingIntance, {
@@ -69,17 +70,24 @@ const FirebaseData = () => {
       });
   };
   
-  const onMessageListener = async () =>
-    new Promise((resolve) =>
-      (async () => {
-        const messagingResolve = await messagingIntance;
-        onMessage(messagingResolve, (payload) => {
+  const onMessageListener = async () => {
+    const messaging = await messagingIntance();
+    // console.log('messaging',messaging)
+    if (messaging) {
+      return new Promise((resolve) => {
+        onMessage(messaging, (payload) => {
           resolve(payload);
         });
-      })()
-    );
+      });
+    } else {
+      console.error('Messaging not supported.');
+      return null;
+    }
+  };
 
   return { firebase, authentication, fetchToken, onMessageListener }
 }
+
+
 
 export default FirebaseData

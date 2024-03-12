@@ -38,6 +38,7 @@ const PushNotificationLayout = ({ children }) => {
         }
       })
       .catch((err) => {
+        console.log(err)
         console.error('Error handling foreground notification:', err);
         toast.error('Error handling notification.');
       });
@@ -57,7 +58,8 @@ const PushNotificationLayout = ({ children }) => {
         )
       })
     }
-  }, [])
+    // console.log(notification)
+  }, [notification])
   return <div>{React.cloneElement(children)}</div>;
 }
 

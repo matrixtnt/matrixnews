@@ -39,6 +39,10 @@ const StyleOne = ({ isLoading, Data }) => {
     setTypeUrl(type)
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <div id='first-section'>
       {/* ad spaces */}
@@ -46,7 +50,7 @@ const StyleOne = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' onError={placeholderImage}/>}
             </div>
           </div>
         </div>
@@ -108,7 +112,7 @@ const StyleOne = ({ isLoading, Data }) => {
             keyboard={false}
             url={Video_url}
             type_url={typeUrl}
-            // title={Data[0].title}
+          // title={Data[0].title}
           />
         </Swiper>
       ) : null}
@@ -118,7 +122,7 @@ const StyleOne = ({ isLoading, Data }) => {
         <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
+              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image'/>}
             </div>
           </div>
         </div>
@@ -126,64 +130,85 @@ const StyleOne = ({ isLoading, Data }) => {
 
       {/* news section */}
       {Data && Data.news?.length > 0 ? (
-        <Swiper {...swiperOption} className='custom-swiper'>
-          {isLoading ? (
-            // Show skeleton loading when data is being fetched
-            <div className='col-12 loading_data'>
-              <Skeleton height={20} count={22} />
+        <>
+          <div className='container'>
+
+            <div id='hns-head' className='row mb-3'>
+              <div id='hns-head-main'>
+                <div className='left-sec'>
+                  <p id='hns-main-logo' className='mb-0'>
+                    {Data && Data.title}
+                  </p>
+                  <div className='short_desc'>{Data && Data.short_description}</div>
+                </div>
+
+                <Link id='hns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
+                  {translate('viewMore')}
+                </Link>
+              </div>
             </div>
-          ) : (
-            Data.news.slice(0, 3).map(item => (
-              <SwiperSlide key={item.id}>
-             
-                <div id='fs-main' className='h-100 inner_custom_swiper news_style_one'>
-                  <div id='body-first-section' className='container'>
-                    <div className='row'>
-                      <div className='col-xl-7 order-1 order-xl-0 col-12 d-flex'>
-                        <div id='Left-first-section' className='my-auto'>
-                          <Link id='btnCatagory' className='btn' type='button'href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
-                            {truncateText(item.category_name, 10)}
-                          </Link>
-                          <div className='my-3 top-title'>{truncateText(item.title, 60)}</div>
-                          <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
-                          <div className='d-flex flex-wrap'>
-                            <Link id='btnReadMore' className='btn mb-0' type='button'href={{pathname:`/news/${item.slug}`,query: { language_id: item.language_id}}}>
-                              <b>{translate('readmore')}</b>
+          </div>
+
+          <Swiper {...swiperOption} className='custom-swiper'>
+            {isLoading ? (
+              // Show skeleton loading when data is being fetched
+              <div className='col-12 loading_data'>
+                <Skeleton height={20} count={22} />
+              </div>
+            ) : (
+              Data.news.slice(0, 3).map(item => (
+                <SwiperSlide key={item.id}>
+
+                  <div id='fs-main' className='h-100 inner_custom_swiper news_style_one'>
+                    <div id='body-first-section' className='container'>
+                      <div className='row'>
+                        <div className='col-xl-7 order-1 order-xl-0 col-12 d-flex'>
+                          <div id='Left-first-section' className='my-auto'>
+                            <Link id='btnCatagory' className='btn' type='button' href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
+                              {truncateText(item.category_name, 10)}
                             </Link>
-                            {item.content_value ? (
-                              <div id='btnpaly' onClick={() => handleVideoUrl(item.content_value)} className='circle'>
-                                <BsPlayCircle id='btnpaly-logo' size={40} />
-                              </div>
-                            ) : null}
+                            <div className='my-3 top-title'>{truncateText(item.title, 60)}</div>
+                            <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
+                            <div className='d-flex flex-wrap'>
+                              <Link id='btnReadMore' className='btn mb-0' type='button' href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
+                                <b>{translate('readmore')}</b>
+                              </Link>
+                              {item.content_value ? (
+                                <div id='btnpaly' onClick={() => handleVideoUrl(item.content_value)} className='circle'>
+                                  <BsPlayCircle id='btnpaly-logo' size={40} />
+                                </div>
+                              ) : null}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className='col-xl-5 order-0 order-xl-1 col-12'>
-                        <div id='right-first-section'>
-                          <img
-                            src={item.image}
-                            className='float-end fs-Newscard-image h-auto'
-                            id='fs-Newscard-image'
-                            alt={item.title}
-                            onError={placeholderImage}
-                          />
+                        <div className='col-xl-5 order-0 order-xl-1 col-12'>
+                          <div id='right-first-section'>
+                            <img
+                              src={item.image}
+                              className='float-end fs-Newscard-image h-auto'
+                              id='fs-Newscard-image'
+                              alt={item.title}
+                              onError={placeholderImage}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))
-          )}
-          <VideoPlayerModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            // backdrop="static"
-            keyboard={false}
-            url={Video_url}
+                </SwiperSlide>
+              ))
+            )}
+            <VideoPlayerModal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              // backdrop="static"
+              keyboard={false}
+              url={Video_url}
             // title={Data[0].title}
-          />
-        </Swiper>
+            />
+          </Swiper>
+        </>
+
       ) : null}
 
       {/* ad spaces */}
@@ -208,7 +233,7 @@ const StyleOne = ({ isLoading, Data }) => {
           ) : (
             Data.breaking_news.slice(0, 3).map(item => (
               <SwiperSlide key={item.id}>
-                
+
                 <div id='fs-main' className='h-100 inner_custom_swiper'>
                   <div id='body-first-section' className='container'>
                     <div className='row'>
@@ -223,7 +248,7 @@ const StyleOne = ({ isLoading, Data }) => {
                               id='btnReadMore'
                               className='btn mb-0'
                               type='button'
-                              href={{pathname:`/breaking-news/${item.slug}`,query: { language_id: item.language_id}}}>
+                              href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}>
                               <b>{translate('readmore')}</b>
                             </Link>
                             {item.content_value ? (
@@ -257,7 +282,7 @@ const StyleOne = ({ isLoading, Data }) => {
             // backdrop="static"
             keyboard={false}
             url={Video_url}
-            // title={Data[0].title}
+          // title={Data[0].title}
           />
         </Swiper>
       ) : null}

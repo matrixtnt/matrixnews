@@ -4731,6 +4731,8 @@ a#social_platforms svg:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 0px;
 }
 
 .pagination li.pagination__link--active a {

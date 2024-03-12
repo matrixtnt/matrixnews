@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { access_key, getLanguage } from 'src/utils/api'
@@ -51,7 +51,7 @@ const RelatedBreakingNews = props => {
               <div key={element.id}>
                 <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`,query: { language_id: element.language_id}}} onClick={scrollToTop}>
                   <div id='rbn-card' className='card'>
-                    <img id='rbn-image' src={element.image} className='card-img-top' alt={element.title} />
+                    <img id='rbn-image' src={element.image} className='card-img-top' alt={element.title} onError={placeholderImage}/>
                     <div id='rbn-card-body' className='rbn-card-body'>
                       <div id='btnrbnCatagory' className='btn btn-sm' type='button'>
                         {translate('breakingnews')}

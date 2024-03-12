@@ -3,7 +3,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { access_key, getLanguage } from 'src/utils/api'
@@ -57,6 +57,7 @@ const AllBreakingNews = () => {
                           src={element.image ? element.image : no_image}
                           className='card-img'
                           alt='breaking news image'
+                          onError={placeholderImage}
                         />
                         <div id='BNV-card-body' className='card-body'>
                           <h5 id='BNV-card-title' className='card-title'>

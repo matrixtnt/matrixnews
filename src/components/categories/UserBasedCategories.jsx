@@ -46,7 +46,8 @@ const UserBasedCategories = () => {
               return { ...element, isToggledOn }
             })
             // Combine paginated data with existing data
-            setData(prevData => [...prevData, ...toggledData])
+            // setData(prevData => [...prevData, ...toggledData])
+            setData(toggledData)
             setLoading(false)
           },
           onError: error => {

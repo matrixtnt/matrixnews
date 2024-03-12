@@ -90,9 +90,9 @@ const CreateNews = () => {
   const languageSelector = async value => {
     setShowCategory(true)
     const selectedData = JSON.parse(value)
-    setDefualtValue({ ...DefaultValue, defualtLanguage: selectedData.language })
+    setDefualtValue(prevState => ({...prevState, defualtLanguage: selectedData.language }));
     setCreateNewsCurrentLanguage(selectedData.language, selectedData.code, selectedData.id)
-    setDefualtValue({ ...DefaultValue, defualtCategoryID:null, defualtCategory: null })
+    setDefualtValue(prevState => ({ ...prevState, defualtCategoryID: null, defualtCategory: null }));
     setShowsubCategory(false)
   }
 
@@ -221,6 +221,14 @@ const CreateNews = () => {
       toast.error(translate("slugrequired"))
       return
     }
+    if (!DefaultValue.defualtLanguage){
+      toast.error(translate("selectlanguage"))
+      return
+    }
+    if (!DefaultValue.defualtCategory){
+      toast.error(translate("selectcategory"))
+      return
+    }
 
     if(!DefaultValue.defaultType){
       toast.error(translate("contentTyperequired"))
@@ -293,7 +301,8 @@ const CreateNews = () => {
   // api call
   const getLocationlatlong = async () => {
     try {
-      const { data } = await getlocationapi.getlocation({ access_key: access_key })
+      const { data } = await getlocationapi.getlocation({ access_key: access_key,limit: 10000 })
+      console.log(data,"locationss")
       return data.data
     } catch (error) {
       console.log(error)

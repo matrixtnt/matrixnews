@@ -66,6 +66,8 @@ const RagisterModalTwo = props => {
 
         // Display success message
         toast.success('Email sent! Please check Email')
+        props.onHide()
+        props.setLoginModalShow(true)
 
         // Redirect to home or any other page
         navigate.push('/')
@@ -103,7 +105,13 @@ const RagisterModalTwo = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    await handleSignup(formValues.email, formValues.password)
+    if (formValues.password === formValues.confirmpassword) {
+      await handleSignup(formValues.email, formValues.password)
+
+    }
+    else {
+      toast.error('Password do not matched!')
+    }
     // setFormErrors(validate(formValues));
   }
 

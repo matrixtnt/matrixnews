@@ -23,6 +23,8 @@ const StyleThree = ({ Data }) => {
     setTypeUrl(type)
   }
 
+  console.log('expiresNewsCheck',Data)
+
   return (
     <>
       {/* ad spaces */}

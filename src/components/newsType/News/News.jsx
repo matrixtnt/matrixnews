@@ -179,6 +179,7 @@ const News = () => {
   // set bookmark
   const setbookmarkData = async (newsid, status) => {
     if (user !== null) {
+      // console.log('newsid: ',newsid,'status:',status)
       setbookmarkApi({
         news_id: newsid,
         status: status,

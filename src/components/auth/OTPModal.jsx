@@ -65,8 +65,7 @@ const OTPModal = props => {
     await signInWithPhoneNumber(authentication, phonenum, appVerifier)
       .then(confirmationResult => {
         window.confirmationResult = confirmationResult
-        loadMobileType(true)
-      })
+        loadMobileType(true)      })
       .catch(error => {
         let errorMessage = ''
         switch (error.code) {
@@ -154,6 +153,7 @@ const OTPModal = props => {
               }
             })
           }, [1000])
+        toast.success('Login Successfully')
           // console.log('phoneRes', response.data)
           if (response.data.is_login === '0') {
             // If new User then show the Update Profile Screen

@@ -123,15 +123,16 @@ const MobilesideBar = ({
                       </>
                     ) : null}
                     <Dropdown.Item id='btnLogout'>
-                      <div
+                      <Link
                         id='btnBookmark'
-                        onClick={() => {
-                          ProfileModal(true)
-                          handleClose()
-                        }}
+                        // onClick={() => {
+                        //   ProfileModal(true)
+                        //   handleClose()
+                        // }}
+                        href={'/profile-update'}
                       >
                         {translate('update-profile')}
-                      </div>
+                      </Link>
                     </Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item onClick={logout} id='btnLogout' className=''>

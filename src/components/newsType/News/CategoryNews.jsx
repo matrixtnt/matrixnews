@@ -107,7 +107,7 @@ const CategoryNews = () => {
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={slug} />
+        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={'0'} />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (

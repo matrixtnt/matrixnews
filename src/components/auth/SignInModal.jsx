@@ -172,6 +172,7 @@ const SignInModal = props => {
               }
               loadMobileType(false)
               props.setisloginloading(false)
+              toast.success('Login Successfully')
             },
             onError: error => {
               toast.error(translate('deactiveMsg'))

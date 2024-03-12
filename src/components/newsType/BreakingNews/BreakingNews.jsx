@@ -14,7 +14,7 @@ import RelatedBreakingNews from '../../relatedNews/RelatedBreakingNews'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { calculateReadTime, extractTextFromHTML, translate } from '../../../utils'
+import { calculateReadTime, extractTextFromHTML, placeholderImage, translate } from '../../../utils'
 import { BsFillPlayFill } from 'react-icons/bs'
 import { AiOutlineEye } from 'react-icons/ai'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
@@ -195,7 +195,7 @@ const BreakingNews = () => {
                             ) : null}
                           </div>
                           <div id='vps-body-left'>
-                            <img id='B_NV-image' src={data[0].image} alt={data[0].title} />
+                            <img id='B_NV-image' src={data[0].image} alt={data[0].title} onError={placeholderImage}/>
                             {data && data[0].content_value ? (
                               <div className='text-black'>
                                 <div id='vps-btnVideo' onClick={() => handleVideoUrl(data[0].content_value)}>
@@ -203,7 +203,7 @@ const BreakingNews = () => {
                                 </div>
                               </div>
                             ) : null}
-                          </div>
+                          </div> 
 
                           <div id='B_NV-functions' className=''>
                             <div id='B_NV-functions-left'>

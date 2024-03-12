@@ -3,7 +3,7 @@ import bookmarkIMG from '../../../public/assets/images/bookmark.png'
 import { FiCalendar } from 'react-icons/fi'
 import { BsTrash } from 'react-icons/bs'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/navigation'
 import { bookmarkApi } from 'src/hooks/bookmarkApi'
@@ -27,9 +27,10 @@ const BookmarkSection = () => {
         access_key: access_key,
         language_id: language_id,
         offset: 0,
-        limit: ''
+        limit: 10000,
       })
       setData(data.data)
+      console.log('bookmardData : ',data)
     } catch (error) {
       console.log(error)
     }
@@ -78,6 +79,7 @@ const BookmarkSection = () => {
               </div>
             ) : Data && Data.length > 0 ? (
               Data.map(element => (
+                                
                 <div className='col-md-6 col-lg-4 col-12' key={element.id}>
                   <div id='bs-card' className='card'>
                     <div className='bs_image_card'>
@@ -86,6 +88,7 @@ const BookmarkSection = () => {
                         src={element.image}
                         className='card-img'
                         alt='bookmark news'
+                        onError={placeholderImage}
                         onClick={() =>
                           navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
                         }

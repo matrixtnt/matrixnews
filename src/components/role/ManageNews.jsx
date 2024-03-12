@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { deleteNewsApi } from '../../store/actions/campaign'
 import { useSelector } from 'react-redux'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
@@ -34,6 +34,7 @@ const ManageNews = () => {
         longitude: null
       })
       setData(data.data)
+      console.log('manage-news :',data)
       return data.data
     } catch (error) {
       console.log(error)
@@ -46,6 +47,7 @@ const ManageNews = () => {
     queryFn: getNews,
     staleTime: 0
   })
+  
 
   // type return
   const typeReturn = type => {
