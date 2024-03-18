@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate } from '../../utils'
-import { Button,Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
 import { SlCalender } from 'react-icons/sl'
@@ -80,7 +80,7 @@ const EditNews = () => {
     languageName: matchingObject.language,
     descriptionValue: manageNews.description,
     defualtLocationId: manageNews.location_id,
-    defualtLocation: manageNews.location_name
+    defualtLocation: manageNews.location.location_name
   })
 
   const handleDate = date => {
@@ -118,9 +118,9 @@ const EditNews = () => {
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
-        if(res.data.length === 0){
+        if (res.data.length === 0) {
           setSubCategory([]);
-          setDefaultValue({ ...DefaultValue, subcategorydefault: ""})
+          setDefaultValue({ ...DefaultValue, subcategorydefault: "" })
           setShowsubCategory(false)
           return
         }
@@ -219,22 +219,22 @@ const EditNews = () => {
       return
     }
 
-    if (!DefaultValue.defaultMetatitle){
+    if (!DefaultValue.defaultMetatitle) {
       toast.error(translate("metaTitlerequired"))
       return
     }
 
-    if (!DefaultValue.defaultMetaDescription){
+    if (!DefaultValue.defaultMetaDescription) {
       toast.error(translate("metaDescriptionrequired"))
       return
     }
 
-    if(!DefaultValue.defaultMetaKeyword){
+    if (!DefaultValue.defaultMetaKeyword) {
       toast.error(translate("metaKeywordsrequired"))
       return
     }
 
-    if (!DefaultValue.defaultSlug){
+    if (!DefaultValue.defaultSlug) {
       toast.error(translate("slugrequired"))
       return
     }
@@ -480,14 +480,26 @@ const EditNews = () => {
     return slug
   }
 
+  useEffect(() => {
+    // Check if DefaultValue.descriptionValue is empty or contains only whitespace
+    if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue.trim() == '') {
+      toast.error(translate('descriptionrequired'));
+    }
+    console.log(DefaultValue.descriptionValue)
+  }, [DefaultValue.descriptionValue]);
+
   // final submit data
   const finalSubmit = async e => {
     e.preventDefault()
 
-    if(!DefaultValue.descriptionValue){
+    // console.log(DefaultValue.descriptionValue.trim(), 'trim')
+    // console.log(DefaultValue.descriptionValue, 'not-trim')
+
+    if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue == "<p><br><\/p>") {
       toast.error(translate('descriptionrequired'))
       return
     }
+
 
     const slugValue = await slugConverter()
     await setNewsApi({
@@ -504,7 +516,7 @@ const EditNews = () => {
       content_data: url,
       description: DefaultValue.descriptionValue,
       image: DefaultValue.imagedefault,
-      ofile:images,
+      ofile: images,
       show_till: DefaultValue.dateValue.toISOString().split('T')[0],
       language_id: DefaultValue.languageId,
       location_id: DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
@@ -946,7 +958,7 @@ const EditNews = () => {
           keyboard={false}
           url={Video_url}
           type_url={manageNews.content_type}
-          // title={Data[0].title}
+        // title={Data[0].title}
         />
       </div>
     </Layout>

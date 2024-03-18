@@ -29,11 +29,29 @@ const OTPModal = props => {
 
   const settings = useSelector(settingsData)
 
+  const [resendTimer, setResendTimer] = useState(60);
+
+  useEffect(() => {
+    let intervalId;
+
+    if (resendTimer > 0) {
+      intervalId = setInterval(() => {
+        setResendTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [resendTimer]);
+
+
   const resendOTP = e => {
     e.preventDefault()
+    // Reset the resendTimer to 60 seconds
     if (props.phonenum !== null) {
       generateOTP(props.phonenum)
-      toast.success('OTP resent successfully!')
+      setResendTimer(60);
     }
   }
 
@@ -65,7 +83,9 @@ const OTPModal = props => {
     await signInWithPhoneNumber(authentication, phonenum, appVerifier)
       .then(confirmationResult => {
         window.confirmationResult = confirmationResult
-        loadMobileType(true)      })
+        toast.success("OTP Send Successfully");
+        loadMobileType(true)
+      })
       .catch(error => {
         let errorMessage = ''
         switch (error.code) {
@@ -153,7 +173,7 @@ const OTPModal = props => {
               }
             })
           }, [1000])
-        toast.success('Login Successfully')
+          toast.success('Login Successfully')
           // console.log('phoneRes', response.data)
           if (response.data.is_login === '0') {
             // If new User then show the Update Profile Screen
@@ -236,10 +256,25 @@ const OTPModal = props => {
                       renderSeparator={<span className='space'></span>}
                       renderInput={props => <input {...props} className='custom-input-class'></input>}
                     />
-                    <div>
+                    {/* <div>
                       <button onClick={e => resendOTP(e)} id='resendbutton' className='btn'>
                         {translate('resendLbl')}
                       </button>
+                    </div> */}
+                    <div className="resend-code mt-4">
+                      {resendTimer > 0 ? (
+                        <div>
+                          <span className="resend-text"> {translate("resendCodeIn")}</span>
+                          <span className="resend-time" >
+                            {" "}
+                            {resendTimer} {translate("seconds")}
+                          </span>
+                        </div>
+                      ) : (
+                        <button onClick={e => resendOTP(e)} id='resendbutton' className='btn'>
+                          {translate('resendLbl')}
+                        </button>
+                      )}
                     </div>
                   </div>
                   <form onClick={e => submitOTP(e)}>

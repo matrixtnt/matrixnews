@@ -68,6 +68,8 @@ const CreateNews = () => {
     defaultImagefile: null,
     defualtLocation: null
   })
+
+  const [videoSet, setVideoSet] = useState(false)
   // other multiple image
   const handleDrop = acceptedFiles => {
     const imageFiles = acceptedFiles.filter(file => file.type.startsWith('image/'))
@@ -133,6 +135,7 @@ const CreateNews = () => {
       return true
     }
     setDefualtValue({ ...DefaultValue, defaultVideoData: e.target.files[0] })
+    setVideoSet(true)
     // setVideoData(e.target.files[0]);
   }
 
@@ -262,11 +265,17 @@ const CreateNews = () => {
       }
     }
 
-    // main image validation
-    if (DefaultValue.defaultImageData === null) {
-      toast.error('please select the main image')
+    if (DefaultValue.defaultType === 'video_upload' && !videoSet) {
+      // toast.error(translate('uploadMainImageLbl'))
+      toast.error(translate('plzUploadVideoLbl'))
       return
     }
+    // main image validation
+    if (DefaultValue.defaultImageData === null) {
+      toast.error(translate('uploadMainImageLbl'))
+      return
+    }
+    // main image validation
 
     setNextStepScreen(true)
   }
@@ -476,7 +485,7 @@ const CreateNews = () => {
     // }
 
     if(!content){
-      toast.error(translate('descriptionrequired'))
+      toast.error(translate('descriptionisrequire'))
       return
     }
 
@@ -727,7 +736,7 @@ const CreateNews = () => {
                           name='video'
                           accept='video/*'
                           onChange={e => handleVideo(e)}
-                          required
+                          // required
                         />
                         <label htmlFor='videoInput'>
                           {' '}

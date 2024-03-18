@@ -27,7 +27,8 @@ const ForgotPasswordTwo = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    setFormErrors(validate(formValues))
+    // setFormErrors(validate(formValues))
+    setFormErrors(formValues)
     setIsSubmit(true)
     const auth = getAuth()
     await sendPasswordResetEmail(auth, formValues.email)
@@ -57,6 +58,7 @@ const ForgotPasswordTwo = props => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit); // eslint-disable-next-line
   }, [formErrors]) // eslint-disable-next-line
+
   const validate = values => {
     const errors = {}
     const regex = /^[^\s@]+@[^s]+\.[^\s@]{2,}$/i
@@ -68,6 +70,7 @@ const ForgotPasswordTwo = props => {
 
     return errors
   }
+
   return (
     <>
       <Modal
@@ -112,7 +115,7 @@ const ForgotPasswordTwo = props => {
                       value={formValues.email}
                       onChange={handleChange}
                     />
-                    <p className='error-msg'> {formErrors.email}</p>
+                    {/* <p className='error-msg'> {formErrors.email}</p> */}
                   </div>
 
                   <div className='py-3'>

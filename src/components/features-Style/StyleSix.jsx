@@ -4,7 +4,7 @@ import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import Skeleton from 'react-loading-skeleton'
-import { placeholderImage, stripHtmlTags, truncateText } from '../../utils'
+import { placeholderImage, stripHtmlTags, translate, truncateText } from '../../utils'
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useQuery } from '@tanstack/react-query'
@@ -94,7 +94,7 @@ const StyleSix = ({ isLoading, Data }) => {
     setTypeUrl(type)
   }
 
-  console.log('six : ',Data)
+  console.log('six : ', Data)
 
 
   return (
@@ -235,6 +235,18 @@ const StyleSix = ({ isLoading, Data }) => {
       {sliderData && sliderData[0].news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
+            <div id='rns-head-main' className=''>
+              <div className='left-sec'>
+                <h4 id='rns-main-logo' className='mb-0'>
+                  {Data.title}
+                </h4>
+                <div className='short_desc'>{Data && Data.short_description}</div>
+              </div>
+
+              {/* <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
+                {translate('viewMore')}
+              </Link> */}
+            </div>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
                 // Show skeleton loading when data is being fetched
@@ -242,6 +254,7 @@ const StyleSix = ({ isLoading, Data }) => {
                   <Skeleton height={20} count={22} />
                 </div>
               ) : (
+
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
                     <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
