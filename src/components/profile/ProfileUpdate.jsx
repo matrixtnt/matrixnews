@@ -10,8 +10,11 @@ import profilesvg from '../../../public/assets/images/Profile.svg'
 import usersvg from '../../../public/assets/images/user.svg'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
+import { useRouter } from 'next/router'
 
 const ProfileUpdate = () => {
+
+  const router = useRouter()
   const userData = useSelector(selectUser)
   const [isMobileValid, setIsMobileValid] = useState(true) // State to track mobile number validity
   const [isEmailValid, setIsEmailValid] = useState(true) // State to track email address validity
@@ -51,19 +54,22 @@ const ProfileUpdate = () => {
 
     if (!JSON.parse(process.env.NEXT_PUBLIC_DEMO)) {
       updateProfileData({
-        name:profileData.name,
-        mobile:profileData.mobile,
-        email:profileData.email,
-        onSuccess:success => {
+        name: profileData.name,
+        mobile: profileData.mobile,
+        email: profileData.email,
+        onSuccess: success => {
           toast.success('successfully updated')
+          router.push('/')
+
         },
-        onError:error => {
+        onError: error => {
           toast.error(error)
         }
       }
       )
     } else {
       toast.error(translate('Profile update is not allowed in demo version.'))
+      router.push('/')
     }
   }
 
@@ -84,12 +90,12 @@ const ProfileUpdate = () => {
 
     if (!JSON.parse(process.env.NEXT_PUBLIC_DEMO)) {
       updateProfileImage({
-        image:selectedFile,
-        onSuccess:success => {
-         
+        image: selectedFile,
+        onSuccess: success => {
+
         },
-        onError:error => {
-          
+        onError: error => {
+
         }
       })
     }
