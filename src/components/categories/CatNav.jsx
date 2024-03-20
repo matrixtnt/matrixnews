@@ -1,19 +1,26 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useSelector } from 'react-redux'
-import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
+import { selectCurrentLanguage, selectCurrentLanguageLabels } from '../../store/reducers/languageReducer'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
-import { translate } from '../../utils'
+import { formatDate, placeholderImage, translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
-import { settingsData } from '../../store/reducers/settingsReducer'
+import { locationData, settingsData } from '../../store/reducers/settingsReducer'
 import Link from 'next/link'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
-import { access_key } from 'src/utils/api'
+import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { loadCategoryCount, loadSubCategories, subCategories } from 'src/store/reducers/tempDataReducer'
 import { useEffect, useState } from 'react'
+import Dropdown from 'react-bootstrap/Dropdown';
+import NoDataFound from '../noDataFound/NoDataFound'
+import { getNewsApi } from 'src/hooks/newsApi'
+import { FiCalendar } from 'react-icons/fi'
+import { FaAngleDown } from 'react-icons/fa'
+
+
 
 SwiperCore.use([Navigation, Pagination])
 const CatNav = () => {
@@ -88,12 +95,58 @@ const CatNav = () => {
     }
   }
 
+  const [currentPage, setCurrentPage] = useState(0)
+  const dataPerPage = 8 // number of posts per page
+
+  const changelanguage = useSelector(selectCurrentLanguageLabels)
+  const location = useSelector(locationData)
+
+  let { id: language_id } = getLanguage()
+  const storedLatitude = location && location.lat
+  const storedLongitude = location && location.long
+  // api call
+  const getNewsByCategoryApi = async page => {
+    try {
+      const { data } = await getNewsApi.getNews({
+        access_key: access_key,
+        offset: page * dataPerPage,
+        limit: dataPerPage,
+        get_user_news: '',
+        search: '',
+        language_id: language_id,
+        category_id: 6,
+        subcategory_id: '',
+        tag_id: '',
+        slug: "",
+        latitude: storedLatitude,
+        longitude: storedLongitude
+      })
+      console.log('categories', data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+
+  // react query
+  const { data: subCatData } = useQuery({
+    queryKey: ['category-news', 6, changelanguage, location, currentPage],
+    queryFn: () => getNewsByCategoryApi(currentPage)
+  })
+
+  // slice the array to get the current posts
+  const currentData = subCatData && subCatData.data && subCatData.data.slice(0, dataPerPage)
+
+  const lengthdata = (subCatData && subCatData.total) || 0
+
   return (
     <>
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <>
           {Data && Data.length > 0 ? (
-            <div id='cn-main' expand='lg'>
+            <div id='cn-main' expand='lg' className='catNavWrapper'>
               <div className='container py-2'>
                 {isLoading ? (
                   <div>
@@ -102,13 +155,61 @@ const CatNav = () => {
                 ) : (
                   <div className={`cn-main-div ${Data && Data.length > 10 ? 'flex-display' : 'block-display'}`}>
 
+                    {/* <div className="row">
+                      <div className="col-lg-3">
+                        <div className="subcategoryWrapper">
+                          <div>
+                            <span>All</span>
+                          </div>
+
+                          {
+                            element.sub_categories.map((subData) => {
+                              return (
+                                <div>
+                                  <span>{subData?.subcategory_name}</span>
+                                </div>
+                              )
+                            })
+                          }
+                        </div>
+                      </div>
+                      <div className="col-lg-9">
+                        <div className="row">
+                          {currentData && currentData.length > 0 ? (
+                            currentData.map(element => (
+                              <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
+                                <Link
+                                  id='Link-all'
+                                  href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                                >
+                                  <div id='cv-card' className='card'>
+                                    <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
+                                    <div id='cv-card-body' className='card-body'>
+                                      <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
+                                        {element.category.category_name}
+                                      </button>
+                                      <p id='cv-card-title' className='card-title'>
+                                        {element.title}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              </div>
+                            ))
+                          ) : (
+                            <NoDataFound />
+                          )}
+                        </div>
+                      </div>
+                    </div> */}
+
                     <Swiper {...swiperOption}>
                       {Data.map((element, index) => (
                         <SwiperSlide key={element.id} className='text-center'
                           onClick={() => handleCategoryChange(element)}
                         >
                           <span
-                            id='catNav-links'
+                            className='catNav-links'
                             // href={{
                             //   pathname: `/categories-news/${element.slug}`,
                             //   query: {

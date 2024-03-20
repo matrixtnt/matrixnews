@@ -79,7 +79,7 @@ const CategoryNews = () => {
   const lengthdata = (Data && Data.total) || 0
 
   const swiperOption = {
-    loop: subCategories.length > 10 ? true: false,
+    loop: subCategories.length > 10 ? true : false,
     speed: 3000,
     spaceBetween: 10,
     slidesPerView: 'auto',
@@ -89,10 +89,10 @@ const CategoryNews = () => {
     observeParents: true,
     parallax: true,
     breakpoints: {
-      0:{
+      0: {
         slidesPerView: 2.5
       },
-      575:{
+      575: {
         slidesPerView: 4
       },
       1200: {
@@ -148,6 +148,7 @@ const CategoryNews = () => {
                     : null
                 }
 
+
                 {currentData && currentData.length > 0 ? (
                   currentData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
@@ -190,6 +191,8 @@ const CategoryNews = () => {
                     activeClassName={'pagination__link--active'}
                   />
                 ) : null}
+
+
               </div>
             )}
           </div>

@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
-import { AiOutlineLike, AiTwotoneLike, AiOutlineEye } from 'react-icons/ai'
+import { AiOutlineLike, AiTwotoneLike, AiOutlineEye, AiFillLike } from 'react-icons/ai'
 import { BsBookmark, BsFillBookmarkFill, BsFillPlayFill } from 'react-icons/bs'
 import { FiCalendar } from 'react-icons/fi'
 import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx'
@@ -36,6 +36,7 @@ import { getNewsApi } from 'src/hooks/newsApi.jsx'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
 import Layout from 'src/components/layout/Layout.jsx'
 import NoDataFound from 'src/components/noDataFound/NoDataFound'
+import toast from 'react-hot-toast'
 
 const News = () => {
   let user = getUser()
@@ -139,7 +140,7 @@ const News = () => {
     staleTime: 0
   })
 
-  const {} = useQuery({
+  const { } = useQuery({
     queryKey: ['setNewsView', NewsId],
     queryFn: setNewsView
   })
@@ -151,7 +152,7 @@ const News = () => {
     }
   }, [currentLanguage.id])
 
-  useEffect(() => {}, [userData.data])
+  useEffect(() => { }, [userData.data])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -186,6 +187,9 @@ const News = () => {
         onStart: async response => {
           await refetch()
           setBookmark(!Bookmark)
+        },
+        onSuccess: res => {
+          toast.success(res.message)
         },
         onError: error => {
           console.log(error)
@@ -394,7 +398,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setLikeDislikeData(Data && Data[0]?.id, !Like ? 1 : 0)}
                           >
-                            {Like ? <AiTwotoneLike size={23} /> : <AiOutlineLike size={23} />}
+                            {Like ? <AiOutlineLike size={23}/> : <AiFillLike size={23} />}
                           </button>
 
                           <p id='nv-function-text'>{translate('likes')}</p>
@@ -459,7 +463,7 @@ const News = () => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
               <SignInModal
                 setIsLogout={setIsLogout}

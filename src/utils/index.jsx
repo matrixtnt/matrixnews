@@ -138,7 +138,7 @@ export const placeholderImage = (e) => {
 
 // truncate text
 export const truncateText = (text, characterLimit) => {
-  if (text.length > characterLimit) {
+  if (text?.length > characterLimit) {
     const truncatedText = text.substring(0, characterLimit) + "...";
     return truncatedText;
   }
