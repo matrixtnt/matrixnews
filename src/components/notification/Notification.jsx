@@ -17,8 +17,7 @@ import { access_key, getUser } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import NoDataFound from '../noDataFound/NoDataFound'
-import moment from 'moment-timezone';
-import { systemTimezoneData } from 'src/store/reducers/settingsReducer'
+import moment from 'moment-timezone'; 
 
 const Notification = () => {
   const [Data, setData] = useState([])
@@ -27,8 +26,6 @@ const Notification = () => {
   const [totalLength, setTotalLength] = useState(0)
   const [offsetdata, setOffsetdata] = useState(0)
   const limit = 6
-
-  const systemTime = useSelector(systemTimezoneData)
 
   // api call
   const getUserNotification = async () => {
@@ -53,7 +50,7 @@ const Notification = () => {
     queryFn: getUserNotification,
     staleTime: 0
   })
-
+ 
 
   const handlePageChange = selectedPage => {
     const newOffset = selectedPage.selected * limit
@@ -63,19 +60,19 @@ const Notification = () => {
   const handleDeleteComment = (e, id) => {
     e.preventDefault()
     deleteusernotificationApi({
-      id: id,
-      onSuccess: response => {
+      id:id,
+      onSuccess:response => {
         // Remove the deleted notification from the state
         setData(prevData => prevData.filter(notification => notification.id !== id))
         toast.success(response.message)
         loaduserNotification({
-          offset: '0',
-          limit: '10',
-          onSuccess: () => { },
-          onError: () => { }
-        })
+          offset:'0',
+          limit:'10',
+          onSuccess:() => {},
+          onError:() => {}
+      })
       },
-      onError: error => {
+      onError:error => {
         if (error === 'No Data Found') {
           setData('')
         }
@@ -113,16 +110,16 @@ const Notification = () => {
       setData(convertedData);
     }
   }, [Data]);
-
+  
   // Function to format the date as "day Month year"
   const formatDate = dateString => {
     const date = new Date(dateString)
     const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting
     return formattedDate;
   }
-
-
-
+  
+  
+  
 
   return (
     <Layout>
@@ -170,7 +167,7 @@ const Notification = () => {
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <NoDataFound />
+                <NoDataFound/>
               </div>
             )}
           </div>
