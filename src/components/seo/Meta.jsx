@@ -1,14 +1,7 @@
 import Head from 'next/head'
 
 const Meta = ({ title, description, keywords, ogImage, pathName, schema }) => {
-  console.log('title',title)
-  console.log('description',description)
-  console.log('keywords',keywords)
-  console.log('ogImage',ogImage)
-  console.log('pathName',pathName)
-  console.log('schema',schema)
   return (
-
     <>
       <Head>
         {/* title */}
@@ -27,7 +20,7 @@ const Meta = ({ title, description, keywords, ogImage, pathName, schema }) => {
         <meta property='og:image:type' content='image/jpg' />
         <meta property='og:image:width' content='1080' />
         <meta property='og:image:height' content='608' />
-        {/* <meta property='og:url' content={pathName ? pathName : process.env.NEXT_PUBLIC_WEB_URL} /> */}
+        <meta property='og:url' content={pathName ? pathName : process.env.NEXT_PUBLIC_WEB_URL} />
         <meta property='og:type' content='website' />
         <meta property='og:locale' content='en_US' />
         <meta property='og:site_name' content={process.env.NEXT_PUBLIC_WEB_URL} />

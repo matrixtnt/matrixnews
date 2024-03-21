@@ -235,8 +235,6 @@ const News = () => {
     setViewerIsOpen(false)
   }
 
-
-
   return (
     <Layout>
       {isLoading ? (
@@ -300,10 +298,6 @@ const News = () => {
                           title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                           hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                         >
-
-                          {console.log('detailspageTitleCheck', Data[0]?.title)}
-                          {console.log('detailspageWebName  ', SettingsData && SettingsData?.web_setting?.web_name)}
-
                           <FacebookIcon size={40} round />
                         </FacebookShareButton>
                         <WhatsappShareButton
@@ -404,7 +398,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setLikeDislikeData(Data && Data[0]?.id, !Like ? 1 : 0)}
                           >
-                            {Like ? <AiOutlineLike size={23} /> : <AiFillLike size={23} />}
+                            {Like ? <AiOutlineLike size={23}/> : <AiFillLike size={23} />}
                           </button>
 
                           <p id='nv-function-text'>{translate('likes')}</p>
