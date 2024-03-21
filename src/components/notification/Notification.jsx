@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { deleteusernotificationApi } from '../../store/actions/campaign'
@@ -17,6 +17,8 @@ import { access_key, getUser } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import NoDataFound from '../noDataFound/NoDataFound'
+import moment from 'moment-timezone';
+import { systemTimezoneData } from 'src/store/reducers/settingsReducer'
 
 const Notification = () => {
   const [Data, setData] = useState([])
@@ -25,6 +27,8 @@ const Notification = () => {
   const [totalLength, setTotalLength] = useState(0)
   const [offsetdata, setOffsetdata] = useState(0)
   const limit = 6
+
+  const systemTime = useSelector(systemTimezoneData)
 
   // api call
   const getUserNotification = async () => {
@@ -49,7 +53,7 @@ const Notification = () => {
     queryFn: getUserNotification,
     staleTime: 0
   })
- 
+
 
   const handlePageChange = selectedPage => {
     const newOffset = selectedPage.selected * limit
@@ -59,19 +63,19 @@ const Notification = () => {
   const handleDeleteComment = (e, id) => {
     e.preventDefault()
     deleteusernotificationApi({
-      id:id,
-      onSuccess:response => {
+      id: id,
+      onSuccess: response => {
         // Remove the deleted notification from the state
         setData(prevData => prevData.filter(notification => notification.id !== id))
         toast.success(response.message)
         loaduserNotification({
-          offset:'0',
-          limit:'10',
-          onSuccess:() => {},
-          onError:() => {}
-      })
+          offset: '0',
+          limit: '10',
+          onSuccess: () => { },
+          onError: () => { }
+        })
       },
-      onError:error => {
+      onError: error => {
         if (error === 'No Data Found') {
           setData('')
         }
@@ -81,16 +85,44 @@ const Notification = () => {
   }
 
   // Function to format the date as "day Month year"
+  // const formatDate = dateString => {
+  //   const date = new Date(dateString)
+  //   const day = date.getDate()
+  //   const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date)
+  //   const year = date.getFullYear()
+  //   const hours = date.getHours()
+  //   const minutes = date.getMinutes()
+  //   const seconds = date.getSeconds()
+  //   return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`
+  // }
+
+  const [convertedTime, setConvertedTime] = useState(null);
+
+  useEffect(() => {
+    if (Data.length > 0) {
+      // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
+      const convertedData = Data.map(element => {
+        const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date
+        const dtKolkata = moment(timestampUtc).tz('Asia/Kolkata');
+        const convertedTime = dtKolkata.format("DD-MM-YYYY hh:mm:ss A");
+        return {
+          ...element,
+          convertedTime
+        };
+      });
+      setData(convertedData);
+    }
+  }, [Data]);
+
+  // Function to format the date as "day Month year"
   const formatDate = dateString => {
     const date = new Date(dateString)
-    const day = date.getDate()
-    const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date)
-    const year = date.getFullYear()
-    const hours = date.getHours()
-    const minutes = date.getMinutes()
-    const seconds = date.getSeconds()
-    return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`
+    const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting
+    return formattedDate;
   }
+
+
+
 
   return (
     <Layout>
@@ -125,7 +157,7 @@ const Notification = () => {
                     )}
                     <div className='Noti-text'>
                       <p className='bd-highlight bd-title'> {element.message}</p>
-                      <p className='bd-highlight mb-0'>{formatDate(element.date)}</p>
+                      <p className='bd-highlight mb-0'>{element.convertedTime}</p>
                     </div>
 
                     <div className='iconTrash ms-auto bd-highlight'>
@@ -138,7 +170,7 @@ const Notification = () => {
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <NoDataFound/>
+                <NoDataFound />
               </div>
             )}
           </div>

@@ -172,7 +172,7 @@ const Header = () => {
   const logout = async () => {
     confirm({
       title: 'Logout',
-      content: 'Are you sure to do this?',
+      content: 'Are you sure you want to log out?',
       centered: true,
       async onOk() {
         try {
@@ -263,7 +263,8 @@ const Header = () => {
     e.preventDefault()
     confirm({
       title: 'Delete Account',
-      content: 'Are you sure to do this?',
+      // content: 'Are you sure to do this?',
+      content: 'Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:Profile information, Settings and Any associated content',
       centered: true,
       async onOk() {
         try {

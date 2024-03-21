@@ -94,8 +94,6 @@ const StyleSix = ({ isLoading, Data }) => {
     setTypeUrl(type)
   }
 
-  console.log('six : ', Data)
-
 
   return (
     <div id='first-section'>

@@ -121,7 +121,7 @@ const CatNav = () => {
         latitude: storedLatitude,
         longitude: storedLongitude
       })
-      console.log('categories', data)
+      // console.log('categories', data)
       return data
     } catch (error) {
       console.log(error)

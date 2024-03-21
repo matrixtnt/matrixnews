@@ -28,6 +28,7 @@ const CommentSection = props => {
       },
       onError:error => {
         console.log(error)
+        toast.error(error)
       }
     }
     )
@@ -49,9 +50,12 @@ const CommentSection = props => {
           }}
           placeholder={`${translate('shareThoghtLbl')}`}
         ></textarea>
+        <div className='d-flex align-items-end justify-content-end'>
+
         <button id='cs-btnsub' type='submit' className='btn'>
           {translate('submitpost')}
         </button>
+        </div>
       </form>
       <CommentsView Nid={Nid} LoadComments={LoadComments} />
     </div>

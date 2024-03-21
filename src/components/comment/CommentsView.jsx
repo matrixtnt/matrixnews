@@ -37,17 +37,19 @@ const CommentsView = props => {
   const setCommentData = (e, id) => {
     e.preventDefault()
     setcommentApi({
-      parent_id:id,
-      news_id:Nid,
-      message:Comment,
-      onSuccess:response => {
+      parent_id: id,
+      news_id: Nid,
+      message: Comment,
+      onSuccess: response => {
         setLoadComments(true)
         setTimeout(() => {
           setLoadComments(false)
         }, 1000)
       },
-      onError:error => {
+      onError: error => {
         console.log(error)
+        toast.error(error)
+
       }
     }
     )
@@ -57,17 +59,18 @@ const CommentsView = props => {
   const setreplyComment = (e, id) => {
     e.preventDefault()
     setcommentApi({
-      parent_id:id,
-      news_id:Nid,
-      message:Comment,
-      onSuccess:response => {
+      parent_id: id,
+      news_id: Nid,
+      message: Comment,
+      onSuccess: response => {
         setLoadComments(true)
         setTimeout(() => {
           setLoadComments(false)
         }, 1000)
       },
-      onError:error => {
+      onError: error => {
         console.log(error)
+        toast.error(error)
       }
     }
     )
@@ -77,12 +80,12 @@ const CommentsView = props => {
   const LikeButton = (e, elem) => {
     e.preventDefault()
     setCommentLikeDislikeApi({
-      comment_id:elem.id,
-      status:elem.like === '1' ? '0' : '1',
-      onSuccess:res => {
+      comment_id: elem.id,
+      status: elem.like === '1' ? '0' : '1',
+      onSuccess: res => {
         setRefreshKey(prevKey => prevKey + 1)
       },
-      onError:err => {
+      onError: err => {
         console.log(err)
       }
     }
@@ -93,13 +96,13 @@ const CommentsView = props => {
   const dislikebutton = (e, elem) => {
     e.preventDefault()
     setCommentLikeDislikeApi({
-      comment_id:elem.id,
-      status:elem.dislike === '1' ? '0' : '2',
-      onSuccess:res => {
+      comment_id: elem.id,
+      status: elem.dislike === '1' ? '0' : '2',
+      onSuccess: res => {
 
         setRefreshKey(prevKey => prevKey + 1)
       },
-      onError:err => {
+      onError: err => {
         console.log(err)
       }
     }
@@ -120,14 +123,14 @@ const CommentsView = props => {
   const deleteComment = e => {
     e.preventDefault()
     deletecommentApi({
-      comment_id:CommentID,
-      onSuccess:res => {
+      comment_id: CommentID,
+      onSuccess: res => {
         setLoadComments(true)
         setRefreshKey(prevKey => prevKey + 1)
         setModalOpen(false)
         toast.success(translate('comDelSucc'))
       },
-      onError:err => {
+      onError: err => {
         console.log(err)
       }
     }
@@ -137,17 +140,17 @@ const CommentsView = props => {
   const submitBtn = e => {
     e.preventDefault()
     setFlagApi({
-      comment_id:CommentID,
-      news_id:Nid,
-      message:message,
-      onSuccess:res => {
+      comment_id: CommentID,
+      news_id: Nid,
+      message: message,
+      onSuccess: res => {
         setRefreshKey(prevKey => prevKey + 1)
         setModalOpen(false)
         setLoadComments(true)
         setMessage('')
         toast.success(translate('flag'))
       },
-      onError:err => {
+      onError: err => {
         console.log(err)
       }
     }
@@ -170,10 +173,10 @@ const CommentsView = props => {
   }
 
   // react query
-  const { data:Data, isLoading } = useQuery({
+  const { data: Data, isLoading } = useQuery({
     queryKey: ['getCommentByNews ', Nid, props.LoadComments, LoadComments, refreshKey],
     queryFn: getCommentByNews,
-    staleTime:0,
+    staleTime: 0,
   })
 
   return (
@@ -206,7 +209,15 @@ const CommentsView = props => {
                             {element.dislike > 0 ? element.dislike : null}
                           </div>
                           <div className='comment_dots'>
+                            {
+                             userData.data.id === element.user_id? <span className='comment_delete' onClick={e => deleteComment(e)}>
+                             <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
+                             
+                           </span>:
                             <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, element)} />
+                            }
+
+
                           </div>
                         </div>
                         <OverlayTrigger
@@ -247,7 +258,7 @@ const CommentsView = props => {
                 </div>
                 {element.replay.map(ele => (
                   <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-              
+
                     <img id='cs-profile' src={ele.user.profile} onError={imgError} alt='replay comment user news image' />
                     <div id='cs-Rcard' className='card'>
                       <b>
@@ -332,7 +343,7 @@ const CommentsView = props => {
                   <BiSolidFlag size={18} />
                 </div>
                 <textarea value={message} name='' id='' cols='30' rows='5' onChange={e => setMessage(e.target.value)} />
-                <div className='comment_bottom'>
+                <div className='comment_bottom d-flex align-items-end justify-content-end'>
                   <button type='submit' className='btn btn-secondary' onClick={e => submitBtn(e)}>
                     {translate('submitBtn')}
                   </button>

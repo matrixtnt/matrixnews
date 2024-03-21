@@ -396,9 +396,10 @@ a {
 
 @media screen and (min-width: 1200px) {
   #Nav-Offcanvas {
-   display: none;
+    display: none;
   }
 }
+
 @media screen and (max-width: 399px) {
   #Nav-Offcanvas {
     width: 84%;
@@ -525,6 +526,14 @@ a {
   color: #ffffff;
   background: var(--primary-color);
   border: none;
+}
+
+@media screen and (max-width: 1200px) {
+  #btnSignIn {
+    color: #ffffff;
+    background: var(--primary-color);
+    border: none;
+  }
 }
 
 #btnSignIn:hover {
@@ -955,6 +964,8 @@ a {
   font-size: small;
   position: relative;
   z-index: 9999;
+  cursor: default;
+  pointer-events: none;
 }
 
 #btnReadMore {
@@ -4469,6 +4480,7 @@ a#social_platforms svg:hover {
   width: fit-content;
   margin-top: 3%;
   margin-left: 3%;
+  font-size: 12px;
 }
 
 #RNews-card-text {
@@ -6559,14 +6571,19 @@ span {
   left: 0px;
 }
 
-.catNavWrapper .categoryName,.catNavWrapper .categoryName:hover ,.catNavWrapper .btn.show,.catNavWrapper .categoryName:focus,.catNavWrapper.categoryName:focus-visible,.catNavWrapper .categoryName:active{
+.catNavWrapper .categoryName,
+.catNavWrapper .categoryName:hover,
+.catNavWrapper .btn.show,
+.catNavWrapper .categoryName:focus,
+.catNavWrapper.categoryName:focus-visible,
+.catNavWrapper .categoryName:active {
   color: var(--secondary-color);
   font-weight: 600;
   background-color: transparent;
   border: none;
 }
 
-.catNavWrapper .categoryName{
+.catNavWrapper .categoryName {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6574,10 +6591,10 @@ span {
   width: max-content;
 }
 
-.catNavWrapper .dropdown-toggle::after{
+.catNavWrapper .dropdown-toggle::after {
   display: none;
 }
 
 .catNavWrapper #cv-card-image {
-  height: 194px ;
+  height: 194px;
 }
