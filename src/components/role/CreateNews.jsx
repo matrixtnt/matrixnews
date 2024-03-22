@@ -311,7 +311,7 @@ const CreateNews = () => {
   const getLocationlatlong = async () => {
     try {
       const { data } = await getlocationapi.getlocation({ access_key: access_key,limit: 10000 })
-      console.log(data,"locationss")
+      // console.log(data,"locationss")
       return data.data
     } catch (error) {
       console.log(error)

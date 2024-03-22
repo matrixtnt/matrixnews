@@ -70,7 +70,7 @@ let serverSidePropsFunction = null;
 if (process.env.NEXT_PUBLIC_SEO === "true") {
   serverSidePropsFunction = async (context) => {
     const { req } = context; // Extract query and request object from context
-    console.log(req)
+    // console.log(req)
     const { params } = req[Symbol.for('NextInternalRequestMeta')].match;
     // Accessing the slug property
     // const currentURL = req[Symbol.for('NextInternalRequestMeta')].__NEXT_INIT_URL;

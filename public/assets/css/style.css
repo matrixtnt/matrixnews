@@ -375,8 +375,9 @@ a {
   margin-right: 0;
 }
 
-[dir='rtl'] .Manu-links ul li:last-of-type {
+[dir="rtl"] .Manu-links ul li:last-of-type {
   margin-right: 30px;
+  gap: 8px;
 }
 
 .Manu-links ul a {
@@ -526,6 +527,13 @@ a {
   color: #ffffff;
   background: var(--primary-color);
   border: none;
+}
+
+[dir='rtl'] #btnSignIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -1264,6 +1272,7 @@ a {
   width: fit-content;
   margin-bottom: 5px;
   font-weight: 600;
+  z-index: 1;
 }
 
 #bns-np-btns {
@@ -2737,6 +2746,10 @@ a#social_platforms svg:hover {
   flex-wrap: wrap;
   word-break: break-word;
 }
+[dir='rtl'] .breadcrumb_data{
+  align-items: baseline;
+  gap: 6px;
+}
 
 #B_NV-main {
   font-family: 'Roboto', sans-serif;
@@ -3674,6 +3687,10 @@ a#social_platforms svg:hover {
   right: 1%;
   bottom: 6%;
 }
+[dir='rtl'] .cdbtnReplay{
+  right: auto;
+  left: 1%;
+}
 
 #cv-replay-propover {
   width: 17rem;
@@ -4481,6 +4498,8 @@ a#social_platforms svg:hover {
   margin-top: 3%;
   margin-left: 3%;
   font-size: 12px;
+  cursor: default;
+  pointer-events: none;
 }
 
 #RNews-card-text {

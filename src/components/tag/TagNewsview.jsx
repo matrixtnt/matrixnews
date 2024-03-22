@@ -2,7 +2,7 @@
 
 import { FiCalendar } from 'react-icons/fi'
 import Link from 'next/link'
-import { translate } from '../../utils'
+import { formatDate, translate } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
@@ -82,7 +82,7 @@ const TagNewsview = () => {
                             </h5>
                             <p id='ts-card-date'>
                               <FiCalendar size={18} id='ts-logoCalendar' />
-                              {element.date.slice(0, 10)}
+                              {formatDate(element.date.slice(0, 10))}
                             </p>
                           </div>
                         </div>

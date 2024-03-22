@@ -88,7 +88,7 @@ const CatNav = () => {
   }
 
   const handleCategoryChange = (categories) => {
-    console.log(categories.sub_categories)
+    // console.log(categories.sub_categories)
     loadSubCategories({ subCategories: categories.sub_categories });
     if (categories.slug) {
       navigate.push(`/categories-news/${categories.slug}?category_id=${categories.id}`)

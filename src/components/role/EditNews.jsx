@@ -485,7 +485,6 @@ const EditNews = () => {
     if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue.trim() == '') {
       toast.error(translate('descriptionrequired'));
     }
-    console.log(DefaultValue.descriptionValue)
   }, [DefaultValue.descriptionValue]);
 
   // final submit data

@@ -34,7 +34,7 @@ const ManageNews = () => {
         longitude: null
       })
       setData(data.data)
-      console.log('manage-news :',data)
+      // console.log('manage-news :',data)
       return data.data
     } catch (error) {
       console.log(error)

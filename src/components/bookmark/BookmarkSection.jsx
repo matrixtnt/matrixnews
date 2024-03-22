@@ -30,7 +30,7 @@ const BookmarkSection = () => {
         limit: 10000,
       })
       setData(data.data)
-      console.log('bookmardData : ',data)
+      // console.log('bookmardData : ',data)
     } catch (error) {
       console.log(error)
     }
@@ -56,11 +56,17 @@ const BookmarkSection = () => {
     staleTime: 0
   })
 
-  const {} = useQuery({
-    queryKey: ['setbookmark',Data],
+  const { } = useQuery({
+    queryKey: ['setbookmark', Data],
     queryFn: setbookmarkApi,
     staleTime: 0
   })
+
+  // Function to format date as desired
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'numeric', year: 'numeric', };
+    return new Date(dateString).toLocaleDateString('en-IN', options);
+  };
 
   return (
     <Layout>
@@ -79,7 +85,7 @@ const BookmarkSection = () => {
               </div>
             ) : Data && Data.length > 0 ? (
               Data.map(element => (
-                                
+
                 <div className='col-md-6 col-lg-4 col-12' key={element.id}>
                   <div id='bs-card' className='card'>
                     <div className='bs_image_card'>
@@ -90,7 +96,7 @@ const BookmarkSection = () => {
                         alt='bookmark news'
                         onError={placeholderImage}
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
+                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } })
                         }
                       />
                       <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
@@ -103,7 +109,7 @@ const BookmarkSection = () => {
                         className='btn btn-sm'
                         type='button'
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
+                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } })
                         }
                       >
                         {element.category_name}
@@ -112,14 +118,14 @@ const BookmarkSection = () => {
                         id='bs-card-title'
                         className='card-title'
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id}})
+                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } })
                         }
                       >
                         {element.title}
                       </h5>
                       <p id='bs-card-date'>
                         <FiCalendar size={18} id='bs-logoCalendar' />
-                        {element.date.slice(0, 10)}
+                        {formatDate(element.date.slice(0, 10))}
                       </p>
                     </div>
                   </div>

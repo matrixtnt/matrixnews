@@ -29,6 +29,7 @@ const RelatedNewsSection = props => {
       })
       // Filter out elements with the same id as props.Cid
       const filteredData = data.data.filter(element => element.slug !== props.Nid)
+      filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
       return filteredData
     } catch (error) {
       console.log(error)

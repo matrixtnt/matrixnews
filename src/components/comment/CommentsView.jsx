@@ -19,6 +19,7 @@ import { getCommentByNewsApi } from 'src/hooks/commentsApi'
 import { access_key, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import Card from '../skeletons/Card'
 
 const CommentsView = props => {
   const [LoadComments, setLoadComments] = useState(false)
@@ -83,7 +84,8 @@ const CommentsView = props => {
       comment_id: elem.id,
       status: elem.like === '1' ? '0' : '1',
       onSuccess: res => {
-        setRefreshKey(prevKey => prevKey + 1)
+        // setRefreshKey(prevKey => prevKey + 1)
+        setRefreshKey(refreshKey + 1)
       },
       onError: err => {
         console.log(err)
@@ -100,7 +102,8 @@ const CommentsView = props => {
       status: elem.dislike === '1' ? '0' : '2',
       onSuccess: res => {
 
-        setRefreshKey(prevKey => prevKey + 1)
+        // setRefreshKey(prevKey => prevKey + 1)
+        setRefreshKey(refreshKey + 1)
       },
       onError: err => {
         console.log(err)
@@ -126,7 +129,8 @@ const CommentsView = props => {
       comment_id: CommentID,
       onSuccess: res => {
         setLoadComments(true)
-        setRefreshKey(prevKey => prevKey + 1)
+        // setRefreshKey(prevKey => prevKey + 1)
+        setRefreshKey(refreshKey + 1)
         setModalOpen(false)
         toast.success(translate('comDelSucc'))
       },
@@ -144,7 +148,8 @@ const CommentsView = props => {
       news_id: Nid,
       message: message,
       onSuccess: res => {
-        setRefreshKey(prevKey => prevKey + 1)
+        // setRefreshKey(prevKey => prevKey + 1)
+        setRefreshKey(refreshKey + 1)
         setModalOpen(false)
         setLoadComments(true)
         setMessage('')
@@ -184,144 +189,150 @@ const CommentsView = props => {
       {userData && userData.data ? (
         <div>
           {Data && Data.length === 0 ? null : <h2>{translate('comment')}</h2>}
-          {Data &&
-            Data.map(element => (
-              <div key={element.id}>
-                <div id='cv-comment' onClick={() => setCommentID(element.id)}>
-                  <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
-                  <div id='cs-card' className='card'>
-                    <b>
-                      <h5>{element?.user?.name ? element?.user?.name : element?.user?.mobile}</h5>
-                    </b>
-                    {/* <Link id="cdbtnReport">Report</Link> */}
-                    <p id='cs-card-text' className='card-text'>
-                      {element.message}
-                    </p>
-                    {['bottom-end'].map(placement => (
-                      <>
-                        <div className='comment_data'>
-                          <div className='comment_like'>
-                            <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
-                            {element.like > 0 ? element.like : null}
-                          </div>
-                          <div className='comment_dislike'>
-                            <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
-                            {element.dislike > 0 ? element.dislike : null}
-                          </div>
-                          <div className='comment_dots'>
-                            {
-                             userData.data.id === element.user_id? <span className='comment_delete' onClick={e => deleteComment(e)}>
-                             <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
-                             
-                           </span>:
-                            <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, element)} />
-                            }
+          {
+            isLoading ? <Card/> :
+              <>
+                {Data &&
+                  Data.map(element => (
+                    <div key={element.id}>
+                      <div id='cv-comment' onClick={() => setCommentID(element.id)}>
+                        <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
+                        <div id='cs-card' className='card'>
+                          <b>
+                            <h5>{element?.user?.name ? element?.user?.name : element?.user?.mobile}</h5>
+                          </b>
+                          {/* <Link id="cdbtnReport">Report</Link> */}
+                          <p id='cs-card-text' className='card-text'>
+                            {element.message}
+                          </p>
+                          {['bottom-end'].map(placement => (
+                            <>
+                              <div className='comment_data'>
+                                <div className='comment_like'>
+                                  <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
+                                  {element.like > 0 ? element.like : null}
+                                </div>
+                                <div className='comment_dislike'>
+                                  <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
+                                  {element.dislike > 0 ? element.dislike : null}
+                                </div>
+                                <div className='comment_dots'>
+                                  {
+                                    userData.data.id === element.user_id ? <span className='comment_delete' onClick={e => deleteComment(e)}>
+                                      <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
+
+                                    </span> :
+                                      <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, element)} />
+                                  }
 
 
+                                </div>
+                              </div>
+                              <OverlayTrigger
+                                trigger='click'
+                                key={placement}
+                                placement={placement}
+                                rootClose
+                                overlay={
+                                  <Popover id={`popover-positioned-${placement}`}>
+                                    <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
+                                    <Popover.Body id='cv-replay-propover'>
+                                      <form id='cv-replay-form' method='post' onSubmit={e => setCommentData(e, element.id)}>
+                                        <textarea
+                                          name=''
+                                          id='cs-reply-input'
+                                          cols='30'
+                                          rows='5'
+                                          onChange={e => {
+                                            setComment(e.target.value)
+                                          }}
+                                          placeholder='Share Your reply...'
+                                        ></textarea>
+                                        <button id='cdbtnsubReplay' type='submit' className='btn'>
+                                          {translate('submitreply')}
+                                        </button>
+                                      </form>
+                                    </Popover.Body>
+                                  </Popover>
+                                }
+                              >
+                                <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' ref={replyRef}>
+                                  {translate('reply')}
+                                </Button>
+                              </OverlayTrigger>
+                            </>
+                          ))}
+                        </div>
+                      </div>
+                      {element.replay.map(ele => (
+                        <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
+
+                          <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='replay comment user news image' />
+                          <div id='cs-Rcard' className='card'>
+                            <b>
+                              <h5>{ele?.user?.name ? ele?.user?.name : ele?.user?.mobile}</h5>
+                            </b>
+                            <p id='cs-card-text' className='card-text'>
+                              {ele.message}
+                            </p>
+                            {['bottom-end'].map(placement => (
+                              <>
+                                <div className='comment_data'>
+                                  <div className='comment_like'>
+                                    <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
+                                    {ele.like > 0 ? ele.like : null}
+                                  </div>
+                                  <div className='comment_dislike'>
+                                    <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
+                                    {ele.dislike > 0 ? ele.dislike : null}
+                                  </div>
+                                  <div className='comment_dots'>
+                                    <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
+                                  </div>
+                                </div>
+
+                                <OverlayTrigger
+                                  trigger='click'
+                                  key={placement}
+                                  placement={placement}
+                                  rootClose
+                                  overlay={
+                                    <Popover id={`popover-positioned-${placement}`}>
+                                      <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
+                                      <Popover.Body id='cv-replay-propover'>
+                                        <form method='post' onSubmit={e => setreplyComment(e, ele.parent_id)}>
+                                          <textarea
+                                            name=''
+                                            id='cs-input'
+                                            cols='30'
+                                            rows='5'
+                                            onChange={e => {
+                                              setComment(e.target.value)
+                                            }}
+                                            placeholder='Share Your reply...'
+                                          ></textarea>
+                                          <button id='cdbtnsubReplay' type='submit' className='btn'>
+                                            {translate('submitreply')}
+                                          </button>
+                                        </form>
+                                      </Popover.Body>
+                                    </Popover>
+                                  }
+                                >
+                                  <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' ref={replyRef}>
+                                    {translate('reply')}
+                                  </Button>
+                                </OverlayTrigger>
+                              </>
+                            ))}
                           </div>
                         </div>
-                        <OverlayTrigger
-                          trigger='click'
-                          key={placement}
-                          placement={placement}
-                          rootClose
-                          overlay={
-                            <Popover id={`popover-positioned-${placement}`}>
-                              <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
-                              <Popover.Body id='cv-replay-propover'>
-                                <form id='cv-replay-form' method='post' onSubmit={e => setCommentData(e, element.id)}>
-                                  <textarea
-                                    name=''
-                                    id='cs-reply-input'
-                                    cols='30'
-                                    rows='5'
-                                    onChange={e => {
-                                      setComment(e.target.value)
-                                    }}
-                                    placeholder='Share Your reply...'
-                                  ></textarea>
-                                  <button id='cdbtnsubReplay' type='submit' className='btn'>
-                                    {translate('submitreply')}
-                                  </button>
-                                </form>
-                              </Popover.Body>
-                            </Popover>
-                          }
-                        >
-                          <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' ref={replyRef}>
-                            {translate('reply')}
-                          </Button>
-                        </OverlayTrigger>
-                      </>
-                    ))}
-                  </div>
-                </div>
-                {element.replay.map(ele => (
-                  <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-
-                    <img id='cs-profile' src={ele.user.profile} onError={imgError} alt='replay comment user news image' />
-                    <div id='cs-Rcard' className='card'>
-                      <b>
-                        <h5>{ele?.user?.name ? ele?.user?.name : ele?.user?.mobile}</h5>
-                      </b>
-                      <p id='cs-card-text' className='card-text'>
-                        {ele.message}
-                      </p>
-                      {['bottom-end'].map(placement => (
-                        <>
-                          <div className='comment_data'>
-                            <div className='comment_like'>
-                              <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
-                              {ele.like > 0 ? ele.like : null}
-                            </div>
-                            <div className='comment_dislike'>
-                              <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
-                              {ele.dislike > 0 ? ele.dislike : null}
-                            </div>
-                            <div className='comment_dots'>
-                              <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
-                            </div>
-                          </div>
-
-                          <OverlayTrigger
-                            trigger='click'
-                            key={placement}
-                            placement={placement}
-                            rootClose
-                            overlay={
-                              <Popover id={`popover-positioned-${placement}`}>
-                                <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
-                                <Popover.Body id='cv-replay-propover'>
-                                  <form method='post' onSubmit={e => setreplyComment(e, ele.parent_id)}>
-                                    <textarea
-                                      name=''
-                                      id='cs-input'
-                                      cols='30'
-                                      rows='5'
-                                      onChange={e => {
-                                        setComment(e.target.value)
-                                      }}
-                                      placeholder='Share Your reply...'
-                                    ></textarea>
-                                    <button id='cdbtnsubReplay' type='submit' className='btn'>
-                                      {translate('submitreply')}
-                                    </button>
-                                  </form>
-                                </Popover.Body>
-                              </Popover>
-                            }
-                          >
-                            <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' ref={replyRef}>
-                              {translate('reply')}
-                            </Button>
-                          </OverlayTrigger>
-                        </>
                       ))}
                     </div>
-                  </div>
-                ))}
-              </div>
-            ))}
+                  ))}
+              </>
+          }
+
           <Modal
             centered
             className='comment_Modal'

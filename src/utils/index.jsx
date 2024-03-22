@@ -189,19 +189,24 @@ export const extractJSONFromMarkup = (markupString) => {
   return null;
 };
 
-export const formatDate = (originalDate) => {
-  if (!originalDate) return ""; // Handle the case when the date is not available
+// export const formatDate = (originalDate) => {
+//   if (!originalDate) return ""; // Handle the case when the date is not available
 
-  // Create a new Date object with the given string
-  const parsedDate = new Date(originalDate);
+//   // Create a new Date object with the given string
+//   const parsedDate = new Date(originalDate);
 
-  // Extract day, month, and year
-  const day = parsedDate.getDate();
-  const month = parsedDate.getMonth() + 1; // Month is zero-based, so add 1
-  const year = parsedDate.getFullYear();
+//   // Extract day, month, and year
+//   const day = parsedDate.getDate();
+//   const month = parsedDate.getMonth() + 1; // Month is zero-based, so add 1
+//   const year = parsedDate.getFullYear();
 
-  // Create the formatted date string in the desired format
-  const formattedDate = `${day < 10 ? '0' : ''}${day}-${month < 10 ? '0' : ''}${month}-${year}`;
+//   // Create the formatted date string in the desired format
+//   const formattedDate = `${day < 10 ? '0' : ''}${day}-${month < 10 ? '0' : ''}${month}-${year}`;
 
-  return formattedDate;
+//   return formattedDate;
+// };
+
+export const formatDate = (dateString) => {
+  const options = { day: 'numeric', month: 'numeric', year: 'numeric', };
+  return new Date(dateString).toLocaleDateString('en-IN', options);
 };

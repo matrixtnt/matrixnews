@@ -170,8 +170,8 @@ const StyleSix = ({ isLoading, Data }) => {
                                 <p id='Top-Posttime01'>
                                   {item.date
                                     ? new Date(item.date).toLocaleString('en-us', {
-                                      month: 'short',
                                       day: 'numeric',
+                                      month: 'short',
                                       year: 'numeric'
                                     })
                                     : ''}
@@ -280,9 +280,9 @@ const StyleSix = ({ isLoading, Data }) => {
                           <div id='Top-Deatils'>
                             <p id='Top-Posttime01'>
                               {item.date
-                                ? new Date(item.date).toLocaleString('en-us', {
-                                  month: 'short',
+                                ? new Date(item.date).toLocaleString('en-in', {
                                   day: 'numeric',
+                                  month: 'short',
                                   year: 'numeric'
                                 })
                                 : ''}

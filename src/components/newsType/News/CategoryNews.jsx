@@ -61,6 +61,7 @@ const CategoryNews = () => {
         longitude: storedLongitude
       })
       // console.log('categories', data)
+      data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
       return data
     } catch (error) {
       console.log(error)
