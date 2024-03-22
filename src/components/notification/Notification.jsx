@@ -95,6 +95,29 @@ const Notification = () => {
 
   const [convertedTime, setConvertedTime] = useState(null);
 
+  // useEffect(() => {
+  //   if (Data.length > 0) {
+  //     // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
+  //     const convertedData = Data.map(element => {
+  //       const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date
+  //       const dtKolkata = moment(timestampUtc).tz('Asia/Kolkata');
+  //       const convertedTime = dtKolkata.format("DD-MM-YYYY hh:mm:ss A");
+  //       return {
+  //         ...element,
+  //         convertedTime
+  //       };
+  //     });
+  //     setData(convertedData);
+  //   }
+  // }, [Data]);
+  
+  // // Function to format the date as "day Month year"
+  // const formatDate = dateString => {
+  //   const date = new Date(dateString)
+  //   const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting
+  //   return formattedDate;
+  // }
+
   useEffect(() => {
     if (Data.length > 0) {
       // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
@@ -111,7 +134,7 @@ const Notification = () => {
     }
   }, [Data]);
   
-  // Function to format the date as "day Month year"
+  // Function to format the date as "DD/MM/YYYY"
   const formatDate = dateString => {
     const date = new Date(dateString)
     const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting

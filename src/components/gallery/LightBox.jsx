@@ -8,7 +8,7 @@ const LightBox = ({ photos, viewerIsOpen, currentImage, setCurrentImage, onClose
     }
     // Create an array to include title_image at index 0
     const lightboxPhotos = title_image ? [{ other_image: title_image, alt: 'Title Image' }, ...photos] : photos;
-    console.log(lightboxPhotos)
+    // console.log(lightboxPhotos)
     const gotoPrevious = () =>
         currentImage > 0 && setCurrentImage(currentImage - 1);
     const gotoNext = () =>
