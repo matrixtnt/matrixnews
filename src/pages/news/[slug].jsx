@@ -66,6 +66,7 @@ const Index = ({ seoData, currentURL }) => {
 //   }
 //   }
 // }
+
 let serverSidePropsFunction = null;
 if (process.env.NEXT_PUBLIC_SEO === "true") {
   serverSidePropsFunction = async (context) => {

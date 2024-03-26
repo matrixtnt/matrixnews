@@ -42,23 +42,23 @@ const Index = ({ seoData, currentURL }) => {
   )
 }
 
-let serverSidePropsFunction = null
-if (process.env.NEXT_PUBLIC_SEO === 'true') {
-  serverSidePropsFunction = async context => {
-    // Retrieve the slug from the URL query parameters
-    const { req } = context // Extract query and request object from context
-    const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
+let serverSidePropsFunction = null;
+if (process.env.NEXT_PUBLIC_SEO === "true") {
+    serverSidePropsFunction = async (context) => {
+        const { req } = context; // Extract query and request object from context
 
-    const seoData = await fetchDataFromSeo()
+        // const currentURL = `${req.headers.host}${req.url}`;
+        const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/personal-notification/';
+        const seoData = await fetchDataFromSeo(req.url);
+        // Pass the fetched data as props to the Index component
 
-    // Pass the fetched data as props to the page component
-    return {
-      props: {
-        seoData,
-        currentURL
-      }
-    }
-  }
+        return {
+            props: {
+                seoData,
+                currentURL,
+            },
+        };
+    };
 }
 
 export const getServerSideProps = serverSidePropsFunction

@@ -5,7 +5,7 @@ const SubCategory = dynamic(() => import('src/components/newsType/News/SubCatego
 const index = () => {
   return (
     <>
-      <Meta title='categories news' description='' keywords='' ogImage='' pathName='' schema='' />
+      <Meta title='sub categories news' description='' keywords='' ogImage='' pathName='' schema='' />
       <SubCategory />
     </>
   )

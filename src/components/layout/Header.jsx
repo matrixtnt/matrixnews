@@ -69,6 +69,7 @@ const Header = () => {
         access_key: access_key
       })
 
+
       if (data && data.data.status === 0) {
         toast.error('You are deactivated by admin!')
         signOut(authentication)

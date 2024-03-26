@@ -42,23 +42,42 @@ const Index = ({ seoData, currentURL }) => {
   )
 }
 
-let serverSidePropsFunction = null
-if (process.env.NEXT_PUBLIC_SEO === 'true') {
-  serverSidePropsFunction = async context => {
-    // Retrieve the slug from the URL query parameters
-    const { req } = context // Extract query and request object from context
-    const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
+// let serverSidePropsFunction = null
+// if (process.env.NEXT_PUBLIC_SEO === 'true') {
+//   serverSidePropsFunction = async context => {
+//     // Retrieve the slug from the URL query parameters
+//     const { req } = context // Extract query and request object from context
+//     const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
 
-    const seoData = await fetchDataFromSeo()
+//     const seoData = await fetchDataFromSeo()
 
-    // Pass the fetched data as props to the page component
-    return {
-      props: {
-        seoData,
-        currentURL
-      }
-    }
-  }
+//     // Pass the fetched data as props to the page component
+//     return {
+//       props: {
+//         seoData,
+//         currentURL
+//       }
+//     }
+//   }
+// }
+
+let serverSidePropsFunction = null;
+if (process.env.NEXT_PUBLIC_SEO === "true") {
+    serverSidePropsFunction = async (context) => {
+        const { req } = context; // Extract query and request object from context
+
+        // const currentURL = `${req.headers.host}${req.url}`;
+        const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/news-notification/';
+        const seoData = await fetchDataFromSeo(req.url);
+        // Pass the fetched data as props to the Index component
+
+        return {
+            props: {
+                seoData,
+                currentURL,
+            },
+        };
+    };
 }
 
 export const getServerSideProps = serverSidePropsFunction

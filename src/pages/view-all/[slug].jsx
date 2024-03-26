@@ -42,23 +42,43 @@ const Index = ({ seoData, currentURL }) => {
   )
 }
 
-let serverSidePropsFunction = null
-if (process.env.NEXT_PUBLIC_SEO === 'true') {
-  serverSidePropsFunction = async context => {
-    // Retrieve the slug from the URL query parameters
-    const { req } = context // Extract query and request object from context
-    const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
+// let serverSidePropsFunction = null
+// if (process.env.NEXT_PUBLIC_SEO === 'true') {
+//   serverSidePropsFunction = async context => {
+//     // Retrieve the slug from the URL query parameters
+//     const { req } = context // Extract query and request object from context
+//     const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
 
-    const seoData = await fetchDataFromSeo()
+//     const seoData = await fetchDataFromSeo()
 
-    // Pass the fetched data as props to the page component
+//     // Pass the fetched data as props to the page component
+//     return {
+//       props: {
+//         seoData,
+//         currentURL
+//       }
+//     }
+//   }
+// }
+
+let serverSidePropsFunction = null;
+if (process.env.NEXT_PUBLIC_SEO === "true") {
+  serverSidePropsFunction = async (context) => {
+    const { req } = context; // Extract query and request object from context
+    // console.log(req)
+    const { params } = req[Symbol.for('NextInternalRequestMeta')].match;
+    // Accessing the slug property
+    // const currentURL = req[Symbol.for('NextInternalRequestMeta')].__NEXT_INIT_URL;
+    const slugValue = params.slug;
+    const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/view-all/' + slugValue + '/';
+    const seoData = await fetchDataFromSeo(slugValue);
     return {
       props: {
         seoData,
-        currentURL
-      }
-    }
-  }
+        currentURL,
+      },
+    };
+  };
 }
 
 export const getServerSideProps = serverSidePropsFunction
