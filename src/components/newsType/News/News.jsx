@@ -243,7 +243,7 @@ const News = () => {
         </div>
       ) : Data && Data.length > 0 ? (
         <>
-          <BreadcrumbNav SecondElement='News Details' ThirdElement={Data && Data[0]?.title} />
+          <BreadcrumbNav SecondElement={translate('newsDetails')} ThirdElement={Data && Data[0]?.title} />
           <div className='news-deatail-section'>
             <div id='nv-main' className='container news_detail'>
               {/* ad spaces */}

@@ -271,5 +271,6 @@
   "contentTyperequired":"Please select content type",
   "descriptionrequired":"Please select description",
   "descriptionisrequire":"Description is required",
-  "resendCodeIn": "Resend Code In"
+  "resendCodeIn": "Resend Code In",
+  "newsDetails": "News Details"
 }
