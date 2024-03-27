@@ -156,6 +156,7 @@ const CommentsView = props => {
       },
       onError: err => {
         console.log(err)
+        toast.error(err)
       }
     }
     )
