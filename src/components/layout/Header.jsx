@@ -265,8 +265,19 @@ const Header = () => {
     confirm({
       title: 'Delete Account',
       // content: 'Are you sure to do this?',
-      content: 'Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:Profile information, Settings and Any associated content',
+      content: (
+        <>
+        <p>Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:</p>
+        <li style={{listStyle: 'disc'}}>Profile information</li>
+        <li style={{listStyle: 'disc'}}>Settings</li>
+        <li style={{listStyle: 'disc'}}>And Any associated content</li>
+        </>
+      ),
       centered: true,
+      okText: 'Delete',
+      okButtonProps: {
+        style: { background: 'red', borderColor: 'red' },
+      },
       async onOk() {
         try {
           await new Promise((resolve, reject) => {
