@@ -67,7 +67,7 @@ const api =
         headers
       })
 
-      if (response.data.error != false) {
+      if (response.data.error !== 'false') {
         // Dispatch Default onError Event
 
         dispatch(actions.apiCallFailed(response.data.message))
