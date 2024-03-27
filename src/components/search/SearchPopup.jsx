@@ -129,9 +129,9 @@ const SearchPopup = () => {
             id='ts-main'
             className='search_bar'
             style={{
-              height: total < 3 || (Data && Data?.error === 'true') || searchValue === '' ? 'auto' : '500px',
+              height: total < 3 || (Data && Data?.error === true) || searchValue === '' ? 'auto' : '500px',
               overflowY:
-                total < 3 || (Data && total > 3 && Data?.error === 'true') || searchValue === '' ? 'visible' : 'scroll'
+                total < 3 || (Data && total > 3 && Data?.error === true) || searchValue === '' ? 'visible' : 'scroll'
             }}
           >
             <div id='ts-content' className=''>

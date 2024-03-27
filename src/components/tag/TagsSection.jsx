@@ -43,7 +43,7 @@ const TagsSection = () => {
           </div>
           <div id='tags-tag'>
             {Data &&
-              Data.map(element => (
+              Data?.map(element => (
                 <Link id='btnTags' key={element.id} href={`/tag/${element.id}`} className='btn btn-outline-dark'>
                   {element.tag_name}
                 </Link>

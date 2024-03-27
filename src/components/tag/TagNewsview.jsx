@@ -2,7 +2,7 @@
 
 import { FiCalendar } from 'react-icons/fi'
 import Link from 'next/link'
-import { formatDate, translate } from '../../utils'
+import { formatDate, placeholderImage, translate } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
@@ -59,14 +59,14 @@ const TagNewsview = () => {
                   </div>
                 ))}
               </div>
-            ) : Data && Data.error !== "true" ? (
+            ) : Data && Data.error !== true ? (
               <>
                 {Data &&
-                  Data.data.map(element => (
+                  Data?.data?.map(element => (
                     <div className='col-md-4 col-12' key={element.id}>
                       <Link id='Link-all' href={{pathname:`/news/${element.slug}`,query: { language_id: element.language_id}}}>
                         <div id='ts-card' className='card'>
-                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} />
+                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage}/>
 
                           <div id='ts-card-body' className='card-body'>
                             <div className='tag_button'>
