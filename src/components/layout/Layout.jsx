@@ -29,7 +29,6 @@ const Layout = ({ children }) => {
       onSuccess: res =>{
 
         document.documentElement.style.setProperty('--primary-color', res && res?.data?.web_setting?.web_color_code)
-        console.log(res?.data?.web_setting?.web_color_code,'primary coor')
       },
       onError: error => {
         console.log(error)

@@ -46,7 +46,7 @@ const Notification = () => {
 
   // react query
   const { isLoading } = useQuery({
-    queryKey: ['getuserNotification', currentLanguage, offsetdata],
+    queryKey: ['getuserNotification', currentLanguage, offsetdata,Data],
     queryFn: getUserNotification,
     staleTime: 0
   })
@@ -167,7 +167,7 @@ const Notification = () => {
                 <Skeleton height={20} count={22} />
               </div>
             ) : Data && Data.length > 0 ? (
-              Data.map((element, index) => (
+              Data.slice(offsetdata, offsetdata + limit).map((element, index) => (
                 <div className='card my-3' key={index}>
                   <div className='card-body bd-highlight' id='card-noti'>
                     {element.type === 'comment_like' ? (

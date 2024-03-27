@@ -119,6 +119,18 @@ const StyleSix = ({ isLoading, Data }) => {
       {sliderData && sliderData[0].videos?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
+          <div id='rns-head-main' className=''>
+              <div className='left-sec'>
+                <h4 id='rns-main-logo' className='mb-0'>
+                  {Data.title}
+                </h4>
+                <div className='short_desc'>{Data && Data.short_description}</div>
+              </div>
+
+              {/* <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
+                {translate('viewMore')}
+              </Link> */}
+            </div>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
                 // Show skeleton loading when data is being fetched
@@ -337,6 +349,18 @@ const StyleSix = ({ isLoading, Data }) => {
       {sliderData && sliderData[0].breaking_news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
+          <div id='rns-head-main' className=''>
+              <div className='left-sec'>
+                <h4 id='rns-main-logo' className='mb-0'>
+                  {Data.title}
+                </h4>
+                <div className='short_desc'>{Data && Data.short_description}</div>
+              </div>
+
+              {/* <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
+                {translate('viewMore')}
+              </Link> */}
+            </div>
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
                 // Show skeleton loading when data is being fetched

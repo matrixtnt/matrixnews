@@ -541,6 +541,8 @@ a {
     color: #ffffff;
     background: var(--primary-color);
     border: none;
+    width: 170px;
+    height: 42px;
   }
 }
 

@@ -491,6 +491,8 @@ const CreateNews = () => {
 
     const slugValue = await slugConverter()
 
+    console.log(slugValue,'slugvalue')
+
     await setNewsApi({
       action_type: 1,
       category_id: DefaultValue.defualtCategoryID,
