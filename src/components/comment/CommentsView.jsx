@@ -80,10 +80,11 @@ const CommentsView = props => {
 
   // like button
   const LikeButton = (e, elem) => {
+    console.log('id : ',elem.id)
     e.preventDefault()
     setCommentLikeDislikeApi({
       comment_id: elem.id,
-      status: elem.like === 1 ? 0 : 1,
+      status: elem.like == '1' ? '0' : '1',
       onSuccess: res => {
         setRefreshKey(prevKey => prevKey + 1)
       },
@@ -97,9 +98,10 @@ const CommentsView = props => {
   // dislike
   const dislikebutton = (e, elem) => {
     e.preventDefault()
+    console.log('id : ',elem.id)
     setCommentLikeDislikeApi({
       comment_id: elem.id,
-      status: elem.dislike === 1 ? 0 : 2,
+      status: elem.dislike == '1' ? '0' : '2',
       onSuccess: res => {
 
         setRefreshKey(prevKey => prevKey + 1)
@@ -210,7 +212,7 @@ const CommentsView = props => {
                               <div className='comment_data'>
                                 <div className='comment_like'>
                                   {
-                                    element.like === 1 ? <>
+                                    element.like === '1' ? <>
                                       <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
                                       {element.total_like > 0 ? element.total_like : null}
                                     </> : <>
@@ -223,7 +225,7 @@ const CommentsView = props => {
                                 </div>
                                 <div className='comment_dislike'>
                                   {
-                                    element.dislike === 1 ? <>
+                                    element.dislike === '1' ? <>
                                       <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
                                       {element.total_dislike > 0 ? element.total_dislike : null}
                                     </> : <>
@@ -284,6 +286,7 @@ const CommentsView = props => {
                       </div>
                       {element.replay.map(ele => (
                         <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
+                          { console.log('repltData',ele)}
 
                           <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='replay comment user news image' />
                           <div id='cs-Rcard' className='card'>
@@ -298,12 +301,12 @@ const CommentsView = props => {
                                 <div className='comment_data'>
                                   <div className='comment_like'>
                                   {
-                                    element.like === 1 ? <>
-                                      <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
-                                      {element.total_like > 0 ? element.total_like : null}
+                                    ele.like == '1' ? <>
+                                      <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
+                                      {ele.total_like > 0 ? ele.total_like : null}
                                     </> : <>
-                                      <AiOutlineLike size={23} onClick={e => LikeButton(e, element)} />
-                                      {element.total_like > 0 ? element.total_like : null}
+                                      <AiOutlineLike size={23} onClick={e => LikeButton(e, ele)} />
+                                      {ele.total_like > 0 ? ele.total_like : null}
                                     </>
                                   }
                                     {/* <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
@@ -311,19 +314,26 @@ const CommentsView = props => {
                                   </div>
                                   <div className='comment_dislike'>
                                   {
-                                    element.dislike === 1 ? <>
-                                      <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
-                                      {element.total_dislike > 0 ? element.total_dislike : null}
+                                    ele.dislike == '1' ? <>
+                                      <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
+                                      {ele.total_dislike > 0 ? ele.total_dislike : null}
                                     </> : <>
-                                      <BiDislike size={22} onClick={e => dislikebutton(e, element)} />
-                                      {element.total_dislike > 0 ? element.total_dislike : null}
+                                      <BiDislike size={22} onClick={e => dislikebutton(e, ele)} />
+                                      {ele.total_dislike > 0 ? ele.total_dislike : null}
                                     </>
                                   }
                                     {/* <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
                                     {ele.total_dislike > 0 ? ele.total_dislike : null} */}
                                   </div>
                                   <div className='comment_dots'>
-                                    <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
+                                  {
+                                    userData.data.id === ele.user_id ? <span className='comment_delete' onClick={e => deleteComment(e)}>
+                                      <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
+
+                                    </span> :
+                                      <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
+                                  }
+                                    {/* <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} /> */}
                                   </div>
                                 </div>
 

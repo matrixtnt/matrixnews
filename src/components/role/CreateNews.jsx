@@ -61,7 +61,7 @@ const CreateNews = () => {
     defualtTag: null,
     defaultTagName: null,
     defualtContent: null,
-    defualtStartDate: new Date(),
+    defualtStartDate: null,
     defualtUrl: null,
     defaultVideoData: null,
     defaultImageData: null,
@@ -491,7 +491,7 @@ const CreateNews = () => {
 
     const slugValue = await slugConverter()
 
-    console.log(slugValue,'slugvalue')
+    // console.log(slugValue,'slugvalue')
 
     await setNewsApi({
       action_type: 1,
@@ -508,7 +508,7 @@ const CreateNews = () => {
       description: content,
       image: DefaultValue.defaultImagefile,
       ofile: images,
-      show_till: DefaultValue.defualtStartDate.toISOString().split('T')[0],
+      show_till: DefaultValue.defualtStartDate?.toISOString().split('T')[0],
       language_id: createNewsLanguage.id,
       location_id: DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
       onSuccess: response => {

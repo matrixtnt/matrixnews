@@ -22,7 +22,7 @@ const SubCategory = () => {
   const router = useRouter()
   const query = router.query
   const catId = query.category_id
-  const subCatId = query.slug
+  const subCatSlug = query.slug
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
@@ -45,9 +45,9 @@ const SubCategory = () => {
         search: '',
         language_id: language_id,
         category_id: catId,
-        subcategory_id: subCatId,
+        // subcategory_slug: subCatId,
         tag_id: '',
-        slug: "",
+        slug: subCatSlug,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -135,19 +135,6 @@ const SubCategory = () => {
     </Layout>
   )
 }
-
-// const SubCategory = () => {
-
-//     const router = useRouter()
-//     const query = router.query
-//     console.log(query.slug,'subCatId')
-
-//     return (
-//         <div>
-// Hellooo
-//         </div>
-//     )
-// }
 
 
 
