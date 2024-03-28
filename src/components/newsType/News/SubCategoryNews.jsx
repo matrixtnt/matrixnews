@@ -23,6 +23,7 @@ const SubCategory = () => {
   const query = router.query
   const catId = query.category_id
   const subCatSlug = query.slug
+  console.log('subCatSlug',subCatSlug)
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
@@ -45,9 +46,9 @@ const SubCategory = () => {
         search: '',
         language_id: language_id,
         category_id: catId,
-        // subcategory_slug: subCatId,
+        subcategory_slug: subCatSlug,
         tag_id: '',
-        slug: subCatSlug,
+        slug: '',
         latitude: storedLatitude,
         longitude: storedLongitude
       })

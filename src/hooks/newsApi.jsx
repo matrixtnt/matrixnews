@@ -12,7 +12,9 @@ export const getNewsApi = {
       search, // {optional}
       language_id,
       category_id,
+      category_slug,
       subcategory_id,
+      subcategory_slug,
       slug,
       tag_id,
       latitude,
@@ -28,7 +30,9 @@ export const getNewsApi = {
         search, // {optional}
         language_id,
         category_id,
+        category_slug,
         subcategory_id,
+        subcategory_slug,
         slug,
         tag_id,
         latitude,
