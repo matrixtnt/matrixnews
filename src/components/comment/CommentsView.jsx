@@ -83,7 +83,7 @@ const CommentsView = props => {
     e.preventDefault()
     setCommentLikeDislikeApi({
       comment_id: elem.id,
-      status: elem.like === '1' ? '0' : '1',
+      status: elem.like === 1 ? 0 : 1,
       onSuccess: res => {
         setRefreshKey(prevKey => prevKey + 1)
       },
@@ -99,7 +99,7 @@ const CommentsView = props => {
     e.preventDefault()
     setCommentLikeDislikeApi({
       comment_id: elem.id,
-      status: elem.dislike === '1' ? '0' : '2',
+      status: elem.dislike === 1 ? 0 : 2,
       onSuccess: res => {
 
         setRefreshKey(prevKey => prevKey + 1)
@@ -210,7 +210,7 @@ const CommentsView = props => {
                               <div className='comment_data'>
                                 <div className='comment_like'>
                                   {
-                                    element.like === '1' ? <>
+                                    element.like === 1 ? <>
                                       <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
                                       {element.total_like > 0 ? element.total_like : null}
                                     </> : <>
@@ -223,7 +223,7 @@ const CommentsView = props => {
                                 </div>
                                 <div className='comment_dislike'>
                                   {
-                                    element.dislike === '1' ? <>
+                                    element.dislike === 1 ? <>
                                       <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
                                       {element.total_dislike > 0 ? element.total_dislike : null}
                                     </> : <>
@@ -298,7 +298,7 @@ const CommentsView = props => {
                                 <div className='comment_data'>
                                   <div className='comment_like'>
                                   {
-                                    element.like === '1' ? <>
+                                    element.like === 1 ? <>
                                       <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
                                       {element.total_like > 0 ? element.total_like : null}
                                     </> : <>
@@ -311,7 +311,7 @@ const CommentsView = props => {
                                   </div>
                                   <div className='comment_dislike'>
                                   {
-                                    element.dislike === '1' ? <>
+                                    element.dislike === 1 ? <>
                                       <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
                                       {element.total_dislike > 0 ? element.total_dislike : null}
                                     </> : <>

@@ -135,7 +135,7 @@ const CategoryNews = () => {
                                 key={subCat.id}
                               >
                                 <Link href={{
-                                  pathname: `/categories-news/sub-category/${subCat.slug}`,
+                                  pathname: `/categories-news/sub-category/${subCat.id}`,
                                 }}
                                   id='catNav-links'
                                 ><b>{subCat?.subcategory_name}</b></Link>
