@@ -68,7 +68,7 @@ export const getLanguage = () => {
 export const getUser = () => {
   let user = store.getState().user
   if (user.data !== null) {
-    return user.data.id
+    return user?.data?.id
   }
 }
 
@@ -447,3 +447,22 @@ export const getUserByIdApi = () => {
     authorizationHeader: true,
   };
 };
+
+export const getComments = (access_key,
+  news_id,
+  offset,
+  limit) => {
+  return {
+    url: `${GET_COMMENT_BY_NEWS}`,
+    method: "GET",
+    params: {
+      access_key,
+      news_id,
+      offset,
+      limit
+
+    },
+    authorizationHeader: false,
+
+  }
+}

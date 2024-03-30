@@ -76,8 +76,9 @@ if (process.env.NEXT_PUBLIC_SEO === "true") {
     // Accessing the slug property
     // const currentURL = req[Symbol.for('NextInternalRequestMeta')].__NEXT_INIT_URL;
     const slugValue = params.slug;
+    const { language_id } = req[Symbol.for('NextInternalRequestMeta')].initQuery;
     const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/news/' + slugValue + '/';
-    const seoData = await fetchDataFromSeo(slugValue);
+    const seoData = await fetchDataFromSeo(slugValue, language_id);
     return {
       props: {
         seoData,

@@ -1,32 +1,36 @@
-'use client'
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { deleteusernotificationApi } from '../../store/actions/campaign'
-import { translate } from '../../utils'
-import Skeleton from 'react-loading-skeleton'
-import { MdMessage } from 'react-icons/md'
-import { IoMdThumbsUp } from 'react-icons/io'
-import { loaduserNotification } from '../../store/reducers/notificationbadgeReducer'
-import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { useSelector } from 'react-redux'
-import ReactPaginate from 'react-paginate'
-import { useQuery } from '@tanstack/react-query'
-import { getNotificationsApi } from 'src/hooks/getNotificationApi'
-import { access_key, getUser } from 'src/utils/api'
-import toast from 'react-hot-toast'
-import Layout from '../layout/Layout'
-import NoDataFound from '../noDataFound/NoDataFound'
-import moment from 'moment-timezone'; 
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import BreadcrumbNav from '../breadcrumb/BreadcrumbNav';
+import { deleteusernotificationApi } from '../../store/actions/campaign';
+import { translate } from '../../utils';
+import Skeleton from 'react-loading-skeleton';
+import { MdMessage } from 'react-icons/md';
+import { IoMdThumbsUp } from 'react-icons/io';
+import { loaduserNotification } from '../../store/reducers/notificationbadgeReducer';
+import { selectCurrentLanguage } from '../../store/reducers/languageReducer';
+import { useSelector } from 'react-redux';
+import ReactPaginate from 'react-paginate';
+import { useQuery } from '@tanstack/react-query';
+import { getNotificationsApi } from 'src/hooks/getNotificationApi';
+import { access_key, getUser } from 'src/utils/api';
+import toast from 'react-hot-toast';
+import Layout from '../layout/Layout';
+import NoDataFound from '../noDataFound/NoDataFound';
+import moment from 'moment-timezone';
+import { systemTimezoneData } from 'src/store/reducers/settingsReducer';
 
 const Notification = () => {
-  const [Data, setData] = useState([])
-  let user = getUser()
-  const currentLanguage = useSelector(selectCurrentLanguage)
-  const [totalLength, setTotalLength] = useState(0)
-  const [offsetdata, setOffsetdata] = useState(0)
-  const limit = 6
+  const [Data, setData] = useState([]);
+  const [convertedData, setConvertedData] = useState([]); // Store converted dates separately
+  let user = getUser();
+  const currentLanguage = useSelector(selectCurrentLanguage);
+  const [totalLength, setTotalLength] = useState(0);
+  const [offsetdata, setOffsetdata] = useState(0);
+  const limit = 6;
 
+  const systemTimezone = useSelector(systemTimezoneData)
+
+  // console.log(systemTimezone.systemTimezone,'notification Time zone')
   // api call
   const getUserNotification = async () => {
     try {
@@ -35,114 +39,72 @@ const Notification = () => {
         offset: offsetdata.toString(),
         limit: limit.toString(),
         user_id: user
-      })
-      setData(data.data)
-      setTotalLength(data.total)
-      return data.data
+      });
+      setData(data.data);
+      setTotalLength(data.total);
+      return data.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // react query
   const { isLoading } = useQuery({
-    queryKey: ['getuserNotification', currentLanguage, offsetdata,Data],
+    queryKey: ['getuserNotification', currentLanguage, offsetdata],
     queryFn: getUserNotification,
     staleTime: 0
-  })
- 
+  });
 
   const handlePageChange = selectedPage => {
-    const newOffset = selectedPage.selected * limit
-    setOffsetdata(newOffset)
-  }
+    const newOffset = selectedPage.selected * limit;
+    setOffsetdata(newOffset);
+  };
 
   const handleDeleteComment = (e, id) => {
-    e.preventDefault()
+    e.preventDefault();
     deleteusernotificationApi({
       id:id,
       onSuccess:response => {
         // Remove the deleted notification from the state
-        setData(prevData => prevData.filter(notification => notification.id !== id))
-        toast.success(response.message)
+        setData(prevData => prevData.filter(notification => notification.id !== id));
+        toast.success(response.message);
         loaduserNotification({
           offset:'0',
           limit:'10',
           onSuccess:() => {},
           onError:() => {}
-      })
+        });
       },
       onError:error => {
         if (error === 'No Data Found') {
-          setData('')
+          setData('');
         }
       }
-    }
-    )
-  }
+    });
+  };
 
-  // Function to format the date as "day Month year"
-  // const formatDate = dateString => {
-  //   const date = new Date(dateString)
-  //   const day = date.getDate()
-  //   const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date)
-  //   const year = date.getFullYear()
-  //   const hours = date.getHours()
-  //   const minutes = date.getMinutes()
-  //   const seconds = date.getSeconds()
-  //   return `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`
-  // }
-
-  const [convertedTime, setConvertedTime] = useState(null);
-
-  // useEffect(() => {
-  //   if (Data.length > 0) {
-  //     // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
-  //     const convertedData = Data.map(element => {
-  //       const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date
-  //       const dtKolkata = moment(timestampUtc).tz('Asia/Kolkata');
-  //       const convertedTime = dtKolkata.format("DD-MM-YYYY hh:mm:ss A");
-  //       return {
-  //         ...element,
-  //         convertedTime
-  //       };
-  //     });
-  //     setData(convertedData);
-  //   }
-  // }, [Data]);
-  
-  // // Function to format the date as "day Month year"
-  // const formatDate = dateString => {
-  //   const date = new Date(dateString)
-  //   const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting
-  //   return formattedDate;
-  // }
+  // Function to format the date as "DD/MM/YYYY"
+  const formatDate = dateString => {
+    const date = new Date(dateString);
+    const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting
+    return formattedDate;
+  };
 
   useEffect(() => {
     if (Data.length > 0) {
       // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
       const convertedData = Data.map(element => {
         const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date
-        const dtKolkata = moment(timestampUtc).tz('Asia/Kolkata');
+        const dtKolkata = moment(timestampUtc).tz(systemTimezone.systemTimezone);
         const convertedTime = dtKolkata.format("DD-MM-YYYY hh:mm:ss A");
         return {
           ...element,
           convertedTime
         };
       });
-      setData(convertedData);
+      setConvertedData(convertedData); // Store converted dates in a separate state variable
     }
   }, [Data]);
-  
-  // Function to format the date as "DD/MM/YYYY"
-  const formatDate = dateString => {
-    const date = new Date(dateString)
-    const formattedDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString(); // Adjusting the date to UTC before formatting
-    return formattedDate;
-  }
-  
-  
-  
 
   return (
     <Layout>
@@ -166,8 +128,8 @@ const Notification = () => {
               <div className='col-12 loading_data'>
                 <Skeleton height={20} count={22} />
               </div>
-            ) : Data && Data.length > 0 ? (
-              Data.slice(offsetdata, offsetdata + limit).map((element, index) => (
+            ) : convertedData && convertedData.length > 0 ? ( // Use convertedData instead of Data
+              convertedData.slice(offsetdata, offsetdata + limit).map((element, index) => (
                 <div className='card my-3' key={index}>
                   <div className='card-body bd-highlight' id='card-noti'>
                     {element.type === 'comment_like' ? (
@@ -215,7 +177,7 @@ const Notification = () => {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
-export default Notification
+export default Notification;

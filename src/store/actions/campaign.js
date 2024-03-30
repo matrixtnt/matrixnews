@@ -14,7 +14,8 @@ import {
   set_comment_like_dislike_Api,
   set_flag_Api,
   register_Fcmtoken_Api,
-  getUserByIdApi
+  getUserByIdApi,
+  getComments
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -24,9 +25,9 @@ export const categoriesApi = ({
   offset = '',
   limit = '',
   language_id = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -43,9 +44,9 @@ export const categoriesApi = ({
 export const setbookmarkApi = ({
   news_id = '',
   status = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -63,9 +64,9 @@ export const setcommentApi = ({
   parent_id = '',
   news_id = '',
   message = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -79,7 +80,7 @@ export const setcommentApi = ({
 }
 
 // 4. delete comment
-export const deletecommentApi = ({ comment_id = '', onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
+export const deletecommentApi = ({ comment_id = '', onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
       ...deleteCommentApi(comment_id),
@@ -95,9 +96,9 @@ export const deletecommentApi = ({ comment_id = '', onSuccess = () => {}, onErro
 export const setlikedislikeApi = ({
   news_id = '',
   status = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -113,9 +114,9 @@ export const setlikedislikeApi = ({
 // 6. delete user notification
 export const deleteusernotificationApi = ({
   id = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -131,9 +132,9 @@ export const deleteusernotificationApi = ({
 // 7. set user categories
 export const setusercategoriesApi = ({
   category_id = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -165,9 +166,9 @@ export const setNewsApi = async ({
   show_till = '',
   language_id = '',
   location_id = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -199,7 +200,7 @@ export const setNewsApi = async ({
 }
 
 // 10. delete new images
-export const deleteImageApi = ({ image_id = '', onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
+export const deleteImageApi = ({ image_id = '', onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
       ...deleteimageApi(image_id),
@@ -212,7 +213,7 @@ export const deleteImageApi = ({ image_id = '', onSuccess = () => {}, onError = 
 }
 
 // 11. delete news
-export const deleteNewsApi = ({ news_id = '', onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
+export const deleteNewsApi = ({ news_id = '', onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
       ...deletenewsApi(news_id),
@@ -227,9 +228,9 @@ export const deleteNewsApi = ({ news_id = '', onSuccess = () => {}, onError = ()
 // 12. subcategory by category
 export const getSubcategoryByCategoryApi = ({
   category_id = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -246,9 +247,9 @@ export const getSubcategoryByCategoryApi = ({
 export const setCommentLikeDislikeApi = ({
   comment_id = '',
   status = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -266,9 +267,9 @@ export const setFlagApi = ({
   comment_id = '',
   news_id = '',
   message = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -282,7 +283,7 @@ export const setFlagApi = ({
 }
 
 // 16. delete account
-export const accountDeleteApi = ({ onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
+export const accountDeleteApi = ({ onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
       ...accountdeleteApi(),
@@ -299,9 +300,9 @@ export const registerFcmTokenApi = async ({
   token = '',
   latitude = '',
   longitude = '',
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   store.dispatch(
     apiCallBegan({
@@ -315,7 +316,7 @@ export const registerFcmTokenApi = async ({
 }
 
 // 18. get user by id
-export const getuserbyidApi = ({ onSuccess = () => {}, onError = () => {}, onStart = () => {} }) => {
+export const getuserbyidApi = ({ onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
       ...getUserByIdApi(),
@@ -326,3 +327,27 @@ export const getuserbyidApi = ({ onSuccess = () => {}, onError = () => {}, onSta
     })
   )
 }
+
+
+// // GET PRODUCTS
+export const GetCommentsApi = ({
+  access_key = '',
+  news_id = '',
+  offset = '',
+  limit = '',
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { } }) => {
+  store.dispatch(
+    apiCallBegan({
+      ...getComments(access_key,
+        news_id,
+        offset,
+        limit),
+      displayToast: false,
+      onStart,
+      onSuccess,
+      onError,
+    })
+  );
+};

@@ -10,6 +10,7 @@ const initialState = {
     lat:null,
     long:null,
     fcmtoken:"",
+    systemTimezone: '',
 }
 
 export const settingsSlice = createSlice({
@@ -35,12 +36,15 @@ export const settingsSlice = createSlice({
         fcmToken:(settings,action)=>{
             settings.fcmtoken = action.payload.data
         },
+        systemTimezone:(settings,action)=>{
+            settings.systemTimezone = action.payload.data
+        },
 
     }
 })
 
 
-export const { settingsRequested,settingsSuccess,settingsFailed,latlong,fcmToken } = settingsSlice.actions;
+export const { settingsRequested,settingsSuccess,settingsFailed,latlong,fcmToken,systemTimezone } = settingsSlice.actions;
 export default settingsSlice.reducer;
 
 // load websettings api call
@@ -71,6 +75,14 @@ export const locationData = createSelector(
 export const loadFcmToken = (data) => {
     store.dispatch(fcmToken({data}))
 }
+// load fcmToken
+export const loadSystemTimezone = (data) => {
+    store.dispatch(systemTimezone({data}))
+}
+export const systemTimezoneData = createSelector(
+    state => state.settings,
+    settings => settings
+)
 
 // Selector Functions
 export const settingsData = createSelector(

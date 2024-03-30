@@ -1,82 +1,42 @@
-'use client'
-import { useState, useRef } from 'react'
-import Button from 'react-bootstrap/Button'
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
-import Popover from 'react-bootstrap/Popover'
+'use client';
+import { useState, useRef } from 'react';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 import {
   deletecommentApi,
   setCommentLikeDislikeApi,
   setFlagApi,
   setcommentApi
-} from '../../store/actions/campaign'
-import { useSelector } from 'react-redux'
-import { selectUser } from '../../store/reducers/userReducer'
-import { imgError, translate } from '../../utils'
-import no_image from '../../../public/assets/images/no_image.jpeg'
-import { Modal } from 'antd'
-import { BiDislike, BiDotsVerticalRounded, BiSolidDislike, BiSolidFlag, BiSolidLike, BiSolidTrash } from 'react-icons/bi'
-import { getCommentByNewsApi } from 'src/hooks/commentsApi'
-import { access_key, getUser } from 'src/utils/api'
-import { useQuery } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
-import Card from '../skeletons/Card'
-import { AiOutlineLike } from 'react-icons/ai'
+} from '../../store/actions/campaign';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../store/reducers/userReducer';
+import { imgError, translate, isLogin } from '../../utils';
+import no_image from '../../../public/assets/images/no_image.jpeg';
+import { Modal } from 'antd';
+import { BiDislike, BiDotsVerticalRounded, BiSolidDislike, BiSolidFlag, BiSolidLike, BiSolidTrash } from 'react-icons/bi';
+import { getCommentByNewsApi } from 'src/hooks/commentsApi';
+import { access_key, getUser } from 'src/utils/api';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import Card from '../skeletons/Card';
+import { AiOutlineLike } from 'react-icons/ai';
 
 const CommentsView = props => {
-  const [LoadComments, setLoadComments] = useState(false)
-  const [refreshKey, setRefreshKey] = useState(0)
-  const [Comment, setComment] = useState('')
-  const Nid = props.Nid
-  let user = getUser()
-  const replyRef = useRef()
-  const userData = useSelector(selectUser)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [dotModal, setDotModal] = useState(false)
-  const [CommentID, setCommentID] = useState(null)
-  const [message, setMessage] = useState(null)
+  const [LoadComments, setLoadComments] = useState(false);
+  // const [refreshKey, setRefreshKey] = useState(0);
+  const [Comment, setComment] = useState('');
+  const [replyComment, setReplyComment] = useState("");
+  const Nid = props.Nid;
+  let user = getUser();
+  const replyRef = useRef();
+  const userData = useSelector(selectUser);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [dotModal, setDotModal] = useState(false);
+  const [CommentID, setCommentID] = useState(null);
+  const [message, setMessage] = useState(null);
 
-  // set comment
-  const setCommentData = (e, id) => {
-    e.preventDefault()
-    setcommentApi({
-      parent_id: id,
-      news_id: Nid,
-      message: Comment,
-      onSuccess: response => {
-        setLoadComments(true)
-        setTimeout(() => {
-          setLoadComments(false)
-        }, 1000)
-      },
-      onError: error => {
-        console.log(error)
-        toast.error(error)
 
-      }
-    }
-    )
-  }
-
-  // set replay comment
-  const setreplyComment = (e, id) => {
-    e.preventDefault()
-    setcommentApi({
-      parent_id: id,
-      news_id: Nid,
-      message: Comment,
-      onSuccess: response => {
-        setLoadComments(true)
-        setTimeout(() => {
-          setLoadComments(false)
-        }, 1000)
-      },
-      onError: error => {
-        console.log(error)
-        toast.error(error)
-      }
-    }
-    )
-  }
 
   // // like button
   // const LikeButton = (e, elem) => {
@@ -136,7 +96,7 @@ const CommentsView = props => {
   //     },
   //   });
   // };
-  
+
   // const dislikebutton = (e, elem) => {
   //   e.preventDefault();
   //   setCommentLikeDislikeApi({
@@ -160,109 +120,9 @@ const CommentsView = props => {
   //     },
   //   });
   // };
-
-
-  const LikeButton = (e, elem) => {
-  e.preventDefault();
-  setCommentLikeDislikeApi({
-    comment_id: elem.id,
-    status: elem.like === 1 ? 0 : 1,
-    onSuccess: (res) => {
-      const updatedData = Data.map(comment => {
-        if (comment.id === elem.id) {
-          return { ...comment, like: res.like, total_like: res.total_like }; // Update like and total_like
-        }
-        return comment;
-      });
-      setLoadComments(true); // Trigger loading state to force re-render
-      setTimeout(() => {
-        setLoadComments(false);
-      }, 1000);
-      setData(updatedData); // Update the state with the modified comment data
-    },
-    onError: (err) => {
-      console.log(err);
-    },
-  });
-};
-
-const dislikebutton = (e, elem) => {
-  e.preventDefault();
-  setCommentLikeDislikeApi({
-    comment_id: elem.id,
-    status: elem.dislike === 1 ? 0 : 2,
-    onSuccess: (res) => {
-      const updatedData = Data.map(comment => {
-        if (comment.id === elem.id) {
-          return { ...comment, dislike: res.dislike, total_dislike: res.total_dislike }; // Update dislike and total_dislike
-        }
-        return comment;
-      });
-      setLoadComments(true); // Trigger loading state to force re-render
-      setTimeout(() => {
-        setLoadComments(false);
-      }, 1000);
-      setData(updatedData); // Update the state with the modified comment data
-    },
-    onError: (err) => {
-      console.log(err);
-    },
-  });
-};
-
-
-  // dots
-  const popupDots = (e, elem) => {
-    e.preventDefault()
-    setModalOpen(true)
-    if (userData.data.id === elem.user_id) {
-      setDotModal(true)
-    } else {
-      setDotModal(false)
-    }
-  }
-
-  const deleteComment = e => {
-    e.preventDefault()
-    deletecommentApi({
-      comment_id: CommentID,
-      onSuccess: res => {
-        setLoadComments(true)
-        // setRefreshKey(prevKey => prevKey + 1)
-        setRefreshKey(refreshKey + 1)
-        setModalOpen(false)
-        toast.success(translate('comDelSucc'))
-      },
-      onError: err => {
-        console.log(err)
-      }
-    }
-    )
-  }
-
-  const submitBtn = e => {
-    e.preventDefault()
-    setFlagApi({
-      comment_id: CommentID,
-      news_id: Nid,
-      message: message,
-      onSuccess: res => {
-        // setRefreshKey(prevKey => prevKey + 1)
-        setRefreshKey(refreshKey + 1)
-        setModalOpen(false)
-        setLoadComments(true)
-        setMessage('')
-        toast.success(translate('flag'))
-      },
-      onError: err => {
-        console.log(err)
-        toast.error(err)
-      }
-    }
-    )
-  }
-
   // api call
+
+
   const getCommentByNews = async () => {
     try {
       const { data } = await getCommentByNewsApi.getCommentByNews({
@@ -270,32 +130,238 @@ const dislikebutton = (e, elem) => {
         news_id: Nid,
         offset: '0',
         limit: '10'
-      })
-      return data.data
+      });
+      return data?.data ? data?.data : [];
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // react query
-  const { data: Data, isLoading } = useQuery({
-    queryKey: ['getCommentByNews ', Nid, props.LoadComments, LoadComments],
+  // console.log("props ->", props);
+  const { data: Data, isLoading, refetch } = useQuery({
+    queryKey: ['getCommentByNews ', Nid],
     queryFn: getCommentByNews,
     staleTime: 0,
-  })
+  });
+
+  // set comment
+  const setCommentData = (e, id) => {
+    e.preventDefault();
+    setcommentApi({
+      parent_id: id,
+      news_id: Nid,
+      message: replyComment,
+      onSuccess: async (response) => {
+        // setLoadComments(true);
+        // setTimeout(() => {
+        //   setLoadComments(false);
+        // }, 1000);
+        setReplyComment("");
+        await refetch();
+      },
+      onError: error => {
+        console.log(error);
+        toast.error(error);
+
+      }
+    }
+    );
+  };
+
+  // set replay comment
+  const setreplyComment = (e, id) => {
+    e.preventDefault();
+    setcommentApi({
+      parent_id: id,
+      news_id: Nid,
+      message: replyComment,
+      onSuccess: async (response) => {
+        // setLoadComments(true);
+        // setTimeout(() => {
+        //   setLoadComments(false);
+        // }, 1000);
+        await refetch();
+        setReplyComment("");
+      },
+      onError: error => {
+        console.log(error);
+        toast.error(error);
+      }
+    }
+    );
+  };
+
+  // console.log(Data);
+  const LikeButton = (e, elem) => {
+    e.preventDefault();
+    setCommentLikeDislikeApi({
+      comment_id: elem.id,
+      status: elem.like === 1 ? 0 : 1,
+      onSuccess: async (res) => {
+        // const updatedData = Data.map(comment => {
+        //   if (comment.id === elem.id) {
+        //     return { ...comment, like: res.like, total_like: res.total_like }; // Update like and total_like
+        //   }
+        //   return comment;
+        // });
+        await refetch();
+        // setLoadComments(true); // Trigger loading state to force re-render
+        // setTimeout(() => {
+        //   setLoadComments(false);
+        // }, 1000);
+        // setData(updatedData); // Update the state with the modified comment data
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
+  };
+
+  const dislikebutton = (e, elem) => {
+    e.preventDefault();
+    setCommentLikeDislikeApi({
+      comment_id: elem.id,
+      status: elem.dislike === 1 ? 0 : 2,
+      onSuccess: async (res) => {
+        // const updatedData = Data.map(comment => {
+        //   if (comment.id === elem.id) {
+        //     return { ...comment, dislike: res.dislike, total_dislike: res.total_dislike }; // Update dislike and total_dislike
+        //   }
+        //   return comment;
+        // });
+        // setLoadComments(true); // Trigger loading state to force re-render
+        // setTimeout(() => {
+        //   setLoadComments(false);
+        // }, 1000);
+        // setData(updatedData); // Update the state with the modified comment data
+        await refetch();
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
+  };
 
 
+  // dots
+  const popupDots = (e, elem) => {
+    e.preventDefault();
+    setModalOpen(true);
+    if (userData.data.id === elem.user_id) {
+      setDotModal(true);
+    } else {
+      setDotModal(false);
+    }
+  };
+
+  const deleteComment = (e, commentId) => {
+    e.preventDefault();
+    deletecommentApi({
+      comment_id: commentId,
+      onSuccess: async (res) => {
+        // setLoadComments(true);
+        // setRefreshKey(prevKey => prevKey + 1)
+        // setRefreshKey(refreshKey + 1);
+        await refetch();
+        setModalOpen(false);
+        toast.success(translate('comDelSucc'));
+      },
+      onError: err => {
+        console.log(err);
+      }
+    }
+    );
+  };
+
+  const submitBtn = e => {
+    e.preventDefault();
+    setFlagApi({
+      comment_id: CommentID,
+      news_id: Nid,
+      message: message,
+      onSuccess: async (res) => {
+        // setRefreshKey(prevKey => prevKey + 1)
+        // setRefreshKey(refreshKey + 1);
+        setModalOpen(false);
+        // setLoadComments(true);
+        setMessage('');
+        await refetch();
+        toast.success(translate('flag'));
+      },
+      onError: err => {
+        console.log(err);
+        toast.error(err);
+      }
+    }
+    );
+  };
+
+
+
+  const setNewComment = async (e) => {
+    e.preventDefault();
+    if (!isLogin()) {
+      toast.error('please login first to comment');
+      return;
+    }
+    setcommentApi({
+      parent_id: 0,
+      news_id: Nid,
+      message: Comment,
+      onSuccess: async (response) => {
+        setComment('');
+        // queryClient.invalidateQueries(['getCommentsByNews']);
+        await refetch();
+
+        // setLoadComments(true);
+        // setTimeout(() => {
+        //   setLoadComments(false);
+        // }, 1000);
+      },
+      onError: error => {
+        console.log(error);
+        toast.error(error);
+      }
+    }
+    );
+  };
+
+  // console.log(Data);
   return (
     <>
+      <div>
+        <form id='cs-main' onSubmit={e => setNewComment(e)}>
+          <h2>{translate('leaveacomments')}</h2>
+          <textarea
+            value={Comment}
+            name=''
+            id='cs-input'
+            cols='30'
+            rows='10'
+            onChange={e => {
+              setComment(e.target.value);
+            }}
+            placeholder={`${translate('shareThoghtLbl')}`}
+          ></textarea>
+          <div className='d-flex align-items-end justify-content-end'>
+
+            <button id='cs-btnsub' type='submit' className='btn'>
+              {translate('submitpost')}
+            </button>
+          </div>
+        </form>
+      </div>
       {userData && userData.data ? (
         <div>
-          {Data && Data.length === 0 ? null : <h2>{translate('comment')}</h2>}
+          {Data?.length == 0 ? null : <h2>{translate('comment')}</h2>}
           {
             isLoading ? <Card /> :
               <>
                 {Data &&
                   Data.map(element => (
                     <div key={element.id}>
+                      {console.log(element)}
                       <div id='cv-comment' onClick={() => setCommentID(element.id)}>
                         <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
                         <div id='cs-card' className='card'>
@@ -337,7 +403,7 @@ const dislikebutton = (e, elem) => {
                                 </div>
                                 <div className='comment_dots'>
                                   {
-                                    userData.data.id === element.user_id ? <span className='comment_delete' onClick={e => deleteComment(e)}>
+                                    userData.data.id === element.user_id ? <span className='comment_delete' onClick={e => deleteComment(e, element.id)}>
                                       <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
 
                                     </span> :
@@ -363,7 +429,7 @@ const dislikebutton = (e, elem) => {
                                           cols='30'
                                           rows='5'
                                           onChange={e => {
-                                            setComment(e.target.value)
+                                            setReplyComment(e.target.value);
                                           }}
                                           placeholder='Share Your reply...'
                                         ></textarea>
@@ -385,7 +451,7 @@ const dislikebutton = (e, elem) => {
                       </div>
                       {element.replay.map(ele => (
                         <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-                          { console.log('repltData',ele)}
+                          {console.log('repltData', ele)}
 
                           <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='replay comment user news image' />
                           <div id='cs-Rcard' className='card'>
@@ -399,39 +465,39 @@ const dislikebutton = (e, elem) => {
                               <>
                                 <div className='comment_data'>
                                   <div className='comment_like'>
-                                  {
-                                    ele.like === 1 ? <>
-                                      <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
-                                      {ele.total_like > 0 ? ele.total_like : null}
-                                    </> : <>
-                                      <AiOutlineLike size={23} onClick={e => LikeButton(e, ele)} />
-                                      {ele.total_like > 0 ? ele.total_like : null}
-                                    </>
-                                  }
+                                    {
+                                      ele.like === 1 ? <>
+                                        <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
+                                        {ele.total_like > 0 ? ele.total_like : null}
+                                      </> : <>
+                                        <AiOutlineLike size={23} onClick={e => LikeButton(e, ele)} />
+                                        {ele.total_like > 0 ? ele.total_like : null}
+                                      </>
+                                    }
                                     {/* <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
                                     {ele.total_like > 0 ? ele.total_like : null} */}
                                   </div>
                                   <div className='comment_dislike'>
-                                  {
-                                    ele.dislike === 1 ? <>
-                                      <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
-                                      {ele.total_dislike > 0 ? ele.total_dislike : null}
-                                    </> : <>
-                                      <BiDislike size={22} onClick={e => dislikebutton(e, ele)} />
-                                      {ele.total_dislike > 0 ? ele.total_dislike : null}
-                                    </>
-                                  }
+                                    {
+                                      ele.dislike === 1 ? <>
+                                        <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
+                                        {ele.total_dislike > 0 ? ele.total_dislike : null}
+                                      </> : <>
+                                        <BiDislike size={22} onClick={e => dislikebutton(e, ele)} />
+                                        {ele.total_dislike > 0 ? ele.total_dislike : null}
+                                      </>
+                                    }
                                     {/* <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
                                     {ele.total_dislike > 0 ? ele.total_dislike : null} */}
                                   </div>
                                   <div className='comment_dots'>
-                                  {
-                                    userData.data.id === ele.user_id ? <span className='comment_delete' onClick={e => deleteComment(e)}>
-                                      <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
+                                    {
+                                      userData.data.id === ele.user_id ? <span className='comment_delete' onClick={e => deleteComment(e, ele?.id)}>
+                                        <span className='mb-0'>{<BiSolidTrash size={18} />}</span>
 
-                                    </span> :
-                                      <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
-                                  }
+                                      </span> :
+                                        <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
+                                    }
                                     {/* <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} /> */}
                                   </div>
                                 </div>
@@ -452,7 +518,7 @@ const dislikebutton = (e, elem) => {
                                             cols='30'
                                             rows='5'
                                             onChange={e => {
-                                              setComment(e.target.value)
+                                              setReplyComment(e.target.value);
                                             }}
                                             placeholder='Share Your reply...'
                                           ></textarea>
@@ -488,7 +554,7 @@ const dislikebutton = (e, elem) => {
             footer={false}
           >
             {dotModal ? (
-              <div className='comment_delete' onClick={e => deleteComment(e)}>
+              <div className='comment_delete' onClick={e => deleteComment(e,)}>
                 <p className='mb-0'>{translate('deleteTxt')}</p>
                 <BiSolidTrash size={18} />
               </div>
@@ -510,7 +576,13 @@ const dislikebutton = (e, elem) => {
         </div>
       ) : null}
     </>
-  )
-}
+  );
+};
 
-export default CommentsView
+export default CommentsView;
+
+
+
+
+
+// news code 

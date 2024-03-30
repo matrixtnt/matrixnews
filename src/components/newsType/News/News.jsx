@@ -1,13 +1,13 @@
-'use client'
-import { useState, useEffect } from 'react'
-import Form from 'react-bootstrap/Form'
-import { AiOutlineLike, AiTwotoneLike, AiOutlineEye, AiFillLike } from 'react-icons/ai'
-import { BsBookmark, BsFillBookmarkFill, BsFillPlayFill } from 'react-icons/bs'
-import { FiCalendar } from 'react-icons/fi'
-import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx'
-import TagsSection from '../../tag/TagsSection.jsx'
-import CommentSection from '../../comment/CommentSection.jsx'
-import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav.jsx'
+'use client';
+import { useState, useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
+import { AiOutlineLike, AiTwotoneLike, AiOutlineEye, AiFillLike } from 'react-icons/ai';
+import { BsBookmark, BsFillBookmarkFill, BsFillPlayFill } from 'react-icons/bs';
+import { FiCalendar } from 'react-icons/fi';
+import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx';
+import TagsSection from '../../tag/TagsSection.jsx';
+import CommentSection from '../../comment/CommentSection.jsx';
+import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav.jsx';
 import {
   FacebookIcon,
   WhatsappIcon,
@@ -15,56 +15,57 @@ import {
   WhatsappShareButton,
   FacebookShareButton,
   XIcon
-} from 'react-share'
-import SignInModal from '../../auth/SignInModal.jsx'
-import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js'
-import { access_key, getLanguage, getUser } from '../../../utils/api.jsx'
-import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate } from '../../../utils/index.jsx'
-import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx'
-import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { useSelector } from 'react-redux'
-import Skeleton from 'react-loading-skeleton'
-import { selectUser } from '../../../store/reducers/userReducer.js'
-import { settingsData } from '../../../store/reducers/settingsReducer'
-import { GoTag } from 'react-icons/go'
-import { BiTime } from 'react-icons/bi'
-import LightBox from '../../gallery/LightBox.jsx'
-import { FaImages } from 'react-icons/fa'
-import { useRouter } from 'next/router.js'
-import { useQuery } from '@tanstack/react-query'
-import { getNewsApi } from 'src/hooks/newsApi.jsx'
-import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
-import Layout from 'src/components/layout/Layout.jsx'
-import NoDataFound from 'src/components/noDataFound/NoDataFound'
-import toast from 'react-hot-toast'
+} from 'react-share';
+import SignInModal from '../../auth/SignInModal.jsx';
+import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js';
+import { access_key, getLanguage, getUser } from '../../../utils/api.jsx';
+import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate } from '../../../utils/index.jsx';
+import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx';
+import { selectCurrentLanguage } from '../../../store/reducers/languageReducer';
+import { useSelector } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
+import { selectUser } from '../../../store/reducers/userReducer.js';
+import { settingsData } from '../../../store/reducers/settingsReducer';
+import { GoTag } from 'react-icons/go';
+import { BiTime } from 'react-icons/bi';
+import LightBox from '../../gallery/LightBox.jsx';
+import { FaImages } from 'react-icons/fa';
+import { useRouter } from 'next/router.js';
+import { useQuery } from '@tanstack/react-query';
+import { getNewsApi } from 'src/hooks/newsApi.jsx';
+import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi';
+import Layout from 'src/components/layout/Layout.jsx';
+import NoDataFound from 'src/components/noDataFound/NoDataFound';
+import toast from 'react-hot-toast';
+import CommentsView from 'src/components/comment/CommentsView.jsx';
 
 const News = () => {
-  let user = getUser()
-  const currentLanguage = useSelector(selectCurrentLanguage)
-  const userData = useSelector(selectUser)
-  const SettingsData = useSelector(settingsData)
-  const router = useRouter()
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+  let user = getUser();
+  const currentLanguage = useSelector(selectCurrentLanguage);
+  const userData = useSelector(selectUser);
+  const SettingsData = useSelector(settingsData);
+  const router = useRouter();
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
 
   // Rest of your code...
   // eslint-disable-next-line
-  const [CheckLike, setCheckLike] = useState(false)
-  const [Like, setLike] = useState(CheckLike) // eslint-disable-next-line
-  const [Bookmark, setBookmark] = useState(false) // eslint-disable-next-line
-  const [FontSize, setFontSize] = useState(18) // eslint-disable-next-line
-  const [Video_url, setVideo_url] = useState()
-  const [modalShow, setModalShow] = useState(false)
-  const [VideomodalShow, setVideoModalShow] = useState(false)
-  const [typeUrl, setTypeUrl] = useState(null)
-  const query = router.query
-  const NewsId = query.slug
+  const [CheckLike, setCheckLike] = useState(false);
+  const [Like, setLike] = useState(CheckLike); // eslint-disable-next-line
+  const [Bookmark, setBookmark] = useState(false); // eslint-disable-next-line
+  const [FontSize, setFontSize] = useState(18); // eslint-disable-next-line
+  const [Video_url, setVideo_url] = useState();
+  const [modalShow, setModalShow] = useState(false);
+  const [VideomodalShow, setVideoModalShow] = useState(false);
+  const [typeUrl, setTypeUrl] = useState(null);
+  const query = router.query;
+  const NewsId = query.slug;
   // eslint-disable-next-line
-  const [islogout, setIsLogout] = useState(false) // eslint-disable-next-line
-  const [isloginloading, setisloginloading] = useState(true) // eslint-disable-next-line
-  let { id: language_id } = getLanguage()
-  const [viewerIsOpen, setViewerIsOpen] = useState(false)
-  const [currentImage, setCurrentImage] = useState(0)
-  const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false)
+  const [islogout, setIsLogout] = useState(false); // eslint-disable-next-line
+  const [isloginloading, setisloginloading] = useState(true); // eslint-disable-next-line
+  let { id: language_id } = getLanguage();
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false);
 
   // api call
   const getNewsById = async () => {
@@ -73,27 +74,27 @@ const News = () => {
         access_key: access_key,
         slug: NewsId,
         language_id: currentLanguage.id
-      })
+      });
 
       if (data.data[0].bookmark === 0) {
-        setBookmark(false)
+        setBookmark(false);
       } else {
-        setBookmark(true)
+        setBookmark(true);
       }
 
       if (data.data[0].like === 0) {
-        setLike(false)
+        setLike(false);
       } else {
-        setLike(true)
+        setLike(true);
       }
-      return data.data
+      return data.data;
     } catch (error) {
       // console.log(error)
       if (error === 'No Data Found') {
-        router.push('/')
+        router.push('/');
       }
     }
-  }
+  };
 
   // api call
   const setNewsView = async () => {
@@ -101,12 +102,12 @@ const News = () => {
       const { data } = await getNewsApi.setNewsView({
         access_key: access_key,
         news_id: NewsId
-      })
-      return data.data
+      });
+      return data.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // api call
   const getAdsSpaceNewsDetails = async () => {
@@ -114,18 +115,18 @@ const News = () => {
       const { data } = await getAdsSpaceNewsDetailsApi.getAdsSpaceNewsDetails({
         access_key: access_key,
         language_id: language_id
-      })
-      return data.data
+      });
+      return data.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   // react query
   const { data: sponsoredads } = useQuery({
     queryKey: ['getadsspacenews'],
     queryFn: getAdsSpaceNewsDetails
-  })
+  });
 
   const {
     refetch,
@@ -138,25 +139,25 @@ const News = () => {
     queryKey: ['getNewsbyId', NewsId, currentLanguage.id],
     queryFn: getNewsById,
     staleTime: 0
-  })
+  });
 
   const { } = useQuery({
     queryKey: ['setNewsView', NewsId],
     queryFn: setNewsView
-  })
+  });
 
   // this logic actually for seo purpose to move to home page otherwise crawling is not working
   useEffect(() => {
     if (currentLanguage.id !== Number(query.language_id)) {
-      router.push('/')
+      router.push('/');
     }
-  }, [currentLanguage.id])
+  }, [currentLanguage.id]);
 
-  useEffect(() => { }, [userData.data])
+  useEffect(() => { }, [userData.data]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   // set like dislike
   const setLikeDislikeData = async (id, status) => {
@@ -165,17 +166,17 @@ const News = () => {
         news_id: id,
         status: status,
         onSuccess: async response => {
-          await refetch()
-          setLike(!Like)
+          await refetch();
+          setLike(!Like);
         },
         onError: error => {
-          console.log(error)
+          console.log(error);
         }
-      })
+      });
     } else {
-      setModalShow(true)
+      setModalShow(true);
     }
-  }
+  };
 
   // set bookmark
   const setbookmarkData = async (newsid, status) => {
@@ -185,55 +186,55 @@ const News = () => {
         news_id: newsid,
         status: status,
         onStart: async response => {
-          await refetch()
-          setBookmark(!Bookmark)
+          await refetch();
+          setBookmark(!Bookmark);
         },
         onSuccess: res => {
-          toast.success(res.message)
+          toast.success(res.message);
         },
         onError: error => {
-          console.log(error)
+          console.log(error);
         }
-      })
+      });
     } else {
-      setModalShow(true)
+      setModalShow(true);
     }
-  }
+  };
 
   const handleVideoUrl = url => {
-    setVideoModalShow(true)
-    setVideo_url(url)
-  }
+    setVideoModalShow(true);
+    setVideo_url(url);
+  };
 
   const TypeUrl = type => {
-    setTypeUrl(type)
-  }
+    setTypeUrl(type);
+  };
 
   // tags
   const tagSplit = tag => {
-    let tags = tag?.split(',')
+    let tags = tag?.split(',');
     // console.log(tags)
-    return tags
-  }
+    return tags;
+  };
 
   // const readTime = calculateReadTime(text);
 
-  const text = extractTextFromHTML(Data && Data[0]?.description)
+  const text = extractTextFromHTML(Data && Data[0]?.description);
 
   // Calculate read time
-  const readTime = calculateReadTime(text)
+  const readTime = calculateReadTime(text);
 
-  const galleryPhotos = Data && Data[0]?.images
+  const galleryPhotos = Data && Data[0]?.images;
 
   const openLightbox = index => {
-    setCurrentImage(index)
-    setViewerIsOpen(true)
-  }
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  };
 
   const closeLightbox = () => {
-    setCurrentImage(0)
-    setViewerIsOpen(false)
-  }
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
 
   return (
     <Layout>
@@ -348,8 +349,8 @@ const News = () => {
                         <div
                           id='vps-btnVideo'
                           onClick={() => {
-                            handleVideoUrl(Data && Data[0]?.content_value)
-                            TypeUrl(Data && Data[0]?.type)
+                            handleVideoUrl(Data && Data[0]?.content_value);
+                            TypeUrl(Data && Data[0]?.type);
                           }}
                         >
                           <BsFillPlayFill id='vps-btnVideo-logo' fill='white' size={50} />
@@ -398,7 +399,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setLikeDislikeData(Data && Data[0]?.id, !Like ? 1 : 0)}
                           >
-                            {Like ? <AiOutlineLike size={23}/> : <AiFillLike size={23} />}
+                            {Like ? <AiOutlineLike size={23} /> : <AiFillLike size={23} />}
                           </button>
 
                           <p id='nv-function-text'>{translate('likes')}</p>
@@ -440,8 +441,9 @@ const News = () => {
                   ) : null}
 
                   {/* // <p id='nv-description' dangerouslySetInnerHTML={{__html: Data[0].description}}></p> */}
+                  {/* <CommentSection Nid={Data && Data[0]?.id} /> */}
                   {SettingsData && SettingsData.comments_mode === '1' ? (
-                    <CommentSection Nid={Data && Data[0]?.id} />
+                    <CommentsView Nid={Data && Data[0]?.id} />
                   ) : (
                     <>
                       <NoDataFound />
@@ -496,7 +498,7 @@ const News = () => {
         <NoDataFound />
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default News
+export default News;

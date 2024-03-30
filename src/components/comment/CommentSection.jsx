@@ -16,17 +16,17 @@ const CommentSection = props => {
       return
     }
     setcommentApi({
-      parent_id:0,
-      news_id:Nid,
-      message:Comment,
-      onSuccess:  response => {
+      parent_id: 0,
+      news_id: Nid,
+      message: Comment,
+      onSuccess: response => {
         setLoadComments(true)
         setComment('')
         setTimeout(() => {
           setLoadComments(true)
         }, 1000)
       },
-      onError:error => {
+      onError: error => {
         console.log(error)
         toast.error(error)
       }
@@ -52,9 +52,9 @@ const CommentSection = props => {
         ></textarea>
         <div className='d-flex align-items-end justify-content-end'>
 
-        <button id='cs-btnsub' type='submit' className='btn'>
-          {translate('submitpost')}
-        </button>
+          <button id='cs-btnsub' type='submit' className='btn'>
+            {translate('submitpost')}
+          </button>
         </div>
       </form>
       <CommentsView Nid={Nid} LoadComments={LoadComments} />

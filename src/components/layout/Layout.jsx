@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { laodSettingsApi, settingsData } from 'src/store/reducers/settingsReducer'
+import { laodSettingsApi, settingsData,loadSystemTimezone } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
 import { useRouter } from 'next/router'
@@ -29,6 +29,8 @@ const Layout = ({ children }) => {
       onSuccess: res =>{
 
         document.documentElement.style.setProperty('--primary-color', res && res?.data?.web_setting?.web_color_code)
+        loadSystemTimezone(res?.data?.system_timezone)
+        // console.log(res.data.system_timezone)
       },
       onError: error => {
         console.log(error)
