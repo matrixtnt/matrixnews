@@ -61,6 +61,7 @@ const Header = () => {
 
   const settings = useSelector(settingsData)
 
+
   // user roles api call
   const getUserById = async () => {
     if (!userData.data.firebase_id) return false
@@ -106,9 +107,9 @@ const Header = () => {
     staleTime: 0
   })
 
-  useEffect(() => {
-    refetch()
-  }, [])
+  // useEffect(() => {
+    // refetch()
+  // }, [])
 
   // api call
   const categoriesApi = async () => {

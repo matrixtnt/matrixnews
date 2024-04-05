@@ -63,7 +63,7 @@ const SubCategory = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage, location, currentPage, query],
+    queryKey: ['sub-category-news', catId, changelanguage, location, currentPage, query],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
 

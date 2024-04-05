@@ -400,7 +400,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setLikeDislikeData(Data && Data[0]?.id, !Like ? 1 : 0)}
                           >
-                            {Like ? <AiOutlineLike size={23} /> : <AiFillLike size={23} />}
+                            {Like ? <AiFillLike size={23} /> :<AiOutlineLike size={23} /> }
                           </button>
 
                           <p id='nv-function-text'>{translate('likes')}</p>

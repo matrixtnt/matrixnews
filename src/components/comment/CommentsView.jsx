@@ -298,7 +298,6 @@ const CommentsView = props => {
   };
 
 
-
   const setNewComment = async (e) => {
     e.preventDefault();
     if (!isLogin()) {

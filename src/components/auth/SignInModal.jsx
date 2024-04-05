@@ -17,7 +17,7 @@ import { loadMobileType, register } from '../../store/reducers/userReducer'
 import PhoneLoginTwo from './PhoneLoginTwo'
 import RagisterModalTwo from './RegisterModalTwo'
 import ForgotPasswordTwo from './ForgotPasswordTwo'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
@@ -231,7 +231,7 @@ const SignInModal = props => {
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
             <img className='ModalImg' src={photo.src} alt='login image' />
             <div className='logo-img-overlay'>
-              <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo1' />
+              <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo1' onError={placeholderImage}/>
             </div>
           </div>
           <div id='modal-content'>

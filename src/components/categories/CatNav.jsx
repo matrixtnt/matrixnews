@@ -142,10 +142,9 @@ const CatNav = () => {
   }
 
 
-
   // react query
   const { data: subCatData, isLoading: subLoading } = useQuery({
-    queryKey: ['category-news', 6, changelanguage, location, currentPage, catId, subCatSlug],
+    queryKey: ['catSubCat-news', changelanguage, location, currentPage, catId, subCatSlug],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
 
