@@ -186,7 +186,7 @@ const FeatureLayout = () => {
         </div>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
-      ) : !newsDataFound ? <> <NewsStyle isLoading={newsLoading} Data={newsData.data}/> </> :
+      ) : !newsDataFound ? <> <NewsStyle isLoading={newsLoading} Data={newsData}/> </> :
         (
           <p className='no_data_available'>{translate('noNews')}</p>
         )}
