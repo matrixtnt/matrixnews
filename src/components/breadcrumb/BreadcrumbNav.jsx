@@ -23,6 +23,11 @@ const BreadcrumbNav = props => {
               {props.ThirdElement}
             </Breadcrumb.Item>
           )}
+          {props.FourthElement === '0' ? null : (
+            <Breadcrumb.Item active id='bcb-third-item'>
+              {props.FourthElement}
+            </Breadcrumb.Item>
+          )}
 
           {/* <Breadcrumb.Item active>Data</Breadcrumb.Item> */}
         </div>

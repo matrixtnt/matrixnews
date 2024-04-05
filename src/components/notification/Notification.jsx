@@ -115,12 +115,13 @@ const Notification = () => {
           <div className='d-flex bd-highlight mb-3'>
             <Link href='/personal-notification' id='btnNotification1' className='btn mx-1 bd-highlight'>
               {' '}
-              {translate('personalLbl')}{' '}
+              {/* {translate('personalLbl')}{' '} */}
+              {translate('personalNotifi')}{' '}:-
             </Link>
-            <Link href='/news-notification' id='btnNewsnoti' className='btn mx-1 bd-highlight'>
+            {/* <Link href='/news-notification' id='btnNewsnoti' className='btn mx-1 bd-highlight'>
               {' '}
               {translate('news')}
-            </Link>
+            </Link> */}
             {/* <button id='btnNotification1' className="btn  btn mx-1 ms-auto bd-highlight" onClick={handleDeleteAll} > Delete All</button> */}
           </div>
           <div className='my-3'>

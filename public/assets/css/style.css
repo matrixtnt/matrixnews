@@ -720,10 +720,17 @@ a {
 /* For when Data.length > 10 */
 .flex-display {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
 }
+
+@media screen and (min-width:1200px) and (max-width: 1399px) {
+  .flex-display {
+    gap: 21px;
+  }
+}
+
 
 /* For when Data.length <= 10 */
 .block-display {
@@ -2749,7 +2756,8 @@ a#social_platforms svg:hover {
   flex-wrap: wrap;
   word-break: break-word;
 }
-[dir='rtl'] .breadcrumb_data{
+
+[dir='rtl'] .breadcrumb_data {
   align-items: baseline;
   gap: 6px;
 }
@@ -3690,7 +3698,8 @@ a#social_platforms svg:hover {
   right: 1%;
   bottom: 6%;
 }
-[dir='rtl'] .cdbtnReplay{
+
+[dir='rtl'] .cdbtnReplay {
   right: auto;
   left: 1%;
 }
@@ -3765,14 +3774,19 @@ a#social_platforms svg:hover {
 }
 
 #btnNotification1 {
-  width: 15%;
+  width: max-content;
   color: #ffffff;
-  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  text-align: start;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: -40px;
+  /* background-color: var(--primary-color); */
 }
 
-#btnNotification1:hover {
+/* #btnNotification1:hover {
   background-color: var(--secondary-color);
-}
+} */
 
 #btnNotification11 {
   width: 15%;
@@ -5022,8 +5036,8 @@ a#social_platforms svg:hover {
 }
 
 .catNav-links:hover {
-  color: #fff;
-  background-color: var(--secondary-color);
+  /* color: #fff; */
+  /* background-color: var(--secondary-color); */
   transition: 0.1s ease-in;
 }
 
@@ -5031,10 +5045,12 @@ a#social_platforms svg:hover {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0 20px;
-  border: 1px solid #dedede80;
+  /* padding: 0 20px; */
+  /* border: 1px solid #dedede80; */
   border-radius: 5px;
   justify-content: center;
+  cursor: pointer;
+  width: max-content;
 }
 
 #catNav-more {
@@ -6500,7 +6516,7 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20vh;
+  height: 30vh;
 }
 
 .personal_Sec {
@@ -6619,4 +6635,197 @@ span {
 
 .catNavWrapper #cv-card-image {
   height: 194px;
+}
+
+.catSubCatWrapper {
+  position: relative;
+}
+
+.catSubCatWrapper .subCatDropdown {
+  position: absolute;
+  top: 36px;
+  left: 0px;
+  background-color: white;
+  width: 100%;
+  z-index: 5;
+  height: 610px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  transition: all 0.3s;
+}
+
+.catSubCatWrapper .subCatDataWrappper .row {
+  padding-top: 20px;
+  gap: 12px 0px;
+}
+
+.catSubCatWrapper .close {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 12px;
+  border-right: 1px solid lightgray;
+  height: 610px;
+  /* max-height: 610px; */
+  overflow-y: auto;
+  position: relative;
+}
+
+
+/* width */
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 10px;
+}
+
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+}
+
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper span {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.catNav-links svg {
+  margin-left: 4px;
+}
+
+.subNavActive,
+.catSubCatWrapper .subCatDropdown .subCatNamesWrapper div svg {
+  color: red !important;
+}
+
+.catSubCatWrapper .viewAllWrapper {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+.catSubCatWrapper .viewAllWrapper button {
+  background-color: transparent;
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  /* margin-top: 4px; */
+  margin-right: 22px;
+  padding: 6px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.catSubCatWrapper #cv-card-title {
+  font-size: 16px;
+}
+
+.offcanvas .subCatdrop .dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  color: var(--secondary-color);
+  font-weight: 600;
+  font-size: 22px;
+  padding: 0px;
+}
+
+.offcanvas .subCatdrop .dropdown-toggle::after {
+  border: none;
+}
+
+.offcanvas .subCatdrop .dropdown-toggle svg {
+  margin-left: 6px;
+  margin-top: -4px;
+}
+
+.surveysSect .card {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border: nono;
+  border-radius: 6px;
+  gap: 12px;
+  position: relative;
+}
+
+.surveysSect .card span {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.surveysSect .card .question {
+  font-size: 20px;
+}
+
+.surveysSect .card .options {
+  background-color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.surveysSect .card .selectedOption{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.surveysSect .card .submitBtn {
+  color: white;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.surveysSect .resultCard{
+  gap: 0px;
+}
+.surveysSect .resultCard span:nth-child(2){
+  margin-top: 20px;
+}
+
+.surveysSect .resultCard span:last-child{
+  margin-bottom: -16px;
+}
+.surveysSect .progress{
+  height: 34px;
+  background-color: gray;
+}
+
+
+.surveysSect .progress-bar {
+  background-color: var(--primary-color);
+}
+
+.surveysSect .card .percentage {
+  position: relative;
+  top: -28px;
+  margin: auto;
+  color: white;
 }

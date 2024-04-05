@@ -26,7 +26,9 @@ const CategoryNews = () => {
   const dataPerPage = 8 // number of posts per page
   const router = useRouter()
   const query = router.query
-  const catId = query.category_id
+  console.log(query,'query')
+  const catId = query.category_slug
+  const catSlug = query.slug
   const slug = query.slug
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
@@ -53,7 +55,8 @@ const CategoryNews = () => {
         get_user_news: '',
         search: '',
         language_id: language_id,
-        category_id: catId,
+        // category_id: catId,
+        category_slug: catSlug,
         subcategory_id: '',
         tag_id: '',
         slug: "",
@@ -70,7 +73,7 @@ const CategoryNews = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage, location, currentPage, query],
+    queryKey: ['category-news', catId, changelanguage, location, currentPage, query,catSlug],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
 
@@ -108,7 +111,7 @@ const CategoryNews = () => {
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={'0'} />
+        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={catSlug} />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (
@@ -121,7 +124,7 @@ const CategoryNews = () => {
               </div>
             ) : (
               <div className='row'>
-                {
+                {/* {
                   subCategories.length > 0 ?
 
                     <div className="col-12 mb-5 subcategoryWrapper">
@@ -147,7 +150,7 @@ const CategoryNews = () => {
                       </Swiper>
                     </div>
                     : null
-                }
+                } */}
 
 
                 {currentData && currentData.length > 0 ? (

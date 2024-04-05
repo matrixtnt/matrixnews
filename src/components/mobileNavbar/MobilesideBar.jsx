@@ -20,6 +20,7 @@ import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import usersvg from '../../../public/assets/images/user.svg'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
 const MobilesideBar = ({
   isuserRole,
@@ -72,6 +73,16 @@ const MobilesideBar = ({
   const searchPopUp = useSelector(state => state.clickAction.searchPopUp)
   const actionSearch = () => {
     store.dispatch(SetSearchPopUp(!searchPopUp))
+  }
+
+  const navigate = useRouter()
+
+  const handleSubCategoryChange = (slug) => {
+    // console.log(categories.sub_categories)
+    if (slug) {
+      navigate.push(`/categories-news/sub-category/${slug}`)
+      handleClose()
+    }
   }
 
   return (
@@ -282,27 +293,50 @@ const MobilesideBar = ({
                 ) : null}
                 <ul className='sub-menu mobile_catogories'>
                   {Data &&
-                    Data.slice(0, 10).map((element, index) => (
+                    Data.slice(0, 12).map((element, index) => (
                       <li className='nav-item' key={index}>
-                        <Link
-                          id='catNav-links'
-                          key={index}
-                          href={{
-                            pathname: `/categories-news/${element.slug}`,
-                            query: {
-                              category_id: element.id
-                            }
-                          }}
-                          onClick={handleClose}
-                        >
-                          {' '}
-                          <b>{element.category_name}</b>{' '}
-                        </Link>
+                        {
+                          element?.sub_categories?.length > 0 ?
+                            <Dropdown className='subCatdrop'>
+                              <Dropdown.Toggle className=''>
+                                {element.category_name}<FaAngleDown />
+                              </Dropdown.Toggle>
+
+                              <Dropdown.Menu >
+                                {
+                                  element.sub_categories.map((data, index) => {
+                                    return (
+                                      <Dropdown.Item
+                                        key={index}
+                                        onClick={()=> handleSubCategoryChange(data.slug)}
+                                      >
+                                        {data.subcategory_name}  
+                                      </Dropdown.Item>
+                                    )
+                                  })}
+                              </Dropdown.Menu>
+                            </Dropdown> :
+                            <Link
+                              className='catNav-links'
+                              key={index}
+                              href={{
+                                pathname: `/categories-news/${element.slug}`,
+                                query: {
+                                  category_id: element.id
+                                }
+                              }}
+                              onClick={handleClose}
+                            >
+                              {' '}
+                              <b>{element.category_name}</b>{' '}
+                            </Link>
+                        }
+
                       </li>
                     ))}
                   {Data && Data.length > 10 && (
                     <li className='nav-item'>
-                      <Link id='catNav-links' href={'/all-categories'} onClick={handleClose}>
+                      <Link className='catNav-links' href={'/all-categories'} onClick={handleClose}>
                         {' '}
                         <b>{translate('More >>')}</b>{' '}
                       </Link>

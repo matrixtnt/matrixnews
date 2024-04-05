@@ -38,6 +38,7 @@ import Layout from 'src/components/layout/Layout.jsx';
 import NoDataFound from 'src/components/noDataFound/NoDataFound';
 import toast from 'react-hot-toast';
 import CommentsView from 'src/components/comment/CommentsView.jsx';
+import Surveys from 'src/components/survey/Surveys.jsx';
 
 const News = () => {
   let user = getUser();
@@ -456,6 +457,10 @@ const News = () => {
                     <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} />
                   ) : null}
                   <TagsSection />
+                  {
+                    isLogin() ?
+                      <Surveys /> : null
+                  }
                 </div>
               </div>
               <VideoPlayerModal

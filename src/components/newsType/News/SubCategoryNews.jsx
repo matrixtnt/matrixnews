@@ -21,9 +21,10 @@ const SubCategory = () => {
   const dataPerPage = 8 // number of posts per page
   const router = useRouter()
   const query = router.query
+  // console.log(query,'query')
   const catId = query.category_id
   const subCatSlug = query.slug
-  console.log('subCatSlug',subCatSlug)
+  // console.log('subCatSlug',subCatSlug)
   let { id: language_id } = getLanguage()
   const changelanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
@@ -46,6 +47,7 @@ const SubCategory = () => {
         search: '',
         language_id: language_id,
         category_id: catId,
+        // category_slug: ,
         subcategory_slug: subCatSlug,
         tag_id: '',
         slug: '',
@@ -73,7 +75,7 @@ const SubCategory = () => {
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'Category'} ThirdElement={'Sub-Category'} />
+        <BreadcrumbNav SecondElement={'Category'} ThirdElement={'Sub-Category'} FourthElement={subCatSlug} />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (

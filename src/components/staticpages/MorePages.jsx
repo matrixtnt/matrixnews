@@ -13,12 +13,15 @@ import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import NoDataFound from '../noDataFound/NoDataFound'
+import { useRouter } from 'next/router'
 
 const MorePages = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [modalData, setmodalData] = useState(null)
   let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
+
+  const router = useRouter()
 
   // api call
   const getpages = async () => {
@@ -41,8 +44,9 @@ const MorePages = () => {
 
   const handleModalActive = (e, element) => {
     e.preventDefault()
-    setModalOpen(true)
-    setmodalData(element)
+    // setModalOpen(true)
+    // setmodalData(element)
+    router.push(`/more-pages/${element.slug}`)
   }
 
   return (

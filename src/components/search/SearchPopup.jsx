@@ -79,7 +79,7 @@ const SearchPopup = () => {
 
   // react query
   const { refetch } = useQuery({
-    queryKey: ['getSearchNews', searchValue,location,language_id],
+    queryKey: ['getSearchNews', ],
     queryFn: getNews,
     staleTime: 0
   })
@@ -102,7 +102,7 @@ const SearchPopup = () => {
   // UseEffect to call getNews whenever dataLimit changes
   useEffect(() => {
     refetch()
-  }, [dataLimit])
+  }, [dataLimit,searchValue,location,language_id])
 
   return (
     <>

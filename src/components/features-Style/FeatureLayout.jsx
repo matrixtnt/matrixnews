@@ -13,15 +13,60 @@ import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
+import toast from 'react-hot-toast'
+import NoDataFound from '../noDataFound/NoDataFound'
+import Card from '../skeletons/Card'
+import { useEffect, useState } from 'react'
+import { getNewsApi } from 'src/hooks/newsApi'
+import NewsStyle from './NewsStyle'
 
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
+  const [noFeatureData, setNoFeatureData] = useState(false)
+  const [newsDataFound, setNewsDataFound] = useState(true)
 
   // current language
   const currentLanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
+
+
+  // api call
+  const getNews = async page => {
+    try {
+      const { data } = await getNewsApi.getNews({
+        access_key: access_key,
+        offset: 0,
+        limit: 10,
+        get_user_news: '',
+        search: '',
+        language_id: language_id,
+        category_id: '',
+        // category_slug: ,
+        subcategory_slug: '',
+        tag_id: '',
+        slug: '',
+        latitude: storedLatitude,
+        longitude: storedLongitude
+      })
+      if (data.error) {
+        setNewsDataFound(true)
+      }
+      setNewsDataFound(false)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // // react query
+  const { isLoading: newsLoading, data: newsData } = useQuery({
+    queryKey: ['newsData', currentLanguage, location],
+    queryFn: () => getNews()
+  })
+
+  // console.log(newsData, 'nnnnn')
 
   const getFeatureSection = async () => {
     try {
@@ -31,6 +76,14 @@ const FeatureLayout = () => {
         latitude: storedLatitude,
         longitude: storedLongitude
       })
+
+      // console.log(data.error)
+      if (data.error) {
+        setNoFeatureData(true)
+        getNews()
+
+      }
+
       return data.data
     } catch (error) {
       console.log(error)
@@ -42,69 +95,82 @@ const FeatureLayout = () => {
     queryKey: ['mainfeatureSection', currentLanguage, location],
     queryFn: getFeatureSection
   })
+
+  useEffect(() => {
+
+    // console.log('noFeatureData = ', noFeatureData)
+    // console.log('newsDataFound = ', newsDataFound)
+
+  }, [noFeatureData, newsDataFound])
+
   const SelectType = () => {
     return (
-      Data &&
-      Data.map((item, index) => {
-        if (item.news_type === 'news') {
-          if (item.style_web === 'style_1') {
-            return <StyleOne key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_2') {
-            return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_3') {
-            return <StyleThree key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_4') {
-            return <StyleFour key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_5') {
-            return <StyleFive key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} visLoading={isLoading} Data={item} />
-          }
-        } else if (item.news_type === 'breaking_news') {
-          if (item.style_web === 'style_1') {
-            return <StyleOne key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_2') {
-            return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_3') {
-            return <StyleThree key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_4') {
-            return <StyleFour key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_5') {
-            return <StyleFive key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} isLoading={isLoading} Data={item} />
-          }
-        } else if (item.news_type === 'videos') {
-          if (item.style_web === 'style_1') {
-            return <StyleOne key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_2') {
-            return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_3') {
-            return <StyleThree key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_4') {
-            return <StyleFour key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_5') {
-            return <StyleFive key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} isLoading={isLoading} Data={item} />
-          }
-        } else if (item.news_type === 'user_choice') {
-          if (item.style_web === 'style_1') {
-            return <StyleOne key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_2') {
-            return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_3') {
-            return <StyleThree key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_4') {
-            return <StyleFour key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_5') {
-            return <StyleFive key={index} isLoading={isLoading} Data={item} />
-          } else if (item.style_web === 'style_6') {
-            return <StyleSix key={index} isLoading={isLoading} Data={item} />
-          }
-        }
-        return null
-      })
+      isLoading ? <>
+        <Card />
+      </> :
+        noFeatureData && newsDataFound ? <> {console.log('iam not found')}<NoDataFound /></> :
+          Data &&
+          Data.map((item, index) => {
+            console.log('i am feature sectoin')
+            if (item.news_type === 'news') {
+              if (item.style_web === 'style_1') {
+                return <StyleOne key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_2') {
+                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_3') {
+                return <StyleThree key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_4') {
+                return <StyleFour key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_5') {
+                return <StyleFive key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_6') {
+                return <StyleSix key={index} visLoading={isLoading} Data={item} />
+              }
+            } else if (item.news_type === 'breaking_news') {
+              if (item.style_web === 'style_1') {
+                return <StyleOne key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_2') {
+                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_3') {
+                return <StyleThree key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_4') {
+                return <StyleFour key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_5') {
+                return <StyleFive key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_6') {
+                return <StyleSix key={index} isLoading={isLoading} Data={item} />
+              }
+            } else if (item.news_type === 'videos') {
+              if (item.style_web === 'style_1') {
+                return <StyleOne key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_2') {
+                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_3') {
+                return <StyleThree key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_4') {
+                return <StyleFour key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_5') {
+                return <StyleFive key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_6') {
+                return <StyleSix key={index} isLoading={isLoading} Data={item} />
+              }
+            } else if (item.news_type === 'user_choice') {
+              if (item.style_web === 'style_1') {
+                return <StyleOne key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_2') {
+                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_3') {
+                return <StyleThree key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_4') {
+                return <StyleFour key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_5') {
+                return <StyleFive key={index} isLoading={isLoading} Data={item} />
+              } else if (item.style_web === 'style_6') {
+                return <StyleSix key={index} isLoading={isLoading} Data={item} />
+              }
+            }
+            return null
+          })
     )
   }
 
@@ -120,9 +186,10 @@ const FeatureLayout = () => {
         </div>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
-      ) : (
-        <p className='no_data_available'>{translate('noNews')}</p>
-      )}
+      ) : !newsDataFound ? <> <NewsStyle isLoading={newsLoading} Data={newsData.data}/> </> :
+        (
+          <p className='no_data_available'>{translate('noNews')}</p>
+        )}
     </>
   )
 }

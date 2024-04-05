@@ -54,6 +54,11 @@ export const DELETE_COMMENT = 'delete_comment'
 export const GET_BOOKMARK = 'get_bookmark'
 export const SET_BOOKMARK = 'set_bookmark'
 
+//Surveys Api 
+export const GET_QUESTION = 'get_question'
+export const GET_QUESTION_RESULT = 'get_question_result'
+export const SET_QUESTION_RESULT = 'set_question_result'
+
 //get language from storage
 export const getLanguage = () => {
   let language = store.getState().languages?.currentLanguage
@@ -419,14 +424,14 @@ export const accountdeleteApi = () => {
 }
 
 // 21. register token
-export const register_Fcmtoken_Api = (token,latitude,longitude) => {
+export const register_Fcmtoken_Api = (token, latitude, longitude) => {
   let { id: language_id } = getLanguage();
   let data = new FormData()
   data.append('access_key', access_key);
   data.append('language_id', language_id);
   data.append('token', token);
-  if(latitude != null) data.append('latitude', latitude);
-  if(longitude != null) data.append('longitude', longitude)
+  if (latitude != null) data.append('latitude', latitude);
+  if (longitude != null) data.append('longitude', longitude)
   return {
     url: `${REGISTER_TOKEN}`,
     method: "POST",
@@ -448,21 +453,22 @@ export const getUserByIdApi = () => {
   };
 };
 
-export const getComments = (access_key,
-  news_id,
-  offset,
-  limit) => {
+export const setQuestionResult = (access_key,
+  language_id,
+  question_id,
+  option_id,) => {
   return {
-    url: `${GET_COMMENT_BY_NEWS}`,
-    method: "GET",
-    params: {
+    url: `${SET_QUESTION_RESULT}`,
+    method: "POST",
+    data: {
       access_key,
-      news_id,
-      offset,
-      limit
+      language_id,
+      question_id,
+      option_id,
 
     },
-    authorizationHeader: false,
+    authorizationHeader: true,
 
   }
 }
+

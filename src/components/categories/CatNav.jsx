@@ -18,7 +18,9 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import NoDataFound from '../noDataFound/NoDataFound'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { FiCalendar } from 'react-icons/fi'
-import { FaAngleDown } from 'react-icons/fa'
+import { FaAngleDown, FaChevronRight } from 'react-icons/fa'
+import { IoClose } from "react-icons/io5";
+import Card from '../skeletons/Card'
 
 
 
@@ -27,7 +29,8 @@ const CatNav = () => {
   const navigate = useRouter()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categoiresOnOff = useSelector(settingsData)
-  const [subCat, setSubCat] = useState([])
+  const [catId, setCatId] = useState('')
+  const [subCatSlug, setSubCatSlug] = useState('')
 
   // api call
   const categoriesApi = async () => {
@@ -89,9 +92,18 @@ const CatNav = () => {
 
   const handleCategoryChange = (categories) => {
     // console.log(categories.sub_categories)
-    loadSubCategories({ subCategories: categories.sub_categories });
     if (categories.slug) {
-      navigate.push(`/categories-news/${categories.slug}?category_id=${categories.id}`)
+      // navigate.push(`/categories-news/${categories.slug}?category_id=${categories.id}`)
+      navigate.push(`/categories-news/${categories.slug}`)
+      setSubCatDrop(false)
+    }
+  }
+  
+  const handleSubCategoryChange = () => {
+    // console.log(categories.sub_categories)
+    if (subCatSlug) {
+      navigate.push(`/categories-news/sub-category/${subCatSlug}`)
+      setSubCatDrop(false)
     }
   }
 
@@ -104,6 +116,7 @@ const CatNav = () => {
   let { id: language_id } = getLanguage()
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
+
   // api call
   const getNewsByCategoryApi = async page => {
     try {
@@ -114,10 +127,10 @@ const CatNav = () => {
         get_user_news: '',
         search: '',
         language_id: language_id,
-        category_id: 6,
-        subcategory_id: '',
+        category_id: catId,
+        subcategory_slug: subCatSlug,
         tag_id: '',
-        slug: "",
+        slug: '',
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -131,8 +144,8 @@ const CatNav = () => {
 
 
   // react query
-  const { data: subCatData } = useQuery({
-    queryKey: ['category-news', 6, changelanguage, location, currentPage],
+  const { data: subCatData, isLoading: subLoading } = useQuery({
+    queryKey: ['category-news', 6, changelanguage, location, currentPage, catId, subCatSlug],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
 
@@ -140,6 +153,26 @@ const CatNav = () => {
   const currentData = subCatData && subCatData.data && subCatData.data.slice(0, dataPerPage)
 
   const lengthdata = (subCatData && subCatData.total) || 0
+
+
+  const [subCatDrop, setSubCatDrop] = useState(false)
+  const [currentCategory, setCurrentCategory] = useState([])
+
+  const handleSubCatDropdown = (category) => {
+    setCurrentCategory(category)
+    setCatId(category.id)
+    setSubCatDrop(true)
+    setSubCatSlug('')
+  }
+
+  useEffect(() => {
+
+    // console.log(currentCategory, 'currCat')
+    // console.log(currentCategory.sub_categories?.map((e) => {
+    //   return e.subcategory_name
+    // }), "subbbbcaaa")
+
+  }, [currentCategory])
 
   return (
     <>
@@ -153,75 +186,134 @@ const CatNav = () => {
                     <Skeleton height={200} count={3} />
                   </div>
                 ) : (
-                  <div className={`cn-main-div ${Data && Data.length > 10 ? 'flex-display' : 'block-display'}`}>
+                  <div className={`cn-main-div catSubCatWrapper flex-display`}>
 
-                    {/* <div className="row">
-                      <div className="col-lg-3">
-                        <div className="subcategoryWrapper">
-                          <div>
-                            <span>All</span>
-                          </div>
+                    {Data.map((element, index) => (
+                      <div key={element.id} className='text-center'
+                      >
+                        {
+                          element?.sub_categories?.length > 0 ?
+                            <span
+                              className='catNav-links'
+                              onClick={() => handleSubCatDropdown(element)}
+                              onMouseEnter={() => handleSubCatDropdown(element)}
 
-                          {
-                            element.sub_categories.map((subData) => {
-                              return (
-                                <div>
-                                  <span>{subData?.subcategory_name}</span>
+                            >
+
+                              <b>{element.category_name} </b> <FaAngleDown />
+                            </span> : <span
+                              className='catNav-links'
+                              onClick={() => handleCategoryChange(element)}
+                            >
+
+                              <b>{element.category_name} </b>
+                            </span>
+                        }
+
+                        {
+                          subCatDrop && currentCategory && currentCategory.id === element.id ? <>
+                            <div className='subCatDropdown' >
+                              <div className="row"
+                              onMouseLeave={() => setSubCatDrop(false)}
+
+                              >
+                                <div className="col-lg-3">
+                                  <div className="subCatNamesWrapper">
+                                    <div onClick={() => setSubCatSlug('')}>
+                                      <span className={subCatSlug === '' ? 'subNavActive' : ''} >
+                                        All
+                                      </span>
+                                      {subCatSlug === '' ? <FaChevronRight /> : null}
+                                    </div>
+                                    {
+                                      currentCategory.sub_categories?.map((e) => {
+                                        return <div onClick={() => setSubCatSlug(e?.slug)} key={e.slug}>
+                                          <span className={subCatSlug === e.slug ? 'subNavActive' : ''} >
+                                            {e.subcategory_name}
+                                          </span>
+                                          {subCatSlug === e.slug ? <FaChevronRight /> : null}
+                                        </div>
+                                      })
+                                    }
+                                  </div>
                                 </div>
-                              )
-                            })
-                          }
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <div className="row">
-                          {currentData && currentData.length > 0 ? (
-                            currentData.map(element => (
-                              <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                                <Link
-                                  id='Link-all'
-                                  href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                                >
-                                  <div id='cv-card' className='card'>
-                                    <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
-                                    <div id='cv-card-body' className='card-body'>
-                                      <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
-                                        {element.category.category_name}
-                                      </button>
-                                      <p id='cv-card-title' className='card-title'>
-                                        {element.title}
-                                      </p>
+                                <div className="col-lg-9">
+                                  <div className="subCatDataWrappper">
+                                    {/* <span className='close' onClick={()=>setSubCatDrop(false)}><IoClose/></span> */}
+                                    <div className='row'>
+                                      {
+                                        subLoading ? <Card /> : <>
+                                          {currentData && currentData.length > 0 ? (
+                                            currentData.map(element => (
+                                              <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
+                                                <Link
+                                                  id='Link-all'
+                                                  href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                                                >
+                                                  <div id='cv-card' className='card'>
+                                                    <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
+                                                    <div id='cv-card-body' className='card-body'>
+                                                      <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
+                                                        {element.category.category_name}
+                                                      </button>
+                                                      <p id='cv-card-title' className='card-title'>
+                                                        {element.title}
+                                                      </p>
+                                                      {/* <p id='cv-card-date'>
+                                                    <FiCalendar size={18} id='cv-logoCalendar' />
+                                                    {formatDate(element.date)}
+                                                  </p> */}
+                                                    </div>
+                                                  </div>
+                                                </Link>
+                                              </div>
+                                            ))
+                                          ) : (
+                                            <NoDataFound />
+                                          )}
+                                        </>
+                                      }
+                                      {
+                                        lengthdata > 1 ?
+                                          <div className="col-12 viewAllWrapper">
+                                            {
+                                              subCatSlug === '' ?
+                                                <button className='viewAll' onClick={() => handleCategoryChange(element)}>View All</button> :
+                                                <button className='viewAll' onClick={() => handleSubCategoryChange()}>View All</button>
+                                            }
+                                          </div> : null
+                                      }
                                     </div>
                                   </div>
-                                </Link>
+                                </div>
                               </div>
-                            ))
-                          ) : (
-                            <NoDataFound />
-                          )}
-                        </div>
-                      </div>
-                    </div> */}
+                            </div>
 
-                    <Swiper {...swiperOption}>
+                          </> : null
+                        }
+                      </div>
+                    ))}
+
+
+                    {/* <Swiper {...swiperOption}>
                       {Data.map((element, index) => (
                         <SwiperSlide key={element.id} className='text-center'
                           onClick={() => handleCategoryChange(element)}
                         >
                           <span
                             className='catNav-links'
-                            // href={{
-                            //   pathname: `/categories-news/${element.slug}`,
-                            //   query: {
-                            //     category_id: element.id
-                            //   }
-                            // }}
+                          // href={{
+                          //   pathname: `/categories-news/${element.slug}`,
+                          //   query: {
+                          //     category_id: element.id
+                          //   }
+                          // }}
                           >
-                          <b>{element.category_name}</b>
+                            <b>{element.category_name}</b>
                           </span>
                         </SwiperSlide>
                       ))}
-                    </Swiper>
+                    </Swiper> */}
                     {Data?.length > 10 ? (
                       <button
                         id='catNav-more'
