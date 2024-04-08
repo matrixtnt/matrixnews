@@ -11,7 +11,7 @@ const nextConfig = {
     buildActivity: false
   },
   trailingSlash: false,
-  reactStrictMode: true,
+  reactStrictMode: false,
   webpack: (config, { isServer }) => {
     if (isServer) {
       require('./scripts/sitemap-generator')
