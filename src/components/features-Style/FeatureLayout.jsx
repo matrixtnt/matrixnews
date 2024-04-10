@@ -69,13 +69,9 @@ const FeatureLayout = () => {
     queryFn: () => getNews()
   })
 
-  // console.log('language_id', language_id)
-
-  const getFeatureSection = async () => {
-    setIsLoading(true)
+  useEffect(() => {
     loadLayout({
       access_key: access_key,
-      language_id: language_id,
       onSuccess: response => {
         dispatch(layoutUpdateLanguage(currentLanguage.id))
         // console.log(currentLanguage.id,'langId-FeatureLayout')
@@ -85,17 +81,12 @@ const FeatureLayout = () => {
       },
       onError: error => {
         console.log(error)
-        setNoFeatureData(true)
-        getNews()
+        dispatch(layoutUpdateLanguage(""))
+        setNoFeatureData(false)
+        setIsLoading(false)
       }
     })
-  }
-
-  useEffect(() => {
-    if (language_id) {
-      getFeatureSection()
-    }
-  }, [])
+  }, [currentLanguage])
 
 
   // const getFeatureSection = async () => {

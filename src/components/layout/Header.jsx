@@ -13,7 +13,7 @@ import {
   selectLanguages,
   setCurrentLanguage
 } from '../../store/reducers/languageReducer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   getSiblings,
   slideToggle,
@@ -55,6 +55,8 @@ const Header = () => {
   let user = getUser()
   const navigate = useRouter()
   const auth = getAuth()
+
+  const dispatch = useDispatch()
 
   const languagesData = useSelector(selectLanguages)
 

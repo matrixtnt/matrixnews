@@ -28,7 +28,7 @@ const rootReducer = combineReducers({
     createNews: createNewsReducer,
     tempdata: tempDataReducer,
     catNavData: CatNavReducers,
-    featureLayouts: featureLayoutReducer,
+    Layouts: featureLayoutReducer,
     getNews: newsReducer,
 });
 

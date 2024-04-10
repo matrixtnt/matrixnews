@@ -7,9 +7,6 @@ const nextConfig = {
   images: {
     domains: [`${process.env.NEXT_PUBLIC_API_URL}`]
   },
-  devIndicators: {
-    buildActivity: false
-  },
   trailingSlash: false,
   reactStrictMode: false,
   webpack: (config, { isServer }) => {

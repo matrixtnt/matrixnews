@@ -19,8 +19,8 @@ export const GET_LOCATION = 'get_location'
 export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
 export const SET_FLAG = 'set_flag'
-export const REGISTER_TOKEN = "register_token"
-export const GET_WEB_SEO_PAGES = "get_web_seo_pages"
+export const REGISTER_TOKEN = 'register_token'
+export const GET_WEB_SEO_PAGES = 'get_web_seo_pages'
 
 // User Api
 export const GET_USER_BY_ID = 'get_user_by_id'
@@ -54,7 +54,7 @@ export const DELETE_COMMENT = 'delete_comment'
 export const GET_BOOKMARK = 'get_bookmark'
 export const SET_BOOKMARK = 'set_bookmark'
 
-//Surveys Api 
+//Surveys Api
 export const GET_QUESTION = 'get_question'
 export const GET_QUESTION_RESULT = 'get_question_result'
 export const SET_QUESTION_RESULT = 'set_question_result'
@@ -425,82 +425,81 @@ export const accountdeleteApi = () => {
 
 // 21. register token
 export const register_Fcmtoken_Api = (token, latitude, longitude) => {
-  let { id: language_id } = getLanguage();
+  let { id: language_id } = getLanguage()
   let data = new FormData()
-  data.append('access_key', access_key);
-  data.append('language_id', language_id);
-  data.append('token', token);
-  if (latitude != null) data.append('latitude', latitude);
+  data.append('access_key', access_key)
+  data.append('language_id', language_id)
+  data.append('token', token)
+  if (latitude != null) data.append('latitude', latitude)
   if (longitude != null) data.append('longitude', longitude)
   return {
     url: `${REGISTER_TOKEN}`,
-    method: "POST",
+    method: 'POST',
     data,
-    authorizationHeader: true,
-  };
+    authorizationHeader: true
+  }
 }
-
 
 // 22. get user by id
 export const getUserByIdApi = () => {
   return {
     url: `${GET_USER_BY_ID}`,
-    method: "GET",
+    method: 'GET',
     params: {
-      access_key: access_key,
+      access_key: access_key
     },
-    authorizationHeader: true,
-  };
-};
+    authorizationHeader: true
+  }
+}
 
-export const setQuestionResult = (access_key,
-  language_id,
-  question_id,
-  option_id,) => {
+export const setQuestionResult = (access_key, language_id, question_id, option_id) => {
   return {
     url: `${SET_QUESTION_RESULT}`,
-    method: "POST",
+    method: 'POST',
     data: {
       access_key,
       language_id,
       question_id,
-      option_id,
-
+      option_id
     },
-    authorizationHeader: true,
-
+    authorizationHeader: true
   }
 }
-export const getQuestionResult = (access_key,
-  language_id,
-  question_id,) => {
+export const getQuestionResult = (access_key, language_id, question_id) => {
   return {
     url: `${GET_QUESTION_RESULT}`,
-    method: "GET",
+    method: 'GET',
     params: {
       access_key,
       language_id,
-      question_id,
-
+      question_id
     },
-    authorizationHeader: true,
-
+    authorizationHeader: true
   }
 }
 
-
-export const getFeatureSection = ( access_key, language_id, offset, limit, slug, latitude, longitude, section_id,) => {
+export const getFeatureSection = (access_key, offset, limit, slug, latitude, longitude, section_id) => {
+  console.log("hello call")
+  let { id: language_id } = getLanguage()
   return {
-      url: `${GET_FEATURE_SECTION}`,
-      method: "GET",
-      params: {
-        access_key, language_id, offset, limit, slug, latitude, longitude, section_id,
-      },
-      authorizationHeader: false,
-
+    url: `${GET_FEATURE_SECTION}`,
+    method: 'GET',
+    params: {
+      access_key: access_key,
+      language_id: language_id,
+      offset: offset,
+      limit: limit,
+      slug: slug,
+      latitude: latitude,
+      longitude: longitude,
+      section_id: section_id
+    },
+    authorizationHeader: false
   }
 }
-export const getNews = ( access_key,
+
+export const getNews = (
+  access_key,
   offset,
   limit,
   id,
@@ -514,12 +513,13 @@ export const getNews = ( access_key,
   slug,
   tag_id,
   latitude,
-  longitude) => {
+  longitude
+) => {
   return {
-      url: `${GET_NEWS}`,
-      method: "GET",
-      params: {
-        access_key,
+    url: `${GET_NEWS}`,
+    method: 'GET',
+    params: {
+      access_key,
       offset,
       limit,
       id,
@@ -534,8 +534,7 @@ export const getNews = ( access_key,
       tag_id,
       latitude,
       longitude
-      },
-      authorizationHeader: false,
-
+    },
+    authorizationHeader: false
   }
 }

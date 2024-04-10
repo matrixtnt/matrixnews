@@ -1,5 +1,5 @@
 'use client'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   loadLanguageLabels,
   selectCurrentLanguage,
@@ -28,7 +28,7 @@ const WeatherCard = () => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
 
-
+const dispatch = useDispatch()
 
   const weatherApi = async () => {
     return new Promise((resolve, reject) => {

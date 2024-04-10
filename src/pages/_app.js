@@ -22,10 +22,7 @@ import '../../public/assets/css/style.css'
 // provide the default query function to your app with defaultOptions
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: {
-      staleTime: 0,
-      refetchOnWindowFocus: false // default: true
-    }
+  
   }
 })
 

@@ -59,10 +59,10 @@ export const loadNews = ({ access_key,
     const state = store.getState()
     const { currentLanguage } = store.getState().languages
     const { lastFetch, Lang } = state.getNews
-    console.log(Lang?.language_id, 'news-langId')
-    console.log(lastFetch, 'lastfetch')
+    // console.log(Lang?.language_id, 'news-langId')
+    // console.log(lastFetch, 'lastfetch')
 
-    console.log('currentLanguage = ', currentLanguage?.id, 'Lang =', Lang?.language_id)
+    // console.log('currentLanguage = ', currentLanguage?.id, 'Lang =', Lang?.language_id)
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes')
 
     if ((currentLanguage?.id != Lang?.language_id) || diffInMinutes > 10) {

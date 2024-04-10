@@ -53,7 +53,7 @@ const MobilesideBar = ({
   }
 
   useEffect(() => {
-    loadLanguageLabels({ code: currentLanguage.code })
+    loadLanguageLabels({ code: currentLanguage?.code })
   }, [currentLanguage])
 
   const closeRef = useRef()
