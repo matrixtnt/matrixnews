@@ -1,5 +1,5 @@
 'use client'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import StyleOne from './StyleOne'
 import StyleTwo from './StyleTwo'
@@ -19,19 +19,22 @@ import Card from '../skeletons/Card'
 import { useEffect, useState } from 'react'
 import { getNewsApi } from 'src/hooks/newsApi'
 import NewsStyle from './NewsStyle'
+import { layoutUpdateLanguage, loadLayout } from 'src/store/reducers/featureLayoutReducer'
 
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
   const [noFeatureData, setNoFeatureData] = useState(false)
   const [newsDataFound, setNewsDataFound] = useState(true)
 
+  const dispatch = useDispatch();
+
   // current language
   const currentLanguage = useSelector(selectCurrentLanguage)
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
-
-
+  const [Data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   // api call
   const getNews = async page => {
     try {
@@ -66,35 +69,64 @@ const FeatureLayout = () => {
     queryFn: () => getNews()
   })
 
-  // console.log(newsData, 'nnnnn')
+  // console.log('language_id', language_id)
 
   const getFeatureSection = async () => {
-    try {
-      const { data } = await getFeatureSectionApi.getFeatureSection({
-        access_key: access_key,
-        language_id: language_id,
-        latitude: storedLatitude,
-        longitude: storedLongitude
-      })
+    setIsLoading(true)
+    loadLayout({
+      access_key: access_key,
+      language_id: language_id,
+      onSuccess: response => {
+        dispatch(layoutUpdateLanguage(currentLanguage.id))
+        // console.log(currentLanguage.id,'langId-FeatureLayout')
+        setData(response.data)
+        setIsLoading(false)
 
-      // console.log(data.error)
-      if (data.error) {
+      },
+      onError: error => {
+        console.log(error)
         setNoFeatureData(true)
         getNews()
-
       }
-
-      return data.data
-    } catch (error) {
-      console.log(error)
-    }
+    })
   }
 
+  useEffect(() => {
+    if (language_id) {
+      getFeatureSection()
+    }
+  }, [])
+
+
+  // const getFeatureSection = async () => {
+  //   try {
+  //     const { data } = await getFeatureSectionApi.getFeatureSection({
+  //       access_key: access_key,
+  //       language_id: language_id,
+  //       latitude: storedLatitude,
+  //       longitude: storedLongitude
+  //     })
+
+  //     // console.log(data.error)
+  //     if (data.error) {
+  //       setNoFeatureData(true)
+  //       getNews()
+
+  //     }
+
+  //     return data.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['mainfeatureSection', currentLanguage, location],
-    queryFn: getFeatureSection
-  })
+  // const { isLoading, data: Data } = useQuery({
+  //   queryKey: ['mainfeatureSection', currentLanguage, location],
+  //   queryFn: getFeatureSection
+  // })
+
+
 
   useEffect(() => {
 
@@ -108,10 +140,10 @@ const FeatureLayout = () => {
       isLoading ? <>
         <Card />
       </> :
-        noFeatureData && newsDataFound ? <> {console.log('iam not found')}<NoDataFound /></> :
+        noFeatureData && newsDataFound ? <><NoDataFound /></> :
           Data &&
           Data.map((item, index) => {
-            console.log('i am feature sectoin')
+            // console.log('i am feature sectoin')
             if (item.news_type === 'news') {
               if (item.style_web === 'style_1') {
                 return <StyleOne key={index} isLoading={isLoading} Data={item} />
@@ -186,7 +218,7 @@ const FeatureLayout = () => {
         </div>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
-      ) : !newsDataFound ? <> <NewsStyle isLoading={newsLoading} Data={newsData}/> </> :
+      ) : !newsDataFound ? <> <NewsStyle isLoading={newsLoading} Data={newsData} /> </> :
         (
           <p className='no_data_available'>{translate('noNews')}</p>
         )}

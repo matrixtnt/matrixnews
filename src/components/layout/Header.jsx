@@ -41,6 +41,7 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import toast from 'react-hot-toast'
 import { accountDeleteApi } from 'src/store/actions/campaign'
 import { Modal } from 'antd'
+import { loadCatNavData } from 'src/store/reducers/CatNavReducers'
 const { confirm } = Modal
 
 const Header = () => {
@@ -97,7 +98,7 @@ const Header = () => {
         // setisuserRole(false);
         return []
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 
   // react query
@@ -108,7 +109,7 @@ const Header = () => {
   })
 
   // useEffect(() => {
-    // refetch()
+  // refetch()
   // }, [])
 
   // api call
@@ -120,6 +121,7 @@ const Header = () => {
         limit: '16',
         language_id: currentLanguage.id
       })
+      loadCatNavData({ data: data.data })
       return data.data
     } catch (error) {
       console.log(error)
@@ -196,7 +198,7 @@ const Header = () => {
           console.log('Oops errors!')
         }
       },
-      onCancel() {}
+      onCancel() { }
     })
   }
 
@@ -268,10 +270,10 @@ const Header = () => {
       // content: 'Are you sure to do this?',
       content: (
         <>
-        <p>Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:</p>
-        <li style={{listStyle: 'disc'}}>Profile information</li>
-        <li style={{listStyle: 'disc'}}>Settings</li>
-        <li style={{listStyle: 'disc'}}>And Any associated content</li>
+          <p>Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:</p>
+          <li style={{ listStyle: 'disc' }}>Profile information</li>
+          <li style={{ listStyle: 'disc' }}>Settings</li>
+          <li style={{ listStyle: 'disc' }}>And Any associated content</li>
         </>
       ),
       centered: true,
@@ -323,7 +325,7 @@ const Header = () => {
           console.log(error)
         }
       },
-      onCancel() {}
+      onCancel() { }
     })
   }
 

@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentLanguage, selectCurrentLanguageLabels } from '../../store/reducers/languageReducer'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -21,19 +21,28 @@ import { FiCalendar } from 'react-icons/fi'
 import { FaAngleDown, FaChevronRight } from 'react-icons/fa'
 import { IoClose } from "react-icons/io5";
 import Card from '../skeletons/Card'
-
+import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
 
 
 SwiperCore.use([Navigation, Pagination])
+
 const CatNav = () => {
+
   const navigate = useRouter()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categoiresOnOff = useSelector(settingsData)
   const [catId, setCatId] = useState('')
   const [subCatSlug, setSubCatSlug] = useState('')
+  const [subCatData, setSubCatData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [subLoading, setSubLoading] = useState(true)
+
+  const dispatch = useDispatch();
+
 
   // api call
   const categoriesApi = async () => {
+    setIsLoading(false)
     try {
       const { data } = await CategoriesApi.getCategories({
         access_key: access_key,
@@ -43,6 +52,7 @@ const CatNav = () => {
       })
 
       loadCategoryCount({ categoryCount: data?.total });
+      setIsLoading(false)
       return data.data
     } catch (error) {
       console.log(error)
@@ -50,7 +60,7 @@ const CatNav = () => {
   }
 
   // react query
-  const { data: Data, isLoading } = useQuery({
+  const { data: Data, } = useQuery({
     queryKey: ['categoriesNav', currentLanguage],
     queryFn: categoriesApi
   })
@@ -98,7 +108,7 @@ const CatNav = () => {
       setSubCatDrop(false)
     }
   }
-  
+
   const handleSubCategoryChange = () => {
     // console.log(categories.sub_categories)
     if (subCatSlug) {
@@ -119,34 +129,74 @@ const CatNav = () => {
 
   // api call
   const getNewsByCategoryApi = async page => {
-    try {
-      const { data } = await getNewsApi.getNews({
-        access_key: access_key,
-        offset: page * dataPerPage,
-        limit: dataPerPage,
-        get_user_news: '',
-        search: '',
-        language_id: language_id,
-        category_id: catId,
-        subcategory_slug: subCatSlug,
-        tag_id: '',
-        slug: '',
-        latitude: storedLatitude,
-        longitude: storedLongitude
-      })
-      // console.log('categories', data)
-      return data
-    } catch (error) {
-      console.log(error)
-    }
+    loadNews({
+      access_key: access_key,
+      offset: page * dataPerPage,
+      limit: dataPerPage,
+      get_user_news: '',
+      search: '',
+      language_id: language_id,
+      category_id: catId,
+      subcategory_slug: subCatSlug,
+      tag_id: '',
+      slug: '',
+      latitude: storedLatitude,
+      longitude: storedLongitude,
+      onSuccess: response => {
+        setSubCatData(response)
+        setSubLoading(false)
+       // console.log(currentLanguage.id,'langId-catnav')
+
+        dispatch(newsUpdateLanguage(currentLanguage.id))
+
+      },
+      onError: error => {
+        setSubLoading(false)
+
+        console.log(error)
+      }
+    })
   }
 
 
+
+  useEffect(() => {
+    if (language_id) {
+      getNewsByCategoryApi(currentPage)
+    }
+
+  }, [subCatSlug, currentPage, catId, currentLanguage])
+
+
+  // const getNewsByCategoryApi = async page => {
+  //   try {
+  //     const { data } = await getNewsApi.getNews({
+  //       access_key: access_key,
+  //       offset: page * dataPerPage,
+  //       limit: dataPerPage,
+  //       get_user_news: '',
+  //       search: '',
+  //       language_id: language_id,
+  //       category_id: catId,
+  //       subcategory_slug: subCatSlug,
+  //       tag_id: '',
+  //       slug: '',
+  //       latitude: storedLatitude,
+  //       longitude: storedLongitude
+  //     })
+  //     // console.log('categories', data)
+  //     return data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+
   // react query
-  const { data: subCatData, isLoading: subLoading } = useQuery({
-    queryKey: ['catSubCat-news', changelanguage, location, currentPage, catId, subCatSlug],
-    queryFn: () => getNewsByCategoryApi(currentPage)
-  })
+  // const { data: subCatData, isLoading: subLoading } = useQuery({
+  //   queryKey: ['catSubCat-news', changelanguage, location, currentPage, catId, subCatSlug],
+  //   queryFn: () => getNewsByCategoryApi(currentPage)
+  // })
 
   // slice the array to get the current posts
   const currentData = subCatData && subCatData.data && subCatData.data.slice(0, dataPerPage)
@@ -193,7 +243,7 @@ const CatNav = () => {
                         {
                           element?.sub_categories?.length > 0 ?
                             <span
-                              className='catNav-links'
+                              className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop': ''}`}
                               onClick={() => handleSubCatDropdown(element)}
                               onMouseEnter={() => handleSubCatDropdown(element)}
 
@@ -201,7 +251,7 @@ const CatNav = () => {
 
                               <b>{element.category_name} </b> <FaAngleDown />
                             </span> : <span
-                              className='catNav-links'
+                               className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop': ''}`}
                               onClick={() => handleCategoryChange(element)}
                             >
 

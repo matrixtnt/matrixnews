@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import { useRouter } from 'next/navigation'
@@ -11,6 +11,8 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { locationData } from 'src/store/reducers/settingsReducer'
+import { loadNews } from 'src/store/reducers/newsReducer'
+import { selectCurrentLanguage } from 'src/store/reducers/languageReducer'
 
 const SearchPopup = () => {
   const [Data, setData] = useState([])
@@ -23,7 +25,10 @@ const SearchPopup = () => {
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
+  const currentLanguage = useSelector(selectCurrentLanguage)
   const navigate = useRouter()
+
+  const dispatch = useDispatch();
 
   // popup
   const actionSearch = () => {
@@ -37,52 +42,99 @@ const SearchPopup = () => {
   }
 
   // api call
+
   const getNews = async () => {
-    try {
-      const { data } = await getNewsApi.getNews({
-        access_key: access_key,
-        offset: '0',
-        limit: dataLimit.toString(),
-        user_id: user,
-        get_user_news: '',
-        search: searchValue, // {optional}
-        language_id: language_id,
-        latitude: storedLatitude,
-        longitude: storedLongitude
-      })
+    loadNews({
+      access_key: access_key,
+      offset: '0',
+      limit: dataLimit.toString(),
+      user_id: user,
+      get_user_news: '',
+      search: searchValue, // {optional}
+      language_id: language_id,
+      latitude: storedLatitude,
+      longitude: storedLongitude,
+      onSuccess: response => {
+        dispatch(newsUpdateLanguage(currentLanguage.id))
+        // Check if the total count of loaded data exceeds the total count from the API
+        const totalItemsFromAPI = parseInt(response.total) // Assuming 'total' is the total count from API response
+        const loadedItemsCount = response.length + parseInt(dataLimit)
 
-      // Check if the total count of loaded data exceeds the total count from the API
-      const totalItemsFromAPI = parseInt(data.total) // Assuming 'total' is the total count from API response
-      const loadedItemsCount = data.length + parseInt(dataLimit)
-
-      if (data.error) {
-        setData([])
-        setTotal(0)
-      }
-
-      if (loadedItemsCount > totalItemsFromAPI) {
-        // If loaded items exceed the total count, set Data to empty array
-        setData([])
-      } else {
-        if (searchValue !== '') {
-          setTotal(data.total)
-          setData(data)
-        } else {
+        if (response.error) {
           setData([])
+          setTotal(0)
         }
-      }
-      return data.data
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
-  // react query
-  const { refetch } = useQuery({
-    queryKey: ['getSearchNews',dataLimit,searchValue,location,language_id ],
-    queryFn: getNews,
-    staleTime: 0
-  })
+        if (loadedItemsCount > totalItemsFromAPI) {
+          // If loaded items exceed the total count, set Data to empty array
+          setData([])
+        } else {
+          if (searchValue !== '') {
+            setTotal(response.total)
+            setData(response)
+          } else {
+            setData([])
+          }
+        }
+
+      },
+      onError: error => {
+
+        console.log(error)
+      }
+    })
+  }
+  
+  useEffect(() => {
+    getNews()
+  }, [dataLimit,searchValue,])
+  
+  // const getNews = async () => {
+  //   try {
+  //     const { data } = await getNewsApi.getNews({
+  //       access_key: access_key,
+  //       offset: '0',
+  //       limit: dataLimit.toString(),
+  //       user_id: user,
+  //       get_user_news: '',
+  //       search: searchValue, // {optional}
+  //       language_id: language_id,
+  //       latitude: storedLatitude,
+  //       longitude: storedLongitude
+  //     })
+
+  //     // Check if the total count of loaded data exceeds the total count from the API
+  //     const totalItemsFromAPI = parseInt(data.total) // Assuming 'total' is the total count from API response
+  //     const loadedItemsCount = data.length + parseInt(dataLimit)
+
+  //     if (data.error) {
+  //       setData([])
+  //       setTotal(0)
+  //     }
+
+  //     if (loadedItemsCount > totalItemsFromAPI) {
+  //       // If loaded items exceed the total count, set Data to empty array
+  //       setData([])
+  //     } else {
+  //       if (searchValue !== '') {
+  //         setTotal(data.total)
+  //         setData(data)
+  //       } else {
+  //         setData([])
+  //       }
+  //     }
+  //     return data.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // // react query
+  // const { refetch } = useQuery({
+  //   queryKey: ['getSearchNews',dataLimit,searchValue,location,language_id ],
+  //   queryFn: getNews,
+  //   staleTime: 0
+  // })
 
   // redirect news page
   const redirectPage = (e, element) => {

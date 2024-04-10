@@ -11,36 +11,43 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key } from 'src/utils/api'
 import { FaSquareXTwitter } from 'react-icons/fa6'
+import { catNavSelector } from 'src/store/reducers/CatNavReducers'
 
 const Footer = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const settings = useSelector(settingsData)
 
+  const categories = useSelector(catNavSelector)
+
+  const categoriesData = categories?.data
+
+  // console.log(categoriesData,'footer')
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // api call
-  const categoriesApi = async () => {
-    try {
-      const { data } = await CategoriesApi.getCategories({
-        access_key: access_key,
-        offset: '0',
-        limit: '8',
-        language_id: currentLanguage.id
-      })
-      return data.data
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // // api call
+  // const categoriesApi = async () => {
+  //   try {
+  //     const { data } = await CategoriesApi.getCategories({
+  //       access_key: access_key,
+  //       offset: '0',
+  //       limit: '8',
+  //       language_id: currentLanguage.id
+  //     })
+  //     return data.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  // react query
-  const { data: Data } = useQuery({
-    queryKey: ['footerCategories', currentLanguage],
-    queryFn: categoriesApi
-  })
+  // // react query
+  // const { data: Data } = useQuery({
+  //   queryKey: ['footerCategories', currentLanguage],
+  //   queryFn: categoriesApi
+  // })
 
   return (
     <>
@@ -60,11 +67,11 @@ const Footer = () => {
                 </p>
               </div>
             </div>
-              {Data && Data.length > 0 ? (
+              {categoriesData && categoriesData.length > 0 ? (
             <div className='col-lg-3 col-12'>
               <p id='footer-nav'>{translate('categories')}</p>
                 <ul className='newscate'>
-                  {Data.map((element, index) => {
+                  {categoriesData.map((element, index) => {
                     return (
                       <li key={index}>
                         <Link

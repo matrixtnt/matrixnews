@@ -10,6 +10,9 @@ import settingsReducer from './reducers/settingsReducer';
 import clickActionReducer from "./stateSlice/clickActionSlice";
 import createNewsReducer from './reducers/createNewsReducer';
 import tempDataReducer from './reducers/tempDataReducer';
+import CatNavReducers from './reducers/CatNavReducers';
+import featureLayoutReducer from './reducers/featureLayoutReducer';
+import newsReducer from './reducers/newsReducer';
 
 const persistConfig = {
     key: 'root',
@@ -23,7 +26,10 @@ const rootReducer = combineReducers({
     settings: settingsReducer,
     clickAction: clickActionReducer,
     createNews: createNewsReducer,
-    tempdata:tempDataReducer,
+    tempdata: tempDataReducer,
+    catNavData: CatNavReducers,
+    featureLayouts: featureLayoutReducer,
+    getNews: newsReducer,
 });
 
 export const store = configureStore({

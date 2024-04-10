@@ -6656,6 +6656,13 @@ span {
 .catSubCatWrapper .subCatDataWrappper .row {
   padding-top: 20px;
   gap: 12px 0px;
+  padding-right: 16px;
+  margin-left: -20px;
+}
+
+.catSubCatWrapper .subCatDataWrappper .row #cv-card{
+  align-items: start;
+  gap: 12px;
 }
 
 .catSubCatWrapper .close {
@@ -6732,7 +6739,7 @@ span {
   border: 2px solid var(--secondary-color);
   color: var(--secondary-color);
   /* margin-top: 4px; */
-  margin-right: 22px;
+  margin-right: 0px;
   padding: 6px;
   border-radius: 6px;
   font-weight: 600;
@@ -6828,4 +6835,11 @@ span {
   top: -28px;
   margin: auto;
   color: white;
+}
+
+.activeSubDrop{
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--primary-color);
+
 }

@@ -16,7 +16,8 @@ import {
   register_Fcmtoken_Api,
   getUserByIdApi,
   getComments,
-  setQuestionResult
+  setQuestionResult,
+  getQuestionResult
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -354,7 +355,7 @@ export const GetCommentsApi = ({
 };
 
 
-// 19. set flag
+// 19. 
 export const setQuestionResultApi = ({
   access_key = '',
   language_id = '',
@@ -367,6 +368,26 @@ export const setQuestionResultApi = ({
   store.dispatch(
     apiCallBegan({
       ...setQuestionResult(access_key, language_id, question_id, option_id,),
+      displayToast: false,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
+}
+export const getQuestionResultApi = ({
+  access_key,
+  language_id,
+  question_id,
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
+}) => {
+  store.dispatch(
+    apiCallBegan({
+      ...getQuestionResult(access_key,
+        language_id,
+        question_id,),
       displayToast: false,
       onStart,
       onSuccess,

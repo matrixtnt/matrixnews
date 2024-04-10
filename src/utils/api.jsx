@@ -471,4 +471,71 @@ export const setQuestionResult = (access_key,
 
   }
 }
+export const getQuestionResult = (access_key,
+  language_id,
+  question_id,) => {
+  return {
+    url: `${GET_QUESTION_RESULT}`,
+    method: "GET",
+    params: {
+      access_key,
+      language_id,
+      question_id,
 
+    },
+    authorizationHeader: true,
+
+  }
+}
+
+
+export const getFeatureSection = ( access_key, language_id, offset, limit, slug, latitude, longitude, section_id,) => {
+  return {
+      url: `${GET_FEATURE_SECTION}`,
+      method: "GET",
+      params: {
+        access_key, language_id, offset, limit, slug, latitude, longitude, section_id,
+      },
+      authorizationHeader: false,
+
+  }
+}
+export const getNews = ( access_key,
+  offset,
+  limit,
+  id,
+  get_user_news,
+  search, // {optional}
+  language_id,
+  category_id,
+  category_slug,
+  subcategory_id,
+  subcategory_slug,
+  slug,
+  tag_id,
+  latitude,
+  longitude) => {
+  return {
+      url: `${GET_NEWS}`,
+      method: "GET",
+      params: {
+        access_key,
+      offset,
+      limit,
+      id,
+      get_user_news,
+      search, // {optional}
+      language_id,
+      category_id,
+      category_slug,
+      subcategory_id,
+      subcategory_slug,
+      slug,
+      tag_id,
+      latitude,
+      longitude
+      },
+      authorizationHeader: false,
+
+  }
+}

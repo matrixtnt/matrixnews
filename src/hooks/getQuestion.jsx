@@ -14,11 +14,12 @@ export const getQuestionApi = {
         })
     },
     getQuestionResult: requestData => {
-        const { access_key, language_id, } = requestData
+        const { access_key, language_id,question_id } = requestData
         return Api.get(GET_QUESTION_RESULT, {
             params: {
                 access_key,
                 language_id,
+                question_id,
             }
         })
     }
