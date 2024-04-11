@@ -6,8 +6,6 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
 
 const StyleFour = ({ Data }) => {
- 
-    // console.log(Data)
 
     return (
         <>
@@ -31,7 +29,7 @@ const StyleFour = ({ Data }) => {
                                 </div> */}
 
                                 <div className='row mt-5 mb-5'>
-                                    {Data?.data?.map((value, index) => {
+                                    {Data && Data?.map((value, index) => {
                                         return (
                                             <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                                                 <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}`, query: { language_id: value.language_id } }}>

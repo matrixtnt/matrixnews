@@ -127,7 +127,7 @@ export const userSignUpApi = (firebase_id, name, email, mobile, type, profile, s
 }
 
 // 4. get languages json
-export const getLanguageJsonDataApi = code => {
+export const getLanguageJsonDataApi = (code) => {
   return {
     url: `${GET_LANGUAGE_JSON_DATA}`,
     method: 'GET',
@@ -479,7 +479,6 @@ export const getQuestionResult = (access_key, language_id, question_id) => {
 }
 
 export const getFeatureSection = (access_key, offset, limit, slug, latitude, longitude, section_id) => {
-  console.log("hello call")
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_FEATURE_SECTION}`,
@@ -505,7 +504,6 @@ export const getNews = (
   id,
   get_user_news,
   search, // {optional}
-  language_id,
   category_id,
   category_slug,
   subcategory_id,
@@ -515,25 +513,26 @@ export const getNews = (
   latitude,
   longitude
 ) => {
+  let { id: language_id } = getLanguage()
   return {
     url: `${GET_NEWS}`,
     method: 'GET',
     params: {
-      access_key,
-      offset,
-      limit,
-      id,
-      get_user_news,
-      search, // {optional}
-      language_id,
-      category_id,
-      category_slug,
-      subcategory_id,
-      subcategory_slug,
-      slug,
-      tag_id,
-      latitude,
-      longitude
+      access_key: access_key,
+      offset: offset,
+      limit: limit,
+      id: id,
+      get_user_news: get_user_news,
+      search: search, // {optional}
+      language_id: language_id,
+      category_id: category_id,
+      category_slug: category_slug,
+      subcategory_id: subcategory_id,
+      subcategory_slug: subcategory_slug,
+      slug: slug,
+      tag_id: tag_id,
+      latitude: latitude,
+      longitude: longitude
     },
     authorizationHeader: false
   }

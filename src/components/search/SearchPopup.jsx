@@ -11,7 +11,7 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { locationData } from 'src/store/reducers/settingsReducer'
-import { loadNews } from 'src/store/reducers/newsReducer'
+import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
 import { selectCurrentLanguage } from 'src/store/reducers/languageReducer'
 
 const SearchPopup = () => {
@@ -49,9 +49,7 @@ const SearchPopup = () => {
       offset: '0',
       limit: dataLimit.toString(),
       user_id: user,
-      get_user_news: '',
       search: searchValue, // {optional}
-      language_id: language_id,
       latitude: storedLatitude,
       longitude: storedLongitude,
       onSuccess: response => {
@@ -84,11 +82,20 @@ const SearchPopup = () => {
       }
     })
   }
-  
+
   useEffect(() => {
-    getNews()
-  }, [dataLimit,searchValue,])
-  
+    if (searchValue) {
+
+      const timeout = setTimeout(() => {
+        getNews()
+      }, 1500);
+      return () => {
+        clearTimeout(timeout)
+      }
+    }
+
+  }, [dataLimit, searchValue])
+
   // const getNews = async () => {
   //   try {
   //     const { data } = await getNewsApi.getNews({
@@ -148,7 +155,7 @@ const SearchPopup = () => {
   }
 
   const handleLoadMore = () => {
-    setDataLimit(prevLimit => prevLimit + 5) // Increment data limit by 5
+    setDataLimit(prevLimit => prevLimit + dataLimit) // Increment data limit by 5
   }
 
   // UseEffect to call getNews whenever dataLimit changes

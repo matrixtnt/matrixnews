@@ -68,11 +68,14 @@ export const {
 export default languageSlice.reducer
 
 // API Calls
-export const loadLanguages = ({onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
-  // const { lastFetch } = store.getState().languages
-  // const diffInMinutes = moment().diff(moment(lastFetch), 'minutes')
+export const loadLanguages = ({
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { } }) => {
+  const { lastFetch, Lang } = store.getState().languages;
+  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
   // // If API data is fetched within last 10 minutes then don't call the API again
-  // if (diffInMinutes < 5) return false
+  if (diffInMinutes < process.env.NEXT_PUBLIC_LOAD_MIN) return false
   store.dispatch(
     apiCallBegan({
       ...getLanguagesApi(),
@@ -87,7 +90,15 @@ export const loadLanguages = ({onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}
   )
 }
 
-export const loadLanguageLabels = ({code="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const loadLanguageLabels = ({
+  code = "",
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { } }) => {
+  const { lastFetch, Lang } = store.getState().languages;
+  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+  // // If API data is fetched within last 10 minutes then don't call the API again
+  // if (diffInMinutes < process.env.NEXT_PUBLIC_LOAD_MIN) return false
   store.dispatch(
     apiCallBegan({
       ...getLanguageJsonDataApi(code),

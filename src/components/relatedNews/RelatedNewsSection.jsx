@@ -22,7 +22,6 @@ const RelatedNewsSection = props => {
         access_key: access_key,
         offset: '0',
         limit: '10',
-        language_id: language_id,
         category_id: catid,
         latitude: storedLatitude,
         longitude: storedLongitude

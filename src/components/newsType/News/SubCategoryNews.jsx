@@ -45,7 +45,6 @@ const SubCategory = () => {
         limit: dataPerPage,
         get_user_news: '',
         search: '',
-        language_id: language_id,
         category_id: catId,
         // category_slug: ,
         subcategory_slug: subCatSlug,

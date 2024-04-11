@@ -27,7 +27,7 @@ const BookmarkSection = () => {
         access_key: access_key,
         language_id: language_id,
         offset: 0,
-        limit: 10000,
+        limit: 10,
       })
       setData(data.data)
       // console.log('bookmardData : ',data)

@@ -10,7 +10,7 @@ import settingsReducer from './reducers/settingsReducer';
 import clickActionReducer from "./stateSlice/clickActionSlice";
 import createNewsReducer from './reducers/createNewsReducer';
 import tempDataReducer from './reducers/tempDataReducer';
-import CatNavReducers from './reducers/CatNavReducers';
+import CategoriesDataSlice from './reducers/CatNavReducers';
 import featureLayoutReducer from './reducers/featureLayoutReducer';
 import newsReducer from './reducers/newsReducer';
 
@@ -27,9 +27,9 @@ const rootReducer = combineReducers({
     clickAction: clickActionReducer,
     createNews: createNewsReducer,
     tempdata: tempDataReducer,
-    catNavData: CatNavReducers,
+    categoryData: CategoriesDataSlice,
     Layouts: featureLayoutReducer,
-    getNews: newsReducer,
+    NewsData: newsReducer,
 });
 
 export const store = configureStore({

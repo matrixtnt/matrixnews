@@ -1531,7 +1531,7 @@ a {
   padding: 5px 0;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
   .right-weather {
     display: none;
   }

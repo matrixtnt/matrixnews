@@ -8,7 +8,7 @@ const initialState = {
     data: {},
     loading: false,
     lastFetch: null,
-    Lang: null
+    Lang: null,
 }
 
 export const newsSlice = createSlice({
@@ -41,31 +41,33 @@ export const { newsRequested, newsReceived, newsRequestFailed, newsUpdateLanguag
 export default newsSlice.reducer
 
 // API Calls
-export const loadNews = ({ access_key,
-    offset,
-    limit,
-    id,
-    get_user_news,
-    search, // {optional}
-    language_id,
-    category_id,
-    category_slug,
-    subcategory_id,
-    subcategory_slug,
-    slug,
-    tag_id,
-    latitude,
-    longitude, onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
+export const loadNews = ({
+    access_key = "",
+    offset = "",
+    limit = "",
+    id = "",
+    get_user_news = "",
+    search = "", // {optional}
+    category_id = "",
+    category_slug = "",
+    subcategory_id = "",
+    subcategory_slug = "",
+    slug = "",
+    tag_id = "",
+    latitude = "",
+    longitude = "", 
+    onSuccess = () => { }, 
+    onError = () => { }, 
+    onStart = () => { } }) => {
     const state = store.getState()
-    const { currentLanguage } = store.getState().languages
-    const { lastFetch, Lang } = state.getNews
+    const { currentLanguage } = store?.getState().languages
+    const { lastFetch, Lang } = state.NewsData
     // console.log(Lang?.language_id, 'news-langId')
     // console.log(lastFetch, 'lastfetch')
 
     // console.log('currentLanguage = ', currentLanguage?.id, 'Lang =', Lang?.language_id)
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes')
-
-    if ((currentLanguage?.id != Lang?.language_id) || diffInMinutes > 10) {
+    // if ((currentLanguage?.id != Lang?.language_id) || diffInMinutes > 10) {
         store.dispatch(
             apiCallBegan({
                 ...getNews(access_key,
@@ -74,7 +76,6 @@ export const loadNews = ({ access_key,
                     id,
                     get_user_news,
                     search, // {optional}
-                    language_id,
                     category_id,
                     category_slug,
                     subcategory_id,
@@ -93,7 +94,7 @@ export const loadNews = ({ access_key,
             })
         )
     }
-}
+// }
 
 // Selector Functions
 export const selectNewsData = createSelector(

@@ -115,26 +115,26 @@ const Header = () => {
   // }, [])
 
   // api call
-  const categoriesApi = async () => {
-    try {
-      const { data } = await CategoriesApi.getCategories({
-        access_key: access_key,
-        offset: '0',
-        limit: '16',
-        language_id: currentLanguage.id
-      })
-      loadCatNavData({ data: data.data })
-      return data.data
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const categoriesApi = async () => {
+  //   try {
+  //     const { data } = await CategoriesApi.getCategories({
+  //       access_key: access_key,
+  //       offset: '0',
+  //       limit: '16',
+  //       language_id: currentLanguage.id
+  //     })
+  //     // loadCatNavData({ data: data.data })
+  //     return data.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  // react query
-  const { data: Data } = useQuery({
-    queryKey: ['header-categories', currentLanguage],
-    queryFn: categoriesApi
-  })
+  // // react query
+  // const { data: Data } = useQuery({
+  //   queryKey: ['header-categories', currentLanguage],
+  //   queryFn: categoriesApi
+  // })
 
   // language change
   const languageChange = (name, code, id) => {
@@ -503,7 +503,7 @@ const Header = () => {
                 name={placement}
                 logout={logout}
                 onClickHandler={onClickHandler}
-                Data={Data}
+                // Data={Data}
                 modalShow={modalShow}
                 setModalShow={setModalShow}
                 islogout={islogout}

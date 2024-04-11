@@ -19,6 +19,7 @@ import { useEffect } from 'react'
 import { loadLocation, locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
+import { isLogin } from 'src/utils'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -28,7 +29,7 @@ const WeatherCard = () => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
 
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const weatherApi = async () => {
     return new Promise((resolve, reject) => {
@@ -61,7 +62,7 @@ const dispatch = useDispatch()
 
   // react query
   const { isLoading, data: weather } = useQuery({
-    queryKey: ['weather', currentLanguage,getLocationData],
+    queryKey: ['weather', currentLanguage, getLocationData],
     queryFn: weatherApi,
     staleTime: 0
   })
@@ -84,23 +85,28 @@ const dispatch = useDispatch()
 
   // language change
   const languageChange = async (name, code, id, display_name) => {
-    loadLanguageLabels({code:code})
+    loadLanguageLabels({ code: code })
     setCurrentLanguage(name, code, id, display_name)
-    await registerFcmTokenApi({
-      token: location.fcmtoken,
-      latitude: storedLatitude,
-      longitude: storedLongitude,
-      onSuccess: async res => {
-      },
-      onError: async err => {
-        console.log(err)
-      }
-    })
+    if (isLogin) {
+
+      await registerFcmTokenApi({
+        token: location.fcmtoken,
+        latitude: storedLatitude,
+        longitude: storedLongitude,
+        onSuccess: async res => {
+        },
+        onError: async err => {
+          console.log(err)
+        }
+      })
+    }
   }
 
-  useEffect(() => {
-    loadLanguageLabels({code:currentLanguage?.code})
-  }, [currentLanguage])
+  // useEffect(() => {
+  //   if(currentLanguage.code){
+  //     loadLanguageLabels({ code: currentLanguage?.code })
+  //   }
+  // }, [currentLanguage])
 
   return (
     <div id='rns-weather-card'>

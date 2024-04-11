@@ -1,8 +1,8 @@
 'use client'
 import { useEffect } from 'react'
-import { laodSettingsApi, settingsData,loadSystemTimezone } from 'src/store/reducers/settingsReducer'
-import { useSelector } from 'react-redux'
-import { selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
+import { laodSettingsApi, settingsData, loadSystemTimezone } from 'src/store/reducers/settingsReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentLanguage, selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
 import { useRouter } from 'next/router'
 import Header from './Header'
 import CatNav from '../categories/CatNav'
@@ -13,6 +13,7 @@ import { protectedRoutes } from 'src/routes/routes'
 import toast from 'react-hot-toast'
 import { selectUser } from 'src/store/reducers/userReducer'
 import { usePathname } from 'next/navigation'
+import { categoriesUpdateLanguage, loadCategories } from 'src/store/reducers/CatNavReducers'
 
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
@@ -20,13 +21,16 @@ const Layout = ({ children }) => {
   const router = useRouter()
   const pathname = usePathname()
 
-  useSelector(selectCurrentLanguageLabels)
+  const dispatch = useDispatch()
 
+
+  useSelector(selectCurrentLanguageLabels)
+  const currentLanguage = useSelector(selectCurrentLanguage)
   // web settings load
   useEffect(() => {
     laodSettingsApi({
       type: '',
-      onSuccess: res =>{
+      onSuccess: res => {
 
         document.documentElement.style.setProperty('--primary-color', res && res?.data?.web_setting?.web_color_code)
         loadSystemTimezone(res?.data?.system_timezone)
@@ -68,6 +72,20 @@ const Layout = ({ children }) => {
       }
     }
   }
+  useEffect(() => {
+    loadCategories({
+      offset: "0",
+      limit: "15",
+      language_id: currentLanguage?.id,
+      onSuccess: (res) => {
+        dispatch(categoriesUpdateLanguage(currentLanguage.id))
+      },
+      onErro: (err) => {
+        console.log("error", err)
+        dispatch(categoriesUpdateLanguage(""))
+      }
+    })
+  }, [currentLanguage])
 
   return (
     <>

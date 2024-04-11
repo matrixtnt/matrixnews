@@ -19,7 +19,8 @@ import Card from '../skeletons/Card'
 import { useEffect, useState } from 'react'
 import { getNewsApi } from 'src/hooks/newsApi'
 import NewsStyle from './NewsStyle'
-import { layoutUpdateLanguage, loadLayout } from 'src/store/reducers/featureLayoutReducer'
+import { layoutReceived, layoutUpdateLanguage, loadLayout } from 'src/store/reducers/featureLayoutReducer'
+import { loadNews } from 'src/store/reducers/newsReducer'
 
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
@@ -35,58 +36,84 @@ const FeatureLayout = () => {
   const storedLongitude = location && location.long
   const [Data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [isNoDataLoading, setNoDataIsLoading] = useState(false)
+  const [isNoData, setNoData] = useState([])
+
+  console.log(Data)
   // api call
-  const getNews = async page => {
-    try {
-      const { data } = await getNewsApi.getNews({
-        access_key: access_key,
-        offset: 0,
-        limit: 10,
-        get_user_news: '',
-        search: '',
-        language_id: language_id,
-        category_id: '',
-        // category_slug: ,
-        subcategory_slug: '',
-        tag_id: '',
-        slug: '',
-        latitude: storedLatitude,
-        longitude: storedLongitude
-      })
-      if (data.error) {
-        setNewsDataFound(true)
-      }
-      setNewsDataFound(false)
-      return data
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const getNews = async page => {
+  //   try {
+  //     const { data } = await getNewsApi.getNews({
+  //       access_key: access_key,
+  //       offset: 0,
+  //       limit: 10,
+  //       latitude: storedLatitude,
+  //       longitude: storedLongitude
+  //     })
+  //     if (data.error) {
+  //       setNewsDataFound(true)
+  //     }
+  //     setNewsDataFound(false)
+  //     return data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  // // react query
-  const { isLoading: newsLoading, data: newsData } = useQuery({
-    queryKey: ['newsData', currentLanguage, location],
-    queryFn: () => getNews()
-  })
-
-  useEffect(() => {
-    loadLayout({
+  // // // react query
+  // const { isLoading: newsLoading, data: newsData } = useQuery({
+  //   queryKey: ['newsData', currentLanguage, location],
+  //   queryFn: () => getNews()
+  // })
+  const getNewsWhenNoData = async () => {
+    loadNews({
       access_key: access_key,
-      onSuccess: response => {
-        dispatch(layoutUpdateLanguage(currentLanguage.id))
-        // console.log(currentLanguage.id,'langId-FeatureLayout')
-        setData(response.data)
-        setIsLoading(false)
+      offset: '0',
+      limit: 10, // {optional}
+      latitude: storedLatitude,
+      longitude: storedLongitude,
+      onSuccess: (response) => {
+        console.log(response)
+        setNoData(response?.data)
+        setNewsDataFound(false)
+        setNoDataIsLoading(false)
 
       },
-      onError: error => {
-        console.log(error)
-        dispatch(layoutUpdateLanguage(""))
-        setNoFeatureData(false)
-        setIsLoading(false)
+      onError: (error) => {
+        setNewsDataFound(true)
+        setNoDataIsLoading(false)
       }
     })
+  }
+  useEffect(() => {
+    if (currentLanguage.id) {
+      console.log(currentLanguage.id)
+      loadLayout({
+        access_key: access_key,
+        onSuccess: (response) => {
+          dispatch(layoutUpdateLanguage(currentLanguage.id))
+          setData(response.data)
+          setIsLoading(false)
+          setNewsDataFound(false)
+        },
+        onError: (error) => {
+          console.log(error)
+          dispatch(layoutUpdateLanguage(""))
+          setData([])
+          setNoFeatureData(false)
+          setNewsDataFound(true)
+          setIsLoading(false)
+          setNoDataIsLoading(true)
+        }
+      })
+    }
   }, [currentLanguage])
+
+  useEffect(() => {
+    if (isNoDataLoading) {
+      getNewsWhenNoData()
+    }
+  }, [isNoDataLoading])
 
 
   // const getFeatureSection = async () => {
@@ -209,7 +236,7 @@ const FeatureLayout = () => {
         </div>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
-      ) : !newsDataFound ? <> <NewsStyle isLoading={newsLoading} Data={newsData} /> </> :
+      ) : !newsDataFound ? <> <NewsStyle isLoading={isNoDataLoading} Data={isNoData} /> </> :
         (
           <p className='no_data_available'>{translate('noNews')}</p>
         )}

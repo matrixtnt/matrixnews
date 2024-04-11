@@ -14,11 +14,15 @@ import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import NoDataFound from '../noDataFound/NoDataFound'
+import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 
 const Categories = () => {
   const [currentPage, setCurrentPage] = useState(0)
   const dataPerPage = 9
   const currentLanguage = useSelector(selectCurrentLanguage)
+
+ 
+  
   const categoiresOnOff = useSelector(settingsData)
 
   // handle page change
@@ -44,7 +48,8 @@ const Categories = () => {
   // react query
   const { isLoading, data: Data } = useQuery({
     queryKey: ['categories', currentPage, currentLanguage.id],
-    queryFn: () => categoriesApi(currentPage)
+    queryFn: () => categoriesApi(currentPage),
+    staleTime: 6000
   })
 
   // slice the array to get the current posts

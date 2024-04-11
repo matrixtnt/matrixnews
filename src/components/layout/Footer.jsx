@@ -11,43 +11,19 @@ import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key } from 'src/utils/api'
 import { FaSquareXTwitter } from 'react-icons/fa6'
-import { catNavSelector } from 'src/store/reducers/CatNavReducers'
+import { catNavSelector, categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 
 const Footer = () => {
-  const currentLanguage = useSelector(selectCurrentLanguage)
-
   const settings = useSelector(settingsData)
 
-  const categories = useSelector(catNavSelector)
+  const categories = useSelector(categoriesCacheData)
+  
+  const categoriesData = categories
 
-  const categoriesData = categories?.data
-
-  // console.log(categoriesData,'footer')
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
-  // // api call
-  // const categoriesApi = async () => {
-  //   try {
-  //     const { data } = await CategoriesApi.getCategories({
-  //       access_key: access_key,
-  //       offset: '0',
-  //       limit: '8',
-  //       language_id: currentLanguage.id
-  //     })
-  //     return data.data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // react query
-  // const { data: Data } = useQuery({
-  //   queryKey: ['footerCategories', currentLanguage],
-  //   queryFn: categoriesApi
-  // })
 
   return (
     <>

@@ -13,7 +13,7 @@ import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import NoDataFound from 'src/components/noDataFound/NoDataFound'
 import { subCategorySelector } from 'src/store/reducers/tempDataReducer'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
@@ -26,7 +26,6 @@ const CategoryNews = () => {
   const dataPerPage = 8 // number of posts per page
   const router = useRouter()
   const query = router.query
-  console.log(query,'query')
   const catId = query.category_slug
   const catSlug = query.slug
   const slug = query.slug
@@ -44,38 +43,43 @@ const CategoryNews = () => {
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected)
   }
-
+  console.log(language_id)
   // api call
   const getNewsByCategoryApi = async page => {
-    try {
-      const { data } = await getNewsApi.getNews({
-        access_key: access_key,
-        offset: page * dataPerPage,
-        limit: dataPerPage,
-        get_user_news: '',
-        search: '',
-        language_id: language_id,
-        // category_id: catId,
-        category_slug: catSlug,
-        subcategory_id: '',
-        tag_id: '',
-        slug: "",
-        latitude: storedLatitude,
-        longitude: storedLongitude
-      })
-      // console.log('categories', data)
-      data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
-      return data
-    } catch (error) {
-      console.log(error)
+    if (language_id !== null) {
+
+      if (location || currentPage || catSlug) {
+
+        try {
+          const { data } = await getNewsApi.getNews({
+            access_key: access_key,
+            offset: page * dataPerPage,
+            limit: dataPerPage,
+            language_id: language_id,
+            category_slug: catSlug,
+            latitude: storedLatitude,
+            longitude: storedLongitude
+          })
+          // console.log('categories', data)
+          data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          return data
+        } catch (error) {
+          console.log(error)
+        }
+      }
     }
   }
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', catId, changelanguage, location, currentPage, query,catSlug],
+    queryKey: ['category-news', language_id, location, currentPage, catSlug],
     queryFn: () => getNewsByCategoryApi(currentPage)
   })
+
+  useEffect(() => {
+    console.log("category-news")
+  }, [])
+
 
   // slice the array to get the current posts
   const currentData = Data && Data.data && Data.data.slice(0, dataPerPage)

@@ -5,7 +5,6 @@ import { apiCallBegan } from '../actions/apiActions'
 import { store } from '../store'
 
 const initialState = {
-  data: {},
   loading: false,
   lastFetch: null,
   Lang: null
@@ -19,8 +18,6 @@ export const featureLayoutSlice = createSlice({
       layout.loading = true
     },
     layoutReceived: (layout, action) => {
-      console.log(action)
-      layout.data = action.payload.data
       layout.loading = false
       layout.lastFetch = Date.now()
       layout.Lang = action.request
@@ -29,11 +26,11 @@ export const featureLayoutSlice = createSlice({
       layout.loading = true
     },
     layoutUpdateLanguage: (layout, action) => {
-        console.log(action.payload)
       if (layout.Lang) {
         layout.Lang.language_id = action.payload
       }
-    }
+    },
+    
   }
 })
 
@@ -56,10 +53,8 @@ export const loadLayout = ({
   const state = store.getState()
   const { currentLanguage } = store.getState().languages
   const { lastFetch, Lang } = state.Layouts
-  const diffInMinutes = moment().diff(moment(lastFetch), 'minutes')
-  console.log(diffInMinutes)
-  console.log(typeof(currentLanguage.id), typeof(Lang?.language_id))
-  if (currentLanguage?.id != Lang?.language_id || diffInMinutes > 10) {
+  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+  // if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN) {
     store.dispatch(
       apiCallBegan({
         ...getFeatureSection(access_key, offset, limit, slug, latitude, longitude, section_id),
@@ -73,7 +68,7 @@ export const loadLayout = ({
       })
     )
   }
-}
+// }
 
 // Selector Functions
 export const selectLayout = createSelector(

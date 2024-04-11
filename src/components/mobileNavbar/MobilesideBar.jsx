@@ -21,13 +21,13 @@ import { store } from '../../store/store'
 import usersvg from '../../../public/assets/images/user.svg'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 
 const MobilesideBar = ({
   isuserRole,
   name,
   logout,
   onClickHandler,
-  Data,
   modalShow,
   setModalShow,
   islogout,
@@ -39,6 +39,8 @@ const MobilesideBar = ({
   ...props
 }) => {
   const userData = useSelector(selectUser)
+
+  const categories = useSelector(categoriesCacheData)
 
   const currentLanguage = useSelector(selectCurrentLanguage)
 
@@ -52,9 +54,11 @@ const MobilesideBar = ({
     setCurrentLanguage(name, code, id)
   }
 
-  useEffect(() => {
-    loadLanguageLabels({ code: currentLanguage?.code })
-  }, [currentLanguage])
+  // useEffect(() => {
+  //   if(currentLanguage.code){
+  //     loadLanguageLabels({ code: currentLanguage?.code })
+  //   }
+  // }, [currentLanguage])
 
   const closeRef = useRef()
 
@@ -279,7 +283,7 @@ const MobilesideBar = ({
             </li>
             {settingsOnOff && settingsOnOff.category_mode === '1' ? (
               <li className='nav-item has-children'>
-                {Data && Data.length > 0 ? (
+                {categories && categories.length > 0 ? (
                   <span className='menu-toggle' onClick={onClickHandler}>
                     <b>
                       <p id='nav-links' className=''>
@@ -292,8 +296,8 @@ const MobilesideBar = ({
                   </span>
                 ) : null}
                 <ul className='sub-menu mobile_catogories'>
-                  {Data &&
-                    Data.slice(0, 12).map((element, index) => (
+                  {categories &&
+                    categories.slice(0, 12).map((element, index) => (
                       <li className='nav-item' key={index}>
                         {
                           element?.sub_categories?.length > 0 ?
@@ -334,7 +338,7 @@ const MobilesideBar = ({
 
                       </li>
                     ))}
-                  {Data && Data.length > 10 && (
+                  {categories && categories.length > 10 && (
                     <li className='nav-item'>
                       <Link className='catNav-links' href={'/all-categories'} onClick={handleClose}>
                         {' '}
