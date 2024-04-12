@@ -72,7 +72,7 @@ export const getLanguage = () => {
 // get user
 export const getUser = () => {
   let user = store.getState().user
-  if (user.data !== null) {
+  if (user?.data !== null) {
     return user?.data?.id
   }
 }

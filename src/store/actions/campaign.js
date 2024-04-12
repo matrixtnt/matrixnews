@@ -318,7 +318,10 @@ export const registerFcmTokenApi = async ({
 }
 
 // 18. get user by id
-export const getuserbyidApi = ({ onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
+export const getuserbyidApi = ({
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
       ...getUserByIdApi(),

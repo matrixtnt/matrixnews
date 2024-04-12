@@ -26,7 +26,7 @@ import {
   profileimg,
   placeholderImage
 } from '../../utils/index'
-import { logoutUser, selectUser } from '../../store/reducers/userReducer'
+import { loadGetUserByIdApi, logoutUser, selectUser } from '../../store/reducers/userReducer'
 import SignInModal from '../auth/SignInModal'
 import MobilesideBar from '../mobileNavbar/MobilesideBar'
 import { settingsData } from '../../store/reducers/settingsReducer'
@@ -63,79 +63,6 @@ const Header = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const settings = useSelector(settingsData)
-
-
-  // user roles api call
-  const getUserById = async () => {
-    if (!userData.data.firebase_id) return false
-    // if (!currentLanguage) return false
-    try {
-      const { data } = await getUserByIdApi.getUserById({
-        access_key: access_key
-      })
-
-
-      if (data && data.data.status === 0) {
-        toast.error('You are deactivated by admin!')
-        signOut(authentication)
-          .then(() => {
-            logoutUser()
-            navigate.push('/')
-          })
-          .catch(error => {
-            toast.error(error)
-          })
-        return false
-      }
-
-      if (data && data.data) {
-        const roles = data.data.role
-        if (roles !== 0) {
-          setisuserRole(true)
-        }
-        return data.data
-      } else {
-        // Handle the case when data or data.data is undefined or empty
-        // Return an appropriate value or handle the situation accordingly
-        // For example:
-        // setisuserRole(false);
-        return []
-      }
-    } catch (error) { }
-  }
-
-  // react query
-  const { refetch } = useQuery({
-    queryKey: ['userRoles', userData],
-    queryFn: getUserById,
-    staleTime: 0
-  })
-
-  // useEffect(() => {
-  // refetch()
-  // }, [])
-
-  // api call
-  // const categoriesApi = async () => {
-  //   try {
-  //     const { data } = await CategoriesApi.getCategories({
-  //       access_key: access_key,
-  //       offset: '0',
-  //       limit: '16',
-  //       language_id: currentLanguage.id
-  //     })
-  //     // loadCatNavData({ data: data.data })
-  //     return data.data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // react query
-  // const { data: Data } = useQuery({
-  //   queryKey: ['header-categories', currentLanguage],
-  //   queryFn: categoriesApi
-  // })
 
   // language change
   const languageChange = (name, code, id) => {

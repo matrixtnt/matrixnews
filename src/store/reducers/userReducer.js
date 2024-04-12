@@ -1,7 +1,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { store } from "../store";
-import { updateProfileApi, userSignUpApi } from "../../utils/api";
+import { getUserByIdApi, updateProfileApi, userSignUpApi } from "../../utils/api";
 import { apiCallBegan } from "../actions/apiActions";
 
 // state
@@ -40,8 +40,10 @@ export const userSlice = createSlice({
             user.mobileLoginType = action.payload.data
         },
         userManageDataSuccess: (user, action) => {
-            let data = action.payload.data;
-            user.data = data
+            console.log(action)
+            let { data } = action.payload;
+            console.log(data)
+            user.userManageData = data
         }
     }
 
@@ -63,7 +65,7 @@ export const register = async ({
     status = "",
     fcm_id = "",
     onSuccess = () => { },
-    nError = () => { },
+    onError = () => { },
     onStart = () => { } }) => {
     store.dispatch(apiCallBegan({
         ...userSignUpApi(firebase_id, name, email, mobile, type, profile, status, fcm_id),
@@ -76,7 +78,14 @@ export const register = async ({
 };
 
 // profile image update
-export const updateProfileImage = ({ name = "", mobile = "", email = "", image = "", onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
+export const updateProfileImage = ({
+    name = "",
+    mobile = "",
+    email = "",
+    image = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { } }) => {
     store.dispatch(apiCallBegan({
         ...updateProfileApi(name, mobile, email, image),
         displayToast: false,
@@ -88,7 +97,15 @@ export const updateProfileImage = ({ name = "", mobile = "", email = "", image =
 };
 
 // update profile data
-export const updateProfileData = ({ name = "", mobile = "", email = "", image = "", onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
+export const updateProfileData = ({
+    name = "",
+    mobile = "",
+    email = "",
+    image = "",
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { }
+}) => {
     store.dispatch(apiCallBegan({
         ...updateProfileApi(name, mobile, email, image),
         displayToast: false,
@@ -98,10 +115,31 @@ export const updateProfileData = ({ name = "", mobile = "", email = "", image = 
         onError,
     }))
 }
+// update profile data
+export const loadGetUserByIdApi = ({
+    onSuccess = () => { },
+    onError = () => { },
+    onStart = () => { }
+}) => {
+    store.dispatch(
+        apiCallBegan({
+            ...getUserByIdApi(),
+            displayToast: false,
+            onSuccessDispatch: userManageDataSuccess.type,
+            onStart,
+            onSuccess,
+            onError,
+        }))
+}
 
 // load mobile type
 export const loadMobileType = (data) => {
     store.dispatch(mobileTypeSuccess({ data }))
+}
+
+// //  loadUserManageData
+export const loadUserManageData = (data) => {
+    store.dispatch(userManageDataSuccess({ data }))
 }
 
 
@@ -113,3 +151,5 @@ export const logoutUser = () => {
 
 // selectors
 export const selectUser = (state) => state.user;
+
+export const getUserManageData = (state) => selectUser(state).userManageData;

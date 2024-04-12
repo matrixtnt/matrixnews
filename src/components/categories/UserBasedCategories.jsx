@@ -10,6 +10,7 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { categoryCountSelector } from 'src/store/reducers/tempDataReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
+import { getUserManageData } from 'src/store/reducers/userReducer'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
@@ -17,14 +18,12 @@ const UserBasedCategories = () => {
   const [finalToggleID, setFinalToggleID] = useState('')
 
   const currentLanguage = useSelector(selectCurrentLanguage)
-  const categorieslength = useSelector(categoryCountSelector)
   const categories = useSelector(categoriesCacheData)
+  const UserManageData = useSelector(getUserManageData)
 
   // get user by id
   useEffect(() => {
-    getuserbyidApi({
-      onSuccess: response => {
-        const useridData = response.data
+        const useridData = UserManageData
         // user categories
         const alluserIds = useridData.user_category.map(category => category.category_id)
         // common id get
@@ -69,11 +68,7 @@ const UserBasedCategories = () => {
             }
           }
         })
-      },
-      onError: error => {
-        console.error(error)
-      }
-    })
+
   }, [currentLanguage])
 
   // handle switch

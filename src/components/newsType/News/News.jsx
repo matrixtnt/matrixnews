@@ -70,28 +70,31 @@ const News = () => {
 
   // api call
   const getNewsById = async () => {
-    try {
-      const { data } = await getNewsApi.getNews({
-        access_key: access_key,
-        slug: NewsId,
-      });
+    if (currentLanguage) {
 
-      if (data.data[0].bookmark === 0) {
-        setBookmark(false);
-      } else {
-        setBookmark(true);
-      }
+      try {
+        const { data } = await getNewsApi.getNews({
+          access_key: access_key,
+          slug: NewsId,
+        });
 
-      if (data.data[0].like === 0) {
-        setLike(false);
-      } else {
-        setLike(true);
-      }
-      return data.data;
-    } catch (error) {
-      // console.log(error)
-      if (error === 'No Data Found') {
-        router.push('/');
+        if (data.data[0].bookmark === 0) {
+          setBookmark(false);
+        } else {
+          setBookmark(true);
+        }
+
+        if (data.data[0].like === 0) {
+          setLike(false);
+        } else {
+          setLike(true);
+        }
+        return data.data;
+      } catch (error) {
+        // console.log(error)
+        if (error === 'No Data Found') {
+          router.push('/');
+        }
       }
     }
   };
@@ -399,7 +402,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setLikeDislikeData(Data && Data[0]?.id, !Like ? 1 : 0)}
                           >
-                            {Like ? <AiFillLike size={23} /> :<AiOutlineLike size={23} /> }
+                            {Like ? <AiFillLike size={23} /> : <AiOutlineLike size={23} />}
                           </button>
 
                           <p id='nv-function-text'>{translate('likes')}</p>

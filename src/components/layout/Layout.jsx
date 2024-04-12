@@ -11,7 +11,7 @@ import SearchPopup from '../search/SearchPopup'
 import Footer from './Footer'
 import { protectedRoutes } from 'src/routes/routes'
 import toast from 'react-hot-toast'
-import { selectUser } from 'src/store/reducers/userReducer'
+import { loadGetUserByIdApi, selectUser } from 'src/store/reducers/userReducer'
 import { usePathname } from 'next/navigation'
 import { categoriesUpdateLanguage, loadCategories } from 'src/store/reducers/CatNavReducers'
 
@@ -86,7 +86,48 @@ const Layout = ({ children }) => {
       }
     })
   }, [currentLanguage])
+  const GetUserByIdFetchData = () => {
+    if (!userData.data.firebase_id) return false
+    loadGetUserByIdApi({
+      onSuccess: (res) => {
+        console.log(res)
+        const data = res
+        if (data && data.data.status === 0) {
+          toast.error('You are deactivated by admin!')
+          signOut(authentication)
+            .then(() => {
+              logoutUser()
+              navigate.push('/')
+            })
+            .catch(error => {
+              toast.error(error)
+            })
+          return false
+        }
 
+        if (data && data.data) {
+          const roles = data.data.role
+          if (roles !== 0) {
+            setisuserRole(true)
+          }
+          return data.data
+        } else {
+          // Handle the case when data or data.data is undefined or empty
+          // Return an appropriate value or handle the situation accordingly
+          // For example:
+          // setisuserRole(false);
+          return []
+        }
+      },
+      onError: (err) => {
+        console.log(err)
+      }
+    }
+    )
+  }
+  useEffect(() => {
+    GetUserByIdFetchData()
+  }, [currentLanguage])
   return (
     <>
       {settings ? (
