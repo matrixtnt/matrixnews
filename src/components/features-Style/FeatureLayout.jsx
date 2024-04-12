@@ -86,6 +86,8 @@ const FeatureLayout = () => {
   }
   useEffect(() => {
     if (currentLanguage.id) {
+      setIsLoading(true)
+      setNewsDataFound(true)
       loadLayout({
         access_key: access_key,
         onSuccess: (response) => {

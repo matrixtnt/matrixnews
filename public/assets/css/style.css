@@ -2761,6 +2761,11 @@ a#social_platforms svg:hover {
   word-break: break-word;
 }
 
+.breadcrumb_data li:last-child::before{
+  content: '';
+  color: transparent;
+}
+
 [dir='rtl'] .breadcrumb_data {
   align-items: baseline;
   gap: 6px;
