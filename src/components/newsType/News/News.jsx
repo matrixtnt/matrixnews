@@ -150,12 +150,6 @@ const News = () => {
     queryFn: setNewsView
   });
 
-  // this logic actually for seo purpose to move to home page otherwise crawling is not working
-  useEffect(() => {
-    if (currentLanguage.id !== Number(query.language_id)) {
-      router.push('/');
-    }
-  }, [currentLanguage.id]);
 
   useEffect(() => { }, [userData.data]);
 
