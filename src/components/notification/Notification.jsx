@@ -17,7 +17,7 @@ import toast from 'react-hot-toast';
 import Layout from '../layout/Layout';
 import NoDataFound from '../noDataFound/NoDataFound';
 import moment from 'moment-timezone';
-import { systemTimezoneData } from 'src/store/reducers/settingsReducer';
+import { settingsData } from 'src/store/reducers/settingsReducer';
 
 const Notification = () => {
   const [Data, setData] = useState([]);
@@ -28,9 +28,8 @@ const Notification = () => {
   const [offsetdata, setOffsetdata] = useState(0);
   const limit = 6;
 
-  const systemTimezone = useSelector(systemTimezoneData)
-
-  // console.log(systemTimezone.systemTimezone,'notification Time zone')
+  const settings = useSelector(settingsData)
+  const systemTimezoneData = settings.system_timezone
   // api call
   const getUserNotification = async () => {
     try {
@@ -63,19 +62,19 @@ const Notification = () => {
   const handleDeleteComment = (e, id) => {
     e.preventDefault();
     deleteusernotificationApi({
-      id:id,
-      onSuccess:response => {
+      id: id,
+      onSuccess: response => {
         // Remove the deleted notification from the state
         setData(prevData => prevData.filter(notification => notification.id !== id));
         toast.success(response.message);
         loaduserNotification({
-          offset:'0',
-          limit:'10',
-          onSuccess:() => {},
-          onError:() => {}
+          offset: '0',
+          limit: '10',
+          onSuccess: () => { },
+          onError: () => { }
         });
       },
-      onError:error => {
+      onError: error => {
         if (error === 'No Data Found') {
           setData('');
         }
@@ -95,7 +94,7 @@ const Notification = () => {
       // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
       const convertedData = Data.map(element => {
         const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date
-        const dtKolkata = moment(timestampUtc).tz(systemTimezone.systemTimezone);
+        const dtKolkata = moment(timestampUtc).tz(systemTimezoneData);
         const convertedTime = dtKolkata.format("DD-MM-YYYY hh:mm:ss A");
         return {
           ...element,
@@ -153,7 +152,7 @@ const Notification = () => {
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <NoDataFound/>
+                <NoDataFound />
               </div>
             )}
           </div>

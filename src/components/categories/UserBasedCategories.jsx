@@ -10,7 +10,7 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { categoryCountSelector } from 'src/store/reducers/tempDataReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
-import { getUserManageData } from 'src/store/reducers/userReducer'
+import { getUserManageData, loadGetUserByIdApi } from 'src/store/reducers/userReducer'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
@@ -23,51 +23,50 @@ const UserBasedCategories = () => {
 
   // get user by id
   useEffect(() => {
-        const useridData = UserManageData
-        // user categories
-        const alluserIds = useridData.user_category.map(category => category.category_id)
-        // common id get
-        const CommanID = []
+    const useridData = UserManageData
+    // user categories
+    const alluserIds = useridData?.user_category.category_id
+    // common id get
+    const CommanID = []
 
-        if (alluserIds.length > 1) {
+    // if (alluserIds.length > 1) {
 
-          for (let i = 0; i < alluserIds.length; i++) {
-            console.log("i", alluserIds.length)
-            console.log("alluserIds[i]", alluserIds[i])
-            const values = alluserIds[i].split(',')
-            console.log("values", values)
-            for (let j = 0; j < values.length; j++) {
-              CommanID.push(values[j])
-            }
-          }
-        } else {
-          CommanID.push(alluserIds)
+    //   for (let i = 0; i < alluserIds.length; i++) {
+    //     const values = alluserIds[i]?.split(',')
+    //     for (let j = 0; j < values.length; j++) {
+    //       CommanID.push(values[j])
+    //     }
+    //   }
+    // } else {
+    //   CommanID.push(alluserIds)
 
-        }
+    // }
 
-        // category api call
-        categoriesApi({
-          offset: 0,
-          limit: categories.length,
-          language_id: currentLanguage.id,
-          onSuccess: response => {
-            const toggledData = response.data.map(element => {
-              // here set isToggleOn has boolean with actual data
-              const isToggledOn = CommanID.includes(element.id.toString())
-              return { ...element, isToggledOn }
-            })
-            // Combine paginated data with existing data
-            // setData(prevData => [...prevData, ...toggledData])
-            setData(toggledData)
-            setLoading(false)
-          },
-          onError: error => {
-            if (error === 'No Data Found') {
-              setData('')
-              setLoading(false)
-            }
-          }
+    // category api call
+    categoriesApi({
+      offset: 0,
+      limit: categories.length,
+      language_id: currentLanguage.id,
+      onSuccess: response => {
+        const toggledData = response.data.map(element => {
+          // here set isToggleOn has boolean with actual data
+          
+          const isToggledOn = alluserIds.includes(element.id)
+         
+          return { ...element, isToggledOn }
         })
+        // Combine paginated data with existing data
+        // setData(prevData => [...prevData, ...toggledData])
+        setData(toggledData)
+        setLoading(false)
+      },
+      onError: error => {
+        if (error === 'No Data Found') {
+          setData('')
+          setLoading(false)
+        }
+      }
+    })
 
   }, [currentLanguage])
 
@@ -103,6 +102,30 @@ const UserBasedCategories = () => {
         category_id: finalToggleID,
         onSuccess: response => {
           toast.success(response.message)
+          loadGetUserByIdApi({
+            onSuccess: (res) => {
+              const data = res
+              if (data && data.data.status === 0) {
+                toast.error('You are deactivated by admin!')
+                signOut(authentication)
+                  .then(() => {
+                    logoutUser()
+                    navigate.push('/')
+                  })
+                  .catch(error => {
+                    toast.error(error)
+                  })
+                return false
+              }
+
+            
+            },
+            onError: (err) => {
+              console.log(err)
+            }
+
+          })
+
         },
         onError: error => {
           toast.error(error)

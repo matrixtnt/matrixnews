@@ -29,12 +29,8 @@ const Layout = ({ children }) => {
   // web settings load
   useEffect(() => {
     laodSettingsApi({
-      type: '',
       onSuccess: res => {
-
-        document.documentElement.style.setProperty('--primary-color', res && res?.data?.web_setting?.web_color_code)
-        loadSystemTimezone(res?.data?.system_timezone)
-        // console.log(res.data.system_timezone)
+        
       },
       onError: error => {
         console.log(error)
@@ -52,6 +48,10 @@ const Layout = ({ children }) => {
       }
     }
   }, [])
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.web_color_code)
+  }, [settings])
 
   // Check if the user is authenticated based on the presence of the token
   const isAuthenticated = userData && userData?.data?.token
