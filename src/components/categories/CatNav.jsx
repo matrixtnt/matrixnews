@@ -143,7 +143,7 @@ const CatNav = () => {
 
   return (
     <>
-       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
+      {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <>
           {categories && categories.length > 0 ? (
             <div id='cn-main' expand='lg'>
@@ -157,22 +157,20 @@ const CatNav = () => {
 
                     <Swiper {...swiperOption}>
                       {categories.map((element, index) => (
-                        <SwiperSlide key={element.id} className='text-center'
+                        element.sub_categories.length > 0 ? (
+                          
+                          <SwiperSlide key={element.id} className='text-center'
                           onClick={() => handleCategoryChange(element)}
-                        >
-                          <span
-                            // id='catNav-links'
-                            className='catNav-links'
-                            // href={{
-                            //   pathname: `/categories-news/${element.slug}`,
-                            //   query: {
-                            //     category_id: element.id
-                            //   }
-                            // }}
                           >
-                          <b>{element.category_name}</b>
-                          </span>
-                        </SwiperSlide>
+                            <span
+
+                              className='catNav-links'
+
+                            >
+                              <b>{element.category_name}</b>
+                            </span>
+                          </SwiperSlide>
+                        ) : null
                       ))}
                     </Swiper>
                     {categories?.length > 10 ? (

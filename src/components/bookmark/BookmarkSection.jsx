@@ -96,7 +96,7 @@ const BookmarkSection = () => {
                         alt='bookmark news'
                         onError={placeholderImage}
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } })
+                          navigate.push({ pathname: `/news/${element.slug}`})
                         }
                       />
                       <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
@@ -109,7 +109,7 @@ const BookmarkSection = () => {
                         className='btn btn-sm'
                         type='button'
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } })
+                          navigate.push({ pathname: `/news/${element.slug}`,  })
                         }
                       >
                         {element.category_name}
@@ -118,7 +118,7 @@ const BookmarkSection = () => {
                         id='bs-card-title'
                         className='card-title'
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } })
+                          navigate.push({ pathname: `/news/${element.slug}`,  })
                         }
                       >
                         {element.title}

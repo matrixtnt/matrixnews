@@ -49,7 +49,7 @@ const RelatedBreakingNews = props => {
           {Data &&
             Data.map(element => (
               <div key={element.id}>
-                <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`,query: { language_id: element.language_id}}} onClick={scrollToTop}>
+                <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`}} onClick={scrollToTop}>
                   <div id='rbn-card' className='card'>
                     <img id='rbn-image' src={element.image} className='card-img-top' alt={element.title} onError={placeholderImage}/>
                     <div id='rbn-card-body' className='rbn-card-body'>

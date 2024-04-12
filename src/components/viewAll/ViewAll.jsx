@@ -87,7 +87,7 @@ const ViewAll = () => {
                       <div className='col-md-4 col-12' key={element.id}>
                         <Link
                           id='Link-all'
-                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                          href={{ pathname: `/news/${element.slug}`,  }}
                         >
                           <div id='BNV-card' className='card'>
                             <img
@@ -156,7 +156,7 @@ const ViewAll = () => {
                           id='Link-all'
                           href={{
                             pathname: `/breaking-news/${element.slug}`,
-                            query: { language_id: element.language_id }
+                            
                           }}
                         >
                           <div id='BNV-card' className='card'>

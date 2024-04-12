@@ -120,7 +120,7 @@ const ManageNews = () => {
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,
-                                  query: { language_id: element.language_id }
+                                  
                                 })
                               }
                             />
@@ -130,7 +130,7 @@ const ManageNews = () => {
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,
-                                  query: { language_id: element.language_id }
+                                  
                                 })
                               }
                             >
@@ -155,7 +155,7 @@ const ManageNews = () => {
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,
-                                  query: { language_id: element.language_id }
+                                  
                                 })
                               }
                             >

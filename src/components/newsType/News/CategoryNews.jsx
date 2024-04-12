@@ -161,7 +161,7 @@ const CategoryNews = () => {
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
                         id='Link-all'
-                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        href={{ pathname: `/news/${element.slug}`,  }}
                       >
                         <div id='cv-card' className='card'>
                           <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />

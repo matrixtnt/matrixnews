@@ -140,7 +140,7 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
+                    <Link href={{ pathname: `/news/${item.slug}` }}>
                       <div className='card fs-Newscard'>
                         <img
                           src={item.image}
@@ -267,7 +267,7 @@ const StyleSix = ({ isLoading, Data }) => {
 
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}>
+                    <Link href={{ pathname: `/news/${item.slug}` }}>
                       <div className='card fs-Newscard'>
                         <img
                           src={item.image}
@@ -393,7 +393,7 @@ const StyleSix = ({ isLoading, Data }) => {
                         ) : null}
                         <div id='Top-Deatils'>
                           <Link
-                            href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}
+                            href={{ pathname: `/breaking-news/${item.slug}`, }}
                             id='Top-Title01'
                           >
                             {truncateText(item.title, 30)}

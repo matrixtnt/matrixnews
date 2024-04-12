@@ -88,7 +88,7 @@ const NewsNotification = () => {
               Data.map((element, index) => (
                 <div key={index} className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}>
                 {element.type === 'category' ? (
-                  <Link href={{ pathname: `/news/${element.news?.slug}`, query: { language_id: element.language_id } }}>
+                  <Link href={{ pathname: `/news/${element.news?.slug}`,  }}>
                     <div className='card-body bd-highlight' id='card-noti'>
                       {/** Content inside the link */}
                       <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />

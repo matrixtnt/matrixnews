@@ -101,6 +101,7 @@ const News = () => {
 
   // api call
   const setNewsView = async () => {
+    if (!isLogin()) return false;
     try {
       const { data } = await getNewsApi.setNewsView({
         access_key: access_key,

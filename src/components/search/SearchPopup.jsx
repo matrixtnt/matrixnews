@@ -149,7 +149,7 @@ const SearchPopup = () => {
     e.preventDefault()
     navigate.push({
       pathname: `/news/${element.slug}`,
-      query: { language_id: element.language_id }
+      
     })
     setSearchValue('')
   }

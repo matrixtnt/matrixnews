@@ -139,7 +139,7 @@ const StyleFour = ({ Data }) => {
                   {Data.news.map((value, index) => {
                     return (
                       <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'  key={value.id}>
-                        <Link id='rns-card' className='card card_hover_two' href={{pathname:`/news/${value.slug}`,query: { language_id: value.language_id}}}>
+                        <Link id='rns-card' className='card card_hover_two' href={{pathname:`/news/${value.slug}`}}>
                           <div className='banner_thumb'>
                             <img
                               id='rns-image'
@@ -208,7 +208,7 @@ const StyleFour = ({ Data }) => {
                         <Link
                           id='rns-card'
                           className='card card_hover_two'
-                          href={{pathname:`/breaking-news/${value.slug}`,query: { language_id: value.language_id}}}
+                          href={{pathname:`/breaking-news/${value.slug}`}}
                         >
                           <div className='banner_thumb'>
                             <img
