@@ -72,8 +72,8 @@ export const loadLanguages = ({
   onSuccess = () => { },
   onError = () => { },
   onStart = () => { } }) => {
-  const { lastFetch, Lang } = store.getState().languages;
-  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+  const { lastFetch, Lang } = store.getState().languages ?? {};
+  const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
   // // If API data is fetched within last 10 minutes then don't call the API again
   if (diffInMinutes < process.env.NEXT_PUBLIC_LOAD_MIN) return false
   store.dispatch(
@@ -95,8 +95,8 @@ export const loadLanguageLabels = ({
   onSuccess = () => { },
   onError = () => { },
   onStart = () => { } }) => {
-  const { lastFetch, Lang } = store.getState().languages;
-  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+  const { lastFetch, Lang } = store.getState().languages ?? {};
+  const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : 0
   // // If API data is fetched within last 10 minutes then don't call the API again
   // if (diffInMinutes < process.env.NEXT_PUBLIC_LOAD_MIN) return false
   store.dispatch(

@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 import { loadMorePages } from 'src/store/reducers/MorePagesReducers'
 
 const MorePages = () => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [Data, setData] = useState([])
   let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -44,18 +44,22 @@ const MorePages = () => {
   // })
 
   useEffect(() => {
-    loadMorePages({
-      onSuccess: (res) => {
-        console.log(res)
-      },
-      onError: (err) => {
-        console.log(err)
 
-      }
-    })
-  }, [])
 
-  const handleModalActive = (e, element) => {
+      loadMorePages({
+        onSuccess: (res) => {
+          setData(res.data)
+          setIsLoading(false)
+        },
+        onError: (err) => {
+          console.log(err)
+          setIsLoading(false)
+
+        }
+      })
+  }, [currentLanguage])
+
+  const handleRoutePageDeatils = (e, element) => {
     e.preventDefault()
 
     router.push(`/more-pages/${element.slug}`)
@@ -79,7 +83,7 @@ const MorePages = () => {
               {Data &&
                 Data.map(element => (
                   <div className='col-md-4 col-12 mb-4'>
-                    <div key={element.id} className='card' onClick={e => handleModalActive(e, element)}>
+                    <div key={element.id} className='card' onClick={e => handleRoutePageDeatils(e, element)}>
                       <div className='more-cat-section-card-body'>
                         <h5 id='cat-card-text' className='card-text mb-0'>
                           {element.title}

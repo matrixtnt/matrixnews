@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { use, useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout.jsx'
 import BreadcrumbNav from 'src/components/breadcrumb/BreadcrumbNav.jsx'
 import { translate } from '../../utils'
@@ -11,34 +11,59 @@ import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
 import Skeleton from 'react-loading-skeleton'
+import { getMorePagesData } from 'src/store/reducers/MorePagesReducers.js'
 
 const SocialPages = () => {
   const router = useRouter()
-//   console.log(router)
 
+  const [isLoading, setIsLoading] = useState(true)
+  const [Data, setData] = useState([])
+
+  const MorePagesData = useSelector(getMorePagesData)
   let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  // api call
-  const getpages = async () => {
-    try {
-      const { data } = await getpagesApi.getpages({
-        access_key: access_key,
-        language_id: language_id,
-        slug: router?.query?.slug
-      })
-      return data.data
-
-    } catch (error) {
-      console.log(error)
+  useEffect(() => {
+    // Check if router.query.slug exists and MorePagesData is not empty
+    if (router.query.slug && MorePagesData.length > 0) {
+      // Find the page object with matching slug
+      const page = MorePagesData.find(page => page.slug === router.query.slug)
+      // If a matching page is found, set its data
+      if (page) {
+        setData([page])
+        setIsLoading(false)
+      } else {
+        // If no matching page is found, handle accordingly (e.g., show a not found message)
+        setIsLoading(false)
+        setData([])
+      }
     }
-  }
+  }, [router.query.slug, MorePagesData])
 
-  // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['getPages', currentLanguage,router?.query?.slug],
-    queryFn: getpages
-  })
+
+
+  // api call
+  // const getpages = async () => {
+  //   try {
+  //     const { data } = await getpagesApi.getpages({
+  //       access_key: access_key,
+  //       language_id: language_id,
+  //       slug: router?.query?.slug
+  //     })
+  //     return data.data
+
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // // react query
+  // const { isLoading, data: Data } = useQuery({
+  //   queryKey: ['getPages', currentLanguage,router?.query?.slug],
+  //   queryFn: getpages
+  // })
+
+
   return (
     <Layout>
       <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement={router?.query?.slug} />
