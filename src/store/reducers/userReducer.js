@@ -40,9 +40,9 @@ export const userSlice = createSlice({
             user.mobileLoginType = action.payload.data
         },
         userManageDataSuccess: (user, action) => {
-            console.log(action)
+            // console.log(action)
             let { data } = action.payload;
-            console.log(data)
+            // console.log(data)
             user.userManageData = data
         }
     }

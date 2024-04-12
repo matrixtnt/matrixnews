@@ -5036,8 +5036,8 @@ a#social_platforms svg:hover {
 }
 
 .catNav-links:hover {
-  /* color: #fff; */
-  /* background-color: var(--secondary-color); */
+  color: #fff;
+  background-color: var(--secondary-color);
   transition: 0.1s ease-in;
 }
 
@@ -5045,8 +5045,8 @@ a#social_platforms svg:hover {
   display: flex;
   align-items: center;
   width: 100%;
-  /* padding: 0 20px; */
-  /* border: 1px solid #dedede80; */
+  padding: 0 20px;
+  border: 1px solid #dedede80;
   border-radius: 5px;
   justify-content: center;
   cursor: pointer;

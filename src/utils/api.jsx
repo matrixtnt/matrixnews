@@ -514,7 +514,7 @@ export const getNews = (
   longitude
 ) => {
   let { id: language_id } = getLanguage()
-  console.log("apijsx ",language_id)
+  // console.log("apijsx ",language_id)
   return {
     url: `${GET_NEWS}`,
     method: 'GET',

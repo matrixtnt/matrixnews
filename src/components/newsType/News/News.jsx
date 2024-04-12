@@ -459,10 +459,10 @@ const News = () => {
                     <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} />
                   ) : null}
                   <TagsSection />
-                  {
+                  {/* {
                     isLogin() ?
                       <Surveys /> : null
-                  }
+                  } */}
                 </div>
               </div>
               <VideoPlayerModal

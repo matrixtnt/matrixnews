@@ -37,91 +37,7 @@ const CommentsView = props => {
   const [message, setMessage] = useState(null);
 
 
-
-  // // like button
-  // const LikeButton = (e, elem) => {
-  //   console.log('id : ',elem.id)
-  //   e.preventDefault()
-  //   setCommentLikeDislikeApi({
-  //     comment_id: elem.id,
-  //     status: elem.like === 1 ? '0' : '1',
-  //     onSuccess: res => {
-  //       setRefreshKey(prevKey => prevKey + 1)
-  //     },
-  //     onError: err => {
-  //       console.log(err)
-  //     }
-  //   }
-  //   )
-  // }
-
-  // // dislike
-  // const dislikebutton = (e, elem) => {
-  //   e.preventDefault()
-  //   console.log('id : ',elem.id)
-  //   setCommentLikeDislikeApi({
-  //     comment_id: elem.id,
-  //     status: elem.dislike === 1 ? '0' : '2',
-  //     onSuccess: res => {
-
-  //       setRefreshKey(prevKey => prevKey + 1)
-  //     },
-  //     onError: err => {
-  //       console.log(err)
-  //     }
-  //   }
-  //   )
-  // }
-
-  // const LikeButton = (e, elem) => {
-  //   e.preventDefault();
-  //   setCommentLikeDislikeApi({
-  //     comment_id: elem.id,
-  //     status: elem.like === 1 ? 0 : 1,
-  //     onSuccess: (res) => {
-  //       const updatedData = Data.map(comment => {
-  //         if (comment.id === elem.id) {
-  //           return { ...comment, like: res.like, total_like: res.total_like }; // Update like and total_like
-  //         }
-  //         return comment;
-  //       });
-  //       setLoadComments(true); // Trigger loading state to force re-render
-  //       setTimeout(() => {
-  //         setLoadComments(false);
-  //       }, 1000);
-  //       setData(updatedData); // Update the state with the modified comment data
-  //     },
-  //     onError: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // };
-
-  // const dislikebutton = (e, elem) => {
-  //   e.preventDefault();
-  //   setCommentLikeDislikeApi({
-  //     comment_id: elem.id,
-  //     status: elem.dislike === 1 ? 0 : 2,
-  //     onSuccess: (res) => {
-  //       const updatedData = Data.map(comment => {
-  //         if (comment.id === elem.id) {
-  //           return { ...comment, dislike: res.dislike, total_dislike: res.total_dislike }; // Update dislike and total_dislike
-  //         }
-  //         return comment;
-  //       });
-  //       setLoadComments(true); // Trigger loading state to force re-render
-  //       setTimeout(() => {
-  //         setLoadComments(false);
-  //       }, 1000);
-  //       setData(updatedData); // Update the state with the modified comment data
-  //     },
-  //     onError: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // };
   // api call
-
 
   const getCommentByNews = async () => {
     try {
@@ -138,7 +54,6 @@ const CommentsView = props => {
   };
 
   // react query
-  // console.log("props ->", props);
   const { data: Data, isLoading, refetch } = useQuery({
     queryKey: ['getCommentByNews ', Nid],
     queryFn: getCommentByNews,
@@ -192,7 +107,6 @@ const CommentsView = props => {
     );
   };
 
-  // console.log(Data);
   const LikeButton = (e, elem) => {
     e.preventDefault();
     setCommentLikeDislikeApi({
@@ -326,7 +240,6 @@ const CommentsView = props => {
     );
   };
 
-  // console.log(Data);
   return (
     <>
       <div>
@@ -360,7 +273,6 @@ const CommentsView = props => {
                 {Data &&
                   Data.map(element => (
                     <div key={element.id}>
-                      {console.log(element)}
                       <div id='cv-comment' onClick={() => setCommentID(element.id)}>
                         <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
                         <div id='cs-card' className='card'>
@@ -450,8 +362,6 @@ const CommentsView = props => {
                       </div>
                       {element.replay.map(ele => (
                         <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-                          {console.log('repltData', ele)}
-
                           <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='replay comment user news image' />
                           <div id='cs-Rcard' className='card'>
                             <b>

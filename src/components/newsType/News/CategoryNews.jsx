@@ -43,7 +43,7 @@ const CategoryNews = () => {
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected)
   }
-  console.log(language_id)
+  // console.log(language_id)
   // api call
   const getNewsByCategoryApi = async page => {
     if (language_id !== null) {
@@ -76,7 +76,7 @@ const CategoryNews = () => {
   })
 
   useEffect(() => {
-    console.log("category-news")
+    // console.log("category-news")
   }, [])
 
 

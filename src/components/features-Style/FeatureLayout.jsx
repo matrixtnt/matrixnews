@@ -72,7 +72,7 @@ const FeatureLayout = () => {
       latitude: storedLatitude,
       longitude: storedLongitude,
       onSuccess: (response) => {
-        console.log(response)
+        // console.log(response)
         setNoData(response?.data)
         setNewsDataFound(false)
         setNoDataIsLoading(false)

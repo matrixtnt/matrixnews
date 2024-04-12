@@ -87,10 +87,10 @@ const Layout = ({ children }) => {
     })
   }, [currentLanguage])
   const GetUserByIdFetchData = () => {
-    if (!userData.data.firebase_id) return false
+    if (!userData.data?.firebase_id) return false
     loadGetUserByIdApi({
       onSuccess: (res) => {
-        console.log(res)
+        // console.log(res)
         const data = res
         if (data && data.data.status === 0) {
           toast.error('You are deactivated by admin!')

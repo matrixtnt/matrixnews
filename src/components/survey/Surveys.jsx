@@ -85,7 +85,7 @@ const Surveys = () => {
                 language_id: language_id,
                 question_id: id
             })
-            console.log(data.data)
+            // console.log(data.data)
             setAnswers(data.data)
             if (submited) {
                 setData(data.data)
@@ -115,7 +115,7 @@ const Surveys = () => {
 
     return (<>
         {questionsData && questionsData.map((survey) => {
-            console.log(survey.id)
+            // console.log(survey.id)
             return (
                 <div className='surveysSect'>
                     <div className="card">
