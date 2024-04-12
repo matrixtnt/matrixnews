@@ -9,6 +9,7 @@ import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { categoryCountSelector } from 'src/store/reducers/tempDataReducer'
+import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
@@ -17,6 +18,7 @@ const UserBasedCategories = () => {
 
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categorieslength = useSelector(categoryCountSelector)
+  const categories = useSelector(categoriesCacheData)
 
   // get user by id
   useEffect(() => {
@@ -27,17 +29,27 @@ const UserBasedCategories = () => {
         const alluserIds = useridData.user_category.map(category => category.category_id)
         // common id get
         const CommanID = []
-        for (let i = 0; i < alluserIds.length; i++) {
-          const values = alluserIds[i].split(',')
-          for (let j = 0; j < values.length; j++) {
-            CommanID.push(values[j])
+
+        if (alluserIds.length > 1) {
+
+          for (let i = 0; i < alluserIds.length; i++) {
+            console.log("i", alluserIds.length)
+            console.log("alluserIds[i]", alluserIds[i])
+            const values = alluserIds[i].split(',')
+            console.log("values", values)
+            for (let j = 0; j < values.length; j++) {
+              CommanID.push(values[j])
+            }
           }
+        } else {
+          CommanID.push(alluserIds)
+
         }
 
         // category api call
         categoriesApi({
           offset: 0,
-          limit: categorieslength,
+          limit: categories.length,
           language_id: currentLanguage.id,
           onSuccess: response => {
             const toggledData = response.data.map(element => {
@@ -73,15 +85,15 @@ const UserBasedCategories = () => {
         }
         return element;
       });
-  
+
       const toggledIds = newData
         .filter((element) => element.isToggledOn)
         .map((element) => element.id);
-  
+
       const finalToggleID = toggledIds.length === 0 ? 0 : toggledIds.join(',');
       setFinalToggleID(finalToggleID);
 
-  
+
       return newData;
     });
   };
@@ -131,30 +143,30 @@ const UserBasedCategories = () => {
               <div className='row'>
                 {data && data.length > 0
                   ? data.map((element) => (
-                      <div className='col-md-4 col-12' key={element.id}>
-                        <div className='manage_card'>
-                          <div className='inner_manage'>
-                            <div className='manage_image'>
-                              <img src={element.image} alt={element.category_name} />
-                            </div>
-                            <div className='manage_title'>
-                              <p className='mb-0'>{element.category_name}</p>
-                            </div>
-                            <div className='manage_toggle'>
-                              <SwitchButton
-                                checked={element.isToggledOn}
-                                onlabel='ON'
-                                onstyle='success'
-                                offlabel='OFF'
-                                offstyle='danger'
-                                style={switchButtonStyle}
-                                onChange={() => handleSwitchChange(element.id)}
-                              />
-                            </div>
+                    <div className='col-md-4 col-12' key={element.id}>
+                      <div className='manage_card'>
+                        <div className='inner_manage'>
+                          <div className='manage_image'>
+                            <img src={element.image} alt={element.category_name} />
+                          </div>
+                          <div className='manage_title'>
+                            <p className='mb-0'>{element.category_name}</p>
+                          </div>
+                          <div className='manage_toggle'>
+                            <SwitchButton
+                              checked={element.isToggledOn}
+                              onlabel='ON'
+                              onstyle='success'
+                              offlabel='OFF'
+                              offstyle='danger'
+                              style={switchButtonStyle}
+                              onChange={() => handleSwitchChange(element.id)}
+                            />
                           </div>
                         </div>
                       </div>
-                    ))
+                    </div>
+                  ))
                   : null}
               </div>
               <button className='finalsumit_btn mb-5' onClick={e => finalSubmit(e)}>
@@ -162,7 +174,7 @@ const UserBasedCategories = () => {
               </button>
             </>
           )}
-         
+
         </div>
       </section>
     </Layout>

@@ -43,13 +43,8 @@ const SubCategory = () => {
         access_key: access_key,
         offset: page * dataPerPage,
         limit: dataPerPage,
-        get_user_news: '',
-        search: '',
         category_id: catId,
-        // category_slug: ,
         subcategory_slug: subCatSlug,
-        tag_id: '',
-        slug: '',
         latitude: storedLatitude,
         longitude: storedLongitude
       })

@@ -68,6 +68,7 @@ const Header = () => {
   // user roles api call
   const getUserById = async () => {
     if (!userData.data.firebase_id) return false
+    // if (!currentLanguage) return false
     try {
       const { data } = await getUserByIdApi.getUserById({
         access_key: access_key

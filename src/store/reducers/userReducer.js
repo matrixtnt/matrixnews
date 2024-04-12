@@ -8,7 +8,8 @@ import { apiCallBegan } from "../actions/apiActions";
 const initialState = {
     data: null,
     isLogin: false,
-    mobileLoginType:false,
+    mobileLoginType: false,
+    userManageData: []
 };
 
 // slice
@@ -30,25 +31,40 @@ export const userSlice = createSlice({
             user.data.profile = data.profile;
         },
         profileUpdateDataSuccess: (user, action) => {
-            let data  = action.payload.data;
+            let data = action.payload.data;
             user.data.name = data.name;
             user.data.mobile = data.mobile
             user.data.email = data.email
         },
         mobileTypeSuccess: (user, action) => {
             user.mobileLoginType = action.payload.data
+        },
+        userManageDataSuccess: (user, action) => {
+            let data = action.payload.data;
+            user.data = data
         }
     }
 
 });
 
-export const { loginSuccess, logoutSuccess,imageUploadSuccess,profileUpdateDataSuccess,mobileTypeSuccess } = userSlice.actions;
+export const { loginSuccess, logoutSuccess, imageUploadSuccess, profileUpdateDataSuccess, mobileTypeSuccess, userManageDataSuccess } = userSlice.actions;
 export default userSlice.reducer;
 
 // api calls
 
 // register
-export const register = async ({firebase_id="", name="", email="", mobile="", type="", profile="", status="", fcm_id="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const register = async ({
+    firebase_id = "",
+    name = "",
+    email = "",
+    mobile = "",
+    type = "",
+    profile = "",
+    status = "",
+    fcm_id = "",
+    onSuccess = () => { },
+    nError = () => { },
+    onStart = () => { } }) => {
     store.dispatch(apiCallBegan({
         ...userSignUpApi(firebase_id, name, email, mobile, type, profile, status, fcm_id),
         displayToast: false,
@@ -60,9 +76,9 @@ export const register = async ({firebase_id="", name="", email="", mobile="", ty
 };
 
 // profile image update
-export const updateProfileImage = ({name="",mobile="",email="",image="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const updateProfileImage = ({ name = "", mobile = "", email = "", image = "", onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
     store.dispatch(apiCallBegan({
-        ...updateProfileApi(name,mobile,email,image),
+        ...updateProfileApi(name, mobile, email, image),
         displayToast: false,
         onSuccessDispatch: imageUploadSuccess.type,
         onStart,
@@ -72,9 +88,9 @@ export const updateProfileImage = ({name="",mobile="",email="",image="", onSucce
 };
 
 // update profile data
-export const updateProfileData = ({name="", mobile="", email="",image="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const updateProfileData = ({ name = "", mobile = "", email = "", image = "", onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
     store.dispatch(apiCallBegan({
-        ...updateProfileApi(name, mobile, email,image),
+        ...updateProfileApi(name, mobile, email, image),
         displayToast: false,
         onSuccessDispatch: profileUpdateDataSuccess.type,
         onStart,
@@ -85,7 +101,7 @@ export const updateProfileData = ({name="", mobile="", email="",image="", onSucc
 
 // load mobile type
 export const loadMobileType = (data) => {
-    store.dispatch(mobileTypeSuccess({data}))
+    store.dispatch(mobileTypeSuccess({ data }))
 }
 
 

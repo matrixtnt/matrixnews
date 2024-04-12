@@ -39,7 +39,6 @@ const FeatureLayout = () => {
   const [isNoDataLoading, setNoDataIsLoading] = useState(false)
   const [isNoData, setNoData] = useState([])
 
-  console.log(Data)
   // api call
   // const getNews = async page => {
   //   try {
@@ -87,7 +86,6 @@ const FeatureLayout = () => {
   }
   useEffect(() => {
     if (currentLanguage.id) {
-      console.log(currentLanguage.id)
       loadLayout({
         access_key: access_key,
         onSuccess: (response) => {

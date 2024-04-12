@@ -65,7 +65,6 @@ export const loadCategories = ({
 }) => {
     const state = store.getState()
     const { currentLanguage } = store.getState().languages
-    console.log(currentLanguage)
     const { lastFetch, Lang } = store.getState().categoryData;
     const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
     // If API data is fetched within last 10 minutes then don't call the API again

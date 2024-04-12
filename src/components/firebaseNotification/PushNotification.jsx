@@ -26,7 +26,7 @@ const PushNotificationLayout = ({ children }) => {
 
   useEffect(() => {
     if (typeof window !== undefined) {
-      setUserToken(getfcmToken.fcmtoken)
+      setUserToken(getfcmToken?.fcmtoken)
     }
   }, [userToken])
 
