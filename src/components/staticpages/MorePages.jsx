@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoArrowForwardCircleSharp } from 'react-icons/io5'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
@@ -14,38 +14,50 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import NoDataFound from '../noDataFound/NoDataFound'
 import { useRouter } from 'next/router'
+import { loadMorePages } from 'src/store/reducers/MorePagesReducers'
 
 const MorePages = () => {
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalData, setmodalData] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [Data, setData] = useState([])
   let { id: language_id } = getLanguage()
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const router = useRouter()
 
   // api call
-  const getpages = async () => {
-    try {
-      const { data } = await getpagesApi.getpages({
-        access_key: access_key,
-        language_id: language_id
-      })
-      return data.data
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const getpages = async () => {
+  //   try {
+  //     const { data } = await getpagesApi.getpages({
+  //       access_key: access_key,
+  //       language_id: language_id
+  //     })
+  //     return data.data
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['getPages', currentLanguage],
-    queryFn: getpages
-  })
+  // // react query
+  // const { isLoading, data: Data } = useQuery({
+  //   queryKey: ['getPages', currentLanguage],
+  //   queryFn: getpages
+  // })
+
+  useEffect(() => {
+    loadMorePages({
+      onSuccess: (res) => {
+        console.log(res)
+      },
+      onError: (err) => {
+        console.log(err)
+
+      }
+    })
+  }, [])
 
   const handleModalActive = (e, element) => {
     e.preventDefault()
-    // setModalOpen(true)
-    // setmodalData(element)
+
     router.push(`/more-pages/${element.slug}`)
   }
 
@@ -84,32 +96,7 @@ const MorePages = () => {
         </div>
       </div>
 
-      <Modal
-        centered
-        className='custom-modal'
-        open={modalOpen}
-        maskClosable={false}
-        onOk={() => setModalOpen(false)}
-        onCancel={() => setModalOpen(false)}
-        footer={false}
-        id='modaltp'
-      >
-        {isLoading ? (
-          <Skeleton height={400} />
-        ) : (
-          <div>
-            {modalData && modalData.page_content ? (
-              <p
-                id='pp-modal-body'
-                className='p-3 mb-0'
-                dangerouslySetInnerHTML={{ __html: modalData && modalData.page_content }}
-              ></p>
-            ) : (
-              <NoDataFound/>
-            )}
-          </div>
-        )}
-      </Modal>
+
     </Layout>
   )
 }

@@ -18,7 +18,8 @@ import {
   getComments,
   setQuestionResult,
   getQuestionResult,
-  getBreakingNews
+  getBreakingNews,
+  getPages
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'

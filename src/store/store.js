@@ -13,6 +13,7 @@ import tempDataReducer from './reducers/tempDataReducer';
 import CategoriesDataSlice from './reducers/CatNavReducers';
 import featureLayoutReducer from './reducers/featureLayoutReducer';
 import newsReducer from './reducers/newsReducer';
+import { morePagesSlice } from './reducers/MorePagesReducers';
 
 const persistConfig = {
     key: 'root',
@@ -30,7 +31,7 @@ const rootReducer = combineReducers({
     categoryData: CategoriesDataSlice,
     Layouts: featureLayoutReducer,
     NewsData: newsReducer,
-    NewsData: newsReducer,
+    morePages: morePagesSlice,
 });
 
 export const store = configureStore({
