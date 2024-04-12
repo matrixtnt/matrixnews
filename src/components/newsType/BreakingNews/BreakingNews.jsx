@@ -33,6 +33,7 @@ const BreakingNews = () => {
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
   const router = useRouter()
+  const { state } = router;
   const query = router.query
   const SettingsData = useSelector(settingsData)
   const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
@@ -40,7 +41,6 @@ const BreakingNews = () => {
   let { id: language_id } = getLanguage()
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
-
   const handleVideoUrl = url => {
     setModalShow(true)
     setVideo_url(url)
@@ -52,6 +52,7 @@ const BreakingNews = () => {
 
   // api call
   const getBreakingNewsIdApi = async () => {
+    console.log("helllooooo")
     try {
       const { data } = await AllBreakingNewsApi.getBreakingNews({
         language_id: language_id,
@@ -99,7 +100,7 @@ const BreakingNews = () => {
     queryFn: getBreakingNewsIdApi
   })
 
-  const {} = useQuery({
+  const { } = useQuery({
     queryKey: ['setBreakingNewsView', access_key, BNid, user, currentLanguage],
     queryFn: setBreakingNewsViewApi
   })
@@ -195,7 +196,7 @@ const BreakingNews = () => {
                             ) : null}
                           </div>
                           <div id='vps-body-left'>
-                            <img id='B_NV-image' src={data[0].image} alt={data[0].title} onError={placeholderImage}/>
+                            <img id='B_NV-image' src={data[0].image} alt={data[0].title} onError={placeholderImage} />
                             {data && data[0].content_value ? (
                               <div className='text-black'>
                                 <div id='vps-btnVideo' onClick={() => handleVideoUrl(data[0].content_value)}>
@@ -203,7 +204,7 @@ const BreakingNews = () => {
                                 </div>
                               </div>
                             ) : null}
-                          </div> 
+                          </div>
 
                           <div id='B_NV-functions' className=''>
                             <div id='B_NV-functions-left'>
@@ -248,7 +249,7 @@ const BreakingNews = () => {
                       keyboard={false}
                       url={Video_url}
                       type_url={data[0].type}
-                      // title={data.title}
+                    // title={data.title}
                     />
                     {/* ad spaces */}
                     {adsdata && adsdata?.ad_spaces_bottom ? (

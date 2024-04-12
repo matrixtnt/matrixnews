@@ -50,7 +50,12 @@ const AllBreakingNews = () => {
               {Data && Data.length > 0 ? (
                 Data.map(element => (
                   <div className='col-md-4 col-12' key={element.id}>
-                    <Link id='Link-all' href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}>
+                    <Link id='Link-all'
+                      href={{
+                        pathname: `/breaking-news/${element.slug}`,
+                        query: { language_id: element.language_id },
+                        state: { element: JSON.stringify(element) }
+                      }}>
                       <div id='BNV-card' className='card'>
                         <img
                           id='BNV-card-image'

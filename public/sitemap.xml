@@ -2,145 +2,241 @@
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
     <loc>https://newsweb.wrteam.me/404</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/loading</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/rss</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/all-breaking-news</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/all-categories</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/bookmark</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/breaking-news/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/categories-news/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/create-news</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/edit-news</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/live-news</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/manage-news</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/more-pages/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/more-pages</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/news/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/news-notification</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/personal-notification</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/profile-update</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/tag/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/user-based-categories</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/video-news-view/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/view-all/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/categories-news/sub-category/[slug]</loc>
+<<<<<<< Updated upstream
     <lastmod>2024-04-12T07:01:06.897Z</lastmod>
+=======
+    <lastmod>2024-04-12T07:14:06.501Z</lastmod>
+>>>>>>> Stashed changes
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
