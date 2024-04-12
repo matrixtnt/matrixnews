@@ -38,6 +38,8 @@ const App = ({ Component, pageProps }) => {
     NProgress.done()
   })
 
+  
+
   return (
     <>
       <QueryClientProvider client={queryClient}>

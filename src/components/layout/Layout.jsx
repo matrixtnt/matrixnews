@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     laodSettingsApi({
       onSuccess: res => {
-        
+
       },
       onError: error => {
         console.log(error)
@@ -128,6 +128,16 @@ const Layout = ({ children }) => {
   useEffect(() => {
     GetUserByIdFetchData()
   }, [currentLanguage])
+
+  useEffect(() => {
+    const handleCopy = (e) => {
+      e.preventDefault();
+    };
+    document.addEventListener('copy', handleCopy);
+    return () => {
+      document.removeEventListener('copy', handleCopy);
+    };
+  }, []);
   return (
     <>
       {settings ? (

@@ -11,11 +11,13 @@ import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import NoDataFound from '../noDataFound/NoDataFound'
+import { useRouter } from 'next/router'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()
   const currentlanguage = useSelector(selectCurrentLanguage)
 
+  const router = useRouter()
   // api call 
   const getBreakingNewsApi = async () => {
     try {
@@ -31,6 +33,7 @@ const AllBreakingNews = () => {
     queryKey: ['all-breaking-news', language_id, access_key, currentlanguage],
     queryFn: getBreakingNewsApi
   })
+
 
   return (
     <Layout>
@@ -52,24 +55,22 @@ const AllBreakingNews = () => {
                   <div className='col-md-4 col-12' key={element.id}>
                     <Link id='Link-all'
                       href={{
-                        pathname: `/breaking-news/${element.slug}`,
-                        query: { language_id: element.language_id },
-                        state: { element: JSON.stringify(element) }
+                        pathname: `/breaking-news/${element.slug}`
                       }}>
-                      <div id='BNV-card' className='card'>
-                        <img
-                          id='BNV-card-image'
-                          src={element.image ? element.image : no_image}
-                          className='card-img'
-                          alt='breaking news image'
-                          onError={placeholderImage}
-                        />
-                        <div id='BNV-card-body' className='card-body'>
-                          <h5 id='BNV-card-title' className='card-title'>
-                            {element.title.slice(0, 150)}...
-                          </h5>
-                        </div>
+                    <div id='BNV-card' className='card'>
+                      <img
+                        id='BNV-card-image'
+                        src={element.image ? element.image : no_image}
+                        className='card-img'
+                        alt='breaking news image'
+                        onError={placeholderImage}
+                      />
+                      <div id='BNV-card-body' className='card-body'>
+                        <h5 id='BNV-card-title' className='card-title'>
+                          {element.title.slice(0, 150)}...
+                        </h5>
                       </div>
+                    </div>
                     </Link>
                   </div>
                 ))

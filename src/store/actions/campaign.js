@@ -17,7 +17,8 @@ import {
   getUserByIdApi,
   getComments,
   setQuestionResult,
-  getQuestionResult
+  getQuestionResult,
+  getBreakingNews
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -391,6 +392,23 @@ export const getQuestionResultApi = ({
       ...getQuestionResult(access_key,
         language_id,
         question_id,),
+      displayToast: false,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
+}
+export const getBreakingNewsApi = ({
+  language_id = "",
+  slug = "",
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
+}) => {
+  store.dispatch(
+    apiCallBegan({
+      ...getBreakingNews(language_id, slug),
       displayToast: false,
       onStart,
       onSuccess,

@@ -30,6 +30,7 @@ const rootReducer = combineReducers({
     categoryData: CategoriesDataSlice,
     Layouts: featureLayoutReducer,
     NewsData: newsReducer,
+    NewsData: newsReducer,
 });
 
 export const store = configureStore({

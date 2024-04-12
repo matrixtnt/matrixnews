@@ -87,7 +87,7 @@ const WeatherCard = () => {
   const languageChange = async (name, code, id, display_name) => {
     loadLanguageLabels({ code: code })
     setCurrentLanguage(name, code, id, display_name)
-    if (isLogin) {
+    if (isLogin()) {
 
       await registerFcmTokenApi({
         token: location.fcmtoken,

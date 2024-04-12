@@ -538,3 +538,22 @@ export const getNews = (
     authorizationHeader: false
   }
 }
+export const getBreakingNews = (
+  language_id,
+  slug,
+) => {
+  // console.log("apijsx ",language_id)
+  return {
+    url: `${GET_BREAKING_NEWS}`,
+    method: 'GET',
+    params: {
+      access_key: access_key,
+      language_id: language_id,
+      slug: slug
+
+    },
+    authorizationHeader: false
+  }
+}
+
+

@@ -1,5 +1,4 @@
 "use client"
-import { settingsData } from "src/store/reducers/settingsReducer";
 import { store } from "../store/store";
 import localeTranslations from './locale/en.json';
 
@@ -134,8 +133,9 @@ export const imgError = (e) => {
 
 // placholder image
 export const placeholderImage = (e) => {
-  const settings = useSelector(settingsData)
-  e.target.src = settings && settings?.web_setting?.web_placeholder_image
+  e.preventDefault()
+  const settingsData = store.getState().settings
+  e.target.src = settingsData && settingsData?.data?.web_setting?.web_placeholder_image
   // e.target.src = "/assets/images/placeholder.png";
 };
 

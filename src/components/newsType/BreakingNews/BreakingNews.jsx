@@ -14,7 +14,7 @@ import RelatedBreakingNews from '../../relatedNews/RelatedBreakingNews'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { calculateReadTime, extractTextFromHTML, placeholderImage, translate } from '../../../utils'
+import { calculateReadTime, extractTextFromHTML, isLogin, placeholderImage, translate } from '../../../utils'
 import { BsFillPlayFill } from 'react-icons/bs'
 import { AiOutlineEye } from 'react-icons/ai'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
@@ -27,13 +27,15 @@ import { useQuery } from '@tanstack/react-query'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
 import Layout from 'src/components/layout/Layout'
 import { settingsData } from 'src/store/reducers/settingsReducer'
+import { getBreakingNewsApi } from 'src/store/actions/campaign'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [DetailsPageData, setDetailsPageData] = useState([])
   const router = useRouter()
-  const { state } = router;
   const query = router.query
   const SettingsData = useSelector(settingsData)
   const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
@@ -49,25 +51,45 @@ const BreakingNews = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+  useEffect(() => {
+    getBreakingNewsApi({
+      slug: BNid,
+      language_id: currentLanguage.id,
+      onSuccess: (res) => {
+        const data = res.data[0]
+        setDetailsPageData(data)
+        setIsLoading(false)
 
-  // api call
-  const getBreakingNewsIdApi = async () => {
-    console.log("helllooooo")
-    try {
-      const { data } = await AllBreakingNewsApi.getBreakingNews({
-        language_id: language_id,
-        access_key: access_key,
-        slug: query.slug
-      })
+      },
+      onError: (err) => {
+        setDetailsPageData([])
+        setIsLoading(false)
+        router.push('/')
+      }
+    })
 
-      return data.data ?? null
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  }, [currentLanguage.id])
+  useEffect(() => {
+  }, [DetailsPageData])
+
+  // // api call
+  // const getBreakingNewsIdApi = async () => {
+  //   try {
+  //     const { data } = await AllBreakingNewsApi.getBreakingNews({
+  //       language_id: language_id,
+  //       access_key: access_key,
+  //       slug: query.slug
+  //     })
+
+  //     return data.data ?? null
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   // api call
   const setBreakingNewsViewApi = async () => {
+    if (!isLogin()) return false;
     try {
       const { data } = await AllBreakingNewsApi.setBreakingNewsView({
         access_key: access_key,
@@ -77,7 +99,6 @@ const BreakingNews = () => {
 
       return data.data ?? null
     } catch (error) {
-      console.log(error)
     }
   }
 
@@ -95,10 +116,10 @@ const BreakingNews = () => {
   }
 
   // react query
-  const { isLoading, data } = useQuery({
-    queryKey: ['breakingNewsById', access_key, BNid, user, language_id, currentLanguage],
-    queryFn: getBreakingNewsIdApi
-  })
+  // const { isLoadinggg, dataaa, refetch } = useQuery({
+  //   queryKey: ['breakingNewsById', access_key, BNid, user, language_id, currentLanguage],
+  //   queryFn: getBreakingNewsIdApi
+  // })
 
   const { } = useQuery({
     queryKey: ['setBreakingNewsView', access_key, BNid, user, currentLanguage],
@@ -107,17 +128,20 @@ const BreakingNews = () => {
 
   const { data: adsdata } = useQuery({
     queryKey: ['getAdsSpaceDetails', access_key, currentLanguage],
-    queryFn: getAdsSpaceNewsApi
+    queryFn: getAdsSpaceNewsApi,
+    staleTime: 1 * 60 * 1000, cacheTime: 5 * 60 * 1000
+
+
   })
 
-  const text = extractTextFromHTML(data && data[0]?.description)
+  const text = extractTextFromHTML(DetailsPageData && DetailsPageData?.description)
 
   // Calculate read time
   const readTime = calculateReadTime(text)
 
   return (
     <Layout>
-      {data && data?.length > 0 ? (
+      {DetailsPageData ? (
         <>
           {isLoading ? (
             // Show skeleton loading when data is being fetched
@@ -126,7 +150,7 @@ const BreakingNews = () => {
             </div>
           ) : (
             <>
-              <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement={data[0].title} />
+              <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement={DetailsPageData?.title} />
 
               <div className='breaking-news-section'>
                 <div id='B_NV-main' className='breaking_news_detail'>
@@ -154,12 +178,12 @@ const BreakingNews = () => {
                           <p id='btnB_NVCatagory' className='btn btn-sm mb-0'>
                             {translate('breakingnews')}
                           </p>
-                          <h1 id='B_NV-title'>{data[0].title}</h1>
+                          <h1 id='B_NV-title'>{DetailsPageData?.title}</h1>
 
                           <div id='B_NV-Header' className=''>
                             <div id='nv-left-head'>
                               <p id='head-lables' className='eye_icon'>
-                                <AiOutlineEye size={18} id='head-logos' /> {data && data[0].total_views}
+                                <AiOutlineEye size={18} id='head-logos' /> {DetailsPageData && DetailsPageData?.total_views}
                               </p>
                               <p id='head-lables' className='minute_Read'>
                                 <BiTime size={18} id='head-logos' />
@@ -173,21 +197,21 @@ const BreakingNews = () => {
                                 <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
                                 <FacebookShareButton
                                   url={currentUrL}
-                                  title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                  title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                                   hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                                 >
                                   <FacebookIcon size={30} round />
                                 </FacebookShareButton>
                                 <WhatsappShareButton
                                   url={currentUrL}
-                                  title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                  title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                                   hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                                 >
                                   <WhatsappIcon size={30} round />
                                 </WhatsappShareButton>
                                 <TwitterShareButton
                                   url={currentUrL}
-                                  title={`${data[0].title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
+                                  title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                                   hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                                 >
                                   <XIcon size={30} round />
@@ -196,10 +220,10 @@ const BreakingNews = () => {
                             ) : null}
                           </div>
                           <div id='vps-body-left'>
-                            <img id='B_NV-image' src={data[0].image} alt={data[0].title} onError={placeholderImage} />
-                            {data && data[0].content_value ? (
+                            <img id='B_NV-image' src={DetailsPageData?.image} alt={DetailsPageData?.title} onError={placeholderImage} />
+                            {DetailsPageData && DetailsPageData?.content_value ? (
                               <div className='text-black'>
-                                <div id='vps-btnVideo' onClick={() => handleVideoUrl(data[0].content_value)}>
+                                <div id='vps-btnVideo' onClick={() => handleVideoUrl(DetailsPageData?.content_value)}>
                                   <BsFillPlayFill id='vps-btnVideo-logo' className='pulse' fill='white' size={50} />
                                 </div>
                               </div>
@@ -231,13 +255,13 @@ const BreakingNews = () => {
                           <p
                             id='B_NV-description'
                             style={{ fontSize: `${FontSize}px`, wordWrap: 'break-word' }}
-                            dangerouslySetInnerHTML={{ __html: data[0].description }}
+                            dangerouslySetInnerHTML={{ __html: DetailsPageData?.description }}
                           ></p>
                         </div>
                       </div>
                       <div className='col-md-5 col-12'>
                         <div id='B_NV-right-section'>
-                          {BNid ? <RelatedBreakingNews id={BNid} /> : null}
+                          {DetailsPageData.length > 0 ? <RelatedBreakingNews id={DetailsPageData?.id} /> : null}
                           {/* <TagsSection /> */}
                         </div>
                       </div>
@@ -248,7 +272,7 @@ const BreakingNews = () => {
                       // backdrop="static"
                       keyboard={false}
                       url={Video_url}
-                      type_url={data[0].type}
+                      type_url={DetailsPageData?.type}
                     // title={data.title}
                     />
                     {/* ad spaces */}
