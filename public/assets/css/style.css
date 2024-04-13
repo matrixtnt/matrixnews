@@ -15,10 +15,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.5px;
   background-color: #f5f5f5 !important;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
 }
 
 /* Chrome, Safari, Edge, Opera */

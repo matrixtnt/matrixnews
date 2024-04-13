@@ -16,18 +16,11 @@ const FirebaseData = () => {
     appId: process.env.NEXT_PUBLIC_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
   }
-
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
 
-  const app = initializeApp(firebaseConfig);
-  const authentication = getAuth(app);
-  const firebaseApp = !getApps().length
-    ? initializeApp(firebaseConfig)
-    : getApp();
- 
-
+  const authentication = getAuth();
 
   const createStickyNote = () => {
     const stickyNote = document.createElement('div');
@@ -131,7 +124,7 @@ const FirebaseData = () => {
   const signOut = () => {
     return authentication.signOut();
   };
-  return { firebase, authentication, fetchToken, onMessageListener, signOut }
+  return { authentication, fetchToken, onMessageListener, signOut }
 }
 
 export default FirebaseData;
