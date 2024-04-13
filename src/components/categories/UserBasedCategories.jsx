@@ -124,6 +124,7 @@ const UserBasedCategories = () => {
       })
     } else {
       // No changes in toggle state, you can handle this case (optional)
+      setLoader(false)
       toast.error('Please select categories')
     }
   }
