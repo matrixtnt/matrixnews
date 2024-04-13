@@ -265,7 +265,7 @@ const News = () => {
               <div id='nv-page' className='row'>
                 <div id='nv-body' className='col-lg-8 col-12'>
                   <button id='btnnvCatagory' className='btn btn-sm' type='button'>
-                    {Data && Data[0]?.category.category_name}
+                    {Data && Data[0]?.category?.category_name}
                   </button>
                   <h1 id='nv-title'>{Data && Data[0]?.title}</h1>
 
