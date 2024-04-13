@@ -1,11 +1,8 @@
 import Link from 'next/link'
 import { HiOutlineArrowLongRight } from 'react-icons/hi2'
 import { placeholderImage, translate, truncateText } from '../../utils'
-import { BsFillPlayFill } from 'react-icons/bs'
-import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
-import { useState } from 'react'
 
-const StyleFour = ({ Data }) => {
+const NewsStyle = ({ Data }) => {
 
     return (
         <>
@@ -32,7 +29,7 @@ const StyleFour = ({ Data }) => {
                                     {Data && Data?.map((value, index) => {
                                         return (
                                             <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
-                                                <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}`,  }}>
+                                                <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}`, }}>
                                                     <div className='banner_thumb'>
                                                         <img
                                                             id='rns-image'
@@ -48,7 +45,7 @@ const StyleFour = ({ Data }) => {
                                                         </div>
                                                     </div>
                                                     <div id='rns-card-body' className='card-block'>
-                                                        <p className='card-title mt-3'>{value.title}</p>
+                                                        <p className='card-title newsStyleTitle mt-3'>{value.title.length > 20 ? <>{value.title.slice(0, 20)}...</> : value.title}</p>
                                                         <p id='btnrnsRead' className='btn overlay mt-2' type='button'>
                                                             {translate('readmore')}
                                                             <HiOutlineArrowLongRight id='rns-arrow' size={20} />
@@ -68,4 +65,4 @@ const StyleFour = ({ Data }) => {
     )
 }
 
-export default StyleFour
+export default NewsStyle

@@ -65,6 +65,7 @@ const FeatureLayout = () => {
   //   queryFn: () => getNews()
   // })
   const getNewsWhenNoData = async () => {
+    setIsLoading(true)
     loadNews({
       access_key: access_key,
       offset: '0',
@@ -76,6 +77,7 @@ const FeatureLayout = () => {
         setNoData(response?.data)
         setNewsDataFound(false)
         setNoDataIsLoading(false)
+        setIsLoading(false)
 
       },
       onError: (error) => {

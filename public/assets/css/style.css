@@ -1509,6 +1509,14 @@ a {
   }
 }
 
+@media (max-width: 992px) {
+  .newsStyleTitle{
+    margin-top: 0px !important;
+    font-size: 18px;
+  }
+}
+
+
 @media (max-width: 850px) {
   #rns-card-body {
     font-size: 18px;
