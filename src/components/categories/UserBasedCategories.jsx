@@ -24,25 +24,9 @@ const UserBasedCategories = () => {
   // get user by id
   useEffect(() => {
     const useridData = UserManageData
-    console.log(useridData)
     // user categories
     const alluserIds = useridData?.user_category?.category_id
-    console.log("alluserIds", alluserIds)
     // common id get
-    const CommanID = []
-
-    // if (alluserIds.length > 1) {
-
-    //   for (let i = 0; i < alluserIds.length; i++) {
-    //     const values = alluserIds[i]?.split(',')
-    //     for (let j = 0; j < values.length; j++) {
-    //       CommanID.push(values[j])
-    //     }
-    //   }
-    // } else {
-    //   CommanID.push(alluserIds)
-
-    // }
 
     // category api call
     categoriesApi({
@@ -53,13 +37,14 @@ const UserBasedCategories = () => {
         const toggledData = response.data.map(element => {
           // here set isToggleOn has boolean with actual data
           
-          const isToggledOn = alluserIds.includes(element.id)
+          const isToggledOn = alluserIds && alluserIds.includes(element.id)
          
           return { ...element, isToggledOn }
         })
         // Combine paginated data with existing data
         // setData(prevData => [...prevData, ...toggledData])
         setData(toggledData)
+
         setLoading(false)
       },
       onError: error => {

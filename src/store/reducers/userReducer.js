@@ -9,7 +9,7 @@ const initialState = {
     data: null,
     isLogin: false,
     mobileLoginType: false,
-    userManageData: []
+    userManageData: null
 };
 
 // slice
