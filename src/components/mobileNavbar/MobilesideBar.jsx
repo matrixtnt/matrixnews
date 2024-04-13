@@ -301,7 +301,7 @@ const MobilesideBar = ({
                       <li className='nav-item' key={index}>
                         {
                           element?.sub_categories?.length > 0 ?
-                            <Dropdown className='subCatdrop'>
+                            <Dropdown className='subCatdrop catNav-links'>
                               <Dropdown.Toggle className=''>
                                 {element.category_name}<FaAngleDown />
                               </Dropdown.Toggle>

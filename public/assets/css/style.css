@@ -3875,7 +3875,7 @@ a#social_platforms svg:hover {
     width: 50%;
   }
 
-  #btnNotification1 {
+  /* #btnNotification1 {
     width: 50%;
     color: #ffffff;
     background-color: var(--primary-color);
@@ -3883,7 +3883,7 @@ a#social_platforms svg:hover {
 
   #btnNotification1:hover {
     background-color: var(--secondary-color);
-  }
+  } */
 
   #btnNewsnoti {
     width: 50%;
@@ -6773,6 +6773,10 @@ span {
   font-weight: 600;
   font-size: 22px;
   padding: 0px;
+}
+
+.offcanvas .subCatdrop .dropdown-toggle:hover{
+  color: white;
 }
 
 .offcanvas .subCatdrop .dropdown-toggle::after {
