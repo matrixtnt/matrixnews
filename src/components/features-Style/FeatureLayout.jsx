@@ -99,7 +99,6 @@ const FeatureLayout = () => {
           setNewsDataFound(false)
         },
         onError: (error) => {
-          console.log(error)
           dispatch(layoutUpdateLanguage(""))
           setData([])
           setNoFeatureData(false)

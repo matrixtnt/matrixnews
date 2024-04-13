@@ -3,98 +3,98 @@ import { initializeApp, getApps, getApp } from 'firebase/app'
 import { getMessaging, getToken, onMessage, isSupported } from 'firebase/messaging'
 import firebase from "firebase/compat/app"
 import { getAuth } from "firebase/auth";
-import { loadFcmToken } from 'src/store/reducers/settingsReducer';
+import toast from 'react-hot-toast';
 
 const FirebaseData = () => {
   let firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_APIKEY,
-    authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
-    projectId: process.env.NEXT_PUBLIC_PROJECTID,
-    storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
-    appId: process.env.NEXT_PUBLIC_APPID,
-    measurementId: process.env.NEXT_PUBLIC_MESASUREMENTID
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_APP_ID,
+    measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
   }
 
-  // eslint-disable-next-line
   if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig)
-  } else {
-    firebase.app() // if already initialized, use that one
+    firebase.initializeApp(firebaseConfig);
   }
 
-  const app = initializeApp(firebaseConfig)
-
-  const authentication = getAuth(app)
-
-  // const messaging = getMessaging(app)
-
+  const app = initializeApp(firebaseConfig);
+  const authentication = getAuth(app);
   const firebaseApp = !getApps().length
-  ? initializeApp(firebaseConfig)
-  : getApp();
-  
-  const messagingIntance = () => {
+    ? initializeApp(firebaseConfig)
+    : getApp();
+ 
+
+
+  const createStickyNote = () => {
+    const stickyNote = document.createElement('div');
+    stickyNote.style.position = 'fixed';
+    stickyNote.style.bottom = '0';
+    stickyNote.style.width = '100%';
+    stickyNote.style.backgroundColor = '#ffffff'; // White background
+    stickyNote.style.color = '#000000'; // Black text
+    stickyNote.style.padding = '10px';
+    stickyNote.style.textAlign = 'center';
+    stickyNote.style.fontSize = '14px';
+    stickyNote.style.zIndex = '99999'; // Set zIndex to 99999
+
+    const closeButton = document.createElement('span');
+    closeButton.style.cursor = 'pointer';
+    closeButton.style.float = 'right';
+    closeButton.innerHTML = '&times;'; // Times symbol (X) for close
+
+    closeButton.onclick = function () {
+      document.body.removeChild(stickyNote);
+    };
+
+    const link = document.createElement('a');
+    link.style.textDecoration = 'underline';
+    link.style.color = '#3498db';
+    link.innerText = 'Download Now';
+
+    // Update link with the dynamic appstoreLink
+    link.href = process.env.NEXT_PUBLIC_APP_ID;
+    stickyNote.innerHTML = 'Notification are not supported on this browser. For a better user experience, please use our mobile application. ';
+    stickyNote.appendChild(closeButton);
+    stickyNote.appendChild(link);
+
+    document.body.appendChild(stickyNote);
+  };
+
+  const messagingInstance = async () => {
     try {
-      const isSupportedBrowser = isSupported();
+      const isSupportedBrowser = await isSupported();
       if (isSupportedBrowser) {
         return getMessaging(firebaseApp);
+      } else {
+        createStickyNote();
+        return null;
       }
-      return null;
     } catch (err) {
+      console.error('Error checking messaging support:', err);
       return null;
     }
   };
-  
-  // const fetchToken = async (setTokenFound, setFcmToken) => {
-  //   return getToken(await messagingIntance, {
-  //     vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
-  //   })
-  //     .then((currentToken) => {
-  //       if (currentToken) {
-  //         loadFcmToken(currentToken)
-  //         setTokenFound(true);
-  //         setFcmToken(currentToken);
-  
-  //         // Track the token -> client mapping, by sending to backend server
-  //         // show on the UI that permission is secured
-  //       } else {
-  //         setTokenFound(false);
-  //         setFcmToken();
-  //         // shows on the UI that permission is required
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       // catch error while creating client token
-  //     });
-  // };
-  
-  // const onMessageListener = async () =>
-  //   new Promise((resolve) =>
-  //     (async () => {
-  //       const messagingResolve = await messagingIntance;
-  //       onMessage(messagingResolve, (payload) => {
-  //         resolve(payload);
-  //       });
-  //     })()
-  //   );
-
   const fetchToken = async (setTokenFound, setFcmToken) => {
-    const messaging = await messagingIntance();
+    const messaging = await messagingInstance();
     if (!messaging) {
       console.error('Messaging not supported.');
       return;
     }
 
     try {
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
         getToken(messaging, {
           vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
         })
           .then((currentToken) => {
             if (currentToken) {
-              loadFcmToken(currentToken);
               setTokenFound(true);
               setFcmToken(currentToken);
+              getFcmToken(currentToken);
             } else {
               setTokenFound(false);
               setFcmToken(null);
@@ -104,13 +104,18 @@ const FirebaseData = () => {
           .catch((err) => {
             console.error('Error retrieving token:', err);
           });
+      } else {
+        setTokenFound(false);
+        setFcmToken(null);
+        toast.error('Permission is required for notifications.');
+      }
     } catch (err) {
       console.error('Error requesting notification permission:', err);
     }
   };
 
   const onMessageListener = async () => {
-    const messaging = await messagingIntance();
+    const messaging = await messagingInstance();
     if (messaging) {
       return new Promise((resolve) => {
         onMessage(messaging, (payload) => {
@@ -122,9 +127,10 @@ const FirebaseData = () => {
       return null;
     }
   };
-
-
-  return { firebase, authentication, fetchToken, onMessageListener }
+  const signOut = () => {
+    return authentication.signOut();
+  };
+  return { firebase, authentication, fetchToken, onMessageListener, signOut }
 }
 
-export default FirebaseData
+export default FirebaseData;
