@@ -127,7 +127,7 @@ const Layout = ({ children }) => {
   }
   useEffect(() => {
     GetUserByIdFetchData()
-  }, [currentLanguage])
+  }, [currentLanguage, userData.data?.firebase_id])
 
   useEffect(() => {
     const handleCopy = (e) => {

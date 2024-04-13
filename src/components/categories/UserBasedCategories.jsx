@@ -24,8 +24,10 @@ const UserBasedCategories = () => {
   // get user by id
   useEffect(() => {
     const useridData = UserManageData
+    console.log(useridData)
     // user categories
     const alluserIds = useridData?.user_category?.category_id
+    console.log("alluserIds", alluserIds)
     // common id get
     const CommanID = []
 
