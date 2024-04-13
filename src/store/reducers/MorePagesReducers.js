@@ -41,25 +41,19 @@ export const loadMorePages = ({
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
-    const { currentLanguage } = store.getState().languages
-    const { lastFetch, Lang } = store.getState().morePages ?? {};
-    // const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
 
-    // If API data is fetched within last 10 minutes then don't call the API again
-    // if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN) {
-        store.dispatch(
-            apiCallBegan({
-                ...getPages(),
-                displayToast: false,
-                onStartDispatch: morePagesRequested.type,
-                onSuccessDispatch: morePagesSuccess.type,
-                onErrorDispatch: morePagesFailed.type,
-                onStart,
-                onSuccess,
-                onError
-            })
-        )
-    // }
+    store.dispatch(
+        apiCallBegan({
+            ...getPages(),
+            displayToast: false,
+            onStartDispatch: morePagesRequested.type,
+            onSuccessDispatch: morePagesSuccess.type,
+            onErrorDispatch: morePagesFailed.type,
+            onStart,
+            onSuccess,
+            onError
+        })
+    )
 }
 
 export const getMorePagesData = createSelector(
