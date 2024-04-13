@@ -11,11 +11,13 @@ import Card from '../skeletons/Card'
 import { categoryCountSelector } from 'src/store/reducers/tempDataReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 import { getUserManageData, loadGetUserByIdApi } from 'src/store/reducers/userReducer'
+import Loader from './Loader'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [finalToggleID, setFinalToggleID] = useState('')
+  const [loader, setLoader] = useState(false)
 
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categories = useSelector(categoriesCacheData)
@@ -36,9 +38,9 @@ const UserBasedCategories = () => {
       onSuccess: response => {
         const toggledData = response.data.map(element => {
           // here set isToggleOn has boolean with actual data
-          
+
           const isToggledOn = alluserIds && alluserIds.includes(element.id)
-         
+
           return { ...element, isToggledOn }
         })
         // Combine paginated data with existing data
@@ -83,12 +85,14 @@ const UserBasedCategories = () => {
   // here final submit button
   const finalSubmit = e => {
     e.preventDefault()
+    setLoader(true)
     // Check if there are any changes in the toggle state
     if (finalToggleID !== '') {
       setusercategoriesApi({
         category_id: finalToggleID,
         onSuccess: response => {
           toast.success(response.message)
+          setLoader(false)
           loadGetUserByIdApi({
             onSuccess: (res) => {
               const data = res
@@ -105,7 +109,7 @@ const UserBasedCategories = () => {
                 return false
               }
 
-            
+
             },
             onError: (err) => {
               console.log(err)
@@ -175,7 +179,9 @@ const UserBasedCategories = () => {
                   : null}
               </div>
               <button className='finalsumit_btn mb-5' onClick={e => finalSubmit(e)}>
-                {translate('saveLbl')}
+                {
+                  loader ? <Loader /> : translate('saveLbl')
+                }
               </button>
             </>
           )}
