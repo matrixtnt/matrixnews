@@ -5,6 +5,7 @@ import firebase from "firebase/compat/app"
 import { getAuth } from "firebase/auth";
 import toast from 'react-hot-toast';
 
+
 const FirebaseData = () => {
   let firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
