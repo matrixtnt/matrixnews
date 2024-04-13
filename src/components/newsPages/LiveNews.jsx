@@ -80,7 +80,7 @@ const LiveNews = () => {
                         id='LN-card-image'
                         src={element.image ? element.image : no_image}
                         className='card-img'
-                        alt={element.title}
+                        alt={element?.title}
                         onError={placeholderImage}
                       />
                       <div className='card-image-overlay'>

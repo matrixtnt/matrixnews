@@ -51,7 +51,7 @@ const VideoPlayerModal = props => {
                 src={props.url}
               ></iframe>
             ) : (
-              <ReactPlayer width='100%' height='500px' url={props.url && props.url} playing controls={true} />
+              <ReactPlayer width='100%' height='500px' url={props.url && props.url} controls={true} />
             )}
           </>
         )}
