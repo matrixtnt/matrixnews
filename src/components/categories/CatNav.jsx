@@ -157,7 +157,7 @@ const CatNav = () => {
 
                     <Swiper {...swiperOption}>
                       {categories.map((element, index) => (
-                        element.sub_categories.length > 0 ? (
+                        // element.sub_categories.length > 0 ? (
                           
                           <SwiperSlide key={element.id} className='text-center'
                           onClick={() => handleCategoryChange(element)}
@@ -170,7 +170,7 @@ const CatNav = () => {
                               <b>{element.category_name}</b>
                             </span>
                           </SwiperSlide>
-                        ) : null
+                        // ) : null
                       ))}
                     </Swiper>
                     {categories?.length > 10 ? (

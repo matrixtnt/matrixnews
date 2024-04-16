@@ -49,7 +49,7 @@ const Footer = () => {
                 <ul className='newscate'>
                   {categoriesData.map((element, index) => {
                     return (
-                      element.sub_categories.length > 0 ? (
+                      // element.sub_categories.length > 0 ? (
                       <li key={index}>
                         <Link
                           href={{
@@ -63,7 +63,7 @@ const Footer = () => {
                           {element.category_name}{' '}
                         </Link>
                       </li>
-                      ): null
+                      // ): null
                     )
                   })}
                 </ul>
