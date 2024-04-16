@@ -6885,3 +6885,7 @@ span {
   height: 20px;
   animation: spin 2s linear infinite;
 }
+
+.replyModal{
+  display: none !important;
+}

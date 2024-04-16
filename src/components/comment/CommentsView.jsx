@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -35,7 +35,8 @@ const CommentsView = props => {
   const [dotModal, setDotModal] = useState(false);
   const [CommentID, setCommentID] = useState(null);
   const [message, setMessage] = useState(null);
-
+  const [replied, setReplied] = useState(false)
+  const [show, setShow] = useState(false)
 
   // api call
 
@@ -57,7 +58,7 @@ const CommentsView = props => {
   const { data: Data, isLoading, refetch } = useQuery({
     queryKey: ['getCommentByNews ', Nid],
     queryFn: getCommentByNews,
-    
+
   });
 
   // set comment
@@ -97,10 +98,8 @@ const CommentsView = props => {
         //   setLoadComments(false);
         // }, 1000);
         await refetch();
+        setReplied(true)
         setReplyComment("");
-        if (replyRef.current) {
-          replyRef.current.hide();
-        }
       },
       onError: error => {
         console.log(error);
@@ -109,6 +108,20 @@ const CommentsView = props => {
     }
     );
   };
+
+  // useEffect(() => {
+  //   if (replied) {
+
+  //     const timeout = setTimeout(() => {
+  //       setReplied(false)
+  //     }, 1500);
+  //     return () => {
+  //       clearTimeout(timeout)
+  //     }
+  //   }
+  //  console.log(replied,'replied')
+  // }, [replied])
+  
 
   const LikeButton = (e, elem) => {
     e.preventDefault();
@@ -243,6 +256,21 @@ const CommentsView = props => {
     );
   };
 
+  // useEffect(() => {
+  //   // if (replied) {
+
+  //     // const timeout = setTimeout(() => {
+  //     //   setReplied(false)
+  //     // }, 1500);
+  //     // return () => {
+  //     //   clearTimeout(timeout)
+  //     // }
+  //   // }
+  //   console.log(replied,'replied')
+
+  // }, [replied])
+  
+
   return (
     <>
       <div>
@@ -333,7 +361,7 @@ const CommentsView = props => {
                                 placement={placement}
                                 rootClose
                                 overlay={
-                                  <Popover id={`popover-positioned-${placement}`}>
+                                  <Popover id={`popover-positioned-${placement}`} className={`${replied ? 'replyModal' : ''}`}>
                                     <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
                                     <Popover.Body id='cv-replay-propover'>
                                       <form id='cv-replay-form' method='post' onSubmit={e => setCommentData(e, element.id)}>
@@ -421,7 +449,7 @@ const CommentsView = props => {
                                   placement={placement}
                                   rootClose
                                   overlay={
-                                    <Popover id={`popover-positioned-${placement}`}>
+                                    <Popover id={`popover-positioned-${placement}`} className={`${replied ? 'replyModal' : ''}`}>
                                       <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
                                       <Popover.Body id='cv-replay-propover'>
                                         <form method='post' onSubmit={e => setreplyComment(e, ele.parent_id)}>
@@ -495,8 +523,3 @@ const CommentsView = props => {
 
 export default CommentsView;
 
-
-
-
-
-// news code 
