@@ -98,6 +98,9 @@ const CommentsView = props => {
         // }, 1000);
         await refetch();
         setReplyComment("");
+        if (replyRef.current) {
+          replyRef.current.hide();
+        }
       },
       onError: error => {
         console.log(error);
