@@ -22,7 +22,9 @@ import '../../public/assets/css/style.css'
 // provide the default query function to your app with defaultOptions
 const queryClient = new QueryClient({
   defaultOptions: {
-  
+    queries: {
+      staleTime: 300000, // Set the staleTime to 5 minutes (300,000 milliseconds)
+    },
   }
 })
 

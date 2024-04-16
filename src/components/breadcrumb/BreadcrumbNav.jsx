@@ -15,17 +15,25 @@ const BreadcrumbNav = props => {
               <FaHome size={25} id='bcb-home-logo' /> {translate('home')}
             </Link>
           </Breadcrumb.Item>
-          <Breadcrumb.Item active id='bcb-active-item'>
-            {props.SecondElement}
-          </Breadcrumb.Item>
-          {props.ThirdElement === '0' ? null : (
+          {props?.link ?
+            <Breadcrumb.Item active id='bcb-active-item'>
+              <Link id='bcb-link-text' href={props?.link}>
+                {props?.SecondElement}
+              </Link>
+            </Breadcrumb.Item>
+            :
+            <Breadcrumb.Item active id='bcb-active-item'>
+              {props?.SecondElement}
+            </Breadcrumb.Item>
+          }
+          {props?.ThirdElement === '0' ? null : (
             <Breadcrumb.Item active id='bcb-third-item'>
-              {props.ThirdElement}
+              {props?.ThirdElement}
             </Breadcrumb.Item>
           )}
-          {props.FourthElement === '0' ? null : (
+          {props?.FourthElement === '0' ? null : (
             <Breadcrumb.Item active id='bcb-third-item'>
-              {props.FourthElement}
+              {props?.FourthElement}
             </Breadcrumb.Item>
           )}
 

@@ -46,28 +46,28 @@ const CategoryNews = () => {
   // console.log(language_id)
   // api call
   const getNewsByCategoryApi = async page => {
-    if (language_id !== null) {
 
-      if (location || currentPage || catSlug) {
 
-        try {
-          const { data } = await getNewsApi.getNews({
-            access_key: access_key,
-            offset: page * dataPerPage,
-            limit: dataPerPage,
-            category_slug: catSlug,
-            latitude: storedLatitude,
-            longitude: storedLongitude
-          })
-          // console.log('categories', data)
-          data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
-          return data
-        } catch (error) {
-          console.log(error)
-        }
+    if (location || currentPage || catSlug) {
+
+      try {
+        const { data } = await getNewsApi.getNews({
+          access_key: access_key,
+          offset: page * dataPerPage,
+          limit: dataPerPage,
+          category_slug: catSlug,
+          latitude: storedLatitude,
+          longitude: storedLongitude
+        })
+        // console.log('categories', data)
+        data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        return data
+      } catch (error) {
+        console.log(error)
       }
     }
   }
+
 
   // react query
   const { isLoading, data: Data } = useQuery({
@@ -79,10 +79,9 @@ const CategoryNews = () => {
     // console.log("category-news")
   }, [])
 
-
   // slice the array to get the current posts
   const currentData = Data && Data.data && Data.data.slice(0, dataPerPage)
-
+  const CurrentCategoryName = Data && Data.data && Data.data[0]?.category?.category_name
   const lengthdata = (Data && Data.total) || 0
 
   const swiperOption = {
@@ -110,11 +109,10 @@ const CategoryNews = () => {
       delay: 0
     }
   }
-
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={catSlug} />
+        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories"/>
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (
@@ -161,7 +159,7 @@ const CategoryNews = () => {
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
                         id='Link-all'
-                        href={{ pathname: `/news/${element.slug}`,  }}
+                        href={{ pathname: `/news/${element.slug}`, }}
                       >
                         <div id='cv-card' className='card'>
                           <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />

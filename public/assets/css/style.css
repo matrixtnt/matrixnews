@@ -2753,6 +2753,10 @@ a#social_platforms svg:hover {
 #bcb-active-item {
   color: var(--primary-color);
 }
+#bcb-active-item a{
+  text-decoration: none;
+  color: var(--primary-color) !important;
+}
 
 #bcb-active-item::before {
   content: var(--bs-breadcrumb-divider, '|');

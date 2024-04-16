@@ -44,6 +44,7 @@ const SubCategory = () => {
         offset: page * dataPerPage,
         limit: dataPerPage,
         category_id: catId,
+        language_id: language_id,
         subcategory_slug: subCatSlug,
         latitude: storedLatitude,
         longitude: storedLongitude
@@ -87,7 +88,7 @@ const SubCategory = () => {
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
                         id='Link-all'
-                        href={{ pathname: `/news/${element.slug}`,  }}
+                        href={{ pathname: `/news/${element.slug}`, }}
                       >
                         <div id='cv-card' className='card'>
                           <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
