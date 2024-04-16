@@ -35,8 +35,7 @@ const CommentsView = props => {
   const [dotModal, setDotModal] = useState(false);
   const [CommentID, setCommentID] = useState(null);
   const [message, setMessage] = useState(null);
-  const [replied, setReplied] = useState(false)
-  const [show, setShow] = useState(false)
+  const [replied, setReplied] = useState(true)
 
   // api call
 
@@ -74,6 +73,7 @@ const CommentsView = props => {
         //   setLoadComments(false);
         // }, 1000);
         setReplyComment("");
+        setReplied(true)
         await refetch();
       },
       onError: error => {
@@ -109,18 +109,18 @@ const CommentsView = props => {
     );
   };
 
-  // useEffect(() => {
-  //   if (replied) {
+  useEffect(() => {
+    // if (replied) {
 
-  //     const timeout = setTimeout(() => {
-  //       setReplied(false)
-  //     }, 1500);
-  //     return () => {
-  //       clearTimeout(timeout)
-  //     }
-  //   }
-  //  console.log(replied,'replied')
-  // }, [replied])
+    //   const timeout = setTimeout(() => {
+    //     setReplied(false)
+    //   }, 1500);
+    //   return () => {
+    //     clearTimeout(timeout)
+    //   }
+    // }
+   console.log(replied,'replied')
+  }, [replied])
   
 
   const LikeButton = (e, elem) => {
@@ -242,6 +242,7 @@ const CommentsView = props => {
         setComment('');
         // queryClient.invalidateQueries(['getCommentsByNews']);
         await refetch();
+        setReplied(true)
 
         // setLoadComments(true);
         // setTimeout(() => {
@@ -384,7 +385,7 @@ const CommentsView = props => {
                                   </Popover>
                                 }
                               >
-                                <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' ref={replyRef}>
+                                <Button id={`${element.id}`} className='cdbtnReplay' onClick={()=>setReplied(false)} variant='secondary' ref={replyRef}>
                                   {translate('reply')}
                                 </Button>
                               </OverlayTrigger>
@@ -472,7 +473,7 @@ const CommentsView = props => {
                                     </Popover>
                                   }
                                 >
-                                  <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' ref={replyRef}>
+                                  <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' onClick={()=>setReplied(false)} ref={replyRef}>
                                     {translate('reply')}
                                   </Button>
                                 </OverlayTrigger>
