@@ -39,38 +39,13 @@ const FeatureLayout = () => {
   const [isNoDataLoading, setNoDataIsLoading] = useState(false)
   const [isNoData, setNoData] = useState([])
 
-  // api call
-  // const getNews = async page => {
-  //   try {
-  //     const { data } = await getNewsApi.getNews({
-  //       access_key: access_key,
-  //       offset: 0,
-  //       limit: 10,
-  //       latitude: storedLatitude,
-  //       longitude: storedLongitude
-  //     })
-  //     if (data.error) {
-  //       setNewsDataFound(true)
-  //     }
-  //     setNewsDataFound(false)
-  //     return data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // // react query
-  // const { isLoading: newsLoading, data: newsData } = useQuery({
-  //   queryKey: ['newsData', currentLanguage, location],
-  //   queryFn: () => getNews()
-  // })
   const getNewsWhenNoData = async () => {
     setIsLoading(true)
     loadNews({
       access_key: access_key,
       offset: '0',
       limit: 10, // {optional}
-      language_id:language_id,
+      language_id: language_id,
       latitude: storedLatitude,
       longitude: storedLongitude,
       onSuccess: (response) => {
@@ -116,37 +91,6 @@ const FeatureLayout = () => {
       getNewsWhenNoData()
     }
   }, [isNoDataLoading])
-
-
-  // const getFeatureSection = async () => {
-  //   try {
-  //     const { data } = await getFeatureSectionApi.getFeatureSection({
-  //       access_key: access_key,
-  //       language_id: language_id,
-  //       latitude: storedLatitude,
-  //       longitude: storedLongitude
-  //     })
-
-  //     // console.log(data.error)
-  //     if (data.error) {
-  //       setNoFeatureData(true)
-  //       getNews()
-
-  //     }
-
-  //     return data.data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // react query
-  // const { isLoading, data: Data } = useQuery({
-  //   queryKey: ['mainfeatureSection', currentLanguage, location],
-  //   queryFn: getFeatureSection
-  // })
-
-
 
   useEffect(() => {
 

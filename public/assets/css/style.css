@@ -2620,6 +2620,8 @@ a#social_platforms svg:hover {
 #bs-no-main {
   text-align: center;
   background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 6px;
 }
 
 #bs-no-image {

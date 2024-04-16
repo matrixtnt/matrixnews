@@ -29,46 +29,6 @@ const CatNav = () => {
 
   const dispatch = useDispatch();
 
-  // api call
-  // const categoriesApi = async () => {
-  //   setIsLoading(false)
-  //   try {
-  //     const { data } = await CategoriesApi.getCategories({
-  //       access_key: access_key,
-  //       offset: '0',
-  //       limit: '40',
-  //       language_id: currentLanguage.id
-  //     })
-
-  //     loadCategoryCount({ categoryCount: data?.total });
-  //     setIsLoading(false)
-  //     return data.data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // react query
-  // const { data: Data, } = useQuery({
-  //   queryKey: ['categoriesNav', currentLanguage],
-  //   queryFn: categoriesApi
-  // })
-
-  // useEffect(() => {
-  //   const subCategoriesObject = Data?.reduce((acc, category) => {
-  //     if (Array.isArray(category.sub_categories)) {
-  //       // Assuming each subcategory has a unique ID, use it as the key
-  //       category.sub_categories.forEach(subCategory => {
-  //         // acc[subCategory.id] = subCategory;
-  //         acc?.push(subCategory)
-  //       });
-  //     }
-  //     return acc;
-  //   }, []);
-  //   setSubCat(subCategoriesObject)
-  // }, [Data])
-
-
   const swiperOption = {
     loop: categories && categories.length > 10 ? true : false,
     speed: 3000,

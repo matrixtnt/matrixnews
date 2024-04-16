@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 import { bookmarkApi } from 'src/hooks/bookmarkApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage, getUser } from 'src/utils/api'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { BsBookmark } from 'react-icons/bs';
@@ -51,17 +51,21 @@ const BookmarkSection = () => {
   }
 
   // react query
-  const { isLoading } = useQuery({
+  const { isLoading, } = useQuery({
     queryKey: ['getbookmark', access_key, user, language_id],
     queryFn: getbookmarkApi,
-    
+
   })
 
   const { } = useQuery({
-    queryKey: ['setbookmark', Data],
+    queryKey: ['setbookmark'],
     queryFn: setbookmarkApi,
-    
   })
+
+  useEffect(() => {
+    
+  }, [Data])
+  
 
   // Function to format date as desired
   const formatDate = (dateString) => {
@@ -97,7 +101,7 @@ const BookmarkSection = () => {
                         alt='bookmark news'
                         onError={placeholderImage}
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`})
+                          navigate.push({ pathname: `/news/${element.slug}` })
                         }
                       />
                       <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
@@ -110,7 +114,7 @@ const BookmarkSection = () => {
                         className='btn btn-sm'
                         type='button'
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`,  })
+                          navigate.push({ pathname: `/news/${element.slug}`, })
                         }
                       >
                         {element.category_name}
@@ -119,7 +123,7 @@ const BookmarkSection = () => {
                         id='bs-card-title'
                         className='card-title'
                         onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`,  })
+                          navigate.push({ pathname: `/news/${element.slug}`, })
                         }
                       >
                         {element.title}
