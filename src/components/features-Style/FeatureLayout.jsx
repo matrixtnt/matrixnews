@@ -70,6 +70,7 @@ const FeatureLayout = () => {
       access_key: access_key,
       offset: '0',
       limit: 10, // {optional}
+      language_id:language_id,
       latitude: storedLatitude,
       longitude: storedLongitude,
       onSuccess: (response) => {

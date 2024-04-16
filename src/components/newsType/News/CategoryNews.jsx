@@ -55,6 +55,7 @@ const CategoryNews = () => {
           access_key: access_key,
           offset: page * dataPerPage,
           limit: dataPerPage,
+          language_id: language_id,
           category_slug: catSlug,
           latitude: storedLatitude,
           longitude: storedLongitude

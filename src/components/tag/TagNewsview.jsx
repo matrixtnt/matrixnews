@@ -22,6 +22,7 @@ const TagNewsview = () => {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
         tag_id: Tid,
+        language_id: language_id,
       })
       return data
     } catch (error) {

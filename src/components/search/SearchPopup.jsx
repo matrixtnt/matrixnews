@@ -50,6 +50,7 @@ const SearchPopup = () => {
       limit: dataLimit.toString(),
       user_id: user,
       search: searchValue, // {optional}
+      language_id: language_id,
       latitude: storedLatitude,
       longitude: storedLongitude,
       onSuccess: response => {

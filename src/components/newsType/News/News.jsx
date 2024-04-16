@@ -76,6 +76,7 @@ const News = () => {
         const { data } = await getNewsApi.getNews({
           access_key: access_key,
           slug: NewsId,
+          language_id: currentLanguage.id
         });
 
         if (data.data[0].bookmark === 0) {

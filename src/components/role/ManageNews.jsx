@@ -29,6 +29,7 @@ const ManageNews = () => {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
         get_user_news: 1,
+        language_id:language_id,
         latitude: null,
         longitude: null
       })
