@@ -339,6 +339,7 @@ const CommentsView = props => {
                                           id='cs-reply-input'
                                           cols='30'
                                           rows='5'
+                                          value={replyComment}
                                           onChange={e => {
                                             setReplyComment(e.target.value);
                                           }}
@@ -426,6 +427,7 @@ const CommentsView = props => {
                                             id='cs-input'
                                             cols='30'
                                             rows='5'
+                                            value={replyComment}
                                             onChange={e => {
                                               setReplyComment(e.target.value);
                                             }}

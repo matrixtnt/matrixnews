@@ -12,6 +12,7 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import { useState } from 'react'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
+import { BsBookmark } from 'react-icons/bs';
 
 const BookmarkSection = () => {
   const { id: language_id } = getLanguage()
@@ -100,7 +101,7 @@ const BookmarkSection = () => {
                         }
                       />
                       <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
-                        <BsTrash id='bs-bookmark-logo' size={18} />
+                        <BsBookmark id='bs-bookmark-logo' size={18} />
                       </button>
                     </div>
                     <div id='bs-card-body' className='card-body'>

@@ -430,6 +430,7 @@ const Header = () => {
                 placement={placement}
                 name={placement}
                 logout={logout}
+                deleteAccount={deleteAccount}
                 onClickHandler={onClickHandler}
                 // Data={Data}
                 modalShow={modalShow}

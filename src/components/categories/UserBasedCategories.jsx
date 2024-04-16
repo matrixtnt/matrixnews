@@ -18,10 +18,12 @@ const UserBasedCategories = () => {
   const [loading, setLoading] = useState(true)
   const [finalToggleID, setFinalToggleID] = useState('')
   const [loader, setLoader] = useState(false)
-
+  
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categories = useSelector(categoriesCacheData)
   const UserManageData = useSelector(getUserManageData)
+  
+  const [catLength, setCatLength] = useState(categories?.length)
 
   // get user by id
   useEffect(() => {
@@ -33,7 +35,7 @@ const UserBasedCategories = () => {
     // category api call
     categoriesApi({
       offset: 0,
-      limit: categories.length,
+      limit: catLength,
       language_id: currentLanguage.id,
       onSuccess: response => {
         const toggledData = response.data.map(element => {
@@ -58,6 +60,12 @@ const UserBasedCategories = () => {
     })
 
   }, [currentLanguage])
+  
+  useEffect(() => {
+    setCatLength(categories?.length)
+    console.log(categories.length,'cat-length')
+  }, [catLength,currentLanguage])
+
 
   // handle switch
   const handleSwitchChange = id => {

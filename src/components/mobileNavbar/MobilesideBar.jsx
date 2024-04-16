@@ -27,6 +27,7 @@ const MobilesideBar = ({
   isuserRole,
   name,
   logout,
+  deleteAccount,
   onClickHandler,
   modalShow,
   setModalShow,
@@ -153,6 +154,9 @@ const MobilesideBar = ({
                     <Dropdown.Item onClick={logout} id='btnLogout' className=''>
                       {translate('logout')}
                     </Dropdown.Item>
+                    <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
+                        {translate('deleteAcc')}
+                      </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
