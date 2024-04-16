@@ -57,7 +57,7 @@ const CommentsView = props => {
   const { data: Data, isLoading, refetch } = useQuery({
     queryKey: ['getCommentByNews ', Nid],
     queryFn: getCommentByNews,
-    staleTime: 0,
+    
   });
 
   // set comment

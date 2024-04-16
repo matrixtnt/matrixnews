@@ -142,7 +142,7 @@ const News = () => {
   } = useQuery({
     queryKey: ['getNewsbyId', NewsId, currentLanguage.id],
     queryFn: getNewsById,
-    staleTime: 0
+    
   });
 
   const { } = useQuery({

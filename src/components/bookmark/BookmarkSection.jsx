@@ -54,13 +54,13 @@ const BookmarkSection = () => {
   const { isLoading } = useQuery({
     queryKey: ['getbookmark', access_key, user, language_id],
     queryFn: getbookmarkApi,
-    staleTime: 0
+    
   })
 
   const { } = useQuery({
     queryKey: ['setbookmark', Data],
     queryFn: setbookmarkApi,
-    staleTime: 0
+    
   })
 
   // Function to format date as desired

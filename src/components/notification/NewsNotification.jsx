@@ -50,7 +50,7 @@ const NewsNotification = () => {
   } = useQuery({
     queryKey: ['getNotification', currentLanguage, offsetdata],
     queryFn: getNotifications,
-    staleTime: 0
+    
   })
   
 

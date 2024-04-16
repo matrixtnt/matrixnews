@@ -64,7 +64,7 @@ const WeatherCard = () => {
   const { isLoading, data: weather } = useQuery({
     queryKey: ['weather', currentLanguage, getLocationData],
     queryFn: weatherApi,
-    staleTime: 0
+    
   })
 
   // to get today weekday nameselectLanguages

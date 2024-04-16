@@ -140,7 +140,7 @@ const SearchPopup = () => {
   // const { refetch } = useQuery({
   //   queryKey: ['getSearchNews',dataLimit,searchValue,location,language_id ],
   //   queryFn: getNews,
-  //   staleTime: 0
+  //   
   // })
 
   // redirect news page

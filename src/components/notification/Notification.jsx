@@ -51,7 +51,7 @@ const Notification = () => {
   const { isLoading } = useQuery({
     queryKey: ['getuserNotification', currentLanguage, offsetdata],
     queryFn: getUserNotification,
-    staleTime: 0
+    
   });
 
   const handlePageChange = selectedPage => {
