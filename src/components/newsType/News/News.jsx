@@ -148,7 +148,8 @@ const News = () => {
 
   const { } = useQuery({
     queryKey: ['setNewsView', NewsId],
-    queryFn: setNewsView
+    queryFn: setNewsView,
+    staleTime: 3000
   });
 
 
