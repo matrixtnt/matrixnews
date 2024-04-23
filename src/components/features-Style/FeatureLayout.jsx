@@ -68,6 +68,8 @@ const FeatureLayout = () => {
       setNewsDataFound(true)
       loadLayout({
         access_key: access_key,
+        offset: 0,
+        limit: 9,
         onSuccess: (response) => {
           dispatch(layoutUpdateLanguage(currentLanguage.id))
           setData(response.data)

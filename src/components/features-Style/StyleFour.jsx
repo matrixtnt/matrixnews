@@ -63,7 +63,7 @@ const StyleFour = ({ Data }) => {
                 <div className='row'>
                   {Data.videos.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                      <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                         <div
                           id='rns-card'
                           className='card card_hover_two'
@@ -145,7 +145,7 @@ const StyleFour = ({ Data }) => {
                 <div className='row'>
                   {Data.news.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                      <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                         <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}` }}>
                           <div className='banner_thumb'>
                             <img
@@ -214,7 +214,7 @@ const StyleFour = ({ Data }) => {
                 <div className='row'>
                   {Data && Data.breaking_news.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                      <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                         <Link
                           id='rns-card'
                           className='card card_hover_two'
