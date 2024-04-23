@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav';
 import { deleteusernotificationApi } from '../../store/actions/campaign';
-import { translate } from '../../utils';
+import { translate,NoDataFound } from '../../utils';
 import Skeleton from 'react-loading-skeleton';
 import { MdMessage } from 'react-icons/md';
 import { IoMdThumbsUp } from 'react-icons/io';
@@ -15,7 +15,7 @@ import { getNotificationsApi } from 'src/hooks/getNotificationApi';
 import { access_key, getUser } from 'src/utils/api';
 import toast from 'react-hot-toast';
 import Layout from '../layout/Layout';
-import NoDataFound from '../noDataFound/NoDataFound';
+// import NoDataFound from '../noDataFound/NoDataFound';
 import moment from 'moment-timezone';
 import { settingsData } from 'src/store/reducers/settingsReducer';
 
@@ -51,7 +51,7 @@ const Notification = () => {
   const { isLoading } = useQuery({
     queryKey: ['getuserNotification', currentLanguage, offsetdata],
     queryFn: getUserNotification,
-    
+
   });
 
   const handlePageChange = selectedPage => {
@@ -152,7 +152,10 @@ const Notification = () => {
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <NoDataFound />
+                <>
+                  {NoDataFound()}
+                  {/* <NoDataFound /> */}
+                </>
               </div>
             )}
           </div>

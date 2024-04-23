@@ -7,13 +7,13 @@ import { useSelector } from 'react-redux'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import Link from 'next/link'
 import { settingsData } from '../../store/reducers/settingsReducer'
-import { placeholderImage, translate } from '../../utils'
+import { NoDataFound, placeholderImage, translate } from '../../utils'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
-import NoDataFound from '../noDataFound/NoDataFound'
+// import NoDataFound from '../noDataFound/NoDataFound'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 
 const Categories = () => {
@@ -21,8 +21,8 @@ const Categories = () => {
   const dataPerPage = 9
   const currentLanguage = useSelector(selectCurrentLanguage)
 
- 
-  
+
+
   const categoiresOnOff = useSelector(settingsData)
 
   // handle page change
@@ -105,7 +105,10 @@ const Categories = () => {
                   </div>
                 ))
               ) : (
-                <NoDataFound/>
+                <>
+                {NoDataFound()}
+                {/* <NoDataFound /> */}
+              </>
               )}
               {lengthdata > 10 ? (
                 <ReactPaginate
@@ -125,7 +128,10 @@ const Categories = () => {
           )}
         </div>
       ) : (
-        <NoDataFound/>
+        <>
+          {NoDataFound()}
+          {/* <NoDataFound /> */}
+        </>
       )}
     </Layout>
   )

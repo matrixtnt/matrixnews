@@ -15,6 +15,7 @@ const CustomDocument = () => {
         <NextScript />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9667891148162497"
      crossorigin="anonymous"></script>
+     
       </body>
     </Html>
   )

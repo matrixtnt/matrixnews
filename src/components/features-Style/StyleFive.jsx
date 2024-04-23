@@ -8,6 +8,7 @@ import Skeleton from 'react-loading-skeleton'
 import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
+import AdSpaces from '../view/adSpaces/AdSpaces'
 SwiperCore.use([Navigation, Pagination])
 const StyleFive = ({ isLoading, Data }) => {
   const [Video_url, setVideo_url] = useState()
@@ -112,13 +113,16 @@ const StyleFive = ({ isLoading, Data }) => {
     <>
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature ads news image' />}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'five'} />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature ads news image' />}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* videos */}
@@ -205,7 +209,7 @@ const StyleFive = ({ isLoading, Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </div>
           </div>
@@ -214,13 +218,16 @@ const StyleFive = ({ isLoading, Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'five'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* news */}
@@ -268,7 +275,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       Data.news.map(element => (
                         <SwiperSlide key={element.id}>
                           <div id='bns-card' className='card' key={element.id}>
-                            <Link id='Link-all' href={{pathname:`/news/${element.slug}`}}>
+                            <Link id='Link-all' href={{ pathname: `/news/${element.slug}` }}>
                               <img
                                 id='bns-image'
                                 src={element.image}
@@ -302,13 +309,16 @@ const StyleFive = ({ isLoading, Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature sponsored ads news image' />}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'five'} />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='feature sponsored ads news image' />}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* breaking news */}
@@ -356,7 +366,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       Data.breaking_news.map(element => (
                         <SwiperSlide key={element.id}>
                           <div id='bns-card' className='card' key={element.id}>
-                            <Link id='Link-all' href={{pathname:`/breaking-news/${element.slug}`}}>
+                            <Link id='Link-all' href={{ pathname: `/breaking-news/${element.slug}` }}>
                               <img
                                 id='bns-image'
                                 src={element.image}

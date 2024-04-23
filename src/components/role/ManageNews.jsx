@@ -29,7 +29,7 @@ const ManageNews = () => {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
         get_user_news: 1,
-        language_id:language_id,
+        language_id: language_id,
         latitude: null,
         longitude: null
       })
@@ -45,9 +45,9 @@ const ManageNews = () => {
   const { isLoading, isError, data, error, status } = useQuery({
     queryKey: ['getnews', currentLanguage],
     queryFn: getNews,
-    
+
   })
-  
+
 
   // type return
   const typeReturn = type => {
@@ -88,12 +88,12 @@ const ManageNews = () => {
             setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
           });
         } catch (e) {
-           console.log('Oops errors!');
+          console.log('Oops errors!');
         }
       },
-      onCancel() {},
+      onCancel() { },
     });
-    
+
   }
 
   return (
@@ -121,7 +121,7 @@ const ManageNews = () => {
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,
-                                  
+
                                 })
                               }
                             />
@@ -131,7 +131,7 @@ const ManageNews = () => {
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,
-                                  
+
                                 })
                               }
                             >
@@ -156,7 +156,7 @@ const ManageNews = () => {
                               onClick={() =>
                                 navigate.push({
                                   pathname: `/news/${element.slug}`,
-                                  
+
                                 })
                               }
                             >
@@ -196,7 +196,10 @@ const ManageNews = () => {
                     </div>
                   ))
                 ) : (
-                  <NoDataFound/>
+                  <>
+                    {NoDataFound()}
+                    {/* <NoDataFound /> */}
+                  </>
                 )}
               </>
             )}

@@ -19,7 +19,7 @@ import {
 import SignInModal from '../../auth/SignInModal.jsx';
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js';
 import { access_key, getLanguage, getUser } from '../../../utils/api.jsx';
-import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate } from '../../../utils/index.jsx';
+import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate, NoDataFound } from '../../../utils/index.jsx';
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx';
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer';
 import { useSelector } from 'react-redux';
@@ -35,10 +35,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getNewsApi } from 'src/hooks/newsApi.jsx';
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi';
 import Layout from 'src/components/layout/Layout.jsx';
-import NoDataFound from 'src/components/noDataFound/NoDataFound';
+// import NoDataFound from 'src/components/noDataFound/NoDataFound';
 import toast from 'react-hot-toast';
 import CommentsView from 'src/components/comment/CommentsView.jsx';
 import Surveys from 'src/components/survey/Surveys.jsx';
+import AdSpaces from '../../view/adSpaces/AdSpaces.jsx';
 
 const News = () => {
   let user = getUser();
@@ -47,6 +48,7 @@ const News = () => {
   const SettingsData = useSelector(settingsData);
   const router = useRouter();
   const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
+
 
   // Rest of your code...
   // eslint-disable-next-line
@@ -106,7 +108,8 @@ const News = () => {
     try {
       const { data } = await getNewsApi.setNewsView({
         access_key: access_key,
-        news_id: NewsId
+        news_id: NewsId,
+        language_id: '',
       });
       return data.data;
     } catch (error) {
@@ -143,7 +146,7 @@ const News = () => {
   } = useQuery({
     queryKey: ['getNewsbyId', NewsId, currentLanguage.id],
     queryFn: getNewsById,
-    
+
   });
 
   const { } = useQuery({
@@ -249,20 +252,23 @@ const News = () => {
             <div id='nv-main' className='container news_detail'>
               {/* ad spaces */}
               {sponsoredads && sponsoredads.ad_spaces_top ? (
-                <div className='ad_spaces'>
-                  <div
-                    target='_blank'
-                    onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_top.ad_url, '_blank')}
-                  >
-                    {
-                      <img
-                        className='adimage'
-                        src={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image}
-                        alt='feature sponsored ads news image'
-                      />
-                    }
-                  </div>
-                </div>
+                <>
+                  <AdSpaces ad_url={sponsoredads && sponsoredads.ad_spaces_top.ad_url} ad_img={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image} style_web='' />
+                  {/* <div className='ad_spaces'>
+                    <div
+                      target='_blank'
+                      onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_top.ad_url, '_blank')}
+                    >
+                      {
+                        <img
+                          className='adimage'
+                          src={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image}
+                          alt='feature sponsored ads news image'
+                        />
+                      }
+                    </div>
+                  </div> */}
+                </>
               ) : null}
               <div id='nv-page' className='row'>
                 <div id='nv-body' className='col-lg-8 col-12'>
@@ -446,7 +452,8 @@ const News = () => {
                     <CommentsView Nid={Data && Data[0]?.id} />
                   ) : (
                     <>
-                      <NoDataFound />
+                      {NoDataFound()}
+                      {/* <NoDataFound /> */}
                     </>
                   )}
                 </div>
@@ -480,26 +487,32 @@ const News = () => {
               />
               {/* ad spaces */}
               {sponsoredads && sponsoredads.ad_spaces_bottom ? (
-                <div className='ad_spaces my-3'>
-                  <div
-                    target='_blank'
-                    onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_bottom.ad_url, '_blank')}
-                  >
-                    {
-                      <img
-                        className='adimage'
-                        src={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image}
-                        alt='feature sponsored ads news '
-                      />
-                    }
-                  </div>
-                </div>
+                <>
+                  <AdSpaces ad_url={sponsoredads && sponsoredads.ad_spaces_bottom.ad_url} ad_img={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image} style_web='' />
+                  {/* <div className='ad_spaces my-3'>
+                    <div
+                      target='_blank'
+                      onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_bottom.ad_url, '_blank')}
+                    >
+                      {
+                        <img
+                          className='adimage'
+                          src={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image}
+                          alt='feature sponsored ads news '
+                        />
+                      }
+                    </div>
+                  </div> */}
+                </>
               ) : null}
             </div>
           </div>
         </>
       ) : (
-        <NoDataFound />
+        <>
+          {NoDataFound()}
+          {/* <NoDataFound /> */}
+        </>
       )}
     </Layout>
   );

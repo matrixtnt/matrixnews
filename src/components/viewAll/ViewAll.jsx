@@ -5,7 +5,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { placeholderImage, translate } from '../../utils'
+import { placeholderImage, translate, NoDataFound } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
@@ -15,7 +15,7 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
-import NoDataFound from '../noDataFound/NoDataFound'
+// import NoDataFound from '../noDataFound/NoDataFound'
 
 const ViewAll = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -87,7 +87,7 @@ const ViewAll = () => {
                       <div className='col-md-4 col-12' key={element.id}>
                         <Link
                           id='Link-all'
-                          href={{ pathname: `/news/${element.slug}`,  }}
+                          href={{ pathname: `/news/${element.slug}`, }}
                         >
                           <div id='BNV-card' className='card'>
                             <img
@@ -108,7 +108,10 @@ const ViewAll = () => {
                       </div>
                     ))
                   ) : (
-                    <NoDataFound />
+                    <>
+                      {NoDataFound()}
+                      {/* <NoDataFound /> */}
+                    </>
                   )}
                 </div>
               )}
@@ -156,7 +159,7 @@ const ViewAll = () => {
                           id='Link-all'
                           href={{
                             pathname: `/breaking-news/${element.slug}`,
-                            
+
                           }}
                         >
                           <div id='BNV-card' className='card'>
@@ -177,28 +180,31 @@ const ViewAll = () => {
                       </div>
                     ))
                   ) : (
-                    <NoDataFound />
+                    <>
+                      {NoDataFound()}
+                      {/* <NoDataFound /> */}
+                    </>
                   )}
                 </div>
               )}
               {
                 lengthdata > 7 ? (
 
-              
-              <ReactPaginate
-                initialPage={currentPage}
-                previousLabel={translate('previous')}
-                nextLabel={translate('next')}
-                pageCount={Math.ceil(lengthdata / dataPerPage)}
-                onPageChange={handlePageChange}
-                containerClassName={'pagination'}
-                previousLinkClassName={'pagination__link'}
-                nextLinkClassName={'pagination__link'}
-                disabledClassName={'pagination__link--disabled'}
-                activeClassName={'pagination__link--active'}
-              />
-              ) : null
-            }
+
+                  <ReactPaginate
+                    initialPage={currentPage}
+                    previousLabel={translate('previous')}
+                    nextLabel={translate('next')}
+                    pageCount={Math.ceil(lengthdata / dataPerPage)}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination'}
+                    previousLinkClassName={'pagination__link'}
+                    nextLinkClassName={'pagination__link'}
+                    disabledClassName={'pagination__link--disabled'}
+                    activeClassName={'pagination__link--active'}
+                  />
+                ) : null
+              }
             </div>
           </div>
         </>

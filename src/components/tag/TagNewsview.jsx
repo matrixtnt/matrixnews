@@ -2,14 +2,14 @@
 
 import { FiCalendar } from 'react-icons/fi'
 import Link from 'next/link'
-import { formatDate, placeholderImage, translate } from '../../utils'
+import { formatDate, placeholderImage, translate,NoDataFound } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { getNewsApi } from 'src/hooks/newsApi'
-import NoDataFound from '../noDataFound/NoDataFound'
+// import NoDataFound from '../noDataFound/NoDataFound'
 
 const TagNewsview = () => {
   const router = useRouter()
@@ -91,7 +91,10 @@ const TagNewsview = () => {
                   ))}
               </>
             ) : (
-              <NoDataFound/>
+              <>
+              {NoDataFound()}
+              {/* <NoDataFound /> */}
+            </>
             )}
           </div>
         </div>

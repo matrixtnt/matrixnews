@@ -6,7 +6,8 @@ import StyleTwo from './StyleTwo'
 import StyleThree from './StyleThree'
 import StyleFour from './StyleFour'
 import StyleFive from './StyleFive'
-import { translate } from '../../utils'
+import { translate,NoDataFound } from '../../utils'
+// import NoDataFound from '../noDataFound/NoDataFound'
 import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
 import { useQuery } from '@tanstack/react-query'
@@ -14,7 +15,6 @@ import { access_key, getLanguage } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import toast from 'react-hot-toast'
-import NoDataFound from '../noDataFound/NoDataFound'
 import Card from '../skeletons/Card'
 import { useEffect, useState } from 'react'
 import { getNewsApi } from 'src/hooks/newsApi'
@@ -104,7 +104,10 @@ const FeatureLayout = () => {
       isLoading ? <>
         <Card />
       </> :
-        noFeatureData && newsDataFound ? <><NoDataFound /></> :
+        noFeatureData && newsDataFound ? <>
+          {NoDataFound()}
+          {/* <NoDataFound /> */}
+        </> :
           Data &&
           Data.map((item, index) => {
             // console.log('i am feature sectoin')

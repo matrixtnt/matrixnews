@@ -2,14 +2,14 @@
 import React, { use, useEffect, useState } from 'react'
 import Layout from '../../components/layout/Layout.jsx'
 import BreadcrumbNav from 'src/components/breadcrumb/BreadcrumbNav.jsx'
-import { translate } from '../../utils'
+import { translate,NoDataFound } from '../../utils'
 import { useRouter } from 'next/router.js'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key, getLanguage } from 'src/utils/api'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
-import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
+// import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
 import Skeleton from 'react-loading-skeleton'
 import { getMorePagesData } from 'src/store/reducers/MorePagesReducers.js'
 
@@ -82,7 +82,10 @@ const SocialPages = () => {
                       dangerouslySetInnerHTML={{ __html: Data && Data[0]?.page_content }}
                     ></div>
                   ) : (
-                    <NoDataFound />
+                    <>
+                    {NoDataFound()}
+                     {/* <NoDataFound /> */}
+                  </>
                   )}
                 </div>
               )}

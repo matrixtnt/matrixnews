@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import { placeholderImage, stripHtmlTags, translate, truncateText } from '../../utils'
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
+import AdSpaces from '../view/adSpaces/AdSpaces'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -47,13 +48,16 @@ const StyleOne = ({ isLoading, Data }) => {
     <div id='first-section'>
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' onError={placeholderImage}/>}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* video section */}
@@ -119,13 +123,16 @@ const StyleOne = ({ isLoading, Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image'/>}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* news section */}
@@ -213,13 +220,16 @@ const StyleOne = ({ isLoading, Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
-        <div className='ad_spaces'>
+        <>
+        <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
+        {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* breaking news section */}

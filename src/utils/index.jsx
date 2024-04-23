@@ -153,6 +153,10 @@ export const profileimgError = (e) => {
   e.target.src = "/assets/images/user.svg"
 }
 
+export const NoDataFound = () => {
+  return <div className='no_data_found text-center my-5'>{translate('nodatafound')}</div>
+}
+
 export const profileimg = "/assets/images/user.svg"
 
 

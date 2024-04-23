@@ -13,6 +13,7 @@ import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
+import AdSpaces from '../view/adSpaces/AdSpaces'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -71,7 +72,8 @@ const StyleSix = ({ isLoading, Data }) => {
 
   const getFeatureSectionById = async () => {
     try {
-      const { data } = await getFeatureSectionApi.getFeatureSectionById({
+      // const { data } = await getFeatureSectionApi.getFeatureSectionById({
+      const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
         section_id: Data?.id,
         language_id: language_id,
@@ -99,27 +101,30 @@ const StyleSix = ({ isLoading, Data }) => {
     <div id='first-section'>
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && (
-                <img
-                  className='adimage'
-                  src={Data.ad_spaces.web_ad_image}
-                  alt='style six feature sponsored ads news image'
-                  onError={placeholderImage}
-                />
-              )}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web='six' />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && (
+                  <img
+                    className='adimage'
+                    src={Data.ad_spaces.web_ad_image}
+                    alt='style six feature sponsored ads news image'
+                    onError={placeholderImage}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* video section */}
       {sliderData && sliderData[0].videos?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
-          <div id='rns-head-main' className=''>
+            <div id='rns-head-main' className=''>
               <div className='left-sec'>
                 <h4 id='rns-main-logo' className='mb-0'>
                   {Data.title}
@@ -226,19 +231,22 @@ const StyleSix = ({ isLoading, Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'six'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && (
                 <img
-                  className='adimage'
-                  src={Data.ad_spaces.web_ad_image}
-                  alt='style six feature sponsored ads news image'
+                className='adimage'
+                src={Data.ad_spaces.web_ad_image}
+                alt='style six feature sponsored ads news image'
                 />
               )}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* news section */}
@@ -334,7 +342,9 @@ const StyleSix = ({ isLoading, Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'six'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && (
@@ -342,14 +352,15 @@ const StyleSix = ({ isLoading, Data }) => {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* breaking news section */}
       {sliderData && sliderData[0].breaking_news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
-          <div id='rns-head-main' className=''>
+            <div id='rns-head-main' className=''>
               <div className='left-sec'>
                 <h4 id='rns-main-logo' className='mb-0'>
                   {Data.title}

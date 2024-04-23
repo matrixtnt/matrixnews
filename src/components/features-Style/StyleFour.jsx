@@ -4,6 +4,7 @@ import { placeholderImage, translate, truncateText } from '../../utils'
 import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
+import AdSpaces from '../view/adSpaces/AdSpaces'
 
 const StyleFour = ({ Data }) => {
   const scrollToTop = () => {
@@ -19,7 +20,7 @@ const StyleFour = ({ Data }) => {
     setVideo_url(url)
   }
 
-  
+
   const TypeUrl = type => {
     setTypeUrl(type)
   }
@@ -28,13 +29,16 @@ const StyleFour = ({ Data }) => {
     <>
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'four'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* videos */}
@@ -98,7 +102,7 @@ const StyleFour = ({ Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </div>
           </div>
@@ -107,13 +111,16 @@ const StyleFour = ({ Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'four'} />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* news */}
@@ -138,8 +145,8 @@ const StyleFour = ({ Data }) => {
                 <div className='row'>
                   {Data.news.map((value, index) => {
                     return (
-                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12'  key={value.id}>
-                        <Link id='rns-card' className='card card_hover_two' href={{pathname:`/news/${value.slug}`}}>
+                      <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                        <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}` }}>
                           <div className='banner_thumb'>
                             <img
                               id='rns-image'
@@ -174,13 +181,16 @@ const StyleFour = ({ Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
-        <div className='ad_spaces'>
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'four'} />
+          {/* <div className='ad_spaces'>
           <div className='container'>
             <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
               {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style four feature sponsored ads news image' />}
             </div>
           </div>
-        </div>
+        </div> */}
+        </>
       ) : null}
 
       {/* breaking news */}
@@ -208,7 +218,7 @@ const StyleFour = ({ Data }) => {
                         <Link
                           id='rns-card'
                           className='card card_hover_two'
-                          href={{pathname:`/breaking-news/${value.slug}`}}
+                          href={{ pathname: `/breaking-news/${value.slug}` }}
                         >
                           <div className='banner_thumb'>
                             <img

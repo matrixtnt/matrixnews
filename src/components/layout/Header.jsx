@@ -94,13 +94,18 @@ const Header = () => {
   }, [currentLanguage])
 
   useEffect(() => {
+    // console.log(userData.data.status, 'userData')
     if (userData.data !== null) {
       setIsLogout(true)
       setisloginloading(false)
+    }
+    if (userData?.data?.status !== 0) {
+      setisuserRole(true)
     } else {
       setIsLogout(false)
       setisloginloading(true)
     } // eslint-disable-next-line
+
   }, [])
 
   const logout = async () => {

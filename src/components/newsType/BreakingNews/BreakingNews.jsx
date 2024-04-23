@@ -28,6 +28,7 @@ import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
 import Layout from 'src/components/layout/Layout'
 import { settingsData } from 'src/store/reducers/settingsReducer'
 import { getBreakingNewsApi } from 'src/store/actions/campaign'
+import AdSpaces from '../../view/adSpaces/AdSpaces.jsx'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
@@ -157,20 +158,23 @@ const BreakingNews = () => {
                   <div id='B_NV-page' className='container'>
                     {/* ad spaces */}
                     {adsdata && adsdata.ad_spaces_top ? (
-                      <div className='ad_spaces mb-5'>
-                        <div
-                          target='_blank'
-                          onClick={() => window.open(adsdata && adsdata.ad_spaces_top.ad_url, '_blank')}
-                        >
-                          {
-                            <img
-                              className='adimage'
-                              src={adsdata && adsdata.ad_spaces_top.web_ad_image}
-                              alt='feature sponsored ads news image'
-                            />
-                          }
-                        </div>
-                      </div>
+                      <>
+                        <AdSpaces ad_url={adsdata && adsdata.ad_spaces_top.ad_url} ad_img={adsdata && adsdata.ad_spaces_top.web_ad_image} style_web='' />
+                        {/* <div className='ad_spaces mb-5'>
+                          <div
+                            target='_blank'
+                            onClick={() => window.open(adsdata && adsdata.ad_spaces_top.ad_url, '_blank')}
+                          >
+                            {
+                              <img
+                                className='adimage'
+                                src={adsdata && adsdata.ad_spaces_top.web_ad_image}
+                                alt='feature sponsored ads news image'
+                              />
+                            }
+                          </div>
+                        </div> */}
+                      </>
                     ) : null}
                     <div className='row'>
                       <div className='col-md-7 col-12'>
@@ -277,20 +281,23 @@ const BreakingNews = () => {
                     />
                     {/* ad spaces */}
                     {adsdata && adsdata?.ad_spaces_bottom ? (
-                      <div className='ad_spaces my-3'>
-                        <div
-                          target='_blank'
-                          onClick={() => window.open(adsdata && adsdata?.ad_spaces_bottom?.ad_url, '_blank')}
-                        >
-                          {
-                            <img
-                              className='adimage'
-                              src={adsdata && adsdata?.ad_spaces_bottom?.web_ad_image}
-                              alt='feature sponsored ads news image'
-                            />
-                          }
-                        </div>
-                      </div>
+                      <>
+                        <AdSpaces ad_url={adsdata && adsdata?.ad_spaces_bottom?.ad_url} ad_img={adsdata && adsdata?.ad_spaces_bottom?.web_ad_image} style_web='' />
+                        {/* <div className='ad_spaces my-3'>
+                          <div
+                            target='_blank'
+                            onClick={() => window.open(adsdata && adsdata?.ad_spaces_bottom?.ad_url, '_blank')}
+                          >
+                            {
+                              <img
+                                className='adimage'
+                                src={adsdata && adsdata?.ad_spaces_bottom?.web_ad_image}
+                                alt='feature sponsored ads news image'
+                              />
+                            }
+                          </div>
+                        </div> */}
+                      </>
                     ) : null}
                   </div>
                 </div>

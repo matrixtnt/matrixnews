@@ -86,6 +86,7 @@ const Layout = ({ children }) => {
       }
     })
   }, [currentLanguage])
+
   const GetUserByIdFetchData = () => {
     if (!userData.data?.firebase_id) return false
     loadGetUserByIdApi({
@@ -108,7 +109,7 @@ const Layout = ({ children }) => {
         if (data && data.data) {
           const roles = data.data.role
           if (roles !== 0) {
-            setisuserRole(true)
+            // setisuserRole(true)
           }
           return data.data
         } else {

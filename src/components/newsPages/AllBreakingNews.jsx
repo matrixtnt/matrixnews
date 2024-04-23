@@ -3,14 +3,14 @@ import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
-import { placeholderImage, translate } from '../../utils'
+import { placeholderImage, translate, NoDataFound } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
-import NoDataFound from '../noDataFound/NoDataFound'
+// import NoDataFound from '../noDataFound/NoDataFound'
 import { useRouter } from 'next/router'
 
 const AllBreakingNews = () => {
@@ -57,25 +57,28 @@ const AllBreakingNews = () => {
                       href={{
                         pathname: `/breaking-news/${element.slug}`
                       }}>
-                    <div id='BNV-card' className='card'>
-                      <img
-                        id='BNV-card-image'
-                        src={element.image ? element.image : no_image}
-                        className='card-img'
-                        alt='breaking news image'
-                        onError={placeholderImage}
-                      />
-                      <div id='BNV-card-body' className='card-body'>
-                        <h5 id='BNV-card-title' className='card-title'>
-                          {element.title.slice(0, 150)}...
-                        </h5>
+                      <div id='BNV-card' className='card'>
+                        <img
+                          id='BNV-card-image'
+                          src={element.image ? element.image : no_image}
+                          className='card-img'
+                          alt='breaking news image'
+                          onError={placeholderImage}
+                        />
+                        <div id='BNV-card-body' className='card-body'>
+                          <h5 id='BNV-card-title' className='card-title'>
+                            {element.title.slice(0, 150)}...
+                          </h5>
+                        </div>
                       </div>
-                    </div>
                     </Link>
                   </div>
                 ))
               ) : (
-                <NoDataFound />
+                <>
+                  {NoDataFound()}
+                  {/* <NoDataFound /> */}
+                </>
               )}
             </div>
           )}

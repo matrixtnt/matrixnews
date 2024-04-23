@@ -4,7 +4,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { formatDate, placeholderImage, translate } from '../../../utils'
+import { formatDate, placeholderImage, translate,NoDataFound } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -14,7 +14,7 @@ import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useState } from 'react'
-import NoDataFound from 'src/components/noDataFound/NoDataFound'
+// import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const SubCategory = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -109,7 +109,10 @@ const SubCategory = () => {
                     </div>
                   ))
                 ) : (
-                  <NoDataFound />
+                  <>
+                    {NoDataFound()}
+                    {/* <NoDataFound /> */}
+                  </>
                 )}
                 {lengthdata > 9 ? (
                   <ReactPaginate

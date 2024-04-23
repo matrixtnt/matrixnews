@@ -4,7 +4,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { formatDate, placeholderImage, translate } from '../../../utils'
+import { formatDate, placeholderImage, translate,NoDataFound } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -14,7 +14,7 @@ import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useEffect, useState } from 'react'
-import NoDataFound from 'src/components/noDataFound/NoDataFound'
+// import NoDataFound from 'src/components/noDataFound/NoDataFound'
 import { subCategorySelector } from 'src/store/reducers/tempDataReducer'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -113,7 +113,7 @@ const CategoryNews = () => {
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories"/>
+        <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories" />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading ? (
@@ -181,7 +181,10 @@ const CategoryNews = () => {
                     </div>
                   ))
                 ) : (
-                  <NoDataFound />
+                  <>
+                    {NoDataFound()}
+                    {/* <NoDataFound /> */}
+                  </>
                 )}
                 {lengthdata > 9 ? (
                   <ReactPaginate

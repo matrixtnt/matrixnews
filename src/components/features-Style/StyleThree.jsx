@@ -28,13 +28,16 @@ const StyleThree = ({ Data }) => {
     <>
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style three feature sponsored ads news image' />}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'three'} />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style three feature sponsored ads news image' />}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* video */}
@@ -149,7 +152,7 @@ const StyleThree = ({ Data }) => {
                 keyboard={false}
                 url={Video_url}
                 type_url={typeUrl}
-                // title={Data[0].title}
+              // title={Data[0].title}
               />
             </div>
           </div>
@@ -158,13 +161,16 @@ const StyleThree = ({ Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style three feature sponsored ads news image' />}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'three'} />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style three feature sponsored ads news image' />}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* news */}
@@ -188,7 +194,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-left'>
                   {Data.news[0] ? (
-                    <Link href={{pathname:`/news/${Data.news[0].slug}`}}>
+                    <Link href={{ pathname: `/news/${Data.news[0].slug}` }}>
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img id='vps-main-image' src={Data.news[0].image} alt='news' onError={placeholderImage} />
                       </Card>
@@ -203,7 +209,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-right'>
                   {Data.news[1] ? (
-                    <Link href={{pathname:`/news/${Data.news[1].slug}`}}>
+                    <Link href={{ pathname: `/news/${Data.news[1].slug}` }}>
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -224,7 +230,7 @@ const StyleThree = ({ Data }) => {
                   ) : null}
 
                   {Data.news[2] ? (
-                    <Link href={{pathname:`/news/${Data.news[2].slug}`}}>
+                    <Link href={{ pathname: `/news/${Data.news[2].slug}` }}>
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -252,13 +258,16 @@ const StyleThree = ({ Data }) => {
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
-        <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style three feature sponsored ads news image' />}
+        <>
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'three'} />
+          {/* <div className='ad_spaces'>
+            <div className='container'>
+              <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style three feature sponsored ads news image' />}
+              </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        </>
       ) : null}
 
       {/* breaking news */}
@@ -282,7 +291,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-left'>
                   {Data.breaking_news[0] ? (
-                    <Link href={{pathname:`/breaking-news/${Data.breaking_news[0].slug}`}}>
+                    <Link href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}` }}>
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img
                           id='vps-main-image'
@@ -301,7 +310,7 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-right'>
                   {Data.breaking_news[1] ? (
-                    <Link href={{pathname:`/breaking-news/${Data.breaking_news[1].slug}`}}>
+                    <Link href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}` }}>
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -319,7 +328,7 @@ const StyleThree = ({ Data }) => {
                   ) : null}
 
                   {Data.breaking_news[2] ? (
-                   <Link href={{pathname:`/breaking-news/${Data.breaking_news[2].slug}`}}>
+                    <Link href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}` }}>
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
                           id='vps-secondry-images'

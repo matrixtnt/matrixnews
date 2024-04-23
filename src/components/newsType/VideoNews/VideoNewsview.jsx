@@ -4,7 +4,7 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { placeholderImage, translate } from '../../../utils'
+import { placeholderImage, translate ,NoDataFound} from '../../../utils'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import no_image from '../../../../public/assets/images/no_image.jpeg'
 import { useRouter } from 'next/router'
@@ -14,7 +14,7 @@ import { access_key, getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
-import NoDataFound from 'src/components/noDataFound/NoDataFound'
+// import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const VideoNewsview = () => {
   const [Video_url, setVideo_url] = useState()
@@ -33,7 +33,8 @@ const VideoNewsview = () => {
   // api call
   const getFeatureSectionById = async () => {
     try {
-      const { data } = await getFeatureSectionApi.getFeatureSectionById({
+      // const { data } = await getFeatureSectionApi.getFeatureSectionById({
+      const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
         language_id: language_id,
         user_id: user,
@@ -125,7 +126,10 @@ const VideoNewsview = () => {
                   </div>
                 ))
               ) : (
-                <NoDataFound/>
+                <>
+                {NoDataFound()}
+                {/* <NoDataFound /> */}
+              </>
               )}
             </div>
           )}

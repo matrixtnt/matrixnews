@@ -4,6 +4,7 @@ import { placeholderImage, translate, truncateText } from '../../utils'
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { BsFillPlayFill } from 'react-icons/bs'
+import AdSpaces from '../view/adSpaces/AdSpaces'
 
 const StyleTwo = ({ Data }) => {
 
@@ -34,13 +35,16 @@ const StyleTwo = ({ Data }) => {
           <div className='container'>
             {/* ad spaces */}
             {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
-              <div className='ad_spaces'>
-                <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-                  {Data.ad_spaces.web_ad_image && (
-                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
-                  )}
-                </div>
-              </div>
+              <>
+                <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
+                {/* <div className='ad_spaces'>
+                  <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                    {Data.ad_spaces.web_ad_image && (
+                      <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
+                    )}
+                  </div>
+                </div> */}
+              </>
             ) : null}
             <div id='hns-head' className='row mb-3'>
               <div id='hns-head-main'>
@@ -169,13 +173,16 @@ const StyleTwo = ({ Data }) => {
           <div className='container'>
             {/* ad spaces */}
             {Data && Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
-              <div className='ad_spaces'>
-                <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-                  {Data.ad_spaces.web_ad_image && (
-                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
-                  )}
-                </div>
-              </div>
+              <>
+                <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
+                {/* <div className='ad_spaces'>
+                  <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                    {Data.ad_spaces.web_ad_image && (
+                      <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
+                    )}
+                  </div>
+                </div> */}
+              </>
             ) : null}
             <div id='hns-head' className='row mb-3'>
               <div id='hns-head-main'>
@@ -230,7 +237,7 @@ const StyleTwo = ({ Data }) => {
                   <div
                     className='video_center card card_hover'
                     onClick={() =>
-                      navigate.push({ pathname: `/news/${Data.news[2].slug}`,  })
+                      navigate.push({ pathname: `/news/${Data.news[2].slug}`, })
                     }
                   >
                     <img src={Data.news[2] && Data.news[2].image} alt={truncateText(Data.news[2].category_name, 10)} onError={placeholderImage} />
@@ -286,13 +293,16 @@ const StyleTwo = ({ Data }) => {
           <div className='container'>
             {/* ad spaces */}
             {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
-              <div className='ad_spaces'>
-                <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-                  {Data.ad_spaces.web_ad_image && (
-                    <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />
-                  )}
-                </div>
-              </div>
+              <>
+                <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
+                {/* <div className='ad_spaces'>
+                  <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
+                    {Data.ad_spaces.web_ad_image && (
+                      <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />
+                    )}
+                  </div>
+                </div> */}
+              </>
             ) : null}
             <div id='hns-head' className='row mb-3'>
               <div id='hns-head-main'>
@@ -313,7 +323,7 @@ const StyleTwo = ({ Data }) => {
                   <div
                     className='video_first_top card card_hover'
 
-                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[0].slug}`})}
+                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[0].slug}` })}
                   >
                     <img
                       src={Data.breaking_news[0] && Data.breaking_news[0].image}

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { translate, truncateText } from '../../utils'
+import { translate, truncateText,NoDataFound } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { imgError } from '../../utils/index'
 import { useSelector } from 'react-redux'
@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
-import NoDataFound from '../noDataFound/NoDataFound'
+// import NoDataFound from '../noDataFound/NoDataFound'
 
 const NewsNotification = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -50,9 +50,9 @@ const NewsNotification = () => {
   } = useQuery({
     queryKey: ['getNotification', currentLanguage, offsetdata],
     queryFn: getNotifications,
-    
+
   })
-  
+
 
   // Function to format the date as "day Month year"
   const formatDate = dateString => {
@@ -87,37 +87,40 @@ const NewsNotification = () => {
             ) : Data && Data.length > 0 ? (
               Data.map((element, index) => (
                 <div key={index} className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}>
-                {element.type === 'category' ? (
-                  <Link href={{ pathname: `/news/${element.news?.slug}`,  }}>
+                  {element.type === 'category' ? (
+                    <Link href={{ pathname: `/news/${element.news?.slug}`, }}>
+                      <div className='card-body bd-highlight' id='card-noti'>
+                        {/** Content inside the link */}
+                        <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
+                        <div className='Noti-text'>
+                          <p className='bd-highlight bd-title'>{truncateText(element.title, 100)}</p>
+                          <p className='bd-highlight bd-title message-title'>{truncateText(element.message, 550)}</p>
+                          <p className='bd-highlight mb-0 text-dark'> {formatDate(element.date_sent)}</p>
+                        </div>
+                        <p className='redirect_arrow'>
+                          <BsFillArrowRightCircleFill />
+                        </p>
+                      </div>
+                    </Link>
+                  ) : (
                     <div className='card-body bd-highlight' id='card-noti'>
-                      {/** Content inside the link */}
+                      {/** Content without the link */}
                       <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
                       <div className='Noti-text'>
                         <p className='bd-highlight bd-title'>{truncateText(element.title, 100)}</p>
                         <p className='bd-highlight bd-title message-title'>{truncateText(element.message, 550)}</p>
-                        <p className='bd-highlight mb-0 text-dark'> {formatDate(element.date_sent)}</p>
+                        <p className='bd-highlight mb-0'> {formatDate(element.date_sent)}</p>
                       </div>
-                      <p className='redirect_arrow'>
-                        <BsFillArrowRightCircleFill />
-                      </p>
                     </div>
-                  </Link>
-                ) : (
-                  <div className='card-body bd-highlight' id='card-noti'>
-                    {/** Content without the link */}
-                    <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
-                    <div className='Noti-text'>
-                      <p className='bd-highlight bd-title'>{truncateText(element.title, 100)}</p>
-                      <p className='bd-highlight bd-title message-title'>{truncateText(element.message, 550)}</p>
-                      <p className='bd-highlight mb-0'> {formatDate(element.date_sent)}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
               ))
             ) : (
               <div className='col-12 no_data mt-5'>
-                <NoDataFound/>
+                <>
+                  {NoDataFound()}
+                  {/* <NoDataFound /> */}
+                </>
               </div>
             )}
           </div>

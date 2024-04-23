@@ -119,7 +119,7 @@ const CommentsView = props => {
     //     clearTimeout(timeout)
     //   }
     // }
-   console.log(replied,'replied')
+  //  console.log(replied,'replied')
   }, [replied])
   
 
