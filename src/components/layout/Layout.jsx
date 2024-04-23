@@ -73,18 +73,21 @@ const Layout = ({ children }) => {
     }
   }
   useEffect(() => {
-    loadCategories({
-      offset: "0",
-      limit: "15",
-      language_id: currentLanguage?.id,
-      onSuccess: (res) => {
-        dispatch(categoriesUpdateLanguage(currentLanguage.id))
-      },
-      onErro: (err) => {
-        console.log("error", err)
-        dispatch(categoriesUpdateLanguage(""))
-      }
-    })
+    if (currentLanguage?.id) {
+      loadCategories({
+        offset: "0",
+        limit: "15",
+        language_id: currentLanguage?.id,
+        onSuccess: (res) => {
+          dispatch(categoriesUpdateLanguage(currentLanguage.id))
+        },
+        onErro: (err) => {
+          console.log("error", err)
+          dispatch(categoriesUpdateLanguage(""))
+        }
+      })
+
+    }
   }, [currentLanguage])
 
   const GetUserByIdFetchData = () => {
