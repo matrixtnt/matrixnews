@@ -81,9 +81,9 @@ const Categories = () => {
                       className='card'
                       href={{
                         pathname: `/categories-news/${element.slug}`,
-                        query: {
-                          category_id: element.id
-                        }
+                        // query: {
+                        //   category_slug: element.slug
+                        // }
                       }}
                     >
                       <img

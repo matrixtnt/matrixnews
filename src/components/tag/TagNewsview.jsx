@@ -21,7 +21,8 @@ const TagNewsview = () => {
     try {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        tag_id: Tid,
+        tag_slug: Tid,
+        // tag_id: Tid,
         language_id: language_id,
       })
       return data

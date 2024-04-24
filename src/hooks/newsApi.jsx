@@ -19,6 +19,7 @@ export const getNewsApi = {
       subcategory_slug,
       slug,
       tag_id,
+      tag_slug,
       latitude,
       longitude
     } = requestData
@@ -37,6 +38,7 @@ export const getNewsApi = {
         subcategory_slug,
         slug,
         tag_id,
+        tag_slug,
         latitude,
         longitude
       }
