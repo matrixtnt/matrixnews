@@ -15,7 +15,7 @@ import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
 import { calculateReadTime, extractTextFromHTML, isLogin, placeholderImage, translate } from '../../../utils'
-import { BsFillPlayFill } from 'react-icons/bs'
+import { BsFillPlayFill, BsLink45Deg } from 'react-icons/bs'
 import { AiOutlineEye } from 'react-icons/ai'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
 import Skeleton from 'react-loading-skeleton'
@@ -29,6 +29,7 @@ import Layout from 'src/components/layout/Layout'
 import { settingsData } from 'src/store/reducers/settingsReducer'
 import { getBreakingNewsApi } from 'src/store/actions/campaign'
 import AdSpaces from '../../view/adSpaces/AdSpaces.jsx'
+import toast from 'react-hot-toast'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
@@ -39,7 +40,23 @@ const BreakingNews = () => {
   const router = useRouter()
   const query = router.query
   const SettingsData = useSelector(settingsData)
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}/breaking-news/${router?.query?.slug}`
+
+  const decodedURL = decodeURI(currentUrL)
+
+
+  const handleCopyUrl = async (e) => {
+    e.preventDefault();
+    // Get the current URL from the router
+    try {
+      // Use the Clipboard API to copy the URL to the clipboard
+      await navigator.clipboard.writeText(currentUrL);
+      toast.success("URL copied to clipboard!");
+    } catch (error) {
+      console.error("Error copying to clipboard:", error);
+    }
+  };
+
   const BNid = query.slug
   let { id: language_id } = getLanguage()
   let user = getUser()
@@ -200,28 +217,37 @@ const BreakingNews = () => {
                               <div id='B_NV-right-head'>
                                 <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
                                 <FacebookShareButton
-                                  url={currentUrL}
+                                  url={decodedURL}
                                   title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                                   hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                                 >
-                                  <FacebookIcon size={30} round />
+                                  <FacebookIcon size={40} round />
                                 </FacebookShareButton>
                                 <WhatsappShareButton
-                                  url={currentUrL}
+                                  url={decodedURL}
                                   title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                                   hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                                 >
-                                  <WhatsappIcon size={30} round />
+                                  <WhatsappIcon size={40} round />
                                 </WhatsappShareButton>
                                 <TwitterShareButton
-                                  url={currentUrL}
+                                  url={decodedURL}
                                   title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                                   hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                                 >
-                                  <XIcon size={30} round />
+                                  <XIcon size={40} round />
                                 </TwitterShareButton>
+                                <button onClick={handleCopyUrl} className='copy_url'>
+                                  <BsLink45Deg size={30} />
+                                </button>
                               </div>
-                            ) : null}
+                            ) :
+                              <div id='nv-right-head'>
+                                <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
+                                <button onClick={handleCopyUrl} className='copy_url'>
+                                  <BsLink45Deg size={30} />
+                                </button>
+                              </div>}
                           </div>
                           <div id='vps-body-left'>
                             <img id='B_NV-image' src={DetailsPageData?.image} alt={DetailsPageData?.title} onError={placeholderImage} />

@@ -6892,3 +6892,15 @@ span {
 .replyModal{
   display: none !important;
 }
+
+.copy_url{
+  padding: 5px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: none;
+}

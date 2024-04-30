@@ -7,6 +7,8 @@ import { FiCalendar } from 'react-icons/fi';
 import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx';
 import TagsSection from '../../tag/TagsSection.jsx';
 import CommentSection from '../../comment/CommentSection.jsx';
+import { BsLink45Deg } from "react-icons/bs";
+
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav.jsx';
 import {
   FacebookIcon,
@@ -47,11 +49,21 @@ const News = () => {
   const userData = useSelector(selectUser);
   const SettingsData = useSelector(settingsData);
   const router = useRouter();
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router.asPath}`;
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}/news/${router?.query?.slug}`;
 
+  const decodedURL = decodeURI(currentUrL)
 
-  // Rest of your code...
-  // eslint-disable-next-line
+  const handleCopyUrl = async (e) => {
+    e.preventDefault();
+    // Get the current URL from the router
+    try {
+      // Use the Clipboard API to copy the URL to the clipboard
+      await navigator.clipboard.writeText(currentUrL);
+      toast.success("URL copied to clipboard!");
+    } catch (error) {
+      console.error("Error copying to clipboard:", error);
+    }
+  };
   const [CheckLike, setCheckLike] = useState(false);
   const [Like, setLike] = useState(CheckLike); // eslint-disable-next-line
   const [Bookmark, setBookmark] = useState(false); // eslint-disable-next-line
@@ -301,14 +313,14 @@ const News = () => {
                         <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
 
                         <FacebookShareButton
-                          url={currentUrL}
+                          url={decodedURL}
                           title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                           hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                         >
                           <FacebookIcon size={40} round />
                         </FacebookShareButton>
                         <WhatsappShareButton
-                          url={currentUrL}
+                          url={decodedURL}
                           title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                           hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                           beforeOnClick={() => setWhatsappImageLoaded(false)}
@@ -316,14 +328,25 @@ const News = () => {
                           <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
                         </WhatsappShareButton>
                         <TwitterShareButton
-                          url={currentUrL}
+                          url={decodedURL}
                           title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                           hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                         >
                           <XIcon size={40} round />
                         </TwitterShareButton>
+                        <button onClick={handleCopyUrl} className='copy_url'>
+                          <BsLink45Deg size={30} />
+                        </button>
                       </div>
-                    ) : null}
+
+                    ) :
+                      <div id='nv-right-head'>
+                        <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
+                        <button onClick={handleCopyUrl} className='copy_url'>
+                          <BsLink45Deg size={30} />
+                        </button>
+                      </div>
+                    }
                   </div>
                   <div id='vps-body-left'>
                     <div className='vps-img-div'>
