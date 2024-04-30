@@ -49,7 +49,7 @@ const News = () => {
   const userData = useSelector(selectUser);
   const SettingsData = useSelector(settingsData);
   const router = useRouter();
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}/news/${router?.query?.slug}`;
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router?.asPath}`;
 
   const decodedURL = decodeURI(currentUrL)
 
@@ -58,7 +58,7 @@ const News = () => {
     // Get the current URL from the router
     try {
       // Use the Clipboard API to copy the URL to the clipboard
-      await navigator.clipboard.writeText(currentUrL);
+      await navigator.clipboard.writeText(decodedURL);
       toast.success("URL copied to clipboard!");
     } catch (error) {
       console.error("Error copying to clipboard:", error);
