@@ -6,7 +6,7 @@ import StyleTwo from './StyleTwo'
 import StyleThree from './StyleThree'
 import StyleFour from './StyleFour'
 import StyleFive from './StyleFive'
-import { translate,NoDataFound } from '../../utils'
+import { translate, NoDataFound } from '../../utils'
 // import NoDataFound from '../noDataFound/NoDataFound'
 import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
@@ -59,6 +59,10 @@ const FeatureLayout = () => {
       onError: (error) => {
         setNewsDataFound(true)
         setNoDataIsLoading(false)
+        setIsLoading(false)
+        setNoFeatureData(true)
+        setNewsDataFound(true)
+        console.log('no data found', error)
       }
     })
   }
@@ -83,6 +87,7 @@ const FeatureLayout = () => {
           setNewsDataFound(true)
           setIsLoading(false)
           setNoDataIsLoading(true)
+          console.log('no data found', error)
         }
       })
     }
@@ -190,7 +195,8 @@ const FeatureLayout = () => {
       ) : !newsDataFound ? <> <NewsStyle isLoading={isNoDataLoading} Data={isNoData} /> </> :
         (
           <p className='no_data_available'>{translate('noNews')}</p>
-        )}
+        )
+      }
     </>
   )
 }

@@ -49,7 +49,7 @@ const News = () => {
   const userData = useSelector(selectUser);
   const SettingsData = useSelector(settingsData);
   const router = useRouter();
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router?.asPath}`;
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router?.asPath}?language_id=${currentLanguage.id}`;
 
   const decodedURL = decodeURI(currentUrL)
 
@@ -82,6 +82,8 @@ const News = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false);
 
+  // console.log(query, 'quryy')
+
   // api call
   const getNewsById = async () => {
     if (currentLanguage) {
@@ -90,7 +92,7 @@ const News = () => {
         const { data } = await getNewsApi.getNews({
           access_key: access_key,
           slug: NewsId,
-          language_id: currentLanguage.id
+          language_id: query.language_id ? query.language_id : currentLanguage.id
         });
 
         if (data.data[0].bookmark === 0) {

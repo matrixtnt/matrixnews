@@ -72,7 +72,7 @@ const BreakingNews = () => {
   useEffect(() => {
     getBreakingNewsApi({
       slug: BNid,
-      language_id: currentLanguage.id,
+      language_id: query.language_id ? query.language_id : currentLanguage.id,
       onSuccess: (res) => {
         const data = res.data[0]
         setDetailsPageData(data)
