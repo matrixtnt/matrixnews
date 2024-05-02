@@ -54,9 +54,9 @@ const Footer = () => {
                         <Link
                           href={{
                             pathname: `/categories-news/${element.slug}`,
-                            query: {
-                              category_id: element.id
-                            }
+                            // query: {
+                            //   category_id: element.id
+                            // }
                           }}
                           onClick={scrollToTop}
                         >

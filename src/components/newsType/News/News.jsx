@@ -456,15 +456,26 @@ const News = () => {
                         <div className='tag_name'>{translate('tagLbl')} :</div>
                         <div className='tag_data'>
                           <span className='tags_section'>
-                            {tagSplit(Data[0].tag_name).map((tag, index) => (
+                            {
+                              Data[0].tag.map((tag, index) => {
+                                return <p
+                                  key={index}
+                                  className='mb-0 me-2 new-view-tags'
+                                  onClick={() => router.push(`/tag/${tag.slug}`)}
+                                >
+                                  {tag.tag_name}
+                                </p>
+                              })
+                            }
+                            {/* {tagSplit(Data[0].tag_name).map((tag, index) => (
                               <p
                                 key={index}
                                 className='mb-0 me-2 new-view-tags'
-                                onClick={() => router.push(`/tag/${Data[0].tag_id}`)}
+                                onClick={() => router.push(`/tag/${tag.slug}`)}
                               >
                                 {tag}
                               </p>
-                            ))}
+                            ))} */}
                           </span>
                         </div>
                       </div>
