@@ -487,10 +487,7 @@ const News = () => {
                   {SettingsData && SettingsData.comments_mode === '1' ? (
                     <CommentsView Nid={Data && Data[0]?.id} />
                   ) : (
-                    <>
-                      {NoDataFound()}
-                      {/* <NoDataFound /> */}
-                    </>
+                    null
                   )}
                 </div>
 
