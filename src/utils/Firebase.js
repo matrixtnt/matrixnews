@@ -57,6 +57,11 @@ const FirebaseData = () => {
     document.body.appendChild(stickyNote);
   };
 
+
+  const firebaseApp = !getApps().length
+  ? initializeApp(firebaseConfig)
+  : getApp();
+
   const messagingInstance = async () => {
     try {
       const isSupportedBrowser = await isSupported();
