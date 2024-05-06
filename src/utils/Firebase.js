@@ -67,10 +67,11 @@ const FirebaseData = () => {
       const isSupportedBrowser = await isSupported();
       if (isSupportedBrowser) {
         return getMessaging(firebaseApp);
-      } else {
-        createStickyNote();
-        return null;
       }
+      // } else {
+      //   createStickyNote();
+      //   return null;
+      // }
     } catch (err) {
       console.error('Error checking messaging support:', err);
       return null;
