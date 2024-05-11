@@ -9,6 +9,7 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+
 SwiperCore.use([Navigation, Pagination])
 const StyleFive = ({ isLoading, Data }) => {
   const [Video_url, setVideo_url] = useState()
@@ -134,7 +135,7 @@ const StyleFive = ({ isLoading, Data }) => {
                 <div id='bns-main-card' className='card'>
                   <img
                     id='bns-main-image'
-                    src={breakingNews2_jpg}
+                    src={breakingNews2_jpg.src}
                     className='card-img'
                     alt={Data.title}
                     onError={placeholderImage}
@@ -239,7 +240,7 @@ const StyleFive = ({ isLoading, Data }) => {
                 <div id='bns-main-card' className='card'>
                   <img
                     id='bns-main-image'
-                    src={breakingNews2_jpg}
+                    src={breakingNews2_jpg.src}
                     className='card-img'
                     alt={Data.title}
                     onError={placeholderImage}
@@ -330,7 +331,7 @@ const StyleFive = ({ isLoading, Data }) => {
                 <div id='bns-main-card' className='card'>
                   <img
                     id='bns-main-image'
-                    src={breakingNews2_jpg}
+                    src={breakingNews2_jpg.src}
                     className='card-img'
                     alt={Data.title}
                     onError={placeholderImage}

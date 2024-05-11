@@ -27,7 +27,7 @@ self.addEventListener('install', function (event) {
 // Handle background messages
 self.addEventListener('push', function (event) {
   const payload = event.data.json();
-  const notificationTitle = payload.notification.title;
+  const notificationTitle = payload.notification.body;
   const notificationOptions = {
     body: payload.notification.body,
   };

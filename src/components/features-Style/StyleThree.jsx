@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Link from 'next/link'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { placeholderImage, translate, truncateText } from '../../utils'
+import AdSpaces from '../view/adSpaces/AdSpaces'
 
 const StyleThree = ({ Data }) => {
   const [Video_url, setVideo_url] = useState()

@@ -4,6 +4,7 @@ import { getMessaging, getToken, onMessage, isSupported } from 'firebase/messagi
 import firebase from "firebase/compat/app"
 import { getAuth } from "firebase/auth";
 import toast from 'react-hot-toast';
+import { loadFcmToken } from 'src/store/reducers/settingsReducer';
 
 
 const FirebaseData = () => {
@@ -16,46 +17,13 @@ const FirebaseData = () => {
     appId: process.env.NEXT_PUBLIC_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
   }
+
   if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
   }
 
   const authentication = getAuth();
 
-  const createStickyNote = () => {
-    const stickyNote = document.createElement('div');
-    stickyNote.style.position = 'fixed';
-    stickyNote.style.bottom = '0';
-    stickyNote.style.width = '100%';
-    stickyNote.style.backgroundColor = '#ffffff'; // White background
-    stickyNote.style.color = '#000000'; // Black text
-    stickyNote.style.padding = '10px';
-    stickyNote.style.textAlign = 'center';
-    stickyNote.style.fontSize = '14px';
-    stickyNote.style.zIndex = '99999'; // Set zIndex to 99999
-
-    const closeButton = document.createElement('span');
-    closeButton.style.cursor = 'pointer';
-    closeButton.style.float = 'right';
-    closeButton.innerHTML = '&times;'; // Times symbol (X) for close
-
-    closeButton.onclick = function () {
-      document.body.removeChild(stickyNote);
-    };
-
-    const link = document.createElement('a');
-    link.style.textDecoration = 'underline';
-    link.style.color = '#3498db';
-    link.innerText = 'Download Now';
-
-    // Update link with the dynamic appstoreLink
-    link.href = process.env.NEXT_PUBLIC_APP_ID;
-    stickyNote.innerHTML = 'Notification are not supported on this browser. For a better user experience, please use our mobile application. ';
-    stickyNote.appendChild(closeButton);
-    stickyNote.appendChild(link);
-
-    document.body.appendChild(stickyNote);
-  };
 
 
   const firebaseApp = !getApps().length
@@ -68,10 +36,6 @@ const FirebaseData = () => {
       if (isSupportedBrowser) {
         return getMessaging(firebaseApp);
       }
-      // } else {
-      //   createStickyNote();
-      //   return null;
-      // }
     } catch (err) {
       console.error('Error checking messaging support:', err);
       return null;
@@ -91,10 +55,11 @@ const FirebaseData = () => {
           vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
         })
           .then((currentToken) => {
+            console.log(currentToken)
             if (currentToken) {
               setTokenFound(true);
               setFcmToken(currentToken);
-              getFcmToken(currentToken);
+              loadFcmToken(currentToken);
             } else {
               setTokenFound(false);
               setFcmToken(null);
