@@ -128,7 +128,7 @@ const VideoNewsview = () => {
               ) : (
                 <>
                 {NoDataFound()}
-                {/* <NoDataFound /> */}
+               
               </>
               )}
             </div>

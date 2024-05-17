@@ -27,8 +27,8 @@ const FirebaseData = () => {
 
 
   const firebaseApp = !getApps().length
-  ? initializeApp(firebaseConfig)
-  : getApp();
+    ? initializeApp(firebaseConfig)
+    : getApp();
 
   const messagingInstance = async () => {
     try {
@@ -55,7 +55,6 @@ const FirebaseData = () => {
           vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
         })
           .then((currentToken) => {
-            console.log(currentToken)
             if (currentToken) {
               setTokenFound(true);
               setFcmToken(currentToken);
@@ -68,6 +67,10 @@ const FirebaseData = () => {
           })
           .catch((err) => {
             console.error('Error retrieving token:', err);
+            // If the error is "no active Service Worker", try to register the service worker again
+            if (err.message.includes('no active Service Worker')) {
+              registerServiceWorker(setTokenFound, setFcmToken);
+            }
           });
       } else {
         setTokenFound(false);
@@ -76,6 +79,21 @@ const FirebaseData = () => {
       }
     } catch (err) {
       console.error('Error requesting notification permission:', err);
+    }
+  };
+
+  const registerServiceWorker = (setTokenFound, setFcmToken) => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/firebase-messaging-sw.js')
+        .then((registration) => {
+          console.log('Service Worker registration successful with scope: ', registration.scope);
+          // After successful registration, try to fetch the token again
+          fetchToken(setTokenFound, setFcmToken);
+        })
+        .catch((err) => {
+          console.log('Service Worker registration failed: ', err);
+        });
     }
   };
 

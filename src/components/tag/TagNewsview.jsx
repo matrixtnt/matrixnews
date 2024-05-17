@@ -94,7 +94,7 @@ const TagNewsview = () => {
             ) : (
               <>
               {NoDataFound()}
-              {/* <NoDataFound /> */}
+             
             </>
             )}
           </div>

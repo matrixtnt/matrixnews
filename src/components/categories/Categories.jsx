@@ -72,7 +72,7 @@ const Categories = () => {
             </div>
           ) : (
             <div className='row'>
-              {currentData && currentData.length > 0 ? (
+              {currentData && currentData?.length > 0 ? (
                 currentData.map(element => (
                   <div className='col-md-4 col-12 mb-4'>
                     <Link
@@ -107,7 +107,7 @@ const Categories = () => {
               ) : (
                 <>
                 {NoDataFound()}
-                {/* <NoDataFound /> */}
+               
               </>
               )}
               {lengthdata > 10 ? (
@@ -130,7 +130,7 @@ const Categories = () => {
       ) : (
         <>
           {NoDataFound()}
-          {/* <NoDataFound /> */}
+         
         </>
       )}
     </Layout>

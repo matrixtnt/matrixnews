@@ -155,7 +155,7 @@ const CategoryNews = () => {
                 } */}
 
 
-                {currentData && currentData.length > 0 ? (
+                {currentData && currentData?.length > 0 ? (
                   currentData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
@@ -183,7 +183,7 @@ const CategoryNews = () => {
                 ) : (
                   <>
                     {NoDataFound()}
-                    {/* <NoDataFound /> */}
+                   
                   </>
                 )}
                 {lengthdata > 9 ? (

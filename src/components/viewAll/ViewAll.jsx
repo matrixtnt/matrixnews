@@ -110,7 +110,7 @@ const ViewAll = () => {
                   ) : (
                     <>
                       {NoDataFound()}
-                      {/* <NoDataFound /> */}
+                     
                     </>
                   )}
                 </div>
@@ -182,7 +182,7 @@ const ViewAll = () => {
                   ) : (
                     <>
                       {NoDataFound()}
-                      {/* <NoDataFound /> */}
+                     
                     </>
                   )}
                 </div>

@@ -544,7 +544,7 @@ const News = () => {
       ) : (
         <>
           {NoDataFound()}
-          {/* <NoDataFound /> */}
+         
         </>
       )}
     </Layout>

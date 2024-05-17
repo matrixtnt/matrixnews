@@ -50,13 +50,6 @@ const StyleOne = ({ isLoading, Data }) => {
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
         <>
           <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
-          {/* <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' onError={placeholderImage}/>}
-            </div>
-          </div>
-        </div> */}
         </>
       ) : null}
 
@@ -125,13 +118,6 @@ const StyleOne = ({ isLoading, Data }) => {
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
         <>
           <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
-          {/* <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image'/>}
-            </div>
-          </div>
-        </div> */}
         </>
       ) : null}
 
@@ -222,13 +208,6 @@ const StyleOne = ({ isLoading, Data }) => {
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
         <>
         <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
-        {/* <div className='ad_spaces'>
-          <div className='container'>
-            <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-              {Data.ad_spaces.web_ad_image && <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style one feature sponsored ads news image' />}
-            </div>
-          </div>
-        </div> */}
         </>
       ) : null}
 

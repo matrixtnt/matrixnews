@@ -77,7 +77,7 @@ const AllBreakingNews = () => {
               ) : (
                 <>
                   {NoDataFound()}
-                  {/* <NoDataFound /> */}
+                 
                 </>
               )}
             </div>

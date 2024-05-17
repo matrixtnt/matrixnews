@@ -58,30 +58,6 @@ const SocialPages = () => {
 
   }, [router.query.slug, MorePagesData, currentLanguage])
 
-
-
-  // api call
-  // const getpages = async () => {
-  //   try {
-  //     const { data } = await getpagesApi.getpages({
-  //       access_key: access_key,
-  //       language_id: language_id,
-  //       slug: router?.query?.slug
-  //     })
-  //     return data.data
-
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // react query
-  // const { isLoading, data: Data } = useQuery({
-  //   queryKey: ['getPages', currentLanguage,router?.query?.slug],
-  //   queryFn: getpages
-  // })
-
-
   return (
     <Layout>
       <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement={router?.query?.slug} />
@@ -102,7 +78,7 @@ const SocialPages = () => {
                     :
                     <>
                       {NoDataFound()}
-                      {/* <NoDataFound /> */}
+                     
                     </>
                   }
                 </div>

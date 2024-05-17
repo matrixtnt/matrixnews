@@ -119,7 +119,7 @@ const NewsNotification = () => {
               <div className='col-12 no_data mt-5'>
                 <>
                   {NoDataFound()}
-                  {/* <NoDataFound /> */}
+                 
                 </>
               </div>
             )}

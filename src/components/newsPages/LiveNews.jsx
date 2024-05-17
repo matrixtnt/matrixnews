@@ -105,7 +105,7 @@ const LiveNews = () => {
               ) : (
                 <>
                   {NoDataFound()}
-                   {/* <NoDataFound /> */}
+                  
                 </>
               )}
             </div>

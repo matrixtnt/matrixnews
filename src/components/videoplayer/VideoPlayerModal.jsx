@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal'
 import ReactPlayer from 'react-player'
 import { AiOutlineClose } from 'react-icons/ai'
 import VideoPlayer from './HLSPlayer'
+import { placeholderImage } from 'src/utils'
 
 const VideoPlayerModal = props => {
 
@@ -49,6 +50,7 @@ const VideoPlayerModal = props => {
                 width='100%'
                 allowFullScreen
                 src={props.url}
+                onError={placeholderImage}
               ></iframe>
             ) : (
               <ReactPlayer width='100%' height='500px' url={props.url && props.url} controls={true} />

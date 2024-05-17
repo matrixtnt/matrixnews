@@ -37,13 +37,6 @@ const StyleTwo = ({ Data }) => {
             {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
               <>
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
-                {/* <div className='ad_spaces'>
-                  <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-                    {Data.ad_spaces.web_ad_image && (
-                      <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
-                    )}
-                  </div>
-                </div> */}
               </>
             ) : null}
             <div id='hns-head' className='row mb-3'>
@@ -175,13 +168,6 @@ const StyleTwo = ({ Data }) => {
             {Data && Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
               <>
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
-                {/* <div className='ad_spaces'>
-                  <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-                    {Data.ad_spaces.web_ad_image && (
-                      <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='style two feature sponsored ads news image' />
-                    )}
-                  </div>
-                </div> */}
               </>
             ) : null}
             <div id='hns-head' className='row mb-3'>
@@ -295,13 +281,6 @@ const StyleTwo = ({ Data }) => {
             {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
               <>
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
-                {/* <div className='ad_spaces'>
-                  <div target='_blank' onClick={() => window.open(Data.ad_spaces.ad_url, '_blank')}>
-                    {Data.ad_spaces.web_ad_image && (
-                      <img className='adimage' src={Data.ad_spaces.web_ad_image} alt='ads' />
-                    )}
-                  </div>
-                </div> */}
               </>
             ) : null}
             <div id='hns-head' className='row mb-3'>

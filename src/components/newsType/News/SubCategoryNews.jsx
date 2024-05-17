@@ -111,7 +111,7 @@ const SubCategory = () => {
                 ) : (
                   <>
                     {NoDataFound()}
-                    {/* <NoDataFound /> */}
+                   
                   </>
                 )}
                 {lengthdata > 9 ? (

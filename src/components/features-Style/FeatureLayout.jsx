@@ -25,7 +25,7 @@ import { loadNews } from 'src/store/reducers/newsReducer'
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
   const [noFeatureData, setNoFeatureData] = useState(false)
-  const [newsDataFound, setNewsDataFound] = useState(true)
+  const [newsDataFound, setNewsDataFound] = useState(true)  
 
   const dispatch = useDispatch();
 
@@ -113,7 +113,7 @@ const FeatureLayout = () => {
       </> :
         noFeatureData && newsDataFound ? <>
           {NoDataFound()}
-          {/* <NoDataFound /> */}
+         
         </> :
           Data &&
           Data.map((item, index) => {

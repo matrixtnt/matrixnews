@@ -20,6 +20,7 @@ import { loadLocation, locationData, settingsData } from 'src/store/reducers/set
 import toast from 'react-hot-toast'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
 import { isLogin } from 'src/utils'
+import { useRouter } from 'next/router'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -30,6 +31,8 @@ const WeatherCard = () => {
   const storedLongitude = location && location.long
 
   const dispatch = useDispatch()
+
+  const router = useRouter()
 
   const weatherApi = async () => {
     return new Promise((resolve, reject) => {
@@ -64,7 +67,7 @@ const WeatherCard = () => {
   const { isLoading, data: weather } = useQuery({
     queryKey: ['weather', currentLanguage, getLocationData],
     queryFn: weatherApi,
-    
+
   })
 
   // to get today weekday nameselectLanguages
@@ -150,31 +153,36 @@ const WeatherCard = () => {
           </div>
           <div className='col-md-6 col-12'>
             <div className='right-weather'>
-              <ul className='language_section'>
-                <li>
-                  <Dropdown>
-                    <Dropdown.Toggle className='language_drop'>
-                      {currentLanguage?.displayName ? currentLanguage?.displayName : currentLanguage?.name}
-                    </Dropdown.Toggle>
+              {
+                router.pathname === '/' ? <>
+                  <ul className='language_section'>
+                    <li>
+                      <Dropdown>
+                        <Dropdown.Toggle className='language_drop'>
+                          {currentLanguage?.displayName ? currentLanguage?.displayName : currentLanguage?.name}
+                        </Dropdown.Toggle>
 
-                    <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
-                      {languagesData &&
-                        languagesData.map((data, index) => {
-                          return (
-                            <Dropdown.Item
-                              key={index}
-                              id='btnLogout'
-                              onClick={() => languageChange(data.language, data.code, data.id, data.display_name)}
-                            >
-                              {data.display_name ? data.display_name : data.language}
-                            </Dropdown.Item>
-                          )
-                        })}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </li>
-              </ul>
-              <div className='slash-line'></div>
+                        <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
+                          {languagesData &&
+                            languagesData.map((data, index) => {
+                              return (
+                                <Dropdown.Item
+                                  key={index}
+                                  id='btnLogout'
+                                  onClick={() => languageChange(data.language, data.code, data.id, data.display_name)}
+                                >
+                                  {data.display_name ? data.display_name : data.language}
+                                </Dropdown.Item>
+                              )
+                            })}
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </li>
+                  </ul>
+                  <div className='slash-line'></div>
+                </>
+                  : null
+              }
               <div className='social_media_top'>
                 {process.env.NEXT_PUBLIC_FACEBOOK ? (
                   <a
