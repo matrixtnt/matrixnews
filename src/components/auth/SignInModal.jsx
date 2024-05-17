@@ -113,7 +113,7 @@ const SignInModal = props => {
                 token: res.data.fcm_id,
                 latitude: storedLatitude,
                 longitude: storedLongitude,
-                onSuccess: async res => {},
+                onSuccess: async res => { },
                 onError: async err => {
                   console.log(err)
                 }
@@ -125,7 +125,7 @@ const SignInModal = props => {
             if (res.data.is_login === '0') {
               //If new User then show the Update Profile Screen
               navigate.push('/profile-update')
-            } 
+            }
             props.setisloginloading(false)
           },
           onError: error => {
@@ -160,7 +160,7 @@ const SignInModal = props => {
                   token: success.data.fcm_id,
                   latitude: storedLatitude,
                   longitude: storedLongitude,
-                  onSuccess: async res => {},
+                  onSuccess: async res => { },
                   onError: async err => {
                     console.log(err)
                   }
@@ -172,6 +172,7 @@ const SignInModal = props => {
               }
               loadMobileType(false)
               props.setisloginloading(false)
+              setFormValues(initialValues)
               toast.success('Login Successfully')
             },
             onError: error => {
@@ -231,7 +232,7 @@ const SignInModal = props => {
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
             <img className='ModalImg' src={photo.src} alt='login image' />
             <div className='logo-img-overlay'>
-              <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo1' onError={placeholderImage}/>
+              <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo1' onError={placeholderImage} />
             </div>
           </div>
           <div id='modal-content'>
