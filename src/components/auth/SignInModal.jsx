@@ -164,9 +164,9 @@ const SignInModal = props => {
                   onError: async err => {
                     console.log(err)
                   }
-                })
+                })  
               }, [1000])
-              if (success.data.is_login === '1') {
+              if (success.data.is_login === '0') {
                 //If new User then show the Update Profile Screen
                 navigate.push('/profile-update')
               }
