@@ -24,7 +24,6 @@ import { useRouter } from 'next/router'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 
 const MobilesideBar = ({
-  isuserRole,
   name,
   logout,
   deleteAccount,
@@ -123,7 +122,7 @@ const MobilesideBar = ({
                         {translate('managePreferences')}
                       </Link>
                     </Dropdown.Item>
-                    {isuserRole ? (
+                    {userData?.data?.role !== 0 ? (
                       <>
                         <Dropdown.Item id='btnLogout'>
                           <Link id='btnBookmark' href='/create-news' onClick={() => handleClose()}>
@@ -155,8 +154,8 @@ const MobilesideBar = ({
                       {translate('logout')}
                     </Dropdown.Item>
                     <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
-                        {translate('deleteAcc')}
-                      </Dropdown.Item>
+                      {translate('deleteAcc')}
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               ) : (
@@ -305,19 +304,19 @@ const MobilesideBar = ({
                       <li className='nav-item' key={index}>
                         {
                           <Link
-                              className='catNav-links'
-                              key={index}
-                              href={{
-                                pathname: `/categories-news/${element.slug}`,
-                                query: {
-                                  category_id: element.id
-                                }
-                              }}
-                              onClick={handleClose}
-                            >
-                              {' '}
-                              <b>{element.category_name}</b>{' '}
-                            </Link>
+                            className='catNav-links'
+                            key={index}
+                            href={{
+                              pathname: `/categories-news/${element.slug}`,
+                              query: {
+                                category_id: element.id
+                              }
+                            }}
+                            onClick={handleClose}
+                          >
+                            {' '}
+                            <b>{element.category_name}</b>{' '}
+                          </Link>
                         }
                       </li>
                     ))}

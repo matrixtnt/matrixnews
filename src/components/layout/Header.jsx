@@ -98,15 +98,13 @@ const Header = () => {
     if (userData.data !== null) {
       setIsLogout(true)
       setisloginloading(false)
-    }
-    if (userData?.data?.role !== 0) {
-      setisuserRole(true)
     } else {
       setIsLogout(false)
       setisloginloading(true)
     } // eslint-disable-next-line
 
   }, [])
+
 
   const logout = async () => {
     confirm({
@@ -361,7 +359,7 @@ const Header = () => {
                         </Link>
                       </Dropdown.Item>
 
-                      {isuserRole ? (
+                      {userData?.data?.role !== 0 ? (
                         <>
                           <Dropdown.Item id='btnLogout'>
                             <Link id='btnBookmark' href='/create-news'>
@@ -430,7 +428,6 @@ const Header = () => {
             {['end'].map((placement, idx) => (
               <MobilesideBar
                 key={idx}
-                isuserRole={isuserRole}
                 languageChange={languageChange}
                 placement={placement}
                 name={placement}
