@@ -300,24 +300,45 @@ const MobilesideBar = ({
                 ) : null}
                 <ul className='sub-menu mobile_catogories'>
                   {categories &&
-                    categories.slice(0, 10).map((element, index) => (
+                    categories.slice(0, 12).map((element, index) => (
                       <li className='nav-item' key={index}>
                         {
-                          <Link
-                            className='catNav-links'
-                            key={index}
-                            href={{
-                              pathname: `/categories-news/${element.slug}`,
-                              query: {
-                                category_id: element.id
-                              }
-                            }}
-                            onClick={handleClose}
-                          >
-                            {' '}
-                            <b>{element.category_name}</b>{' '}
-                          </Link>
+                          element?.sub_categories?.length > 0 ?
+                            <Dropdown className='subCatdrop'>
+                              <Dropdown.Toggle className=''>
+                                {element.category_name}<FaAngleDown />
+                              </Dropdown.Toggle>
+
+                              <Dropdown.Menu >
+                                {
+                                  element.sub_categories.map((data, index) => {
+                                    return (
+                                      <Dropdown.Item
+                                        key={index}
+                                        onClick={() => handleSubCategoryChange(data.slug)}
+                                      >
+                                        {data.subcategory_name}
+                                      </Dropdown.Item>
+                                    )
+                                  })}
+                              </Dropdown.Menu>
+                            </Dropdown> :
+                            <Link
+                              className='catNav-links'
+                              key={index}
+                              href={{
+                                pathname: `/categories-news/${element.slug}`,
+                                query: {
+                                  category_id: element.id
+                                }
+                              }}
+                              onClick={handleClose}
+                            >
+                              {' '}
+                              <b>{element.category_name}</b>{' '}
+                            </Link>
                         }
+
                       </li>
                     ))}
                   {categories && categories.length > 10 && (

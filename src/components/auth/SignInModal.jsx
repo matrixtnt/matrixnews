@@ -164,7 +164,7 @@ const SignInModal = props => {
                   onError: async err => {
                     console.log(err)
                   }
-                })  
+                })
               }, [1000])
               if (success.data.is_login === '0') {
                 //If new User then show the Update Profile Screen
@@ -202,6 +202,12 @@ const SignInModal = props => {
             break
           case 'auth/user-disabled':
             errorMessage = 'This account has been disabled. Please contact support for assistance.'
+            break
+          case 'auth/too-many-requests':
+            errorMessage = 'Too many requests please try again after some time'
+            break
+          case 'auth/invalid-login-credentials':
+            errorMessage = 'The details entered are incorrect Please enter the correct details and try again.'
             break
           // handle other error codes as needed
           default:

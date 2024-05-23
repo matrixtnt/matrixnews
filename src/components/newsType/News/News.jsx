@@ -268,20 +268,6 @@ const News = () => {
               {sponsoredads && sponsoredads.ad_spaces_top ? (
                 <>
                   <AdSpaces ad_url={sponsoredads && sponsoredads.ad_spaces_top.ad_url} ad_img={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image} style_web='' />
-                  {/* <div className='ad_spaces'>
-                    <div
-                      target='_blank'
-                      onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_top.ad_url, '_blank')}
-                    >
-                      {
-                        <img
-                          className='adimage'
-                          src={sponsoredads && sponsoredads.ad_spaces_top.web_ad_image}
-                          alt='feature sponsored ads news image'
-                        />
-                      }
-                    </div>
-                  </div> */}
                 </>
               ) : null}
               <div id='nv-page' className='row'>
@@ -360,12 +346,6 @@ const News = () => {
                           </button>
                         ) : null}
                       </div>
-                      {/* <FsLightbox
-                        toggler={viewerIsOpen}
-                        sources={galleryPhotos.map((photo) => photo.other_image)}
-                        sourceIndex={currentImage}
-                        onClose={() => setViewerIsOpen(false)}
-                      /> */}
                       <LightBox
                         photos={galleryPhotos}
                         viewerIsOpen={viewerIsOpen}
@@ -496,10 +476,10 @@ const News = () => {
                     <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} />
                   ) : null}
                   <TagsSection />
-                  {/* {
+                  {
                     isLogin() ?
                       <Surveys /> : null
-                  } */}
+                  }
                 </div>
               </div>
               <VideoPlayerModal
@@ -544,7 +524,7 @@ const News = () => {
       ) : (
         <>
           {NoDataFound()}
-         
+
         </>
       )}
     </Layout>
