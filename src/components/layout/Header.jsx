@@ -73,7 +73,7 @@ const Header = () => {
   useEffect(() => {
     loadLanguages({
       onSuccess: response => {
-        if (currentLanguage.code == null) {
+        if (currentLanguage.code === null) {
           // eslint-disable-next-line
           // eslint-disable-next-line
           let index =

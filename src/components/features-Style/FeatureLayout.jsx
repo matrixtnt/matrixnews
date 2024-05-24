@@ -66,6 +66,7 @@ const FeatureLayout = () => {
       }
     })
   }
+  
   useEffect(() => {
     if (currentLanguage.id) {
       setIsLoading(true)

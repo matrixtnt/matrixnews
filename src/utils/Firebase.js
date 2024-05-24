@@ -75,7 +75,6 @@ const FirebaseData = () => {
       } else {
         setTokenFound(false);
         setFcmToken(null);
-        toast.error('Permission is required for notifications.');
       }
     } catch (err) {
       console.error('Error requesting notification permission:', err);

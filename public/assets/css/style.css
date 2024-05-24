@@ -2306,7 +2306,6 @@ a {
   background: var(--secondary-color);
   height: fit-content;
   width: 100%;
-  margin-top: 170px;
 }
 
 .News {
@@ -5338,6 +5337,7 @@ span {
   object-fit: cover;
   width: 100%;
   aspect-ratio: unset;
+  margin: 40px 0px;
 }
 
 @media (max-width: 575px) {
@@ -6540,7 +6540,7 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30vh;
+  height: 64vh;
 }
 
 .personal_Sec {

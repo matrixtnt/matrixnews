@@ -14,6 +14,7 @@ import toast from 'react-hot-toast'
 import { loadGetUserByIdApi, selectUser } from 'src/store/reducers/userReducer'
 import { usePathname } from 'next/navigation'
 import { categoriesUpdateLanguage, loadCategories } from 'src/store/reducers/CatNavReducers'
+import CookiesComponent from '../cookies/CookiesComponent'
 
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
@@ -142,6 +143,7 @@ const Layout = ({ children }) => {
       document.removeEventListener('copy', handleCopy);
     };
   }, []);
+  
   return (
     <>
       {settings ? (
@@ -151,6 +153,7 @@ const Layout = ({ children }) => {
           <Header />
           <CatNav />
           <div>{children}</div>
+          <CookiesComponent/>
           <Footer />
         </>
       ) : (

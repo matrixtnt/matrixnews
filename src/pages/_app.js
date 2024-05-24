@@ -55,7 +55,7 @@ const App = ({ Component, pageProps }) => {
             </InspectElement>
           </ThemeProvider>
         </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools initialIsOpen={false} />  
       </QueryClientProvider>
     </>
   )
