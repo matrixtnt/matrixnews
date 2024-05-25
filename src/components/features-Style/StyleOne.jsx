@@ -157,13 +157,19 @@ const StyleOne = ({ isLoading, Data }) => {
                       <div className='row'>
                         <div className='col-xl-7 order-1 order-xl-0 col-12 d-flex'>
                           <div id='Left-first-section' className='my-auto'>
-                            <Link id='btnCatagory' className='btn' type='button' href={{ pathname: `/news/${item.slug}` }}>
+                            <Link id='btnCatagory' className='btn' type='button'
+                              href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
+                              as={`/news/${item.slug}`}
+                            >
                               {truncateText(item.category_name, 10)}
                             </Link>
                             <div className='my-3 top-title'>{truncateText(item.title, 60)}</div>
                             <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
                             <div className='d-flex flex-wrap'>
-                              <Link id='btnReadMore' className='btn mb-0' type='button' href={{ pathname: `/news/${item.slug}` }}>
+                              <Link id='btnReadMore' className='btn mb-0' type='button'
+                                href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
+                                as={`/news/${item.slug}`}
+                              >
                                 <b>{translate('readmore')}</b>
                               </Link>
                               {item.content_value ? (
@@ -207,7 +213,7 @@ const StyleOne = ({ isLoading, Data }) => {
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
         <>
-        <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
+          <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'one'} />
         </>
       ) : null}
 
@@ -237,7 +243,9 @@ const StyleOne = ({ isLoading, Data }) => {
                               id='btnReadMore'
                               className='btn mb-0'
                               type='button'
-                              href={{ pathname: `/breaking-news/${item.slug}` }}>
+                              href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}
+                              as={`/breaking-news/${item.slug}`}
+                              >
                               <b>{translate('readmore')}</b>
                             </Link>
                             {item.content_value ? (

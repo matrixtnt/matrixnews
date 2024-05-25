@@ -18,7 +18,7 @@ import toast from 'react-hot-toast'
 import Card from '../skeletons/Card'
 import { useEffect, useState } from 'react'
 import { getNewsApi } from 'src/hooks/newsApi'
-import NewsStyle from './NewsStyle'
+import DefaultNewsStyle from './DefaultNewsStyle'
 import { layoutReceived, layoutUpdateLanguage, loadLayout } from 'src/store/reducers/featureLayoutReducer'
 import { loadNews } from 'src/store/reducers/newsReducer'
 
@@ -193,7 +193,7 @@ const FeatureLayout = () => {
         </div>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
-      ) : !newsDataFound ? <> <NewsStyle isLoading={isNoDataLoading} Data={isNoData} /> </> :
+      ) : !newsDataFound ? <> <DefaultNewsStyle isLoading={isNoDataLoading} Data={isNoData} /> </> :
         (
           <p className='no_data_available'>{translate('noNews')}</p>
         )

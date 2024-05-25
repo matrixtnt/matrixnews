@@ -24,7 +24,6 @@ import { AiOutlineLike } from 'react-icons/ai';
 
 const CommentsView = props => {
   const [LoadComments, setLoadComments] = useState(false);
-  // const [refreshKey, setRefreshKey] = useState(0);
   const [Comment, setComment] = useState('');
   const [replyComment, setReplyComment] = useState("");
   const Nid = props.Nid;
@@ -68,10 +67,6 @@ const CommentsView = props => {
       news_id: Nid,
       message: replyComment,
       onSuccess: async (response) => {
-        // setLoadComments(true);
-        // setTimeout(() => {
-        //   setLoadComments(false);
-        // }, 1000);
         setReplyComment("");
         setReplied(true)
         await refetch();
@@ -93,10 +88,6 @@ const CommentsView = props => {
       news_id: Nid,
       message: replyComment,
       onSuccess: async (response) => {
-        // setLoadComments(true);
-        // setTimeout(() => {
-        //   setLoadComments(false);
-        // }, 1000);
         await refetch();
         setReplied(true)
         setReplyComment("");
@@ -110,18 +101,9 @@ const CommentsView = props => {
   };
 
   useEffect(() => {
-    // if (replied) {
 
-    //   const timeout = setTimeout(() => {
-    //     setReplied(false)
-    //   }, 1500);
-    //   return () => {
-    //     clearTimeout(timeout)
-    //   }
-    // }
-  //  console.log(replied,'replied')
   }, [replied])
-  
+
 
   const LikeButton = (e, elem) => {
     e.preventDefault();
@@ -129,18 +111,7 @@ const CommentsView = props => {
       comment_id: elem.id,
       status: elem.like === 1 ? 0 : 1,
       onSuccess: async (res) => {
-        // const updatedData = Data.map(comment => {
-        //   if (comment.id === elem.id) {
-        //     return { ...comment, like: res.like, total_like: res.total_like }; // Update like and total_like
-        //   }
-        //   return comment;
-        // });
         await refetch();
-        // setLoadComments(true); // Trigger loading state to force re-render
-        // setTimeout(() => {
-        //   setLoadComments(false);
-        // }, 1000);
-        // setData(updatedData); // Update the state with the modified comment data
       },
       onError: (err) => {
         console.log(err);
@@ -154,17 +125,6 @@ const CommentsView = props => {
       comment_id: elem.id,
       status: elem.dislike === 1 ? 0 : 2,
       onSuccess: async (res) => {
-        // const updatedData = Data.map(comment => {
-        //   if (comment.id === elem.id) {
-        //     return { ...comment, dislike: res.dislike, total_dislike: res.total_dislike }; // Update dislike and total_dislike
-        //   }
-        //   return comment;
-        // });
-        // setLoadComments(true); // Trigger loading state to force re-render
-        // setTimeout(() => {
-        //   setLoadComments(false);
-        // }, 1000);
-        // setData(updatedData); // Update the state with the modified comment data
         await refetch();
       },
       onError: (err) => {
@@ -190,9 +150,6 @@ const CommentsView = props => {
     deletecommentApi({
       comment_id: commentId,
       onSuccess: async (res) => {
-        // setLoadComments(true);
-        // setRefreshKey(prevKey => prevKey + 1)
-        // setRefreshKey(refreshKey + 1);
         await refetch();
         setModalOpen(false);
         toast.success(translate('comDelSucc'));
@@ -211,10 +168,7 @@ const CommentsView = props => {
       news_id: Nid,
       message: message,
       onSuccess: async (res) => {
-        // setRefreshKey(prevKey => prevKey + 1)
-        // setRefreshKey(refreshKey + 1);
         setModalOpen(false);
-        // setLoadComments(true);
         setMessage('');
         await refetch();
         toast.success(translate('flag'));
@@ -240,14 +194,8 @@ const CommentsView = props => {
       message: Comment,
       onSuccess: async (response) => {
         setComment('');
-        // queryClient.invalidateQueries(['getCommentsByNews']);
         await refetch();
         setReplied(true)
-
-        // setLoadComments(true);
-        // setTimeout(() => {
-        //   setLoadComments(false);
-        // }, 1000);
       },
       onError: error => {
         console.log(error);
@@ -257,20 +205,6 @@ const CommentsView = props => {
     );
   };
 
-  // useEffect(() => {
-  //   // if (replied) {
-
-  //     // const timeout = setTimeout(() => {
-  //     //   setReplied(false)
-  //     // }, 1500);
-  //     // return () => {
-  //     //   clearTimeout(timeout)
-  //     // }
-  //   // }
-  //   console.log(replied,'replied')
-
-  // }, [replied])
-  
 
   return (
     <>
@@ -328,8 +262,6 @@ const CommentsView = props => {
                                       {element.total_like > 0 ? element.total_like : null}
                                     </>
                                   }
-                                  {/* <BiSolidLike size={22} onClick={e => LikeButton(e, element)} />
-                                  {element.total_like > 0 ? element.total_like : null} */}
                                 </div>
                                 <div className='comment_dislike'>
                                   {
@@ -341,8 +273,6 @@ const CommentsView = props => {
                                       {element.total_dislike > 0 ? element.total_dislike : null}
                                     </>
                                   }
-                                  {/* <BiSolidDislike size={22} onClick={e => dislikebutton(e, element)} />
-                                  {element.total_dislike > 0 ? element.total_dislike : null} */}
                                 </div>
                                 <div className='comment_dots'>
                                   {
@@ -352,8 +282,6 @@ const CommentsView = props => {
                                     </span> :
                                       <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, element)} />
                                   }
-
-
                                 </div>
                               </div>
                               <OverlayTrigger
@@ -385,7 +313,7 @@ const CommentsView = props => {
                                   </Popover>
                                 }
                               >
-                                <Button id={`${element.id}`} className='cdbtnReplay' onClick={()=>setReplied(false)} variant='secondary' ref={replyRef}>
+                                <Button id={`${element.id}`} className='cdbtnReplay' onClick={() => setReplied(false)} variant='secondary' ref={replyRef}>
                                   {translate('reply')}
                                 </Button>
                               </OverlayTrigger>
@@ -416,8 +344,6 @@ const CommentsView = props => {
                                         {ele.total_like > 0 ? ele.total_like : null}
                                       </>
                                     }
-                                    {/* <BiSolidLike size={22} onClick={e => LikeButton(e, ele)} />
-                                    {ele.total_like > 0 ? ele.total_like : null} */}
                                   </div>
                                   <div className='comment_dislike'>
                                     {
@@ -429,8 +355,6 @@ const CommentsView = props => {
                                         {ele.total_dislike > 0 ? ele.total_dislike : null}
                                       </>
                                     }
-                                    {/* <BiSolidDislike size={22} onClick={e => dislikebutton(e, ele)} />
-                                    {ele.total_dislike > 0 ? ele.total_dislike : null} */}
                                   </div>
                                   <div className='comment_dots'>
                                     {
@@ -440,7 +364,6 @@ const CommentsView = props => {
                                       </span> :
                                         <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} />
                                     }
-                                    {/* <BiDotsVerticalRounded size={22} onClick={e => popupDots(e, ele)} /> */}
                                   </div>
                                 </div>
 
@@ -473,7 +396,7 @@ const CommentsView = props => {
                                     </Popover>
                                   }
                                 >
-                                  <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' onClick={()=>setReplied(false)} ref={replyRef}>
+                                  <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' onClick={() => setReplied(false)} ref={replyRef}>
                                     {translate('reply')}
                                   </Button>
                                 </OverlayTrigger>

@@ -42,24 +42,6 @@ const Index = ({ seoData, currentURL }) => {
   )
 }
 
-// let serverSidePropsFunction = null
-// if (process.env.NEXT_PUBLIC_SEO === 'true') {
-//   serverSidePropsFunction = async context => {
-//     // Retrieve the slug from the URL query parameters
-//     const { req } = context // Extract query and request object from context
-//     const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
-
-//     const seoData = await fetchDataFromSeo()
-
-//     // Pass the fetched data as props to the page component
-//     return {
-//       props: {
-//         seoData,
-//         currentURL
-//       }
-//     }
-//   }
-// }
 
 let serverSidePropsFunction = null;
 if (process.env.NEXT_PUBLIC_SEO === "true") {

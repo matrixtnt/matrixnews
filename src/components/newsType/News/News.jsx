@@ -502,20 +502,7 @@ const News = () => {
               {sponsoredads && sponsoredads.ad_spaces_bottom ? (
                 <>
                   <AdSpaces ad_url={sponsoredads && sponsoredads.ad_spaces_bottom.ad_url} ad_img={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image} style_web='' />
-                  {/* <div className='ad_spaces my-3'>
-                    <div
-                      target='_blank'
-                      onClick={() => window.open(sponsoredads && sponsoredads.ad_spaces_bottom.ad_url, '_blank')}
-                    >
-                      {
-                        <img
-                          className='adimage'
-                          src={sponsoredads && sponsoredads.ad_spaces_bottom.web_ad_image}
-                          alt='feature sponsored ads news '
-                        />
-                      }
-                    </div>
-                  </div> */}
+
                 </>
               ) : null}
             </div>

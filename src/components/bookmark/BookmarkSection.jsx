@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { BsBookmark } from 'react-icons/bs';
+import Link from 'next/link'
 
 const BookmarkSection = () => {
   const { id: language_id } = getLanguage()
@@ -63,9 +64,9 @@ const BookmarkSection = () => {
   })
 
   useEffect(() => {
-    
+
   }, [Data])
-  
+
 
   // Function to format date as desired
   const formatDate = (dateString) => {
@@ -92,48 +93,45 @@ const BookmarkSection = () => {
               Data.map(element => (
 
                 <div className='col-md-6 col-lg-4 col-12' key={element.id}>
-                  <div id='bs-card' className='card'>
-                    <div className='bs_image_card'>
-                      <img
-                        id='bs-card-image'
-                        src={element.image}
-                        className='card-img'
-                        alt='bookmark news'
-                        onError={placeholderImage}
-                        onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}` })
-                        }
-                      />
-                      <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
-                        <BsBookmark id='bs-bookmark-logo' size={18} />
-                      </button>
+                  <Link
+                    href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                    as={`/news/${element.slug}`}
+                  >
+                    <div id='bs-card' className='card'>
+                      <div className='bs_image_card'>
+                        <img
+                          id='bs-card-image'
+                          src={element.image}
+                          className='card-img'
+                          alt='bookmark news'
+                          onError={placeholderImage}
+                        />
+                        <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
+                          <BsBookmark id='bs-bookmark-logo' size={18} />
+                        </button>
+                      </div>
+                      <div id='bs-card-body' className='card-body'>
+                        <button
+                          id='bs-btnCatagory'
+                          className='btn btn-sm'
+                          type='button'
+                        >
+                          {element.category_name}
+                        </button>
+                        <h5
+                          id='bs-card-title'
+                          className='card-title'
+                        >
+                          {element.title}
+                        </h5>
+                        <p id='bs-card-date'>
+                          <FiCalendar size={18} id='bs-logoCalendar' />
+                          {formatDate(element.date.slice(0, 10))}
+                        </p>
+                      </div>
                     </div>
-                    <div id='bs-card-body' className='card-body'>
-                      <button
-                        id='bs-btnCatagory'
-                        className='btn btn-sm'
-                        type='button'
-                        onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, })
-                        }
-                      >
-                        {element.category_name}
-                      </button>
-                      <h5
-                        id='bs-card-title'
-                        className='card-title'
-                        onClick={() =>
-                          navigate.push({ pathname: `/news/${element.slug}`, })
-                        }
-                      >
-                        {element.title}
-                      </h5>
-                      <p id='bs-card-date'>
-                        <FiCalendar size={18} id='bs-logoCalendar' />
-                        {formatDate(element.date.slice(0, 10))}
-                      </p>
-                    </div>
-                  </div>
+                  </Link>
+
                 </div>
               ))
             ) : (

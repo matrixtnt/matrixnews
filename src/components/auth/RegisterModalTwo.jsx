@@ -61,8 +61,8 @@ const RagisterModalTwo = props => {
         // Send email verification
         sendEmailVerification(user)
 
-        // Sign out the user
-        signOut(auth)
+        // // Sign out the user
+        // signOut(auth)
 
         // Display success message
         toast.success('Email sent! Please check Email')

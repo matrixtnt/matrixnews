@@ -1,5 +1,8 @@
-/* ---------------------- Navbar css -------------------------- */
+/* font style */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+/* ---------------------- Navbar css -------------------------- */
 /* News main nave */
 
 * {
@@ -913,6 +916,11 @@ a {
   bottom: 0;
   color: #fff;
   z-index: 99;
+  transition: all 0.3s;
+}
+
+.fs-Newscard:hover #Top-Deatils {
+  bottom: 12px;
 }
 
 #Top-Posttime01 {
@@ -1364,9 +1372,36 @@ a {
   font-weight: 400;
   text-decoration: none;
   border: 1px solid rgba(0, 0, 0, 0.04);
-  height: 356px;
-  /* height: 430px; */
+  /* height: 356px; */
+  height: 430px;
   overflow: hidden;
+}
+
+.defaultStyleSect #rns-card {
+  height: 342px;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .defaultStyleSect #rns-card {
+    height: 320px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .defaultStyleSect #rns-card {
+    height: 254px;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .defaultStyleSect #rns-card {
+    height: 272px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .defaultStyleSect #rns-card {
+    height: auto;
+  }
 }
 
 .video_style_four #rns-card {
@@ -1511,7 +1546,7 @@ a {
 }
 
 @media (max-width: 992px) {
-  .newsStyleTitle{
+  .newsStyleTitle {
     margin-top: 0px !important;
     font-size: 18px;
   }
@@ -2473,6 +2508,11 @@ ul.useL>li {
   padding-left: 8px;
 }
 
+#footer .webName{
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
 #social_platforms {
   color: #fff;
   background-color: var(--secondary-color);
@@ -2755,7 +2795,8 @@ a#social_platforms svg:hover {
 #bcb-active-item {
   color: var(--primary-color);
 }
-#bcb-active-item a{
+
+#bcb-active-item a {
   text-decoration: none;
   color: var(--primary-color) !important;
 }
@@ -2775,7 +2816,7 @@ a#social_platforms svg:hover {
   word-break: break-word;
 }
 
-.breadcrumb_data li:last-child::before{
+.breadcrumb_data li:last-child::before {
   content: '';
   color: transparent;
 }
@@ -3457,7 +3498,7 @@ a#social_platforms svg:hover {
 #nv-right-section {
   display: flex;
   flex-direction: column;
-  gap: 1%;
+  /* gap: 1%; */
 }
 
 #nv-title {
@@ -6684,7 +6725,7 @@ span {
   margin-left: -20px;
 }
 
-.catSubCatWrapper .subCatDataWrappper .row #cv-card{
+.catSubCatWrapper .subCatDataWrappper .row #cv-card {
   align-items: start;
   gap: 12px;
 }
@@ -6782,7 +6823,7 @@ span {
   padding: 0px;
 }
 
-.offcanvas .subCatdrop .dropdown-toggle:hover{
+.offcanvas .subCatdrop .dropdown-toggle:hover {
   color: white;
 }
 
@@ -6823,7 +6864,7 @@ span {
   cursor: pointer;
 }
 
-.surveysSect .card .selectedOption{
+.surveysSect .card .selectedOption {
   background-color: var(--primary-color);
   color: white;
 }
@@ -6839,17 +6880,19 @@ span {
   font-size: 18px;
 }
 
-.surveysSect .resultCard{
+.surveysSect .resultCard {
   gap: 0px;
 }
-.surveysSect .resultCard span:nth-child(2){
+
+.surveysSect .resultCard span:nth-child(2) {
   margin-top: 20px;
 }
 
-.surveysSect .resultCard span:last-child{
+.surveysSect .resultCard span:last-child {
   margin-bottom: -16px;
 }
-.surveysSect .progress{
+
+.surveysSect .progress {
   height: 34px;
   background-color: gray;
 }
@@ -6866,7 +6909,25 @@ span {
   color: white;
 }
 
-.activeSubDrop{
+.surveysSect .loadMoreBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
+  color: #fff;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+
+}
+
+/* surveysSect ends here  */
+
+.activeSubDrop {
   text-decoration: underline;
   text-decoration-thickness: 3px;
   text-decoration-color: var(--primary-color);
@@ -6890,11 +6951,11 @@ span {
   animation: spin 2s linear infinite;
 }
 
-.replyModal{
+.replyModal {
   display: none !important;
 }
 
-.copy_url{
+.copy_url {
   padding: 5px;
   background: var(--primary-color);
   color: #fff;

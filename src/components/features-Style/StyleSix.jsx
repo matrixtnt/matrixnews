@@ -131,7 +131,10 @@ const StyleSix = ({ isLoading, Data }) => {
               ) : (
                 sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={{ pathname: `/news/${item.slug}` }}>
+                    <Link
+                      href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
+                      as={`/news/${item.slug}`}
+                    >
                       <div className='card fs-Newscard'>
                         <img
                           src={item.image}
@@ -182,12 +185,6 @@ const StyleSix = ({ isLoading, Data }) => {
                               ) : null}
 
                               <div
-                                onClick={() =>
-                                  router.push({
-                                    pathname: `/news/${item.slug}`,
-                                    query: { language_id: item.language_id }
-                                  })
-                                }
                                 id='Top-Title01'
                               >
                                 {truncateText(item.title, 30)} <br />
@@ -248,7 +245,10 @@ const StyleSix = ({ isLoading, Data }) => {
 
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
-                    <Link href={{ pathname: `/news/${item.slug}` }}>
+                    <Link
+                      href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
+                      as={`/news/${item.slug}`}
+                    >
                       <div className='card fs-Newscard'>
                         <img
                           src={item.image}
@@ -261,12 +261,12 @@ const StyleSix = ({ isLoading, Data }) => {
                           <div
                             id='btnCatagory'
                             className='btn'
-                            onClick={() =>
-                              router.push({
-                                pathname: `/categories-news/${item.slug}`,
-                                query: { category_id: item.id }
-                              })
-                            }
+                          // onClick={() =>
+                          //   router.push({
+                          //     pathname: `/categories-news/${item.slug}`,
+                          //     query: { category_id: item.id }
+                          //   })
+                          // }
                           >
                             {truncateText(item.category_name, 25)}
                           </div>
@@ -281,15 +281,9 @@ const StyleSix = ({ isLoading, Data }) => {
                                 : ''}
                             </p>
                             <div
-                              onClick={() =>
-                                router.push({
-                                  pathname: `/news/${item.slug}`,
-                                  query: { language_id: item.language_id }
-                                })
-                              }
                               id='Top-Title01'
                             >
-                              {truncateText(item.title, 30)}
+                              {truncateText(item.title, 50)}
                             </div>
                           </div>
                         </div>

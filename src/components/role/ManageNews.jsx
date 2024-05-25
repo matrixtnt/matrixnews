@@ -15,6 +15,7 @@ import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Modal } from 'antd';
 import NoDataFound from '../noDataFound/NoDataFound'
+import Link from 'next/link'
 const { confirm } = Modal;
 
 const ManageNews = () => {
@@ -113,56 +114,49 @@ const ManageNews = () => {
                   Data.map((element, id) => (
                     <div className=' col-xl-4 col-md-6 col-12' key={id}>
                       <div className='manage-data'>
-                        <div className='manage-card'>
-                          <div className='manage-img'>
-                            <img
-                              src={element.image}
-                              alt='manage news'
-                              onClick={() =>
-                                navigate.push({
-                                  pathname: `/news/${element.slug}`,
+                        <Link
+                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                          as={`/news/${element.slug}`}
+                        >
+                          <div className='manage-card'>
 
-                                })
-                              }
-                            />
-                          </div>
-                          <div className='manage-title'>
-                            <p
-                              onClick={() =>
-                                navigate.push({
-                                  pathname: `/news/${element.slug}`,
+                            <div className='manage-img'>
+                              <img
+                                src={element.image}
+                                alt='manage news'
+                              />
+                            </div>
 
-                                })
-                              }
-                            >
-                              {element.category_name}
-                            </p>
+                            <div className='manage-title'>
+                              <p>
+                                {element.category_name}
+                              </p>
+                            </div>
+                            <div className='manage-date'>
+                              <p>
+                                {new Date(element.date).toLocaleTimeString([], {
+                                  hour: 'numeric',
+                                  minute: 'numeric',
+                                  second: 'numeric',
+                                  hour12: true
+                                })}
+                              </p>
+                            </div>
                           </div>
-                          <div className='manage-date'>
-                            <p>
-                              {new Date(element.date).toLocaleTimeString([], {
-                                hour: 'numeric',
-                                minute: 'numeric',
-                                second: 'numeric',
-                                hour12: true
-                              })}
-                            </p>
-                          </div>
-                        </div>
+                        </Link>
                         <div className='manage-right'>
-                          <div className='manage-title'>
-                            <p
-                              className='mb-0'
-                              onClick={() =>
-                                navigate.push({
-                                  pathname: `/news/${element.slug}`,
-
-                                })
-                              }
-                            >
-                              {element.title}
-                            </p>
-                          </div>
+                          <Link
+                            href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                            as={`/news/${element.slug}`}
+                          >
+                            <div className='manage-title'>
+                              <p
+                                className='mb-0'
+                              >
+                                {element.title}
+                              </p>
+                            </div>
+                          </Link>
                           <div className='manage_type'>
                             <p className='mb-1'>
                               {translate('contentTypeLbl')} : <span>{typeReturn(element.content_type)}</span>
@@ -198,7 +192,7 @@ const ManageNews = () => {
                 ) : (
                   <>
                     {NoDataFound()}
-                   
+
                   </>
                 )}
               </>

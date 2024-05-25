@@ -2,34 +2,24 @@ import Link from 'next/link'
 import { HiOutlineArrowLongRight } from 'react-icons/hi2'
 import { placeholderImage, translate, truncateText } from '../../utils'
 
-const NewsStyle = ({ Data }) => {
+const DefaultNewsStyle = ({ Data }) => {
 
     return (
-        <>
+        <section className='defaultStyleSect'>
             {/* news */}
             {Data ? (
                 <div id='rns-main' className='news_style_four'>
                     <div className='container'>
                         <div className='row'>
                             <div id='rns-cards-main' className=''>
-                                {/* <div id='rns-head-main' className=''>
-                                    <div className='left-sec'>
-                                        <h4 id='rns-main-logo' className='mb-0'>
-                                            {Data.title}
-                                        </h4>
-                                        <div className='short_desc'>{Data && Data.short_description}</div>
-                                    </div>  
-
-                                    <Link id='rns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
-                                        {translate('viewMore')}
-                                    </Link>
-                                </div> */}
 
                                 <div className='row mt-5 mb-5'>
                                     {Data && Data?.map((value, index) => {
                                         return (
                                             <div className='col-xxl-3 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
-                                                <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}`, }}>
+                                                <Link id='rns-card' className='card card_hover_two' href={{ pathname: `/news/${value.slug}`, query: { language_id: value.language_id } }}
+                                                    as={`/news/${value.slug}`}
+                                                >
                                                     <div className='banner_thumb'>
                                                         <img
                                                             id='rns-image'
@@ -61,8 +51,8 @@ const NewsStyle = ({ Data }) => {
                     </div>
                 </div>
             ) : null}
-        </>
+        </section>
     )
 }
 
-export default NewsStyle
+export default DefaultNewsStyle

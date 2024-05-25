@@ -87,7 +87,8 @@ const ViewAll = () => {
                       <div className='col-md-4 col-12' key={element.id}>
                         <Link
                           id='Link-all'
-                          href={{ pathname: `/news/${element.slug}`, }}
+                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                          as={`/news/${element.slug}`}
                         >
                           <div id='BNV-card' className='card'>
                             <img
@@ -110,7 +111,7 @@ const ViewAll = () => {
                   ) : (
                     <>
                       {NoDataFound()}
-                     
+
                     </>
                   )}
                 </div>
@@ -157,10 +158,8 @@ const ViewAll = () => {
                       <div className='col-md-4 col-12' key={element.id}>
                         <Link
                           id='Link-all'
-                          href={{
-                            pathname: `/breaking-news/${element.slug}`,
-
-                          }}
+                          href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
+                          as={`/breaking-news/${element.slug}`}
                         >
                           <div id='BNV-card' className='card'>
                             <img
@@ -182,7 +181,7 @@ const ViewAll = () => {
                   ) : (
                     <>
                       {NoDataFound()}
-                     
+
                     </>
                   )}
                 </div>

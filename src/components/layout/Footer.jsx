@@ -152,7 +152,7 @@ const Footer = () => {
           <div className='d-flex copyright' id='copyright1'>
             <p id='footer-Copyright' className='h6 p-2'>
               {translate('copyright')} © {moment().year()} {translate('allrights')}{' '}
-              {settings && settings?.web_setting?.web_name}
+              <span className='webName'>{settings && settings?.web_setting?.web_name}</span>
             </p>
           </div>
         </div>

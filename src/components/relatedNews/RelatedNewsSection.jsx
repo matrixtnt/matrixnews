@@ -38,7 +38,7 @@ const RelatedNewsSection = props => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['realated-news-section', catid, props.Nid,location],
+    queryKey: ['realated-news-section', catid, props.Nid, location],
     queryFn: getNewsByCategoryApi
   })
 
@@ -60,9 +60,12 @@ const RelatedNewsSection = props => {
           </div>
           {Data &&
             Data.map(element => (
-              <Link id='Link-all' href={{pathname:`/news/${element.slug}`}} key={element.id}>
+              <Link id='Link-all'
+                href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                as={`/news/${element.slug}`}
+                key={element.id}>
                 <div id='RNews-card' className='card' onClick={() => scrollToTop()}>
-                  <img id='RNews-image' src={element.image} className='card-img-top' alt={element.title} onError={placeholderImage}/>
+                  <img id='RNews-image' src={element.image} className='card-img-top' alt={element.title} onError={placeholderImage} />
                   <div id='RNews-card-body' className='RNews-card-body'>
                     <button id='btnRNewsCatagory' className='btn btn-sm' type='button'>
                       {element?.category?.category_name}
@@ -71,7 +74,7 @@ const RelatedNewsSection = props => {
                       {truncateText(element.title, 100)}
                     </h6>
                   </div>
-                  {}
+                  { }
                 </div>
               </Link>
             ))}

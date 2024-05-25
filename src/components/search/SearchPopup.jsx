@@ -13,6 +13,7 @@ import { useEffect } from 'react'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
 import { selectCurrentLanguage } from 'src/store/reducers/languageReducer'
+import Link from 'next/link'
 
 const SearchPopup = () => {
   const [Data, setData] = useState([])
@@ -145,15 +146,15 @@ const SearchPopup = () => {
   // })
 
   // redirect news page
-  const redirectPage = (e, element) => {
-    actionSearch()
-    e.preventDefault()
-    navigate.push({
-      pathname: `/news/${element.slug}`,
-      
-    })
-    setSearchValue('')
-  }
+  // const redirectPage = (e, element) => {
+  //   actionSearch()
+  //   e.preventDefault()
+  //   navigate.push({
+  //     pathname: `/news/${element.slug}`,
+
+  //   })
+  //   setSearchValue('')
+  // }
 
   const handleLoadMore = () => {
     setDataLimit(prevLimit => prevLimit + dataLimit) // Increment data limit by 5
@@ -201,7 +202,10 @@ const SearchPopup = () => {
                   Data.data?.length > 0 &&
                   Data.data.map(element => (
                     <div className='col-12 px-0' key={element.id}>
-                      <div id='Link-all' onClick={e => redirectPage(e, element)}>
+                      <Link id='Link-all'
+                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        as={`/news/${element.slug}`}
+                      >
                         <div id='ts-card' className='card'>
                           <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} />
                           <div id='ts-card-body' className='card-body'>
@@ -210,7 +214,7 @@ const SearchPopup = () => {
                             </h5>
                           </div>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   ))}
                 {searchValue !== '' && Data?.data?.length > 0 && (

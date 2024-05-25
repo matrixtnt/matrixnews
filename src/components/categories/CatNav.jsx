@@ -50,7 +50,7 @@
 //     }
 //   }
 
- 
+
 //   const handleCategoryChange = (categories) => {
 //     // console.log(categories.sub_categories)
 //     if (categories.slug) {
@@ -78,7 +78,7 @@
 //   // let { id: language_id } = getLanguage()
 //   const storedLatitude = location && location.lat
 //   const storedLongitude = location && location.long
-  
+
 //   // api call
 //   const getNewsByCategoryApi = async page => {
 //     loadNews({
@@ -127,25 +127,25 @@
 //    const currentData = subCatData && subCatData.data && subCatData.data.slice(0, dataPerPage)
 
 //    const lengthdata = (subCatData && subCatData.total) || 0
- 
- 
+
+
 //    const [subCatDrop, setSubCatDrop] = useState(false)
 //    const [currentCategory, setCurrentCategory] = useState([])
- 
+
 //    const handleSubCatDropdown = (category) => {
 //      setCurrentCategory(category)
 //      setCatId(category.id)
 //      setSubCatDrop(true)
 //      setSubCatSlug('')
 //    }
- 
+
 //    useEffect(() => {
- 
+
 //      // console.log(currentCategory, 'currCat')
 //      // console.log(currentCategory.sub_categories?.map((e) => {
 //      //   return e.subcategory_name
 //      // }), "subbbbcaaa")
- 
+
 //    }, [currentCategory])
 
 //   return (
@@ -165,7 +165,7 @@
 //     //                 <Swiper {...swiperOption}>
 //     //                   {categories.map((element, index) => (
 //     //                     // element.sub_categories.length > 0 ? (
-                          
+
 //     //                       <SwiperSlide key={element.id} className='text-center'
 //     //                       onClick={() => handleCategoryChange(element)}
 //     //                       >
@@ -395,7 +395,7 @@ const CatNav = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categoiresOnOff = useSelector(settingsData)
 
-    const categories = useSelector(categoriesCacheData)
+  const categories = useSelector(categoriesCacheData)
 
   const [catId, setCatId] = useState('')
   const [subCatSlug, setSubCatSlug] = useState('')
@@ -434,6 +434,7 @@ const CatNav = () => {
 
   // api call
   const getNewsByCategoryApi = async page => {
+    setSubLoading(true)
     loadNews({
       access_key: access_key,
       offset: page * dataPerPage,
@@ -450,7 +451,7 @@ const CatNav = () => {
       onSuccess: response => {
         setSubCatData(response)
         setSubLoading(false)
-       // console.log(currentLanguage.id,'langId-catnav')
+        // console.log(currentLanguage.id,'langId-catnav')
 
         dispatch(newsUpdateLanguage(currentLanguage.id))
 
@@ -464,7 +465,6 @@ const CatNav = () => {
   }
 
 
-
   useEffect(() => {
     if (language_id) {
       getNewsByCategoryApi(currentPage)
@@ -472,36 +472,6 @@ const CatNav = () => {
 
   }, [subCatSlug, currentPage, catId, currentLanguage])
 
-
-  // const getNewsByCategoryApi = async page => {
-  //   try {
-  //     const { data } = await getNewsApi.getNews({
-  //       access_key: access_key,
-  //       offset: page * dataPerPage,
-  //       limit: dataPerPage,
-  //       get_user_news: '',
-  //       search: '',
-  //       language_id: language_id,
-  //       category_id: catId,
-  //       subcategory_slug: subCatSlug,
-  //       tag_id: '',
-  //       slug: '',
-  //       latitude: storedLatitude,
-  //       longitude: storedLongitude
-  //     })
-  //     // console.log('categories', data)
-  //     return data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-
-  // react query
-  // const { data: subCatData, isLoading: subLoading } = useQuery({
-  //   queryKey: ['catSubCat-news', changelanguage, location, currentPage, catId, subCatSlug],
-  //   queryFn: () => getNewsByCategoryApi(currentPage)
-  // })
 
   // slice the array to get the current posts
   const currentData = subCatData && subCatData.data && subCatData.data.slice(0, dataPerPage)
@@ -548,7 +518,7 @@ const CatNav = () => {
                         {
                           element?.sub_categories?.length > 0 ?
                             <span
-                              className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop': ''}`}
+                              className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                               onClick={() => handleSubCatDropdown(element)}
                               onMouseEnter={() => handleSubCatDropdown(element)}
 
@@ -556,7 +526,7 @@ const CatNav = () => {
 
                               <b>{element.category_name} </b> <FaAngleDown />
                             </span> : <span
-                               className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop': ''}`}
+                              className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                               onClick={() => handleCategoryChange(element)}
                             >
 
@@ -568,7 +538,7 @@ const CatNav = () => {
                           subCatDrop && currentCategory && currentCategory.id === element.id ? <>
                             <div className='subCatDropdown' >
                               <div className="row"
-                              onMouseLeave={() => setSubCatDrop(false)}
+                                onMouseLeave={() => setSubCatDrop(false)}
 
                               >
                                 <div className="col-lg-3">
@@ -596,13 +566,20 @@ const CatNav = () => {
                                     {/* <span className='close' onClick={()=>setSubCatDrop(false)}><IoClose/></span> */}
                                     <div className='row'>
                                       {
-                                        subLoading ? <Card /> : <>
+                                        subLoading ? <>
+                                          {[...Array(8)].map((_, index) => (
+                                            <div className='col-md-3 col-12' key={index}>
+                                              <Card catNav={true}/>
+                                            </div>
+                                          ))}
+                                        </> : <>
                                           {currentData && currentData.length > 0 ? (
                                             currentData.map(element => (
                                               <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                                                 <Link
                                                   id='Link-all'
                                                   href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                                                  as={`/news/${element.slug}`}
                                                 >
                                                   <div id='cv-card' className='card'>
                                                     <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />

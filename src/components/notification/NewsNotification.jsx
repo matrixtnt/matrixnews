@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { translate, truncateText,NoDataFound } from '../../utils'
+import { translate, truncateText, NoDataFound } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { imgError } from '../../utils/index'
 import { useSelector } from 'react-redux'
@@ -88,7 +88,10 @@ const NewsNotification = () => {
               Data.map((element, index) => (
                 <div key={index} className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}>
                   {element.type === 'category' ? (
-                    <Link href={{ pathname: `/news/${element.news?.slug}`, }}>
+                    <Link
+                      href={{ pathname: `/news/${element.news?.slug}`, query: { language_id: element.language_id } }}
+                      as={`/news/${element.news?.slug}`}
+                    >
                       <div className='card-body bd-highlight' id='card-noti'>
                         {/** Content inside the link */}
                         <img id='noti_profile' src={element.image} alt='notification' onError={imgError} />
@@ -119,7 +122,7 @@ const NewsNotification = () => {
               <div className='col-12 no_data mt-5'>
                 <>
                   {NoDataFound()}
-                 
+
                 </>
               </div>
             )}

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { formatDate, placeholderImage, translate,NoDataFound } from '../../../utils'
+import { formatDate, placeholderImage, translate, NoDataFound } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { access_key, getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -160,7 +160,8 @@ const CategoryNews = () => {
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
                         id='Link-all'
-                        href={{ pathname: `/news/${element.slug}`, }}
+                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        as={`/news/${element.slug}`}
                       >
                         <div id='cv-card' className='card'>
                           <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
@@ -183,7 +184,7 @@ const CategoryNews = () => {
                 ) : (
                   <>
                     {NoDataFound()}
-                   
+
                   </>
                 )}
                 {lengthdata > 9 ? (

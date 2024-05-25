@@ -181,7 +181,10 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-left'>
                   {Data.news[0] ? (
-                    <Link href={{ pathname: `/news/${Data.news[0].slug}` }}>
+                    <Link
+                      href={{ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id } }}
+                      as={`/news/${Data.news[0].slug}`}
+                    >
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img id='vps-main-image' src={Data.news[0].image} alt='news' onError={placeholderImage} />
                       </Card>
@@ -196,7 +199,10 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-right'>
                   {Data.news[1] ? (
-                    <Link href={{ pathname: `/news/${Data.news[1].slug}` }}>
+                    <Link
+                      href={{ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id } }}
+                      as={`/news/${Data.news[1].slug}`}
+                    >
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -217,7 +223,10 @@ const StyleThree = ({ Data }) => {
                   ) : null}
 
                   {Data.news[2] ? (
-                    <Link href={{ pathname: `/news/${Data.news[2].slug}` }}>
+                    <Link
+                      href={{ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id } }}
+                      as={`/news/${Data.news[2].slug}`}
+                    >
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -271,7 +280,10 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-left'>
                   {Data.breaking_news[0] ? (
-                    <Link href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}` }}>
+                    <Link
+                      href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}`, query: { language_id: Data.breaking_news[0].language_id } }}
+                      as={`/breaking-news/${Data.breaking_news[0].slug}`}
+                    >
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img
                           id='vps-main-image'
@@ -290,7 +302,10 @@ const StyleThree = ({ Data }) => {
               <div className='col-lg-6 col-12'>
                 <div id='vps-body-right'>
                   {Data.breaking_news[1] ? (
-                    <Link href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}` }}>
+                    <Link
+                      href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}`, query: { language_id: Data.breaking_news[1].language_id } }}
+                      as={`/breaking-news/${Data.breaking_news[1].slug}`}
+                    >
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
                           id='vps-secondry-images'
@@ -308,7 +323,10 @@ const StyleThree = ({ Data }) => {
                   ) : null}
 
                   {Data.breaking_news[2] ? (
-                    <Link href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}` }}>
+                    <Link
+                      href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}`, query: { language_id: Data.breaking_news[2].language_id } }}
+                      as={`/breaking-news/${Data.breaking_news[2].slug}`}
+                    >
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
                           id='vps-secondry-images'

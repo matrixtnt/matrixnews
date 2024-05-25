@@ -1,11 +1,11 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
 
-const Card = () => {
+const Card = ({ catNav }) => {
   return (
     <div className='card is-loading mb-4 border-0'>
       <div className='image'>
-        <Skeleton height={200} />
+        <Skeleton height={catNav ? 105 : 200} />
       </div>
       <div className='content'>
         <h2>

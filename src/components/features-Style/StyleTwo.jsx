@@ -185,87 +185,98 @@ const StyleTwo = ({ Data }) => {
               </div>
             </div>
             <div className='row'>
+
               <div className='col-md-3'>
                 {Data.news[0] ? (
-                  <div
-                    className='video_first_top card card_hover'
-                    onClick={() =>
-                      navigate.push({ pathname: `/news/${Data.news[0].slug}` })
-                    }
+                  <Link
+                    href={{ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id } }}
+                    as={`/news/${Data.news[0].slug}`}
                   >
-                    <img src={Data.news[0] && Data.news[0].image} alt={truncateText(Data.news[0].category_name, 10)} onError={placeholderImage} />
+                    <div
+                      className='video_first_top card card_hover'
+                    >
+                      <img src={Data.news[0] && Data.news[0].image} alt={truncateText(Data.news[0].category_name, 10)} onError={placeholderImage} />
 
-                    <div className='content'>
-                      <span>{truncateText(Data.news[0].category_name, 10)}</span>
-                      <p>{Data.news[0] && Data.news[0].title}</p>
+                      <div className='content'>
+                        <span>{truncateText(Data.news[0].category_name, 10)}</span>
+                        <p>{Data.news[0] && Data.news[0].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
 
                 {Data.news[1] ? (
-                  <div
-                    className='video_seond_top card card_hover'
-                    onClick={() =>
-                      navigate.push({ pathname: `/news/${Data.news[1].slug}` })
-                    }
+                  <Link
+                    href={{ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id } }}
+                    as={`/news/${Data.news[1].slug}`}
                   >
-                    <img src={Data.news[1] && Data.news[1].image} alt={truncateText(Data.news[1].category_name, 10)} onError={placeholderImage} />
+                    <div
+                      className='video_seond_top card card_hover'
+                    >
+                      <img src={Data.news[1] && Data.news[1].image} alt={truncateText(Data.news[1].category_name, 10)} onError={placeholderImage} />
 
-                    <div className='content'>
-                      <span>{truncateText(Data.news[1].category_name, 10)}</span>
-                      <p>{Data.news[1] && Data.news[1].title}</p>
+                      <div className='content'>
+                        <span>{truncateText(Data.news[1].category_name, 10)}</span>
+                        <p>{Data.news[1] && Data.news[1].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
               </div>
               <div className='col-md-6'>
                 {Data.news[2] ? (
-                  <div
-                    className='video_center card card_hover'
-                    onClick={() =>
-                      navigate.push({ pathname: `/news/${Data.news[2].slug}`, })
-                    }
+                  <Link
+                    href={{ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id } }}
+                    as={`/news/${Data.news[2].slug}`}
                   >
-                    <img src={Data.news[2] && Data.news[2].image} alt={truncateText(Data.news[2].category_name, 10)} onError={placeholderImage} />
+                    <div
+                      className='video_center card card_hover'
+                    >
+                      <img src={Data.news[2] && Data.news[2].image} alt={truncateText(Data.news[2].category_name, 10)} onError={placeholderImage} />
 
-                    <div className='content'>
-                      <span>{truncateText(Data.news[2].category_name, 10)}</span>
-                      <p>{Data.news[2] && Data.news[2].title}</p>
+                      <div className='content'>
+                        <span>{truncateText(Data.news[2].category_name, 10)}</span>
+                        <p>{Data.news[2] && Data.news[2].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
               </div>
               <div className='col-md-3'>
                 {Data.news[3] ? (
-                  <div
-                    className='video_top_right card card_hover'
-                    onClick={() =>
-                      navigate.push({ pathname: `/news/${Data.news[3].slug}` })
-                    }
+                  <Link
+                    href={{ pathname: `/news/${Data.news[3].slug}`, query: { language_id: Data.news[3].language_id } }}
+                    as={`/news/${Data.news[3].slug}`}
                   >
-                    <img src={Data.news[3] && Data.news[3].image} alt={truncateText(Data.news[3].category_name, 10)} onError={placeholderImage} />
+                    <div
+                      className='video_top_right card card_hover'
+                    >
+                      <img src={Data.news[3] && Data.news[3].image} alt={truncateText(Data.news[3].category_name, 10)} onError={placeholderImage} />
 
-                    <div className='content'>
-                      <span>{truncateText(Data.news[3].category_name, 10)}</span>
-                      <p>{Data.news[3] && Data.news[3].title}</p>
+                      <div className='content'>
+                        <span>{truncateText(Data.news[3].category_name, 10)}</span>
+                        <p>{Data.news[3] && Data.news[3].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
 
                 {Data.news[4] ? (
-                  <div
-                    className='video_bottom_right card card_hover'
-                    onClick={() =>
-                      navigate.push({ pathname: `/news/${Data.news[4].slug}` })
-                    }
+                  <Link
+                    href={{ pathname: `/news/${Data.news[4].slug}`, query: { language_id: Data.news[4].language_id } }}
+                    as={`/news/${Data.news[4].slug}`}
                   >
-                    <img src={Data.news[4] && Data.news[4].image} alt={truncateText(Data.news[4].category_name, 10)} onError={placeholderImage} />
+                    <div
+                      className='video_bottom_right card card_hover'
+                    >
+                      <img src={Data.news[4] && Data.news[4].image} alt={truncateText(Data.news[4].category_name, 10)} onError={placeholderImage} />
 
-                    <div className='content'>
-                      <span>{truncateText(Data.news[4].category_name, 10)}</span>
-                      <p>{Data.news[4] && Data.news[4].title}</p>
+                      <div className='content'>
+                        <span>{truncateText(Data.news[4].category_name, 10)}</span>
+                        <p>{Data.news[4] && Data.news[4].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
               </div>
             </div>
@@ -299,91 +310,111 @@ const StyleTwo = ({ Data }) => {
             <div className='row'>
               <div className='col-md-3'>
                 {Data.breaking_news[0] ? (
-                  <div
-                    className='video_first_top card card_hover'
-
-                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[0].slug}` })}
+                  <Link
+                    href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}`, query: { language_id: Data.breaking_news[0].language_id } }}
+                    as={`/breaking-news/${Data.breaking_news[0].slug}`}
                   >
-                    <img
-                      src={Data.breaking_news[0] && Data.breaking_news[0].image}
-                      alt={Data.breaking_news[0] && Data.breaking_news[0].title}
-                      onError={placeholderImage}
-                    />
+                    <div
+                      className='video_first_top card card_hover'
+                    >
+                      <img
+                        src={Data.breaking_news[0] && Data.breaking_news[0].image}
+                        alt={Data.breaking_news[0] && Data.breaking_news[0].title}
+                        onError={placeholderImage}
+                      />
 
-                    <div className='content'>
-                      <p>{Data.breaking_news[0] && Data.breaking_news[0].title}</p>
+                      <div className='content'>
+                        <p>{Data.breaking_news[0] && Data.breaking_news[0].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
 
                 {Data.breaking_news[1] ? (
-                  <div
-                    className='video_seond_top card card_hover'
-                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[1].slug}` })}
+                  <Link
+                    href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}`, query: { language_id: Data.breaking_news[1].language_id } }}
+                    as={`/breaking-news/${Data.breaking_news[1].slug}`}
                   >
-                    <img
-                      src={Data.breaking_news[1] && Data.breaking_news[1].image}
-                      alt={Data.breaking_news[1] && Data.breaking_news[1].title}
-                      onError={placeholderImage}
-                    />
+                    <div
+                      className='video_seond_top card card_hover'
+                    >
+                      <img
+                        src={Data.breaking_news[1] && Data.breaking_news[1].image}
+                        alt={Data.breaking_news[1] && Data.breaking_news[1].title}
+                        onError={placeholderImage}
+                      />
 
-                    <div className='content'>
-                      <p>{Data.breaking_news[1] && Data.breaking_news[1].title}</p>
+                      <div className='content'>
+                        <p>{Data.breaking_news[1] && Data.breaking_news[1].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
               </div>
               <div className='col-md-6'>
                 {Data.breaking_news[2] ? (
-                  <div
-                    className='video_center card card_hover'
-                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[2].slug}` })}
+                  <Link
+                    href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}`, query: { language_id: Data.breaking_news[2].language_id } }}
+                    as={`/breaking-news/${Data.breaking_news[2].slug}`}
                   >
-                    <img
-                      src={Data.breaking_news[2] && Data.breaking_news[2].image}
-                      alt={Data.breaking_news[2] && Data.breaking_news[2].title}
-                      onError={placeholderImage}
-                    />
+                    <div
+                      className='video_center card card_hover'
+                    >
+                      <img
+                        src={Data.breaking_news[2] && Data.breaking_news[2].image}
+                        alt={Data.breaking_news[2] && Data.breaking_news[2].title}
+                        onError={placeholderImage}
+                      />
 
-                    <div className='content'>
-                      <p>{Data.breaking_news[2] && Data.breaking_news[2].title}</p>
+                      <div className='content'>
+                        <p>{Data.breaking_news[2] && Data.breaking_news[2].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
               </div>
               <div className='col-md-3'>
                 {Data.breaking_news[3] ? (
-                  <div
-                    className='video_top_right card card_hover'
-                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[3].slug}` })}
+                  <Link
+                    href={{ pathname: `/breaking-news/${Data.breaking_news[3].slug}`, query: { language_id: Data.breaking_news[3].language_id } }}
+                    as={`/breaking-news/${Data.breaking_news[3].slug}`}
                   >
-                    <img
-                      src={Data.breaking_news[3] && Data.breaking_news[3].image}
-                      alt={Data.breaking_news[3] && Data.breaking_news[3].title}
-                      onError={placeholderImage}
-                    />
+                    <div
+                      className='video_top_right card card_hover'
+                      onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[3].slug}` })}
+                    >
+                      <img
+                        src={Data.breaking_news[3] && Data.breaking_news[3].image}
+                        alt={Data.breaking_news[3] && Data.breaking_news[3].title}
+                        onError={placeholderImage}
+                      />
 
-                    <div className='content'>
-                      <p>{Data.breaking_news[3] && Data.breaking_news[3].title}</p>
+                      <div className='content'>
+                        <p>{Data.breaking_news[3] && Data.breaking_news[3].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
 
                 {Data.breaking_news[4] ? (
-                  <div
-                    className='video_bottom_right card card_hover'
-                    onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[4].slug}` })}
+                  <Link
+                    href={{ pathname: `/breaking-news/${Data.breaking_news[4].slug}`, query: { language_id: Data.breaking_news[4].language_id } }}
+                    as={`/breaking-news/${Data.breaking_news[4].slug}`}
                   >
-                    <img
-                      src={Data.breaking_news[4] && Data.breaking_news[4].image}
-                      alt={Data.breaking_news[4] && Data.breaking_news[4].title}
-                      onError={placeholderImage}
-                    />
+                    <div
+                      className='video_bottom_right card card_hover'
+                    >
+                      <img
+                        src={Data.breaking_news[4] && Data.breaking_news[4].image}
+                        alt={Data.breaking_news[4] && Data.breaking_news[4].title}
+                        onError={placeholderImage}
+                      />
 
-                    <div className='content'>
-                      <p>{Data.breaking_news[4] && Data.breaking_news[4].title}</p>
+                      <div className='content'>
+                        <p>{Data.breaking_news[4] && Data.breaking_news[4].title}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 ) : null}
               </div>
             </div>
