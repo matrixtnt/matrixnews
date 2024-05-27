@@ -9,6 +9,7 @@ const nextConfig = {
   },
   trailingSlash: false,
   reactStrictMode: false,
+  optimizeFonts: false,
   webpack: (config, { isServer }) => {
     if (isServer) {
       require('./scripts/sitemap-generator')
