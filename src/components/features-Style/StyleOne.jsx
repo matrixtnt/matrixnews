@@ -8,6 +8,7 @@ import { placeholderImage, stripHtmlTags, translate, truncateText } from '../../
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+import CommonViewMoreDiv from './CommonViewMoreDiv'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -127,18 +128,7 @@ const StyleOne = ({ isLoading, Data }) => {
           <div className='container'>
 
             <div id='hns-head' className='row mb-3'>
-              <div id='hns-head-main'>
-                <div className='left-sec'>
-                  <p id='hns-main-logo' className='mb-0'>
-                    {Data && Data.title}
-                  </p>
-                  <div className='short_desc'>{Data && Data.short_description}</div>
-                </div>
-
-                <Link id='hns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
-                  {translate('viewMore')}
-                </Link>
-              </div>
+              <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
             </div>
           </div>
 
@@ -245,7 +235,7 @@ const StyleOne = ({ isLoading, Data }) => {
                               type='button'
                               href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}
                               as={`/breaking-news/${item.slug}`}
-                              >
+                            >
                               <b>{translate('readmore')}</b>
                             </Link>
                             {item.content_value ? (

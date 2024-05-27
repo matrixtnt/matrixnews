@@ -252,7 +252,7 @@ const SignInModal = props => {
                     <h5>
                       <strong>{translate('welcomeback')}</strong>
                     </h5>
-                    <div id='Welcom' style={{ fontSize: '14px' }}>
+                    <div className='welcomeText'>
                       {' '}
                       {translate('enter-email-password')}
                     </div>

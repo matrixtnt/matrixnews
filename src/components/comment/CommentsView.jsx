@@ -232,7 +232,7 @@ const CommentsView = props => {
       </div>
       {userData && userData.data ? (
         <div>
-          {Data?.length == 0 ? null : <h2>{translate('comment')}</h2>}
+          {Data?.length == 0 ? null : <h2 className='comment'>{translate('comment')}</h2>}
           {
             isLoading ? <Card /> :
               <>

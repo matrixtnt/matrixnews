@@ -206,7 +206,7 @@ const RagisterModalTwo = props => {
                     <h5>
                       <strong>{translate('Welcome')}</strong>
                     </h5>
-                    <div id='Welcom' style={{ fontSize: '14px' }}>
+                    <div  className='welcomeText'>
                       {' '}
                       {translate('register-daily-news')}
                     </div>

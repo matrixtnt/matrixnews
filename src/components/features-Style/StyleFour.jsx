@@ -5,6 +5,7 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+import CommonViewMoreDiv from './CommonViewMoreDiv'
 
 const StyleFour = ({ Data }) => {
   const scrollToTop = () => {
@@ -40,18 +41,7 @@ const StyleFour = ({ Data }) => {
           <div className='container'>
             <div className='row'>
               <div id='rns-cards-main' className=''>
-                <div id='rns-head-main' className=''>
-                  <div className='left-sec'>
-                    <h4 id='rns-main-logo' className='mb-0'>
-                      {Data.title}
-                    </h4>
-                    <div className='short_desc'>{Data && Data.short_description}</div>
-                  </div>
-
-                  <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
-                    {translate('viewMore')}
-                  </Link>
-                </div>
+                <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/video-news-view/${Data.slug}`} />
 
                 <div className='row'>
                   {Data.videos.map((value, index) => {
@@ -115,19 +105,7 @@ const StyleFour = ({ Data }) => {
           <div className='container'>
             <div className='row'>
               <div id='rns-cards-main' className=''>
-                <div id='rns-head-main' className=''>
-                  <div className='left-sec'>
-                    <h4 id='rns-main-logo' className='mb-0'>
-                      {Data.title}
-                    </h4>
-                    <div className='short_desc'>{Data && Data.short_description}</div>
-                  </div>
-
-                  <Link id='rns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
-                    {translate('viewMore')}
-                  </Link>
-                </div>
-
+                <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
                 <div className='row'>
                   {Data.news.map((value, index) => {
                     return (
@@ -177,22 +155,11 @@ const StyleFour = ({ Data }) => {
 
       {/* breaking news */}
       {Data && Data.breaking_news?.length > 0 ? (
-        <div id='rns-main'>
+        <div id='rns-main' className='news_style_four'>
           <div className='container'>
             <div className='row'>
               <div id='rns-cards-main' className=''>
-                <div id='rns-head-main' className=''>
-                  <div className='left-sec'>
-                    <h4 id='rns-main-logo' className='mb-0'>
-                      {Data.title}
-                    </h4>
-                    <div className='short_desc'>{Data && Data.short_description}</div>
-                  </div>
-                  <Link id='rns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
-                    {translate('viewMore')}
-                  </Link>
-                </div>
-
+                <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
                 <div className='row'>
                   {Data && Data.breaking_news.map((value, index) => {
                     return (

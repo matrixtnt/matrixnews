@@ -5,6 +5,7 @@ import Link from 'next/link'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { placeholderImage, translate, truncateText } from '../../utils'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+import CommonViewMoreDiv from './CommonViewMoreDiv'
 
 const StyleThree = ({ Data }) => {
   const [Video_url, setVideo_url] = useState()
@@ -165,17 +166,7 @@ const StyleThree = ({ Data }) => {
         <div id='vps-main' className='news_style_three'>
           <div className='container'>
             <div className='row'>
-              <div id='vps-head-main' className=''>
-                <div className='left-sec'>
-                  <p id='vps-main-logo' className='mb-0'>
-                    {Data && Data.title}
-                  </p>
-                  <div className='short_desc'>{Data && Data.short_description}</div>
-                </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/view-all/${Data.slug}`}>
-                  {translate('viewMore')}
-                </Link>
-              </div>
+              <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
             </div>
             <div className='row'>
               <div className='col-lg-6 col-12'>
@@ -264,17 +255,7 @@ const StyleThree = ({ Data }) => {
         <div id='vps-main' className='breaking_news_style_three'>
           <div className='container'>
             <div className='row'>
-              <div id='vps-head-main' className=''>
-                <div className='left-sec'>
-                  <p id='vps-main-logo' className='mb-0'>
-                    {Data && Data.title}
-                  </p>
-                  <div className='short_desc'>{Data && Data.short_description}</div>
-                </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/view-all/${Data.slug}`}>
-                  {translate('viewMore')}
-                </Link>
-              </div>
+              <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
             </div>
             <div className='row'>
               <div className='col-lg-6 col-12'>

@@ -231,15 +231,15 @@ const OTPModal = props => {
 
             <div id='modal-content'>
               <Modal.Header closeButton>
-                <Modal.Title id='contained-modal-title-vcenter'>{translate('login')}</Modal.Title>
+                <Modal.Title id='contained-modal-title-vcenter'>{translate('opt-verify')}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div className='AC'>
                   <div className=''>
-                    <h5>
+                    <h5 className='forgotText'>
                       <strong>{translate('otp-sent')} </strong>
                     </h5>
-                    <div id='Welcom' style={{ fontSize: '14px' }}>
+                    <div className='welcomeText'>
                       {' '}
                       {props.phonenum}{' '}
                     </div>

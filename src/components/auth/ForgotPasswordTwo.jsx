@@ -99,7 +99,7 @@ const ForgotPasswordTwo = props => {
             <Modal.Body style={{ marginTop: '12%' }}>
               <div className='AC'>
                 <div className='welcom-back2'>
-                  <div id='Welcom' className='mb-2'>
+                  <div className='mb-2 welcomeText forgotText'>
                     {translate('enteremail')}
                   </div>
                 </div>

@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+import CommonViewMoreDiv from './CommonViewMoreDiv'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -110,18 +111,7 @@ const StyleSix = ({ isLoading, Data }) => {
       {sliderData && sliderData[0].videos?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
-            <div id='rns-head-main' className=''>
-              <div className='left-sec'>
-                <h4 id='rns-main-logo' className='mb-0'>
-                  {Data.title}
-                </h4>
-                <div className='short_desc'>{Data && Data.short_description}</div>
-              </div>
-
-              {/* <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
-                {translate('viewMore')}
-              </Link> */}
-            </div>
+            <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
                 // Show skeleton loading when data is being fetched
@@ -187,7 +177,7 @@ const StyleSix = ({ isLoading, Data }) => {
                               <div
                                 id='Top-Title01'
                               >
-                                {truncateText(item.title, 30)} <br />
+                                {truncateText(item.title, 35)} <br />
                                 {stripHtmlTags(item.description.slice(0, 600))} ...
                               </div>
                             </div>
@@ -223,18 +213,7 @@ const StyleSix = ({ isLoading, Data }) => {
       {sliderData && sliderData[0].news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
-            <div id='rns-head-main' className=''>
-              <div className='left-sec'>
-                <h4 id='rns-main-logo' className='mb-0'>
-                  {Data.title}
-                </h4>
-                <div className='short_desc'>{Data && Data.short_description}</div>
-              </div>
-
-              {/* <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
-                {translate('viewMore')}
-              </Link> */}
-            </div>
+            <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
                 // Show skeleton loading when data is being fetched
@@ -283,7 +262,7 @@ const StyleSix = ({ isLoading, Data }) => {
                             <div
                               id='Top-Title01'
                             >
-                              {truncateText(item.title, 50)}
+                              {truncateText(item.title, 35)}
                             </div>
                           </div>
                         </div>
@@ -318,18 +297,7 @@ const StyleSix = ({ isLoading, Data }) => {
       {sliderData && sliderData[0].breaking_news?.length > 0 ? (
         <div className='container'>
           <div id='style-six-body-section'>
-            <div id='rns-head-main' className=''>
-              <div className='left-sec'>
-                <h4 id='rns-main-logo' className='mb-0'>
-                  {Data.title}
-                </h4>
-                <div className='short_desc'>{Data && Data.short_description}</div>
-              </div>
-
-              {/* <Link id='rns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
-                {translate('viewMore')}
-              </Link> */}
-            </div>
+            <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
               {isLoading ? (
                 // Show skeleton loading when data is being fetched
@@ -365,7 +333,7 @@ const StyleSix = ({ isLoading, Data }) => {
                             href={{ pathname: `/breaking-news/${item.slug}`, }}
                             id='Top-Title01'
                           >
-                            {truncateText(item.title, 30)}
+                            {truncateText(item.title, 35)}
                             {stripHtmlTags(item.description.slice(0, 600))} ...
                           </Link>
                         </div>

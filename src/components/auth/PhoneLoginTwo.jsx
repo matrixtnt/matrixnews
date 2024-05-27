@@ -67,17 +67,17 @@ const PhoneLoginTwo = props => {
             </div>
           </div>
 
-          <div id='modal-content'>
+          <div id='modal-content' className='phoneLoginModal'>
             <Modal.Header closeButton>
               <Modal.Title id='contained-modal-title-vcenter'>{translate('loginTxt')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className='AC'>
                 <div className='welcom-back4'>
-                  <h5>
+                  <h5 className='forgotText'>
                     <strong> {translate('enter-your-mobile-number')} </strong>
                   </h5>
-                  <div id='Welcom' style={{ fontSize: '14px' }}>
+                  <div className='welcomeText'>
                     {' '}
                     {translate('six-didgit-code')}
                   </div>

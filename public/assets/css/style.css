@@ -9,11 +9,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Zilla Slab", serif;
 }
+
 
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.5px;
@@ -43,6 +44,7 @@ code {
 
 :root {
   --paragraph-color: #565969;
+  --text-primary-color: #0F1F40;
 }
 
 /* 
@@ -158,20 +160,21 @@ a {
 }
 
 .custom-card .swiper-wrapper {
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
 
 .custom-card .swiper-button-prev::after,
 .custom-card .swiper-button-next::after {
-  font-size: 18px;
+  font-size: 20px;
   background-color: var(--primary-color);
   color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 900;
 }
 
 .custom-card .swiper-button-prev {
-  left: 46%;
+  left: 44%;
 }
 
 .custom-card .swiper-button-next {
@@ -279,6 +282,8 @@ a {
   border-radius: 5px;
   height: 44px;
   padding-left: 10px;
+  width: 100%;
+  font-family: 'circular';
 }
 
 .PhoneInputCountrySelect:focus+.PhoneInputCountryIcon--border {
@@ -419,11 +424,12 @@ a {
 }
 
 #nav-links {
-  color: var(--secondary-color);
   position: relative;
   text-decoration: none;
   /* text-transform: uppercase; */
   font-weight: 600;
+  color: var(--text-primary-color);
+  text-transform: uppercase;
 }
 
 @media (max-width: 1200px) {
@@ -532,6 +538,7 @@ a {
 
 #btnSignIn {
   color: #ffffff;
+  font-weight: 600;
   background: var(--primary-color);
   border: none;
 }
@@ -561,11 +568,13 @@ a {
   text-decoration: none;
   color: #ffffff;
   border: none;
+  font-weight: 600;
 }
 
 #btnLogout {
   color: #ffffff;
   border: none;
+  font-weight: 600;
 }
 
 #btnLogout:hover {
@@ -925,10 +934,13 @@ a {
 
 #Top-Posttime01 {
   margin-bottom: 0;
+  font-weight: 500;
+  color: #FFFFFFC2;
 }
 
 #Top-Title01 {
-  font-size: 1.5rem;
+  font-size: 32px;
+  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -937,6 +949,12 @@ a {
   text-decoration: none;
   color: #fff !important;
   margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 575px) {
+  #Top-Title01 {
+    font-size: 26px;
+  }
 }
 
 .video #Top-Description {
@@ -990,7 +1008,7 @@ a {
   width: fit-content;
   margin-bottom: 5px;
   font-weight: 600;
-  font-size: small;
+  padding: 2px 12px;
   position: relative;
   z-index: 9999;
   cursor: default;
@@ -1214,7 +1232,7 @@ a {
 #bns-main-card {
   height: 83%;
   background: black;
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
 }
 
@@ -1248,7 +1266,7 @@ a {
   border: none;
   display: flex;
   align-items: center;
-  padding: 0px 10px 0px 10px;
+  padding: 0px 16px;
 }
 
 #bns-card::before {
@@ -1258,26 +1276,28 @@ a {
   height: 80%;
   background-color: #fff;
   bottom: 0;
-  border-radius: 10px;
+  box-shadow: 0px 0px 16px #1B2D510F;
+  border-radius: 15px;
 }
 
 #bns-image {
   aspect-ratio: 1/1;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 15px;
   position: relative;
 }
 
 #bns-card-text {
-  font-size: 18px;
+  font-size: 24px;
+  margin-top: 12px;
   margin-bottom: 0;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.2;
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: vertical; */
 }
 
 #btnbnsCatagory {
@@ -1285,15 +1305,19 @@ a {
   background: var(--primary-color);
   width: fit-content;
   margin-bottom: 5px;
+  font-weight: 600;
 }
 
 #btnbnsViewAll {
   color: #ffffff;
   background: var(--primary-color);
-  width: fit-content;
+  width: max-content;
+  padding: 6px 20px;
   margin-bottom: 5px;
+  font-size: 22px;
   font-weight: 600;
   z-index: 1;
+  border: none;
 }
 
 #bns-np-btns {
@@ -1371,9 +1395,10 @@ a {
   padding: 15px;
   font-weight: 400;
   text-decoration: none;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid lightgray;
+  border-radius: 10px;
   /* height: 356px; */
-  height: 430px;
+  height: 462px;
   overflow: hidden;
 }
 
@@ -1398,6 +1423,7 @@ a {
     height: 272px;
   }
 }
+
 @media screen and (max-width: 575px) {
   .defaultStyleSect #rns-card {
     height: auto;
@@ -1410,7 +1436,7 @@ a {
 
 @media (min-width: 1200px) and (max-width: 1399px) {
   #rns-card {
-    height: 360px;
+    height: 390px;
   }
 
   .video_style_four #rns-card {
@@ -1430,7 +1456,7 @@ a {
 
 @media (min-width: 768px) and (max-width: 991px) {
   #rns-card {
-    height: 255px;
+    height: 296px;
   }
 
   .video_style_four #rns-card {
@@ -1440,7 +1466,7 @@ a {
 
 @media (min-width: 576px) and (max-width: 767px) {
   #rns-card {
-    height: 265px;
+    height: 318px;
   }
 
   .video_style_four #rns-card {
@@ -1485,11 +1511,22 @@ a {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--text-primary-color);
+  font-size: 24px;
+  font-weight: bold;
+  margin: 16px 0px;
+}
+
+@media (max-width: 575px) {
+  .card-block .card-title {
+    font-size: 20px;
+  }
 }
 
 #btnrnsRead {
-  color: var(--secondary-color);
-  border: 1px solid var(--secondary-color);
+  color: var(--text-primary-color);
+  font-weight: 500;
+  border: 2px solid lightgray;
 }
 
 #btnrnsRead:hover {
@@ -1650,10 +1687,20 @@ a {
 }
 
 .language_drop {
-  background-color: transparent !important;
+  background-color: #fff;
   outline: none !important;
   border: none !important;
+  color: var(--text-primary-color);
+  margin-right: 12px;
+  padding: 2px 12px;
 }
+
+.language_drop:hover,
+.language_section .dropdown .btn.show {
+  background-color: var(--primary-color);
+}
+
+
 
 #wcard-footer {
   position: absolute;
@@ -1718,9 +1765,9 @@ a {
   justify-content: center;
 }
 
-#rns-nav-logo b {
+/* #rns-nav-logo b {
   font-weight: 500;
-}
+} */
 
 #tags-tag {
   margin: 10px auto;
@@ -2196,12 +2243,14 @@ a {
   align-items: center;
   justify-content: space-between;
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 
 #hns-main-logo {
-  font-size: 22px;
-  font-weight: 500;
   line-height: 1.2;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-primary-color);
 }
 
 #hns-Viewmore {
@@ -2508,7 +2557,7 @@ ul.useL>li {
   padding-left: 8px;
 }
 
-#footer .webName{
+#footer .webName {
   color: var(--primary-color);
   font-weight: 600;
 }
@@ -2655,8 +2704,6 @@ a#social_platforms svg:hover {
   }
 }
 
-/* font-family: 'Zilla Slab', serif; */
-
 #bs-no-main {
   text-align: center;
   background-color: #f5f5f5;
@@ -2728,6 +2775,7 @@ a#social_platforms svg:hover {
   position: absolute;
   top: 10px;
   left: 10px;
+  font-weight: 600;
 }
 
 #bs-card-title {
@@ -2737,12 +2785,15 @@ a#social_platforms svg:hover {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: var(--text-primary-color);
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 26px;
 }
 
 #bs-card-date {
-  font-size: 12px;
+  color: #1B2D51;
   font-weight: 400;
-  font-family: 'Roboto', sans-serif;
 }
 
 #bs-logoCalendar {
@@ -2790,10 +2841,13 @@ a#social_platforms svg:hover {
 
 #bcb-item {
   text-decoration: none;
+  color: var(--text-primary-color);
+  font-weight: 600;
 }
 
 #bcb-active-item {
   color: var(--primary-color);
+  font-weight: 600;
 }
 
 #bcb-active-item a {
@@ -3125,6 +3179,7 @@ a#social_platforms svg:hover {
   position: absolute;
   top: 10px;
   left: 10px;
+  font-weight: 600;
 }
 
 #cv-card-title {
@@ -3137,6 +3192,9 @@ a#social_platforms svg:hover {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: var(--text-primary-color);
+  font-weight: 600;
+  text-align: start;
 }
 
 #btncvRead {
@@ -3147,6 +3205,7 @@ a#social_platforms svg:hover {
 
 #cv-card-date {
   font-size: large;
+  color: #1B2D51;
 }
 
 #cv-logoCalendar {
@@ -3155,8 +3214,11 @@ a#social_platforms svg:hover {
 }
 
 #submitbutton {
+  border: 3px solid transparent;
   background-color: var(--primary-color);
   color: #fff;
+  font-size: 22px;
+  font-weight: 500;
 }
 
 @media screen and (min-width: 992px) {
@@ -3349,6 +3411,8 @@ a#social_platforms svg:hover {
     color: #ffffff;
     background: var(--primary-color);
     cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
   }
 
   #loginbutton:hover {
@@ -3404,7 +3468,7 @@ a#social_platforms svg:hover {
   padding: 10px;
   width: 100%;
   border: none;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 #login-social3 {
@@ -3493,6 +3557,7 @@ a#social_platforms svg:hover {
   color: #ffffff;
   background: var(--primary-color);
   width: fit-content;
+  font-weight: 600;
 }
 
 #nv-right-section {
@@ -3505,6 +3570,8 @@ a#social_platforms svg:hover {
   margin-top: 1%;
   text-transform: capitalize;
   word-break: break-word;
+  font-weight: bold;
+  font-size: 46px;
 }
 
 /* ------------------------------------------------------------------- */
@@ -3564,10 +3631,13 @@ a#social_platforms svg:hover {
 #nv-Share-Label {
   margin-bottom: 0;
   line-height: 0;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 #head-lables {
-  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary-color);
   margin-bottom: 0;
 }
 
@@ -3594,9 +3664,13 @@ a#social_platforms svg:hover {
 }
 
 #nv-functions {
+  border: 1px solid lightgray;
   border-radius: 10px;
   background-color: #f5f5f5;
   justify-content: center;
+  margin-top: 30px;
+  color: var(--text-primary-color);
+  font-weight: 600;
 }
 
 #nv-functions-left {
@@ -3690,6 +3764,13 @@ a#social_platforms svg:hover {
   flex-direction: column;
 }
 
+#cs-main h2,
+#nv-body .comment {
+  color: var(--text-primary-color);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
 #cs-reply-input {
   width: 17rem;
 }
@@ -3700,6 +3781,8 @@ a#social_platforms svg:hover {
   background-color: var(--secondary-color);
   color: #ffffff;
   width: fit-content;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 #cv-comment {
@@ -3730,8 +3813,12 @@ a#social_platforms svg:hover {
 #cs-card {
   padding: 1%;
   background-color: #f5f5f5;
-
   width: 87%;
+  color: var(--text-primary-color);
+}
+
+#cs-card h5 {
+  font-weight: 600;
 }
 
 @media (max-width: 575px) {
@@ -3761,6 +3848,7 @@ a#social_platforms svg:hover {
   position: absolute;
   right: 1%;
   bottom: 6%;
+  font-weight: 500;
 }
 
 [dir='rtl'] .cdbtnReplay {
@@ -3819,7 +3907,8 @@ a#social_platforms svg:hover {
 }
 
 .bd-title {
-  color: #000;
+  color: var(--text-primary-color);
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -3827,6 +3916,7 @@ a#social_platforms svg:hover {
   display: flex;
   flex-direction: row;
   gap: 20px;
+  align-items: center;
 }
 
 #flexCheckChecked {
@@ -3844,7 +3934,7 @@ a#social_platforms svg:hover {
   text-align: start;
   font-size: 18px;
   font-weight: 600;
-  margin-top: -40px;
+  margin-top: -60px;
   /* background-color: var(--primary-color); */
 }
 
@@ -3894,12 +3984,13 @@ a#social_platforms svg:hover {
 }
 
 #btntrash {
-  color: #000000;
+  color: var(--text-primary-color);
   border: 1px solid var(--primary-color);
   background-color: rgba(230, 113, 92, 0.345);
   width: 8rem;
   height: 2.1rem;
   padding: 1%;
+  font-weight: 600;
 }
 
 #btntrash:hover {
@@ -4494,9 +4585,9 @@ a#social_platforms svg:hover {
   height: 3rem;
 }
 
-#nav-logo b {
+/* #nav-logo b {
   font-weight: 500;
-}
+} */
 
 #rbn-card {
   margin: 10px;
@@ -4581,10 +4672,14 @@ a#social_platforms svg:hover {
   font-size: 12px;
   cursor: default;
   pointer-events: none;
+  font-weight: 600;
 }
 
 #RNews-card-text {
   margin: 3%;
+  color: var(--text-primary-color);
+  font-weight: 600;
+  margin-top: 20px;
 }
 
 #spinner {
@@ -4653,6 +4748,10 @@ a#social_platforms svg:hover {
   background-color: #fff;
 }
 
+.video_section_all .row {
+  gap: 24px 0px;
+}
+
 #vnv-card-body {
   padding: 1%;
 }
@@ -4671,6 +4770,8 @@ a#social_platforms svg:hover {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   font-weight: 600;
+  font-size: 24px;
+  color: var(--text-primary-color);
 }
 
 #btnvnvRead {
@@ -4718,6 +4819,9 @@ a#social_platforms svg:hover {
 #cs-main textarea {
   padding-left: 10px;
   padding-top: 5px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  color: var(--text-primary-color);
 }
 
 #B_NV-main #vps-btnVideo,
@@ -4906,6 +5010,20 @@ a#social_platforms svg:hover {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+#vps-body-left #vps-card-title b {
+  color: var(--text-primary-color);
+}
+
+@media screen and (max-width: 575px) {
+
+  .bns-card-text,
+  #vps-card-title b {
+    font-size: 24px;
+  }
 }
 
 .no_data_available {
@@ -4984,6 +5102,8 @@ a#social_platforms svg:hover {
   border: none;
   outline: none;
   margin: auto;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .morepages {
@@ -5096,7 +5216,8 @@ a#social_platforms svg:hover {
 
 .catNav-links b {
   display: flex;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-primary-color);
 }
 
 /* .catNav-links:hover {
@@ -5126,6 +5247,8 @@ a#social_platforms svg:hover {
   border-radius: 5px;
   justify-content: center;
   text-align: center;
+  color: var(--text-primary-color);
+  font-weight: 700;
 }
 
 .live-news #LN-card-image {
@@ -5238,7 +5361,7 @@ a#social_platforms svg:hover {
   color: #fff;
   padding: 10px 10px 0 10px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 24px;
   z-index: 1;
   position: relative;
   overflow: hidden;
@@ -5249,7 +5372,30 @@ a#social_platforms svg:hover {
 }
 
 .new_video_style_two .video_center .content p {
-  font-size: 38px;
+  font-size: 48px;
+}
+
+.new_video_style_two .card:hover .content p {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+
+  .new_video_style_two .content p {
+    font-size: 18px;
+  }
+
+  .new_video_style_two .video_center .content p {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .new_video_style_two .content p,
+  .new_video_style_two .video_center .content p {
+    font-size: 22px;
+  }
 }
 
 .new_video_style_two .content span {
@@ -5260,6 +5406,7 @@ a#social_platforms svg:hover {
   background-color: var(--primary-color);
   padding: 5px;
   border-radius: 5px;
+  font-weight: 600;
 }
 
 .custom-swiper a {
@@ -5295,7 +5442,9 @@ a#social_platforms svg:hover {
 }
 
 .short_desc {
-  color: #000;
+  color: #0F1F40C2;
+  font-weight: 600;
+  margin-top: 8px;
 }
 
 .card_hover img {
@@ -5947,8 +6096,9 @@ span {
   position: absolute;
   top: 7px;
   left: 10px;
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 10px;
+  color: var(--text-primary-color);
 }
 
 .profile_name input {
@@ -5956,6 +6106,9 @@ span {
   width: 100%;
   border-radius: 5px;
   padding-left: 10px;
+  font-weight: 600;
+  color: var(--text-primary-color);
+  padding-top: 12px;
 }
 
 .profile_submit {
@@ -5969,6 +6122,7 @@ span {
   outline: transparent;
   outline: none;
   border: none;
+  font-size: 18px;
   font-weight: bold;
   letter-spacing: 0.5px;
 }
@@ -6415,6 +6569,7 @@ span {
 
 #bcb-third-item {
   text-transform: capitalize;
+  font-weight: 600;
 }
 
 .top_title {
@@ -6582,6 +6737,9 @@ span {
   justify-content: center;
   align-items: center;
   height: 64vh;
+  color: var(--text-primary-color);
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .personal_Sec {
@@ -6847,7 +7005,7 @@ span {
 }
 
 .surveysSect .card span {
-  color: var(--secondary-color);
+  color: var(--text-primary-color);
   font-weight: 600;
 }
 
@@ -6909,22 +7067,6 @@ span {
   color: white;
 }
 
-.surveysSect .loadMoreBtn {
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
-  background-color: var(--secondary-color);
-  background-color: var(--primary-color);
-  color: #fff;
-  display: block;
-  margin: auto;
-  margin-top: 20px;
-  width: 100%;
-  font-size: 18px;
-  font-weight: 600;
-
-}
-
 /* surveysSect ends here  */
 
 .activeSubDrop {
@@ -6965,4 +7107,110 @@ span {
   justify-content: center;
   font-weight: bold;
   border: none;
+}
+
+.loadMoreBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
+  color: #fff;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.commonBtn {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.commonBtn::after {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 100%;
+  background-color: var(--secondary-color);
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.commonBtn:hover::after {
+  width: 100%;
+}
+
+.modal-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+.welcomeText {
+  color: var(--text-primary-color);
+  font-weight: 600;
+}
+
+.forgotText {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+.email-input {
+  color: var(--text-primary-color);
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.phoneLoginModal .modal-body {
+  height: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.phoneLoginModal .modal-body,
+.phoneLoginModal .modal-header {
+  margin-left: 12px;
+}
+
+
+.manage_preferences .manage_title{
+  color: var(--text-primary-color);
+  font-size: 22px;
+  font-weight: 600;
+}
+
+
+#resendbutton{
+  color: var(--text-primary-color);
+  font-weight: 500;
+}
+
+.resend-text{
+  color: var(--text-primary-color);
+  font-weight: 500;
+}
+
+
+.resend-time{
+  color: red;
+  font-weight: 500;
+  font-family: 'circular';
+}
+
+@media screen and (max-width: 575px) {
+  .modal-title {
+    font-size: 26px;
+  }
+
+  .forgotText {
+    font-size: 16px;
+  }
 }

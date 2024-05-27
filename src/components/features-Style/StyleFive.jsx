@@ -142,7 +142,7 @@ const StyleFive = ({ isLoading, Data }) => {
                     </p>
                     <Link
                       id='btnbnsViewAll'
-                      className='btn'
+                      className='btn commonBtn'
                       type='button'
                       href={`/video-news-view/${Data.slug}`}
                       onClick={() => scrollToTop()}
@@ -183,9 +183,10 @@ const StyleFive = ({ isLoading, Data }) => {
                                   <BsFillPlayFill id='vps-btnVideo-logo' className='pulse' fill='white' size={50} />
                                 </div>
                               </div>
+
                               <div id='bns-card-body' className='card-body ps-0'>
                                 <h5 id='bns-card-text' className=''>
-                                  {truncateText(element.title, 20)}
+                                  {truncateText(element.title, 34)}
                                 </h5>
                               </div>
                             </div>
@@ -240,7 +241,7 @@ const StyleFive = ({ isLoading, Data }) => {
                     </p>
                     <Link
                       id='btnbnsViewAll'
-                      className='btn'
+                      className='btn commonBtn'
                       type='button'
                       href={`/view-all/${Data.slug}`}
                       onClick={() => scrollToTop()}
@@ -276,12 +277,12 @@ const StyleFive = ({ isLoading, Data }) => {
                               <div id='bns-card-body' className='card-body ps-0'>
                                 <div
                                   id='btnbnsCatagory'
-                                  className='btn btn-sm'
+                                  className='btn btn-sm mt-2'
                                 >
                                   {truncateText(element.category_name, 10)}
                                 </div>
                                 <h5 id='bns-card-text' className=''>
-                                  {element.title}
+                                {truncateText(element.title, 34)}
                                 </h5>
                               </div>
                             </Link>
@@ -327,7 +328,7 @@ const StyleFive = ({ isLoading, Data }) => {
                     </p>
                     <Link
                       id='btnbnsViewAll'
-                      className='btn'
+                      className='btn commonBtn'
                       type='button'
                       href={`/view-all/${Data.slug}`}
                       onClick={() => scrollToTop()}
@@ -362,7 +363,7 @@ const StyleFive = ({ isLoading, Data }) => {
                               />
                               <div id='bns-card-body' className='card-body ps-0'>
                                 <h5 id='bns-card-text' className=''>
-                                  {element.title}
+                                {truncateText(element.title, 34)}
                                 </h5>
                               </div>
                             </Link>

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { BsFillPlayFill } from 'react-icons/bs'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+import CommonViewMoreDiv from './CommonViewMoreDiv'
 
 const StyleTwo = ({ Data }) => {
 
@@ -39,18 +40,8 @@ const StyleTwo = ({ Data }) => {
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
               </>
             ) : null}
-            <div id='hns-head' className='row mb-3'>
-              <div id='hns-head-main'>
-                <div className='left-sec'>
-                  <p id='hns-main-logo' className='mb-0'>
-                    {Data && Data.title}
-                  </p>
-                  <div className='short_desc'>{Data && Data.short_description}</div>
-                </div>
-                <Link id='hns-Viewmore' href={`/video-news-view/${Data.slug}`} onClick={() => scrollToTop()}>
-                  {translate('viewMore')}
-                </Link>
-              </div>
+            <div id='hns-head' className='row'>
+              <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/video-news-view/${Data.slug}`} />
             </div>
             <div className='row'>
               <div className='col-md-3'>
@@ -170,19 +161,8 @@ const StyleTwo = ({ Data }) => {
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
               </>
             ) : null}
-            <div id='hns-head' className='row mb-3'>
-              <div id='hns-head-main'>
-                <div className='left-sec'>
-                  <p id='hns-main-logo' className='mb-0'>
-                    {Data && Data.title}
-                  </p>
-                  <div className='short_desc'>{Data && Data.short_description}</div>
-                </div>
-
-                <Link id='hns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
-                  {translate('viewMore')}
-                </Link>
-              </div>
+            <div id='hns-head' className='row'>
+              <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
             </div>
             <div className='row'>
 
@@ -294,18 +274,8 @@ const StyleTwo = ({ Data }) => {
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
               </>
             ) : null}
-            <div id='hns-head' className='row mb-3'>
-              <div id='hns-head-main'>
-                <div className='left-sec'>
-                  <p id='hns-main-logo' className='mb-0'>
-                    {Data && Data.title}
-                  </p>
-                  <div className='short_desc'>{Data && Data.short_description}</div>
-                </div>
-                <Link id='hns-Viewmore' href={`/view-all/${Data.slug}`} onClick={() => scrollToTop()}>
-                  {translate('viewMore')}
-                </Link>
-              </div>
+            <div id='hns-head' className='row'>
+              <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
             </div>
             <div className='row'>
               <div className='col-md-3'>
@@ -359,6 +329,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <div
                       className='video_center card card_hover'
+                      onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[2].slug}` })}
                     >
                       <img
                         src={Data.breaking_news[2] && Data.breaking_news[2].image}
@@ -403,6 +374,7 @@ const StyleTwo = ({ Data }) => {
                   >
                     <div
                       className='video_bottom_right card card_hover'
+                      onClick={() => navigate.push({ pathname: `/breaking-news/${Data.breaking_news[4].slug}` })}
                     >
                       <img
                         src={Data.breaking_news[4] && Data.breaking_news[4].image}
