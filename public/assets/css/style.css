@@ -1,15 +1,21 @@
 /* font style */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
 
 @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
 /* ---------------------- Navbar css -------------------------- */
 /* News main nave */
 
+:root {
+  --paragraph-color: #565969;
+  --text-primary-color: #0F1F40;
+  --primary-font-family: "Zilla Slab", serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Zilla Slab", serif;
+  font-family: var(--primary-font-family);
 }
 
 
@@ -38,14 +44,7 @@ input[type='number'] {
   appearance: textfield;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
 
-:root {
-  --paragraph-color: #565969;
-  --text-primary-color: #0F1F40;
-}
 
 /* 
 .btn-primary {
@@ -338,7 +337,7 @@ a {
 }
 
 .Newsbar {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -404,7 +403,7 @@ a {
 }
 
 #Nav-Offcanvas {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 @media screen and (min-width: 1200px) {
@@ -521,7 +520,7 @@ a {
 }
 
 #navbarSupportedContent {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 #NewsNav {
@@ -654,7 +653,7 @@ a {
   height: 3rem;
   background-color: var(--secondary-color);
   color: #ffffff;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   gap: 0%;
 }
 
@@ -726,7 +725,7 @@ a {
 /* ---------------------------------- cat nav --------------------------- */
 
 #cn-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   border-top: 0.1px solid #0000001c;
   border-bottom: 0.1px solid #0000001c;
   background-color: #ffffff;
@@ -778,7 +777,7 @@ a {
 /* ----------------------------------- first section -----------------------------------  */
 
 #first-section {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: var(--secondary-color);
   background-color: #f5f5f5;
   height: fit-content;
@@ -1177,7 +1176,7 @@ a {
 }
 
 #bns-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: var(--secondary-color);
   padding-top: 2%;
   background-color: #f5f5f5;
@@ -1337,7 +1336,7 @@ a {
 
 @media (max-width: 1199px) {
   #bns-main {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font-family);
     color: var(--secondary-color);
     padding-top: 2%;
     background-color: #f5f5f5;
@@ -1378,7 +1377,7 @@ a {
 }
 
 #rns-Viewmore {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   letter-spacing: 1px;
   color: #fff;
   background-color: var(--primary-color);
@@ -1783,7 +1782,7 @@ a {
 #vps-main {
   height: fit-content;
   padding-bottom: 2%;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: #ffffff;
   /* background-color: var(--secondary-color); */
 }
@@ -1805,7 +1804,7 @@ a {
 }
 
 #vps-Viewmore {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   letter-spacing: 1px;
   color: #fff;
   background-color: var(--primary-color);
@@ -2234,7 +2233,7 @@ a {
 /* -----------------------------health news section------------------------- */
 
 #hns-head {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: var(--secondary-color);
 }
 
@@ -2266,7 +2265,7 @@ a {
 
 #hns-main {
   margin-top: 20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: var(--secondary-color);
   height: fit-content;
   padding-bottom: 20px;
@@ -2823,7 +2822,7 @@ a#social_platforms svg:hover {
   background: #f5f5f5;
   padding-top: 1.5rem;
   padding-bottom: 0.1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   font-size: 20px;
 }
 
@@ -2882,7 +2881,7 @@ a#social_platforms svg:hover {
 }
 
 #B_NV-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: var(--secondary-color);
 }
 
@@ -2921,7 +2920,7 @@ a#social_platforms svg:hover {
   color: var(--secondary-color);
   border-top: 1px solid #c0c5d0;
   border-bottom: 1px solid #c0c5d0;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   padding: 15px 0;
   flex-wrap: wrap;
 }
@@ -3113,7 +3112,7 @@ a#social_platforms svg:hover {
 }
 
 #cat-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 #cat-section-card {
@@ -3152,7 +3151,7 @@ a#social_platforms svg:hover {
 }
 
 #cv-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 #cv-card {
@@ -3269,7 +3268,7 @@ a#social_platforms svg:hover {
 }
 
 #LN-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
 }
 
 #LN-card {
@@ -3507,7 +3506,7 @@ a#social_platforms svg:hover {
 
   #forgot {
     font: 'small-caption';
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--primary-font-family);
     float: right;
     right: 0;
     cursor: pointer;
@@ -3546,7 +3545,7 @@ a#social_platforms svg:hover {
 }
 
 #nv-main {
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   color: var(--secondary-color);
 }
 
@@ -3585,7 +3584,7 @@ a#social_platforms svg:hover {
   color: var(--secondary-color);
   border-top: 1px solid #c0c5d0;
   border-bottom: 1px solid #c0c5d0;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   padding: 10px 0;
 }
 
@@ -4397,7 +4396,7 @@ a#social_platforms svg:hover {
 
 #forgot {
   font: 'small-caption';
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font-family);
   display: flex;
   width: 100%;
   justify-content: flex-end;
