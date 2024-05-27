@@ -183,7 +183,7 @@ a {
 
 @media (max-width: 575px) {
   .custom-card .swiper-button-prev {
-    left: 40%;
+    left: 32%;
   }
 
   .custom-card .swiper-button-next {
@@ -1347,9 +1347,9 @@ a {
 
   #bns-card-text {
     margin-top: 2%;
-    font-size: 16px;
+    /* font-size: 16px; */
     margin-bottom: 0.5rem;
-    font-weight: 500;
+    /* font-weight: 500; */
     line-height: 1.2;
   }
 }
@@ -2244,6 +2244,7 @@ a {
   justify-content: space-between;
   margin-top: 30px;
   margin-bottom: 20px;
+  gap: 18px 0px;
 }
 
 #hns-main-logo {
