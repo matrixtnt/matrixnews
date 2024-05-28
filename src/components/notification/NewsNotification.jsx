@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { translate, truncateText, NoDataFound } from '../../utils'
@@ -13,14 +13,30 @@ import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { access_key, getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
+import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
 // import NoDataFound from '../noDataFound/NoDataFound'
 
 const NewsNotification = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
   const [totalLength, setTotalLength] = useState(0)
   const [offsetdata, setOffsetdata] = useState(0)
-  const limit = 6
+  const dataPerPage = 6
   let { id: language_id } = getLanguage()
+
+
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [notificationData, setNotificationData] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setOffset(offset + 1)
+  }
 
   const handlePageChange = selectedPage => {
     const newOffset = selectedPage?.selected * limit
@@ -29,14 +45,18 @@ const NewsNotification = () => {
 
   // api call
   const getNotifications = async () => {
+    !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getNotificationsApi.getNotifications({
         access_key: access_key,
-        offset: offsetdata.toString(),
-        limit: limit.toString(),
+        offset: offset * dataPerPage,
+        limit: dataPerPage,
         language_id: language_id
       })
       setTotalLength(data.total)
+      setTotalData(data.total)
+      setIsLoading({ loading: false })
+      setIsLoading({ loadMoreLoading: false })
       return data.data
     } catch (error) {
       console.log(error)
@@ -45,13 +65,22 @@ const NewsNotification = () => {
 
   // react query
   const {
-    isLoading,
     data: Data,
   } = useQuery({
-    queryKey: ['getNotification', currentLanguage, offsetdata],
+    queryKey: ['getNotification', currentLanguage,offset],
     queryFn: getNotifications,
 
   })
+
+  useEffect(() => {
+    if (Data && Data.data) {
+      setNotificationData((prevData) => [...prevData, ...Data.data]);
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
 
 
   // Function to format the date as "day Month year"
@@ -80,12 +109,12 @@ const NewsNotification = () => {
             </Link>
           </div>
           <div className='my-3'>
-            {isLoading ? (
+            {isLoading.loading ? (
               <div className='col-12 loading_data'>
                 <Skeleton height={20} count={22} />
               </div>
-            ) : Data && Data.length > 0 ? (
-              Data.map((element, index) => (
+            ) : notificationData && notificationData.length > 0 ? (
+              notificationData.map((element, index) => (
                 <div key={index} className={`card my-3${element.category_id === '0' ? ' disabled-link' : ''}`}>
                   {element.type === 'category' ? (
                     <Link
@@ -127,23 +156,21 @@ const NewsNotification = () => {
               </div>
             )}
           </div>
-          {totalLength > 7 ? (
-            <ReactPaginate
-              previousLabel={translate('previous')}
-              nextLabel={translate('next')}
-              breakLabel='...'
-              breakClassName='break-me'
-              pageCount={Math.ceil(totalLength / limit)}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              containerClassName={'pagination'}
-              previousLinkClassName={'pagination__link'}
-              nextLinkClassName={'pagination__link'}
-              disabledClassName={'pagination__link--disabled'}
-              activeClassName={'pagination__link--active'}
-            />
-          ) : null}
+          {totalData > dataPerPage && totalData !== notificationData.length ? (
+                // <ReactPaginate
+                //   initialPage={currentPage}
+                //   previousLabel={translate('previous')}
+                //   nextLabel={translate('next')}
+                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                //   onPageChange={handlePageChange}
+                //   containerClassName={'pagination'}
+                //   previousLinkClassName={'pagination__link'}
+                //   nextLinkClassName={'pagination__link'}
+                //   disabledClassName={'pagination__link--disabled'}
+                //   activeClassName={'pagination__link--active'}
+                // />
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+              ) : null}
         </div>
       </div>
     </Layout>

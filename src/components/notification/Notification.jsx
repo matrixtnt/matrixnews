@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav';
 import { deleteusernotificationApi } from '../../store/actions/campaign';
-import { translate,NoDataFound } from '../../utils';
+import { translate, NoDataFound } from '../../utils';
 import Skeleton from 'react-loading-skeleton';
 import { MdMessage } from 'react-icons/md';
 import { IoMdThumbsUp } from 'react-icons/io';
@@ -18,29 +18,48 @@ import Layout from '../layout/Layout';
 // import NoDataFound from '../noDataFound/NoDataFound';
 import moment from 'moment-timezone';
 import { settingsData } from 'src/store/reducers/settingsReducer';
+import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn';
 
 const Notification = () => {
-  const [Data, setData] = useState([]);
   const [convertedData, setConvertedData] = useState([]); // Store converted dates separately
   let user = getUser();
   const currentLanguage = useSelector(selectCurrentLanguage);
   const [totalLength, setTotalLength] = useState(0);
   const [offsetdata, setOffsetdata] = useState(0);
-  const limit = 6;
+  const dataPerPage = 6;
 
   const settings = useSelector(settingsData)
   const systemTimezoneData = settings.system_timezone
+
+
+
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [notificationData, setNotificationData] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setOffset(offset + 1)
+  }
+
   // api call
   const getUserNotification = async () => {
+    !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getNotificationsApi.getUserNotification({
         access_key: access_key,
-        offset: offsetdata.toString(),
-        limit: limit.toString(),
+        offset: offset * dataPerPage,
+        limit: dataPerPage,
         user_id: user
       });
-      setData(data.data);
-      setTotalLength(data.total);
+      setTotalData(data.total)
+      setIsLoading({ loading: false })
+      setIsLoading({ loadMoreLoading: false })
       return data.data;
     } catch (error) {
       console.log(error);
@@ -48,11 +67,21 @@ const Notification = () => {
   };
 
   // react query
-  const { isLoading } = useQuery({
-    queryKey: ['getuserNotification', currentLanguage, offsetdata],
+  const { data: Data } = useQuery({
+    queryKey: ['getuserNotification', currentLanguage, offsetdata, offset],
     queryFn: getUserNotification,
 
   });
+
+  useEffect(() => {
+    if (Data && Data) {
+      setNotificationData((prevData) => [...prevData, ...Data]);
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
 
   const handlePageChange = selectedPage => {
     const newOffset = selectedPage.selected * limit;
@@ -90,9 +119,9 @@ const Notification = () => {
   };
 
   useEffect(() => {
-    if (Data.length > 0) {
+    if (notificationData.length > 0) {
       // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
-      const convertedData = Data.map(element => {
+      const convertedData = notificationData.map(element => {
         const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date
         const dtKolkata = moment(timestampUtc).tz(systemTimezoneData);
         const convertedTime = dtKolkata.format("DD-MM-YYYY hh:mm:ss A");
@@ -103,7 +132,7 @@ const Notification = () => {
       });
       setConvertedData(convertedData); // Store converted dates in a separate state variable
     }
-  }, [Data]);
+  }, [notificationData]);
 
   return (
     <Layout>
@@ -124,12 +153,12 @@ const Notification = () => {
             {/* <button id='btnNotification1' className="btn  btn mx-1 ms-auto bd-highlight" onClick={handleDeleteAll} > Delete All</button> */}
           </div>
           <div className='my-3'>
-            {isLoading ? (
+            {isLoading.loading ? (
               <div className='col-12 loading_data'>
                 <Skeleton height={20} count={22} />
               </div>
             ) : convertedData && convertedData.length > 0 ? ( // Use convertedData instead of Data
-              convertedData.slice(offsetdata, offsetdata + limit).map((element, index) => (
+              convertedData.map((element, index) => (
                 <div className='card my-3' key={index}>
                   <div className='card-body bd-highlight' id='card-noti'>
                     {element.type === 'comment_like' ? (
@@ -154,28 +183,25 @@ const Notification = () => {
               <div className='col-12 no_data mt-5'>
                 <>
                   {NoDataFound()}
-                 
                 </>
               </div>
             )}
           </div>
 
-          {totalLength > 7 ? (
-            <ReactPaginate
-              previousLabel={translate('previous')}
-              nextLabel={translate('next')}
-              breakLabel='...'
-              breakClassName='break-me'
-              pageCount={Math.ceil(totalLength / limit)}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              containerClassName={'pagination'}
-              previousLinkClassName={'pagination__link'}
-              nextLinkClassName={'pagination__link'}
-              disabledClassName={'pagination__link--disabled'}
-              activeClassName={'pagination__link--active'}
-            />
+          {totalData > dataPerPage && totalData !== notificationData.length ? (
+            // <ReactPaginate
+            //   initialPage={currentPage}
+            //   previousLabel={translate('previous')}
+            //   nextLabel={translate('next')}
+            //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+            //   onPageChange={handlePageChange}
+            //   containerClassName={'pagination'}
+            //   previousLinkClassName={'pagination__link'}
+            //   nextLinkClassName={'pagination__link'}
+            //   disabledClassName={'pagination__link--disabled'}
+            //   activeClassName={'pagination__link--active'}
+            // />
+            <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
           ) : null}
         </div>
       </div>

@@ -19,19 +19,21 @@ import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
 
 const Categories = () => {
 
+
+  const dataPerPage = 9
+  const currentLanguage = useSelector(selectCurrentLanguage)
+
+
+  const categoiresOnOff = useSelector(settingsData)
+
   const [isLoading, setIsLoading] = useState({
     loading: false,
     loadMoreLoading: false
   })
   const [loadMore, setLoadMore] = useState(false)
-  const [loaderLoading, setLoaderLoading] = useState(false)
-  const dataPerPage = 3
-  const currentLanguage = useSelector(selectCurrentLanguage)
-
   const [categories, setCategories] = useState([])
   const [offset, setOffset] = useState(0)
   const [totalData, setTotalData] = useState('')
-  const categoiresOnOff = useSelector(settingsData)
 
   const handleLoadMore = () => {
     setLoadMore(true)
@@ -39,8 +41,8 @@ const Categories = () => {
   }
 
   // api call
-  const categoriesApi = async page => {
-    !loadMore ? setIsLoading({loading: true}) : setIsLoading({ loadMoreLoading: true })
+  const categoriesApi = async () => {
+    !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await CategoriesApi.getCategories({
         access_key,
@@ -49,7 +51,7 @@ const Categories = () => {
         language_id: currentLanguage.id
       })
       setTotalData(data.total)
-      setIsLoading({loading: false})
+      setIsLoading({ loading: false })
       setIsLoading({ loadMoreLoading: false })
       return data
     } catch (error) {
@@ -131,10 +133,9 @@ const Categories = () => {
               ) : (
                 <>
                   {NoDataFound()}
-
                 </>
               )}
-              {totalData > 10 && totalData !== categories.length ? (
+              {totalData > dataPerPage && totalData !== categories.length ? (
                 // <ReactPaginate
                 //   initialPage={currentPage}
                 //   previousLabel={translate('previous')}

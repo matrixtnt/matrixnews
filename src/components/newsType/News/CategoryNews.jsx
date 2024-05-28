@@ -14,12 +14,7 @@ import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useEffect, useState } from 'react'
-// import NoDataFound from 'src/components/noDataFound/NoDataFound'
-import { subCategorySelector } from 'src/store/reducers/tempDataReducer'
-import SwiperCore, { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination])
+import LoadMoreBtn from 'src/components/view/adSpaces/loadMoreBtn/LoadMoreBtn'
 
 const CategoryNews = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -35,9 +30,21 @@ const CategoryNews = () => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
 
-  const subCategories = useSelector(subCategorySelector)
 
-  // console.log('router ==== ',subCategories)
+
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [categoriesNewsData, setCategoriesNewsData] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setOffset(offset + 1)
+  }
 
   // handle page change
   const handlePageChange = ({ selected }) => {
@@ -45,15 +52,15 @@ const CategoryNews = () => {
   }
   // console.log(language_id)
   // api call
-  const getNewsByCategoryApi = async page => {
-
+  const getNewsByCategoryApi = async () => {
 
     if (location || currentPage || catSlug) {
 
+      !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
       try {
         const { data } = await getNewsApi.getNews({
           access_key: access_key,
-          offset: page * dataPerPage,
+          offset: offset * dataPerPage,
           limit: dataPerPage,
           language_id: language_id,
           category_slug: catSlug,
@@ -62,6 +69,9 @@ const CategoryNews = () => {
         })
         // console.log('categories', data)
         data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setTotalData(data.total)
+        setIsLoading({ loading: false })
+        setIsLoading({ loadMoreLoading: false })
         return data
       } catch (error) {
         console.log(error)
@@ -71,52 +81,34 @@ const CategoryNews = () => {
 
 
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['category-news', language_id, location, currentPage, catSlug],
-    queryFn: () => getNewsByCategoryApi(currentPage)
+  const { data: Data } = useQuery({
+    queryKey: ['category-news', language_id, location, catSlug,offset],
+    queryFn: () => getNewsByCategoryApi()
   })
 
+
   useEffect(() => {
-    // console.log("category-news")
-  }, [])
+    if (Data && Data.data) {
+      setCategoriesNewsData((prevData) => [...prevData, ...Data.data]);
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
 
   // slice the array to get the current posts
   const currentData = Data && Data.data && Data.data.slice(0, dataPerPage)
   const CurrentCategoryName = Data && Data.data && Data.data[0]?.category?.category_name
   const lengthdata = (Data && Data.total) || 0
 
-  const swiperOption = {
-    loop: subCategories.length > 10 ? true : false,
-    speed: 3000,
-    spaceBetween: 10,
-    slidesPerView: 'auto',
-    navigation: false,
-    freeMode: true,
-    observer: true,
-    observeParents: true,
-    parallax: true,
-    breakpoints: {
-      0: {
-        slidesPerView: 2.5
-      },
-      575: {
-        slidesPerView: 4
-      },
-      1200: {
-        slidesPerView: 10
-      }
-    },
-    autoplay: {
-      delay: 0
-    }
-  }
   return (
     <Layout>
       <section className='categoryview_Section'>
         <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories" />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
-            {isLoading ? (
+            {isLoading.loading? (
               <div className='row'>
                 {[...Array(3)].map((_, index) => (
                   <div className='col-md-4 col-12' key={index}>
@@ -126,37 +118,8 @@ const CategoryNews = () => {
               </div>
             ) : (
               <div className='row'>
-                {/* {
-                  subCategories.length > 0 ?
-
-                    <div className="col-12 mb-5 subcategoryWrapper">
-                      <h4 className='subCatTitle'>Sub-Categories :</h4>
-
-                      <Swiper {...swiperOption}>
-                        {
-                          subCategories.map((subCat) => {
-                            return (
-                              <SwiperSlide className='text-center'
-                                key={subCat.id}
-                              >
-                                <Link href={{
-                                  pathname: `/categories-news/sub-category/${subCat.slug}`,
-                                }}
-                                  id='catNav-links'
-                                ><b>{subCat?.subcategory_name}</b></Link>
-                              </SwiperSlide>
-                            )
-                          })
-                        }
-
-                      </Swiper>
-                    </div>
-                    : null
-                } */}
-
-
-                {currentData && currentData?.length > 0 ? (
-                  currentData.map(element => (
+                {categoriesNewsData && categoriesNewsData?.length > 0 ? (
+                  categoriesNewsData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
                         id='Link-all'
@@ -187,20 +150,21 @@ const CategoryNews = () => {
 
                   </>
                 )}
-                {lengthdata > 9 ? (
-                  <ReactPaginate
-                    initialPage={currentPage}
-                    previousLabel={translate('previous')}
-                    nextLabel={translate('next')}
-                    pageCount={Math.ceil(lengthdata / dataPerPage)}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination'}
-                    previousLinkClassName={'pagination__link'}
-                    nextLinkClassName={'pagination__link'}
-                    disabledClassName={'pagination__link--disabled'}
-                    activeClassName={'pagination__link--active'}
-                  />
-                ) : null}
+                {totalData > dataPerPage && totalData !== categoriesNewsData.length ? (
+                // <ReactPaginate
+                //   initialPage={currentPage}
+                //   previousLabel={translate('previous')}
+                //   nextLabel={translate('next')}
+                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                //   onPageChange={handlePageChange}
+                //   containerClassName={'pagination'}
+                //   previousLinkClassName={'pagination__link'}
+                //   nextLinkClassName={'pagination__link'}
+                //   disabledClassName={'pagination__link--disabled'}
+                //   activeClassName={'pagination__link--active'}
+                // />
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+              ) : null}
 
 
               </div>

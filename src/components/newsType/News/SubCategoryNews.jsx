@@ -13,7 +13,8 @@ import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import LoadMoreBtn from 'src/components/view/adSpaces/loadMoreBtn/LoadMoreBtn'
 // import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const SubCategory = () => {
@@ -31,17 +32,32 @@ const SubCategory = () => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
 
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [subCategories, setSubCategories] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setOffset(offset + 1)
+  }
+
   // handle page change
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected)
   }
 
   // api call
-  const getNewsByCategoryApi = async page => {
+  const getNewsByCategoryApi = async () => {
+    !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getNewsApi.getNews({
         access_key: access_key,
-        offset: page * dataPerPage,
+        offset: offset * dataPerPage,
         limit: dataPerPage,
         category_id: catId,
         language_id: language_id,
@@ -50,6 +66,9 @@ const SubCategory = () => {
         longitude: storedLongitude
       })
       // console.log('categories', data)
+      setTotalData(data.total)
+      setIsLoading({ loading: false })
+      setIsLoading({ loadMoreLoading: false })
       return data
     } catch (error) {
       console.log(error)
@@ -57,9 +76,9 @@ const SubCategory = () => {
   }
 
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['sub-category-news', catId, changelanguage, location, currentPage, query],
-    queryFn: () => getNewsByCategoryApi(currentPage)
+  const { data: Data } = useQuery({
+    queryKey: ['sub-category-news', catId, changelanguage, location, offset, query],
+    queryFn: () => getNewsByCategoryApi()
   })
 
   // slice the array to get the current posts
@@ -67,13 +86,23 @@ const SubCategory = () => {
 
   const lengthdata = (Data && Data.total) || 0
 
+  useEffect(() => {
+    if (Data && Data.data) {
+      setSubCategories((prevData) => [...prevData, ...Data.data]);
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
+
   return (
     <Layout>
       <section className='categoryview_Section'>
         <BreadcrumbNav SecondElement={'Category'} ThirdElement={'Sub-Category'} FourthElement={subCatSlug} />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
-            {isLoading ? (
+            {isLoading.loading ? (
               <div className='row'>
                 {[...Array(3)].map((_, index) => (
                   <div className='col-md-4 col-12' key={index}>
@@ -83,8 +112,8 @@ const SubCategory = () => {
               </div>
             ) : (
               <div className='row'>
-                {currentData && currentData.length > 0 ? (
-                  currentData.map(element => (
+                {subCategories && subCategories.length > 0 ? (
+                  subCategories.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
                       <Link
                         id='Link-all'
@@ -115,20 +144,21 @@ const SubCategory = () => {
 
                   </>
                 )}
-                {lengthdata > 9 ? (
-                  <ReactPaginate
-                    initialPage={currentPage}
-                    previousLabel={translate('previous')}
-                    nextLabel={translate('next')}
-                    pageCount={Math.ceil(lengthdata / dataPerPage)}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination'}
-                    previousLinkClassName={'pagination__link'}
-                    nextLinkClassName={'pagination__link'}
-                    disabledClassName={'pagination__link--disabled'}
-                    activeClassName={'pagination__link--active'}
-                  />
-                ) : null}
+                {totalData > dataPerPage && totalData !== subCategories.length ? (
+                // <ReactPaginate
+                //   initialPage={currentPage}
+                //   previousLabel={translate('previous')}
+                //   nextLabel={translate('next')}
+                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                //   onPageChange={handlePageChange}
+                //   containerClassName={'pagination'}
+                //   previousLinkClassName={'pagination__link'}
+                //   nextLinkClassName={'pagination__link'}
+                //   disabledClassName={'pagination__link--disabled'}
+                //   activeClassName={'pagination__link--active'}
+                // />
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+              ) : null}
               </div>
             )}
           </div>

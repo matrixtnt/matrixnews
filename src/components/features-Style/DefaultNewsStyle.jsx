@@ -36,7 +36,7 @@ const DefaultNewsStyle = ({ Data }) => {
                                                     </div>
                                                     <div id='rns-card-body' className='card-block'>
                                                         <p className='card-title newsStyleTitle mt-3'>{value.title.length > 20 ? <>{value.title.slice(0, 20)}...</> : value.title}</p>
-                                                        <p id='btnrnsRead' className='btn overlay mt-2' type='button'>
+                                                        <p id='btnrnsRead' className='commonBtn' type='button'>
                                                             {translate('readmore')}
                                                             <HiOutlineArrowLongRight id='rns-arrow' size={20} />
                                                         </p>

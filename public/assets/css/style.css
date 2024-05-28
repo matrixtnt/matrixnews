@@ -1413,9 +1413,14 @@ a {
   height: 342px;
 }
 
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+  .defaultStyleSect #rns-card {
+    height: 356px;
+  }
+}
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   .defaultStyleSect #rns-card {
-    height: 320px;
+    height: 344px;
   }
 }
 
@@ -1427,7 +1432,7 @@ a {
 
 @media screen and (min-width: 576px) and (max-width: 991px) {
   .defaultStyleSect #rns-card {
-    height: 272px;
+    height: 282px;
   }
 }
 
@@ -1535,6 +1540,7 @@ a {
   border: none;
   border-radius: 6px;
   font-size: 18px;
+  width: max-content;
 }
 
 /* #btnrnsRead:hover {
@@ -5059,6 +5065,9 @@ a#social_platforms svg:hover {
   align-items: center;
   height: 100vh;
   margin-bottom: 0;
+  color: var(--text-primary-color);
+  font-size: 24px;
+  font-weight: 600;
 }
 
 #btnrnsCatagory,
@@ -7173,8 +7182,9 @@ span {
   border: 4px solid #f3f3f3;
   border-top: 4px solid var(--primary-color);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  margin-top: 20px;
+  width: 30px;
+  height: 30px;
   animation: spin 2s linear infinite;
 }
 

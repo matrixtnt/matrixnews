@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
@@ -15,10 +15,11 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
+import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
 // import NoDataFound from '../noDataFound/NoDataFound'
 
 const ViewAll = () => {
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const dataPerPage = 6 // number of posts per page
   const router = useRouter()
   const query = router.query
@@ -35,17 +36,38 @@ const ViewAll = () => {
 
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-  const getFeatureSection = async page => {
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [viewAllData, setViewAllData] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setCurrentIndex(currentIndex + 1)
+    setOffset(offset + 1)
+  }
+
+
+  const getFeatureSection = async () => {
+    !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getFeatureSectionApi.getFeatureSection({
         access_key: access_key,
         language_id: language_id,
-        offset: page * dataPerPage,
+        offset: offset * dataPerPage,
         limit: dataPerPage,
         slug: catid,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
+      setTotalData(data.data[0]?.news ? data.data[0].news_total : data.data[0]?.breaking_news_total)
+      console.log(data.data[0].news_total, "totlaNewsss")
+      setIsLoading({ loading: false })
+      setIsLoading({ loadMoreLoading: false })
       return data.data
     } catch (error) {
       console.log(error)
@@ -53,26 +75,39 @@ const ViewAll = () => {
   }
 
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['viewallFeaturebyslug', catid, currentLanguage, location, currentPage], // Include currentPage in the queryKey
-    queryFn: () => getFeatureSection(currentPage)
+  const { data: Data } = useQuery({
+    queryKey: ['viewallFeaturebyslug', catid, currentLanguage, location, offset], // Include currentPage in the queryKey
+    queryFn: () => getFeatureSection()
   })
 
+  useEffect(() => {
+    if (Data && Data) {
+      Data[0].news ?
+        setViewAllData((prevData) => [...prevData, ...Data[0]?.news]) : setViewAllData((prevData) => [...prevData, ...Data[0]?.breaking_news])
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading, currentIndex])
+
   // slice the array to get the current posts
-  const currentData =
-    Data && Data[0]?.news
-      ? Data && Data[0]?.news.slice(0, dataPerPage)
-      : Data && Data[0]?.breaking_news.slice(0, dataPerPage)
+  const currentData = viewAllData
+
+  useEffect(() => {
+    console.log(viewAllData, 'currr@@@')
+  }, [viewAllData,])
+
 
   const lengthdata = (Data && Data[0]?.news_total) || 0
   return (
     <Layout>
-      {Data && Data[0]?.news ? (
+      {viewAllData && viewAllData ? (
         <>
-          <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
+          <BreadcrumbNav SecondElement={Data && Data[0]?.title} ThirdElement='0' />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
-              {isLoading ? (
+              {isLoading.loading ? (
                 <div className='row'>
                   {[...Array(3)].map((_, index) => (
                     <div className='col-md-4 col-12' key={index}>
@@ -82,8 +117,8 @@ const ViewAll = () => {
                 </div>
               ) : (
                 <div className='row'>
-                  {currentData ? (
-                    currentData.map(element => (
+                  {viewAllData && viewAllData ? (
+                    viewAllData && viewAllData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>
                         <Link
                           id='Link-all'
@@ -116,34 +151,31 @@ const ViewAll = () => {
                   )}
                 </div>
               )}
-              {
-                lengthdata > 7 ? (
-
-
-                  <ReactPaginate
-                    initialPage={currentPage}
-                    previousLabel={translate('previous')}
-                    nextLabel={translate('next')}
-                    pageCount={Math.ceil(lengthdata / dataPerPage)}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination'}
-                    previousLinkClassName={'pagination__link'}
-                    nextLinkClassName={'pagination__link'}
-                    disabledClassName={'pagination__link--disabled'}
-                    activeClassName={'pagination__link--active'}
-                  />
-                ) : null
-              }
+              {totalData > dataPerPage && totalData !== currentData?.length ? (
+                // <ReactPaginate
+                //   initialPage={currentPage}
+                //   previousLabel={translate('previous')}
+                //   nextLabel={translate('next')}
+                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                //   onPageChange={handlePageChange}
+                //   containerClassName={'pagination'}
+                //   previousLinkClassName={'pagination__link'}
+                //   nextLinkClassName={'pagination__link'}
+                //   disabledClassName={'pagination__link--disabled'}
+                //   activeClassName={'pagination__link--active'}
+                // />
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+              ) : null}
             </div>
           </div>
         </>
       ) : null}
-      {Data && Data[0]?.breaking_news ? (
+      {viewAllData && viewAllData[0]?.breaking_news ? (
         <>
           <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
-              {isLoading ? (
+              {isLoading.loading ? (
                 <div className='row'>
                   {[...Array(3)].map((_, index) => (
                     <div className='col-md-4 col-12' key={index}>
@@ -186,24 +218,21 @@ const ViewAll = () => {
                   )}
                 </div>
               )}
-              {
-                lengthdata > 7 ? (
-
-
-                  <ReactPaginate
-                    initialPage={currentPage}
-                    previousLabel={translate('previous')}
-                    nextLabel={translate('next')}
-                    pageCount={Math.ceil(lengthdata / dataPerPage)}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination'}
-                    previousLinkClassName={'pagination__link'}
-                    nextLinkClassName={'pagination__link'}
-                    disabledClassName={'pagination__link--disabled'}
-                    activeClassName={'pagination__link--active'}
-                  />
-                ) : null
-              }
+              {totalData > dataPerPage && totalData !== currentData?.length ? (
+                // <ReactPaginate
+                //   initialPage={currentPage}
+                //   previousLabel={translate('previous')}
+                //   nextLabel={translate('next')}
+                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                //   onPageChange={handlePageChange}
+                //   containerClassName={'pagination'}
+                //   previousLinkClassName={'pagination__link'}
+                //   nextLinkClassName={'pagination__link'}
+                //   disabledClassName={'pagination__link--disabled'}
+                //   activeClassName={'pagination__link--active'}
+                // />
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+              ) : null}
             </div>
           </div>
         </>
