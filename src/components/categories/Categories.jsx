@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { IoArrowForwardCircleSharp } from 'react-icons/io5'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
@@ -15,42 +15,66 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 // import NoDataFound from '../noDataFound/NoDataFound'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
+import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
 
 const Categories = () => {
-  const [currentPage, setCurrentPage] = useState(0)
-  const dataPerPage = 9
+
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [loaderLoading, setLoaderLoading] = useState(false)
+  const dataPerPage = 3
   const currentLanguage = useSelector(selectCurrentLanguage)
 
-
-
+  const [categories, setCategories] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
   const categoiresOnOff = useSelector(settingsData)
 
-  // handle page change
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected)
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setOffset(offset + 1)
   }
 
   // api call
   const categoriesApi = async page => {
+    !loadMore ? setIsLoading({loading: true}) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await CategoriesApi.getCategories({
         access_key,
-        offset: page * dataPerPage,
+        offset: offset * dataPerPage,
         limit: dataPerPage,
         language_id: currentLanguage.id
       })
+      setTotalData(data.total)
+      setIsLoading({loading: false})
+      setIsLoading({ loadMoreLoading: false })
       return data
     } catch (error) {
       console.log(error)
     }
   }
 
+
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['categories', currentPage, currentLanguage.id],
-    queryFn: () => categoriesApi(currentPage),
+  const { data: Data } = useQuery({
+    queryKey: ['categories', currentLanguage.id, offset],
+    queryFn: () => categoriesApi(),
     staleTime: 6000
   })
+
+  useEffect(() => {
+    if (Data && Data.data) {
+      setCategories((prevData) => [...prevData, ...Data.data]);
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
+
 
   // slice the array to get the current posts
   const currentData = Data && Data.data && Data.data.slice(0, dataPerPage)
@@ -62,7 +86,7 @@ const Categories = () => {
       <BreadcrumbNav SecondElement='Categories' ThirdElement='0' />
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <div className='container my-5'>
-          {isLoading ? (
+          {isLoading.loading ? (
             <div className='row'>
               {[...Array(3)].map((_, index) => (
                 <div className='col-md-4 col-12' key={index}>
@@ -72,8 +96,8 @@ const Categories = () => {
             </div>
           ) : (
             <div className='row'>
-              {currentData && currentData?.length > 0 ? (
-                currentData.map(element => (
+              {categories && categories?.length > 0 ? (
+                categories.map(element => (
                   <div className='col-md-4 col-12 mb-4'>
                     <Link
                       id='cat-section-card'
@@ -106,23 +130,24 @@ const Categories = () => {
                 ))
               ) : (
                 <>
-                {NoDataFound()}
-               
-              </>
+                  {NoDataFound()}
+
+                </>
               )}
-              {lengthdata > 10 ? (
-                <ReactPaginate
-                  initialPage={currentPage}
-                  previousLabel={translate('previous')}
-                  nextLabel={translate('next')}
-                  pageCount={Math.ceil(lengthdata / dataPerPage)}
-                  onPageChange={handlePageChange}
-                  containerClassName={'pagination'}
-                  previousLinkClassName={'pagination__link'}
-                  nextLinkClassName={'pagination__link'}
-                  disabledClassName={'pagination__link--disabled'}
-                  activeClassName={'pagination__link--active'}
-                />
+              {totalData > 10 && totalData !== categories.length ? (
+                // <ReactPaginate
+                //   initialPage={currentPage}
+                //   previousLabel={translate('previous')}
+                //   nextLabel={translate('next')}
+                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                //   onPageChange={handlePageChange}
+                //   containerClassName={'pagination'}
+                //   previousLinkClassName={'pagination__link'}
+                //   nextLinkClassName={'pagination__link'}
+                //   disabledClassName={'pagination__link--disabled'}
+                //   activeClassName={'pagination__link--active'}
+                // />
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
               ) : null}
             </div>
           )}
@@ -130,7 +155,7 @@ const Categories = () => {
       ) : (
         <>
           {NoDataFound()}
-         
+
         </>
       )}
     </Layout>

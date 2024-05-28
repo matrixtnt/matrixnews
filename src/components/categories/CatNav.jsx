@@ -609,8 +609,8 @@ const CatNav = () => {
                                           <div className="col-12 viewAllWrapper">
                                             {
                                               subCatSlug === '' ?
-                                                <button className='viewAll' onClick={() => handleCategoryChange(element)}>View All</button> :
-                                                <button className='viewAll' onClick={() => handleSubCategoryChange()}>View All</button>
+                                                <button className='viewAll commonBtn' onClick={() => handleCategoryChange(element)}>View All</button> :
+                                                <button className='viewAll commonBtn' onClick={() => handleSubCategoryChange()}>View All</button>
                                             }
                                           </div> : null
                                       }

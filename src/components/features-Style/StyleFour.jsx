@@ -130,7 +130,7 @@ const StyleFour = ({ Data }) => {
                           </div>
                           <div id='rns-card-body' className='card-block'>
                             <p className='card-title'>{value.title}</p>
-                            <p id='btnrnsRead' className='btn overlay' type='button'>
+                            <p id='btnrnsRead' className='btn overlay commonBtn' type='button'>
                               {translate('readmore')}
                               <HiOutlineArrowLongRight id='rns-arrow' size={20} />
                             </p>
@@ -181,10 +181,10 @@ const StyleFour = ({ Data }) => {
                           </div>
                           <div id='rns-card-body' className='card-block'>
                             <p className='card-title'>{value.title}</p>
-                            <p id='btnrnsRead' className='btn overlay' type='button'>
+                            <button id='btnrnsRead' className='commonBtn'>
                               {translate('readmore')}
                               <HiOutlineArrowLongRight id='rns-arrow' size={20} />
-                            </p>
+                            </button>
                           </div>
                         </Link>
                       </div>

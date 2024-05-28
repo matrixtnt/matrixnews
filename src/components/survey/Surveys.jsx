@@ -271,7 +271,7 @@ const Surveys = () => {
                         );
                     })}
             {questionsData && visibleQuestionsCount < questionsData.length && (
-                <button onClick={handleLoadMore} className='loadMoreBtn'>Load More</button>
+                <button onClick={handleLoadMore} className='loadMoreBtn commonBtn'>Load More</button>
             )}
         </section>
     );

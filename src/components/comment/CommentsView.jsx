@@ -224,7 +224,7 @@ const CommentsView = props => {
           ></textarea>
           <div className='d-flex align-items-end justify-content-end'>
 
-            <button id='cs-btnsub' type='submit' className='btn'>
+            <button id='cs-btnsub' type='submit' className='commonBtn'>
               {translate('submitpost')}
             </button>
           </div>
