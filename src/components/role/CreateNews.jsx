@@ -676,6 +676,7 @@ const CreateNews = () => {
                             width: '100%'
                           }}
                           placeholder='Select Location'
+                          defaultValue={DefaultValue.defualtLocation}
                           onChange={value => setDefualtValue({ ...DefaultValue, defualtLocation: value })}
                         >
                           {locationOptions &&

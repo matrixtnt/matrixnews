@@ -10,16 +10,25 @@ import { settingsData } from '../../store/reducers/settingsReducer'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import { access_key } from 'src/utils/api'
-import { FaSquareXTwitter } from 'react-icons/fa6'
+import { FaLocationDot, FaSquareXTwitter } from 'react-icons/fa6'
 import { catNavSelector, categoriesCacheData } from 'src/store/reducers/CatNavReducers'
+import { checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
+import { IoMdMail } from 'react-icons/io'
+import { MdCall } from 'react-icons/md'
+import Image from 'next/image'
+
+import playStore from '../../../public/assets/images/playStore.svg'
+import appleStore from '../../../public/assets/images/appleStore.svg'
 
 const Footer = () => {
+
   const settings = useSelector(settingsData)
 
   const categories = useSelector(categoriesCacheData)
-  
+
   const categoriesData = categories
 
+  const checkNewsData = useSelector(checkNewsDataSelector)
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -42,10 +51,135 @@ const Footer = () => {
                   <br />
                 </p>
               </div>
+              {process.env.NEXT_PUBLIC_FACEBOOK || process.env.NEXT_PUBLIC_INSTAGRAM || process.env.NEXT_PUBLIC_LINKEDIN || process.env.NEXT_PUBLIC_TWITTER ?
+                <div className='footerMediasWrapper'>
+                  <span className='followUs'>{translate('followus')}</span>
+                  <div className='mediaIconsWrapper'>
+                    {process.env.NEXT_PUBLIC_FACEBOOK ? (
+                      <a
+                        target='_blank'
+                        className='btn btn-outline-white'
+                        href={process.env.NEXT_PUBLIC_FACEBOOK}
+                        rel='noreferrer'
+                      >
+                        <FaFacebookSquare />
+                      </a>
+                    ) : null}
+                    {process.env.NEXT_PUBLIC_INSTAGRAM ? (
+                      <a
+                        target='_blank'
+                        className='btn btn-outline-white'
+                        href={process.env.NEXT_PUBLIC_INSTAGRAM}
+                        rel='noreferrer'
+                      >
+                        <FaInstagram />
+                      </a>
+                    ) : null}
+                    {process.env.NEXT_PUBLIC_LINKEDIN ? (
+                      <a
+                        target='_blank'
+                        className='btn btn-outline-white'
+                        href={process.env.NEXT_PUBLIC_LINKEDIN}
+                        rel='noreferrer'
+                      >
+                        <FaLinkedin />
+                      </a>
+                    ) : null}
+                    {process.env.NEXT_PUBLIC_TWITTER ? (
+                      <a
+                        target='_blank'
+                        className='btn btn-outline-white'
+                        href={process.env.NEXT_PUBLIC_TWITTER}
+                        rel='noreferrer'
+                      >
+                        <FaSquareXTwitter />
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+                : null}
+
             </div>
-              {categoriesData && categoriesData.length > 0 ? (
-            <div className='col-lg-3 col-12'>
-              <p id='footer-nav'>{translate('categories')}</p>
+
+            <div className='col-lg-3 col-12 navigationWrapper'>
+              <p id='footer-nav'>{translate('navigations')}</p>
+              <ul className='useL'>
+                <li className='nav-item'>
+                  <Link href='/' onClick={() => scrollToTop()}>
+                    {translate('home')}
+                  </Link>
+                </li>
+                {
+                  settings && settings.live_streaming_mode === '1' && checkNewsData && checkNewsData?.data?.isLiveNewsData ?
+                    <li className='nav-item'>
+                      <Link href='/live-news' onClick={() => scrollToTop()}>
+                        {translate('livenews')}
+                      </Link>
+                    </li>
+                    : null
+                }
+
+                {
+                  settings && settings.breaking_news_mode === '1' && checkNewsData && checkNewsData?.data?.isBreakingNewsData ?
+                    <li className='nav-item'>
+                      <Link href='/all-breaking-news' onClick={() => scrollToTop()}>
+                        {translate('breakingnews')}
+                      </Link>
+                    </li>
+                    : null
+                }
+                <li className='nav-item'>
+                  <Link href='/about-us' onClick={() => scrollToTop()}>
+                    {translate('aboutus')}
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link href='/contact-us' onClick={() => scrollToTop()}>
+                    {translate('contactus')}
+                  </Link>
+                </li>
+
+              </ul>
+            </div>
+
+            {/* <div className='col-lg-3 col-12'>
+              <p id='footer-nav'>{translate('contactinfo')}</p>
+              <ul className='useL contactInfo'>
+                <li className='nav-item'>
+                  <a>
+                    <span className='contactIcons'><FaLocationDot /></span>
+                    New S.Sales Road,Toronto,CA,65040
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a
+                    target='_blank'
+                    className=''
+                    href={process.env.NEXT_PUBLIC_FACEBOOK}
+                    rel='noreferrer'
+                  >
+                    <span className='contactIcons'><IoMdMail /></span>
+                    newsweb@gmail.com
+                  </a>
+                </li>
+                <li className='nav-item'>
+                  <a
+                    target='_blank'
+                    className=''
+                    href={process.env.NEXT_PUBLIC_FACEBOOK}
+                    rel='noreferrer'
+                  >
+                    <span className='contactIcons'><MdCall /></span>
+                    0123456789
+                  </a>
+                </li>
+
+
+              </ul>
+            </div> */}
+            {categoriesData && categoriesData.length > 0 ? (
+              <div className='col-lg-3 col-12'>
+                <p id='footer-nav'>{translate('categories')}</p>
                 <ul className='newscate'>
                   {categoriesData.map((element, index) => {
                     return (
@@ -67,93 +201,45 @@ const Footer = () => {
                     )
                   })}
                 </ul>
-            </div>
-              ) : null}
+              </div>
+            ) : null}
 
             <div className='col-lg-3 col-12'>
-              <p id='footer-nav'>{translate('usefulllinks')}</p>
-              <ul className='useL'>
+              <p id='footer-nav'>{translate('downloadapp')}</p>
+              <ul className='useL contactInfo'>
                 <li className='nav-item'>
-                  <Link href='/' onClick={() => scrollToTop()}>
-                    {translate('home')}
-                  </Link>
+                  <a>
+                    {translate('magicofapp')}
+                  </a>
                 </li>
-                <li className='nav-item'>
-                  <Link href='/live-news' onClick={() => scrollToTop()}>
-                    {translate('livenews')}
+
+                <div className='appWrapper'>
+                  <Link href={''}>
+                    <Image src={playStore} height={0} width={0} alt='play-store-img' />
                   </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link href='/all-breaking-news' onClick={() => scrollToTop()}>
-                    {translate('breakingnews')}
+                  <Link href={''}>
+                    <Image src={appleStore} height={0} width={0} alt='apple-store-img' />
                   </Link>
-                </li>
+                </div>
+
+
               </ul>
             </div>
 
-            {
-              process.env.NEXT_PUBLIC_FACEBOOK || process.env.NEXT_PUBLIC_INSTAGRAM || process.env.NEXT_PUBLIC_LINKEDIN || process.env.NEXT_PUBLIC_TWITTER ? ( <div className='col-lg-3 col-12'>
-                <p id='footer-nav'>{translate('followus')} </p>
-                <div className='social_media'>
-                  {process.env.NEXT_PUBLIC_FACEBOOK ? (
-                    <a
-                      target='_blank'
-                      id='social_platforms'
-                      className='btn btn-outline-white'
-                      href={process.env.NEXT_PUBLIC_FACEBOOK}
-                      rel='noreferrer'
-                    >
-                      <FaFacebookSquare /> {translate('facebook')}
-                    </a>
-                  ) : null}
-                  {process.env.NEXT_PUBLIC_INSTAGRAM ? (
-                    <a
-                      target='_blank'
-                      id='social_platforms'
-                      className='btn btn-outline-white'
-                      href={process.env.NEXT_PUBLIC_INSTAGRAM}
-                      rel='noreferrer'
-                    >
-                      <FaInstagram /> {translate('instagram')}
-                    </a>
-                  ) : null}
-                  {process.env.NEXT_PUBLIC_LINKEDIN ? (
-                    <a
-                      target='_blank'
-                      id='social_platforms'
-                      className='btn btn-outline-white'
-                      href={process.env.NEXT_PUBLIC_LINKEDIN}
-                      rel='noreferrer'
-                    >
-                      <FaLinkedin /> {translate('linkedin')}
-                    </a>
-                  ) : null}
-                  {process.env.NEXT_PUBLIC_TWITTER ? (
-                    <a
-                      target='_blank'
-                      id='social_platforms'
-                      className='btn btn-outline-white'
-                      href={process.env.NEXT_PUBLIC_TWITTER}
-                      rel='noreferrer'
-                    >
-                      <FaSquareXTwitter /> {translate('twitter')}
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-              ) : null
-
-            }
-
-
           </div>
-          <hr className='hr_line' />
-
-          <div className='d-flex copyright' id='copyright1'>
-            <p id='footer-Copyright' className='h6 p-2'>
-              {translate('copyright')} © {moment().year()} {translate('allrights')}{' '}
-              <span className='webName'>{settings && settings?.web_setting?.web_name}</span>
-            </p>
+        </div>
+        <div className='copyRightWrapper'>
+          <div className='container d-flex copyright'>
+            <div>
+              <p id='footer-Copyright' className='h6 p-2'>
+                {translate('copyright')} © {moment().year()} {translate('allrights')}{' '}
+                <span className='webName'>{settings && settings?.web_setting?.web_name}</span>
+              </p>
+            </div>
+            <div className='ms-2'>
+              <Link href='/terms-condition'> Terms & Condition |</Link>
+              <Link href='privacy-policy'> Privacy</Link>
+            </div>
           </div>
         </div>
       </section>

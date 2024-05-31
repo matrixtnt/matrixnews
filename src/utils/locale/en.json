@@ -285,5 +285,9 @@
   "descriptionisrequire": "Description is required",
   "resendCodeIn": "Resend Code In",
   "newsDetails": "News Details",
-  "opt-verify": "OTP Verification"
+  "opt-verify": "OTP Verification",
+  "navigations": "Navigations",
+  "contactinfo": "Contact Info",
+  "downloadapp": "Download App",
+  "magicofapp": "Experienec the Magic of the News App"
 }

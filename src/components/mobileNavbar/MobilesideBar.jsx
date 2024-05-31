@@ -22,6 +22,11 @@ import usersvg from '../../../public/assets/images/user.svg'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
+import LanguageDropdown from '../view/Dropdowns/LanguagesDropdown'
+import ProfileDropDown from '../view/Dropdowns/ProfileDropDown'
+import { usePathname } from 'next/navigation'
+import { checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
+import MorePagesDropDown from '../view/Dropdowns/MorePagesDropDown'
 
 const MobilesideBar = ({
   name,
@@ -40,6 +45,8 @@ const MobilesideBar = ({
 }) => {
   const userData = useSelector(selectUser)
 
+  const router = usePathname();
+
   const categories = useSelector(categoriesCacheData)
 
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -48,17 +55,13 @@ const MobilesideBar = ({
 
   const settingsOnOff = useSelector(settingsData)
 
+  const checkNewsData = useSelector(checkNewsDataSelector)
+
   // language change
   const languageChange = (name, code, id) => {
     loadLanguageLabels({ code: code })
     setCurrentLanguage(name, code, id)
   }
-
-  // useEffect(() => {
-  //   if(currentLanguage.code){
-  //     loadLanguageLabels({ code: currentLanguage?.code })
-  //   }
-  // }, [currentLanguage])
 
   const closeRef = useRef()
 
@@ -100,64 +103,65 @@ const MobilesideBar = ({
           <Offcanvas.Title>
             <li id='Nav-btns'>
               {islogout && checkUserData(userData) ? (
-                <Dropdown>
-                  <Dropdown.Toggle id='btnSignIn' className=''>
-                    <img
-                      className='profile_photo'
-                      src={userData.data && userData.data.profile ? userData.data.profile : usersvg.src}
-                      onError={profileimgError}
-                      alt='profile'
-                    />
-                    {truncateText(userName, 10)}
-                  </Dropdown.Toggle>
+                // <Dropdown>
+                //   <Dropdown.Toggle id='btnSignIn' className=''>
+                //     <img
+                //       className='profile_photo'
+                //       src={userData.data && userData.data.profile ? userData.data.profile : usersvg.src}
+                //       onError={profileimgError}
+                //       alt='profile'
+                //     />
+                //     {truncateText(userName, 10)}
+                //   </Dropdown.Toggle>
 
-                  <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
-                    <Dropdown.Item id='btnLogout'>
-                      <Link id='btnBookmark' href='/bookmark' onClick={handleClose}>
-                        {translate('bookmark')}
-                      </Link>
-                    </Dropdown.Item>
-                    <Dropdown.Item id='btnLogout' onClick={handleClose}>
-                      <Link id='btnBookmark' href='/user-based-categories'>
-                        {translate('managePreferences')}
-                      </Link>
-                    </Dropdown.Item>
-                    {userData?.data?.role !== 0 ? (
-                      <>
-                        <Dropdown.Item id='btnLogout'>
-                          <Link id='btnBookmark' href='/create-news' onClick={() => handleClose()}>
-                            {translate('createNewsLbl')}
-                          </Link>
-                        </Dropdown.Item>
+                //   <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
+                //     <Dropdown.Item id='btnLogout'>
+                //       <Link id='btnBookmark' href='/bookmark' onClick={handleClose}>
+                //         {translate('bookmark')}
+                //       </Link>
+                //     </Dropdown.Item>
+                //     <Dropdown.Item id='btnLogout' onClick={handleClose}>
+                //       <Link id='btnBookmark' href='/user-based-categories'>
+                //         {translate('managePreferences')}
+                //       </Link>
+                //     </Dropdown.Item>
+                //     {userData?.data?.role !== 0 ? (
+                //       <>
+                //         <Dropdown.Item id='btnLogout'>
+                //           <Link id='btnBookmark' href='/create-news' onClick={() => handleClose()}>
+                //             {translate('createNewsLbl')}
+                //           </Link>
+                //         </Dropdown.Item>
 
-                        <Dropdown.Item id='btnLogout'>
-                          <Link id='btnBookmark' href='/manage-news' onClick={() => handleClose()}>
-                            {translate('manageNewsLbl')}
-                          </Link>
-                        </Dropdown.Item>
-                      </>
-                    ) : null}
-                    <Dropdown.Item id='btnLogout'>
-                      <Link
-                        id='btnBookmark'
-                        // onClick={() => {
-                        //   ProfileModal(true)
-                        //   handleClose()
-                        // }}
-                        href={'/profile-update'}
-                      >
-                        {translate('update-profile')}
-                      </Link>
-                    </Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item onClick={logout} id='btnLogout' className=''>
-                      {translate('logout')}
-                    </Dropdown.Item>
-                    <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
-                      {translate('deleteAcc')}
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                //         <Dropdown.Item id='btnLogout'>
+                //           <Link id='btnBookmark' href='/manage-news' onClick={() => handleClose()}>
+                //             {translate('manageNewsLbl')}
+                //           </Link>
+                //         </Dropdown.Item>
+                //       </>
+                //     ) : null}
+                //     <Dropdown.Item id='btnLogout'>
+                //       <Link
+                //         id='btnBookmark'
+                //         // onClick={() => {
+                //         //   ProfileModal(true)
+                //         //   handleClose()
+                //         // }}
+                //         href={'/profile-update'}
+                //       >
+                //         {translate('update-profile')}
+                //       </Link>
+                //     </Dropdown.Item>
+                //     <Dropdown.Divider />
+                //     <Dropdown.Item onClick={logout} id='btnLogout' className=''>
+                //       {translate('logout')}
+                //     </Dropdown.Item>
+                //     <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
+                //       {translate('deleteAcc')}
+                //     </Dropdown.Item>
+                //   </Dropdown.Menu>
+                // </Dropdown>
+                <ProfileDropDown userName={userName} userData={userData} isLogin={islogout} profileimg={usersvg.src} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} handleClose={handleClose} />
               ) : (
                 <Button variant='danger' onClick={() => setModalShow(true)} id='btnSignIn' className='' type='button'>
                   <BiUserCircle size={23} id='btnLogo' />
@@ -165,9 +169,10 @@ const MobilesideBar = ({
                 </Button>
               )}
             </li>
-
-            <li id='Nav-btns'>
-              <Dropdown>
+            {
+              router.pathname === '/' ?
+                <li id='Nav-btns'>
+                  {/* <Dropdown>
                 <Dropdown.Toggle id='btnSignIn' className=''>
                   {currentLanguage?.name}
                 </Dropdown.Toggle>
@@ -186,8 +191,9 @@ const MobilesideBar = ({
                       )
                     })}
                 </Dropdown.Menu>
-              </Dropdown>
-            </li>
+              </Dropdown> */}
+                  <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} handleClose={handleClose} />
+                </li> : null}
             <li id='Nav-btns'>
               {islogout && checkUserData(userData) ? (
                 <Link
@@ -220,29 +226,44 @@ const MobilesideBar = ({
         </Offcanvas.Header>
         <Offcanvas.Body>
           <ul className=''>
-            <li className='nav-item'>
+            <li id='NavHover' className='nav-item'>
               <b>
                 <Link
+                  id='nav-links'
                   activeclassname='active'
                   exact='true'
-                  id='nav-links'
-                  className=''
                   aria-current='page'
                   href='/'
+                  className={`headerDropdownItem link-color ${router === '/' ? 'navLinkActive' : ''}`}
                   onClick={handleClose}
                 >
                   {translate('home')}
                 </Link>
               </b>
             </li>
-            {settingsOnOff && settingsOnOff.live_streaming_mode === '1' ? (
-              <li className='nav-item'>
+            <li id='NavHover' className='nav-item'>
+              <b>
+                <Link
+                  id='nav-links'
+                  activeclassname='active'
+                  exact='true'
+                  className={`headerDropdownItem link-color ${router === '/about-us' ? 'navLinkActive' : ''}`}
+                  aria-current='page'
+                  href={`/about-us`}
+                  onClick={handleClose}
+                >
+                  {translate('aboutus')}
+                </Link>
+              </b>
+            </li>
+            {settingsOnOff && settingsOnOff.live_streaming_mode === '1' && checkNewsData && checkNewsData?.data?.isLiveNewsData ? (
+              <li id='NavHover' className='nav-item'>
                 <b>
                   <Link
+                    id='nav-links'
                     activeclassname='active'
                     exact='true'
-                    id='nav-links'
-                    className=''
+                    className={`headerDropdownItem link-color ${router === '/live-news' ? 'navLinkActive' : ''}`}
                     aria-current='page'
                     href='/live-news'
                     onClick={handleClose}
@@ -252,16 +273,16 @@ const MobilesideBar = ({
                 </b>
               </li>
             ) : null}
-            {settingsOnOff && settingsOnOff.breaking_news_mode === '1' ? (
-              <li className='nav-item'>
+            {settingsOnOff && settingsOnOff.breaking_news_mode === '1' && checkNewsData && checkNewsData?.data?.isBreakingNewsData ? (
+              <li id='NavHover' className='nav-item'>
                 <b>
                   <Link
+                    id='nav-links'
                     activeclassname='active'
                     exact='true'
-                    id='nav-links'
-                    className=''
+                    className={`headerDropdownItem link-color ${router === '/all-breakingnews' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    href='/all-breaking-news  '
+                    href='/all-breaking-news'
                     onClick={handleClose}
                   >
                     {translate('breakingnews')}
@@ -269,20 +290,25 @@ const MobilesideBar = ({
                 </b>
               </li>
             ) : null}
-            <li className='nav-item'>
+
+            <li id='NavHover' className='nav-item'>
               <b>
                 <Link
+                  id='nav-links'
                   activeclassname='active'
                   exact='true'
-                  id='nav-links'
-                  className='link-color'
+                  className={`headerDropdownItem link-color ${router === '/contact-us' ? 'navLinkActive' : ''}`}
                   aria-current='page'
-                  href='/more-pages'
+                  href='/contact-us'
                   onClick={handleClose}
                 >
-                  {translate('More Pages')}
+                  {translate('contactus')}
                 </Link>
               </b>
+            </li>
+
+            <li id='NavHover' className='nav-item'>
+              <MorePagesDropDown handleClose={handleClose} />
             </li>
             {settingsOnOff && settingsOnOff.category_mode === '1' ? (
               <li className='nav-item has-children'>

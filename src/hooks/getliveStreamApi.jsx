@@ -3,11 +3,13 @@ import { GET_LIVE_STREAMING } from 'src/utils/api'
 
 export const getLiveStreamingApi = {
   getLiveStreaming: requestData => {
-    const { access_key, language_id } = requestData
+    const { access_key, language_id ,offset,limit} = requestData
     return Api.get(GET_LIVE_STREAMING, {
       params: {
         access_key,
-        language_id
+        language_id,
+        offset,
+        limit,
       }
     })
   }

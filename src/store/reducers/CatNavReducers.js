@@ -31,6 +31,7 @@ export const CategoriesDataSlice = createSlice({
         },
         categoriesFailed: (state, action) => {
             state.loading = false;
+            state.categories= [];
         },
         categoriesUpdateLanguage: (state, action) => {
             if (state.Lang) {

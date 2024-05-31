@@ -63,6 +63,7 @@ const Notification = () => {
       return data.data;
     } catch (error) {
       console.log(error);
+      setIsLoading({ loading: false })
     }
   };
 

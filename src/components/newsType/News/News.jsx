@@ -280,7 +280,11 @@ const News = () => {
                   <div id='nv-Header' className=''>
                     <div id='nv-left-head'>
                       <p id='head-lables'>
-                        <FiCalendar size={18} id='head-logos' /> {formatDate(Data && Data[0]?.date)}
+                        <FiCalendar size={18} id='head-logos' /> {new Date(Data && Data[0]?.date).toLocaleString('en-us', {
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric'
+                        })}
                       </p>
                       <p id='head-lables'>
                         <AiOutlineLike size={18} id='head-logos' /> {Data && Data[0]?.total_like} {translate('likes')}

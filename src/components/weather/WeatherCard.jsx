@@ -19,8 +19,9 @@ import { useEffect } from 'react'
 import { loadLocation, locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
-import { isLogin } from 'src/utils'
+import { isLogin, translate } from 'src/utils'
 import { useRouter } from 'next/router'
+import LanguageDropdown from '../view/Dropdowns/LanguagesDropdown'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -105,11 +106,11 @@ const WeatherCard = () => {
     }
   }
 
-  // useEffect(() => {
-  //   if(currentLanguage.code){
-  //     loadLanguageLabels({ code: currentLanguage?.code })
-  //   }
-  // }, [currentLanguage])
+  useEffect(() => {
+    if (currentLanguage.code) {
+      loadLanguageLabels({ code: currentLanguage?.code })
+    }
+  }, [currentLanguage.code])
 
   return (
     <div id='rns-weather-card'>
@@ -157,7 +158,7 @@ const WeatherCard = () => {
                 router.pathname === '/' ? <>
                   <ul className='language_section'>
                     <li>
-                      <Dropdown>
+                      {/* <Dropdown>
                         <Dropdown.Toggle className='language_drop'>
                           {currentLanguage?.displayName ? currentLanguage?.displayName : currentLanguage?.name}
                         </Dropdown.Toggle>
@@ -176,12 +177,13 @@ const WeatherCard = () => {
                               )
                             })}
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
+                      <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange}/>
                     </li>
                   </ul>
                   <div className='slash-line'></div>
                 </>
-                  : null
+                  : <span className='mt-1 fw-bold followUs'>{translate('followus')} :</span>
               }
               <div className='social_media_top'>
                 {process.env.NEXT_PUBLIC_FACEBOOK ? (

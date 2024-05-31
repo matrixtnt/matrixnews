@@ -42,6 +42,11 @@ import toast from 'react-hot-toast'
 import { accountDeleteApi } from 'src/store/actions/campaign'
 import { Modal } from 'antd'
 import { loadCatNavData } from 'src/store/reducers/CatNavReducers'
+import { checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
+import MorePagesDropDown from '../view/Dropdowns/MorePagesDropDown'
+import { usePathname } from 'next/navigation';
+import ProfileDropDown from '../view/Dropdowns/ProfileDropDown'
+
 const { confirm } = Modal
 
 const Header = () => {
@@ -53,6 +58,7 @@ const Header = () => {
   const [profileModal, setProfileModal] = useState(false)
   const [isuserRole, setisuserRole] = useState(false)
   let user = getUser()
+  const router = usePathname();
   const navigate = useRouter()
   const auth = getAuth()
 
@@ -63,6 +69,10 @@ const Header = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
 
   const settings = useSelector(settingsData)
+
+  const checkNewsData = useSelector(checkNewsDataSelector)
+
+  // console.log(checkNewsData.data, 'header innn')
 
   // language change
   const languageChange = (name, code, id) => {
@@ -280,22 +290,36 @@ const Header = () => {
                     id='nav-links'
                     activeclassname='active'
                     exact='true'
-                    className='link-color'
                     aria-current='page'
                     href='/'
+                    className={`headerDropdownItem link-color ${router === '/' ? 'navLinkActive' : ''}`}
                   >
                     {translate('home')}
                   </Link>
                 </b>
               </li>
-              {settings && settings.live_streaming_mode === '1' ? (
+              <li id='NavHover' className='nav-item'>
+                <b>
+                  <Link
+                    id='nav-links'
+                    activeclassname='active'
+                    exact='true'
+                    className={`headerDropdownItem link-color ${router === '/about-us' ? 'navLinkActive' : ''}`}
+                    aria-current='page'
+                    href={`/about-us`}
+                  >
+                    {translate('aboutus')}
+                  </Link>
+                </b>
+              </li>
+              {settings && settings.live_streaming_mode === '1' && checkNewsData && checkNewsData?.data?.isLiveNewsData ? (
                 <li id='NavHover' className='nav-item'>
                   <b>
                     <Link
                       id='nav-links'
                       activeclassname='active'
                       exact='true'
-                      className='link-color'
+                      className={`headerDropdownItem link-color ${router === '/live-news' ? 'navLinkActive' : ''}`}
                       aria-current='page'
                       href='/live-news'
                     >
@@ -304,14 +328,14 @@ const Header = () => {
                   </b>
                 </li>
               ) : null}
-              {settings && settings.breaking_news_mode === '1' ? (
+              {settings && settings.breaking_news_mode === '1' && checkNewsData && checkNewsData?.data?.isBreakingNewsData ? (
                 <li id='NavHover' className='nav-item'>
                   <b>
                     <Link
                       id='nav-links'
                       activeclassname='active'
                       exact='true'
-                      className='link-color'
+                      className={`headerDropdownItem link-color ${router === '/all-breakingnews' ? 'navLinkActive' : ''}`}
                       aria-current='page'
                       href='/all-breaking-news'
                     >
@@ -320,74 +344,81 @@ const Header = () => {
                   </b>
                 </li>
               ) : null}
+
               <li id='NavHover' className='nav-item'>
                 <b>
                   <Link
                     id='nav-links'
                     activeclassname='active'
                     exact='true'
-                    className='link-color'
+                    className={`headerDropdownItem link-color ${router === '/contact-us' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    href='/more-pages'
+                    href='/contact-us'
                   >
-                    {translate('More Pages')}
+                    {translate('contactus')}
                   </Link>
                 </b>
               </li>
-              <li id='Nav-btns' className='d-flex'>
+
+              <li id='NavHover' className='nav-item'>
+                <MorePagesDropDown />
+              </li>
+
+              <li id='Nav-btns' className='profileDropDownWrapper'>
                 {isLogin() && checkUserData(userData) ? (
-                  <Dropdown>
-                    <Dropdown.Toggle id='btnSignIn' className='me-2'>
-                      <img
-                        className='profile_photo'
-                        src={userData.data && userData.data.profile ? userData.data.profile : profileimg}
-                        onError={profileimgError}
-                        alt='profile'
-                      />
-                      {truncateText(userName, 10)}
-                    </Dropdown.Toggle>
+                  // <Dropdown>
+                  //   <Dropdown.Toggle id='btnSignIn' className='me-2'>
+                  //     <img
+                  //       className='profile_photo'
+                  //       src={userData.data && userData.data.profile ? userData.data.profile : profileimg}
+                  //       onError={profileimgError}
+                  //       alt='profile'
+                  //     />
+                  //     {truncateText(userName, 10)}
+                  //   </Dropdown.Toggle>
 
-                    <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
-                      <Dropdown.Item id='btnLogout'>
-                        <Link id='btnBookmark' href='/bookmark'>
-                          {translate('bookmark')}
-                        </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item id='btnLogout'>
-                        <Link id='btnBookmark' href='/user-based-categories'>
-                          {translate('managePreferences')}
-                        </Link>
-                      </Dropdown.Item>
+                  //   <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
+                  //     <Dropdown.Item id='btnLogout'>
+                  //       <Link id='btnBookmark' href='/bookmark'>
+                  //         {translate('bookmark')}
+                  //       </Link>
+                  //     </Dropdown.Item>
+                  //     <Dropdown.Item id='btnLogout'>
+                  //       <Link id='btnBookmark' href='/user-based-categories'>
+                  //         {translate('managePreferences')}
+                  //       </Link>
+                  //     </Dropdown.Item>
 
-                      {userData?.data?.role !== 0 ? (
-                        <>
-                          <Dropdown.Item id='btnLogout'>
-                            <Link id='btnBookmark' href='/create-news'>
-                              {translate('createNewsLbl')}
-                            </Link>
-                          </Dropdown.Item>
+                  //     {/* {userData?.data?.role !== 0 ? (
+                  //       <>
+                  //         <Dropdown.Item id='btnLogout'>
+                  //           <Link id='btnBookmark' href='/create-news'>
+                  //             {translate('createNewsLbl')}
+                  //           </Link>
+                  //         </Dropdown.Item>
 
-                          <Dropdown.Item id='btnLogout'>
-                            <Link id='btnBookmark' href='/manage-news'>
-                              {translate('manageNewsLbl')}
-                            </Link>
-                          </Dropdown.Item>
-                        </>
-                      ) : null}
-                      <Dropdown.Item id='btnLogout'>
-                        <Link id='btnBookmark' href='/profile-update'>
-                          {translate('update-profile')}
-                        </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
-                        {translate('deleteAcc')}
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item onClick={logout} id='btnLogout' className=''>
-                        {translate('logout')}
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  //         <Dropdown.Item id='btnLogout'>
+                  //           <Link id='btnBookmark' href='/manage-news'>
+                  //             {translate('manageNewsLbl')}
+                  //           </Link>
+                  //         </Dropdown.Item>
+                  //       </>
+                  //     ) : null} */}
+                  //     <Dropdown.Item id='btnLogout'>
+                  //       <Link id='btnBookmark' href='/profile-update'>
+                  //         {translate('update-profile')}
+                  //       </Link>
+                  //     </Dropdown.Item>
+                  //     <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
+                  //       {translate('deleteAcc')}
+                  //     </Dropdown.Item>
+                  //     <Dropdown.Divider />
+                  //     <Dropdown.Item onClick={logout} id='btnLogout' className=''>
+                  //       {translate('logout')}
+                  //     </Dropdown.Item>
+                  //   </Dropdown.Menu>
+                  // </Dropdown>
+                  <><ProfileDropDown userName={userName} userData={userData} isLogin={isLogin} profileimg={profileimg} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)}/></>
                 ) : (
                   <Button
                     variant='danger'
@@ -410,7 +441,7 @@ const Header = () => {
                 ) : null}
 
                 {/* searchbar */}
-                <div id='btnNotification' type='button' className='btn ms-2' onClick={actionSearch}>
+                <div id='btnNotification' type='button' className='btn' onClick={actionSearch}>
                   <AiOutlineSearch size={23} />
                 </div>
               </li>

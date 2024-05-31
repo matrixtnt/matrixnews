@@ -15,12 +15,21 @@ import { loadGetUserByIdApi, selectUser } from 'src/store/reducers/userReducer'
 import { usePathname } from 'next/navigation'
 import { categoriesUpdateLanguage, loadCategories } from 'src/store/reducers/CatNavReducers'
 import CookiesComponent from '../cookies/CookiesComponent'
+import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
+import { useQuery } from '@tanstack/react-query'
+import { access_key } from 'src/utils/api'
+import { checkBreakingNewsData, checkLiveNewsData, checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
+import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
   const userData = useSelector(selectUser)
   const router = useRouter()
   const pathname = usePathname()
+
+  const checkNewsData = useSelector(checkNewsDataSelector)
+
+  const livenewsFound = checkNewsData.data.isLiveNewsData
 
   const dispatch = useDispatch()
 
@@ -143,7 +152,44 @@ const Layout = ({ children }) => {
       document.removeEventListener('copy', handleCopy);
     };
   }, []);
-  
+
+
+  // to check live new Data 
+  // api call
+  const getLiveStreaming = async () => {
+    try {
+      const { data } = await getLiveStreamingApi.getLiveStreaming({
+        access_key: access_key,
+        language_id: currentLanguage.id
+      })
+      dispatch(checkLiveNewsData({ data: { liveNewsDataFound: data.data?.length > 0 ? true : false } }))
+      // console.log(data, 'checkLiveData')
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  // api call 
+  const getBreakingNewsApi = async () => {
+    try {
+      const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id: currentLanguage.id, access_key: access_key })
+      dispatch(checkBreakingNewsData({ data: { breakingNewsDataFound: data.data?.length > 0 ? true : false } }))
+      return data.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (currentLanguage.id) {
+      getLiveStreaming()
+      getBreakingNewsApi()
+    }
+  }, [currentLanguage])
+
+
   return (
     <>
       {settings ? (

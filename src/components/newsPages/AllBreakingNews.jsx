@@ -12,35 +12,76 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 // import NoDataFound from '../noDataFound/NoDataFound'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()
   const currentlanguage = useSelector(selectCurrentLanguage)
 
   const router = useRouter()
+
+  const dataPerPage = 1;
+
+  const [isLoading, setIsLoading] = useState({
+    loading: false,
+    loadMoreLoading: false
+  })
+  const [loadMore, setLoadMore] = useState(false)
+  const [breakingNewsData, setBreakingNewsData] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+  const handleLoadMore = () => {
+    setLoadMore(true)
+    setOffset(offset + 1)
+  }
+
+
   // api call 
   const getBreakingNewsApi = async () => {
+    !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
-      const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id, access_key })
+      const { data } = await AllBreakingNewsApi.getBreakingNews({
+        language_id: language_id,
+        access_key: access_key,
+        offset: offset * dataPerPage,
+        limit: dataPerPage,
+      })
+      setTotalData(data.total)
+      setIsLoading({ loading: false })
+      setIsLoading({ loadMoreLoading: false })
       return data.data
     } catch (error) {
       console.log(error)
+      setIsLoading({ loading: false })
     }
   }
 
   // react query
-  const { isLoading, data: Data } = useQuery({
-    queryKey: ['all-breaking-news', language_id, access_key, currentlanguage],
+  const { data: Data } = useQuery({
+    queryKey: ['all-breaking-news', language_id, access_key, currentlanguage, offset],
     queryFn: getBreakingNewsApi
   })
 
 
+
+  useEffect(() => {
+    if (Data && Data) {
+      setBreakingNewsData((prevData) => [...prevData, ...Data]);
+    }
+  }, [Data])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
+
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('breakingNewsLbl')}  />
       <div id='BNV-main'>
         <div id='BNV-content' className='container'>
-          {isLoading ? (
+          {isLoading.loading ? (
             <div className='row'>
               {[...Array(3)].map((_, index) => (
                 <div className='col-md-4 col-12' key={index}>
@@ -51,7 +92,7 @@ const AllBreakingNews = () => {
           ) : (
             <div className='row my-5'>
               {Data && Data.length > 0 ? (
-                Data.map(element => (
+                breakingNewsData.map(element => (
                   <div className='col-md-4 col-12' key={element.id}>
                     <Link id='Link-all'
                       href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
@@ -82,6 +123,9 @@ const AllBreakingNews = () => {
               )}
             </div>
           )}
+          {totalData > dataPerPage && totalData !== breakingNewsData.length ? (
+            <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+          ) : null}
         </div>
       </div>
     </Layout>

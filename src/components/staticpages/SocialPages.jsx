@@ -60,7 +60,7 @@ const SocialPages = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement={router?.query?.slug} />
+      <BreadcrumbNav SecondElement={router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1)}  />
       <section className='morePagesSlugPage container'>
         <div className="row">
           <div className="col-12">
@@ -78,7 +78,7 @@ const SocialPages = () => {
                     :
                     <>
                       {NoDataFound()}
-                     
+
                     </>
                   }
                 </div>

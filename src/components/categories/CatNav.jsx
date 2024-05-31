@@ -458,7 +458,6 @@ const CatNav = () => {
       },
       onError: error => {
         setSubLoading(false)
-
         console.log(error)
       }
     })

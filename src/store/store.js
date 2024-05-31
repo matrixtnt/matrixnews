@@ -14,6 +14,7 @@ import CategoriesDataSlice from './reducers/CatNavReducers';
 import featureLayoutReducer from './reducers/featureLayoutReducer';
 import newsReducer from './reducers/newsReducer';
 import MorePagesReducers  from './reducers/MorePagesReducers';
+import CheckNewsDataReducer from './reducers/CheckNewsDataReducer';
 
 const persistConfig = {
     key: 'root',
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
     Layouts: featureLayoutReducer,
     NewsData: newsReducer,
     morePages: MorePagesReducers,
+    checkNewsData: CheckNewsDataReducer,
 });
 
 export const store = configureStore({
