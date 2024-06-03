@@ -42,7 +42,6 @@ export default newsSlice.reducer
 
 // API Calls
 export const loadNews = ({
-    access_key = "",
     offset = "",
     limit = "",
     id = "",
@@ -55,9 +54,9 @@ export const loadNews = ({
     slug = "",
     tag_id = "",
     latitude = "",
-    longitude = "", 
-    onSuccess = () => { }, 
-    onError = () => { }, 
+    longitude = "",
+    onSuccess = () => { },
+    onError = () => { },
     onStart = () => { } }) => {
     const state = store.getState()
     const { currentLanguage } = store?.getState().languages
@@ -68,32 +67,32 @@ export const loadNews = ({
     // console.log('currentLanguage = ', currentLanguage?.id, 'Lang =', Lang?.language_id)
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes')
     // if ((currentLanguage?.id != Lang?.language_id) || diffInMinutes > 10) {
-        store.dispatch(
-            apiCallBegan({
-                ...getNews(access_key,
-                    offset,
-                    limit,
-                    id,
-                    get_user_news,
-                    search, // {optional}
-                    category_id,
-                    category_slug,
-                    subcategory_id,
-                    subcategory_slug,
-                    slug,
-                    tag_id,
-                    latitude,
-                    longitude),
-                displayToast: false,
-                onStartDispatch: newsRequested.type,
-                onSuccessDispatch: newsReceived.type,
-                onErrorDispatch: newsRequestFailed.type,
-                onStart,
-                onSuccess,
-                onError
-            })
-        )
-    }
+    store.dispatch(
+        apiCallBegan({
+            ...getNews(
+                offset,
+                limit,
+                id,
+                get_user_news,
+                search, // {optional}
+                category_id,
+                category_slug,
+                subcategory_id,
+                subcategory_slug,
+                slug,
+                tag_id,
+                latitude,
+                longitude),
+            displayToast: false,
+            onStartDispatch: newsRequested.type,
+            onSuccessDispatch: newsReceived.type,
+            onErrorDispatch: newsRequestFailed.type,
+            onStart,
+            onSuccess,
+            onError
+        })
+    )
+}
 // }
 
 // Selector Functions

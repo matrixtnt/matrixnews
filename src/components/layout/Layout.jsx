@@ -28,11 +28,10 @@ const Layout = ({ children }) => {
 
   const checkNewsData = useSelector(checkNewsDataSelector)
 
-  const isLiveNewsCallOnce = checkNewsData.data.isLiveNewsData
-  const isBreakingNewsCallOnce = checkNewsData.data.isLiveNewsData
+  const isLiveNewsCallOnce = checkNewsData.data.isLiveNewsApiCallOnce
+  const isBreakingNewsCallOnce = checkNewsData.data.isBreakingNewsApiCallOnce
 
   const dispatch = useDispatch()
-
 
   useSelector(selectCurrentLanguageLabels)
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -161,7 +160,7 @@ const Layout = ({ children }) => {
       const { data } = await getLiveStreamingApi.getLiveStreaming({
         language_id: currentLanguage.id
       })
-      dispatch(checkLiveNewsData({ data: { liveNewsDataFound: data.data?.length > 0 ? true : false } }))
+      dispatch(checkLiveNewsData({ data: { liveNewsDataFound: data.data?.length > 0 ? true : false, isLiveNewsApiCallOnce: true } }))
       // console.log(data, 'checkLiveData')
       return data.data
     } catch (error) {
@@ -174,7 +173,7 @@ const Layout = ({ children }) => {
   const getBreakingNewsApi = async () => {
     try {
       const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id: currentLanguage.id, })
-      dispatch(checkBreakingNewsData({ data: { breakingNewsDataFound: data.data?.length > 0 ? true : false } }))
+      dispatch(checkBreakingNewsData({ data: { breakingNewsDataFound: data.data?.length > 0 ? true : false, isBreakingNewsApiCallOnce: true, } }))
       return data.data
     } catch (error) {
       console.log(error)
@@ -182,7 +181,7 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (currentLanguage.id) {
+    if (currentLanguage.id && !isLiveNewsCallOnce && !isBreakingNewsCallOnce) {
       getLiveStreaming()
       getBreakingNewsApi()
     }

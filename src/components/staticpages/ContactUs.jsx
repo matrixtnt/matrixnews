@@ -6,7 +6,7 @@ import { translate, NoDataFound } from '../../utils'
 import { useRouter } from 'next/router.js'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 // import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
@@ -59,7 +59,7 @@ const ContactUs = () => {
 
     return (
         <Layout>
-            <BreadcrumbNav SecondElement={translate('contactus')}  />
+            <BreadcrumbNav SecondElement={translate('contactus')} />
             <section className='morePagesSlugPage container'>
                 <div className="row">
                     <div className="col-12">

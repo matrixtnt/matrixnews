@@ -6,7 +6,6 @@ export const getNewsApi = {
 
   getNews: requestData => {
     const {
-      access_key,
       offset,
       limit,
       id,
@@ -25,7 +24,6 @@ export const getNewsApi = {
     } = requestData
     return Api.get(GET_NEWS, {
       params: {
-        access_key,
         offset,
         limit,
         id,
@@ -45,9 +43,8 @@ export const getNewsApi = {
     })
   },
   setNewsView: requestData => {
-    const { access_key, news_id } = requestData
+    const { news_id } = requestData
     return Api.post(SET_NEWS_VIEW, {
-      access_key,
       news_id
     })
   }

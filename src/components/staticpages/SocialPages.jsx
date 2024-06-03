@@ -6,7 +6,7 @@ import { translate, NoDataFound } from '../../utils'
 import { useRouter } from 'next/router.js'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 // import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
@@ -60,7 +60,7 @@ const SocialPages = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1)}  />
+      <BreadcrumbNav SecondElement={router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1)} />
       <section className='morePagesSlugPage container'>
         <div className="row">
           <div className="col-12">

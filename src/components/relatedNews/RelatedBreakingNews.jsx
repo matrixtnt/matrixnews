@@ -5,7 +5,7 @@ import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { placeholderImage, translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 
 const RelatedBreakingNews = props => {
@@ -15,7 +15,7 @@ const RelatedBreakingNews = props => {
   // api call
   const getBreakingNews = async () => {
     try {
-      const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id, access_key })
+      const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id })
       const filteredData = data && data?.data.filter(element => element.id !== props.id)
       return filteredData
     } catch (error) {

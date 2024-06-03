@@ -6,7 +6,7 @@ import { translate, NoDataFound } from '../../utils'
 import { useRouter } from 'next/router.js'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
 // import NoDataFound from 'src/components/noDataFound/NoDataFound.jsx'
@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
 
     const str = "/privacy-policy";
     const withoutSlash = str.slice(1);
-    console.log(withoutSlash,'withOutSladh')
+    console.log(withoutSlash, 'withOutSladh')
 
     const page = router.route.slice(1);
 
@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
 
     return (
         <Layout>
-            <BreadcrumbNav SecondElement={translate('priPolicy')}  />
+            <BreadcrumbNav SecondElement={translate('priPolicy')} />
             <section className='morePagesSlugPage container'>
                 <div className="row">
                     <div className="col-12">

@@ -18,16 +18,16 @@ export const checkNewsDataSlice = createSlice({
   initialState,
   reducers: {
     checkLiveNewsData: (state, action) => {
-      const { liveNewsDataFound,liveNewsData } = action.payload.data
+      const { liveNewsDataFound,isLiveNewsApiCallOnce } = action.payload.data
       state.data.isLiveNewsData = liveNewsDataFound
-      state.data.liveNewsData = liveNewsData
+      state.data.isLiveNewsApiCallOnce = isLiveNewsApiCallOnce
       // console.log("In reducer-> ",action.payload.data)
     },
     checkBreakingNewsData: (state, action) => {
-      const { breakingNewsDataFound,breakingNewsData  } = action.payload.data
+      const { breakingNewsDataFound,isBreakingNewsApiCallOnce  } = action.payload.data
       // console.log("In reducer-> ",action.payload.data)
       state.data.isBreakingNewsData = breakingNewsDataFound
-      state.data.breakingNewsData = breakingNewsData
+      state.data.isBreakingNewsApiCallOnce = isBreakingNewsApiCallOnce
     }
   }
 })

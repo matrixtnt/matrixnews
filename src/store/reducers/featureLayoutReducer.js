@@ -30,7 +30,7 @@ export const featureLayoutSlice = createSlice({
         layout.Lang.language_id = action.payload
       }
     },
-    
+
   }
 })
 
@@ -39,35 +39,34 @@ export default featureLayoutSlice.reducer
 
 // API Calls
 export const loadLayout = ({
-  access_key = "",
   offset = "",
   limit = "",
   slug = "",
   latitude = "",
   longitude = "",
   section_id = "",
-  onSuccess = () => {},
-  onError = () => {},
-  onStart = () => {}
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
 }) => {
   const state = store.getState()
   const { currentLanguage } = store.getState().languages
   const { lastFetch, Lang } = state.Layouts
   const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
   // if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN) {
-    store.dispatch(
-      apiCallBegan({
-        ...getFeatureSection(access_key, offset, limit, slug, latitude, longitude, section_id),
-        displayToast: false,
-        onStartDispatch: layoutRequested.type,
-        onSuccessDispatch: layoutReceived.type,
-        onErrorDispatch: layoutRequestFailed.type,
-        onStart,
-        onSuccess,
-        onError
-      })
-    )
-  }
+  store.dispatch(
+    apiCallBegan({
+      ...getFeatureSection(offset, limit, slug, latitude, longitude, section_id),
+      displayToast: false,
+      onStartDispatch: layoutRequested.type,
+      onSuccessDispatch: layoutReceived.type,
+      onErrorDispatch: layoutRequestFailed.type,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
+}
 // }
 
 // Selector Functions

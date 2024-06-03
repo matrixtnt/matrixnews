@@ -2,7 +2,7 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 import { extractJSONFromMarkup } from 'src/utils'
-import { GET_WEB_SEO_PAGES, access_key } from 'src/utils/api'
+import { GET_WEB_SEO_PAGES } from 'src/utils/api'
 
 const MorePages = dynamic(() => import('src/components/staticpages/MorePages'), { ssr: false })
 
@@ -10,7 +10,7 @@ const MorePages = dynamic(() => import('src/components/staticpages/MorePages'), 
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?access_key=${access_key}&type=more_pages`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}&type=more_pages`
     )
     const data = response.data
     return data
@@ -44,21 +44,21 @@ const Index = ({ seoData, currentURL }) => {
 
 let serverSidePropsFunction = null;
 if (process.env.NEXT_PUBLIC_SEO === "true") {
-    serverSidePropsFunction = async (context) => {
-        const { req } = context; // Extract query and request object from context
+  serverSidePropsFunction = async (context) => {
+    const { req } = context; // Extract query and request object from context
 
-        // const currentURL = `${req.headers.host}${req.url}`;
-        const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/more-pages/';
-        const seoData = await fetchDataFromSeo(req.url);
-        // Pass the fetched data as props to the Index component
+    // const currentURL = `${req.headers.host}${req.url}`;
+    const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/more-pages/';
+    const seoData = await fetchDataFromSeo(req.url);
+    // Pass the fetched data as props to the Index component
 
-        return {
-            props: {
-                seoData,
-                currentURL,
-            },
-        };
+    return {
+      props: {
+        seoData,
+        currentURL,
+      },
     };
+  };
 }
 
 export const getServerSideProps = serverSidePropsFunction

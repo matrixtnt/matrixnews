@@ -2,7 +2,7 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 import { extractJSONFromMarkup } from 'src/utils'
-import { GET_WEB_SEO_PAGES, access_key } from 'src/utils/api'
+import { GET_WEB_SEO_PAGES } from 'src/utils/api'
 
 const AllBreakingNews = dynamic(() => import('src/components/newsPages/AllBreakingNews'), { ssr: false })
 
@@ -10,7 +10,7 @@ const AllBreakingNews = dynamic(() => import('src/components/newsPages/AllBreaki
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?access_key=${access_key}&type=all_breaking_news`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}&type=all_breaking_news`
     )
     const data = response.data
     return data
@@ -22,7 +22,7 @@ const fetchDataFromSeo = async () => {
 
 const Index = ({ seoData, currentURL }) => {
   let schema = null
-  
+
 
   if (seoData && seoData.data && seoData.data.length > 0 && seoData.data[0].schema_markup) {
     const schemaString = seoData.data[0].schema_markup

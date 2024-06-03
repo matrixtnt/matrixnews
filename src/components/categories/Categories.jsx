@@ -9,7 +9,6 @@ import Link from 'next/link'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { NoDataFound, placeholderImage, translate } from '../../utils'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
-import { access_key } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
@@ -45,7 +44,6 @@ const Categories = () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await CategoriesApi.getCategories({
-        access_key,
         offset: offset * dataPerPage,
         limit: dataPerPage,
         language_id: currentLanguage.id

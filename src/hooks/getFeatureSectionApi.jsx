@@ -4,10 +4,9 @@ import { GET_FEATURE_SECTION } from 'src/utils/api'
 
 export const getFeatureSectionApi = {
   getFeatureSectionById: requestData => {
-    const { access_key, language_id, offset, limit, slug, latitude, longitude, section_id } = requestData
+    const { language_id, offset, limit, slug, latitude, longitude, section_id } = requestData
     return Api.get(GET_FEATURE_SECTION_BY_ID, {
       params: {
-        access_key,
         language_id,
         offset,
         limit,
@@ -19,10 +18,9 @@ export const getFeatureSectionApi = {
     })
   },
   getFeatureSection: requestData => {
-    const { access_key, language_id, offset, limit, slug, latitude, longitude, section_id } = requestData
+    const { language_id, offset, limit, slug, latitude, longitude, section_id } = requestData
     return Api.get(GET_FEATURE_SECTION, {
       params: {
-        access_key,
         language_id,
         offset,
         limit,

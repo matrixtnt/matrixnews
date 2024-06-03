@@ -92,11 +92,11 @@ const FeatureLayout = () => {
     }
   }, [currentLanguage])
 
-  useEffect(() => {
-    if (isNoDataLoading) {
-      getNewsWhenNoData()
-    }
-  }, [isNoDataLoading])
+  // useEffect(() => {
+  //   if (isNoDataLoading) {
+  //     getNewsWhenNoData()
+  //   }
+  // }, [isNoDataLoading])
 
   useEffect(() => {
 

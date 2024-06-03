@@ -3,13 +3,13 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 import { extractJSONFromMarkup } from 'src/utils'
-import {GET_PAGES, access_key } from 'src/utils/api'
+import { GET_PAGES } from 'src/utils/api'
 const SocialPages = dynamic(() => import('../../components/staticpages/SocialPages.jsx'), { ssr: false })
 
 // This is seo api
 const fetchDataFromSeo = async (id, language_id) => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}?access_key=${access_key}&language_id=${language_id}&slug=${id}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}&language_id=${language_id}&slug=${id}`);
     const data = response.data;
     return data;
   } catch (error) {

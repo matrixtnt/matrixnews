@@ -338,7 +338,6 @@ export const getuserbyidApi = ({
 
 // // GET PRODUCTS
 export const GetCommentsApi = ({
-  access_key = '',
   news_id = '',
   offset = '',
   limit = '',
@@ -347,7 +346,7 @@ export const GetCommentsApi = ({
   onStart = () => { } }) => {
   store.dispatch(
     apiCallBegan({
-      ...getComments(access_key,
+      ...getComments(
         news_id,
         offset,
         limit),
@@ -362,7 +361,6 @@ export const GetCommentsApi = ({
 
 // 19. 
 export const setQuestionResultApi = ({
-  access_key = '',
   language_id = '',
   question_id = '',
   option_id = '',
@@ -372,7 +370,7 @@ export const setQuestionResultApi = ({
 }) => {
   store.dispatch(
     apiCallBegan({
-      ...setQuestionResult(access_key, language_id, question_id, option_id,),
+      ...setQuestionResult(language_id, question_id, option_id,),
       displayToast: false,
       onStart,
       onSuccess,
@@ -381,7 +379,6 @@ export const setQuestionResultApi = ({
   )
 }
 export const getQuestionResultApi = ({
-  access_key,
   language_id,
   question_id,
   onSuccess = () => { },
@@ -390,7 +387,7 @@ export const getQuestionResultApi = ({
 }) => {
   store.dispatch(
     apiCallBegan({
-      ...getQuestionResult(access_key,
+      ...getQuestionResult(
         language_id,
         question_id,),
       displayToast: false,

@@ -36,7 +36,7 @@ import { store } from '../../store/store'
 import FirebaseData from 'src/utils/Firebase'
 import { useQuery } from '@tanstack/react-query'
 import { getUserByIdApi } from 'src/hooks/getuserbyId'
-import { access_key, getUser } from 'src/utils/api'
+import { getUser } from 'src/utils/api'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import toast from 'react-hot-toast'
 import { accountDeleteApi } from 'src/store/actions/campaign'
@@ -418,7 +418,7 @@ const Header = () => {
                   //     </Dropdown.Item>
                   //   </Dropdown.Menu>
                   // </Dropdown>
-                  <><ProfileDropDown userName={userName} userData={userData} isLogin={isLogin} profileimg={profileimg} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)}/></>
+                  <><ProfileDropDown userName={userName} userData={userData} isLogin={isLogin} profileimg={profileimg} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} /></>
                 ) : (
                   <Button
                     variant='danger'

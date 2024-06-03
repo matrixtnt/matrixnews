@@ -2,7 +2,7 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 import { extractJSONFromMarkup } from 'src/utils'
-import { GET_WEB_SEO_PAGES, access_key } from 'src/utils/api'
+import { GET_WEB_SEO_PAGES } from 'src/utils/api'
 
 const ViewAll = dynamic(() => import('src/components/viewAll/ViewAll'), { ssr: false })
 
@@ -10,7 +10,7 @@ const ViewAll = dynamic(() => import('src/components/viewAll/ViewAll'), { ssr: f
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?access_key=${access_key}&type=view_all`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}&type=view_all`
     )
     const data = response.data
     return data
