@@ -6,7 +6,7 @@ import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { placeholderImage, translate, NoDataFound } from '../../utils'
 import no_image from '../../../public/assets/images/no_image.jpeg'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
@@ -44,7 +44,6 @@ const AllBreakingNews = () => {
     try {
       const { data } = await AllBreakingNewsApi.getBreakingNews({
         language_id: language_id,
-        access_key: access_key,
         offset: offset * dataPerPage,
         limit: dataPerPage,
       })
@@ -60,7 +59,7 @@ const AllBreakingNews = () => {
 
   // react query
   const { data: Data } = useQuery({
-    queryKey: ['all-breaking-news', language_id, access_key, currentlanguage, offset],
+    queryKey: ['all-breaking-news', language_id, currentlanguage, offset],
     queryFn: getBreakingNewsApi
   })
 
@@ -78,7 +77,7 @@ const AllBreakingNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('breakingNewsLbl')}  />
+      <BreadcrumbNav SecondElement={translate('breakingNewsLbl')} />
       <div id='BNV-main'>
         <div id='BNV-content' className='container'>
           {isLoading.loading ? (

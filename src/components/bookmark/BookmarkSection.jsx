@@ -8,7 +8,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/navigation'
 import { bookmarkApi } from 'src/hooks/bookmarkApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getLanguage, getUser } from 'src/utils/api'
 import { useEffect, useState } from 'react'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
@@ -26,7 +26,6 @@ const BookmarkSection = () => {
   const getbookmarkApi = async () => {
     try {
       const { data } = await bookmarkApi.getBookmark({
-        access_key: access_key,
         language_id: language_id,
         offset: 0,
         limit: 10,
@@ -41,7 +40,6 @@ const BookmarkSection = () => {
   const setbookmarkApi = async (news_id, status) => {
     try {
       const { data } = await bookmarkApi.setBookmark({
-        access_key: access_key,
         news_id: news_id,
         status: status
       })
@@ -53,7 +51,7 @@ const BookmarkSection = () => {
 
   // react query
   const { isLoading, } = useQuery({
-    queryKey: ['getbookmark', access_key, user, language_id],
+    queryKey: ['getbookmark', user, language_id],
     queryFn: getbookmarkApi,
 
   })

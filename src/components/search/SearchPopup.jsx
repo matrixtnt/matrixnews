@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { AiOutlineClose } from 'react-icons/ai'
 import { truncateText } from '../../utils'
 import { getNewsApi } from 'src/hooks/newsApi'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { locationData } from 'src/store/reducers/settingsReducer'
@@ -46,7 +46,6 @@ const SearchPopup = () => {
 
   const getNews = async () => {
     loadNews({
-      access_key: access_key,
       offset: '0',
       limit: dataLimit.toString(),
       user_id: user,
@@ -98,72 +97,9 @@ const SearchPopup = () => {
 
   }, [dataLimit, searchValue])
 
-  // const getNews = async () => {
-  //   try {
-  //     const { data } = await getNewsApi.getNews({
-  //       access_key: access_key,
-  //       offset: '0',
-  //       limit: dataLimit.toString(),
-  //       user_id: user,
-  //       get_user_news: '',
-  //       search: searchValue, // {optional}
-  //       language_id: language_id,
-  //       latitude: storedLatitude,
-  //       longitude: storedLongitude
-  //     })
-
-  //     // Check if the total count of loaded data exceeds the total count from the API
-  //     const totalItemsFromAPI = parseInt(data.total) // Assuming 'total' is the total count from API response
-  //     const loadedItemsCount = data.length + parseInt(dataLimit)
-
-  //     if (data.error) {
-  //       setData([])
-  //       setTotal(0)
-  //     }
-
-  //     if (loadedItemsCount > totalItemsFromAPI) {
-  //       // If loaded items exceed the total count, set Data to empty array
-  //       setData([])
-  //     } else {
-  //       if (searchValue !== '') {
-  //         setTotal(data.total)
-  //         setData(data)
-  //       } else {
-  //         setData([])
-  //       }
-  //     }
-  //     return data.data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // react query
-  // const { refetch } = useQuery({
-  //   queryKey: ['getSearchNews',dataLimit,searchValue,location,language_id ],
-  //   queryFn: getNews,
-  //   
-  // })
-
-  // redirect news page
-  // const redirectPage = (e, element) => {
-  //   actionSearch()
-  //   e.preventDefault()
-  //   navigate.push({
-  //     pathname: `/news/${element.slug}`,
-
-  //   })
-  //   setSearchValue('')
-  // }
-
   const handleLoadMore = () => {
     setDataLimit(prevLimit => prevLimit + dataLimit) // Increment data limit by 5
   }
-
-  // UseEffect to call getNews whenever dataLimit changes
-  // useEffect(() => {
-  //   refetch()
-  // }, [dataLimit,searchValue,location,language_id])
 
   return (
     <>

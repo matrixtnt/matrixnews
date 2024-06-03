@@ -30,6 +30,7 @@ const WeatherCard = () => {
   const getLocationData = getLocation?.location_news_mode
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
+  const weatherMode = getLocation?.weather_mode
 
   const dispatch = useDispatch()
 
@@ -131,7 +132,7 @@ const WeatherCard = () => {
                   <Skeleton height={5} count={3} />
                 </>
               ) : (
-                weather && (
+                weather && weatherMode === '1' && (
                   <>
                     <img src={weather && weather?.current?.condition?.icon} alt='weather news' className='weather_icon' />
                     <b className='me-2'>{weather && weather?.current?.temp_c}°C</b>
@@ -178,7 +179,7 @@ const WeatherCard = () => {
                             })}
                         </Dropdown.Menu>
                       </Dropdown> */}
-                      <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange}/>
+                      <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} />
                     </li>
                   </ul>
                   <div className='slash-line'></div>

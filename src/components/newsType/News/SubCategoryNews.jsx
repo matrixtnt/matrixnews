@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
 import { formatDate, placeholderImage, translate, NoDataFound } from '../../../utils'
 import { useRouter } from 'next/router.js'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
@@ -56,7 +56,6 @@ const SubCategory = () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getNewsApi.getNews({
-        access_key: access_key,
         offset: offset * dataPerPage,
         limit: dataPerPage,
         category_id: catId,
@@ -146,20 +145,20 @@ const SubCategory = () => {
                   </>
                 )}
                 {totalData > dataPerPage && totalData !== subCategories.length ? (
-                // <ReactPaginate
-                //   initialPage={currentPage}
-                //   previousLabel={translate('previous')}
-                //   nextLabel={translate('next')}
-                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-                //   onPageChange={handlePageChange}
-                //   containerClassName={'pagination'}
-                //   previousLinkClassName={'pagination__link'}
-                //   nextLinkClassName={'pagination__link'}
-                //   disabledClassName={'pagination__link--disabled'}
-                //   activeClassName={'pagination__link--active'}
-                // />
-                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
-              ) : null}
+                  // <ReactPaginate
+                  //   initialPage={currentPage}
+                  //   previousLabel={translate('previous')}
+                  //   nextLabel={translate('next')}
+                  //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                  //   onPageChange={handlePageChange}
+                  //   containerClassName={'pagination'}
+                  //   previousLinkClassName={'pagination__link'}
+                  //   nextLinkClassName={'pagination__link'}
+                  //   disabledClassName={'pagination__link--disabled'}
+                  //   activeClassName={'pagination__link--active'}
+                  // />
+                  <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+                ) : null}
               </div>
             )}
           </div>

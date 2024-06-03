@@ -11,7 +11,7 @@ import { translate, NoDataFound } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import toast from 'react-hot-toast'
@@ -25,7 +25,7 @@ import { loadNews } from 'src/store/reducers/newsReducer'
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
   const [noFeatureData, setNoFeatureData] = useState(false)
-  const [newsDataFound, setNewsDataFound] = useState(true)    
+  const [newsDataFound, setNewsDataFound] = useState(true)
 
   const dispatch = useDispatch();
 
@@ -42,7 +42,6 @@ const FeatureLayout = () => {
   const getNewsWhenNoData = async () => {
     setIsLoading(true)
     loadNews({
-      access_key: access_key,
       offset: '0',
       limit: 10, // {optional}
       language_id: language_id,
@@ -66,13 +65,12 @@ const FeatureLayout = () => {
       }
     })
   }
-  
+
   useEffect(() => {
     if (currentLanguage.id) {
       setIsLoading(true)
       setNewsDataFound(true)
       loadLayout({
-        access_key: access_key,
         offset: 0,
         limit: 9,
         onSuccess: (response) => {
@@ -114,7 +112,7 @@ const FeatureLayout = () => {
       </> :
         noFeatureData && newsDataFound ? <>
           {NoDataFound()}
-         
+
         </> :
           Data &&
           Data.map((item, index) => {

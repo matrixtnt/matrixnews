@@ -10,7 +10,7 @@ import no_image from '../../../public/assets/images/no_image.jpeg'
 import ReactPaginate from 'react-paginate'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getLanguage, getUser } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
@@ -56,7 +56,6 @@ const ViewAll = () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getFeatureSectionApi.getFeatureSection({
-        access_key: access_key,
         language_id: language_id,
         offset: offset * dataPerPage,
         limit: dataPerPage,

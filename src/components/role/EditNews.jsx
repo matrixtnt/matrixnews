@@ -22,7 +22,7 @@ import { IoIosClose } from 'react-icons/io'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import managenewsimage from '../../../public/assets/images/manage-news.svg'
 import { getTagApi } from 'src/hooks/tagsApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { getlocationapi } from 'src/hooks/getlocationApi'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
@@ -266,7 +266,7 @@ const EditNews = () => {
   // api call
   const getTag = async () => {
     try {
-      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: language_id })
+      const { data } = await getTagApi.getTag({ language_id: language_id })
       return data.data
     } catch (error) {
       console.log(error)
@@ -276,7 +276,7 @@ const EditNews = () => {
   // api call
   const getLocationlatlong = async () => {
     try {
-      const { data } = await getlocationapi.getlocation({ access_key: access_key })
+      const { data } = await getlocationapi.getlocation({})
       return data.data
     } catch (error) {
       console.log(error)
@@ -287,7 +287,6 @@ const EditNews = () => {
   const getCategories = async () => {
     try {
       const { data } = await CategoriesApi.getCategories({
-        access_key: access_key,
         offset: '',
         limit: '70',
         language_id: DefaultValue.languageId
@@ -302,7 +301,6 @@ const EditNews = () => {
   const getsubcategorybycategory = async () => {
     try {
       const { data } = await getsubcategorybycategoryApi.getsubcategorybycategory({
-        access_key: access_key,
         category_id: manageNews.category_id,
         language_id: language_id
       })
@@ -328,12 +326,12 @@ const EditNews = () => {
 
   // react query
   const { data: tagsData } = useQuery({
-    queryKey: ['getTag', language_id, access_key],
+    queryKey: ['getTag', language_id,],
     queryFn: getTag
   })
 
   const { data: locationOptions } = useQuery({
-    queryKey: ['getlocation', access_key],
+    queryKey: ['getlocation',],
     queryFn: getLocationlatlong
   })
 

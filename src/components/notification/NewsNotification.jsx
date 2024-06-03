@@ -11,7 +11,7 @@ import ReactPaginate from 'react-paginate'
 import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
 // import NoDataFound from '../noDataFound/NoDataFound'
@@ -48,7 +48,6 @@ const NewsNotification = () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getNotificationsApi.getNotifications({
-        access_key: access_key,
         offset: offset * dataPerPage,
         limit: dataPerPage,
         language_id: language_id
@@ -68,7 +67,7 @@ const NewsNotification = () => {
   const {
     data: Data,
   } = useQuery({
-    queryKey: ['getNotification', currentLanguage,offset],
+    queryKey: ['getNotification', currentLanguage, offset],
     queryFn: getNotifications,
 
   })
@@ -158,20 +157,20 @@ const NewsNotification = () => {
             )}
           </div>
           {totalData > dataPerPage && totalData !== notificationData.length ? (
-                // <ReactPaginate
-                //   initialPage={currentPage}
-                //   previousLabel={translate('previous')}
-                //   nextLabel={translate('next')}
-                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-                //   onPageChange={handlePageChange}
-                //   containerClassName={'pagination'}
-                //   previousLinkClassName={'pagination__link'}
-                //   nextLinkClassName={'pagination__link'}
-                //   disabledClassName={'pagination__link--disabled'}
-                //   activeClassName={'pagination__link--active'}
-                // />
-                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
-              ) : null}
+            // <ReactPaginate
+            //   initialPage={currentPage}
+            //   previousLabel={translate('previous')}
+            //   nextLabel={translate('next')}
+            //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+            //   onPageChange={handlePageChange}
+            //   containerClassName={'pagination'}
+            //   previousLinkClassName={'pagination__link'}
+            //   nextLinkClassName={'pagination__link'}
+            //   disabledClassName={'pagination__link--disabled'}
+            //   activeClassName={'pagination__link--active'}
+            // />
+            <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+          ) : null}
         </div>
       </div>
     </Layout>

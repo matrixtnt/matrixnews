@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
 import { formatDate, placeholderImage, translate, NoDataFound } from '../../../utils'
 import { useRouter } from 'next/router.js'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
@@ -59,7 +59,6 @@ const CategoryNews = () => {
       !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
       try {
         const { data } = await getNewsApi.getNews({
-          access_key: access_key,
           offset: offset * dataPerPage,
           limit: dataPerPage,
           language_id: language_id,
@@ -83,7 +82,7 @@ const CategoryNews = () => {
 
   // react query
   const { data: Data } = useQuery({
-    queryKey: ['category-news', language_id, location, catSlug,offset],
+    queryKey: ['category-news', language_id, location, catSlug, offset],
     queryFn: () => getNewsByCategoryApi()
   })
 
@@ -109,7 +108,7 @@ const CategoryNews = () => {
         <BreadcrumbNav SecondElement={'category' ? 'category' : ''} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories" />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
-            {isLoading.loading? (
+            {isLoading.loading ? (
               <div className='row'>
                 {[...Array(3)].map((_, index) => (
                   <div className='col-md-4 col-12' key={index}>
@@ -152,20 +151,20 @@ const CategoryNews = () => {
                   </>
                 )}
                 {totalData > dataPerPage && totalData !== categoriesNewsData.length ? (
-                // <ReactPaginate
-                //   initialPage={currentPage}
-                //   previousLabel={translate('previous')}
-                //   nextLabel={translate('next')}
-                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-                //   onPageChange={handlePageChange}
-                //   containerClassName={'pagination'}
-                //   previousLinkClassName={'pagination__link'}
-                //   nextLinkClassName={'pagination__link'}
-                //   disabledClassName={'pagination__link--disabled'}
-                //   activeClassName={'pagination__link--active'}
-                // />
-                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
-              ) : null}
+                  // <ReactPaginate
+                  //   initialPage={currentPage}
+                  //   previousLabel={translate('previous')}
+                  //   nextLabel={translate('next')}
+                  //   pageCount={Math.ceil(lengthdata / dataPerPage)}
+                  //   onPageChange={handlePageChange}
+                  //   containerClassName={'pagination'}
+                  //   previousLinkClassName={'pagination__link'}
+                  //   nextLinkClassName={'pagination__link'}
+                  //   disabledClassName={'pagination__link--disabled'}
+                  //   activeClassName={'pagination__link--active'}
+                  // />
+                  <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+                ) : null}
 
 
               </div>

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { formatDate, placeholderImage, translate, NoDataFound } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { getNewsApi } from 'src/hooks/newsApi'
@@ -20,7 +20,6 @@ const TagNewsview = () => {
   const getNewsByTag = async () => {
     try {
       const { data } = await getNewsApi.getNews({
-        access_key: access_key,
         tag_slug: Tid,
         // tag_id: Tid,
         language_id: language_id,

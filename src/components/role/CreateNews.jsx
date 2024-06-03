@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import createnewsimage from '../../../public/assets/images/Create-news.svg'
 import { getTagApi } from 'src/hooks/tagsApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getlocationapi } from 'src/hooks/getlocationApi'
@@ -92,7 +92,7 @@ const CreateNews = () => {
   const languageSelector = async value => {
     setShowCategory(true)
     const selectedData = JSON.parse(value)
-    setDefualtValue(prevState => ({...prevState, defualtLanguage: selectedData.language }));
+    setDefualtValue(prevState => ({ ...prevState, defualtLanguage: selectedData.language }));
     setCreateNewsCurrentLanguage(selectedData.language, selectedData.code, selectedData.id)
     setDefualtValue(prevState => ({ ...prevState, defualtCategoryID: null, defualtCategory: null }));
     setShowsubCategory(false)
@@ -106,7 +106,7 @@ const CreateNews = () => {
     getSubcategoryByCategoryApi({
       category_id: categoryID,
       onSuccess: res => {
-        if(res.data.length === 0){
+        if (res.data.length === 0) {
           setSubCategory([]);
           setShowsubCategory(false)
           return
@@ -205,35 +205,35 @@ const CreateNews = () => {
       return
     }
 
-    if (!DefaultValue.defaultMetatitle){
+    if (!DefaultValue.defaultMetatitle) {
       toast.error(translate("metaTitlerequired"))
       return
     }
 
-    if (!DefaultValue.defaultMetaDescription){
+    if (!DefaultValue.defaultMetaDescription) {
       toast.error(translate("metaDescriptionrequired"))
       return
     }
 
-    if(!DefaultValue.defaultMetaKeyword){
+    if (!DefaultValue.defaultMetaKeyword) {
       toast.error(translate("metaKeywordsrequired"))
       return
     }
 
-    if (!DefaultValue.defaultSlug){
+    if (!DefaultValue.defaultSlug) {
       toast.error(translate("slugrequired"))
       return
     }
-    if (!DefaultValue.defualtLanguage){
+    if (!DefaultValue.defualtLanguage) {
       toast.error(translate("selectlanguage"))
       return
     }
-    if (!DefaultValue.defualtCategory){
+    if (!DefaultValue.defualtCategory) {
       toast.error(translate("selectcategory"))
       return
     }
 
-    if(!DefaultValue.defaultType){
+    if (!DefaultValue.defaultType) {
       toast.error(translate("contentTyperequired"))
       return
     }
@@ -284,7 +284,6 @@ const CreateNews = () => {
   const getCategories = async () => {
     try {
       const { data } = await CategoriesApi.getCategories({
-        access_key: access_key,
         offset: '',
         limit: '70',
         language_id: createNewsLanguage.id
@@ -300,7 +299,7 @@ const CreateNews = () => {
   // api call
   const getTag = async () => {
     try {
-      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: createNewsLanguage.id })
+      const { data } = await getTagApi.getTag({ language_id: createNewsLanguage.id })
       return data.data
     } catch (error) {
       console.log(error)
@@ -310,7 +309,7 @@ const CreateNews = () => {
   // api call
   const getLocationlatlong = async () => {
     try {
-      const { data } = await getlocationapi.getlocation({ access_key: access_key,limit: 10000 })
+      const { data } = await getlocationapi.getlocation({ limit: 10000 })
       // console.log(data,"locationss")
       return data.data
     } catch (error) {
@@ -326,12 +325,12 @@ const CreateNews = () => {
 
   // react query
   const { data: tagsData } = useQuery({
-    queryKey: ['getTag', access_key, createNewsLanguage.id],
+    queryKey: ['getTag', createNewsLanguage.id],
     queryFn: getTag
   })
 
   const { data: locationOptions } = useQuery({
-    queryKey: ['getlocation', access_key],
+    queryKey: ['getlocation',],
     queryFn: getLocationlatlong
   })
 
@@ -484,7 +483,7 @@ const CreateNews = () => {
     //   return // Stop execution if meta description validation fails
     // }
 
-    if(!content){
+    if (!content) {
       toast.error(translate('descriptionisrequire'))
       return
     }
@@ -739,7 +738,7 @@ const CreateNews = () => {
                           name='video'
                           accept='video/*'
                           onChange={e => handleVideo(e)}
-                          // required
+                        // required
                         />
                         <label htmlFor='videoInput'>
                           {' '}

@@ -16,7 +16,7 @@ import no_image from '../../../public/assets/images/no_image.jpeg';
 import { Modal } from 'antd';
 import { BiDislike, BiDotsVerticalRounded, BiSolidDislike, BiSolidFlag, BiSolidLike, BiSolidTrash } from 'react-icons/bi';
 import { getCommentByNewsApi } from 'src/hooks/commentsApi';
-import { access_key, getUser } from 'src/utils/api';
+import { getUser } from 'src/utils/api';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import Card from '../skeletons/Card';
@@ -41,7 +41,6 @@ const CommentsView = props => {
   const getCommentByNews = async () => {
     try {
       const { data } = await getCommentByNewsApi.getCommentByNews({
-        access_key: access_key,
         news_id: Nid,
         offset: '0',
         limit: '10'

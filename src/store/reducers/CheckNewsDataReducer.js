@@ -7,6 +7,8 @@ const initialState = {
   data: {
     isLiveNewsData: false,// Set the default value as needed
     isBreakingNewsData: false,
+    isLiveNewsApiCallOnce: false,
+    isBreakingNewsApiCallOnce: false,
   }
 }
 

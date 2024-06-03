@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { placeholderImage, translate, truncateText } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
@@ -19,7 +19,6 @@ const RelatedNewsSection = props => {
   const getNewsByCategoryApi = async () => {
     try {
       const { data } = await getNewsApi.getNews({
-        access_key: access_key,
         offset: '0',
         limit: '10',
         category_id: catid,

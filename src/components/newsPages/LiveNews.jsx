@@ -9,7 +9,7 @@ import { NoDataFound, placeholderImage, translate } from '../../utils'
 import no_image from '../../../public/assets/images/placeholder.png'
 import { useQuery } from '@tanstack/react-query'
 import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
@@ -46,7 +46,6 @@ const LiveNews = () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getLiveStreamingApi.getLiveStreaming({
-        access_key: access_key,
         language_id: language_id,
         offset: offset * dataPerPage,
         limit: dataPerPage,
@@ -88,7 +87,7 @@ const LiveNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('livenews')}  />
+      <BreadcrumbNav SecondElement={translate('livenews')} />
 
       <div id='LN-main' className='py-5 bg-white'>
         <div id='LN-content' className='container'>

@@ -10,7 +10,7 @@ import { loadManageToEdit } from '../../store/reducers/createNewsReducer'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Modal } from 'antd';
@@ -28,7 +28,6 @@ const ManageNews = () => {
   const getNews = async () => {
     try {
       const { data } = await getNewsApi.getNews({
-        access_key: access_key,
         get_user_news: 1,
         language_id: language_id,
         latitude: null,

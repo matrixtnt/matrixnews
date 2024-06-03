@@ -8,7 +8,7 @@ import { placeholderImage, stripHtmlTags, translate, truncateText } from '../../
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getLanguage, getUser } from 'src/utils/api'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
@@ -75,7 +75,6 @@ const StyleSix = ({ isLoading, Data }) => {
     try {
       // const { data } = await getFeatureSectionApi.getFeatureSectionById({
       const { data } = await getFeatureSectionApi.getFeatureSection({
-        access_key: access_key,
         section_id: Data?.id,
         language_id: language_id,
         latitude: storedLatitude,

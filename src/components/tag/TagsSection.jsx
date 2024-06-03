@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { getTagApi } from 'src/hooks/tagsApi'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 
 const TagsSection = () => {
@@ -15,7 +15,7 @@ const TagsSection = () => {
   // api call
   const getTag = async () => {
     try {
-      const { data } = await getTagApi.getTag({ access_key: access_key, language_id: language_id })
+      const { data } = await getTagApi.getTag({ language_id: language_id })
       return data.data
     } catch (error) {
       console.log(error)

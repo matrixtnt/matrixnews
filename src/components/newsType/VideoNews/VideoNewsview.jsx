@@ -4,13 +4,13 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { placeholderImage, translate ,NoDataFound} from '../../../utils'
+import { placeholderImage, translate, NoDataFound } from '../../../utils'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import no_image from '../../../../public/assets/images/no_image.jpeg'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
@@ -35,12 +35,11 @@ const VideoNewsview = () => {
     try {
       // const { data } = await getFeatureSectionApi.getFeatureSectionById({
       const { data } = await getFeatureSectionApi.getFeatureSection({
-        access_key: access_key,
         language_id: language_id,
         user_id: user,
         offset: '',
         limit: '10',
-        slug:catid,
+        slug: catid,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
@@ -119,7 +118,7 @@ const VideoNewsview = () => {
                       keyboard={false}
                       url={Video_url}
                       type_url={typeUrl}
-                      // title={Data[0].title}
+                    // title={Data[0].title}
                     />
 
                     {/* </Link> */}
@@ -127,9 +126,9 @@ const VideoNewsview = () => {
                 ))
               ) : (
                 <>
-                {NoDataFound()}
-               
-              </>
+                  {NoDataFound()}
+
+                </>
               )}
             </div>
           )}

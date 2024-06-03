@@ -9,7 +9,7 @@ import Skeleton from 'react-loading-skeleton'
 import { placeholderImage, translate } from '../../utils'
 import { getpagesApi } from 'src/hooks/getPagesApi'
 import { useQuery } from '@tanstack/react-query'
-import { access_key, getLanguage } from 'src/utils/api'
+import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import NoDataFound from '../noDataFound/NoDataFound'
@@ -28,7 +28,6 @@ const MorePages = () => {
   // const getpages = async () => {
   //   try {
   //     const { data } = await getpagesApi.getpages({
-  //       access_key: access_key,
   //       language_id: language_id
   //     })
   //     return data.data
@@ -46,17 +45,17 @@ const MorePages = () => {
   useEffect(() => {
 
 
-      loadMorePages({
-        onSuccess: (res) => {
-          setData(res.data)
-          setIsLoading(false)
-        },
-        onError: (err) => {
-          console.log(err)
-          setIsLoading(false)
+    loadMorePages({
+      onSuccess: (res) => {
+        setData(res.data)
+        setIsLoading(false)
+      },
+      onError: (err) => {
+        console.log(err)
+        setIsLoading(false)
 
-        }
-      })
+      }
+    })
   }, [currentLanguage])
 
   const handleRoutePageDeatils = (e, element) => {

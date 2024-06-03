@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import ReactPaginate from 'react-paginate';
 import { useQuery } from '@tanstack/react-query';
 import { getNotificationsApi } from 'src/hooks/getNotificationApi';
-import { access_key, getUser } from 'src/utils/api';
+import { getUser } from 'src/utils/api';
 import toast from 'react-hot-toast';
 import Layout from '../layout/Layout';
 // import NoDataFound from '../noDataFound/NoDataFound';
@@ -52,7 +52,6 @@ const Notification = () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
     try {
       const { data } = await getNotificationsApi.getUserNotification({
-        access_key: access_key,
         offset: offset * dataPerPage,
         limit: dataPerPage,
         user_id: user

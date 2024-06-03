@@ -22,7 +22,7 @@ import Skeleton from 'react-loading-skeleton'
 import { BiTime } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
-import { access_key, getLanguage, getUser } from 'src/utils/api'
+import { getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi'
 import Layout from 'src/components/layout/Layout'
@@ -95,7 +95,6 @@ const BreakingNews = () => {
   //   try {
   //     const { data } = await AllBreakingNewsApi.getBreakingNews({
   //       language_id: language_id,
-  //       access_key: access_key,
   //       slug: query.slug
   //     })
 
@@ -110,7 +109,6 @@ const BreakingNews = () => {
     if (!isLogin()) return false;
     try {
       const { data } = await AllBreakingNewsApi.setBreakingNewsView({
-        access_key: access_key,
         user_id: user,
         breaking_news_id: BNid
       })
@@ -124,7 +122,6 @@ const BreakingNews = () => {
   const getAdsSpaceNewsApi = async () => {
     try {
       const { data } = await getAdsSpaceNewsDetailsApi.getAdsSpaceNewsDetails({
-        access_key: access_key,
         language_id: language_id
       })
       return data.data ?? null
@@ -135,17 +132,17 @@ const BreakingNews = () => {
 
   // react query
   // const { isLoadinggg, dataaa, refetch } = useQuery({
-  //   queryKey: ['breakingNewsById', access_key, BNid, user, language_id, currentLanguage],
+  //   queryKey: ['breakingNewsById', BNid, user, language_id, currentLanguage],
   //   queryFn: getBreakingNewsIdApi
   // })
 
   const { } = useQuery({
-    queryKey: ['setBreakingNewsView', access_key, BNid, user, currentLanguage],
+    queryKey: ['setBreakingNewsView', BNid, user, currentLanguage],
     queryFn: setBreakingNewsViewApi
   })
 
   const { data: adsdata } = useQuery({
-    queryKey: ['getAdsSpaceDetails', access_key, currentLanguage],
+    queryKey: ['getAdsSpaceDetails', currentLanguage],
     queryFn: getAdsSpaceNewsApi,
     staleTime: 1 * 60 * 1000, cacheTime: 5 * 60 * 1000
 

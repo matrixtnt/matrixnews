@@ -20,7 +20,7 @@ import {
 } from 'react-share';
 import SignInModal from '../../auth/SignInModal.jsx';
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js';
-import { access_key, getLanguage, getUser } from '../../../utils/api.jsx';
+import { getLanguage, getUser } from '../../../utils/api.jsx';
 import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate, NoDataFound } from '../../../utils/index.jsx';
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx';
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer';
@@ -90,7 +90,6 @@ const News = () => {
 
       try {
         const { data } = await getNewsApi.getNews({
-          access_key: access_key,
           slug: NewsId,
           language_id: query.language_id ? query.language_id : currentLanguage.id
         });
@@ -121,7 +120,6 @@ const News = () => {
     if (!isLogin()) return false;
     try {
       const { data } = await getNewsApi.setNewsView({
-        access_key: access_key,
         news_id: NewsId,
         language_id: '',
       });
@@ -135,7 +133,6 @@ const News = () => {
   const getAdsSpaceNewsDetails = async () => {
     try {
       const { data } = await getAdsSpaceNewsDetailsApi.getAdsSpaceNewsDetails({
-        access_key: access_key,
         language_id: language_id
       });
       return data.data;

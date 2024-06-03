@@ -84,7 +84,6 @@ export const getLanguagesApi = () => {
     url: `${GET_LANGUAGE_LIST}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       language_id: language_id
     },
     authorizationHeader: false
@@ -97,7 +96,6 @@ export const getCategoriesApi = (offset, limit, language_id) => {
     url: `${GET_CATEGORIES}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       offset: offset,
       limit: limit,
       language_id: language_id
@@ -112,7 +110,6 @@ export const userSignUpApi = (firebase_id, name, email, mobile, type, profile, s
     url: `${USER_SIGNUP}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       firebase_id: firebase_id, //Firebase ID
       name: name,
       email: email,
@@ -132,7 +129,6 @@ export const getLanguageJsonDataApi = (code) => {
     url: `${GET_LANGUAGE_JSON_DATA}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       code: code
     },
     authorizationHeader: false
@@ -146,7 +142,6 @@ export const setBookmarkApi = (news_id, status) => {
     url: `${SET_BOOKMARK}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       user_id: user,
       news_id: news_id,
       status: status //1-bookmark, 0-unbookmark
@@ -162,7 +157,6 @@ export const setCommentApi = (parent_id, news_id, message) => {
     url: `${SET_COMMENT}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       parent_id: parent_id, //if not exists, set 0
       news_id: news_id,
       message: message,
@@ -179,7 +173,6 @@ export const deleteCommentApi = comment_id => {
     url: `${DELETE_COMMENT}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       user_id: user,
       comment_id: comment_id
     },
@@ -194,7 +187,6 @@ export const setLikeDisLikeApi = (news_id, status) => {
     url: `${SET_LIKE_DISLIKE}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       user_id: user,
       news_id: news_id,
       status: status // 1=like, 2=dislike, 0=none
@@ -210,7 +202,6 @@ export const getUserNotificationApi = (offset, limit) => {
     url: `${GET_USER_NOTIFICATION}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       user_id: user,
       offset: offset,
       limit: limit
@@ -225,7 +216,6 @@ export const DeleteUserNotificationApi = id => {
     url: `${DELETE_USER_NOTIFICATION}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       id: id
     },
     authorizationHeader: true
@@ -239,7 +229,6 @@ export const setUserCategoriesApi = category_id => {
     url: `${SET_USER_CATEGORIES}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       user_id: user,
       category_id: category_id
     },
@@ -253,7 +242,6 @@ export const getSettingsApi = type => {
     url: `${GET_SETTINGS}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       type: type //optional
     },
     authorizationHeader: false
@@ -263,7 +251,6 @@ export const getSettingsApi = type => {
 // 13. update profile image
 export const updateProfileApi = (name, mobile, email, image) => {
   let data = new FormData()
-  data.append('access_key', access_key)
   data.append('name', name)
   data.append('mobile', mobile)
   data.append('email', email)
@@ -299,7 +286,6 @@ export const setnewsApi = (
   let data = new FormData()
   let createToEdit = store.getState().createNews.createToEdit
   let news_id = createToEdit ? createToEdit.id : null
-  data.append('access_key', access_key)
   if (action_type === 2) {
     data.append('news_id', news_id)
   }
@@ -339,7 +325,6 @@ export const deleteimageApi = image_id => {
     url: `${DELETE_IMAGES}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       id: image_id
     },
     authorizationHeader: true
@@ -352,7 +337,6 @@ export const deletenewsApi = news_id => {
     url: `${DELETE_NEWS}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       id: news_id
     },
     authorizationHeader: true
@@ -366,7 +350,6 @@ export const getsubcategorybycategoryApi = category_id => {
     url: `${GET_SUBCATEGORY_BY_CATEGORY}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       category_id: category_id,
       language_id: language_id
     },
@@ -382,7 +365,6 @@ export const set_comment_like_dislike_Api = (comment_id, status) => {
     url: `${SET_COMMENT_LIKE_DISLIKE}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       user_id: user,
       comment_id: comment_id,
       status: status, // 1=like, 2=dislike, 0=none
@@ -399,7 +381,6 @@ export const set_flag_Api = (comment_id, news_id, message) => {
     url: `${SET_FLAG}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       comment_id: comment_id,
       user_id: user,
       news_id: news_id, // 1=like, 2=dislike, 0=none
@@ -416,7 +397,6 @@ export const accountdeleteApi = () => {
     url: `${DELETE_ACCOUNT}`,
     method: 'POST',
     data: {
-      access_key: access_key,
       user_id: user
     },
     authorizationHeader: true
@@ -427,7 +407,6 @@ export const accountdeleteApi = () => {
 export const register_Fcmtoken_Api = (token, latitude, longitude) => {
   let { id: language_id } = getLanguage()
   let data = new FormData()
-  data.append('access_key', access_key)
   data.append('language_id', language_id)
   data.append('token', token)
   if (latitude != null) data.append('latitude', latitude)
@@ -446,18 +425,16 @@ export const getUserByIdApi = () => {
     url: `${GET_USER_BY_ID}`,
     method: 'GET',
     params: {
-      access_key: access_key
     },
     authorizationHeader: true
   }
 }
 
-export const setQuestionResult = (access_key, language_id, question_id, option_id) => {
+export const setQuestionResult = (language_id, question_id, option_id) => {
   return {
     url: `${SET_QUESTION_RESULT}`,
     method: 'POST',
     data: {
-      access_key,
       language_id,
       question_id,
       option_id
@@ -465,12 +442,11 @@ export const setQuestionResult = (access_key, language_id, question_id, option_i
     authorizationHeader: true
   }
 }
-export const getQuestionResult = (access_key, language_id, question_id) => {
+export const getQuestionResult = (language_id, question_id) => {
   return {
     url: `${GET_QUESTION_RESULT}`,
     method: 'GET',
     params: {
-      access_key,
       language_id,
       question_id
     },
@@ -478,13 +454,12 @@ export const getQuestionResult = (access_key, language_id, question_id) => {
   }
 }
 
-export const getFeatureSection = (access_key, offset, limit, slug, latitude, longitude, section_id) => {
+export const getFeatureSection = (offset, limit, slug, latitude, longitude, section_id) => {
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_FEATURE_SECTION}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       language_id: language_id,
       offset: offset,
       limit: limit,
@@ -498,7 +473,6 @@ export const getFeatureSection = (access_key, offset, limit, slug, latitude, lon
 }
 
 export const getNews = (
-  access_key,
   offset,
   limit,
   id,
@@ -519,7 +493,6 @@ export const getNews = (
     url: `${GET_NEWS}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       offset: offset,
       limit: limit,
       id: id,
@@ -547,7 +520,6 @@ export const getBreakingNews = (
     url: `${GET_BREAKING_NEWS}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       language_id: language_id,
       slug: slug
 
@@ -565,7 +537,6 @@ export const getPages = (
     url: `${GET_PAGES}`,
     method: 'GET',
     params: {
-      access_key: access_key,
       language_id: language_id,
       slug: slug
 
