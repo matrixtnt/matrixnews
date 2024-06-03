@@ -59,7 +59,7 @@ const BreadcrumbNav = ({ SecondElement, ThirdElement, FourthElement }) => {
           Home
         </span>
       ),
-      href: '',
+      href: '/',
     },
   ];
 

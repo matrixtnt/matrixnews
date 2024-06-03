@@ -379,7 +379,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import NoDataFound from '../noDataFound/NoDataFound'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { FiCalendar } from 'react-icons/fi'
-import { FaAngleDown, FaChevronRight } from 'react-icons/fa'
+import { FaAngleDown, FaAngleUp, FaChevronRight } from 'react-icons/fa'
 import { IoClose } from "react-icons/io5";
 import Card from '../skeletons/Card'
 import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
@@ -517,11 +517,11 @@ const CatNav = () => {
                             <span
                               className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                               onClick={() => handleSubCatDropdown(element)}
-                              onMouseEnter={() => handleSubCatDropdown(element)}
+                              // onMouseEnter={() => handleSubCatDropdown(element)}
 
                             >
 
-                              <b>{element.category_name} </b> <FaAngleDown />
+                              <b>{element.category_name} </b> {subCatDrop && currentCategory && currentCategory.id === element.id ? <FaAngleUp /> : <FaAngleDown />}
                             </span> : <span
                               className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                               onClick={() => handleCategoryChange(element)}
