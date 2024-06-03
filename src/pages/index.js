@@ -23,13 +23,15 @@ const Index = ({ adsenseUrl }) => {
 
   // console.log(settingsData,"settingsDataaaaa")
 
+  const adsenseURL = adsenseUrl;
+
   return (
     <>
       <Meta />
       <Home />
       {
-        adsenseUrl && adsenseUrl !== null || adsenseUrl && adsenseUrl !== undefined || adsenseUrl && adsenseUrl?.length > 0 ?
-          <script async src={adsenseUrl}
+        adsenseURL && adsenseURL !== null || adsenseURL && adsenseURL !== undefined || adsenseURL && adsenseURL?.length > 0 ?
+          <script async src={adsenseURL}
             crossorigin="anonymous"></script> : null
       }
     </>
@@ -49,15 +51,13 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
 
     // console.log(settingsData?.data, "Data")
 
-    const adsenseUrl = settingsData?.data?.web_setting?.google_adsense;
+    const adsenseUrl = settingsData?.data?.web_setting?.google_adsense ? settingsData?.data?.web_setting?.google_adsense : null
 
     // console.log(adsenseUrl, "adsenseUrl")
 
     // Pass the fetched data as props to the page component
     return {
       props: {
-        settingsData,
-        currentURL,
         adsenseUrl
       }
     }

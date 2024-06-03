@@ -10,7 +10,7 @@ const ViewAll = dynamic(() => import('src/components/viewAll/ViewAll'), { ssr: f
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}&type=view_all`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=view_all`
     )
     const data = response.data
     return data

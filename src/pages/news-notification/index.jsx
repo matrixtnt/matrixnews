@@ -10,7 +10,7 @@ const NewsNotification = dynamic(() => import('src/components/notification/NewsN
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}&type=news_notifications`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=news_notifications`
     )
     const data = response.data
     return data

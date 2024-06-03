@@ -2,13 +2,13 @@ import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
 import { extractJSONFromMarkup } from 'src/utils'
-import { GET_NEWS } from 'src/utils/api'
+import { GET_NEWS, access_key } from 'src/utils/api'
 const News = dynamic(() => import('src/components/newsType/News/News'), { ssr: false })
 
 // This is seo api
 const fetchDataFromSeo = async (id, language_id) => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_NEWS}&language_id=${language_id}&slug=${id}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_NEWS}?language_id=${language_id}&slug=${id}`);
     const data = response.data;
     return data;
   } catch (error) {
@@ -19,7 +19,7 @@ const fetchDataFromSeo = async (id, language_id) => {
 
 const Index = ({ seoData, currentURL }) => {
   let schema = null;
-  console.log(seoData)
+  // console.log(seoData)
   if (seoData && seoData.data && seoData.data.length > 0 && seoData.data[0].schema_markup) {
     const schemaString = seoData.data[0].schema_markup;
     schema = extractJSONFromMarkup(schemaString);

@@ -10,7 +10,7 @@ const AllBreakingNews = dynamic(() => import('src/components/newsPages/AllBreaki
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}&type=all_breaking_news`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=all_breaking_news`
     )
     const data = response.data
     return data

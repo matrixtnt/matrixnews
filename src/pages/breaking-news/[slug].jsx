@@ -9,7 +9,7 @@ const BreakingNews = dynamic(() => import('src/components/newsType/BreakingNews/
 const fetchDataFromSeo = async (id, language_id) => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_BREAKING_NEWS}&language_id=${language_id}&slug=${id}`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_BREAKING_NEWS}?language_id=${language_id}&slug=${id}`
     )
     const data = response.data
     return data
