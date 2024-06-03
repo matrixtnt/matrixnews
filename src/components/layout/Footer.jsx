@@ -203,27 +203,35 @@ const Footer = () => {
               </div>
             ) : null}
 
-            <div className='col-lg-3 col-12'>
-              <p id='footer-nav'>{translate('downloadapp')}</p>
-              <ul className='useL contactInfo'>
-                <li className='nav-item'>
-                  <a>
-                    {translate('magicofapp')}
-                  </a>
-                </li>
+            {
+              settings && settings?.web_setting?.android_app_link || settings && settings?.web_setting?.ios_app_link ?
 
-                <div className='appWrapper'>
-                  <Link href={''}>
-                    <Image src={playStore} height={0} width={0} alt='play-store-img' />
-                  </Link>
-                  <Link href={''}>
-                    <Image src={appleStore} height={0} width={0} alt='apple-store-img' />
-                  </Link>
-                </div>
+                <div className='col-lg-3 col-12'>
+                  <p id='footer-nav'>{translate('downloadapp')}</p>
+                  <ul className='useL contactInfo'>
+                    <li className='nav-item'>
+                      <a>
+                        {translate('magicofapp')}
+                      </a>
+                    </li>
 
-
-              </ul>
-            </div>
+                    <div className='appWrapper'>
+                      {
+                        settings?.web_setting?.android_app_link ?
+                          <Link href={settings?.web_setting?.android_app_link} target='_blank'>
+                            <Image src={playStore} height={0} width={0} alt='play-store-img' />
+                          </Link> : null
+                      }
+                      {
+                        settings?.web_setting?.ios_app_link ?
+                          <Link href={settings?.web_setting?.ios_app_link} target='_blank'>
+                            <Image src={appleStore} height={0} width={0} alt='apple-store-img' />
+                          </Link> : null
+                      }
+                    </div>
+                  </ul>
+                </div> : null
+            }
 
           </div>
         </div>
