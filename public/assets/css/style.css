@@ -6784,6 +6784,11 @@ span {
 }
 
 @media only screen and (max-width:575px) {
+
+  .top-title {
+    font-size: 24px;
+  }
+
   .otp-content {
     display: flex;
     flex-direction: column;

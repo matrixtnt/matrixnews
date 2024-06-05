@@ -418,7 +418,7 @@ const Header = () => {
                   //     </Dropdown.Item>
                   //   </Dropdown.Menu>
                   // </Dropdown>
-                  <><ProfileDropDown userName={userName} userData={userData} isLogin={isLogin} profileimg={profileimg} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} /></>
+                  <><ProfileDropDown userName={userName} userData={userData} isLogin={isLogin} profileimg={profileimg} deleteAccount={deleteAccount} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} /></>
                 ) : (
                   <Button
                     variant='danger'

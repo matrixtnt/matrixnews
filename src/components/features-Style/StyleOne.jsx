@@ -156,7 +156,7 @@ const StyleOne = ({ isLoading, Data }) => {
                             <div className='my-3 top-title'>{truncateText(item.title, 60)}</div>
                             <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
                             <div className='d-flex flex-wrap'>
-                              <Link id='btnReadMore' className='btn mb-0' type='button'
+                              <Link id='btnReadMore' className='mb-0 commonBtn' type='button'
                                 href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                                 as={`/news/${item.slug}`}
                               >
