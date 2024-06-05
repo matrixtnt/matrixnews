@@ -138,7 +138,7 @@ const ProfileUpdate = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('update-profile')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('update-profile')}  />
       <section className='profile py-5 bg-white'>
         <div className='container'>
           <div className='row'>

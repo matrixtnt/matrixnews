@@ -564,7 +564,7 @@ const EditNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('editNewsLbl')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('editNewsLbl')}  />
       <div className='create_news py-5 bg-white'>
         <div className='container'>
           <div className='row'>

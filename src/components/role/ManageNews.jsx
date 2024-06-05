@@ -98,7 +98,7 @@ const ManageNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('manageNewsLbl')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('manageNewsLbl')}  />
 
       <div className='manage_news bg-white py-5'>
         <div className='container'>

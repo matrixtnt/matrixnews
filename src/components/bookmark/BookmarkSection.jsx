@@ -74,7 +74,7 @@ const BookmarkSection = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('bookmarkLbl')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('bookmarkLbl')}  />
 
       <div id='bs-main' className='py-5 bookmark_page'>
         <div id='bs-content' className='container'>

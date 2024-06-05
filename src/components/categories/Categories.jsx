@@ -84,7 +84,7 @@ const Categories = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement='Categories' ThirdElement='0' />
+      <BreadcrumbNav SecondElement='Categories'  />
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <div className='container my-5'>
           {isLoading.loading ? (

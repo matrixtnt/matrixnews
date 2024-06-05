@@ -66,7 +66,7 @@ const VideoNewsview = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={'Video News'} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={'Video News'}  />
       <div className='py-5 video_section_all'>
         <div className='container'>
           {isLoading ? (

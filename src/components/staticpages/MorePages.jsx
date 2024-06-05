@@ -66,7 +66,7 @@ const MorePages = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('More Pages')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('More Pages')}  />
       <div className='morepages bg-white'>
         <div className='container'>
           {isLoading ? (

@@ -104,7 +104,7 @@ const ViewAll = () => {
     <Layout>
       {viewAllData && viewAllData ? (
         <>
-          <BreadcrumbNav SecondElement={Data && Data[0]?.title} ThirdElement='0' />
+          <BreadcrumbNav SecondElement={Data && Data[0]?.title}  />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
               {isLoading.loading ? (
@@ -172,7 +172,7 @@ const ViewAll = () => {
       ) : null}
       {viewAllData && viewAllData[0]?.breaking_news ? (
         <>
-          <BreadcrumbNav SecondElement={Data[0].title} ThirdElement='0' />
+          <BreadcrumbNav SecondElement={Data[0].title}  />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
               {isLoading.loading ? (

@@ -97,7 +97,7 @@ const NewsNotification = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('notificationLbl')} ThirdElement='0' />
+      <BreadcrumbNav SecondElement={translate('notificationLbl')}  />
       <div className='new_noti-sec personal_Sec bg-white'>
         <div className='container new_notification'>
           <div className='d-flex bd-highlight mb-3'>
