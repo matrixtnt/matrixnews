@@ -122,8 +122,8 @@ const WeatherCard = () => {
               <div className='calender_icon me-2'>
                 <p className=' mb-0'>
                   <SlCalender />
-                  {`${dayOfMonth}`}
                   {`${month}`}
+                  {`${dayOfMonth}`}
                   ,{`${year}`}
                 </p>
               </div>

@@ -70,6 +70,7 @@ const ViewAll = () => {
       return data.data
     } catch (error) {
       console.log(error)
+      setViewAllData([])
       setIsLoading({ loading: false })
     }
   }
@@ -95,7 +96,7 @@ const ViewAll = () => {
   const currentData = viewAllData
 
   useEffect(() => {
-    console.log(viewAllData, 'currr@@@')
+    // console.log(viewAllData, 'currr@@@')
   }, [viewAllData,])
 
 

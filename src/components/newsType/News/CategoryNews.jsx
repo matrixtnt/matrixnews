@@ -74,6 +74,7 @@ const CategoryNews = () => {
         return data
       } catch (error) {
         console.log(error)
+        setCategoriesNewsData([])
         setIsLoading({ loading: false })
       }
     }
@@ -89,7 +90,8 @@ const CategoryNews = () => {
 
   useEffect(() => {
     if (Data && Data.data) {
-      setCategoriesNewsData((prevData) => [...prevData, ...Data.data]);
+      loadMore ? setCategoriesNewsData((prevData) => [...prevData, ...Data.data]) :
+        setCategoriesNewsData(Data.data);
     }
   }, [Data])
 

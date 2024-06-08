@@ -71,6 +71,7 @@ const SubCategory = () => {
       return data
     } catch (error) {
       console.log(error)
+      setSubCategories([])
       setIsLoading({ loading: false })
     }
   }

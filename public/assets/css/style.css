@@ -1779,8 +1779,12 @@ a {
 }
 
 .calender_icon p {
-  font-weight: 500;
+  font-weight: 900;
   font-size: small;
+}
+
+.calender_icon p svg {
+  margin-top: -4px;
 }
 
 .calender_icon svg {
@@ -2926,6 +2930,7 @@ a#social_platforms svg:hover {
   top: 10px;
   left: 10px;
   font-weight: 600;
+  cursor: default !important;
 }
 
 #bs-card-title {
@@ -6502,6 +6507,18 @@ span {
   padding-left: 15px;
 }
 
+.create_news input::placeholder,
+.create_news textarea::placeholder,
+.create_news .ant-select-selection-placeholder {
+  color: gray !important;
+  /* font-weight: 500; */
+}
+
+.create_news .ql-editor{
+  font-size: 16px;
+}
+
+
 @keyframes blink {
   0% {
     opacity: 1;
@@ -7213,6 +7230,7 @@ span {
   gap: 12px;
   position: relative;
   margin-top: 20px;
+  padding-bottom: 2px;
 }
 
 .surveysSect .card span {
@@ -7222,6 +7240,7 @@ span {
 
 .surveysSect .card .question {
   font-size: 20px;
+  margin-bottom: 20px;
 }
 
 .surveysSect .card .options {
@@ -7274,6 +7293,7 @@ span {
 .surveysSect .card .percentage {
   position: relative;
   top: -28px;
+  left: 46%;
   margin: auto;
   color: white;
 }

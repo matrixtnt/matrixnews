@@ -56,6 +56,7 @@ const LiveNews = () => {
       return data.data
     } catch (error) {
       console.log(error)
+      setLiveNewsData([])
       setIsLoading({ loading: false })
     }
   }

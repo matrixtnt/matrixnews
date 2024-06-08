@@ -54,6 +54,7 @@ const Categories = () => {
       return data
     } catch (error) {
       console.log(error)
+      setCategories([])
       setIsLoading({ loading: false })
     }
   }

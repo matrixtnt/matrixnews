@@ -527,7 +527,7 @@ const CreateNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('createNewsLbl')}  />
+      <BreadcrumbNav SecondElement={translate('createNewsLbl')} />
       <div className='create_news py-5 bg-white'>
         <div className='container'>
           <div className='row'>
@@ -637,6 +637,7 @@ const CreateNews = () => {
                           placeholder={translate('catLbl')}
                           onChange={(value, option) => categorySelector(value, option)}
                           optionLabelProp='label'
+                          className='createSelectDropDown'
                         >
                           {category &&
                             category.map((elem, id) => (

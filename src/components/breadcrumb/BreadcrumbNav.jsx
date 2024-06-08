@@ -66,14 +66,13 @@ const BreadcrumbNav = ({ SecondElement, ThirdElement, FourthElement }) => {
   if (SecondElement !== '') {
     items.push({
       title: SecondElement,
-      href: '',
+      href: SecondElement == 'category' ? '/all-categories' : null
     });
   }
 
   if (ThirdElement !== '') {
     items.push({
       title: ThirdElement,
-      href: '',
     });
   }
 

@@ -62,6 +62,7 @@ const Notification = () => {
       return data.data;
     } catch (error) {
       console.log(error);
+      setNotificationData([])
       setIsLoading({ loading: false })
     }
   };

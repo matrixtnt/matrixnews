@@ -53,6 +53,7 @@ const AllBreakingNews = () => {
       return data.data
     } catch (error) {
       console.log(error)
+      setBreakingNewsData([])
       setIsLoading({ loading: false })
     }
   }

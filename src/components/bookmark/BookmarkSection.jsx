@@ -74,7 +74,7 @@ const BookmarkSection = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('bookmarkLbl')}  />
+      <BreadcrumbNav SecondElement={translate('bookmarkLbl')} />
 
       <div id='bs-main' className='py-5 bookmark_page'>
         <div id='bs-content' className='container'>
@@ -91,12 +91,12 @@ const BookmarkSection = () => {
               Data.map(element => (
 
                 <div className='col-md-6 col-lg-4 col-12' key={element.id}>
-                  <Link
-                    href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                    as={`/news/${element.slug}`}
-                  >
-                    <div id='bs-card' className='card'>
-                      <div className='bs_image_card'>
+                  <div id='bs-card' className='card'>
+                    <div className='bs_image_card'>
+                      <Link
+                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        as={`/news/${element.slug}`}
+                      >
                         <img
                           id='bs-card-image'
                           src={element.image}
@@ -104,18 +104,23 @@ const BookmarkSection = () => {
                           alt='bookmark news'
                           onError={placeholderImage}
                         />
-                        <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
-                          <BsBookmark id='bs-bookmark-logo' size={18} />
-                        </button>
-                      </div>
-                      <div id='bs-card-body' className='card-body'>
-                        <button
-                          id='bs-btnCatagory'
-                          className='btn btn-sm'
-                          type='button'
-                        >
-                          {element.category_name}
-                        </button>
+                      </Link>
+                      <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
+                        <BsBookmark id='bs-bookmark-logo' size={18} />
+                      </button>
+                    </div>
+                    <div id='bs-card-body' className='card-body'>
+                      <button
+                        id='bs-btnCatagory'
+                        className='btn btn-sm'
+                        type='button'
+                      >
+                        {element.category_name}
+                      </button>
+                      <Link
+                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        as={`/news/${element.slug}`}
+                      >
                         <h5
                           id='bs-card-title'
                           className='card-title'
@@ -126,9 +131,9 @@ const BookmarkSection = () => {
                           <FiCalendar size={18} id='bs-logoCalendar' />
                           {formatDate(element.date.slice(0, 10))}
                         </p>
-                      </div>
+                      </Link>
                     </div>
-                  </Link>
+                  </div>
 
                 </div>
               ))
