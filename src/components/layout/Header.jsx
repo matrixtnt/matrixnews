@@ -26,7 +26,7 @@ import {
   profileimg,
   placeholderImage
 } from '../../utils/index'
-import { loadGetUserByIdApi, logoutUser, selectUser } from '../../store/reducers/userReducer'
+import { getUserManageData, loadGetUserByIdApi, logoutUser, selectUser } from '../../store/reducers/userReducer'
 import SignInModal from '../auth/SignInModal'
 import MobilesideBar from '../mobileNavbar/MobilesideBar'
 import { settingsData } from '../../store/reducers/settingsReducer'
@@ -51,6 +51,7 @@ const { confirm } = Modal
 
 const Header = () => {
   const userData = useSelector(selectUser)
+  const userRoleStatus = useSelector(getUserManageData)
   const { authentication } = FirebaseData()
   const [modalShow, setModalShow] = useState(false)
   const [islogout, setIsLogout] = useState(false) // eslint-disable-next-line
@@ -83,7 +84,7 @@ const Header = () => {
   useEffect(() => {
     loadLanguages({
       onSuccess: response => {
-        if (currentLanguage.code === null) {
+        if (currentLanguage?.code === null) {
           // eslint-disable-next-line
           // eslint-disable-next-line
           let index =
@@ -189,7 +190,7 @@ const Header = () => {
   }
 
   // set rtl
-  const selectedLang = languagesData && languagesData.find(lang => lang.code === currentLanguage.code)
+  const selectedLang = languagesData && languagesData.find(lang => lang.code === currentLanguage?.code)
   useEffect(() => {
     if (selectedLang && selectedLang.isRTL === 1) {
       document.documentElement.dir = 'rtl'
@@ -418,7 +419,7 @@ const Header = () => {
                   //     </Dropdown.Item>
                   //   </Dropdown.Menu>
                   // </Dropdown>
-                  <><ProfileDropDown userName={userName} userData={userData} isLogin={isLogin} profileimg={profileimg} deleteAccount={deleteAccount} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} /></>
+                  <><ProfileDropDown userName={userName} userData={userData} userRole={userRoleStatus} isLogin={isLogin} profileimg={profileimg} deleteAccount={deleteAccount} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} /></>
                 ) : (
                   <Button
                     variant='danger'

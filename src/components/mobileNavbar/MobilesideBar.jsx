@@ -13,7 +13,7 @@ import {
 } from '../../store/reducers/languageReducer'
 import { FaAngleDown } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../store/reducers/userReducer'
+import { getUserManageData, selectUser } from '../../store/reducers/userReducer'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
@@ -44,6 +44,7 @@ const MobilesideBar = ({
   ...props
 }) => {
   const userData = useSelector(selectUser)
+  const userRoleStatus = useSelector(getUserManageData)
 
   const router = usePathname();
 
@@ -161,7 +162,7 @@ const MobilesideBar = ({
                 //     </Dropdown.Item>
                 //   </Dropdown.Menu>
                 // </Dropdown>
-                <ProfileDropDown userName={userName} userData={userData} isLogin={islogout} profileimg={usersvg.src} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} handleClose={handleClose} />
+                <ProfileDropDown userName={userName} userData={userData} userRole={userRoleStatus} isLogin={islogout} profileimg={usersvg.src} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} handleClose={handleClose} />
               ) : (
                 <Button variant='danger' onClick={() => setModalShow(true)} id='btnSignIn' className='' type='button'>
                   <BiUserCircle size={23} id='btnLogo' />

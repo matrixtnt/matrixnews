@@ -6,7 +6,7 @@ import { FaAngleDown } from "react-icons/fa6";
 
 import { translate, truncateText } from 'src/utils';
 
-const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgError, handleClose,deleteAccount }) => {
+const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgError, handleClose, deleteAccount, userRole }) => {
 
     const router = usePathname();
 
@@ -47,7 +47,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
                 </>
             ),
         },
-        ...(userData?.data?.role !== 0 ? [
+        ...(userRole?.role !== 0 ? [
             {
                 key: '6',
                 label: (

@@ -50,7 +50,7 @@ const WeatherCard = () => {
             }
 
             const response = await axios.get(
-              `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage.code}`
+              `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage?.code}`
             )
 
             resolve(response.data) // Resolve the promise with the fetched data
@@ -108,10 +108,10 @@ const WeatherCard = () => {
   }
 
   useEffect(() => {
-    if (currentLanguage.code) {
+    if (currentLanguage?.code) {
       loadLanguageLabels({ code: currentLanguage?.code })
     }
-  }, [currentLanguage.code])
+  }, [currentLanguage?.code])
 
   return (
     <div id='rns-weather-card'>

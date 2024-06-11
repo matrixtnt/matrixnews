@@ -181,7 +181,7 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (currentLanguage.id && !isLiveNewsCallOnce && !isBreakingNewsCallOnce) {
+    if (currentLanguage?.id && !isLiveNewsCallOnce && !isBreakingNewsCallOnce) {
       getLiveStreaming()
       getBreakingNewsApi()
     }
