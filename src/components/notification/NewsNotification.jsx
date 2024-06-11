@@ -98,7 +98,7 @@ const NewsNotification = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('notificationLbl')}  />
+      <BreadcrumbNav SecondElement={translate('notificationLbl')} />
       <div className='new_noti-sec personal_Sec bg-white'>
         <div className='container new_notification'>
           <div className='d-flex bd-highlight mb-3'>
@@ -158,18 +158,6 @@ const NewsNotification = () => {
             )}
           </div>
           {totalData > dataPerPage && totalData !== notificationData.length ? (
-            // <ReactPaginate
-            //   initialPage={currentPage}
-            //   previousLabel={translate('previous')}
-            //   nextLabel={translate('next')}
-            //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-            //   onPageChange={handlePageChange}
-            //   containerClassName={'pagination'}
-            //   previousLinkClassName={'pagination__link'}
-            //   nextLinkClassName={'pagination__link'}
-            //   disabledClassName={'pagination__link--disabled'}
-            //   activeClassName={'pagination__link--active'}
-            // />
             <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
           ) : null}
         </div>

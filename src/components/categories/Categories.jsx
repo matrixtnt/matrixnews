@@ -136,18 +136,6 @@ const Categories = () => {
                 </>
               )}
               {totalData > dataPerPage && totalData !== categories.length ? (
-                // <ReactPaginate
-                //   initialPage={currentPage}
-                //   previousLabel={translate('previous')}
-                //   nextLabel={translate('next')}
-                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-                //   onPageChange={handlePageChange}
-                //   containerClassName={'pagination'}
-                //   previousLinkClassName={'pagination__link'}
-                //   nextLinkClassName={'pagination__link'}
-                //   disabledClassName={'pagination__link--disabled'}
-                //   activeClassName={'pagination__link--active'}
-                // />
                 <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
               ) : null}
             </div>

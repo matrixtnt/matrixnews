@@ -105,7 +105,7 @@ const ViewAll = () => {
     <Layout>
       {viewAllData && viewAllData ? (
         <>
-          <BreadcrumbNav SecondElement={Data && Data[0]?.title}  />
+          <BreadcrumbNav SecondElement={Data && Data[0]?.title} />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
               {isLoading.loading ? (
@@ -173,7 +173,7 @@ const ViewAll = () => {
       ) : null}
       {viewAllData && viewAllData[0]?.breaking_news ? (
         <>
-          <BreadcrumbNav SecondElement={Data[0].title}  />
+          <BreadcrumbNav SecondElement={Data[0].title} />
           <div id='BNV-main'>
             <div id='BNV-content' className='container'>
               {isLoading.loading ? (
@@ -220,18 +220,6 @@ const ViewAll = () => {
                 </div>
               )}
               {totalData > dataPerPage && totalData !== currentData?.length ? (
-                // <ReactPaginate
-                //   initialPage={currentPage}
-                //   previousLabel={translate('previous')}
-                //   nextLabel={translate('next')}
-                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-                //   onPageChange={handlePageChange}
-                //   containerClassName={'pagination'}
-                //   previousLinkClassName={'pagination__link'}
-                //   nextLinkClassName={'pagination__link'}
-                //   disabledClassName={'pagination__link--disabled'}
-                //   activeClassName={'pagination__link--active'}
-                // />
                 <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
               ) : null}
             </div>
