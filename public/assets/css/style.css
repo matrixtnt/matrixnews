@@ -2404,6 +2404,11 @@ a {
   margin-top: 30px;
   margin-bottom: 20px;
   gap: 18px 0px;
+  flex-wrap: wrap;
+}
+
+#hns-head-main .left-sec {
+  width: 88%;
 }
 
 #hns-main-logo {
@@ -6944,6 +6949,16 @@ span {
   margin: 50px auto;
 }
 
+.error_page img {
+  width: 100%;
+}
+
+@media screen and (max-width: 575px) {
+  .error_page img {
+    height: 100%;
+  }
+}
+
 .create_news .ant-alert-message {
   font-size: x-small;
 }
@@ -7628,6 +7643,6 @@ span {
   font-weight: 600;
 }
 
-.ant-modal-confirm .ant-modal-confirm-btns button{
- font-weight: 700;
+.ant-modal-confirm .ant-modal-confirm-btns button {
+  font-weight: 700;
 }
