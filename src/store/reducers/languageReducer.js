@@ -93,7 +93,7 @@ export const loadLanguages = ({
   }
 }
 
-// Helper function to check if the page has been manually refreshed
+// Helper function to check if the page has been manually refreshed or not
 const isManualRefresh = () => {
   const manualRefresh = sessionStorage.getItem("manualRefresh");
   sessionStorage.removeItem("manualRefresh");
