@@ -78,13 +78,15 @@ export const getUser = () => {
 }
 
 // 1. languages
-export const getLanguagesApi = () => {
+export const getLanguagesApi = (limit, offset) => {
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_LANGUAGE_LIST}`,
     method: 'GET',
     params: {
-      language_id: language_id
+      language_id: language_id,
+      limit: limit,
+      offset: offset
     },
     authorizationHeader: false
   }

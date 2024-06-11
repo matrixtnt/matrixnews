@@ -31,7 +31,7 @@ export const CategoriesDataSlice = createSlice({
         },
         categoriesFailed: (state, action) => {
             state.loading = false;
-            state.categories= [];
+            state.categories = [];
         },
         categoriesUpdateLanguage: (state, action) => {
             if (state.Lang) {
@@ -69,7 +69,7 @@ export const loadCategories = ({
     const { lastFetch, Lang } = store.getState().categoryData ?? {};
     const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
     // If API data is fetched within last 10 minutes then don't call the API again
-    if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN) {
+    if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN || isManualRefresh()) {
         store.dispatch(
             apiCallBegan({
                 ...getCategoriesApi(offset, limit, language_id),
@@ -84,6 +84,26 @@ export const loadCategories = ({
         );
     }
 };
+
+// Helper function to check if the page has been manually refreshed
+const isManualRefresh = () => {
+    const manualRefresh = sessionStorage.getItem("manualRefresh");
+    sessionStorage.removeItem("manualRefresh");
+    return manualRefresh === "true";
+};
+
+// Event listener to set manualRefresh flag when page is manually refreshed
+if (typeof window !== 'undefined') {
+    window.addEventListener("load", () => {
+        if (navigator.userAgent.includes("Mozilla")) {
+            // This is likely a manual refresh
+            sessionStorage.setItem("manualRefresh", "true");
+        } else {
+            // This is the initial page load
+            sessionStorage.removeItem("manualRefresh");
+        }
+    });
+}
 
 export const categoriesCacheData = createSelector(
     (state) => state.categoryData,
