@@ -456,7 +456,7 @@ export const getQuestionResult = (language_id, question_id) => {
   }
 }
 
-export const getFeatureSection = (offset, limit, slug, latitude, longitude, section_id) => {
+export const getFeatureSection = (offset, limit, slug, latitude, longitude, section_id,isToken) => {
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_FEATURE_SECTION}`,
@@ -468,9 +468,9 @@ export const getFeatureSection = (offset, limit, slug, latitude, longitude, sect
       slug: slug,
       latitude: latitude,
       longitude: longitude,
-      section_id: section_id
+      section_id: section_id,
     },
-    authorizationHeader: false
+    authorizationHeader: isToken ? true : false
   }
 }
 

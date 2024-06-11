@@ -59,7 +59,7 @@ const ProfileUpdate = () => {
         email: profileData.email,
         onSuccess: success => {
           toast.success('successfully updated')
-          router.push('/')
+          userData?.data?.is_login === "0" ? router.push('/user-based-categories') : router.push('/');
 
         },
         onError: error => {
@@ -138,7 +138,7 @@ const ProfileUpdate = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('update-profile')}  />
+      <BreadcrumbNav SecondElement={translate('update-profile')} />
       <section className='profile py-5 bg-white'>
         <div className='container'>
           <div className='row'>

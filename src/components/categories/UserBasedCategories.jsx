@@ -10,20 +10,23 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { categoryCountSelector } from 'src/store/reducers/tempDataReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
-import { getUserManageData, loadGetUserByIdApi } from 'src/store/reducers/userReducer'
+import { getUserManageData, loadGetUserByIdApi, selectUser } from 'src/store/reducers/userReducer'
 import Loader from './Loader'
+import { useRouter } from 'next/router'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [finalToggleID, setFinalToggleID] = useState('')
   const [loader, setLoader] = useState(false)
-  
+  const navigate = useRouter()
   const currentLanguage = useSelector(selectCurrentLanguage)
   const categories = useSelector(categoriesCacheData)
   const UserManageData = useSelector(getUserManageData)
-  
+
   const [catLength, setCatLength] = useState(categories?.length)
+
+  const userData = useSelector(selectUser)
 
   // get user by id
   useEffect(() => {
@@ -60,11 +63,11 @@ const UserBasedCategories = () => {
     })
 
   }, [currentLanguage])
-  
+
   useEffect(() => {
     setCatLength(categories?.length)
-    console.log(categories.length,'cat-length')
-  }, [catLength,currentLanguage])
+    console.log(categories.length, 'cat-length')
+  }, [catLength, currentLanguage])
 
 
   // handle switch
@@ -101,6 +104,7 @@ const UserBasedCategories = () => {
         onSuccess: response => {
           toast.success(response.message)
           setLoader(false)
+          userData?.data?.is_login === "0" ? navigate.push('/') : null;
           loadGetUserByIdApi({
             onSuccess: (res) => {
               const data = res

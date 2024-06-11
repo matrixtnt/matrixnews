@@ -45,6 +45,7 @@ export const loadLayout = ({
   latitude = "",
   longitude = "",
   section_id = "",
+  isToken = false,
   onSuccess = () => { },
   onError = () => { },
   onStart = () => { }
@@ -56,7 +57,7 @@ export const loadLayout = ({
   // if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN) {
   store.dispatch(
     apiCallBegan({
-      ...getFeatureSection(offset, limit, slug, latitude, longitude, section_id),
+      ...getFeatureSection(offset, limit, slug, latitude, longitude, section_id,isToken),
       displayToast: false,
       onStartDispatch: layoutRequested.type,
       onSuccessDispatch: layoutReceived.type,

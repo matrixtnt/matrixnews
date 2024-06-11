@@ -6,7 +6,7 @@ import StyleTwo from './StyleTwo'
 import StyleThree from './StyleThree'
 import StyleFour from './StyleFour'
 import StyleFive from './StyleFive'
-import { translate, NoDataFound } from '../../utils'
+import { translate, NoDataFound, isLogin } from '../../utils'
 // import NoDataFound from '../noDataFound/NoDataFound'
 import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
@@ -21,11 +21,15 @@ import { getNewsApi } from 'src/hooks/newsApi'
 import DefaultNewsStyle from './DefaultNewsStyle'
 import { layoutReceived, layoutUpdateLanguage, loadLayout } from 'src/store/reducers/featureLayoutReducer'
 import { loadNews } from 'src/store/reducers/newsReducer'
+import { selectUser } from 'src/store/reducers/userReducer'
 
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
   const [noFeatureData, setNoFeatureData] = useState(false)
   const [newsDataFound, setNewsDataFound] = useState(true)
+
+  const userData = useSelector(selectUser)
+  const userToken = userData?.data?.token;
 
   const dispatch = useDispatch();
 
@@ -66,6 +70,8 @@ const FeatureLayout = () => {
     })
   }
 
+  
+
   useEffect(() => {
     if (currentLanguage?.id) {
       setIsLoading(true)
@@ -73,6 +79,7 @@ const FeatureLayout = () => {
       loadLayout({
         offset: 0,
         limit: 9,
+        isToken: userToken ? true : false,
         onSuccess: (response) => {
           dispatch(layoutUpdateLanguage(currentLanguage.id))
           setData(response.data)
@@ -90,13 +97,13 @@ const FeatureLayout = () => {
         }
       })
     }
-  }, [currentLanguage])
+  }, [currentLanguage,isLogin()])
 
-  // useEffect(() => {
-  //   if (isNoDataLoading) {
-  //     getNewsWhenNoData()
-  //   }
-  // }, [isNoDataLoading])
+  useEffect(() => {
+    if (isNoDataLoading) {
+      getNewsWhenNoData()
+    }
+  }, [isNoDataLoading])
 
   useEffect(() => {
 
