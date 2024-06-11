@@ -6720,6 +6720,8 @@ span {
 
 .para {
   text-transform: none;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .para * {
