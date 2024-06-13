@@ -21,7 +21,7 @@ const AllBreakingNews = () => {
 
   const router = useRouter()
 
-  const dataPerPage = 1;
+  const dataPerPage = 6;
 
   const [isLoading, setIsLoading] = useState({
     loading: false,

@@ -95,6 +95,7 @@ const CatNav = () => {
       },
       onError: error => {
         setSubLoading(false)
+        setSubCatData([])
         console.log(error)
       }
     })

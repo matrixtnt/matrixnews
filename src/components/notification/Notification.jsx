@@ -145,7 +145,7 @@ const Notification = () => {
             <Link href='/personal-notification' id='btnNotification1' className='btn mx-1 bd-highlight'>
               {' '}
               {/* {translate('personalLbl')}{' '} */}
-              {translate('personalNotifi')}{' '}:-
+              {translate('personalLbl')}{' '}:-
             </Link>
             {/* <Link href='/news-notification' id='btnNewsnoti' className='btn mx-1 bd-highlight'>
               {' '}
