@@ -647,7 +647,7 @@ a {
 }
 
 .navLinkActive {
-  color: red !important;
+  color: var(--primary-color) !important;
 }
 
 .ant-dropdown-menu .ant-dropdown-menu-item {
@@ -5434,7 +5434,7 @@ a#social_platforms svg:hover {
 #catNav-more {
   display: flex;
   align-items: center;
-  width: 50%;
+  width: max-content;
   padding: 0 10px;
   border: 1px solid #dedede80;
   border-radius: 5px;
