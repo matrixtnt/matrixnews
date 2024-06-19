@@ -116,7 +116,7 @@ const CatNav = () => {
   const lengthdata = (subCatData && subCatData.total) || 0
 
 
-  const [subCatDrop, setSubCatDrop] = useState(false)
+  const [subCatDrop, setSubCatDrop] = useState(true)
   const [currentCategory, setCurrentCategory] = useState([])
 
   const handleSubCatDropdown = (category) => {
@@ -173,7 +173,7 @@ const CatNav = () => {
 
                         {
                           categoiresOnOff && categoiresOnOff.subcategory_mode === '1' ?
-                            subCatDrop && currentCategory && currentCategory.id === element.id ? <>
+                            subCatDrop && currentCategory && currentCategory.id !== element.id ? <>
                               <div className='subCatDropdown' >
                                 <div className="row"
                                   onMouseLeave={() => setSubCatDrop(false)}

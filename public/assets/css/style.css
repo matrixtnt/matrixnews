@@ -878,7 +878,7 @@ a {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 40px;
+  gap: 18px;
 }
 
 @media screen and (min-width:1200px) and (max-width: 1399px) {
@@ -5431,6 +5431,23 @@ a#social_platforms svg:hover {
   width: max-content;
 }
 
+/* width
+.catContaier::-webkit-scrollbar {
+  width: 2px;
+  height: 3px;;
+}
+
+Track
+.catContaier::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+Handle
+.catContaier::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+} */
+
 #catNav-more {
   display: flex;
   align-items: center;
@@ -5442,6 +5459,7 @@ a#social_platforms svg:hover {
   text-align: center;
   color: var(--text-primary-color);
   font-weight: 700;
+  width: 200px;
 }
 
 .live-news #LN-card-image {
