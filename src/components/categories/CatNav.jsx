@@ -61,7 +61,7 @@ const CatNav = () => {
   }
 
   const [currentPage, setCurrentPage] = useState(0)
-  const dataPerPage = 8 // number of posts per page
+  const dataPerPage = 4 // number of posts per page
 
   const changelanguage = useSelector(selectCurrentLanguageLabels)
   const location = useSelector(locationData)
@@ -150,7 +150,7 @@ const CatNav = () => {
                   <div className={`cn-main-div catSubCatWrapper flex-display`}>
                     <div className="catContainer flex-display">
 
-                      {categories.map((element, index) => (
+                      {categories?.slice(0,10).map((element, index) => (
                         <div key={element.id} className='text-center'
                         >
                           <div>
