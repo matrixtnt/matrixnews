@@ -878,7 +878,7 @@ a {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 22px;
+  gap: 38px;
 }
 
 /* For when Data.length <= 10 */
@@ -890,7 +890,7 @@ a {
 .catContainer {
   width: 100%;
   overflow: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding-bottom: 4px;
 }
 
@@ -915,7 +915,7 @@ a {
 
 /* Handle */
 .catContainer::-webkit-scrollbar-thumb {
-  background: lightgray;
+  background: var(--secondary-color);
   border-radius: 10px;
 }
 
