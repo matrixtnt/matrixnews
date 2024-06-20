@@ -878,20 +878,45 @@ a {
   display: flex;
   justify-content: start;
   align-items: center;
-  gap: 18px;
+  gap: 22px;
 }
-
-@media screen and (min-width:1200px) and (max-width: 1399px) {
-  .flex-display {
-    gap: 21px;
-  }
-}
-
 
 /* For when Data.length <= 10 */
 .block-display {
   display: block;
   /* Add any other styles you want for the "block" display here */
+}
+
+.catContainer {
+  width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
+  padding-bottom: 4px;
+}
+
+
+/* width */
+.catContainer::-webkit-scrollbar {
+  width: 2px;
+  height: 6px;
+  display: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.catContainer:hover::-webkit-scrollbar {
+  display: block;
+}
+
+/* Track */
+.catContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+.catContainer::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 10px;
 }
 
 #cn-main .swiper-slide {
@@ -5430,23 +5455,6 @@ a#social_platforms svg:hover {
   cursor: pointer;
   width: max-content;
 }
-
-/* width
-.catContaier::-webkit-scrollbar {
-  width: 2px;
-  height: 3px;;
-}
-
-Track
-.catContaier::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-
-Handle
-.catContaier::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-} */
 
 #catNav-more {
   display: flex;
