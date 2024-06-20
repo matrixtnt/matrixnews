@@ -181,7 +181,6 @@ const CatNav = () => {
                                 <div className='subCatDropdown' >
                                   <div className="row"
                                     onMouseLeave={() => setSubCatDrop(false)}
-
                                   >
                                     <div className="col-lg-3">
                                       <div className="subCatNamesWrapper">
@@ -209,7 +208,7 @@ const CatNav = () => {
                                         <div className='row'>
                                           {
                                             subLoading ? <>
-                                              {[...Array(8)].map((_, index) => (
+                                              {[...Array(4)].map((_, index) => (
                                                 <div className='col-md-3 col-12' key={index}>
                                                   <Card catNav={true} />
                                                 </div>
@@ -247,7 +246,7 @@ const CatNav = () => {
                                             </>
                                           }
                                           {
-                                            lengthdata > 1 ?
+                                            lengthdata > dataPerPage ?
                                               <div className="col-12 viewAllWrapper">
                                                 {
                                                   subCatSlug === '' ?
