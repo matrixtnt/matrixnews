@@ -35,7 +35,7 @@ const StyleTwo = ({ Data }) => {
         <div className='new_video_style_two'>
           <div className='container'>
             {/* ad spaces */}
-            {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
+            {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) ? (
               <>
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
               </>
@@ -156,7 +156,7 @@ const StyleTwo = ({ Data }) => {
         <div className='new_video_style_two'>
           <div className='container'>
             {/* ad spaces */}
-            {Data && Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
+            {Data && Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) ? (
               <>
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
               </>
@@ -269,7 +269,7 @@ const StyleTwo = ({ Data }) => {
         <div className='new_video_style_two'>
           <div className='container'>
             {/* ad spaces */}
-            {Data.ad_spaces && Data.id === Data.ad_spaces.ad_featured_section_id ? (
+            {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) ? (
               <>
                 <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'two'} />
               </>
