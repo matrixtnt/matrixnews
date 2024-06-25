@@ -9,7 +9,7 @@ import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { getNewsApi } from 'src/hooks/newsApi'
-// import NoDataFound from '../noDataFound/NoDataFound'
+
 
 const TagNewsview = () => {
   const router = useRouter()

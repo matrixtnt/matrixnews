@@ -10,10 +10,10 @@ import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
-// import NoDataFound from '../noDataFound/NoDataFound'
+
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
 
 const AllBreakingNews = () => {
   let { id: language_id } = getLanguage()

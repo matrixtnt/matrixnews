@@ -10,14 +10,7 @@ import CommentSection from '../../comment/CommentSection.jsx';
 import { BsLink45Deg } from "react-icons/bs";
 
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav.jsx';
-import {
-  FacebookIcon,
-  WhatsappIcon,
-  TwitterShareButton,
-  WhatsappShareButton,
-  FacebookShareButton,
-  XIcon
-} from 'react-share';
+
 import SignInModal from '../../auth/SignInModal.jsx';
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js';
 import { getLanguage, getUser } from '../../../utils/api.jsx';
@@ -42,6 +35,7 @@ import toast from 'react-hot-toast';
 import CommentsView from 'src/components/comment/CommentsView.jsx';
 import Surveys from 'src/components/survey/Surveys.jsx';
 import AdSpaces from '../../view/adSpaces/AdSpaces.jsx';
+import SocialShare from 'src/components/view/SocialShare.jsx';
 
 const News = () => {
   let user = getUser();
@@ -301,7 +295,9 @@ const News = () => {
                       <div id='nv-right-head'>
                         <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
 
-                        <FacebookShareButton
+                        <SocialShare url={decodedURL} title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}  handleCopyUrl={handleCopyUrl}/>
+
+                        {/* <FacebookShareButton
                           url={decodedURL}
                           title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
                           hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
@@ -322,11 +318,16 @@ const News = () => {
                           hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
                         >
                           <XIcon size={40} round />
-                        </TwitterShareButton>
-                        <button onClick={handleCopyUrl} className='copy_url'>
+                        </TwitterShareButton> */}
+                        {/* <button onClick={handleCopyUrl} className='copy_url'>
                           <BsLink45Deg size={30} />
-                        </button>
+                        </button> */}
+
+
+
                       </div>
+
+
 
                     ) :
                       <div id='nv-right-head'>

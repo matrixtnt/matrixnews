@@ -15,8 +15,8 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
-import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
-// import NoDataFound from '../noDataFound/NoDataFound'
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
+
 
 const ViewAll = () => {
   const [currentIndex, setCurrentIndex] = useState(0)

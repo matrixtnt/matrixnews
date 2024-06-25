@@ -7,7 +7,7 @@ import StyleThree from './StyleThree'
 import StyleFour from './StyleFour'
 import StyleFive from './StyleFive'
 import { translate, NoDataFound, isLogin } from '../../utils'
-// import NoDataFound from '../noDataFound/NoDataFound'
+
 import Skeleton from 'react-loading-skeleton'
 import StyleSix from './StyleSix'
 import { useQuery } from '@tanstack/react-query'

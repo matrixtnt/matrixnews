@@ -3819,6 +3819,7 @@ a#social_platforms svg:hover {
 @media (max-width: 575px) {
   #nv-right-head {
     padding-top: 10px;
+    flex-wrap: wrap;
   }
 
   #nv-left-head {

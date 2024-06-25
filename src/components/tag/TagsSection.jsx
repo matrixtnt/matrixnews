@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton'
 import { getTagApi } from 'src/hooks/tagsApi'
 import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
-import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
 import { useEffect, useState } from 'react'
 
 const TagsSection = () => {

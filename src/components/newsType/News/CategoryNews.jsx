@@ -14,7 +14,8 @@ import { locationData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import ReactPaginate from 'react-paginate'
 import { useEffect, useState } from 'react'
-import LoadMoreBtn from 'src/components/view/adSpaces/loadMoreBtn/LoadMoreBtn'
+import LoadMoreBtn from 'src/components/view/loadMoreBtn/LoadMoreBtn'
+import NewsCard from 'src/components/view/NewsCard'
 
 const CategoryNews = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -123,7 +124,7 @@ const CategoryNews = () => {
                 {categoriesNewsData && categoriesNewsData?.length > 0 ? (
                   categoriesNewsData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                      <Link
+                      {/* <Link
                         id='Link-all'
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                         as={`/news/${element.slug}`}
@@ -143,7 +144,8 @@ const CategoryNews = () => {
                             </p>
                           </div>
                         </div>
-                      </Link>
+                      </Link> */}
+                      <NewsCard element={element} />
                     </div>
                   ))
                 ) : (

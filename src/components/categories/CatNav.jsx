@@ -23,6 +23,7 @@ import { IoClose } from "react-icons/io5";
 import Card from '../skeletons/Card'
 import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
+import NewsCard from '../view/NewsCard'
 
 
 SwiperCore.use([Navigation, Pagination])
@@ -150,7 +151,7 @@ const CatNav = () => {
                   <div className={`cn-main-div catSubCatWrapper flex-display`}>
                     <div className="catContainer flex-display">
 
-                      {categories?.slice(0,10).map((element, index) => (
+                      {categories?.slice(0, 10).map((element, index) => (
                         <div key={element.id} className='text-center'
                         >
                           <div>
@@ -217,7 +218,7 @@ const CatNav = () => {
                                               {currentData && currentData.length > 0 ? (
                                                 currentData.map(element => (
                                                   <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                                                    <Link
+                                                    {/* <Link
                                                       id='Link-all'
                                                       href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                                                       as={`/news/${element.slug}`}
@@ -231,13 +232,14 @@ const CatNav = () => {
                                                           <p id='cv-card-title' className='card-title'>
                                                             {element.title}
                                                           </p>
-                                                          {/* <p id='cv-card-date'>
+                                                          <p id='cv-card-date'>
                                                     <FiCalendar size={18} id='cv-logoCalendar' />
                                                     {formatDate(element.date)}
-                                                  </p> */}
+                                                  </p>
                                                         </div>
                                                       </div>
-                                                    </Link>
+                                                    </Link> */}
+                                                    <NewsCard element={element} subDropCard={true}/>
                                                   </div>
                                                 ))
                                               ) : (
@@ -275,7 +277,7 @@ const CatNav = () => {
                           navigate.push('/all-categories')
                         }}
                       >
-                        {translate('allLbl')} {">>"} 
+                        {translate('allLbl')} {">>"}
                       </button>
                     ) : null}
                   </div>

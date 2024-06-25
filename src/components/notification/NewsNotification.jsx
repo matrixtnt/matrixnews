@@ -13,8 +13,8 @@ import { useQuery } from '@tanstack/react-query'
 import { getNotificationsApi } from 'src/hooks/getNotificationApi'
 import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
-import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
-// import NoDataFound from '../noDataFound/NoDataFound'
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
+
 
 const NewsNotification = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)

@@ -15,10 +15,10 @@ import { getNotificationsApi } from 'src/hooks/getNotificationApi';
 import { getUser } from 'src/utils/api';
 import toast from 'react-hot-toast';
 import Layout from '../layout/Layout';
-// import NoDataFound from '../noDataFound/NoDataFound';
+;
 import moment from 'moment-timezone';
 import { settingsData } from 'src/store/reducers/settingsReducer';
-import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn';
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn';
 
 const Notification = () => {
   const [convertedData, setConvertedData] = useState([]); // Store converted dates separately

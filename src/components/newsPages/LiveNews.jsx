@@ -12,9 +12,9 @@ import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
 import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
-import LoadMoreBtn from '../view/adSpaces/loadMoreBtn/LoadMoreBtn'
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
 import { settingsData } from 'src/store/reducers/settingsReducer'
-// import NoDataFound from '../noDataFound/NoDataFound'
+
 
 const LiveNews = () => {
   const [Video_url, setVideo_url] = useState()

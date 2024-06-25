@@ -17,7 +17,7 @@ import { loadMobileType, register } from '../../store/reducers/userReducer'
 import PhoneLoginTwo from './PhoneLoginTwo'
 import RagisterModalTwo from './RegisterModalTwo'
 import ForgotPasswordTwo from './ForgotPasswordTwo'
-import { placeholderImage, translate } from '../../utils'
+import { getAuthErrorMessage, placeholderImage, translate } from '../../utils'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/navigation'
@@ -189,30 +189,30 @@ const SignInModal = props => {
       })
       .catch(function (error) {
         var errorCode = error.code
-        var errorMessage
-        switch (errorCode) {
-          case 'auth/invalid-email':
-            errorMessage = 'Invalid email. Please enter a valid email and try again.'
-            break
-          case 'auth/wrong-password':
-            errorMessage = 'Wrong password. Please enter the correct password and try again.'
-            break
-          case 'auth/user-not-found':
-            errorMessage = 'User not found. Please check your email and try again.'
-            break
-          case 'auth/user-disabled':
-            errorMessage = 'This account has been disabled. Please contact support for assistance.'
-            break
-          case 'auth/too-many-requests':
-            errorMessage = 'Too many requests please try again after some time'
-            break
-          case 'auth/invalid-login-credentials':
-            errorMessage = 'The details entered are incorrect Please enter the correct details and try again.'
-            break
-          // handle other error codes as needed
-          default:
-            errorMessage = 'An error occurred. Please try again later.'
-        }
+        var errorMessage = getAuthErrorMessage(errorCode);
+        // switch (errorCode) {
+        //   case 'auth/invalid-email':
+        //     errorMessage = 'Invalid email. Please enter a valid email and try again.'
+        //     break
+        //   case 'auth/wrong-password':
+        //     errorMessage = 'Wrong password. Please enter the correct password and try again.'
+        //     break
+        //   case 'auth/user-not-found':
+        //     errorMessage = 'User not found. Please check your email and try again.'
+        //     break
+        //   case 'auth/user-disabled':
+        //     errorMessage = 'This account has been disabled. Please contact support for assistance.'
+        //     break
+        //   case 'auth/too-many-requests':
+        //     errorMessage = 'Too many requests please try again after some time'
+        //     break
+        //   case 'auth/invalid-login-credentials':
+        //     errorMessage = 'The details entered are incorrect Please enter the correct details and try again.'
+        //     break
+        //   // handle other error codes as needed
+        //   default:
+        //     errorMessage = 'An error occurred. Please try again later.'
+        // }
         // display error message in a toast or alert
         toast.error(errorMessage)
       })
