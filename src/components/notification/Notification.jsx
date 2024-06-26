@@ -30,6 +30,7 @@ const Notification = () => {
 
   const settings = useSelector(settingsData)
   const systemTimezoneData = settings.system_timezone
+  const [newData, setNewData] = useState([])
 
 
 
@@ -68,7 +69,7 @@ const Notification = () => {
   };
 
   // react query
-  const { data: Data } = useQuery({
+  const { data: Data, refetch } = useQuery({
     queryKey: ['getuserNotification', currentLanguage, offsetdata, offset],
     queryFn: getUserNotification,
 
@@ -89,28 +90,19 @@ const Notification = () => {
     setOffsetdata(newOffset);
   };
 
-  const handleDeleteComment = (e, id) => {
+  const handleDeleteComment = async (e, id) => {
     e.preventDefault();
-    deleteusernotificationApi({
-      id: id,
-      onSuccess: response => {
-        // Remove the deleted notification from the state
-        setData(prevData => prevData.filter(notification => notification.id !== id));
-        toast.success(response.message);
-        loaduserNotification({
-          offset: '0',
-          limit: '10',
-          onSuccess: () => { },
-          onError: () => { }
-        });
-      },
-      onError: error => {
-        if (error === 'No Data Found') {
-          setData('');
-        }
-      }
-    });
+    try {
+      await deleteusernotificationApi({ id });
+      setNotificationData((prevData) => prevData.filter((notification) => notification.id !== id));
+      toast.success('Notification deleted successfully.');
+      refetch(); // Refetch notifications after deletion
+    } catch (error) {
+      toast.error('Error deleting notification.');
+      console.error('Error deleting notification:', error);
+    }
   };
+
 
   // Function to format the date as "DD/MM/YYYY"
   const formatDate = dateString => {
@@ -120,7 +112,7 @@ const Notification = () => {
   };
 
   useEffect(() => {
-    if (notificationData.length > 0) {
+    if (notificationData) {
       // Iterate through each element in Data array and convert date to Asia/Kolkata timezone
       const convertedData = notificationData.map(element => {
         const timestampUtc = formatDate(element.date); // Using the formatDate function to format the date

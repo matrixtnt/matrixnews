@@ -15,6 +15,7 @@ import featureLayoutReducer from './reducers/featureLayoutReducer';
 import newsReducer from './reducers/newsReducer';
 import MorePagesReducers  from './reducers/MorePagesReducers';
 import CheckNewsDataReducer from './reducers/CheckNewsDataReducer';
+import CheckPermissionsReducer from './reducers/CheckPermissionsReducer';
 
 const persistConfig = {
     key: 'root',
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
     NewsData: newsReducer,
     morePages: MorePagesReducers,
     checkNewsData: CheckNewsDataReducer,
+    checkPermission : CheckPermissionsReducer,
 });
 
 export const store = configureStore({

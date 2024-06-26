@@ -5,9 +5,14 @@ import firebase from "firebase/compat/app"
 import { getAuth } from "firebase/auth";
 import toast from 'react-hot-toast';
 import { loadFcmToken } from 'src/store/reducers/settingsReducer';
+import { checkNotificationPermission } from 'src/store/reducers/CheckPermissionsReducer';
+import { useDispatch } from 'react-redux';
 
 
 const FirebaseData = () => {
+
+  const dispatch = useDispatch()
+
   let firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
@@ -51,6 +56,7 @@ const FirebaseData = () => {
     try {
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
+        dispatch(checkNotificationPermission({ data: { isNotificationPermission: 'granted' } }))
         getToken(messaging, {
           vapidKey: process.env.NEXT_PUBLIC_VAPID_KEY,
         })
@@ -72,7 +78,11 @@ const FirebaseData = () => {
               registerServiceWorker(setTokenFound, setFcmToken);
             }
           });
-      } else {
+      }
+      if (permission === 'denied') {
+        dispatch(checkNotificationPermission({ data: { isNotificationPermission: 'denied' } }))
+      }
+      else {
         setTokenFound(false);
         setFcmToken(null);
       }

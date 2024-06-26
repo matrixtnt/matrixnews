@@ -15,13 +15,14 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 
 import { useQuery } from '@tanstack/react-query'
 import Skeleton from 'react-loading-skeleton'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { loadLocation, locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
 import { isLogin, translate } from 'src/utils'
 import { useRouter } from 'next/router'
 import LanguageDropdown from '../view/Dropdowns/LanguagesDropdown'
+import { checkLocationPermission, checkNotificationPermission, checkPermissionsSelector, isLocationPermissionCheck, isNotificationPermissionCheck } from 'src/store/reducers/CheckPermissionsReducer'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -31,6 +32,16 @@ const WeatherCard = () => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
   const weatherMode = getLocation?.weather_mode
+
+  const checkPermissions = useSelector(checkPermissionsSelector);
+  const checkNotificationPermissionOnce = checkPermissions?.data?.isNotificaitonPermissionCheck;
+  const checkLocationPermissonOnce = checkPermissions?.data?.isLocaitonPermissionCheck;
+
+  // console.log("checkNotificationPermissionOnce = >", checkNotificationPermissionOnce)
+  // console.log("checkLocationPermissonOnce = >", checkLocationPermissonOnce)
+
+  const [notificationPermission, setNotificationPermission] = useState(null)
+  const [locationPermission, setLocationPermission] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -52,11 +63,12 @@ const WeatherCard = () => {
             const response = await axios.get(
               `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=${currentLanguage?.code}`
             )
-
+            dispatch(checkLocationPermission({ data: { isLocationPermission: 'granted' } }))
             resolve(response.data) // Resolve the promise with the fetched data
           })
         } else {
           toast.error('Geolocation not supported')
+          dispatch(checkLocationPermission({ data: { isLocationPermission: 'not supported' } }))
         }
       } catch (error) {
         loadLocation(null, null)
@@ -112,6 +124,48 @@ const WeatherCard = () => {
       loadLanguageLabels({ code: currentLanguage?.code })
     }
   }, [currentLanguage?.code])
+
+  const registerToken = (tokenId) => {
+    registerFcmTokenApi({
+      token: tokenId,
+      latitude: storedLatitude,
+      longitude: storedLongitude,
+      onSuccess: async res => {
+      },
+      onError: async err => {
+        console.log(err);
+      }
+    });
+  }
+
+  useEffect(() => {
+    if (checkPermissions?.data?.isNotificaitonPermission === 'granted' && isLogin() && checkNotificationPermissionOnce === false) {
+      // console.log('i am 1')
+      registerToken(location.fcmtoken)
+      dispatch(isNotificationPermissionCheck({ data: { isNotificaitonPermissionChecked: true } }))
+    }
+
+  }, [checkPermissions])
+
+  useEffect(() => {
+    if (checkPermissions?.data?.isNotificaitonPermission === 'denied' && isLogin() && checkNotificationPermissionOnce === false) {
+      // console.log('i am 2')
+      registerToken('')
+      dispatch(isNotificationPermissionCheck({ data: { isNotificaitonPermissionChecked: true } }))
+    }
+
+  }, [checkPermissions])
+
+  useEffect(() => {
+    if (checkPermissions?.data?.isLocationPermission === 'granted' && isLogin() && checkLocationPermissonOnce === false) {
+      // console.log('i am 3')
+      registerToken('')
+      dispatch(isLocationPermissionCheck({ data: { isLocaitonPermissionChecked: true } }))
+    }
+
+  }, [checkPermissions])
+
+
 
   return (
     <div id='rns-weather-card'>
