@@ -100,7 +100,7 @@ const SubCategory = () => {
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'Category'} ThirdElement={'Sub-Category'} FourthElement={subCatSlug} />
+        <BreadcrumbNav SecondElement={'category'} ThirdElement={'Sub-Category'} FourthElement={subCatSlug} />
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading.loading ? (

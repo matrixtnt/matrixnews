@@ -1,47 +1,38 @@
-import React from 'react';
-import { Breadcrumb } from 'antd';
+import Link from 'next/link'
+import React from 'react'
+import { AiOutlineDoubleRight } from 'react-icons/ai'
 import { FaHome } from 'react-icons/fa';
 
-const BreadcrumbNav = ({ SecondElement, ThirdElement, FourthElement }) => {
-  const items = [
-    {
-      title: (
-        <span>
-          <FaHome size={25} id='bcb-home-logo' className='me-1' />
-          Home
-        </span>
-      ),
-      href: '/',
-    },
-  ];
-
-  if (SecondElement !== '') {
-    items.push({
-      title: SecondElement,
-      href: SecondElement == 'category' ? '/all-categories' : null
-    });
-  }
-
-  if (ThirdElement !== '') {
-    items.push({
-      title: ThirdElement,
-    });
-  }
-
-  if (FourthElement !== '') {
-    items.push({
-      title: FourthElement,
-      href: '',
-    });
-  }
-
+const Breadcrum = ({ SecondElement, ThirdElement, FourthElement }) => {
   return (
-    <Breadcrumb
-      className='container breadcrumbWrapper'
-      separator="|"
-      items={items}
-    />
-  );
-};
+    <div className='container breadcrumbWrapper'>
+      <div className='pageName'>
+        <Link href={'/'} className='firstElement'> <FaHome size={25} className='me-1' /><span>Home </span></Link>
+        <span> | </span>
+        {
+          SecondElement == 'category' ? <Link  href={'/all-categories'}><span>{SecondElement}</span></Link> : <span>{SecondElement}</span>
+        }
 
-export default BreadcrumbNav;
+        {
+          ThirdElement &&
+          <>
+            <span> | </span>
+            <span className='contentUpperCase'>{ThirdElement}</span>
+          </>
+        }
+        {
+          FourthElement &&
+          <>
+            <span> | </span>
+            <span className='contentUpperCase'>{FourthElement}</span>
+          </>
+        }
+
+
+      </div>
+
+    </div >
+  )
+}
+
+export default Breadcrum

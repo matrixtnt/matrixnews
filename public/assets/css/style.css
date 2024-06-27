@@ -7566,6 +7566,19 @@ span {
   font-weight: 600;
 }
 
+.breadcrumbWrapper .pageName a{
+  color: var(--text-primary-color);
+  text-transform: capitalize;
+}
+
+.breadcrumbWrapper .firstElement{
+  color: var(--text-primary-color);
+}
+
+.breadcrumbWrapper .firstElement svg{
+  margin-top: -8px;
+}
+
 .ant-breadcrumb-separator {
   color: var(--text-primary-color) !important;
 }

@@ -9,6 +9,7 @@ import { getLanguage } from 'src/utils/api'
 import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { getNewsApi } from 'src/hooks/newsApi'
+import NewsCard from '../view/NewsCard'
 
 
 const TagNewsview = () => {
@@ -64,7 +65,7 @@ const TagNewsview = () => {
                 {Data &&
                   Data?.data?.map(element => (
                     <div className='col-md-4 col-12' key={element.id}>
-                      <Link id='Link-all'
+                      {/* <Link id='Link-all'
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                         as={`/news/${element.slug}`}
                       >
@@ -89,7 +90,8 @@ const TagNewsview = () => {
                             </p>
                           </div>
                         </div>
-                      </Link>
+                      </Link> */}
+                      <NewsCard element={element}/>
                     </div>
                   ))}
               </>

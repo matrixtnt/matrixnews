@@ -30,6 +30,8 @@ import { settingsData } from 'src/store/reducers/settingsReducer'
 import { getBreakingNewsApi } from 'src/store/actions/campaign'
 import AdSpaces from '../../view/adSpaces/AdSpaces.jsx'
 import toast from 'react-hot-toast'
+import SeoShare from 'src/components/view/SocialMediaShares/SeoShare'
+import WithoutSeoShare from 'src/components/view/SocialMediaShares/WithoutSeoShare'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
@@ -211,40 +213,19 @@ const BreakingNews = () => {
                               </p>
                             </div>
                             {process.env.NEXT_PUBLIC_SEO === 'true' ? (
-                              <div id='B_NV-right-head'>
-                                <h6 id='B_NV-Share-Label'>{translate('shareLbl')}:</h6>
-                                <FacebookShareButton
-                                  url={decodedURL}
-                                  title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                  hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                >
-                                  <FacebookIcon size={40} round />
-                                </FacebookShareButton>
-                                <WhatsappShareButton
-                                  url={decodedURL}
-                                  title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                  hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                >
-                                  <WhatsappIcon size={40} round />
-                                </WhatsappShareButton>
-                                <TwitterShareButton
-                                  url={decodedURL}
-                                  title={`${DetailsPageData?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                  hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                                >
-                                  <XIcon size={40} round />
-                                </TwitterShareButton>
-                                <button onClick={handleCopyUrl} className='copy_url'>
-                                  <BsLink45Deg size={30} />
-                                </button>
-                              </div>
+
+                              <SeoShare url={decodedURL} title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} setWhatsappImageLoaded={setWhatsappImageLoaded} />
+
                             ) :
-                              <div id='nv-right-head'>
-                                <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                                <button onClick={handleCopyUrl} className='copy_url'>
-                                  <BsLink45Deg size={30} />
-                                </button>
-                              </div>}
+
+                              <WithoutSeoShare url={decodedURL} title={SettingsData && SettingsData?.web_setting?.web_name} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} />
+                              // <div id='nv-right-head'>
+                              //   <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
+                              //   <button onClick={handleCopyUrl} className='copy_url'>
+                              //     <BsLink45Deg size={30} />
+                              //   </button>
+                              // </div>
+                            }
                           </div>
                           <div id='vps-body-left'>
                             <img id='B_NV-image' src={DetailsPageData?.image} alt={DetailsPageData?.title} onError={placeholderImage} />
