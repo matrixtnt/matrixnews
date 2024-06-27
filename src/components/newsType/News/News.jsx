@@ -30,12 +30,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getNewsApi } from 'src/hooks/newsApi.jsx';
 import { getAdsSpaceNewsDetailsApi } from 'src/hooks/adSpaceApi';
 import Layout from 'src/components/layout/Layout.jsx';
-// import NoDataFound from 'src/components/noDataFound/NoDataFound';
 import toast from 'react-hot-toast';
 import CommentsView from 'src/components/comment/CommentsView.jsx';
 import Surveys from 'src/components/survey/Surveys.jsx';
 import AdSpaces from '../../view/adSpaces/AdSpaces.jsx';
-import SocialShare from 'src/components/view/SocialShare.jsx';
+import WithoutSeoShare from 'src/components/view/SocialMediaShares/WithoutSeoShare.jsx';
+import SeoShare from 'src/components/view/SocialMediaShares/SeoShare.jsx';
 
 const News = () => {
   let user = getUser();
@@ -292,50 +292,18 @@ const News = () => {
                       </p>
                     </div>
                     {process.env.NEXT_PUBLIC_SEO === 'true' ? (
-                      <div id='nv-right-head'>
-                        <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
 
-                        <SocialShare url={decodedURL} title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}  handleCopyUrl={handleCopyUrl}/>
-
-                        {/* <FacebookShareButton
-                          url={decodedURL}
-                          title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                          hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                        >
-                          <FacebookIcon size={40} round />
-                        </FacebookShareButton>
-                        <WhatsappShareButton
-                          url={decodedURL}
-                          title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                          hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                          beforeOnClick={() => setWhatsappImageLoaded(false)}
-                        >
-                          <WhatsappIcon size={40} round onLoad={() => setWhatsappImageLoaded(true)} />
-                        </WhatsappShareButton>
-                        <TwitterShareButton
-                          url={decodedURL}
-                          title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`}
-                          hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`}
-                        >
-                          <XIcon size={40} round />
-                        </TwitterShareButton> */}
-                        {/* <button onClick={handleCopyUrl} className='copy_url'>
-                          <BsLink45Deg size={30} />
-                        </button> */}
-
-
-
-                      </div>
-
-
+                      <SeoShare url={decodedURL} title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} setWhatsappImageLoaded={setWhatsappImageLoaded} />
 
                     ) :
-                      <div id='nv-right-head'>
-                        <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                        <button onClick={handleCopyUrl} className='copy_url'>
-                          <BsLink45Deg size={30} />
-                        </button>
-                      </div>
+
+                      <WithoutSeoShare url={decodedURL} title={SettingsData && SettingsData?.web_setting?.web_name} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} />
+                      // <div id='nv-right-head'>
+                      //   <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
+                      //   <button onClick={handleCopyUrl} className='copy_url'>
+                      //     <BsLink45Deg size={30} />
+                      //   </button>
+                      // </div>
                     }
                   </div>
                   <div id='vps-body-left'>

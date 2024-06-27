@@ -3816,6 +3816,10 @@ a#social_platforms svg:hover {
   align-items: center;
 }
 
+/* .moreShareIcon{
+  background-color: ;
+} */
+
 @media (max-width: 575px) {
   #nv-right-head {
     padding-top: 10px;
