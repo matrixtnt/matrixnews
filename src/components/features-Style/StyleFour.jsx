@@ -106,7 +106,7 @@ const StyleFour = ({ Data }) => {
             <div className='row'>
               <div id='rns-cards-main' className=''>
                 <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
-                <div className='row'>
+                <div className='row mb-5'>
                   {Data.news.map((value, index) => {
                     return (
                       <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
@@ -160,7 +160,7 @@ const StyleFour = ({ Data }) => {
             <div className='row'>
               <div id='rns-cards-main' className=''>
                 <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
-                <div className='row'>
+                <div className='row mb-5'>
                   {Data && Data.breaking_news.map((value, index) => {
                     return (
                       <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>

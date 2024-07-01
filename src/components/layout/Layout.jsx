@@ -6,7 +6,7 @@ import { selectCurrentLanguage, selectCurrentLanguageLabels } from 'src/store/re
 import { useRouter } from 'next/router'
 import Header from './Header'
 import CatNav from '../categories/CatNav'
-import WeatherCard from '../weather/WeatherCard'
+import TopBar from '../topBar/TopBar'
 import SearchPopup from '../search/SearchPopup'
 import Footer from './Footer'
 import { protectedRoutes } from 'src/routes/routes'
@@ -61,6 +61,7 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.web_color_code)
+    document.documentElement.style.setProperty('--darkmode-primary-color', settings && settings?.web_setting?.web_color_code)
   }, [settings])
 
   // Check if the user is authenticated based on the presence of the token
@@ -193,7 +194,7 @@ const Layout = ({ children }) => {
       {settings ? (
         <>
           <SearchPopup />
-          <WeatherCard />
+          <TopBar />
           <Header />
           <CatNav />
           <div>{children}</div>

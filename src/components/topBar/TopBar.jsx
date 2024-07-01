@@ -25,7 +25,8 @@ import LanguageDropdown from '../view/Dropdowns/LanguagesDropdown'
 import { checkLocationPermission, checkNotificationPermission, checkPermissionsSelector, isLocationPermissionCheck, isNotificationPermissionCheck } from 'src/store/reducers/CheckPermissionsReducer'
 import { FaMoon } from "react-icons/fa";
 import { MdLightMode } from "react-icons/md";
-import { checkThemeColor, checkThemeMode, themeSelector } from 'src/store/reducers/CheckThemeReducer'
+import { checkThemeMode, themeSelector } from 'src/store/reducers/CheckThemeReducer'
+import ThemeToggler from '../view/ThemeToggler'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -40,7 +41,6 @@ const WeatherCard = () => {
   const checkNotificationPermissionOnce = checkPermissions?.data?.isNotificaitonPermissionCheck;
   const checkLocationPermissonOnce = checkPermissions?.data?.isLocaitonPermissionCheck;
 
-  const [darkModeOn, setDarkModeOn] = useState(false)
   const darkThemeMode = useSelector(themeSelector);
 
   const dispatch = useDispatch()
@@ -165,29 +165,6 @@ const WeatherCard = () => {
 
   }, [checkPermissions])
 
-  // to check themeMode 
-
-  const applyTheme = () => {
-    if (darkThemeMode) {
-      document.body.setAttribute('data-bs-theme', 'dark');
-    }
-    else{
-      document.body.setAttribute('data-bs-theme', 'light');
-    }
-  };
-
-  useEffect(() => {
-    applyTheme()
-    handleThemeMode()
-    console.log('darkThemeMode => ', darkThemeMode)
-    console.log('darkThemeModeState => ', darkModeOn)
-  }, [darkThemeMode, darkModeOn])
-
-  const handleThemeMode = () => {
-    dispatch(checkThemeMode({ data: { isDarkMode: darkModeOn } }))
-  }
-
-
 
   return (
     <div id='rns-weather-card'>
@@ -231,37 +208,18 @@ const WeatherCard = () => {
           </div>
           <div className='col-md-6 col-12'>
             <div className='right-weather'>
-              <div className="darkModeToggle">
+              {/* <div className="darkModeToggle">
                 <MdLightMode size={20} />
-                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" onClick={() => setDarkModeOn(!darkModeOn ? true : false)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" checked={darkThemeMode} onChange={(e) => applyTheme(e.target.checked)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
                 </div>
                 <FaMoon />
-              </div>
+              </div> */}
+              <ThemeToggler />
 
               {
                 router.pathname === '/' ? <>
                   <ul className='language_section'>
                     <li>
-                      {/* <Dropdown>
-                        <Dropdown.Toggle className='language_drop'>
-                          {currentLanguage?.displayName ? currentLanguage?.displayName : currentLanguage?.name}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
-                          {languagesData &&
-                            languagesData.map((data, index) => {
-                              return (
-                                <Dropdown.Item
-                                  key={index}
-                                  id='btnLogout'
-                                  onClick={() => languageChange(data.language, data.code, data.id, data.display_name)}
-                                >
-                                  {data.display_name ? data.display_name : data.language}
-                                </Dropdown.Item>
-                              )
-                            })}
-                        </Dropdown.Menu>
-                      </Dropdown> */}
                       <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} />
                     </li>
                   </ul>

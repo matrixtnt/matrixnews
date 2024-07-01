@@ -154,7 +154,10 @@ const StyleOne = ({ isLoading, Data }) => {
                               {truncateText(item.category_name, 10)}
                             </Link>
                             <div className='my-3 top-title'>{truncateText(item.title, 60)}</div>
-                            <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
+                            {
+                              stripHtmlTags(item.description).length > 0 &&
+                              <p className='mb-3 para'>{stripHtmlTags(item.description).substring(0, 100) + '...'}</p>
+                            }
                             <div className='d-flex flex-wrap'>
                               <Link id='btnReadMore' className='mb-0 commonBtn' type='button'
                                 href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}

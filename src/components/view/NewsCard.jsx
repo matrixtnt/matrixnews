@@ -10,7 +10,7 @@ const NewsCard = ({ element, subDropCard }) => {
             href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
             as={`/news/${element.slug}`}
         >
-            <div id='cv-card' className='card'>
+            <div id='cv-card' className='card commonNewsCard'>
                 <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
                 <div id='cv-card-body' className='card-body'>
                     <button id='cv-btnCatagory' className='btn btn-sm' type='button'>

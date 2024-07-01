@@ -64,7 +64,7 @@ const ViewAll = () => {
         longitude: storedLongitude
       })
       setTotalData(data.data[0]?.news ? data.data[0].news_total : data.data[0]?.breaking_news_total)
-      console.log(data.data[0].news_total, "totlaNewsss")
+      // console.log(data.data[0].news_total, "totlaNewsss")
       setIsLoading({ loading: false })
       setIsLoading({ loadMoreLoading: false })
       return data.data
@@ -117,7 +117,7 @@ const ViewAll = () => {
                   ))}
                 </div>
               ) : (
-                <div className='row'>
+                <div className='row commonRowGap'>
                   {viewAllData && viewAllData ? (
                     viewAllData && viewAllData.map(element => (
                       <div className='col-md-4 col-12' key={element.id}>

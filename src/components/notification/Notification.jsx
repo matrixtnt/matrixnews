@@ -133,18 +133,18 @@ const Notification = () => {
 
       <div className='personal_Sec bg-white'>
         <div id='main-Noticard' className='container '>
-          <div className='d-flex bd-highlight mb-3'>
+          {/* <div className='d-flex bd-highlight mb-3'>
             <Link href='/personal-notification' id='btnNotification1' className='btn mx-1 bd-highlight'>
               {' '}
-              {/* {translate('personalLbl')}{' '} */}
+              {translate('personalLbl')}{' '}
               {translate('personalLbl')}{' '}:-
             </Link>
-            {/* <Link href='/news-notification' id='btnNewsnoti' className='btn mx-1 bd-highlight'>
+            <Link href='/news-notification' id='btnNewsnoti' className='btn mx-1 bd-highlight'>
               {' '}
               {translate('news')}
-            </Link> */}
-            {/* <button id='btnNotification1' className="btn  btn mx-1 ms-auto bd-highlight" onClick={handleDeleteAll} > Delete All</button> */}
-          </div>
+            </Link>
+            <button id='btnNotification1' className="btn  btn mx-1 ms-auto bd-highlight" onClick={handleDeleteAll} > Delete All</button>
+          </div> */}
           <div className='my-3'>
             {isLoading.loading ? (
               <div className='col-12 loading_data'>

@@ -90,7 +90,7 @@ const AllBreakingNews = () => {
               ))}
             </div>
           ) : (
-            <div className='row my-5'>
+            <div className='row my-5 commonRowGap'>
               {Data && Data.length > 0 ? (
                 breakingNewsData.map(element => (
                   <div className='col-md-4 col-12' key={element.id}>

@@ -214,7 +214,7 @@ const BreakingNews = () => {
                             </div>
                             {process.env.NEXT_PUBLIC_SEO === 'true' ? (
 
-                              <SeoShare url={decodedURL} title={`${Data && Data[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} setWhatsappImageLoaded={setWhatsappImageLoaded} />
+                              <SeoShare url={decodedURL} title={`${DetailsPageData && DetailsPageData[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} setWhatsappImageLoaded={''} />
 
                             ) :
 

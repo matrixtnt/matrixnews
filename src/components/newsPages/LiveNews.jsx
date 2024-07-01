@@ -101,7 +101,7 @@ const LiveNews = () => {
               ))}
             </div>
           ) : (
-            <div className='row live-news'>
+            <div className='row live-news commonRowGap'>
               {liveNewsData && liveNewsData.length > 0 ? (
                 liveNewsData.map(element => (
                   <div className='col-md-4 col-12' key={element.id}>

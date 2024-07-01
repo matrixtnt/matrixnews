@@ -27,6 +27,7 @@ import ProfileDropDown from '../view/Dropdowns/ProfileDropDown'
 import { usePathname } from 'next/navigation'
 import { checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
 import MorePagesDropDown from '../view/Dropdowns/MorePagesDropDown'
+import ThemeToggler from '../view/ThemeToggler'
 
 const MobilesideBar = ({
   name,
@@ -57,6 +58,8 @@ const MobilesideBar = ({
   const settingsOnOff = useSelector(settingsData)
 
   const checkNewsData = useSelector(checkNewsDataSelector)
+
+  // console.log('routerPathName => ',navigate)
 
   // language change
   const languageChange = (name, code, id) => {
@@ -104,64 +107,6 @@ const MobilesideBar = ({
           <Offcanvas.Title>
             <li id='Nav-btns'>
               {islogout && checkUserData(userData) ? (
-                // <Dropdown>
-                //   <Dropdown.Toggle id='btnSignIn' className=''>
-                //     <img
-                //       className='profile_photo'
-                //       src={userData.data && userData.data.profile ? userData.data.profile : usersvg.src}
-                //       onError={profileimgError}
-                //       alt='profile'
-                //     />
-                //     {truncateText(userName, 10)}
-                //   </Dropdown.Toggle>
-
-                //   <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
-                //     <Dropdown.Item id='btnLogout'>
-                //       <Link id='btnBookmark' href='/bookmark' onClick={handleClose}>
-                //         {translate('bookmark')}
-                //       </Link>
-                //     </Dropdown.Item>
-                //     <Dropdown.Item id='btnLogout' onClick={handleClose}>
-                //       <Link id='btnBookmark' href='/user-based-categories'>
-                //         {translate('managePreferences')}
-                //       </Link>
-                //     </Dropdown.Item>
-                //     {userData?.data?.role !== 0 ? (
-                //       <>
-                //         <Dropdown.Item id='btnLogout'>
-                //           <Link id='btnBookmark' href='/create-news' onClick={() => handleClose()}>
-                //             {translate('createNewsLbl')}
-                //           </Link>
-                //         </Dropdown.Item>
-
-                //         <Dropdown.Item id='btnLogout'>
-                //           <Link id='btnBookmark' href='/manage-news' onClick={() => handleClose()}>
-                //             {translate('manageNewsLbl')}
-                //           </Link>
-                //         </Dropdown.Item>
-                //       </>
-                //     ) : null}
-                //     <Dropdown.Item id='btnLogout'>
-                //       <Link
-                //         id='btnBookmark'
-                //         // onClick={() => {
-                //         //   ProfileModal(true)
-                //         //   handleClose()
-                //         // }}
-                //         href={'/profile-update'}
-                //       >
-                //         {translate('update-profile')}
-                //       </Link>
-                //     </Dropdown.Item>
-                //     <Dropdown.Divider />
-                //     <Dropdown.Item onClick={logout} id='btnLogout' className=''>
-                //       {translate('logout')}
-                //     </Dropdown.Item>
-                //     <Dropdown.Item id='btnLogout' onClick={e => deleteAccount(e)}>
-                //       {translate('deleteAcc')}
-                //     </Dropdown.Item>
-                //   </Dropdown.Menu>
-                // </Dropdown>
                 <ProfileDropDown userName={userName} userData={userData} userRole={userRoleStatus} isLogin={islogout} profileimg={usersvg.src} profileimgError={profileimgError} logout={logout} checkUserData={checkUserData(userData)} handleClose={handleClose} />
               ) : (
                 <Button variant='danger' onClick={() => setModalShow(true)} id='btnSignIn' className='' type='button'>
@@ -170,29 +115,10 @@ const MobilesideBar = ({
                 </Button>
               )}
             </li>
-            {
-              router.pathname === '/' ?
-                <li id='Nav-btns'>
-                  {/* <Dropdown>
-                <Dropdown.Toggle id='btnSignIn' className=''>
-                  {currentLanguage?.name}
-                </Dropdown.Toggle>
 
-                <Dropdown.Menu style={{ backgroundColor: '#1A2E51' }}>
-                  {languagesData &&
-                    languagesData.map((data, index) => {
-                      return (
-                        <Dropdown.Item
-                          key={index}
-                          id='btnLogout'
-                          onClick={() => languageChange(data.language, data.code, data.id)}
-                        >
-                          {data.language}
-                        </Dropdown.Item>
-                      )
-                    })}
-                </Dropdown.Menu>
-              </Dropdown> */}
+            {
+              router === '/' ?
+                <li id='Nav-btns'>
                   <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} handleClose={handleClose} />
                 </li> : null}
             <li id='Nav-btns'>
@@ -222,6 +148,9 @@ const MobilesideBar = ({
               >
                 <AiOutlineSearch size={23} />
               </div>
+            </li>
+            <li  id='Nav-btns'>
+            <ThemeToggler />
             </li>
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -281,7 +210,7 @@ const MobilesideBar = ({
                     id='nav-links'
                     activeclassname='active'
                     exact='true'
-                    className={`headerDropdownItem link-color ${router === '/all-breakingnews' ? 'navLinkActive' : ''}`}
+                    className={`headerDropdownItem link-color ${router === '/all-breaking-news' ? 'navLinkActive' : ''}`}
                     aria-current='page'
                     href='/all-breaking-news'
                     onClick={handleClose}

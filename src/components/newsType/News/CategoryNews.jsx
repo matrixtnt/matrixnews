@@ -120,7 +120,7 @@ const CategoryNews = () => {
                 ))}
               </div>
             ) : (
-              <div className='row'>
+              <div className='row commonRowGap'>
                 {categoriesNewsData && categoriesNewsData?.length > 0 ? (
                   categoriesNewsData.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>

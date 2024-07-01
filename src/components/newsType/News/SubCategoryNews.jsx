@@ -112,7 +112,7 @@ const SubCategory = () => {
                 ))}
               </div>
             ) : (
-              <div className='row'>
+              <div className='row commonRowGap'>
                 {subCategories && subCategories.length > 0 ? (
                   subCategories.map(element => (
                     <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>

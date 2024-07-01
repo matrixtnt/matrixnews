@@ -161,7 +161,6 @@ const CatNav = () => {
                                 <span
                                   className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                                   onClick={() => handleSubCatDropdown(element)}
-                                // onMouseEnter={() => handleSubCatDropdown(element)}
 
                                 >
 

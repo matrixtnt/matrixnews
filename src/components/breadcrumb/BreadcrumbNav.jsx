@@ -5,8 +5,8 @@ import { FaHome } from 'react-icons/fa';
 
 const Breadcrum = ({ SecondElement, ThirdElement, FourthElement }) => {
   return (
-    <div className='container breadcrumbWrapper'>
-      <div className='pageName'>
+    <div className='breadcrumbWrapper'>
+      <div className='pageName container'>
         <Link href={'/'} className='firstElement'> <FaHome size={25} className='me-1' /><span>Home </span></Link>
         <span> | </span>
         {
