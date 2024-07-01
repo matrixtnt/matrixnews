@@ -5,7 +5,7 @@ import { store } from '../store'
 // Initial state with some default data
 const initialState = {
     data: {
-        isDarkMode: false,
+        isDarkMode: true,
     }
 }
 // Create a Redux slice

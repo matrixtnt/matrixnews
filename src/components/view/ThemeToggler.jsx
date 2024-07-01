@@ -10,7 +10,7 @@ const ThemeToggler = () => {
 
     const dispatch = useDispatch()
 
-    const applyTheme = (isDarkMode) => {
+    const changeTheme = (isDarkMode) => {
         if (isDarkMode) {
             // document.body.setAttribute('data-bs-theme', 'dark');
             dispatch(checkThemeMode({ data: { isDarkMode: true } }))
@@ -38,7 +38,7 @@ const ThemeToggler = () => {
         <div>
             <div className="darkModeToggle">
                 <MdLightMode size={20} />
-                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" checked={darkThemeMode} onChange={(e) => applyTheme(e.target.checked)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" checked={darkThemeMode} onChange={(e) => changeTheme(e.target.checked)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
                 </div>
                 <FaMoon />
             </div>
