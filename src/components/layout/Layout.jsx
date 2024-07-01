@@ -31,6 +31,7 @@ const Layout = ({ children }) => {
   const isLiveNewsCallOnce = checkNewsData.data.isLiveNewsApiCallOnce
   const isBreakingNewsCallOnce = checkNewsData.data.isBreakingNewsApiCallOnce
 
+
   const dispatch = useDispatch()
 
   useSelector(selectCurrentLanguageLabels)
@@ -186,7 +187,6 @@ const Layout = ({ children }) => {
       getBreakingNewsApi()
     }
   }, [currentLanguage])
-
 
   return (
     <>

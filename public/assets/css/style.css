@@ -6,9 +6,15 @@
 /* News main nave */
 
 :root {
+  --body-color: #f5f5f5;
   --paragraph-color: #565969;
   --text-primary-color: #0F1F40;
   --primary-font-family: "Zilla Slab", serif;
+}
+
+[data-bs-theme="dark"] {
+  --body-color: #0F1F40;
+  --text-primary-color: #fff;
 }
 
 * {
@@ -28,7 +34,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.5px;
-  background-color: #f5f5f5 !important;
+  background-color: var(--body-color) !important;
   /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -7566,16 +7572,16 @@ span {
   font-weight: 600;
 }
 
-.breadcrumbWrapper .pageName a{
+.breadcrumbWrapper .pageName a {
   color: var(--text-primary-color);
   text-transform: capitalize;
 }
 
-.breadcrumbWrapper .firstElement{
+.breadcrumbWrapper .firstElement {
   color: var(--text-primary-color);
 }
 
-.breadcrumbWrapper .firstElement svg{
+.breadcrumbWrapper .firstElement svg {
   margin-top: -8px;
 }
 
@@ -7691,4 +7697,23 @@ span {
 
 .ant-modal-confirm .ant-modal-confirm-btns button {
   font-weight: 700;
+}
+
+
+/* dark mode css from here  */
+
+.darkModeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-right: 30px;
+}
+
+.darkModeToggle svg:last-child {
+  margin-left: -8px;
+}
+
+.darkModeToggle input:focus{
+  box-shadow: none;
 }

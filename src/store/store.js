@@ -13,9 +13,10 @@ import tempDataReducer from './reducers/tempDataReducer';
 import CategoriesDataSlice from './reducers/CatNavReducers';
 import featureLayoutReducer from './reducers/featureLayoutReducer';
 import newsReducer from './reducers/newsReducer';
-import MorePagesReducers  from './reducers/MorePagesReducers';
+import MorePagesReducers from './reducers/MorePagesReducers';
 import CheckNewsDataReducer from './reducers/CheckNewsDataReducer';
 import CheckPermissionsReducer from './reducers/CheckPermissionsReducer';
+import CheckThemeReducer from './reducers/CheckThemeReducer';
 
 const persistConfig = {
     key: 'root',
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
     NewsData: newsReducer,
     morePages: MorePagesReducers,
     checkNewsData: CheckNewsDataReducer,
-    checkPermission : CheckPermissionsReducer,
+    checkPermission: CheckPermissionsReducer,
+    checkTheme: CheckThemeReducer,
 });
 
 export const store = configureStore({

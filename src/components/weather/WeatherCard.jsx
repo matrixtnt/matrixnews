@@ -23,6 +23,9 @@ import { isLogin, translate } from 'src/utils'
 import { useRouter } from 'next/router'
 import LanguageDropdown from '../view/Dropdowns/LanguagesDropdown'
 import { checkLocationPermission, checkNotificationPermission, checkPermissionsSelector, isLocationPermissionCheck, isNotificationPermissionCheck } from 'src/store/reducers/CheckPermissionsReducer'
+import { FaMoon } from "react-icons/fa";
+import { MdLightMode } from "react-icons/md";
+import { checkThemeColor, checkThemeMode, themeSelector } from 'src/store/reducers/CheckThemeReducer'
 
 const WeatherCard = () => {
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -37,11 +40,8 @@ const WeatherCard = () => {
   const checkNotificationPermissionOnce = checkPermissions?.data?.isNotificaitonPermissionCheck;
   const checkLocationPermissonOnce = checkPermissions?.data?.isLocaitonPermissionCheck;
 
-  // console.log("checkNotificationPermissionOnce = >", checkNotificationPermissionOnce)
-  // console.log("checkLocationPermissonOnce = >", checkLocationPermissonOnce)
-
-  const [notificationPermission, setNotificationPermission] = useState(null)
-  const [locationPermission, setLocationPermission] = useState(false)
+  const [darkModeOn, setDarkModeOn] = useState(false)
+  const darkThemeMode = useSelector(themeSelector);
 
   const dispatch = useDispatch()
 
@@ -165,6 +165,28 @@ const WeatherCard = () => {
 
   }, [checkPermissions])
 
+  // to check themeMode 
+
+  const applyTheme = () => {
+    if (darkThemeMode) {
+      document.body.setAttribute('data-bs-theme', 'dark');
+    }
+    else{
+      document.body.setAttribute('data-bs-theme', 'light');
+    }
+  };
+
+  useEffect(() => {
+    applyTheme()
+    handleThemeMode()
+    console.log('darkThemeMode => ', darkThemeMode)
+    console.log('darkThemeModeState => ', darkModeOn)
+  }, [darkThemeMode, darkModeOn])
+
+  const handleThemeMode = () => {
+    dispatch(checkThemeMode({ data: { isDarkMode: darkModeOn } }))
+  }
+
 
 
   return (
@@ -209,6 +231,13 @@ const WeatherCard = () => {
           </div>
           <div className='col-md-6 col-12'>
             <div className='right-weather'>
+              <div className="darkModeToggle">
+                <MdLightMode size={20} />
+                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" onClick={() => setDarkModeOn(!darkModeOn ? true : false)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                </div>
+                <FaMoon />
+              </div>
+
               {
                 router.pathname === '/' ? <>
                   <ul className='language_section'>
