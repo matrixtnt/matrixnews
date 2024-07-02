@@ -29,11 +29,15 @@ export const morePagesSlice = createSlice({
         },
         morePagesFailed: (state, action) => {
             state.loading = false
-        }
+        },
+        resetMorePagesData: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
+        },
     }
 })
 
-export const { morePagesRequested, morePagesSuccess, morePagesFailed } = morePagesSlice.actions
+export const { morePagesRequested, morePagesSuccess, morePagesFailed,resetMorePagesData } = morePagesSlice.actions
 export default morePagesSlice.reducer
 
 // API CALLS
@@ -60,3 +64,8 @@ export const getMorePagesData = createSelector(
     state => state.morePages,
     morePages => morePages.data
 )
+
+// clear state data 
+export const resetMorePages = () => {
+    store.dispatch(resetMorePagesData())
+}

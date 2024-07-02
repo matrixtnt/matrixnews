@@ -52,7 +52,11 @@ export const languageSlice = createSlice({
     },
     languageLabelRequestFailed: (languages, action) => {
       languages.currentLanguageLabels.loading = true
-    }
+    },
+    resetLanguageData: (deafaultState) => {
+      deafaultState = initialState;
+      return deafaultState;
+  },
   }
 })
 
@@ -63,7 +67,8 @@ export const {
   languageChanged,
   languageLabelRequested,
   languageLabelsReceived,
-  languageLabelRequestFailed
+  languageLabelRequestFailed,
+  resetLanguageData
 } = languageSlice.actions
 export default languageSlice.reducer
 
@@ -156,3 +161,8 @@ export const selectCurrentLanguageLabels = createSelector(
   state => state.languages?.currentLanguageLabels?.data,
   languages => languages
 )
+
+// clear state data 
+export const resetLanguage = () => {
+  store.dispatch(resetLanguageData())
+}

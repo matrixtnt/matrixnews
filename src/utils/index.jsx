@@ -1,6 +1,19 @@
 "use client"
+import { resetTheme } from "src/store/reducers/CheckThemeReducer";
 import { store } from "../store/store";
 import localeTranslations from './locale/en.json';
+import { resetLanguage } from "src/store/reducers/languageReducer";
+import { resetCat } from "src/store/reducers/CatNavReducers";
+import { resetCheckNews } from "src/store/reducers/CheckNewsDataReducer";
+import { resetPermission } from "src/store/reducers/CheckPermissionsReducer";
+import { resetCreateNews } from "src/store/reducers/createNewsReducer";
+import { resetFeatureLayout } from "src/store/reducers/featureLayoutReducer";
+import { logoutUser } from "src/store/reducers/userReducer";
+import { resetMorePages } from "src/store/reducers/MorePagesReducers";
+import { resetNews } from "src/store/reducers/newsReducer";
+import { resetNotificationBadge } from "src/store/reducers/notificationbadgeReducer";
+import { resetSettings } from "src/store/reducers/settingsReducer";
+import { resetTemp } from "src/store/reducers/tempDataReducer";
 
 
 
@@ -430,6 +443,63 @@ export const getAuthErrorMessage = (errorCode) => {
     default:
       return "Unknown Error";
   }
+}
+
+
+// to clear redux data 
+
+export const clearReduxData = () => {
+  resetCat()
+  resetCheckNews()
+  resetPermission()
+  resetTheme()
+  resetCreateNews()
+  resetFeatureLayout()
+  resetLanguage()
+  resetMorePages()
+  resetNews()
+  resetNotificationBadge()
+  resetSettings()
+  resetTemp()
+  logoutUser()
+}
+
+export function clearCookies() {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+  }
+}
+
+export async function clearCache() {
+  const cacheNames = await caches.keys();
+  for (const cacheName of cacheNames) {
+    await caches.delete(cacheName);
+  }
+}
+
+export function clearLocalStorage() {
+  localStorage.clear();
+}
+
+export function clearSessionStorage() {
+  sessionStorage.clear();
+}
+
+export async function clearCacheAndCookies() {
+  clearCookies();
+  await clearCache();
+  clearLocalStorage();
+  clearSessionStorage();
+}
+
+export const clearAllSiteData = () => {
+  clearReduxData()
+  clearCacheAndCookies()
 }
 
 

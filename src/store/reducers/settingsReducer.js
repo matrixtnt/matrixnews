@@ -42,12 +42,16 @@ export const settingsSlice = createSlice({
         systemTimezone: (settings, action) => {
             settings.systemTimezone = action.payload.data
         },
+        resetSettingsData: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
+        },
 
     }
 })
 
 
-export const { settingsRequested, settingsSuccess, settingsFailed, latlong, fcmToken, systemTimezone } = settingsSlice.actions;
+export const { settingsRequested, settingsSuccess, settingsFailed, latlong, fcmToken, systemTimezone, resetSettingsData } = settingsSlice.actions;
 export default settingsSlice.reducer;
 
 // load websettings api call
@@ -100,3 +104,9 @@ export const settingsData = createSelector(
     state => state.settings,
     settings => settings?.data,
 )
+
+
+// clear state data 
+export const resetSettings = () => {
+    store.dispatch(resetSettingsData())
+}

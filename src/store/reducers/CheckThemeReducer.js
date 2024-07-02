@@ -17,10 +17,15 @@ export const checkThemeSlice = createSlice({
             const { isDarkMode } = action.payload.data
             state.data.isDarkMode = isDarkMode;
         },
+        resetThemeMode: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
+        },
+
     }
 })
 
-export const { checkThemeMode } = checkThemeSlice.actions
+export const { checkThemeMode, resetThemeMode } = checkThemeSlice.actions
 export default checkThemeSlice.reducer
 
 export const checkThemeColor = data => {
@@ -32,3 +37,9 @@ export const checkThemeSelector = state => state.checkTheme
 
 // Selector function to get categoryCount from the state
 export const themeSelector = createSelector(checkThemeSelector, checkTheme => checkTheme.data.isDarkMode)
+
+
+// clear state data 
+export const resetTheme = () => {
+    store.dispatch(resetThemeMode())
+}

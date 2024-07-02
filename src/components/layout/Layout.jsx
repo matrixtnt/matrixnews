@@ -19,6 +19,7 @@ import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
 import { useQuery } from '@tanstack/react-query'
 import { checkBreakingNewsData, checkLiveNewsData, checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
+import { clearAllSiteData } from 'src/utils'
 
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
@@ -188,6 +189,17 @@ const Layout = ({ children }) => {
       getBreakingNewsApi()
     }
   }, [currentLanguage])
+
+
+  // to clear cache and siteData every 24 hrs 
+  useEffect(() => {
+    setInterval(() => {
+      clearAllSiteData()
+      window.location.reload(true);
+    }, 86400000);
+  }, [])
+
+
 
   return (
     <>

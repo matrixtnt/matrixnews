@@ -38,6 +38,10 @@ export const CategoriesDataSlice = createSlice({
                 state.Lang.language_id = action.payload
             }
         },
+        resetCatData: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
+        },
     }
 })
 
@@ -46,7 +50,8 @@ export const {
     categoriesRequested,
     categoriesSuccess,
     categoriesFailed,
-    categoriesUpdateLanguage } = CategoriesDataSlice.actions
+    categoriesUpdateLanguage,
+    resetCatData } = CategoriesDataSlice.actions
 export default CategoriesDataSlice.reducer
 
 
@@ -109,3 +114,8 @@ export const categoriesCacheData = createSelector(
     (state) => state.categoryData,
     (categoryData) => categoryData.categories
 );
+
+// clear state data 
+export const resetCat = () => {
+    store.dispatch(resetCatData())
+}

@@ -13,8 +13,7 @@
 }
 
 [data-bs-theme="dark"] {
-  --body-color: #0F1F40;
-  --body-color: #051224;
+  --primary-color: #CE2B2B;
   --body-color: #0A1935;
   --secondary-color: #122342;
   --text-primary-color: #fff;
@@ -1604,7 +1603,7 @@ a {
 }
 
 #rns-card {
-  background-color: var(--body-color);
+  background-color: #efefef;
   margin-bottom: 22px;
   color: #000;
   padding: 15px;
@@ -1616,6 +1615,13 @@ a {
   height: 462px;
   overflow: hidden;
 }
+
+[data-bs-theme="dark"] #rns-card {
+  background-color: var(--secondary-color);
+  border: 1px solid #113476;
+}
+
+
 
 .defaultStyleSect #rns-card {
   height: 342px;
@@ -6338,6 +6344,11 @@ span {
   margin-bottom: 10px;
 }
 
+[data-bs-theme="dark"] .tags_section_outer {
+  border-top: 1px solid #6c757d;
+  border-bottom: 1px solid #6c757d;
+}
+
 .tags_section_outer .inner_tag {
   display: flex;
   flex-wrap: wrap;
@@ -6347,6 +6358,12 @@ span {
 .tags_section_outer .tag_name {
   padding-left: 10px;
   padding-right: 15px;
+  color: var(--text-primary-color);
+}
+
+
+.tags_section_outer .tag_icon {
+  color: var(--text-primary-color);
 }
 
 /* update profile */

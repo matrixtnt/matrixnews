@@ -8,7 +8,7 @@ const initialState = {
     loading: false,
     lastFetch: null,
     currentLanguage: {
-        id:null,
+        id: null,
         code: null,
         name: null
     },
@@ -25,23 +25,27 @@ export const createNewsSlice = createSlice({
             createNews.currentLanguage.name = action.payload.name;
             createNews.currentLanguage.id = action.payload.id;
         },
-        managetoEditData: (createNews,action) => {
+        managetoEditData: (createNews, action) => {
             createNews.createToEdit = action.payload.data
+        },
+        resetCreateNewsData: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
         },
 
     }
 });
 
-export const {languageChanged,managetoEditData} = createNewsSlice.actions;
+export const { languageChanged, managetoEditData, resetCreateNewsData } = createNewsSlice.actions;
 export default createNewsSlice.reducer;
 
 
 export const setCreateNewsCurrentLanguage = (name, code, id) => {
-    store.dispatch(languageChanged({name, code,id}));
+    store.dispatch(languageChanged({ name, code, id }));
 };
 
 export const loadManageToEdit = (data) => {
-    store.dispatch(managetoEditData({data}));
+    store.dispatch(managetoEditData({ data }));
 }
 
 
@@ -56,3 +60,8 @@ export const selectManageNews = createSelector(
     state => state.createNews.createToEdit,
     createNews => createNews,
 );
+
+// clear state data 
+export const resetCreateNews = () => {
+    store.dispatch(resetCreateNewsData())
+}

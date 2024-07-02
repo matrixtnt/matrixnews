@@ -32,12 +32,15 @@ export const newsSlice = createSlice({
             if (news.Lang) {
                 news.Lang.language_id = action.payload
             }
-
-        }
+        },
+        resetNewsData: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
+        },
     }
 })
 
-export const { newsRequested, newsReceived, newsRequestFailed, newsUpdateLanguage } = newsSlice.actions
+export const { newsRequested, newsReceived, newsRequestFailed, newsUpdateLanguage,resetNewsData } = newsSlice.actions
 export default newsSlice.reducer
 
 // API Calls
@@ -100,3 +103,8 @@ export const selectNewsData = createSelector(
     state => state.NewsData,
     NewsData => NewsData
 )
+
+// clear state data 
+export const resetNews = () => {
+    store.dispatch(resetNewsData())
+}

@@ -22,20 +22,24 @@ export const counterSlice = createSlice({
             if (action.payload === "No Data Found") {
                 counter.counter = 0;
             }
-        }
+        },
+        resetNotificationBadgeData: (deafaultState) => {
+            deafaultState = initialState;
+            return deafaultState;
+        },
     }
 
 });
 
-export const { counterSuccess,counterFailure } = counterSlice.actions;
+export const { counterSuccess, counterFailure, resetNotificationBadgeData } = counterSlice.actions;
 export default counterSlice.reducer;
 
 // api calls
 
 // personal user notification
-export const loaduserNotification = ({offset="",limit="", onSuccess=()=>{}, onError=()=>{}, onStart=()=>{}}) => {
+export const loaduserNotification = ({ offset = "", limit = "", onSuccess = () => { }, onError = () => { }, onStart = () => { } }) => {
     store.dispatch(apiCallBegan({
-        ...getUserNotificationApi(offset,limit),
+        ...getUserNotificationApi(offset, limit),
         displayToast: false,
         onSuccessDispatch: counterSuccess.type,
         onErrorDispatch: counterFailure.type,
@@ -47,3 +51,8 @@ export const loaduserNotification = ({offset="",limit="", onSuccess=()=>{}, onEr
 
 // selectors
 export const counterData = (state) => state.counter;
+
+// clear state data 
+export const resetNotificationBadge = () => {
+    store.dispatch(resetNotificationBadgeData())
+}

@@ -30,11 +30,15 @@ export const featureLayoutSlice = createSlice({
         layout.Lang.language_id = action.payload
       }
     },
+    resetFeatureLayoutData: (deafaultState) => {
+      deafaultState = initialState;
+      return deafaultState;
+    },
 
   }
 })
 
-export const { layoutRequested, layoutReceived, layoutRequestFailed, layoutUpdateLanguage } = featureLayoutSlice.actions
+export const { layoutRequested, layoutReceived, layoutRequestFailed, layoutUpdateLanguage,resetFeatureLayoutData } = featureLayoutSlice.actions
 export default featureLayoutSlice.reducer
 
 // API Calls
@@ -57,7 +61,7 @@ export const loadLayout = ({
   // if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN) {
   store.dispatch(
     apiCallBegan({
-      ...getFeatureSection(offset, limit, slug, latitude, longitude, section_id,isToken),
+      ...getFeatureSection(offset, limit, slug, latitude, longitude, section_id, isToken),
       displayToast: false,
       onStartDispatch: layoutRequested.type,
       onSuccessDispatch: layoutReceived.type,
@@ -75,3 +79,9 @@ export const selectLayout = createSelector(
   state => state.Layouts,
   Layouts => Layouts
 )
+
+
+// clear state data 
+export const resetFeatureLayout = () => {
+  store.dispatch(resetFeatureLayoutData())
+}

@@ -32,11 +32,15 @@ export const checkPermissionSlice = createSlice({
       const { isLocaitonPermissionChecked } = action.payload.data
       state.data.isLocaitonPermissionCheck = isLocaitonPermissionChecked
     },
+    resetPermissionData: (deafaultState) => {
+      deafaultState = initialState;
+      return deafaultState;
+    },
   }
 })
 
 // Export the categoryCount reducer and action
-export const { checkNotificationPermission, checkLocationPermission, isNotificationPermissionCheck, isLocationPermissionCheck } = checkPermissionSlice.actions
+export const { checkNotificationPermission, checkLocationPermission, isNotificationPermissionCheck, isLocationPermissionCheck, resetPermissionData } = checkPermissionSlice.actions
 export default checkPermissionSlice.reducer
 
 // Function to load category count data
@@ -60,3 +64,10 @@ export const checkPermissionsSelector = state => state.checkPermission
 // Selector function to get categoryCount from the state
 export const notificationPermissionSelector = createSelector(checkPermissionsSelector, checkPermission => checkPermission.data.isNotificaitonPermission)
 export const locationPermissionSelector = createSelector(checkPermissionsSelector, checkPermission => checkPermission.data.isLocationPermission)
+
+
+
+// clear state data 
+export const resetPermission = () => {
+  store.dispatch(resetPermissionData())
+}
