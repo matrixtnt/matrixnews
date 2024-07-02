@@ -209,10 +209,8 @@ const Footer = () => {
                 <div className='col-lg-3 col-12'>
                   <p id='footer-nav'>{translate('downloadapp')}</p>
                   <ul className='useL contactInfo'>
-                    <li className='nav-item'>
-                      <a>
-                        {translate('magicofapp')}
-                      </a>
+                    <li className='nav-item magicofapp'>
+                      {translate('magicofapp')}
                     </li>
 
                     <div className='appWrapper'>

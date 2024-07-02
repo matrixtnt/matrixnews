@@ -3,7 +3,7 @@ import React from 'react'
 import { FiCalendar } from 'react-icons/fi'
 import { formatDate, placeholderImage } from 'src/utils'
 
-const NewsCard = ({ element, subDropCard }) => {
+const NewsCard = ({ element, subDropCard, tagCard }) => {
     return (
         <Link
             id='Link-all'
@@ -14,7 +14,7 @@ const NewsCard = ({ element, subDropCard }) => {
                 <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
                 <div id='cv-card-body' className='card-body'>
                     <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
-                        {element.category.category_name}
+                        {tagCard ? element?.tag_name : element.category.category_name}
                     </button>
                     <p id='cv-card-title' className='card-title'>
                         {element.title}

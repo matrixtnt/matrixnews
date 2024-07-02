@@ -19,6 +19,7 @@ const TagNewsview = () => {
   let { id: language_id } = getLanguage()
   // api call
   const getNewsByTag = async () => {
+    console.log(Tid,'tagSlug')
     try {
       const { data } = await getNewsApi.getNews({
         tag_slug: Tid,
@@ -91,7 +92,7 @@ const TagNewsview = () => {
                           </div>
                         </div>
                       </Link> */}
-                      <NewsCard element={element}/>
+                      <NewsCard element={element} tagCard={true}/>
                     </div>
                   ))}
               </>
