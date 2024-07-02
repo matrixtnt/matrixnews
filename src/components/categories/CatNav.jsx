@@ -180,7 +180,7 @@ const CatNav = () => {
                               subCatDrop && currentCategory && currentCategory.id === element.id ? <>
                                 <div className='subCatDropdown' >
                                   <div className="row"
-                                    onMouseLeave={() => setSubCatDrop(false)}
+                                    // onMouseLeave={() => setSubCatDrop(false)}
                                   >
                                     <div className="col-lg-3">
                                       <div className="subCatNamesWrapper">
