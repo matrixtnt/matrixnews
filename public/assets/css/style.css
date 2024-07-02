@@ -17,6 +17,7 @@
   --body-color: #0A1935;
   --secondary-color: #122342;
   --text-primary-color: #fff;
+  --hover--color: #15346D;
 }
 
 * {
@@ -199,6 +200,10 @@ a {
   background-color: var(--secondary-color);
 }
 
+[data-bs-theme="dark"] .custom-card .swiper-button-prev:hover::after,
+[data-bs-theme="dark"] .custom-card .swiper-button-next:hover::after {
+  background-color: var(--hover--color);
+}
 @media (max-width: 575px) {
   .custom-card .swiper-button-prev {
     left: 32%;
@@ -773,6 +778,10 @@ a {
 #btnNotification:hover {
   color: #ffffff;
   background: var(--secondary-color);
+}
+
+[data-bs-theme="dark"] #btnNotification:hover  {
+  background-color: var(--hover--color);
 }
 
 #btnSerch {
@@ -2024,7 +2033,7 @@ a {
 }
 
 [data-bs-theme="dark"] #btnTags:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
 }
 
 /* -----------------------------video player sectin ---------------------------------- */
@@ -3053,6 +3062,10 @@ a#social_platforms svg:hover {
 #bs-card-date {
   color: #1B2D51;
   font-weight: 400;
+}
+
+[data-bs-theme="dark"] #bs-card-date {
+  color: #b7b7b7;
 }
 
 #bs-logoCalendar {
@@ -5368,6 +5381,10 @@ a#social_platforms svg:hover {
   height: 84px;
 }
 
+[data-bs-theme="dark"] .manage_preferences .manage_card {
+  border: 0.2px solid #6c757d;
+}
+
 .manage_preferences .inner_manage {
   display: flex;
   align-items: center;
@@ -6473,6 +6490,11 @@ span {
   letter-spacing: 0.5px;
 }
 
+[data-bs-theme="dark"] .profile_submit {
+  background-color: var(--hover--color);
+}
+
+
 .profile_modal {
   width: 400px !important;
 }
@@ -7286,7 +7308,7 @@ span {
 
 [data-bs-theme="dark"] .catSubCatWrapper .subCatDropdown {
   background-color: var(--secondary-color);
-  box-shadow: rgba(255, 255, 255, 0.15) 0px 6px 8px;
+  box-shadow: 0px 8px 14px hsl(240, 51.3%, 15.3%);
 }
 
 
@@ -7378,8 +7400,8 @@ span {
 
 .catSubCatWrapper .viewAllWrapper button {
   background-color: transparent;
-  border: 2px solid var(--secondary-color);
-  color: var(--secondary-color);
+  border: 2px solid var(--text-primary-color);
+  color: var(--text-primary-color);
   /* margin-top: 4px; */
   margin-right: 0px;
   padding: 6px;
@@ -7636,6 +7658,12 @@ span {
   transition: all 0.4s;
 }
 
+
+[data-bs-theme="dark"] .commonBtn::after {
+  background-color: var(--hover--color);
+}
+
+
 .commonBtn:hover::after {
   width: 100%;
 }
@@ -7850,7 +7878,7 @@ span {
   }
 }
 
-.magicofapp{
+.magicofapp {
   color: #fff;
 }
 
