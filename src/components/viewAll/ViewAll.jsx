@@ -29,10 +29,6 @@ const ViewAll = () => {
   const storedLongitude = location && location.long
   let user = getUser()
   let { id: language_id } = getLanguage()
-  // handle page change
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected)
-  }
 
   const currentLanguage = useSelector(selectCurrentLanguage)
 

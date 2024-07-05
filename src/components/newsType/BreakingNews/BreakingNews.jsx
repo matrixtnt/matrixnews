@@ -10,7 +10,6 @@ import {
   FacebookShareButton,
   XIcon
 } from 'react-share'
-import RelatedBreakingNews from '../../relatedNews/RelatedBreakingNews'
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
@@ -269,7 +268,7 @@ const BreakingNews = () => {
                       </div>
                       <div className='col-md-5 col-12'>
                         <div id='B_NV-right-section'>
-                          {DetailsPageData.length > 0 ? <RelatedBreakingNews id={DetailsPageData?.id} /> : null}
+                          {/* {DetailsPageData.length > 0 ? <RelatedBreakingNews id={DetailsPageData?.id} /> : null} */}
                           {/* <TagsSection /> */}
                         </div>
                       </div>

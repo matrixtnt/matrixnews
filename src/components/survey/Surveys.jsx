@@ -6,12 +6,15 @@ import { setQuestionResultApi } from 'src/store/actions/campaign';
 import { getLanguage, getUser } from 'src/utils/api';
 import Card from '../skeletons/Card';
 import { ProgressBar } from 'react-bootstrap';
+import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn';
 
 const Surveys = () => {
     const [submited, setSubmited] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [submittedQuestionId, setSubmittedQuestionId] = useState(null);
     const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(2); // Initial count of visible questions
+
+    const [loadMore, setLoadMore] = useState(false)
 
     let { id: language_id } = getLanguage();
     let user = getUser();
@@ -73,7 +76,9 @@ const Surveys = () => {
     };
 
     const handleLoadMore = () => {
+        setLoadMore(true)
         setVisibleQuestionsCount((prevCount) => prevCount + 2);
+        setLoadMore(false)
     };
 
     return (
@@ -132,7 +137,8 @@ const Surveys = () => {
                         );
                     })}
             {questionsData && visibleQuestionsCount < questionsData.length && (
-                <button onClick={handleLoadMore} className='loadMoreBtn commonBtn'>Load More</button>
+                // <button onClick={handleLoadMore} className='loadMoreBtn commonBtn'>Load More</button>
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={loadMore}/>
             )}
         </section>
     );

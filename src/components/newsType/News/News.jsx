@@ -244,6 +244,9 @@ const News = () => {
     setViewerIsOpen(false);
   };
 
+
+  console.log(Data, '<= Dtaaa')
+
   return (
     <Layout>
       {isLoading ? (
@@ -443,7 +446,9 @@ const News = () => {
 
                 <div id='nv-right-section' className='col-lg-4 col-12'>
                   {Data && Data[0]?.category_id ? (
-                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} />
+                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} 
+                    catSlug={Data && Data[0]?.category_slug}
+                    />
                   ) : null}
                   <TagsSection />
                   {
