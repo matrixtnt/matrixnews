@@ -9,6 +9,7 @@ import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
 import AdSpaces from '../view/adSpaces/AdSpaces'
+import StyleFiveSkeleton from '../skeletons/StyleFiveSkeleton'
 
 SwiperCore.use([Navigation, Pagination])
 const StyleFive = ({ isLoading, Data }) => {
@@ -112,6 +113,7 @@ const StyleFive = ({ isLoading, Data }) => {
 
   return (
     <>
+
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) && Data.news_type === 'videos' ? (
         <>
@@ -282,7 +284,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                   {truncateText(element.category_name, 10)}
                                 </div>
                                 <h5 id='bns-card-text' className=''>
-                                {truncateText(element.title, 34)}
+                                  {truncateText(element.title, 34)}
                                 </h5>
                               </div>
                             </Link>
@@ -363,7 +365,7 @@ const StyleFive = ({ isLoading, Data }) => {
                               />
                               <div id='bns-card-body' className='card-body ps-0'>
                                 <h5 id='bns-card-text' className=''>
-                                {truncateText(element.title, 34)}
+                                  {truncateText(element.title, 34)}
                                 </h5>
                               </div>
                             </Link>
@@ -378,6 +380,7 @@ const StyleFive = ({ isLoading, Data }) => {
           </div>
         </div>
       ) : null}
+
     </>
   )
 }

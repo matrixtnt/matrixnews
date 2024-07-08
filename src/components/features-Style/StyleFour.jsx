@@ -6,8 +6,9 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
+import StyleFourSkeleton from '../skeletons/StyleFourSkeleton'
 
-const StyleFour = ({ Data }) => {
+const StyleFour = ({ Data, isLoading }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -28,6 +29,7 @@ const StyleFour = ({ Data }) => {
 
   return (
     <>
+
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) && Data.news_type === 'videos' ? (
         <>
@@ -196,6 +198,7 @@ const StyleFour = ({ Data }) => {
           </div>
         </div>
       ) : null}
+
     </>
   )
 }

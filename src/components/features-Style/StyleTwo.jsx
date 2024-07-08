@@ -6,6 +6,7 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { BsFillPlayFill } from 'react-icons/bs'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
+import StyleTwoSkeleton from '../skeletons/StyleTwoSkeleton'
 
 const StyleTwo = ({ Data }) => {
 
@@ -30,6 +31,7 @@ const StyleTwo = ({ Data }) => {
 
   return (
     <>
+
       {/* videos */}
       {Data.videos && Data.videos?.length > 0 ? (
         <div className='new_video_style_two'>
@@ -393,6 +395,7 @@ const StyleTwo = ({ Data }) => {
           </div>
         </div>
       ) : null}
+
     </>
   )
 }

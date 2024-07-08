@@ -66,7 +66,7 @@ const SocialPages = () => {
           <div className="col-12">
             <div className="contentWrapper">
               {isLoading ?
-                <Skeleton height={400} />
+                <Skeleton height={400} className='my-4' />
                 :
                 <div>
                   {Data && Data[0]?.page_content ?

@@ -16,6 +16,7 @@ import Layout from '../layout/Layout'
 import { Modal } from 'antd';
 import NoDataFound from '../noDataFound/NoDataFound'
 import Link from 'next/link'
+import Card from '../skeletons/Card'
 const { confirm } = Modal;
 
 const ManageNews = () => {
@@ -98,14 +99,18 @@ const ManageNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('manageNewsLbl')}  />
+      <BreadcrumbNav SecondElement={translate('manageNewsLbl')} />
 
       <div className='manage_news bg-white py-5'>
         <div className='container'>
           <div className='row'>
             {isLoading ? (
-              <div>
-                <Skeleton height={200} count={3} />
+              <div className='row'>
+                {[...Array(3)].map((_, index) => (
+                  <div className='col-xl-4 col-md-6 col-12' key={index}>
+                    <Card />
+                  </div>
+                ))}
               </div>
             ) : (
               <>

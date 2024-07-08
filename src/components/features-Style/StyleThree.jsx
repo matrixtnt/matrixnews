@@ -6,8 +6,9 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { placeholderImage, translate, truncateText } from '../../utils'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
+import StyleThreeSkelton from '../skeletons/StyleThreeSkeleton'
 
-const StyleThree = ({ Data }) => {
+const StyleThree = ({ Data, isLoading }) => {
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
   const [typeUrl, setTypeUrl] = useState(null)
@@ -28,6 +29,7 @@ const StyleThree = ({ Data }) => {
 
   return (
     <>
+
       {/* ad spaces */}
       {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) && Data.news_type === 'videos' ? (
         <>
@@ -329,6 +331,7 @@ const StyleThree = ({ Data }) => {
           </div>
         </div>
       ) : null}
+
     </>
   )
 }

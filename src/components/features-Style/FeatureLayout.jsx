@@ -22,6 +22,12 @@ import DefaultNewsStyle from './DefaultNewsStyle'
 import { layoutReceived, layoutUpdateLanguage, loadLayout } from 'src/store/reducers/featureLayoutReducer'
 import { loadNews } from 'src/store/reducers/newsReducer'
 import { selectUser } from 'src/store/reducers/userReducer'
+import StyleTwoSkeleton from '../skeletons/StyleTwoSkeleton'
+import StyleThreeSkeleton from '../skeletons/StyleThreeSkeleton'
+import StyleFourSkeleton from '../skeletons/StyleFourSkeleton'
+import StyleFiveSkeleton from '../skeletons/StyleFiveSkeleton'
+import StyleSixSkeleton from '../skeletons/StyleSixSkeleton'
+import StyleOneSkeleton from '../skeletons/StyleOneSkeleton'
 
 const FeatureLayout = () => {
   let { id: language_id } = getLanguage()
@@ -70,7 +76,7 @@ const FeatureLayout = () => {
     })
   }
 
-  
+
 
   useEffect(() => {
     if (currentLanguage?.id) {
@@ -97,7 +103,7 @@ const FeatureLayout = () => {
         }
       })
     }
-  }, [currentLanguage,isLogin()])
+  }, [currentLanguage, isLogin()])
 
   useEffect(() => {
     if (isNoDataLoading) {
@@ -114,75 +120,71 @@ const FeatureLayout = () => {
 
   const SelectType = () => {
     return (
-      isLoading ? <>
-        <Card />
+      noFeatureData && newsDataFound ? <>
+        {NoDataFound()}
       </> :
-        noFeatureData && newsDataFound ? <>
-          {NoDataFound()}
-
-        </> :
-          Data &&
-          Data.map((item, index) => {
-            // console.log('i am feature sectoin')
-            if (item.news_type === 'news') {
-              if (item.style_web === 'style_1') {
-                return <StyleOne key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_2') {
-                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_3') {
-                return <StyleThree key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_4') {
-                return <StyleFour key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_5') {
-                return <StyleFive key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_6') {
-                return <StyleSix key={index} visLoading={isLoading} Data={item} />
-              }
-            } else if (item.news_type === 'breaking_news') {
-              if (item.style_web === 'style_1') {
-                return <StyleOne key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_2') {
-                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_3') {
-                return <StyleThree key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_4') {
-                return <StyleFour key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_5') {
-                return <StyleFive key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_6') {
-                return <StyleSix key={index} isLoading={isLoading} Data={item} />
-              }
-            } else if (item.news_type === 'videos') {
-              if (item.style_web === 'style_1') {
-                return <StyleOne key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_2') {
-                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_3') {
-                return <StyleThree key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_4') {
-                return <StyleFour key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_5') {
-                return <StyleFive key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_6') {
-                return <StyleSix key={index} isLoading={isLoading} Data={item} />
-              }
-            } else if (item.news_type === 'user_choice') {
-              if (item.style_web === 'style_1') {
-                return <StyleOne key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_2') {
-                return <StyleTwo key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_3') {
-                return <StyleThree key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_4') {
-                return <StyleFour key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_5') {
-                return <StyleFive key={index} isLoading={isLoading} Data={item} />
-              } else if (item.style_web === 'style_6') {
-                return <StyleSix key={index} isLoading={isLoading} Data={item} />
-              }
+        Data &&
+        Data.map((item, index) => {
+          // console.log('i am feature sectoin')
+          if (item.news_type === 'news') {
+            if (item.style_web === 'style_1') {
+              return <StyleOne key={index} Data={item} />
+            } else if (item.style_web === 'style_2') {
+              return <StyleTwo key={index} Data={item} />
+            } else if (item.style_web === 'style_3') {
+              return <StyleThree key={index} Data={item} />
+            } else if (item.style_web === 'style_4') {
+              return <StyleFour key={index} Data={item} />
+            } else if (item.style_web === 'style_5') {
+              return <StyleFive key={index} Data={item} />
+            } else if (item.style_web === 'style_6') {
+              return <StyleSix key={index} Data={item} />
             }
-            return null
-          })
+          } else if (item.news_type === 'breaking_news') {
+            if (item.style_web === 'style_1') {
+              return <StyleOne key={index} Data={item} />
+            } else if (item.style_web === 'style_2') {
+              return <StyleTwo key={index} Data={item} />
+            } else if (item.style_web === 'style_3') {
+              return <StyleThree key={index} Data={item} />
+            } else if (item.style_web === 'style_4') {
+              return <StyleFour key={index} Data={item} />
+            } else if (item.style_web === 'style_5') {
+              return <StyleFive key={index} Data={item} />
+            } else if (item.style_web === 'style_6') {
+              return <StyleSix key={index} Data={item} />
+            }
+          } else if (item.news_type === 'videos') {
+            if (item.style_web === 'style_1') {
+              return <StyleOne key={index} Data={item} />
+            } else if (item.style_web === 'style_2') {
+              return <StyleTwo key={index} Data={item} />
+            } else if (item.style_web === 'style_3') {
+              return <StyleThree key={index} Data={item} />
+            } else if (item.style_web === 'style_4') {
+              return <StyleFour key={index} Data={item} />
+            } else if (item.style_web === 'style_5') {
+              return <StyleFive key={index} Data={item} />
+            } else if (item.style_web === 'style_6') {
+              return <StyleSix key={index} Data={item} />
+            }
+          } else if (item.news_type === 'user_choice') {
+            if (item.style_web === 'style_1') {
+              return <StyleOne key={index} Data={item} />
+            } else if (item.style_web === 'style_2') {
+              return <StyleTwo key={index} Data={item} />
+            } else if (item.style_web === 'style_3') {
+              return <StyleThree key={index} Data={item} />
+            } else if (item.style_web === 'style_4') {
+              return <StyleFour key={index} Data={item} />
+            } else if (item.style_web === 'style_5') {
+              return <StyleFive key={index} Data={item} />
+            } else if (item.style_web === 'style_6') {
+              return <StyleSix key={index} Data={item} />
+            }
+          }
+          return null
+        })
     )
   }
 
@@ -191,11 +193,14 @@ const FeatureLayout = () => {
   return (
     <>
       {isLoading ? (
-        <div className='container'>
-          <div className='col-12 loading_data'>
-            <Skeleton height={20} count={22} />
-          </div>
-        </div>
+        <>
+          <StyleTwoSkeleton />
+          <StyleThreeSkeleton />
+          <StyleOneSkeleton />
+          <StyleFourSkeleton />
+          <StyleFiveSkeleton />
+          <StyleSixSkeleton />
+        </>
       ) : selectedComponent && selectedComponent.length > 0 ? (
         selectedComponent
       ) : !newsDataFound ? <> <DefaultNewsStyle isLoading={isNoDataLoading} Data={isNoData} /> </> :

@@ -15,10 +15,11 @@ import { useRouter } from 'next/navigation'
 import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
+import StyleSixSkeleton from '../skeletons/StyleSixSkeleton'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
-const StyleSix = ({ isLoading, Data }) => {
+const StyleSix = ({ Data, }) => {
 
   const [Video_url, setVideo_url] = useState()
   const [modalShow, setModalShow] = useState(false)
@@ -112,12 +113,7 @@ const StyleSix = ({ isLoading, Data }) => {
           <div id='style-six-body-section'>
             <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
-              {isLoading ? (
-                // Show skeleton loading when data is being fetched
-                <div className='col-12 loading_data'>
-                  <Skeleton height={20} count={22} />
-                </div>
-              ) : (
+              {
                 sliderData[0].videos.map(item => (
                   <SwiperSlide key={item.id}>
                     <Link
@@ -186,7 +182,7 @@ const StyleSix = ({ isLoading, Data }) => {
                     </Link>
                   </SwiperSlide>
                 ))
-              )}
+              }
               <VideoPlayerModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
@@ -214,12 +210,7 @@ const StyleSix = ({ isLoading, Data }) => {
           <div id='style-six-body-section'>
             <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
-              {isLoading ? (
-                // Show skeleton loading when data is being fetched
-                <div className='col-12 loading_data'>
-                  <Skeleton height={20} count={22} />
-                </div>
-              ) : (
+              {
 
                 sliderData[0].news.map(item => (
                   <SwiperSlide key={item.id}>
@@ -269,7 +260,7 @@ const StyleSix = ({ isLoading, Data }) => {
                     </Link>
                   </SwiperSlide>
                 ))
-              )}
+              }
 
               <VideoPlayerModal
                 show={modalShow}
@@ -298,12 +289,7 @@ const StyleSix = ({ isLoading, Data }) => {
           <div id='style-six-body-section'>
             <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
             <Swiper {...swiperOptionUpdate} className='custom-swiper'>
-              {isLoading ? (
-                // Show skeleton loading when data is being fetched
-                <div className='col-12 loading_data'>
-                  <Skeleton height={20} count={22} />
-                </div>
-              ) : (
+              {
                 sliderData[0].breaking_news.map(item => (
                   <SwiperSlide key={item.id}>
                     {/* <Link href={item.content_value ? '#' : `/breaking-news/${item.slug}`}> */}
@@ -341,7 +327,7 @@ const StyleSix = ({ isLoading, Data }) => {
                     {/* </Link> */}
                   </SwiperSlide>
                 ))
-              )}
+              }
               <VideoPlayerModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

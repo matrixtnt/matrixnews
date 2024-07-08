@@ -12,7 +12,7 @@ import CommonViewMoreDiv from './CommonViewMoreDiv'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
-const StyleOne = ({ isLoading, Data }) => {
+const StyleOne = ({ Data }) => {
   const truncate = input => (input?.length > 180 ? `${input.substring(0, 180)}...` : input)
 
   const swiperOption = {
@@ -57,12 +57,7 @@ const StyleOne = ({ isLoading, Data }) => {
       {/* video section */}
       {Data.videos && Data.videos?.length > 0 ? (
         <Swiper {...swiperOption} className='custom-swiper'>
-          {isLoading ? (
-            // Show skeleton loading when data is being fetched
-            <div className='col-12 loading_data'>
-              <Skeleton height={20} count={22} />
-            </div>
-          ) : (
+          {
             Data.videos.slice(0, 3).map(item => (
               <SwiperSlide key={item.id}>
                 <div id='fs-main' className='h-100 video_style_one inner_custom_swiper'>
@@ -102,7 +97,7 @@ const StyleOne = ({ isLoading, Data }) => {
                 </div>
               </SwiperSlide>
             ))
-          )}
+          }
           <VideoPlayerModal
             show={modalShow}
             onHide={() => setModalShow(false)}
@@ -133,12 +128,7 @@ const StyleOne = ({ isLoading, Data }) => {
           </div>
 
           <Swiper {...swiperOption} className='custom-swiper'>
-            {isLoading ? (
-              // Show skeleton loading when data is being fetched
-              <div className='col-12 loading_data'>
-                <Skeleton height={20} count={22} />
-              </div>
-            ) : (
+            {
               Data.news.slice(0, 3).map(item => (
                 <SwiperSlide key={item.id}>
 
@@ -189,7 +179,7 @@ const StyleOne = ({ isLoading, Data }) => {
                   </div>
                 </SwiperSlide>
               ))
-            )}
+            }
             <VideoPlayerModal
               show={modalShow}
               onHide={() => setModalShow(false)}
@@ -213,12 +203,7 @@ const StyleOne = ({ isLoading, Data }) => {
       {/* breaking news section */}
       {Data && Data.breaking_news?.length > 0 ? (
         <Swiper {...swiperOption} className='custom-swiper'>
-          {isLoading ? (
-            // Show skeleton loading when data is being fetched
-            <div className='col-12 loading_data'>
-              <Skeleton height={20} count={22} />
-            </div>
-          ) : (
+          {
             Data.breaking_news.slice(0, 3).map(item => (
               <SwiperSlide key={item.id}>
 
@@ -265,7 +250,7 @@ const StyleOne = ({ isLoading, Data }) => {
                 </div>
               </SwiperSlide>
             ))
-          )}
+          }
           <VideoPlayerModal
             show={modalShow}
             onHide={() => setModalShow(false)}

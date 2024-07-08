@@ -17,6 +17,7 @@
   --body-color: #0A1935;
   --secondary-color: #122342;
   --text-primary-color: #fff;
+  --text-secondary-color: #98a2b3;
   --hover--color: #15346D;
 }
 
@@ -204,6 +205,7 @@ a {
 [data-bs-theme="dark"] .custom-card .swiper-button-next:hover::after {
   background-color: var(--hover--color);
 }
+
 @media (max-width: 575px) {
   .custom-card .swiper-button-prev {
     left: 32%;
@@ -780,7 +782,7 @@ a {
   background: var(--secondary-color);
 }
 
-[data-bs-theme="dark"] #btnNotification:hover  {
+[data-bs-theme="dark"] #btnNotification:hover {
   background-color: var(--hover--color);
 }
 
@@ -3065,7 +3067,7 @@ a#social_platforms svg:hover {
 }
 
 [data-bs-theme="dark"] #bs-card-date {
-  color: #b7b7b7;
+  color: var(--text-secondary-color);
 }
 
 #bs-logoCalendar {
@@ -3500,7 +3502,7 @@ a#social_platforms svg:hover {
 }
 
 [data-bs-theme="dark"] #cv-card-date {
-  color: #b7b7b7;
+  color: var(--text-secondary-color);
 }
 
 
@@ -5787,7 +5789,7 @@ a#social_platforms svg:hover {
 }
 
 [data-bs-theme="dark"] .short_desc {
-  color: #98a2b3;
+  color: var(--text-secondary-color);
 }
 
 .card_hover img {
@@ -6915,7 +6917,7 @@ span {
 }
 
 [data-bs-theme="dark"] .para {
-  color: #98a2b3;
+  color: var(--text-secondary-color);
 }
 
 .para * {
@@ -7936,5 +7938,63 @@ span {
 
 [data-bs-theme="dark"] .react-loading-skeleton,
 [data-bs-theme="dark"] .react-loading-skeleton::after {
-  background-color: #ebebeb7a !important;
+  background-color: #ebebeb42 !important;
+  --base-color: #ffffff00;
+  --highlight-color: #ffffff00;
+}
+
+/* ================================================================================================================ */
+
+/* style skeletons css  */
+
+.commonViewMoreSkeleton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textSkeleton {
+  position: relative;
+}
+
+.textSkeleton .innerDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: absolute;
+  bottom: 12px;
+  padding: 0px 12px;
+  width: 100%;
+}
+
+.news_style_one #Left-first-section {
+  box-shadow: none;
+}
+
+.news_style_one .innerDiv,
+.news_style_five .styleFive_textSkeleton .innerDiv {
+  bottom: 120px;
+  left: 20px;
+}
+
+#style-six-body-section .styleSix_textSkeleton .innerDiv {
+  justify-content: space-between;
+  height: 100%;
+}
+
+#style-six-body-section .styleSix_textSkeleton .innerDiv .categoryBadge {
+  margin-top: 28px;
+}
+
+.allCatSkeleton .innerDiv{
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 34px;
+}
+
+@media screen and (max-width: 1199px) {
+  .styleOneSkeleton {
+    display: none;
+  }
 }
