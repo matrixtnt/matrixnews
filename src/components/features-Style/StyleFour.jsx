@@ -31,7 +31,7 @@ const StyleFour = ({ Data, isLoading }) => {
     <>
 
       {/* ad spaces */}
-      {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) && Data.news_type === 'videos' ? (
+      {Data.ad_spaces && Data.id == Data.ad_spaces.ad_featured_section_id && Data.news_type === 'videos' ? (
         <>
           <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'four'} />
         </>
@@ -95,7 +95,7 @@ const StyleFour = ({ Data, isLoading }) => {
       ) : null}
 
       {/* ad spaces */}
-      {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) && Data.news_type === 'news' ? (
+      {Data.ad_spaces && Data.id == Data.ad_spaces.ad_featured_section_id && Data.news_type === 'news' ? (
         <>
           <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'four'} />
         </>
@@ -149,7 +149,7 @@ const StyleFour = ({ Data, isLoading }) => {
       ) : null}
 
       {/* ad spaces */}
-      {Data.ad_spaces && Data.id === Number(Data.ad_spaces.ad_featured_section_id) && Data.news_type === 'breaking_news' ? (
+      {Data.ad_spaces && Data.id == Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
         <>
           <AdSpaces ad_url={Data.ad_spaces.ad_url} ad_img={Data.ad_spaces.web_ad_image} style_web={'four'} />
         </>

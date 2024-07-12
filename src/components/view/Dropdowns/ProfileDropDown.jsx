@@ -47,7 +47,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
                 </>
             ),
         },
-        ...(Number(userRole?.role) !== 0 ? [
+        ...(userRole?.role != 0 ? [
             {
                 key: '6',
                 label: (
