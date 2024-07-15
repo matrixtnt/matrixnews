@@ -8008,8 +8008,9 @@ span {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 999;
   padding: 20px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: var(--body-color);
   box-shadow: 0px 0px 50px #1B2D511A;
   border-radius: 10px;
   display: flex;
@@ -8056,7 +8057,7 @@ span {
 }
 
 .cookiesComponent .btnsWrapper button {
-  border: 1px solid #0F1F40;
+  border: 1px solid var(--text-secondary-color);
   border-radius: 5px;
   padding: 10px 20px;
   color: var(--text-primary-color);
