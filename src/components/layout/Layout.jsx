@@ -210,7 +210,7 @@ const Layout = ({ children }) => {
           <Header />
           <CatNav />
           <div>{children}</div>
-          {/* <CookiesComponent/> */}
+          <CookiesComponent/>
           <Footer />
         </>
       ) : (

@@ -13,6 +13,7 @@ import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 import { getUserManageData, loadGetUserByIdApi, selectUser } from 'src/store/reducers/userReducer'
 import Loader from './Loader'
 import { useRouter } from 'next/router'
+import AllCategorySkeleton from '../skeletons/AllCategorySkeleton'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
@@ -156,7 +157,7 @@ const UserBasedCategories = () => {
             <div className='row'>
               {[...Array(3)].map((_, index) => (
                 <div className='col-md-4 col-12' key={index}>
-                  <Card isLoading={true} />
+                  <AllCategorySkeleton />
                 </div>
               ))}
             </div>

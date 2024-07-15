@@ -89,7 +89,7 @@ const Categories = () => {
       <BreadcrumbNav SecondElement='Categories' />
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
         <div className='container my-5'>
-          {!isLoading.loading ? (
+          {isLoading.loading ? (
             <div className='row'>
               {[...Array(6)].map((_, index) => (
                 <div className='col-md-4 col-12' key={index}>

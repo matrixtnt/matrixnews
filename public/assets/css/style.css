@@ -9,13 +9,16 @@
   --body-color: #f5f5f5 !important;
   --paragraph-color: #565969;
   --text-primary-color: #0F1F40;
+  --text-secondary-color: #0f1f40c2;
+  --text-secondary-color: #65686D;
+  --hover--color: #1A2E51;
   --primary-font-family: "Zilla Slab", serif;
 }
 
 [data-bs-theme="dark"] {
   --primary-color: #CE2B2B;
-  --body-color: #0A1935;
   --secondary-color: #122342;
+  --body-color: #0A1935;
   --text-primary-color: #fff;
   --text-secondary-color: #98a2b3;
   --hover--color: #15346D;
@@ -198,7 +201,7 @@ a {
 
 .custom-card .swiper-button-prev:hover::after,
 .custom-card .swiper-button-next:hover::after {
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
 }
 
 [data-bs-theme="dark"] .custom-card .swiper-button-prev:hover::after,
@@ -750,7 +753,7 @@ a {
 }
 
 .btnSignIn:hover {
-  background: var(--secondary-color);
+  background: var(--hover--color);
 }
 
 #btnNotification {
@@ -779,7 +782,7 @@ a {
 
 #btnNotification:hover {
   color: #ffffff;
-  background: var(--secondary-color);
+  background: var(--hover--color);
 }
 
 [data-bs-theme="dark"] #btnNotification:hover {
@@ -795,7 +798,7 @@ a {
 
 #btnSerch:hover {
   color: #ffffff;
-  background: var(--secondary-color);
+  background: var(--hover--color);
 }
 
 #serchModal {
@@ -1231,7 +1234,7 @@ a {
 
 #btnReadMore:hover {
   color: #ffffff;
-  background: var(--secondary-color);
+  background: var(--hover--color);
 }
 
 /* .circle {
@@ -2654,6 +2657,7 @@ a {
 
 #footer {
   padding-top: 1%;
+  padding-top: 50%;
   background: var(--secondary-color);
   height: fit-content;
   width: 100%;
@@ -2815,7 +2819,7 @@ ul.useL>li {
 }
 
 #ES:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
 }
 
 #footer .copyright p {
@@ -2933,7 +2937,7 @@ a#social_platforms svg:hover {
   }
 
   #ES:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--hover--color);
   }
 
   .news_footer {
@@ -4260,7 +4264,7 @@ a#social_platforms svg:hover {
 
 #btnNotification11:hover {
   color: #ffffff;
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
 }
 
 #btnNewsnoti {
@@ -4271,7 +4275,7 @@ a#social_platforms svg:hover {
 
 #btnNewsnoti:hover {
   color: #ffffff;
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
 }
 
 #btnNewsnoti1 {
@@ -4282,7 +4286,7 @@ a#social_platforms svg:hover {
 
 #btnNewsnoti1:hover {
   color: #ffffff;
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
 }
 
 #noti_profile {
@@ -4304,8 +4308,8 @@ a#social_platforms svg:hover {
 }
 
 #btntrash:hover {
-  border: 1px solid var(--secondary-color);
-  background-color: var(--secondary-color);
+  border: 1px solid var(--hover--color);
+  background-color: var(--hover--color);
   color: #ffffff;
 }
 
@@ -4341,7 +4345,7 @@ a#social_platforms svg:hover {
 
   #btnNewsnoti:hover {
     color: #ffffff;
-    background-color: var(--secondary-color);
+    background-color: var(--hover--color);
   }
 
   #card-noti {
@@ -4373,16 +4377,16 @@ a#social_platforms svg:hover {
   }
 
   #btntrash:hover {
-    border: 1px solid var(--secondary-color);
-    background-color: var(--secondary-color);
+    border: 1px solid var(--hover--color);
+    background-color: var(--hover--color);
     color: #ffffff;
   }
 }
 
 #submitbutton:hover {
   background-color: var(--body-color);
-  color: var(--secondary-color);
-  border: var(--secondary-color) solid 3px;
+  color: var(--hover--color);
+  border: var(--hover--color) solid 3px;
   font-weight: bold;
 }
 
@@ -4821,8 +4825,8 @@ a#social_platforms svg:hover {
 
   #loginbutton2:hover {
     background-color: var(--body-color);
-    color: var(--secondary-color);
-    border: var(--secondary-color) solid 3px;
+    color: var(--hover--color);
+    border: var(--hover--color) solid 3px;
     font-weight: bold;
   }
 
@@ -7270,7 +7274,7 @@ span {
 .catNavWrapper .categoryName:focus,
 .catNavWrapper.categoryName:focus-visible,
 .catNavWrapper .categoryName:active {
-  color: var(--secondary-color);
+  color: var(--hover--color);
   font-weight: 600;
   background-color: transparent;
   border: none;
@@ -7655,7 +7659,7 @@ span {
   left: 0px;
   width: 0px;
   height: 100%;
-  background-color: var(--secondary-color);
+  background-color: var(--hover--color);
   z-index: -1;
   transition: all 0.4s;
 }
@@ -7986,7 +7990,7 @@ span {
   margin-top: 28px;
 }
 
-.allCatSkeleton .innerDiv{
+.allCatSkeleton .innerDiv {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -7997,4 +8001,46 @@ span {
   .styleOneSkeleton {
     display: none;
   }
+}
+
+/* cookies style from here  */
+
+.cookiesComponent {
+  position: fixed;
+  bottom: 400px;
+  right: 600px;
+  padding: 20px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 50px #1B2D511A;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.cookiesComponent .content{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.cookiesComponent .btnsWrapper{
+  display: flex;
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.cookiesComponent .btnsWrapper button{
+  border: 1px solid #0F1F40;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: transparent;
+}
+.cookiesComponent .btnsWrapper button{
+  border: 1px solid #0F1F40;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: transparent;
 }

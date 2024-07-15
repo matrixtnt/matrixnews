@@ -1,44 +1,48 @@
-import CookieConsent, { Cookies, getCookieConsentValue } from "react-cookie-consent";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import Image from 'next/image';
+import cookiesIcon from '../../../public/assets/images/Cookie Icon.svg'
 
 const CookiesComponent = () => {
-  const [consent, setConsent] = useState(Cookies.get('myAwesomeCookieName2') || false);
+  const [showPopup, setShowPopup] = useState(false);
 
-  const handleAccept = (acceptedByScrolling) => {
-    if (acceptedByScrolling) {
-      console.log(getCookieConsentValue("your_custom_cookie_name"));
-      alert("Accept was triggered by user scrolling");
-    } else {
-      alert("Accept was triggered by clicking the Accept button");
+  useEffect(() => {
+    const consent = Cookies.get('cookie-consent');
+    if (!consent) {
+      setShowPopup(true);
     }
-    setConsent(true);
-    Cookies.set('myAwesomeCookieName2', true, { expires: 150 });
+  }, []);
+
+  const handleAccept = () => {
+    Cookies.set('cookie-consent', 'accepted', { expires: 365 });
+    setShowPopup(false);
   };
 
   const handleDecline = () => {
-    alert("nay!");
-    setConsent(false);
-    Cookies.remove('myAwesomeCookieName2');
+    Cookies.set('cookie-consent', 'declined', { expires: 365 });
+    setShowPopup(false);
   };
 
+  if (!showPopup) return null;
+
   return (
-    <div>
-      <CookieConsent
-        location="bottom"
-        buttonText="I Accept"
-        onDecline={handleDecline}
-        enableDeclineButton
-        cookieName="myAwesomeCookieName2"
-        style={{ background: "#2B373B" }}
-        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-        expires={150}
-        onAccept={handleAccept}
-      >
-        We cookies to enhance the user experience.{" "}
-      </CookieConsent>
-      {/* {consent && <p>Cookie consent given!</p>} */}
+    <div className='cookiesComponent'>
+      <div className="imgWrapper">
+        <Image src={cookiesIcon} height={0} width={0} />
+      </div>
+
+      <div className='content'>
+        <span>Do you allow us to use cookies?</span>
+        <span>We use cookies to learn where you struggle when you're navigating our website and fix them for your future visit.</span>
+      </div>
+
+      <div className="btnsWrapper">
+        <button onClick={handleDecline}>Decline Cookies</button>
+        <button onClick={handleAccept}>Accept Cookies</button>
+      </div>
     </div>
   );
 };
+
 
 export default CookiesComponent;
