@@ -7970,7 +7970,7 @@ span {
   width: 100%;
 }
 
-.news_style_one #Left-first-section {
+.styleOneSkeleton #Left-first-section {
   box-shadow: none;
 }
 
@@ -8001,6 +8001,7 @@ span {
     display: none;
   }
 }
+/* ============================= skeletons css  ends here =================================================/
 
 /* cookies style from here  */
 
