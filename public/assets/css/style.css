@@ -8010,7 +8010,7 @@ span {
   right: 20px;
   z-index: 999;
   padding: 20px;
-  background: var(--body-color);
+  background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 50px #1B2D511A;
   border-radius: 10px;
   display: flex;
@@ -8024,8 +8024,8 @@ span {
 }
 
 [data-bs-theme="dark"] .cookiesComponent {
-  background-color: var(--secondary-color);
-  box-shadow: 0px 0px 50px #8498c21a;
+  background: #122342 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 50px #6c757d2b;
 }
 
 .cookiesComponent .imgWrapper {
@@ -8073,6 +8073,11 @@ span {
 .cookiesComponent .btnsWrapper button:last-child {
   color: #fff;
   background-color: #0F1F40;
+}
+
+[data-bs-theme="dark"] .cookiesComponent .btnsWrapper button:last-child {
+  color: #0F1F40;
+  background-color: #FFFFFF;
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
