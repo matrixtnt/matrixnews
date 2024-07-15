@@ -20,6 +20,7 @@ import { useQuery } from '@tanstack/react-query'
 import { checkBreakingNewsData, checkLiveNewsData, checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
 import { clearAllSiteData } from 'src/utils'
+import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
 
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
@@ -28,6 +29,9 @@ const Layout = ({ children }) => {
   const pathname = usePathname()
 
   const checkNewsData = useSelector(checkNewsDataSelector)
+
+  const darkThemeMode = useSelector(themeSelector);
+
 
   const isLiveNewsCallOnce = checkNewsData.data.isLiveNewsApiCallOnce
   const isBreakingNewsCallOnce = checkNewsData.data.isBreakingNewsApiCallOnce
@@ -61,9 +65,23 @@ const Layout = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.web_color_code)
-    document.documentElement.style.setProperty('--darkmode-primary-color', settings && settings?.web_setting?.web_color_code)
-  }, [settings])
+    if (darkThemeMode) {
+      document.documentElement.style.setProperty('--body-color', settings && settings?.web_setting?.dark_body_color)
+      document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.dark_primary_color)
+      document.documentElement.style.setProperty('--secondary-color', settings && settings?.web_setting?.dark_secondary_color)
+      document.documentElement.style.setProperty('--hover--color', settings && settings?.web_setting?.dark_hover_color)
+      document.documentElement.style.setProperty('--text-primary-color', settings && settings?.web_setting?.dark_text_primary_color)
+      document.documentElement.style.setProperty('--text-secondary-color', settings && settings?.web_setting?.dark_text_secondary_color)
+    }
+    else {
+      document.documentElement.style.setProperty('--body-color', settings && settings?.web_setting?.light_body_color)
+      document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.light_primary_color)
+      document.documentElement.style.setProperty('--secondary-color', settings && settings?.web_setting?.light_secondary_color)
+      document.documentElement.style.setProperty('--hover--color', settings && settings?.web_setting?.light_hover_color)
+      document.documentElement.style.setProperty('--text-primary-color', settings && settings?.web_setting?.light_text_primary_color)
+      document.documentElement.style.setProperty('--text-secondary-color', settings && settings?.web_setting?.light_text_secondary_color)
+    }
+  }, [settings,darkThemeMode])
 
   // Check if the user is authenticated based on the presence of the token
   const isAuthenticated = userData && userData?.data?.token
@@ -210,7 +228,7 @@ const Layout = ({ children }) => {
           <Header />
           <CatNav />
           <div>{children}</div>
-          <CookiesComponent/>
+          <CookiesComponent />
           <Footer />
         </>
       ) : (

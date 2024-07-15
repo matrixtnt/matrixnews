@@ -18,6 +18,7 @@ import Image from 'next/image'
 
 import playStore from '../../../public/assets/images/playStore.svg'
 import appleStore from '../../../public/assets/images/appleStore.svg'
+import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
 
 const Footer = () => {
 
@@ -28,6 +29,8 @@ const Footer = () => {
   const categoriesData = categories
 
   const checkNewsData = useSelector(checkNewsDataSelector)
+
+  const darkThemeMode = useSelector(themeSelector);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -41,7 +44,7 @@ const Footer = () => {
             <div className='col-lg-3 col-12'>
               <div className='News'>
                 <Link href='/'>
-                  <img id='NewsLogo' src={settings && settings?.web_setting?.web_footer_logo} onError={placeholderImage} alt='footer logo image' />
+                  <img id='NewsLogo' src={darkThemeMode ? settings && settings?.web_setting?.dark_header_logo : settings && settings?.web_setting?.light_footer_logo} onError={placeholderImage} alt='footer logo image' />
                 </Link>
               </div>
               <div className='Lorem-text'>

@@ -72,6 +72,7 @@ const Header = () => {
   const settings = useSelector(settingsData)
 
   const checkNewsData = useSelector(checkNewsDataSelector);
+  
   const darkThemeMode = useSelector(themeSelector);
 
   // language change
@@ -277,7 +278,7 @@ const Header = () => {
         <div className='navbar_content'>
           <div id='News-logo' className='News-logo'>
             <Link href='/' activeclassname='active' exact='true'>
-              <img id='NewsLogo' src={settings && darkThemeMode ? settings?.web_setting?.web_footer_logo : settings?.web_setting?.web_header_logo} onError={placeholderImage} alt='logo' />
+              <img id='NewsLogo' src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} onError={placeholderImage} alt='logo' />
             </Link>
           </div>
 

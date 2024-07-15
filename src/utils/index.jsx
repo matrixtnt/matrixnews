@@ -144,12 +144,15 @@ export const imgError = (e) => {
   e.target.src = "/assets/images/no_image.jpeg";
 };
 
+
 // placholder image
 export const placeholderImage = (e) => {
   e.preventDefault()
   const settingsData = store.getState().settings
-  e.target.src = settingsData && settingsData?.data?.web_setting?.web_placeholder_image
-  // e.target.src = "/assets/images/placeholder.png";
+  const darkThemeMode = store.getState().checkTheme
+  const isDarkMode = darkThemeMode?.data?.isDarkMode;
+  // console.log(darkThemeMode.data.isDarkMode,'theemmee ')
+  e.target.src = isDarkMode ? settingsData && settingsData?.data?.web_setting?.dark_placeholder_image : settingsData && settingsData?.data?.web_setting?.light_placeholder_image
 };
 
 // truncate text

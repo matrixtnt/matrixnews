@@ -6,6 +6,7 @@ import { translate } from '../../utils'
 import { useSelector } from 'react-redux'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
+import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
 
 const ForgotPasswordTwo = props => {
   const initialValues = { email: '', password: '' }
@@ -19,6 +20,8 @@ const ForgotPasswordTwo = props => {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const settings = useSelector(settingsData)
+
+  const darkThemeMode = useSelector(themeSelector);
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -88,7 +91,7 @@ const ForgotPasswordTwo = props => {
           >
             <img className='ModalImg' id='ModalImg2' src={photo.src} alt='forgot password images news' />
             <div className='logo-img-overlay'>
-              <img id='NewsLogo' src={settings && settings?.web_setting?.web_header_logo} alt='news logo' />
+              <img id='NewsLogo' src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='news logo' />
             </div>
           </div>
 

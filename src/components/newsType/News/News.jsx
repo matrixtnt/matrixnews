@@ -245,8 +245,6 @@ const News = () => {
   };
 
 
-  console.log(Data, '<= Dtaaa')
-
   return (
     <Layout>
       {isLoading ? (

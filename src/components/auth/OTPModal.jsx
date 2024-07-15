@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
+import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
 
 const OTPModal = props => {
   const [OTP, setOTP] = useState('') // eslint-disable-next-line
@@ -28,6 +29,8 @@ const OTPModal = props => {
   const navigate = useRouter()
 
   const settings = useSelector(settingsData)
+
+  const darkThemeMode = useSelector(themeSelector);
 
   const [resendTimer, setResendTimer] = useState(60);
 
@@ -225,7 +228,7 @@ const OTPModal = props => {
             <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img5'>
               <img className='ModalImg5' src={photo.src} alt='otp modal image' />
               <div className='logo-img-overlay'>
-                <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo5' />
+                <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo5' />
               </div>
             </div>
 

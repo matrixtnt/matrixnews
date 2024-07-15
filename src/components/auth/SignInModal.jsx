@@ -25,6 +25,7 @@ import FirebaseData from 'src/utils/Firebase'
 import toast from 'react-hot-toast'
 import { locationData } from 'src/store/reducers/settingsReducer'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
+import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
 
 const SignInModal = props => {
   const { authentication, messaging } = FirebaseData()
@@ -48,6 +49,8 @@ const SignInModal = props => {
   const storedLongitude = location && location.long
 
   const settings = useSelector(settingsData)
+
+  const darkThemeMode = useSelector(themeSelector);
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -238,7 +241,7 @@ const SignInModal = props => {
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
             <img className='ModalImg' src={photo.src} alt='login image' />
             <div className='logo-img-overlay'>
-              <img src={settings && settings?.web_setting?.web_header_logo} alt='logo image' id='logo1' onError={placeholderImage} />
+              <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo1' onError={placeholderImage} />
             </div>
           </div>
           <div id='modal-content'>

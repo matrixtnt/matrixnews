@@ -6,23 +6,21 @@
 /* News main nave */
 
 :root {
-  --body-color: #f5f5f5 !important;
-  --paragraph-color: #565969;
-  --text-primary-color: #0F1F40;
-  --text-secondary-color: #0f1f40c2;
+  /* --body-color: #f5f5f5 !important; */
+  /* --text-primary-color: #0F1F40;
   --text-secondary-color: #65686D;
-  --hover--color: #1A2E51;
+  --hover--color: #1A2E51; */
   --primary-font-family: "Zilla Slab", serif;
 }
 
-[data-bs-theme="dark"] {
+/* [data-bs-theme="dark"] {
   --primary-color: #CE2B2B;
   --secondary-color: #122342;
   --body-color: #0A1935;
   --text-primary-color: #fff;
-  --text-secondary-color: #98a2b3;
+  --text-secondary-color: #98A2B3;
   --hover--color: #15346D;
-}
+} */
 
 * {
   margin: 0;
@@ -3686,7 +3684,7 @@ a#social_platforms svg:hover {
 
   .ModalImg {
     width: 100%;
-    height: 40rem;
+    height: 42rem;
     border-radius: 7px 0 0 7px;
     opacity: 0.5;
     object-fit: cover;
@@ -6098,7 +6096,7 @@ span {
 .single-input-inner label {
   font-weight: 400;
   font-size: 14px;
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
   margin-bottom: 0px;
   position: absolute;
   top: 0;
@@ -6115,11 +6113,11 @@ span {
   padding: 0 40px;
   font-size: 14px;
   background: rgba(8, 12, 36, 0.06);
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
 }
 
 .single-input-inner input::placeholder {
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
 }
 
 .single-input-inner input:active,
@@ -6135,12 +6133,12 @@ span {
   border-radius: 0px;
   padding: 17px 40px;
   background: rgba(8, 12, 36, 0.06);
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
   margin-bottom: -8px;
 }
 
 .single-input-inner textarea::placeholder {
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
 }
 
 .single-input-inner.style-border input {
@@ -6151,7 +6149,7 @@ span {
 }
 
 .single-input-inner.style-border input::placeholder {
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
 }
 
 .single-input-inner.style-border textarea {
@@ -6187,7 +6185,7 @@ span {
 .single-select-inner label {
   font-weight: 400;
   font-size: 14px;
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
   margin-bottom: 0px;
   position: absolute;
   top: 0;
@@ -6203,20 +6201,20 @@ span {
   border: 0 !important;
   border-radius: 0px;
   font-size: 14px;
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
   background: rgba(8, 12, 36, 0.06);
   padding: 0 30px 0 40px;
 }
 
 .single-select-inner .single-select::placeholder {
-  color: var(--paragraph-color);
+  color: var(--text-secondary-color);
 }
 
 .single-select-inner .single-select:after {
   right: 20px;
   height: 7px;
   width: 7px;
-  border-color: var(--paragraph-color);
+  border-color: var(--text-secondary-color);
 }
 
 .single-select-inner .single-select .list {
@@ -8001,6 +7999,7 @@ span {
     display: none;
   }
 }
+
 /* ============================= skeletons css  ends here =================================================/
 
 /* cookies style from here  */
@@ -8022,6 +8021,11 @@ span {
   width: 640px;
   height: 366px;
   padding: 185px 60px;
+}
+
+[data-bs-theme="dark"] .cookiesComponent {
+  background-color: var(--secondary-color);
+  box-shadow: 0px 0px 50px #8498c21a;
 }
 
 .cookiesComponent .imgWrapper {
