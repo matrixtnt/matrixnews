@@ -2657,7 +2657,6 @@ a {
 
 #footer {
   padding-top: 1%;
-  padding-top: 50%;
   background: var(--secondary-color);
   height: fit-content;
   width: 100%;
@@ -8007,8 +8006,8 @@ span {
 
 .cookiesComponent {
   position: fixed;
-  bottom: 400px;
-  right: 600px;
+  bottom: 20px;
+  right: 20px;
   padding: 20px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 50px #1B2D511A;
@@ -8018,29 +8017,92 @@ span {
   align-items: center;
   justify-content: center;
   gap: 30px;
+  width: 640px;
+  height: 366px;
+  padding: 185px 60px;
 }
 
-.cookiesComponent .content{
+.cookiesComponent .imgWrapper {
+  margin-top: 30px;
+}
+
+.cookiesComponent .content {
   display: flex;
   flex-direction: column;
   gap: 16px;
   align-items: center;
-}
-.cookiesComponent .btnsWrapper{
-  display: flex;
-  gap: 20px;
-  margin-top: 48px;
+  text-align: center;
 }
 
-.cookiesComponent .btnsWrapper button{
-  border: 1px solid #0F1F40;
-  border-radius: 5px;
-  padding: 10px 20px;
-  background-color: transparent;
+.cookiesComponent .content span:first-child {
+  color: var(--text-primary-color);
+  font-size: 24px;
+  font-weight: bold;
 }
-.cookiesComponent .btnsWrapper button{
+
+.cookiesComponent .content span:last-child {
+  color: var(--text-secondary-color);
+  font-weight: 600;
+}
+
+.cookiesComponent .btnsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 24px;
+  padding-bottom: 30px;
+}
+
+.cookiesComponent .btnsWrapper button {
   border: 1px solid #0F1F40;
   border-radius: 5px;
   padding: 10px 20px;
+  color: var(--text-primary-color);
   background-color: transparent;
+  font-weight: 600;
+}
+
+.cookiesComponent .btnsWrapper button:last-child {
+  color: #fff;
+  background-color: #0F1F40;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .cookiesComponent {
+    width: 450px;
+    height: 450px;
+    padding: 50px;
+  }
+}
+
+@media screen and (min-width:576px) and (max-width: 767px) {
+  .cookiesComponent {
+    width: 350px;
+    height: 490px;
+    padding: 20px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 575px) {
+  .cookiesComponent {
+    bottom: 10px;
+    right: 10px;
+    width: 300px;
+    height: 420px;
+    padding: 20px;
+  }
+
+  .cookiesComponent .content span:first-child {
+    font-size: 18px;
+  }
+
+  .cookiesComponent .content span:last-child {
+    font-size: 14px;
+  }
+
+  .cookiesComponent .btnsWrapper {
+    margin-top: 0px;
+  }
 }
