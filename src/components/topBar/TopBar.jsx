@@ -43,6 +43,8 @@ const WeatherCard = () => {
 
   const darkThemeMode = useSelector(themeSelector);
 
+  const socialMedias = getLocation?.social_media;
+
   const dispatch = useDispatch()
 
   const router = useRouter()
@@ -208,12 +210,7 @@ const WeatherCard = () => {
           </div>
           <div className='col-md-6 col-12'>
             <div className='right-weather'>
-              {/* <div className="darkModeToggle">
-                <MdLightMode size={20} />
-                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" checked={darkThemeMode} onChange={(e) => applyTheme(e.target.checked)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                </div>
-                <FaMoon />
-              </div> */}
+
               <ThemeToggler />
 
               {
@@ -228,6 +225,23 @@ const WeatherCard = () => {
                   : <span className='mt-1 fw-bold followUs'>{translate('followus')} :</span>
               }
               <div className='social_media_top'>
+                {
+                  socialMedias?.length > 0 ?
+                    socialMedias?.map((data) => {
+                      return <a
+                        target='_blank'
+                        id='social_platforms'
+                        className='me-2'
+                        href={data?.link}
+                        rel='noreferrer'
+                        key={data?.id}
+                      >
+                        <img src={data?.image} alt="social-media-icon" className='socialMediaIcons' />
+                      </a>
+                    }) : null
+                }
+              </div>
+              {/* <div className='social_media_top'>
                 {process.env.NEXT_PUBLIC_FACEBOOK ? (
                   <a
                     target='_blank'
@@ -272,7 +286,7 @@ const WeatherCard = () => {
                     <FaSquareXTwitter />
                   </a>
                 ) : null}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

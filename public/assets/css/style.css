@@ -1670,7 +1670,7 @@ a {
 }
 
 .video_style_four #rns-card {
-  height: 355px;
+  height: 400px;
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
@@ -1679,7 +1679,7 @@ a {
   }
 
   .video_style_four #rns-card {
-    height: 310px;
+    height: 340px;
   }
 }
 
@@ -1689,7 +1689,7 @@ a {
   }
 
   .video_style_four #rns-card {
-    height: 270px;
+    height: 300px;
   }
 }
 
@@ -1699,7 +1699,7 @@ a {
   }
 
   .video_style_four #rns-card {
-    height: 210px;
+    height: 250px;
   }
 }
 
@@ -1709,7 +1709,7 @@ a {
   }
 
   .video_style_four #rns-card {
-    height: 220px;
+    height: 270px;
   }
 }
 
@@ -1919,6 +1919,27 @@ a {
 
 .social_media_top {
   margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social_media_top a{
+  height: 28px;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.social_media_top a:hover{
+  background-color: var(--primary-color) !important;
+  border-radius: 4px;
+}
+
+.social_media_top .socialMediaIcons{
+  width: 16px;
+  height: 16px;
 }
 
 .language_section {
@@ -7819,7 +7840,17 @@ span {
   background-color: #57657dc4;
   color: #fff;
   border-radius: 50px;
-  padding: 4px 8px;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.footerMediasWrapper .mediaIconsWrapper .socialMediaIcon{
+  width: 16px;
+  height: 16px;
 }
 
 .footerMediasWrapper .mediaIconsWrapper a:hover,

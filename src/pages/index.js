@@ -32,7 +32,7 @@ const Index = ({ adsenseUrl }) => {
       {
         adsenseURL && adsenseURL !== null || adsenseURL && adsenseURL !== undefined || adsenseURL && adsenseURL?.length > 0 ?
           <script async src={adsenseURL}
-            crossorigin="anonymous"></script> : null
+            crossOrigin="anonymous"></script> : null
       }
     </>
   )

@@ -11,7 +11,7 @@ const StyleSixSkeleton = () => {
                 <div id='style-six-body-section'>
                     <div className='row loading_data'>
                         {[...Array(4)].map((_, index) => (
-                            <div className="col-12 col-lg-3 col-md-6">
+                            <div className="col-12 col-lg-3 col-md-6" key={index}>
                                 <div className='textSkeleton styleSix_textSkeleton'>
                                     <Skeleton height={300} width={'100%'} />
                                     <div className='innerDiv'>

@@ -38,7 +38,7 @@ const ThemeToggler = () => {
         <div>
             <div className="darkModeToggle">
                 <MdLightMode size={20} />
-                <div class="form-check form-switch text-white"><input class="form-check-input" type="checkbox" checked={darkThemeMode} onChange={(e) => changeTheme(e.target.checked)} role="switch" id="flexSwitchCheckDefault" /><label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                <div className="form-check form-switch text-white"><input className="form-check-input" type="checkbox" checked={darkThemeMode} onChange={(e) => changeTheme(e.target.checked)} role="switch" id="flexSwitchCheckDefault" /><label className="form-check-label" htmlFor="flexSwitchCheckDefault"></label>
                 </div>
                 <FaMoon />
             </div>

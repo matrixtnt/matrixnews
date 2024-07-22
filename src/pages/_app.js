@@ -15,7 +15,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'swiper/swiper-bundle.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-datepicker/dist/react-datepicker.css'
-import 'react-quill/dist/quill.snow.css'
 import 'nprogress/nprogress.css'
 import '../../public/assets/css/style.css'
 

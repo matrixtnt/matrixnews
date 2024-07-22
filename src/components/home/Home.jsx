@@ -17,7 +17,7 @@ const Home = () => {
       {process.env.NEXT_PUBLIC_SEO === 'false' ?
         adsenseUrl && adsenseUrl !== null || adsenseUrl && adsenseUrl !== undefined || adsenseUrl && adsenseUrl?.length > 0 ?
           <script async src={adsenseUrl}
-            crossorigin="anonymous"></script> : null
+            crossOrigin="anonymous"></script> : null
         : null
       }
     </Layout>

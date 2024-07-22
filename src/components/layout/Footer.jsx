@@ -53,7 +53,28 @@ const Footer = () => {
                   <br />
                 </p>
               </div>
-              {process.env.NEXT_PUBLIC_FACEBOOK || process.env.NEXT_PUBLIC_INSTAGRAM || process.env.NEXT_PUBLIC_LINKEDIN || process.env.NEXT_PUBLIC_TWITTER ?
+              {settings?.social_media?.length > 0 ?
+                <div className='footerMediasWrapper'>
+                  <span className='followUs'>{translate('followus')}</span>
+                  <div className='mediaIconsWrapper'>
+                    {
+                      settings?.social_media?.map((data) => {
+                        return <a
+                          target='_blank'
+                          className='btn btn-outline-white'
+                          href={data?.link}
+                          rel='noreferrer'
+                          key={data?.id}
+                        >
+                          <img src={data?.image} alt="social-media-icon" className='socialMediaIcon'/>
+                        </a>
+
+                      })
+                    }
+                  </div>
+                </div>
+                : null}
+              {/* {process.env.NEXT_PUBLIC_FACEBOOK || process.env.NEXT_PUBLIC_INSTAGRAM || process.env.NEXT_PUBLIC_LINKEDIN || process.env.NEXT_PUBLIC_TWITTER ?
                 <div className='footerMediasWrapper'>
                   <span className='followUs'>{translate('followus')}</span>
                   <div className='mediaIconsWrapper'>
@@ -99,7 +120,7 @@ const Footer = () => {
                     ) : null}
                   </div>
                 </div>
-                : null}
+                : null} */}
 
             </div>
 
