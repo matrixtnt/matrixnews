@@ -46,41 +46,41 @@ const EditNews = () => {
   const [Video_url, setVideo_url] = useState()
   const languagesData = useSelector(selectLanguages)
   const manageNews = useSelector(selectManageNews)
-  const [url, setUrl] = useState(manageNews.content_value)
+  const [url, setUrl] = useState(manageNews?.content_value)
   const [subCategory, setSubCategory] = useState([])
   const [showsubCategory, setShowsubCategory] = useState(false)
-  const [videoData, setVideoData] = useState(manageNews.content_value)
+  const [videoData, setVideoData] = useState(manageNews?.content_value)
   const [otherUrl, setOtherUrl] = useState(false)
   let { id: language_id } = getLanguage()
   const getLocation = useSelector(settingsData)
   const getLocationData = getLocation?.location_news_mode
   const navigate = useRouter()
 
-  const matchingObject = languagesData.find(obj => obj.id === manageNews.language_id)
+  const matchingObject = languagesData.find(obj => obj.id === manageNews?.language_id)
 
   const [DefaultValue, setDefaultValue] = useState({
-    defualTitle: manageNews.title,
-    defaultMetatitle: manageNews.meta_title,
-    defaultMetaDescription: manageNews.meta_description,
-    defaultMetaKeyword: manageNews.meta_keyword,
-    defaultSlug: manageNews.slug,
-    categorydefault: manageNews.category?.category_name,
-    standardType: manageNews.content_type,
-    contentValue: manageNews.content_value,
-    tagValue: manageNews.tag_name?.split(','),
-    dateValue: manageNews.show_till === '0000-00-00' ? null : new Date(manageNews.show_till),
-    imagedefault: manageNews.image,
-    languageId: manageNews.language_id,
-    categoryID: manageNews.category_id,
-    tagsid: manageNews.tag_id,
-    contentType: manageNews.content_type,
-    multipleImage: manageNews.images,
+    defualTitle: manageNews?.title,
+    defaultMetatitle: manageNews?.meta_title,
+    defaultMetaDescription: manageNews?.meta_description,
+    defaultMetaKeyword: manageNews?.meta_keyword,
+    defaultSlug: manageNews?.slug,
+    categorydefault: manageNews?.category?.category_name,
+    standardType: manageNews?.content_type,
+    contentValue: manageNews?.content_value,
+    tagValue: manageNews?.tag_name?.split(','),
+    dateValue: manageNews?.show_till === '0000-00-00' ? null : new Date(manageNews?.show_till),
+    imagedefault: manageNews?.image,
+    languageId: manageNews?.language_id,
+    categoryID: manageNews?.category_id,
+    tagsid: manageNews?.tag_id,
+    contentType: manageNews?.content_type,
+    multipleImage: manageNews?.images,
     subcategorydefault: manageNews?.sub_category?.subcategory_name,
-    subcategoryID: manageNews.subcategory_id,
+    subcategoryID: manageNews?.subcategory_id,
     languageName: matchingObject.language,
-    descriptionValue: manageNews.description,
-    defualtLocationId: manageNews.location_id,
-    defualtLocation: manageNews.location.location_name
+    descriptionValue: manageNews?.description,
+    defualtLocationId: manageNews?.location_id,
+    defualtLocation: manageNews?.location?.location_name
   })
 
   const handleDate = date => {
@@ -158,7 +158,7 @@ const EditNews = () => {
     if (selectedOption) {
       const contentType = selectedOption.name
 
-      if (contentType !== manageNews.content_type) {
+      if (contentType !== manageNews?.content_type) {
         // Set contentValue to an empty string when the contentType changes
         setDefaultValue((DefaultValue.contentValue = ''))
       }
@@ -301,7 +301,7 @@ const EditNews = () => {
   const getsubcategorybycategory = async () => {
     try {
       const { data } = await getsubcategorybycategoryApi.getsubcategorybycategory({
-        category_id: manageNews.category_id,
+        category_id: manageNews?.category_id,
         language_id: language_id
       })
 
@@ -341,20 +341,20 @@ const EditNews = () => {
       setShowCategory(true)
       setDefaultValue({ ...DefaultValue, languageId: matchingObject.id, languageName: matchingObject.language })
     }
-    if (manageNews.content_type === 'standard_post') {
+    if (manageNews?.content_type === 'standard_post') {
       setDefaultValue({ ...DefaultValue, standardType: translate('stdPostLbl'), contentType: 'standard_post' })
       setShowURl(false)
       setVideoUrl(false)
       setUrl(null)
-    } else if (manageNews.content_type === 'video_youtube') {
+    } else if (manageNews?.content_type === 'video_youtube') {
       setDefaultValue({ ...DefaultValue, standardType: translate('videoYoutubeLbl'), contentType: 'video_youtube' })
       setShowURl(true)
       setVideoUrl(false)
-    } else if (manageNews.content_type === 'video_other') {
+    } else if (manageNews?.content_type === 'video_other') {
       setDefaultValue({ ...DefaultValue, standardType: translate('videoOtherUrlLbl'), contentType: 'video_other' })
       setShowURl(true)
       setVideoUrl(false)
-    } else if (manageNews.content_type === 'video_upload') {
+    } else if (manageNews?.content_type === 'video_upload') {
       setDefaultValue({ ...DefaultValue, standardType: translate('videoUploadLbl'), contentType: 'video_upload' })
       setShowURl(false)
       setVideoUrl(true)
@@ -782,8 +782,8 @@ const EditNews = () => {
                     ) : null}
                     {videoUrl ? (
                       <div className='input_form mb-2 video_url'>
-                        {manageNews.content_type === 'video_upload' ? (
-                          <div className='preview' onClick={() => handleVideoUrl(manageNews.content_value)}>
+                        {manageNews?.content_type === 'video_upload' ? (
+                          <div className='preview' onClick={() => handleVideoUrl(manageNews?.content_value)}>
                             {translate('previewLbl')}
                             <BsFillPlayFill />
                           </div>
@@ -954,7 +954,7 @@ const EditNews = () => {
           // backdrop="static"
           keyboard={false}
           url={Video_url}
-          type_url={manageNews.content_type}
+          type_url={manageNews?.content_type}
         // title={Data[0].title}
         />
       </div>

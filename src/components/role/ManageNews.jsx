@@ -45,6 +45,7 @@ const ManageNews = () => {
   // react query
   const { isLoading, isError, data, error, status } = useQuery({
     queryKey: ['getnews', currentLanguage],
+    staleTime: 0,
     queryFn: getNews,
 
   })
@@ -78,7 +79,7 @@ const ManageNews = () => {
             deleteNewsApi({
               news_id: data.id,
               onSuccess: res => {
-                toast.success(res.message)
+                toast.success('News deleted Successfully')
                 const updatedData = Data.filter(item => item.id !== data.id)
                 setData(updatedData)
               },
@@ -86,7 +87,7 @@ const ManageNews = () => {
                 toast.error(err.message)
               }
             })
-            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000); 
           });
         } catch (e) {
           console.log('Oops errors!');
