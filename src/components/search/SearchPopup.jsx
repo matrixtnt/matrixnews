@@ -119,7 +119,7 @@ const SearchPopup = () => {
               onChange={handleInputChange}
             />
           </div>
-          <button type='submit' className='submit-btn' onClick={() => setSearchValue('')}>
+          <button type='submit' className='submit-btn' onClick={actionSearch}>
             <AiOutlineClose />
           </button>
           <div

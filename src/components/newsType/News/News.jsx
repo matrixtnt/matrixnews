@@ -36,6 +36,8 @@ import Surveys from 'src/components/survey/Surveys.jsx';
 import AdSpaces from '../../view/adSpaces/AdSpaces.jsx';
 import WithoutSeoShare from 'src/components/view/SocialMediaShares/WithoutSeoShare.jsx';
 import SeoShare from 'src/components/view/SocialMediaShares/SeoShare.jsx';
+import { store } from 'src/store/store.js';
+import { SetSearchPopUp } from 'src/store/stateSlice/clickActionSlice.js';
 
 const News = () => {
   let user = getUser();
@@ -244,6 +246,15 @@ const News = () => {
     setViewerIsOpen(false);
   };
 
+  const closeSearchPopUp = () => {
+    store.dispatch(SetSearchPopUp(false))
+  }
+
+  useEffect(() => {
+    closeSearchPopUp()
+  }, [NewsId])
+
+
 
   return (
     <Layout>
@@ -444,8 +455,8 @@ const News = () => {
 
                 <div id='nv-right-section' className='col-lg-4 col-12'>
                   {Data && Data[0]?.category_id ? (
-                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId} 
-                    catSlug={Data && Data[0]?.category_slug}
+                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId}
+                      catSlug={Data && Data[0]?.category_slug}
                     />
                   ) : null}
                   <TagsSection />

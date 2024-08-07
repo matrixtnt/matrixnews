@@ -81,7 +81,7 @@ const Layout = ({ children }) => {
       document.documentElement.style.setProperty('--text-primary-color', settings && settings?.web_setting?.light_text_primary_color)
       document.documentElement.style.setProperty('--text-secondary-color', settings && settings?.web_setting?.light_text_secondary_color)
     }
-  }, [settings,darkThemeMode])
+  }, [settings, darkThemeMode])
 
   // Check if the user is authenticated based on the presence of the token
   const isAuthenticated = userData && userData?.data?.token
@@ -214,9 +214,11 @@ const Layout = ({ children }) => {
     setInterval(() => {
       clearAllSiteData()
       window.location.reload(true);
-    }, 86400000);
+    }, 300000);
   }, [])
 
+
+  // 86400000
 
 
   return (

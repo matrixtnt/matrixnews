@@ -534,12 +534,12 @@ export const getBreakingNews = (
 export const getPages = (
   slug,
 ) => {
-  let { id: language_id } = getLanguage()
+  // let { id: language_id } = getLanguage()
   return {
     url: `${GET_PAGES}`,
     method: 'GET',
     params: {
-      language_id: language_id,
+      // language_id: language_id,
       slug: slug
 
     },

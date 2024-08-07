@@ -31,6 +31,8 @@ import AdSpaces from '../../view/adSpaces/AdSpaces.jsx'
 import toast from 'react-hot-toast'
 import SeoShare from 'src/components/view/SocialMediaShares/SeoShare'
 import WithoutSeoShare from 'src/components/view/SocialMediaShares/WithoutSeoShare'
+import { store } from 'src/store/store'
+import { SetSearchPopUp } from 'src/store/stateSlice/clickActionSlice'
 
 const BreakingNews = () => {
   const [FontSize, setFontSize] = useState(14)
@@ -154,6 +156,14 @@ const BreakingNews = () => {
 
   // Calculate read time
   const readTime = calculateReadTime(text)
+
+  const closeSearchPopUp = () => {
+    store.dispatch(SetSearchPopUp(false))
+  }
+
+  useEffect(() => {
+    closeSearchPopUp()
+  }, [BNid])
 
   return (
     <Layout>

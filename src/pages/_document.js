@@ -14,7 +14,9 @@ const CustomDocument = () => {
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"></link>
       </Head>
 
+      {/* add to any script */}
       <script async src="https://static.addtoany.com/menu/page.js"></script>
+
       <body>
         <Main />
         <NextScript />

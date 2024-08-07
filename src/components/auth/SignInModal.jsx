@@ -317,18 +317,23 @@ const SignInModal = props => {
                 </div>
                 <div className='container px-0' id='social_buttons'>
                   <div className='row'>
-                    <div className='col-lg-6 col-12'>
+                    <div className={`${process.env.NEXT_PUBLIC_FIREBASE_MOBILE_LOGIN === 'true'? 'col-lg-6' : 'col-lg-12'}  col-12`}>
                       <button id='login-social2' type='button' className=' btn ' onClick={signInWithGoogle}>
                         <FaGoogle />
                         <p>{translate('signin-with-google')}</p>
                       </button>
                     </div>
-                    <div className='col-lg-6 col-12'>
-                      <Button id='login-social3' type='button' onClick={e => signInwithPhone(e)}>
-                        <FaMobileAlt />
-                        <p>{translate('signin-with-phone')}</p>
-                      </Button>
-                    </div>
+                    {
+                      process.env.NEXT_PUBLIC_FIREBASE_MOBILE_LOGIN === 'true' &&
+                      <div className='col-lg-6 col-12'>
+                        <Button id='login-social3' type='button' onClick={e => signInwithPhone(e)}>
+                          <FaMobileAlt />
+                          <p>{translate('signin-with-phone')}</p>
+                        </Button>
+                      </div>
+
+                    }
+
                   </div>
                 </div>
               </div>

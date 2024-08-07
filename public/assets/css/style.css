@@ -4172,7 +4172,7 @@ a#social_platforms svg:hover {
   border: none;
 }
 
-.cdbtnReplay {
+.cdbtnReply {
   width: fit-content;
   background-color: var(--primary-color);
   color: #ffffff;
@@ -4183,28 +4183,28 @@ a#social_platforms svg:hover {
   font-weight: 500;
 }
 
-[dir='rtl'] .cdbtnReplay {
+[dir='rtl'] .cdbtnReply {
   right: auto;
   left: 1%;
 }
 
-#cv-replay-propover {
+#cv-reply-propover {
   width: 17rem;
   padding: 0%;
 }
 
-#cv-replay-form {
+#cv-reply-form {
   width: 17rem;
 }
 
-#cdbtnsubReplay {
+#cdbtnsubReply {
   width: 100%;
   background-color: var(--secondary-color);
   color: #ffffff;
   border: none;
 }
 
-#cdbtnsubReplay:hover {
+#cdbtnsubReply:hover {
   width: 100%;
   background-color: var(--primary-color);
   color: #ffffff;
@@ -4216,7 +4216,7 @@ a#social_platforms svg:hover {
   flex-direction: row;
 }
 
-/* ---------------------------------- replay comments ---------------------------------------------- */
+/* ---------------------------------- reply comments ---------------------------------------------- */
 
 #cv-Rcomment {
   display: flex;
@@ -5893,15 +5893,16 @@ span {
   margin-top: 10px;
   object-fit: cover;
   width: 100%;
+  height: 120px;
   aspect-ratio: unset;
   margin: 40px 0px;
 }
 
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .ad_spaces .adimage {
     height: auto;
   }
-}
+} */
 
 .message_icon {
   margin-top: 7px;

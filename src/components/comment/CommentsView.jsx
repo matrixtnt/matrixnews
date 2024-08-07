@@ -79,7 +79,7 @@ const CommentsView = props => {
     );
   };
 
-  // set replay comment
+  // set reply comment
   const setreplyComment = (e, id) => {
     e.preventDefault();
     setcommentApi({
@@ -291,8 +291,8 @@ const CommentsView = props => {
                                 overlay={
                                   <Popover id={`popover-positioned-${placement}`} className={`${replied ? 'replyModal' : ''}`}>
                                     <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
-                                    <Popover.Body id='cv-replay-propover'>
-                                      <form id='cv-replay-form' method='post' onSubmit={e => setCommentData(e, element.id)}>
+                                    <Popover.Body id='cv-reply-propover'>
+                                      <form id='cv-reply-form' method='post' onSubmit={e => setCommentData(e, element.id)}>
                                         <textarea
                                           name=''
                                           id='cs-reply-input'
@@ -304,7 +304,7 @@ const CommentsView = props => {
                                           }}
                                           placeholder='Share Your reply...'
                                         ></textarea>
-                                        <button id='cdbtnsubReplay' type='submit' className='btn'>
+                                        <button id='cdbtnsubReply' type='submit' className='btn'>
                                           {translate('submitreply')}
                                         </button>
                                       </form>
@@ -312,7 +312,7 @@ const CommentsView = props => {
                                   </Popover>
                                 }
                               >
-                                <Button id={`${element.id}`} className='cdbtnReplay' onClick={() => setReplied(false)} variant='secondary' ref={replyRef}>
+                                <Button id={`${element.id}`} className='cdbtnReply' onClick={() => setReplied(false)} variant='secondary' ref={replyRef}>
                                   {translate('reply')}
                                 </Button>
                               </OverlayTrigger>
@@ -320,9 +320,9 @@ const CommentsView = props => {
                           ))}
                         </div>
                       </div>
-                      {element.replay.map(ele => (
+                      {element.reply.map(ele => (
                         <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-                          <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='replay comment user news image' />
+                          <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='reply comment user news image' />
                           <div id='cs-Rcard' className='card'>
                             <b>
                               <h5>{ele?.user?.name ? ele?.user?.name : ele?.user?.mobile}</h5>
@@ -374,7 +374,7 @@ const CommentsView = props => {
                                   overlay={
                                     <Popover id={`popover-positioned-${placement}`} className={`${replied ? 'replyModal' : ''}`}>
                                       <Popover.Header as='h3'>{translate('addreplyhere')}</Popover.Header>
-                                      <Popover.Body id='cv-replay-propover'>
+                                      <Popover.Body id='cv-reply-propover'>
                                         <form method='post' onSubmit={e => setreplyComment(e, ele.parent_id)}>
                                           <textarea
                                             name=''
@@ -387,7 +387,7 @@ const CommentsView = props => {
                                             }}
                                             placeholder='Share Your reply...'
                                           ></textarea>
-                                          <button id='cdbtnsubReplay' type='submit' className='btn'>
+                                          <button id='cdbtnsubReply' type='submit' className='btn'>
                                             {translate('submitreply')}
                                           </button>
                                         </form>
@@ -395,7 +395,7 @@ const CommentsView = props => {
                                     </Popover>
                                   }
                                 >
-                                  <Button id={`${element.id}`} className='cdbtnReplay' variant='secondary' onClick={() => setReplied(false)} ref={replyRef}>
+                                  <Button id={`${element.id}`} className='cdbtnReply' variant='secondary' onClick={() => setReplied(false)} ref={replyRef}>
                                     {translate('reply')}
                                   </Button>
                                 </OverlayTrigger>
