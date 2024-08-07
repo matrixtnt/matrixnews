@@ -117,7 +117,7 @@ const MobilesideBar = ({
             </li>
 
             {
-              router === '/' ?
+              router === '/' && languagesData?.length > 1?
                 <li id='Nav-btns'>
                   <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} handleClose={handleClose} />
                 </li> : null}

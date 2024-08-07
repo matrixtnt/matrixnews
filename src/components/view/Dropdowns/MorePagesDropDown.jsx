@@ -46,7 +46,7 @@ const MorePagesDropDown = ({handleClose}) => {
             >
                 <a onClick={(e) => e.preventDefault()}>
                     <span className={`nav-link headerDropdownItem ${router === '/terms-condition' || router === '/privacy-policy' ? 'navLinkActive' : ''}`}>
-                    {translate('morePages')}
+                    {translate('More Pages')}
                         <FaAngleDown />
                     </span>
                 </a>

@@ -210,15 +210,29 @@ const Layout = ({ children }) => {
 
 
   // to clear cache and siteData every 24 hrs 
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     clearAllSiteData()
+  //     window.location.reload(true);
+  //   }, 86400000);
+  // }, [])
+
+  // Function to calculate the time until midnight
+  const calculateTimeToMidnight = () => {
+    const now = new Date()
+    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0)
+    return midnight - now
+  }
+
   useEffect(() => {
-    setInterval(() => {
+    const timeout = setTimeout(() => {
       clearAllSiteData()
-      window.location.reload(true);
-    }, 300000);
+      window.location.reload(true)
+    }, calculateTimeToMidnight())
+
+    return () => clearTimeout(timeout)
   }, [])
 
-
-  // 86400000
 
 
   return (

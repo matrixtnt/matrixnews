@@ -20,6 +20,7 @@ export const userSlice = createSlice({
         loginSuccess: (user, action) => {
             let { data } = action.payload;
             user.data = data;
+            user.isLogin = true
         },
         logoutSuccess: (user) => {
             user = initialState;

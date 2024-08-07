@@ -214,7 +214,7 @@ const WeatherCard = () => {
               <ThemeToggler />
 
               {
-                router.pathname === '/' ? <>
+                router.pathname === '/' && languagesData?.length > 1 ? <>
                   <ul className='language_section'>
                     <li>
                       <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} />

@@ -6,40 +6,36 @@ import cookiesIconLightTheme from '../../../public/assets/images/CookieIcon.svg'
 import cookiesIconDarTheme from '../../../public/assets/images/CookieIconDarkTheme.svg'
 import { useSelector } from 'react-redux';
 import { themeSelector } from 'src/store/reducers/CheckThemeReducer';
-import { isLogin } from 'src/utils';
 import { selectUser } from 'src/store/reducers/userReducer';
 
 const CookiesComponent = () => {
+
   const [showPopup, setShowPopup] = useState(false);
+
+  const [isCookiesAccept, setIsCookiesAccept] = useState(false)
 
   const darkTheme = useSelector(themeSelector)
 
   const userData = useSelector(selectUser)
 
+  const isLogin = userData?.isLogin
+
+  // console.log('isLogin',isLogin)
+
   // console.log('userData => ',userData)
 
 
 
-  useEffect(() => {
-    const consent = Cookies.get('cookie-consent');
-    if (!consent) {
-      setShowPopup(true);
-    }
-  }, []);
 
-   useEffect(() => {
-   const storedUsername = Cookies.get('user-name');
-    if (isLogin) {
-      console.log('cookiesStoredUsername', storedUsername);
-    }
-  }, [isLogin,showPopup]);
 
 
   const expirationDays = 7;
 
   const handleAccept = () => {
     Cookies.set('cookie-consent', 'accepted', { expires: expirationDays });
+
     setShowPopup(false);
+    setIsCookiesAccept(true)
     handleSaveData()
   };
 
@@ -47,8 +43,6 @@ const CookiesComponent = () => {
     Cookies.set('cookie-consent', 'declined', { expires: expirationDays });
     setShowPopup(false);
   };
-
-  if (!showPopup) return null;
 
   const handleSaveData = () => {
     Cookies.set('user-name', userData?.data?.name, { expires: expirationDays })
@@ -58,6 +52,25 @@ const CookiesComponent = () => {
     Cookies.set('user-fcmId', userData?.data?.fcm_id, { expires: expirationDays })
     Cookies.set('user-loginType', userData?.data?.type, { expires: expirationDays })
   }
+
+
+  useEffect(() => {
+    const consent = Cookies.get('cookie-consent');
+    if (!consent) {
+      setShowPopup(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedUsername = Cookies.get('user-name');
+    if (isLogin && isCookiesAccept) {
+      handleSaveData()
+      // console.log('cookiesStoredUsername', storedUsername);
+    }
+  }, [isLogin, showPopup, userData]);
+
+  if (!showPopup) return null;
+
 
 
 
