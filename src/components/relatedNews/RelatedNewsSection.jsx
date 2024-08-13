@@ -28,7 +28,7 @@ const RelatedNewsSection = props => {
         longitude: storedLongitude
       })
       // Filter out elements with the same id as props.Cid
-      const filteredData = data.data.filter(element => element.slug !== props.Nid)
+      const filteredData = data.data.filter(element => element.slug !== props.newsSlug)
       filteredData.sort((a, b) => new Date(b.date) - new Date(a.date));
       return filteredData
     } catch (error) {
@@ -38,7 +38,7 @@ const RelatedNewsSection = props => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['realated-news-section', catid, props.catSlug, props.Nid, location],
+    queryKey: ['realated-news-section', catid, props.catSlug, props.newsSlug, location],
     queryFn: getNewsByCategoryApi
   })
 

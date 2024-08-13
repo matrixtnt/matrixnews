@@ -24,24 +24,6 @@ const MorePages = () => {
 
   const router = useRouter()
 
-  // api call
-  // const getpages = async () => {
-  //   try {
-  //     const { data } = await getpagesApi.getpages({
-  //       language_id: language_id
-  //     })
-  //     return data.data
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // // react query
-  // const { isLoading, data: Data } = useQuery({
-  //   queryKey: ['getPages', currentLanguage],
-  //   queryFn: getpages
-  // })
-
   useEffect(() => {
 
 

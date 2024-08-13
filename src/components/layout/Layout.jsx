@@ -19,8 +19,11 @@ import { getLiveStreamingApi } from 'src/hooks/getliveStreamApi'
 import { useQuery } from '@tanstack/react-query'
 import { checkBreakingNewsData, checkLiveNewsData, checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
 import { AllBreakingNewsApi } from 'src/hooks/allBreakingNewsApi'
-import { clearAllSiteData } from 'src/utils'
+import { clearAllSiteData, placeholderImage, translate } from 'src/utils'
 import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
+import maintenanceModeLight from '../../../public/assets/images/Mantenance_Mode_Light.svg'
+import maintenanceModeDark from '../../../public/assets/images/Mantenance_Mode_Dark.svg'
+import Image from 'next/image'
 
 const Layout = ({ children }) => {
   const settings = useSelector(settingsData)
@@ -31,6 +34,9 @@ const Layout = ({ children }) => {
   const checkNewsData = useSelector(checkNewsDataSelector)
 
   const darkThemeMode = useSelector(themeSelector);
+
+  const maintenanceMode = settings?.maintenance_mode
+  // console.log('maintenanceMode =>', maintenanceMode)
 
 
   const isLiveNewsCallOnce = checkNewsData.data.isLiveNewsApiCallOnce
@@ -237,17 +243,38 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {settings ? (
-        <>
-          <SearchPopup />
-          <TopBar />
-          <Header />
-          <CatNav />
-          <div>{children}</div>
-          {/* <CookiesComponent /> */}
-          <Footer />
-        </>
-      ) : (
+      {settings ? maintenanceMode == '1' ? <div className='under_maintance'>
+        {/* <div className="col-12 text-center"> */}
+        <div>
+          {
+            darkThemeMode ?
+              <Image loading="lazy" src={maintenanceModeDark} alt="underMaintanceImg" width={600} height={600} onError={placeholderImage} /> :
+              <Image loading="lazy" src={maintenanceModeLight} alt="underMaintanceImg" width={600} height={600} onError={placeholderImage} />
+          }
+        </div>
+        <div>
+          <h2>
+            {translate("underMaintance")}
+          </h2>
+        </div>
+        <div>
+          <h2 className='desc'>
+            {translate("pleaseTryagain")}
+          </h2>
+        </div>
+        {/* </div> */}
+      </div> :
+        (
+          <>
+            <SearchPopup />
+            <TopBar />
+            <Header />
+            <CatNav />
+            <div>{children}</div>
+            {/* <CookiesComponent /> */}
+            <Footer />
+          </>
+        ) : (
         <div className='loader-container'>
           <div className='loader'></div>
         </div>

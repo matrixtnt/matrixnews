@@ -384,7 +384,7 @@ a {
 #NewsLogo {
   height: 60px;
   object-fit: contain;
-  width: auto;
+  width: 180px;
 }
 
 /* manu-links and buttons */
@@ -1924,7 +1924,7 @@ a {
   justify-content: center;
 }
 
-.social_media_top a{
+.social_media_top a {
   height: 28px;
   width: 28px;
   display: flex;
@@ -1932,12 +1932,13 @@ a {
   justify-content: center;
   transition: all 0.3s;
 }
-.social_media_top a:hover{
+
+.social_media_top a:hover {
   background-color: var(--primary-color) !important;
   border-radius: 4px;
 }
 
-.social_media_top .socialMediaIcons{
+.social_media_top .socialMediaIcons {
   width: 16px;
   height: 16px;
 }
@@ -3190,7 +3191,9 @@ a#social_platforms svg:hover {
 }
 
 #B_NV-page {
-  padding: 30px 0;
+  /* padding: 30px 0; */
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 #btnB_NVCatagory {
@@ -3897,6 +3900,15 @@ a#social_platforms svg:hover {
   color: var(--text-primary-color);
 }
 
+@media screen and (max-width: 575px) {
+
+  #nv-title,
+  #B_NV-title {
+    font-size: 28px;
+    margin: 20px 0px;
+  }
+}
+
 /* ------------------------------------------------------------------- */
 
 #nv-Header {
@@ -4104,6 +4116,7 @@ a#social_platforms svg:hover {
 #cs-reply-input {
   width: 17rem;
   background-color: #f5f5f5;
+  color: var(--text-primary-color);
 }
 
 
@@ -7849,7 +7862,7 @@ span {
 }
 
 
-.footerMediasWrapper .mediaIconsWrapper .socialMediaIcon{
+.footerMediasWrapper .mediaIconsWrapper .socialMediaIcon {
   width: 16px;
   height: 16px;
 }
@@ -8147,5 +8160,38 @@ span {
 
   .cookiesComponent .btnsWrapper {
     margin-top: 0px;
+  }
+}
+
+
+.under_maintance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  height: 100vh;
+  text-align: center;
+}
+
+.under_maintance .desc {
+  width: 62%;
+  margin: auto;
+}
+
+@media screen and (max-width: 630px) {
+  .under_maintance .desc {
+    width: 100%;
+  }
+}
+
+.under_maintance img {
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .under_maintance img {
+    width: 250px;
+    height: min-content;
   }
 }

@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import { getMorePagesData, loadMorePages } from 'src/store/reducers/MorePagesReducers.js'
 
-const SocialPages = () => {
+const SocialPages = ({ isAboutContactUsPage }) => {
   const router = useRouter()
 
   const [isLoading, setIsLoading] = useState(true)
@@ -60,7 +60,9 @@ const SocialPages = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1)} />
+      <BreadcrumbNav SecondElement={isAboutContactUsPage ? router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1) : translate('More Pages')}
+        ThirdElement={!isAboutContactUsPage ? router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1) : ''}
+      />
       <section className='morePagesSlugPage container'>
         <div className="row">
           <div className="col-12">

@@ -1,9 +1,6 @@
 'use client'
 import { store } from '../store/store'
 
-// access key get from env
-export const access_key = process.env.NEXT_PUBLIC_ACCESS_KEY
-
 // General Api
 export const GET_SETTINGS = 'get_settings'
 export const GET_CATEGORIES = 'get_category'
@@ -11,10 +8,8 @@ export const GET_LIVE_STREAMING = 'get_live_streaming'
 export const GET_SUBCATEGORY_BY_CATEGORY = 'get_subcategory_by_category'
 export const GET_TAG = 'get_tag'
 export const GET_PAGES = 'get_pages'
-export const GET_NOTIFICATIONS = 'get_notification'
 export const GET_VIDEO = 'get_videos'
 export const GET_FEATURE_SECTION = 'get_featured_sections'
-export const GET_FEATURE_SECTION_BY_ID = 'get_featured_section_by_id'
 export const GET_LOCATION = 'get_location'
 export const SET_USER_CATEGORIES = 'set_user_category'
 export const SET_LIKE_DISLIKE = 'set_like_dislike'
@@ -534,12 +529,12 @@ export const getBreakingNews = (
 export const getPages = (
   slug,
 ) => {
-  // let { id: language_id } = getLanguage()
+  let { id: language_id } = getLanguage()
   return {
     url: `${GET_PAGES}`,
     method: 'GET',
     params: {
-      // language_id: language_id,
+      language_id: language_id,
       slug: slug
 
     },

@@ -60,7 +60,12 @@ const BreakingNews = () => {
     }
   };
 
-  const BNid = query.slug
+  const breakingNewsSlug = query.slug
+
+  const [newsViewsIncreament, setNewsViewsIncreament] = useState(false)
+
+
+
   let { id: language_id } = getLanguage()
   let user = getUser()
   const currentLanguage = useSelector(selectCurrentLanguage)
@@ -74,7 +79,7 @@ const BreakingNews = () => {
   }, [])
   useEffect(() => {
     getBreakingNewsApi({
-      slug: BNid,
+      slug: breakingNewsSlug,
       language_id: query.language_id ? query.language_id : currentLanguage.id,
       onSuccess: (res) => {
         const data = res.data[0]
@@ -90,34 +95,37 @@ const BreakingNews = () => {
     })
 
   }, [currentLanguage.id])
+
   useEffect(() => {
   }, [DetailsPageData])
 
-  // // api call
-  // const getBreakingNewsIdApi = async () => {
-  //   try {
-  //     const { data } = await AllBreakingNewsApi.getBreakingNews({
-  //       language_id: language_id,
-  //       slug: query.slug
-  //     })
 
-  //     return data.data ?? null
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  useEffect(() => {
+    console.log('newsViewsIncreament =>', newsViewsIncreament)
+  }, [newsViewsIncreament])
+
 
   // api call
   const setBreakingNewsViewApi = async () => {
-    if (!isLogin()) return false;
-    try {
-      const { data } = await AllBreakingNewsApi.setBreakingNewsView({
-        user_id: user,
-        breaking_news_id: BNid
-      })
+    if (isLogin() && DetailsPageData) {
 
-      return data.data ?? null
-    } catch (error) {
+      try {
+        const { data } = await AllBreakingNewsApi.setBreakingNewsView({
+          user_id: user,
+          breaking_news_id: DetailsPageData?.id
+        })
+
+        if (data?.error === false) {
+          setNewsViewsIncreament(true)
+          console.log('data.error =>', data.error)
+        }
+        else {
+          console.log('data.error =>', data.error)
+        }
+
+        return data.data ?? null
+      } catch (error) {
+      }
     }
   }
 
@@ -133,14 +141,9 @@ const BreakingNews = () => {
     }
   }
 
-  // react query
-  // const { isLoadinggg, dataaa, refetch } = useQuery({
-  //   queryKey: ['breakingNewsById', BNid, user, language_id, currentLanguage],
-  //   queryFn: getBreakingNewsIdApi
-  // })
 
   const { } = useQuery({
-    queryKey: ['setBreakingNewsView', BNid, user, currentLanguage],
+    queryKey: ['setBreakingNewsView', DetailsPageData, user, currentLanguage],
     queryFn: setBreakingNewsViewApi
   })
 
@@ -163,7 +166,7 @@ const BreakingNews = () => {
 
   useEffect(() => {
     closeSearchPopUp()
-  }, [BNid])
+  }, [breakingNewsSlug])
 
   return (
     <Layout>
@@ -212,7 +215,7 @@ const BreakingNews = () => {
                           <div id='B_NV-Header' className=''>
                             <div id='nv-left-head'>
                               <p id='head-lables' className='eye_icon'>
-                                <AiOutlineEye size={18} id='head-logos' /> {DetailsPageData && DetailsPageData?.total_views}
+                                <AiOutlineEye size={18} id='head-logos' /> {newsViewsIncreament ? DetailsPageData?.total_views + 1 : DetailsPageData?.total_views}
                               </p>
                               <p id='head-lables' className='minute_Read'>
                                 <BiTime size={18} id='head-logos' />

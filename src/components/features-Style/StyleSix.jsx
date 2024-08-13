@@ -74,7 +74,6 @@ const StyleSix = ({ Data, }) => {
 
   const getFeatureSectionById = async () => {
     try {
-      // const { data } = await getFeatureSectionApi.getFeatureSectionById({
       const { data } = await getFeatureSectionApi.getFeatureSection({
         section_id: Data?.id,
         language_id: language_id,

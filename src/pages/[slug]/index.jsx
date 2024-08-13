@@ -37,7 +37,7 @@ const Index = ({ seoData, currentURL }) => {
         pathName={currentURL}
         schema={schema}
       />
-      <SocialPages />
+      <SocialPages isAboutContactUsPage={true} />
     </>
   )
 }

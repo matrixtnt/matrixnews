@@ -61,20 +61,43 @@ export const laodSettingsApi = ({
     onError = () => { },
     onStart = () => { } }) => {
     const { lastFetch } = store.getState().settings;
-    const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+    const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
     // // If API data is fetched within last 10 minutes then don't call the API again
-    if (diffInMinutes < process.env.NEXT_PUBLIC_LOAD_MIN) return false
-    store.dispatch(apiCallBegan({
-        ...getSettingsApi(type),
-        displayToast: false,
-        onStartDispatch: settingsRequested.type,
-        onSuccessDispatch: settingsSuccess.type,
-        onErrorDispatch: settingsFailed.type,
-        onStart,
-        onSuccess,
-        onError
-    }))
+    if (diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN || isManualRefresh()) {
+        store.dispatch(apiCallBegan({
+            ...getSettingsApi(type),
+            displayToast: false,
+            onStartDispatch: settingsRequested.type,
+            onSuccessDispatch: settingsSuccess.type,
+            onErrorDispatch: settingsFailed.type,
+            onStart,
+            onSuccess,
+            onError
+        }))
+    }
 };
+
+
+// Helper function to check if the page has been manually refreshed
+const isManualRefresh = () => {
+    const manualRefresh = sessionStorage.getItem("manualRefresh");
+    sessionStorage.removeItem("manualRefresh");
+    return manualRefresh === "true";
+};
+
+// Event listener to set manualRefresh flag when page is manually refreshed
+if (typeof window !== 'undefined') {
+    window.addEventListener("load", () => {
+        if (navigator.userAgent.includes("Mozilla")) {
+            // This is likely a manual refresh
+            sessionStorage.setItem("manualRefresh", "true");
+        } else {
+            // This is the initial page load
+            sessionStorage.removeItem("manualRefresh");
+        }
+    });
+}
+
 
 // load location
 export const loadLocation = (lat, long) => {

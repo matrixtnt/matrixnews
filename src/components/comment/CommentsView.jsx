@@ -236,7 +236,7 @@ const CommentsView = props => {
             isLoading ? <Card /> :
               <>
                 {Data &&
-                  Data.map(element => (
+                  Data?.map(element => (
                     <div key={element.id}>
                       <div id='cv-comment' onClick={() => setCommentID(element.id)}>
                         <img id='cs-profile' src={element?.user?.profile} onError={imgError} alt='comment user profile news image' />
@@ -248,7 +248,7 @@ const CommentsView = props => {
                           <p id='cs-card-text' className='card-text'>
                             {element.message}
                           </p>
-                          {['bottom-end'].map(placement => (
+                          {['bottom-end']?.map(placement => (
                             <>
                               <div className='comment_data'>
                                 <div className='comment_like'>
@@ -320,7 +320,7 @@ const CommentsView = props => {
                           ))}
                         </div>
                       </div>
-                      {element.reply.map(ele => (
+                      {element.reply?.map(ele => (
                         <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
                           <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='reply comment user news image' />
                           <div id='cs-Rcard' className='card'>
@@ -330,7 +330,7 @@ const CommentsView = props => {
                             <p id='cs-card-text' className='card-text'>
                               {ele.message}
                             </p>
-                            {['bottom-end'].map(placement => (
+                            {['bottom-end']?.map(placement => (
                               <>
                                 <div className='comment_data'>
                                   <div className='comment_like'>

@@ -191,7 +191,7 @@ const FeatureLayout = () => {
   const selectedComponent = SelectType()
 
   return (
-    <>
+    <div className='d-flex flex-column gap-5 mb-4'>
       {isLoading ? (
         <>
           <StyleTwoSkeleton />
@@ -208,7 +208,7 @@ const FeatureLayout = () => {
           <p className='no_data_available'>{translate('noNews')}</p>
         )
       }
-    </>
+    </div>
   )
 }
 

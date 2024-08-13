@@ -33,7 +33,6 @@ const VideoNewsview = () => {
   // api call
   const getFeatureSectionById = async () => {
     try {
-      // const { data } = await getFeatureSectionApi.getFeatureSectionById({
       const { data } = await getFeatureSectionApi.getFeatureSection({
         language_id: language_id,
         user_id: user,
@@ -66,7 +65,7 @@ const VideoNewsview = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={'Video News'}  />
+      <BreadcrumbNav SecondElement={'Video News'} />
       <div className='py-5 video_section_all'>
         <div className='container'>
           {isLoading ? (

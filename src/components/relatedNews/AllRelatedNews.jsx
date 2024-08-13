@@ -46,7 +46,8 @@ const AllRelatedNews = () => {
       const { data } = await getNewsApi.getNews({
         offset: offset * dataPerPage,
         limit: dataPerPage,
-        category_id: catSlug,
+        // category_id: catSlug,
+        category_slug: catSlug,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude

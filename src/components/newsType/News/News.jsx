@@ -69,7 +69,9 @@ const News = () => {
   const [VideomodalShow, setVideoModalShow] = useState(false);
   const [typeUrl, setTypeUrl] = useState(null);
   const query = router.query;
-  const NewsId = query.slug;
+  const newsSlug = query.slug;
+
+
   // eslint-disable-next-line
   const [islogout, setIsLogout] = useState(false); // eslint-disable-next-line
   const [isloginloading, setisloginloading] = useState(true); // eslint-disable-next-line
@@ -77,6 +79,9 @@ const News = () => {
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false);
+
+  const [newsViewsIncreament, setNewsViewsIncreament] = useState(false)
+
 
   // console.log(query, 'quryy')
 
@@ -86,7 +91,7 @@ const News = () => {
 
       try {
         const { data } = await getNewsApi.getNews({
-          slug: NewsId,
+          slug: newsSlug,
           language_id: query.language_id ? query.language_id : currentLanguage.id
         });
 
@@ -113,15 +118,26 @@ const News = () => {
 
   // api call
   const setNewsView = async () => {
-    if (!isLogin()) return false;
-    try {
-      const { data } = await getNewsApi.setNewsView({
-        news_id: NewsId,
-        language_id: '',
-      });
-      return data.data;
-    } catch (error) {
-      console.log(error);
+    if (isLogin() && Data) {
+      // console.log('setNewsView called')
+      try {
+        const { data } = await getNewsApi.setNewsView({
+          news_id: Data[0]?.id,
+          language_id: '',
+        });
+        // console.log('newViewResponse =>', data.error)
+        if (data?.error === false) {
+          setNewsViewsIncreament(true)
+          console.log('data.error =>', data.error)
+        }
+        else {
+          console.log('data.error =>', data.error)
+
+        }
+        return data.data;
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -151,15 +167,15 @@ const News = () => {
     error,
     status
   } = useQuery({
-    queryKey: ['getNewsbyId', NewsId, currentLanguage.id],
+    queryKey: ['getNewsbyId', newsSlug, currentLanguage.id],
     queryFn: getNewsById,
 
   });
 
   const { } = useQuery({
-    queryKey: ['setNewsView'],
+    queryKey: ['setNewsView', Data],
     queryFn: setNewsView,
-    staleTime: 3000
+    staleTime: 0
   });
 
 
@@ -189,11 +205,11 @@ const News = () => {
   };
 
   // set bookmark
-  const setbookmarkData = async (newsid, status) => {
+  const setbookmarkData = async (id, status) => {
     if (user !== null) {
-      // console.log('newsid: ',newsid,'status:',status)
+      // console.log('id: ',id,'status:',status)
       setbookmarkApi({
-        news_id: newsid,
+        news_id: id,
         status: status,
         onStart: async response => {
           await refetch();
@@ -250,9 +266,16 @@ const News = () => {
     store.dispatch(SetSearchPopUp(false))
   }
 
+
+
   useEffect(() => {
     closeSearchPopUp()
-  }, [NewsId])
+  }, [newsSlug])
+
+
+  useEffect(() => {
+    // console.log('newsViewsIncreament', newsViewsIncreament)
+  }, [newsViewsIncreament])
 
 
 
@@ -294,7 +317,7 @@ const News = () => {
                       </p>
 
                       <p id='head-lables' className='eye_icon'>
-                        <AiOutlineEye size={18} id='head-logos' /> {Data && Data[0]?.total_views}
+                        <AiOutlineEye size={18} id='head-logos' /> {newsViewsIncreament ? Data && Data[0]?.total_views + 1 : Data && Data[0]?.total_views}
                       </p>
                       <p id='head-lables' className='minute_Read'>
                         <BiTime size={18} id='head-logos' />
@@ -455,7 +478,7 @@ const News = () => {
 
                 <div id='nv-right-section' className='col-lg-4 col-12'>
                   {Data && Data[0]?.category_id ? (
-                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} Nid={NewsId}
+                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} newsSlug={newsSlug}
                       catSlug={Data && Data[0]?.category_slug}
                     />
                   ) : null}
