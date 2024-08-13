@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import React from 'react'
-import { AiOutlineDoubleRight } from 'react-icons/ai'
 import { FaHome } from 'react-icons/fa';
 import { translate } from 'src/utils';
 

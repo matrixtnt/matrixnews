@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { laodSettingsApi, settingsData, loadSystemTimezone } from 'src/store/reducers/settingsReducer'
+import { laodSettingsApi, settingsData, loadSystemTimezone, resetSettings } from 'src/store/reducers/settingsReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentLanguage, selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
 import { useRouter } from 'next/router'
@@ -36,7 +36,8 @@ const Layout = ({ children }) => {
   const darkThemeMode = useSelector(themeSelector);
 
   const maintenanceMode = settings?.maintenance_mode
-  // console.log('maintenanceMode =>', maintenanceMode)
+
+  const cookiesMode = settings?.web_setting?.accept_cookie
 
 
   const isLiveNewsCallOnce = checkNewsData.data.isLiveNewsApiCallOnce
@@ -51,7 +52,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     laodSettingsApi({
       onSuccess: res => {
-
+        resetSettings()
       },
       onError: error => {
         console.log(error)
@@ -222,23 +223,7 @@ const Layout = ({ children }) => {
   //     window.location.reload(true);
   //   }, 86400000);
   // }, [])
-
-  // Function to calculate the time until midnight
-  const calculateTimeToMidnight = () => {
-    const now = new Date()
-    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0)
-    return midnight - now
-  }
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      clearAllSiteData()
-      window.location.reload(true)
-    }, calculateTimeToMidnight())
-
-    return () => clearTimeout(timeout)
-  }, [])
-
+  
 
 
   return (
@@ -271,7 +256,10 @@ const Layout = ({ children }) => {
             <Header />
             <CatNav />
             <div>{children}</div>
-            {/* <CookiesComponent /> */}
+            {
+              cookiesMode == '1' &&
+              <CookiesComponent />
+            }
             <Footer />
           </>
         ) : (

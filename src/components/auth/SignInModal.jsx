@@ -313,7 +313,9 @@ const SignInModal = props => {
                       </button>
                     </div>
                   </form>
-                  <div className='bordert mx-3 my-3 py-2'></div>
+                  <div className='ORDiv mx-3 my-3 py-2'>
+                    <span>{translate('or')}</span>
+                  </div>
                 </div>
                 <div className='container px-0' id='social_buttons'>
                   <div className='row'>

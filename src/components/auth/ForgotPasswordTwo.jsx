@@ -118,7 +118,6 @@ const ForgotPasswordTwo = props => {
                       value={formValues.email}
                       onChange={handleChange}
                     />
-                    {/* <p className='error-msg'> {formErrors.email}</p> */}
                   </div>
 
                   <div className='py-3'>

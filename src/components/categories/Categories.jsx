@@ -11,9 +11,6 @@ import { NoDataFound, placeholderImage, translate } from '../../utils'
 import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { useQuery } from '@tanstack/react-query'
 import Layout from '../layout/Layout'
-import Card from '../skeletons/Card'
-
-import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
 import AllCategorySkeleton from '../skeletons/AllCategorySkeleton'
 
