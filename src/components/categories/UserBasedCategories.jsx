@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SwitchButton from 'bootstrap-switch-button-react'
 import { categoriesApi, getuserbyidApi, setusercategoriesApi } from '../../store/actions/campaign'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer'
 import toast from 'react-hot-toast'
@@ -170,7 +170,7 @@ const UserBasedCategories = () => {
                       <div className='manage_card'>
                         <div className='inner_manage'>
                           <div className='manage_image'>
-                            <img src={element.image} alt={element.category_name} />
+                            <img src={element.image} alt={element.category_name} onError={placeholderImage} />
                           </div>
                           <div className='manage_title'>
                             <p className='mb-0'>{element.category_name}</p>
@@ -192,7 +192,7 @@ const UserBasedCategories = () => {
                   ))
                   : null}
               </div>
-              <button className='finalsumit_btn mb-5' onClick={e => finalSubmit(e)}>
+              <button className='finalsumit_btn mb-5 commonBtn' onClick={e => finalSubmit(e)}>
                 {
                   loader ? <Loader /> : translate('saveLbl')
                 }
