@@ -20,8 +20,6 @@ const fetchDataFromSeo = async (slugValue, language_id) => {
 const Index = ({ seoData, currentURL }) => {
   let schema = null
 
-  console.log('seoData =>', seoData)
-
   if (seoData && seoData.data && seoData.data.length > 0 && seoData.data[0].schema_markup) {
     const schemaString = seoData.data[0].schema_markup
     schema = extractJSONFromMarkup(schemaString)

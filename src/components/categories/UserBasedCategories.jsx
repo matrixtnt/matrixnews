@@ -67,7 +67,7 @@ const UserBasedCategories = () => {
 
   useEffect(() => {
     setCatLength(categories?.length)
-    console.log(categories.length, 'cat-length')
+    // console.log(categories.length, 'cat-length')
   }, [catLength, currentLanguage])
 
 

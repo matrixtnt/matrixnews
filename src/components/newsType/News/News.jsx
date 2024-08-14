@@ -333,12 +333,6 @@ const News = () => {
                     ) :
 
                       <WithoutSeoShare url={decodedURL} title={SettingsData && SettingsData?.web_setting?.web_name} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} />
-                      // <div id='nv-right-head'>
-                      //   <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                      //   <button onClick={handleCopyUrl} className='copy_url'>
-                      //     <BsLink45Deg size={30} />
-                      //   </button>
-                      // </div>
                     }
                   </div>
                   <div id='vps-body-left'>

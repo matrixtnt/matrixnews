@@ -101,7 +101,7 @@ const BreakingNews = () => {
 
 
   useEffect(() => {
-    console.log('newsViewsIncreament =>', newsViewsIncreament)
+    // console.log('newsViewsIncreament =>', newsViewsIncreament)
   }, [newsViewsIncreament])
 
 
