@@ -11,7 +11,7 @@ import {
 } from '../../store/actions/campaign';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../store/reducers/userReducer';
-import { imgError, translate, isLogin } from '../../utils';
+import { imgError, translate, isLogin, placeholderImage } from '../../utils';
 import no_image from '../../../public/assets/images/no_image.jpeg';
 import { Modal } from 'antd';
 import { BiDislike, BiDotsVerticalRounded, BiSolidDislike, BiSolidFlag, BiSolidLike, BiSolidTrash } from 'react-icons/bi';
@@ -322,7 +322,7 @@ const CommentsView = props => {
                       </div>
                       {element.reply?.map(ele => (
                         <div id='cv-Rcomment' key={ele.id} onClick={() => setCommentID(ele.id)}>
-                          <img id='cs-profile' src={ele?.user?.profile} onError={imgError} alt='reply comment user news image' />
+                          <img id='cs-profile' src={ele?.user?.profile} onError={imgError ? imgError : placeholderImage} alt='reply comment user news image' />
                           <div id='cs-Rcard' className='card'>
                             <b>
                               <h5>{ele?.user?.name ? ele?.user?.name : ele?.user?.mobile}</h5>

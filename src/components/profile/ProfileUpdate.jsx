@@ -143,14 +143,14 @@ const ProfileUpdate = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-md-6'>
-              <img className='create-img' src={profilesvg.src} alt='profile' onError={placeholderImage}/>
+              <img className='create-img' src={profilesvg.src} alt='profile' onError={placeholderImage} />
             </div>
             <div className='col-md-6'>
               <div className='profile_content'>
                 <div className='prop__image'>
                   <img
                     src={userData.data && userData.data.profile ? userData.data.profile : usersvg.src}
-                    onError={profileimgError}
+                    onError={profileimgError ? profileimgError : placeholderImage}
                     alt='profile'
                     id='user_profile'
                   />

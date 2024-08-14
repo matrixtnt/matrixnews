@@ -337,26 +337,26 @@ export const getuserbyidApi = ({
 
 
 // // GET PRODUCTS
-export const GetCommentsApi = ({
-  news_id = '',
-  offset = '',
-  limit = '',
-  onSuccess = () => { },
-  onError = () => { },
-  onStart = () => { } }) => {
-  store.dispatch(
-    apiCallBegan({
-      ...getComments(
-        news_id,
-        offset,
-        limit),
-      displayToast: false,
-      onStart,
-      onSuccess,
-      onError,
-    })
-  );
-};
+// export const GetCommentsApi = ({
+//   news_id = '',
+//   offset = '',
+//   limit = '',
+//   onSuccess = () => { },
+//   onError = () => { },
+//   onStart = () => { } }) => {
+//   store.dispatch(
+//     apiCallBegan({
+//       ...getComments(
+//         news_id,
+//         offset,
+//         limit),
+//       displayToast: false,
+//       onStart,
+//       onSuccess,
+//       onError,
+//     })
+//   );
+// };
 
 
 // 19. 

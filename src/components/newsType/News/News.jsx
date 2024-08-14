@@ -128,10 +128,10 @@ const News = () => {
         // console.log('newViewResponse =>', data.error)
         if (data?.error === false) {
           setNewsViewsIncreament(true)
-          console.log('data.error =>', data.error)
+          // console.log('data.error =>', data.error)
         }
         else {
-          console.log('data.error =>', data.error)
+          // console.log('newsView Err =>', data.error)
 
         }
         return data.data;
@@ -399,7 +399,7 @@ const News = () => {
                             className='btn'
                             onClick={() => setbookmarkData(Data && Data[0]?.id, !Bookmark ? 1 : 0)}
                           >
-                            {Bookmark ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
+                            {Data[0].bookmark !== 0 ? <BsFillBookmarkFill size={23} /> : <BsBookmark size={23} />}
                           </button>
                           <p id='nv-function-text'>{translate('saveLbl')}</p>
                         </div>

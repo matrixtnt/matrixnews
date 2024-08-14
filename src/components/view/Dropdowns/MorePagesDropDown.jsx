@@ -18,17 +18,28 @@ const MorePagesDropDown = ({ handleClose }) => {
     useEffect(() => {
 
         loadMorePages({
+
             onSuccess: (res) => {
                 setData(res.data)
                 setIsLoading(false)
+                // console.log('morePages Res =>', res)
             },
             onError: (err) => {
-                console.log(err)
+                console.log('morePages =>', err)
+                setData([])
                 setIsLoading(false)
 
             }
         })
+
     }, [currentLanguage])
+
+    useEffect(() => {
+
+    }, [Data])
+
+
+
 
     const router = usePathname();
 
@@ -54,6 +65,7 @@ const MorePagesDropDown = ({ handleClose }) => {
     }));
 
     return (
+        Data?.length > 0 &&
         <div>
             <Dropdown
                 menu={{
@@ -63,7 +75,7 @@ const MorePagesDropDown = ({ handleClose }) => {
             >
                 <a onClick={(e) => e.preventDefault()}>
                     <span className={`nav-link headerDropdownItem ${router === '/terms-condition' || router === '/privacy-policy' ? 'navLinkActive' : ''}`}>
-                       { translate('More Pages')}
+                        {translate('More Pages')}
                         <FaAngleDown />
                     </span>
                 </a>

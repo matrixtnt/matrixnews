@@ -4,11 +4,11 @@ import { GET_QUESTION_RESULT } from 'src/utils/api'
 
 export const getQuestionApi = {
     getQuestion: requestData => {
-        const { language_id, user_id } = requestData
+        const { language_id } = requestData
         return Api.get(GET_QUESTION, {
             params: {
                 language_id,
-                user_id,
+                // user_id,
             }
         })
     },

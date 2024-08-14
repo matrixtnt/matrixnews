@@ -14,9 +14,9 @@ export const AllBreakingNewsApi = {
     })
   },
   setBreakingNewsView: requestData => {
-    const { user_id, breaking_news_id } = requestData
+    const { breaking_news_id } = requestData
     return Api.post(SET_BREAKING_NEWS_VIEW, {
-      user_id,
+      // user_id,
       breaking_news_id
     })
   }

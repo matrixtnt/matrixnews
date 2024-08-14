@@ -134,12 +134,12 @@ export const getLanguageJsonDataApi = (code) => {
 
 // 5. set bookmark
 export const setBookmarkApi = (news_id, status) => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${SET_BOOKMARK}`,
     method: 'POST',
     data: {
-      user_id: user,
+      // user_id: user,
       news_id: news_id,
       status: status //1-bookmark, 0-unbookmark
     },
@@ -165,12 +165,12 @@ export const setCommentApi = (parent_id, news_id, message) => {
 
 // 7. delete comment
 export const deleteCommentApi = comment_id => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${DELETE_COMMENT}`,
     method: 'POST',
     data: {
-      user_id: user,
+      // user_id: user,
       comment_id: comment_id
     },
     authorizationHeader: true
@@ -179,12 +179,12 @@ export const deleteCommentApi = comment_id => {
 
 // 8. set likedislike
 export const setLikeDisLikeApi = (news_id, status) => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${SET_LIKE_DISLIKE}`,
     method: 'POST',
     data: {
-      user_id: user,
+      // user_id: user,
       news_id: news_id,
       status: status // 1=like, 2=dislike, 0=none
     },
@@ -194,12 +194,12 @@ export const setLikeDisLikeApi = (news_id, status) => {
 
 // 9. get user notification
 export const getUserNotificationApi = (offset, limit) => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${GET_USER_NOTIFICATION}`,
     method: 'GET',
     params: {
-      user_id: user,
+      // user_id: user,
       offset: offset,
       limit: limit
     },
@@ -221,12 +221,12 @@ export const DeleteUserNotificationApi = id => {
 
 // 11. set user categories
 export const setUserCategoriesApi = category_id => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${SET_USER_CATEGORIES}`,
     method: 'POST',
     data: {
-      user_id: user,
+      // user_id: user,
       category_id: category_id
     },
     authorizationHeader: true
@@ -357,12 +357,12 @@ export const getsubcategorybycategoryApi = category_id => {
 // 18. set comment like dislike
 export const set_comment_like_dislike_Api = (comment_id, status) => {
   let { id: language_id } = getLanguage()
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${SET_COMMENT_LIKE_DISLIKE}`,
     method: 'POST',
     data: {
-      user_id: user,
+      // user_id: user,
       comment_id: comment_id,
       status: status, // 1=like, 2=dislike, 0=none
       language_id: language_id
@@ -373,13 +373,13 @@ export const set_comment_like_dislike_Api = (comment_id, status) => {
 
 // 19. set flag
 export const set_flag_Api = (comment_id, news_id, message) => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${SET_FLAG}`,
     method: 'POST',
     data: {
       comment_id: comment_id,
-      user_id: user,
+      // user_id: user,
       news_id: news_id, // 1=like, 2=dislike, 0=none
       message: message
     },
@@ -389,12 +389,12 @@ export const set_flag_Api = (comment_id, news_id, message) => {
 
 // 20. acccount delete
 export const accountdeleteApi = () => {
-  let user = getUser()
+  // let user = getUser()
   return {
     url: `${DELETE_ACCOUNT}`,
     method: 'POST',
     data: {
-      user_id: user
+      // user_id: user
     },
     authorizationHeader: true
   }

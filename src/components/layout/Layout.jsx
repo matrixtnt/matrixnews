@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { laodSettingsApi, settingsData, loadSystemTimezone, resetSettings } from 'src/store/reducers/settingsReducer'
+import { laodSettingsApi, settingsData, loadSystemTimezone, } from 'src/store/reducers/settingsReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentLanguage, selectCurrentLanguageLabels } from 'src/store/reducers/languageReducer'
 import { useRouter } from 'next/router'
@@ -52,7 +52,6 @@ const Layout = ({ children }) => {
   useEffect(() => {
     laodSettingsApi({
       onSuccess: res => {
-        resetSettings()
       },
       onError: error => {
         console.log(error)
@@ -223,13 +222,12 @@ const Layout = ({ children }) => {
   //     window.location.reload(true);
   //   }, 86400000);
   // }, [])
-  
+
 
 
   return (
     <>
       {settings ? maintenanceMode == '1' ? <div className='under_maintance'>
-        {/* <div className="col-12 text-center"> */}
         <div>
           {
             darkThemeMode ?
@@ -238,7 +236,7 @@ const Layout = ({ children }) => {
           }
         </div>
         <div>
-          <h2>
+          <h2 className='title'>
             {translate("underMaintance")}
           </h2>
         </div>

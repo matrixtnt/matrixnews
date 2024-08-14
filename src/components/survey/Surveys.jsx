@@ -24,7 +24,7 @@ const Surveys = () => {
         try {
             const { data } = await getQuestionApi.getQuestion({
                 language_id: language_id,
-                user_id: user,
+                // user_id: user,
             });
             return data.data;
         } catch (error) {

@@ -153,6 +153,8 @@ const Header = () => {
     setShow(true)
   }
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const onClickHandler = e => {
     const target = e.currentTarget
     const parentEl = target.parentElement
@@ -174,6 +176,7 @@ const Header = () => {
           slideToggle(child, 1000)
         }
       })
+      setIsMenuOpen(!isMenuOpen);
     }
   }
 
@@ -415,6 +418,7 @@ const Header = () => {
                 logout={logout}
                 deleteAccount={deleteAccount}
                 onClickHandler={onClickHandler}
+                isMenuOpen={isMenuOpen}
                 // Data={Data}
                 modalShow={modalShow}
                 setModalShow={setModalShow}

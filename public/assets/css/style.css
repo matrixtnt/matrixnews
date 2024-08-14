@@ -8215,9 +8215,13 @@ span {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 20px;
   height: 100vh;
   text-align: center;
+}
+
+[data-bs-theme="dark"] .under_maintance .title {
+  margin-top: 30px;
 }
 
 .under_maintance .desc {

@@ -55,7 +55,7 @@ const Notification = () => {
       const { data } = await getNotificationsApi.getUserNotification({
         offset: offset * dataPerPage,
         limit: dataPerPage,
-        user_id: user
+        // user_id: user
       });
       setTotalData(data.total)
       setIsLoading({ loading: false })

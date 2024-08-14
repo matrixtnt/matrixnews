@@ -111,7 +111,7 @@ const BreakingNews = () => {
 
       try {
         const { data } = await AllBreakingNewsApi.setBreakingNewsView({
-          user_id: user,
+          // user_id: user,
           breaking_news_id: DetailsPageData?.id
         })
 

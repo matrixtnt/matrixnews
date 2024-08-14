@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaAngleDown } from "react-icons/fa6";
 
-import { translate, truncateText } from 'src/utils';
+import { placeholderImage, translate, truncateText } from 'src/utils';
 
 const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgError, handleClose, deleteAccount, userRole }) => {
 
@@ -107,7 +107,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
                         <img
                             className='profile_photo'
                             src={userData.data && userData.data.profile ? userData.data.profile : profileimg}
-                            onError={profileimgError}
+                            onError={profileimgError ? profileimgError : placeholderImage}
                             alt='profile'
                         />
                         <span className='userName'>{truncateText(userName, 10)}</span>

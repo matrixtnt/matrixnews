@@ -11,7 +11,7 @@ import {
   selectLanguages,
   setCurrentLanguage
 } from '../../store/reducers/languageReducer'
-import { FaAngleDown } from 'react-icons/fa'
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { getUserManageData, selectUser } from '../../store/reducers/userReducer'
 import { settingsData } from '../../store/reducers/settingsReducer'
@@ -40,6 +40,7 @@ const MobilesideBar = ({
   setIsLogout,
   handleShow,
   show,
+  isMenuOpen,
   handleClose,
   ProfileModal,
   ...props
@@ -117,7 +118,7 @@ const MobilesideBar = ({
             </li>
 
             {
-              router === '/' && languagesData?.length > 1?
+              router === '/' && languagesData?.length > 1 ?
                 <li id='Nav-btns'>
                   <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} handleClose={handleClose} />
                 </li> : null}
@@ -149,8 +150,8 @@ const MobilesideBar = ({
                 <AiOutlineSearch size={23} />
               </div>
             </li>
-            <li  id='Nav-btns'>
-            <ThemeToggler />
+            <li id='Nav-btns'>
+              <ThemeToggler />
             </li>
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -250,7 +251,8 @@ const MobilesideBar = ({
                       </p>
                     </b>
                     <i className=''>
-                      <FaAngleDown />
+                      {/* <FaAngleDown /> */}
+                      {!isMenuOpen ? <FaAngleUp /> : <FaAngleDown />}
                     </i>
                   </span>
                 ) : null}
