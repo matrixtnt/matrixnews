@@ -8028,6 +8028,13 @@ span {
   --highlight-color: #ffffff00;
 }
 
+[data-bs-theme="light"] .react-loading-skeleton,
+[data-bs-theme="light"] .react-loading-skeleton::after {
+  background-color: #6c757d17 !important;
+  --base-color: #6c757d00;
+  --highlight-color: #cccccc03;
+}
+
 /* ================================================================================================================ */
 
 /* style skeletons css  */
