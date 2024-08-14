@@ -239,7 +239,7 @@ const SignInModal = props => {
       >
         <div className='ModalWrapper' id='ModalWrapper'>
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
-            <img className='ModalImg' src={photo.src} alt='login image' />
+            <img className='ModalImg' src={photo.src} alt='login image' onError={placeholderImage}/>
             <div className='logo-img-overlay'>
               <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo1' onError={placeholderImage} />
             </div>

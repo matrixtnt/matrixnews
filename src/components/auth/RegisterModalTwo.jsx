@@ -6,7 +6,7 @@ import { eyeSlash } from 'react-icons-kit/fa/eyeSlash'
 import Modal from 'react-bootstrap/Modal'
 import { useRouter } from 'next/navigation'
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { useSelector } from 'react-redux'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
@@ -192,9 +192,10 @@ const RagisterModalTwo = props => {
       >
         <div className='ModalWrapper' id='ModalWrapper22'>
           <div style={{ width: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img3'>
-            <img className='ModalImg3' src={photo.src} alt='register image' />
+            <img className='ModalImg3' src={photo.src} alt='register image' onError={placeholderImage}/>
             <div className='logo-img-overlay'>
-              <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo3' />
+              <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo3' 
+              onError={placeholderImage} />
             </div>
           </div>
 

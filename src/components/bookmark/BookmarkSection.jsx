@@ -139,7 +139,7 @@ const BookmarkSection = () => {
               // Show "No data found" message if no data is available
               <div className='col-12 no_data mt-5'>
                 <div id='bs-no-main'>
-                  <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' />
+                  <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' onError={placeholderImage}/>
                   <p id='bs-no-title'>
                     <b>{translate('addbookmark')}</b>
                   </p>

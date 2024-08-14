@@ -1,7 +1,4 @@
 'use client'
-import Link from 'next/link'
-import { placeholderImage, translate, truncateText } from '../../utils'
-import Skeleton from 'react-loading-skeleton'
 import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import { locationData } from 'src/store/reducers/settingsReducer'
@@ -86,13 +83,13 @@ const AllRelatedNews = () => {
   return (
     <Layout>
       <>
-        <BreadcrumbNav SecondElement={'Related News'} ThirdElement={7} />
+        <BreadcrumbNav SecondElement={'Related News'} ThirdElement={catSlug} />
         <div id='BNV-main' className='mb-5'>
           <div id='BNV-content' className='container'>
             {isLoading.loading ? (
               <div className='row'>
-                {[...Array(3)].map((_, index) => (
-                  <div className='col-md-4 col-12' key={index}>
+                {[...Array(4)].map((_, index) => (
+                  <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
                     <Card isLoading={true} />
                   </div>
                 ))}
@@ -101,7 +98,7 @@ const AllRelatedNews = () => {
               <div className='row commonRowGap'>
                 {viewAllData && viewAllData ? (
                   viewAllData && viewAllData.map(element => (
-                    <div className='col-md-4 col-12' key={element.id}>
+                    <div className='col-md-4 col-lg-3 col-sm-6 col-12' key={element.id}>
                       <NewsCard element={element} />
                     </div>
                   ))

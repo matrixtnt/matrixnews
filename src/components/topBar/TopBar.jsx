@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react'
 import { loadLocation, locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
 import { registerFcmTokenApi } from 'src/store/actions/campaign'
-import { isLogin, translate } from 'src/utils'
+import { isLogin, placeholderImage, translate } from 'src/utils'
 import { useRouter } from 'next/router'
 import LanguageDropdown from '../view/Dropdowns/LanguagesDropdown'
 import { checkLocationPermission, checkNotificationPermission, checkPermissionsSelector, isLocationPermissionCheck, isNotificationPermissionCheck } from 'src/store/reducers/CheckPermissionsReducer'
@@ -189,7 +189,7 @@ const WeatherCard = () => {
               ) : (
                 weather && weatherMode === '1' && (
                   <>
-                    <img src={weather && weather?.current?.condition?.icon} alt='weather news' className='weather_icon' />
+                    <img src={weather && weather?.current?.condition?.icon} alt='weather news' className='weather_icon' onError={placeholderImage}/>
                     <b className='me-2'>{weather && weather?.current?.temp_c}°C</b>
                     <div className='left-state'>
                       <p className='location-wcard mb-0 '>
@@ -236,57 +236,11 @@ const WeatherCard = () => {
                         rel='noreferrer'
                         key={data?.id}
                       >
-                        <img src={data?.image} alt="social-media-icon" className='socialMediaIcons' />
+                        <img src={data?.image} alt="social-media-icon" className='socialMediaIcons' onError={placeholderImage}/>
                       </a>
                     }) : null
                 }
               </div>
-              {/* <div className='social_media_top'>
-                {process.env.NEXT_PUBLIC_FACEBOOK ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='me-2'
-                    href={process.env.NEXT_PUBLIC_FACEBOOK}
-                    rel='noreferrer'
-                  >
-                    <FaFacebookSquare />
-                  </a>
-                ) : null}
-                {process.env.NEXT_PUBLIC_INSTAGRAM ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='me-2'
-                    href={process.env.NEXT_PUBLIC_INSTAGRAM}
-                    rel='noreferrer'
-                  >
-                    <FaInstagram />
-                  </a>
-                ) : null}
-                {process.env.NEXT_PUBLIC_LINKEDIN ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className='me-2'
-                    href={process.env.NEXT_PUBLIC_LINKEDIN}
-                    rel='noreferrer'
-                  >
-                    <FaLinkedin />
-                  </a>
-                ) : null}
-                {process.env.NEXT_PUBLIC_TWITTER ? (
-                  <a
-                    target='_blank'
-                    id='social_platforms'
-                    className=''
-                    href={process.env.NEXT_PUBLIC_TWITTER}
-                    rel='noreferrer'
-                  >
-                    <FaSquareXTwitter />
-                  </a>
-                ) : null}
-              </div> */}
             </div>
           </div>
         </div>

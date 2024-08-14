@@ -60,8 +60,8 @@ const SocialPages = ({ isAboutContactUsPage }) => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={isAboutContactUsPage ? router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1) : translate('More Pages')}
-        ThirdElement={!isAboutContactUsPage ? router?.query?.slug.charAt(0).toUpperCase() + router.query.slug.slice(1) : ''}
+      <BreadcrumbNav SecondElement={isAboutContactUsPage ? router?.query?.slug : translate('More Pages')}
+        ThirdElement={!isAboutContactUsPage ? router?.query?.slug : ''}
       />
       <section className='morePagesSlugPage container'>
         <div className="row">

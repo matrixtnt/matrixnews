@@ -72,7 +72,7 @@ const Header = () => {
   const settings = useSelector(settingsData)
 
   const checkNewsData = useSelector(checkNewsDataSelector);
-  
+
   const darkThemeMode = useSelector(themeSelector);
 
   // language change
@@ -120,7 +120,7 @@ const Header = () => {
   const logout = async () => {
     confirm({
       title: 'Logout',
-      content: 'Are you sure you want to log out?',
+      content: translate('logoutTxt'),
       centered: true,
       async onOk() {
         try {

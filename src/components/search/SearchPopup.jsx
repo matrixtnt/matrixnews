@@ -5,7 +5,7 @@ import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import { useRouter } from 'next/navigation'
 import { AiOutlineClose } from 'react-icons/ai'
-import { truncateText } from '../../utils'
+import { placeholderImage, truncateText } from '../../utils'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -143,7 +143,7 @@ const SearchPopup = () => {
                         as={`/news/${element.slug}`}
                       >
                         <div id='ts-card' className='card'>
-                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} />
+                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
                           <div id='ts-card-body' className='card-body'>
                             <h5 id='ts-card-title' className='card-title'>
                               {truncateText(element.title, 150)}

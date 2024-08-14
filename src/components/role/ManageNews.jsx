@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { deleteNewsApi } from '../../store/actions/campaign'
 import { useSelector } from 'react-redux'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { useRouter } from 'next/navigation'
 import { loadManageToEdit } from '../../store/reducers/createNewsReducer'
@@ -129,6 +129,7 @@ const ManageNews = () => {
                               <img
                                 src={element.image}
                                 alt='manage news'
+                                onError={placeholderImage}
                               />
                             </div>
 

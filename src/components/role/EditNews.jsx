@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
@@ -569,7 +569,7 @@ const EditNews = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-md-7 col-12'>
-              <img className='edit-img' src={managenewsimage.src} alt='create news' />
+              <img className='edit-img' src={managenewsimage.src} alt='create news' onError={placeholderImage}/>
             </div>
 
             <div className='col-md-5 col-12'>
@@ -876,6 +876,7 @@ const EditNews = () => {
                             src={DefaultValue.imagedefault}
                             onClick={() => document.getElementById('file').click()}
                             alt='edit news'
+                            onError={placeholderImage}
                           />
                         </div>
                       )}

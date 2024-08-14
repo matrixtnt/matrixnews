@@ -108,13 +108,16 @@ const CategoryNews = () => {
   return (
     <Layout>
       <section className='categoryview_Section'>
-        <BreadcrumbNav SecondElement={'category'} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories" />
+        {
+          CurrentCategoryName &&
+          <BreadcrumbNav SecondElement={'category'} ThirdElement={CurrentCategoryName && CurrentCategoryName} link="/all-categories" />
+        }
         <div id='cv-main' className='bg-white py-3'>
           <div id='cv-content' className='my-5 container'>
             {isLoading.loading ? (
               <div className='row'>
-                {[...Array(3)].map((_, index) => (
-                  <div className='col-md-4 col-12' key={index}>
+                {[...Array(4)].map((_, index) => (
+                  <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
                     <Card isLoading={true} />
                   </div>
                 ))}
@@ -123,28 +126,7 @@ const CategoryNews = () => {
               <div className='row commonRowGap'>
                 {categoriesNewsData && categoriesNewsData?.length > 0 ? (
                   categoriesNewsData.map(element => (
-                    <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                      {/* <Link
-                        id='Link-all'
-                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                        as={`/news/${element.slug}`}
-                      >
-                        <div id='cv-card' className='card'>
-                          <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
-                          <div id='cv-card-body' className='card-body'>
-                            <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
-                              {element.category.category_name}
-                            </button>
-                            <p id='cv-card-title' className='card-title'>
-                              {element.title}
-                            </p>
-                            <p id='cv-card-date'>
-                              <FiCalendar size={18} id='cv-logoCalendar' />
-                              {formatDate(element.date)}
-                            </p>
-                          </div>
-                        </div>
-                      </Link> */}
+                    <div className='col-lg-3 col-sm-6 col-md-4 col-12 ' key={element.id}>
                       <NewsCard element={element} />
                     </div>
                   ))

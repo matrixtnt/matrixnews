@@ -2999,12 +2999,19 @@ a#social_platforms svg:hover {
   width: 15rem;
 }
 
+[data-bs-theme="dark"] #bs-no-image {
+  filter: invert(0.8);
+}
+
 #bs-no-title {
   font-size: 40px;
+  color: var(--text-primary-color);
 }
 
 #bs-no-text {
   font-size: 20px;
+  font-weight: 500;
+  color: var(--text-secondary-color);
 }
 
 #bs-card {
@@ -4116,7 +4123,7 @@ a#social_platforms svg:hover {
 #cs-reply-input {
   width: 17rem;
   background-color: #f5f5f5;
-  color: var(--text-primary-color);
+  color: #000;
 }
 
 
@@ -7349,13 +7356,15 @@ span {
   box-shadow: 0px 8px 14px hsl(240, 51.3%, 15.3%);
 }
 
-
-
 .catSubCatWrapper .subCatDataWrappper .row {
   padding-top: 20px;
   gap: 12px 0px;
   padding-right: 16px;
   margin-left: -20px;
+}
+
+.catSubCatWrapper .subCatDataWrappper .commonNewsCard {
+  height: 100%;
 }
 
 .catSubCatWrapper .subCatDataWrappper .row #cv-card {
@@ -7382,6 +7391,10 @@ span {
   /* max-height: 610px; */
   overflow-y: auto;
   position: relative;
+}
+
+.catSubCatWrapper .subCatDropdown .no_data_found {
+  height: 24vh;
 }
 
 
@@ -7939,6 +7952,32 @@ span {
 }
 
 
+.commonNewsCard {
+  height: 440px;
+}
+
+/* .commonNewsCard img{
+  height: 400px;
+} */
+
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+  .commonNewsCard {
+    height: 360px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .commonNewsCard {
+    height: 316px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .commonNewsCard {
+    height: 100%;
+  }
+}
+
 .commonNewsCard p {
   padding: 0px 12px;
 }
@@ -8196,7 +8235,7 @@ span {
   }
 }
 
-.ORDiv{
+.ORDiv {
   position: relative;
   margin: auto;
   display: flex;
@@ -8204,14 +8243,14 @@ span {
   justify-content: center;
 }
 
-.ORDiv span{
+.ORDiv span {
   margin: auto;
   display: block;
   color: var(--text-primary-color);
 }
 
 .ORDiv::before,
-.ORDiv::after{
+.ORDiv::after {
   content: '';
   position: absolute;
   width: 44%;
@@ -8219,9 +8258,10 @@ span {
   background-color: var(--text-primary-color);
 }
 
-.ORDiv::before{
+.ORDiv::before {
   left: 0px;
 }
-.ORDiv::after{
+
+.ORDiv::after {
   right: 0px;
 }

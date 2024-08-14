@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
@@ -532,7 +532,7 @@ const CreateNews = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-md-7 col-12'>
-              <img className='create-img' src={createnewsimage.src} alt='create news' />
+              <img className='create-img' src={createnewsimage.src} alt='create news' onError={placeholderImage}/>
             </div>
 
             <div className='col-md-5 col-12'>
@@ -811,7 +811,7 @@ const CreateNews = () => {
                       </label>
                       {DefaultValue.defaultImageData && (
                         <div className='mainimage'>
-                          <img src={DefaultValue.defaultImageData} alt='mainimage' />
+                          <img src={DefaultValue.defaultImageData} alt='mainimage' onError={placeholderImage}/>
                         </div>
                       )}
                       <input

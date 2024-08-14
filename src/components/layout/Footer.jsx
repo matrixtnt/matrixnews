@@ -66,7 +66,7 @@ const Footer = () => {
                           rel='noreferrer'
                           key={data?.id}
                         >
-                          <img src={data?.image} alt="social-media-icon" className='socialMediaIcon'/>
+                          <img src={data?.image} alt="social-media-icon" className='socialMediaIcon' onError={placeholderImage}/>
                         </a>
 
                       })
@@ -74,54 +74,6 @@ const Footer = () => {
                   </div>
                 </div>
                 : null}
-              {/* {process.env.NEXT_PUBLIC_FACEBOOK || process.env.NEXT_PUBLIC_INSTAGRAM || process.env.NEXT_PUBLIC_LINKEDIN || process.env.NEXT_PUBLIC_TWITTER ?
-                <div className='footerMediasWrapper'>
-                  <span className='followUs'>{translate('followus')}</span>
-                  <div className='mediaIconsWrapper'>
-                    {process.env.NEXT_PUBLIC_FACEBOOK ? (
-                      <a
-                        target='_blank'
-                        className='btn btn-outline-white'
-                        href={process.env.NEXT_PUBLIC_FACEBOOK}
-                        rel='noreferrer'
-                      >
-                        <FaFacebookSquare />
-                      </a>
-                    ) : null}
-                    {process.env.NEXT_PUBLIC_INSTAGRAM ? (
-                      <a
-                        target='_blank'
-                        className='btn btn-outline-white'
-                        href={process.env.NEXT_PUBLIC_INSTAGRAM}
-                        rel='noreferrer'
-                      >
-                        <FaInstagram />
-                      </a>
-                    ) : null}
-                    {process.env.NEXT_PUBLIC_LINKEDIN ? (
-                      <a
-                        target='_blank'
-                        className='btn btn-outline-white'
-                        href={process.env.NEXT_PUBLIC_LINKEDIN}
-                        rel='noreferrer'
-                      >
-                        <FaLinkedin />
-                      </a>
-                    ) : null}
-                    {process.env.NEXT_PUBLIC_TWITTER ? (
-                      <a
-                        target='_blank'
-                        className='btn btn-outline-white'
-                        href={process.env.NEXT_PUBLIC_TWITTER}
-                        rel='noreferrer'
-                      >
-                        <FaSquareXTwitter />
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-                : null} */}
-
             </div>
 
             <div className='col-lg-3 col-12 navigationWrapper'>

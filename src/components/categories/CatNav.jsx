@@ -209,36 +209,15 @@ const CatNav = () => {
                                           {
                                             subLoading ? <>
                                               {[...Array(4)].map((_, index) => (
-                                                <div className='col-md-3 col-12' key={index}>
+                                                <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
                                                   <Card catNav={true} />
                                                 </div>
                                               ))}
                                             </> : <>
                                               {currentData && currentData.length > 0 ? (
                                                 currentData.map(element => (
-                                                  <div className='col-lg-3 col-md-4 col-12 ' key={element.id}>
-                                                    {/* <Link
-                                                      id='Link-all'
-                                                      href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                                                      as={`/news/${element.slug}`}
-                                                    >
-                                                      <div id='cv-card' className='card'>
-                                                        <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
-                                                        <div id='cv-card-body' className='card-body'>
-                                                          <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
-                                                            {element.category.category_name}
-                                                          </button>
-                                                          <p id='cv-card-title' className='card-title'>
-                                                            {element.title}
-                                                          </p>
-                                                          <p id='cv-card-date'>
-                                                    <FiCalendar size={18} id='cv-logoCalendar' />
-                                                    {formatDate(element.date)}
-                                                  </p>
-                                                        </div>
-                                                      </div>
-                                                    </Link> */}
-                                                    <NewsCard element={element} subDropCard={true}/>
+                                                  <div className='col-lg-3 col-sm-6 col-md-4 col-12 ' key={element.id}>
+                                                    <NewsCard element={element} subDropCard={true} />
                                                   </div>
                                                 ))
                                               ) : (

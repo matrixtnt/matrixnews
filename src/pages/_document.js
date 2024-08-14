@@ -1,11 +1,10 @@
 // ** React Import
 // ** Next Import
 import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 
 const CustomDocument = () => {
   return (
-    <Html lang='en'>
+    <Html lang='en' version={process?.env?.NEXT_PUBLIC_WEB_VERSION}>
       <Head>
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />

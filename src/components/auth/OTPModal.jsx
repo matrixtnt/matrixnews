@@ -4,7 +4,7 @@ import photo from '../../../public/assets/images/Login.jpg'
 import React, { useEffect, useState } from 'react'
 //otp
 import OTPInput from 'react-otp-input'
-import { translate } from '../../utils'
+import { placeholderImage, translate } from '../../utils'
 
 //firebase
 import FirebaseData from '../../utils/Firebase'
@@ -226,9 +226,11 @@ const OTPModal = props => {
         >
           <div className='ModalWrapper55' id='ModalWrapper'>
             <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img5'>
-              <img className='ModalImg5' src={photo.src} alt='otp modal image' />
+              <img className='ModalImg5' src={photo.src} alt='otp modal image' onError={placeholderImage}/>
               <div className='logo-img-overlay'>
-                <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo5' />
+                <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo5'
+                onError={placeholderImage}
+                 />
               </div>
             </div>
 

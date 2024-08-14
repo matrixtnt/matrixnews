@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux'
 import { getNewsApi } from 'src/hooks/newsApi'
 
 const RelatedNewsSection = props => {
-  const catid = props.Cid
   let { id: language_id } = getLanguage()
   const location = useSelector(locationData)
   const storedLatitude = location && location.lat
@@ -21,7 +20,6 @@ const RelatedNewsSection = props => {
       const { data } = await getNewsApi.getNews({
         offset: '0',
         limit: '10',
-        category_id: catid,
         category_slug: props.catSlug,
         language_id: language_id,
         latitude: storedLatitude,
@@ -38,7 +36,7 @@ const RelatedNewsSection = props => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['realated-news-section', catid, props.catSlug, props.newsSlug, location],
+    queryKey: ['realated-news-section', props.catSlug, props.newsSlug, location],
     queryFn: getNewsByCategoryApi
   })
 
@@ -82,7 +80,7 @@ const RelatedNewsSection = props => {
           {
             Data.length > 4 &&
             <div className='mb-4'>
-              <Link href={`/view-all/related-news/${catid}`}>
+              <Link href={`/view-all/related-news/${props.catSlug}`}>
                 <button className='loadMoreBtn commonBtn'>  {translate('viewall')}</button>
               </Link>
             </div>

@@ -1,8 +1,5 @@
 'use client'
-
-import { FiCalendar } from 'react-icons/fi'
-import Link from 'next/link'
-import { formatDate, placeholderImage, translate, NoDataFound } from '../../utils'
+import { NoDataFound } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getLanguage } from 'src/utils/api'
@@ -15,15 +12,13 @@ import NewsCard from '../view/NewsCard'
 const TagNewsview = () => {
   const router = useRouter()
   const query = router.query
-  const Tid = query.slug
+  const tagSlug = query.slug
   let { id: language_id } = getLanguage()
   // api call
   const getNewsByTag = async () => {
-    console.log(Tid,'tagSlug')
     try {
       const { data } = await getNewsApi.getNews({
-        tag_slug: Tid,
-        // tag_id: Tid,
+        tag_slug: tagSlug,
         language_id: language_id,
       })
       return data
@@ -34,7 +29,7 @@ const TagNewsview = () => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['getNewsByTag', Tid, query],
+    queryKey: ['getNewsByTag', tagSlug, query],
     queryFn: getNewsByTag
   })
 
@@ -55,8 +50,8 @@ const TagNewsview = () => {
           <div className='row'>
             {isLoading ? (
               <div className='row'>
-                {[...Array(3)].map((_, index) => (
-                  <div className='col-md-4 col-12' key={index}>
+                {[...Array(4)].map((_, index) => (
+                  <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
                     <Card isLoading={true} />
                   </div>
                 ))}
@@ -65,34 +60,8 @@ const TagNewsview = () => {
               <>
                 {Data &&
                   Data?.data?.map(element => (
-                    <div className='col-md-4 col-12' key={element.id}>
-                      {/* <Link id='Link-all'
-                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                        as={`/news/${element.slug}`}
-                      >
-                        <div id='ts-card' className='card'>
-                          <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
-
-                          <div id='ts-card-body' className='card-body'>
-                            <div className='tag_button'>
-                              {tagSplit(element.tag_name).map((tag, index) => (
-                                <button className='btn btn-sm tag-button' type='button' key={index}>
-                                  {tag}
-                                </button>
-                              ))}
-                            </div>
-
-                            <h5 id='ts-card-title' className='card-title'>
-                              {element.title.slice(0, 150)}...
-                            </h5>
-                            <p id='ts-card-date'>
-                              <FiCalendar size={18} id='ts-logoCalendar' />
-                              {formatDate(element.date.slice(0, 10))}
-                            </p>
-                          </div>
-                        </div>
-                      </Link> */}
-                      <NewsCard element={element} tagCard={true}/>
+                    <div className='col-md-4 col-lg-3 col-sm-6 col-12' key={element.id}>
+                      <NewsCard element={element} tagCard={true} />
                     </div>
                   ))}
               </>

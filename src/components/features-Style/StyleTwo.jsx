@@ -129,9 +129,9 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[4].type)
                     }}
                   >
-                    <img src={Data.videos[4] && Data.videos[4].image} alt={Data.videos[4] && Data.videos[4].title} />
+                    <img src={Data.videos[4] && Data.videos[4].image} alt={Data.videos[4] && Data.videos[4].title} onError={placeholderImage}/>
                     <div className='video_button'>
-                      <BsFillPlayFill className='pulse' fill='white' size={50} onError={placeholderImage} />
+                      <BsFillPlayFill className='pulse' fill='white' size={50}  />
                     </div>
                     <div className='content'>
                       <p>{Data.videos[4] && Data.videos[4].title}</p>

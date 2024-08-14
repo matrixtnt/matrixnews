@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser, updateProfileData, updateProfileImage } from '../../store/reducers/userReducer'
 import { FaCamera } from 'react-icons/fa'
-import { profileimgError, translate } from '../../utils'
+import { placeholderImage, profileimgError, translate } from '../../utils'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import validator from 'validator'
 import profilesvg from '../../../public/assets/images/Profile.svg'
@@ -143,7 +143,7 @@ const ProfileUpdate = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-md-6'>
-              <img className='create-img' src={profilesvg.src} alt='profile' />
+              <img className='create-img' src={profilesvg.src} alt='profile' onError={placeholderImage}/>
             </div>
             <div className='col-md-6'>
               <div className='profile_content'>
