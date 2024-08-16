@@ -62,6 +62,7 @@ const CreateNews = () => {
     defaultTagName: null,
     defualtContent: null,
     defualtStartDate: null,
+    defualtPublishDate: null,
     defualtUrl: null,
     defaultVideoData: null,
     defaultImageData: null,
@@ -508,6 +509,7 @@ const CreateNews = () => {
       image: DefaultValue.defaultImagefile,
       ofile: images,
       show_till: DefaultValue.defualtStartDate?.toISOString().split('T')[0],
+      published_date: DefaultValue.defualtPublishDate?.toISOString().split('T')[0],
       language_id: createNewsLanguage.id,
       location_id: DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
       onSuccess: response => {
@@ -789,6 +791,18 @@ const CreateNews = () => {
                         todayButton={'Today'}
                         minDate={new Date()}
                         onChange={date => setDefualtValue({ ...DefaultValue, defualtStartDate: date })}
+                      />
+                      <SlCalender className='form-calender' />
+                    </div>
+                    <div className='show_date mb-2'>
+                      <DatePicker
+                        dateFormat='yyyy-MM-dd'
+                        selected={DefaultValue.defualtPublishDate}
+                        placeholderText={translate('publishDate')}
+                        clearButtonTitle
+                        todayButton={'Today'}
+                        minDate={new Date()}
+                        onChange={date => setDefualtValue({ ...DefaultValue, defualtPublishDate: date })}
                       />
                       <SlCalender className='form-calender' />
                     </div>

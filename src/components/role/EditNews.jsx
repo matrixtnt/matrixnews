@@ -69,6 +69,7 @@ const EditNews = () => {
     contentValue: manageNews?.content_value,
     tagValue: manageNews?.tag_name?.split(','),
     dateValue: manageNews?.show_till === '0000-00-00' ? null : new Date(manageNews?.show_till),
+    publishDateValue: manageNews?.published_date === '0000-00-00' ? null : new Date(manageNews?.published_date),
     imagedefault: manageNews?.image,
     languageId: manageNews?.language_id,
     categoryID: manageNews?.category_id,
@@ -85,6 +86,10 @@ const EditNews = () => {
 
   const handleDate = date => {
     setDefaultValue({ ...DefaultValue, dateValue: date })
+  }
+
+  const handlePublishDate = date => {
+    setDefaultValue({ ...DefaultValue, publishDateValue: date })
   }
 
   // other multiple image
@@ -517,6 +522,7 @@ const EditNews = () => {
       show_till: DefaultValue.dateValue.toISOString().split('T')[0],
       language_id: DefaultValue.languageId,
       location_id: DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
+      published_date: DefaultValue.publishDateValue.toISOString().split('T')[0],
       onSuccess: response => {
         toast.success(response.message)
         navigate.push('/manage-news')
@@ -564,12 +570,12 @@ const EditNews = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('editNewsLbl')}  />
+      <BreadcrumbNav SecondElement={translate('editNewsLbl')} />
       <div className='create_news py-5 bg-white'>
         <div className='container'>
           <div className='row'>
             <div className='col-md-7 col-12'>
-              <img className='edit-img' src={managenewsimage.src} alt='create news' onError={placeholderImage}/>
+              <img className='edit-img' src={managenewsimage.src} alt='create news' onError={placeholderImage} />
             </div>
 
             <div className='col-md-5 col-12'>
@@ -841,6 +847,18 @@ const EditNews = () => {
                         todayButton={'Today'}
                         minDate={new Date()}
                         onChange={date => handleDate(date)}
+                      />
+                      <SlCalender className='form-calender' />
+                    </div>
+                    <div className='show_date mb-2'>
+                      <DatePicker
+                        dateFormat='yyyy-MM-dd'
+                        selected={DefaultValue.publishDateValue}
+                        placeholderText={translate('publishDate')}
+                        clearButtonTitle
+                        todayButton={'Today'}
+                        minDate={new Date()}
+                        onChange={date => handlePublishDate(date)}
                       />
                       <SlCalender className='form-calender' />
                     </div>

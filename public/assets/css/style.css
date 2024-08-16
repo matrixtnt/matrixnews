@@ -8218,9 +8218,10 @@ span {
   gap: 20px;
   height: 100vh;
   text-align: center;
+  color: var(--text-primary-color);
 }
 
-[data-bs-theme="dark"] .under_maintance .title {
+.under_maintance .title {
   margin-top: 30px;
 }
 

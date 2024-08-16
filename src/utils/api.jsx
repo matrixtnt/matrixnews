@@ -278,7 +278,8 @@ export const setnewsApi = (
   ofile,
   show_till,
   language_id,
-  location_id
+  location_id,
+  published_date,
 ) => {
   let data = new FormData()
   let createToEdit = store.getState().createNews.createToEdit
@@ -305,6 +306,7 @@ export const setnewsApi = (
     })
   }
   data.append('show_till', show_till)
+  data.append('published_date', published_date)
   data.append('language_id', language_id)
   data.append('location_id', location_id)
 

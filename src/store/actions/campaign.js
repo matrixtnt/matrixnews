@@ -170,6 +170,7 @@ export const setNewsApi = async ({
   show_till = '',
   language_id = '',
   location_id = '',
+  published_date,
   onSuccess = () => { },
   onError = () => { },
   onStart = () => { }
@@ -193,7 +194,8 @@ export const setNewsApi = async ({
         ofile,
         show_till,
         language_id,
-        location_id
+        location_id,
+        published_date
       ),
       displayToast: false,
       onStart,

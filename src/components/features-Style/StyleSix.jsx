@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import Skeleton from 'react-loading-skeleton'
 import { placeholderImage, stripHtmlTags, translate, truncateText } from '../../utils'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useQuery } from '@tanstack/react-query'
 import { getLanguage, getUser } from 'src/utils/api'
@@ -16,6 +16,7 @@ import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
 import StyleSixSkeleton from '../skeletons/StyleSixSkeleton'
+import toast from 'react-hot-toast'
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -30,6 +31,23 @@ const StyleSix = ({ Data, }) => {
   const storedLatitude = location && location.lat
   const storedLongitude = location && location.long
   const router = useRouter()
+
+  const dataPerPage = 6;
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [loadMore, setLoadMore] = useState(false)
+  const [swiperNewsData, setSwiperNewsData] = useState([])
+  const [offset, setOffset] = useState(0)
+  const [totalData, setTotalData] = useState('')
+
+
+  const handleLoadMore = () => {
+    if (totalData > dataPerPage && totalData !== swiperNewsData.length) {
+      setLoadMore(true)
+      setOffset(offset + 1)
+    }
+  }
+
   const Newbreakpoints = {
     320: {
       slidesPerView: 1
@@ -53,6 +71,7 @@ const StyleSix = ({ Data, }) => {
       slidesPerView: 4
     }
   }
+
   const swiperOptionUpdate = {
     loop: false,
     speed: 750,
@@ -63,6 +82,9 @@ const StyleSix = ({ Data, }) => {
     autoplay: {
       delay: 2000000,
       disableOnInteraction: false
+    },
+    onReachEnd: () => {
+      handleLoadMore()
     }
     // pagination: { clickable: true },
   }
@@ -73,24 +95,55 @@ const StyleSix = ({ Data, }) => {
   }
 
   const getFeatureSectionById = async () => {
+
+    !loadMore ? setIsLoading(true) : setIsLoading(false)
+
     try {
       const { data } = await getFeatureSectionApi.getFeatureSection({
+        offset: offset * dataPerPage,
+        limit: dataPerPage,
         section_id: Data?.id,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude
       })
+      setIsLoading(false)
       return data.data
     } catch (error) {
       console.log(error)
+      setSwiperNewsData([])
+      setIsLoading(false)
     }
   }
 
   // react query
   const { data: sliderData } = useQuery({
-    queryKey: ['styleSixFeature', location, Data?.id],
+    queryKey: ['styleSixFeature', location, Data?.id, offset],
     queryFn: getFeatureSectionById
   })
+
+
+
+  useEffect(() => {
+    if (sliderData && sliderData) {
+      loadMore ? setSwiperNewsData((prevData) => [...prevData, ...sliderData[0]?.news]) :
+        setSwiperNewsData(sliderData[0].news);
+    }
+    if (sliderData) {
+
+      setTotalData(sliderData[0]?.news_total)
+    }
+  }, [sliderData])
+
+  useEffect(() => {
+
+  }, [totalData, isLoading])
+
+  useEffect(() => {
+    // console.log('swiperNewsData =>', swiperNewsData)
+  }, [swiperNewsData])
+
+
 
   const TypeUrl = type => {
     setTypeUrl(type)
@@ -204,76 +257,79 @@ const StyleSix = ({ Data, }) => {
       ) : null}
 
       {/* news section */}
-      {sliderData && sliderData[0].news?.length > 0 ? (
-        <div className='container'>
-          <div id='style-six-body-section'>
-            <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
-            <Swiper {...swiperOptionUpdate} className='custom-swiper'>
-              {
+      {
+        isLoading ? <StyleSixSkeleton /> :
+          swiperNewsData?.length > 0 ? (
+            <div className='container'>
 
-                sliderData[0].news.map(item => (
-                  <SwiperSlide key={item.id}>
-                    <Link
-                      href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
-                      as={`/news/${item.slug}`}
-                    >
-                      <div className='card fs-Newscard'>
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className='fs-Newscard-image h-auto'
-                          id='fs-Newscard-image01'
-                          onError={placeholderImage}
-                        />
-                        <div className='card-img-overlay'>
-                          <div
-                            id='btnCatagory'
-                            className='btn'
-                          // onClick={() =>
-                          //   router.push({
-                          //     pathname: `/categories-news/${item.slug}`,
-                          //     query: { category_id: item.id }
-                          //   })
-                          // }
-                          >
-                            {truncateText(item.category_name, 25)}
-                          </div>
-                          <div id='Top-Deatils'>
-                            <p id='Top-Posttime01'>
-                              {item.date
-                                ? new Date(item.date).toLocaleString('en-in', {
-                                  day: 'numeric',
-                                  month: 'short',
-                                  year: 'numeric'
-                                })
-                                : ''}
-                            </p>
-                            <div
-                              id='Top-Title01'
-                            >
-                              {truncateText(item.title, 35)}
+              <div id='style-six-body-section'>
+                <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} styleSix={true} />
+                <Swiper {...swiperOptionUpdate} className='custom-swiper'>
+                  {
+
+                    swiperNewsData?.map(item => (
+                      <SwiperSlide key={item.id}>
+                        <Link
+                          href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
+                          as={`/news/${item.slug}`}
+                        >
+                          <div className='card fs-Newscard'>
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className='fs-Newscard-image h-auto'
+                              id='fs-Newscard-image01'
+                              onError={placeholderImage}
+                            />
+                            <div className='card-img-overlay'>
+                              <div
+                                id='btnCatagory'
+                                className='btn'
+                              // onClick={() =>
+                              //   router.push({
+                              //     pathname: `/categories-news/${item.slug}`,
+                              //     query: { category_id: item.id }
+                              //   })
+                              // }
+                              >
+                                {truncateText(item.category_name, 25)}
+                              </div>
+                              <div id='Top-Deatils'>
+                                <p id='Top-Posttime01'>
+                                  {item.date
+                                    ? new Date(item.date).toLocaleString('en-in', {
+                                      day: 'numeric',
+                                      month: 'short',
+                                      year: 'numeric'
+                                    })
+                                    : ''}
+                                </p>
+                                <div
+                                  id='Top-Title01'
+                                >
+                                  {truncateText(item.title, 35)}
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </SwiperSlide>
-                ))
-              }
+                        </Link>
+                      </SwiperSlide>
+                    ))
+                  }
 
-              <VideoPlayerModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-                // backdrop="static"
-                keyboard={false}
-                url={Video_url}
-                type_url={typeUrl}
-              // title={Data[0].title}
-              />
-            </Swiper>
-          </div>
-        </div>
-      ) : null}
+                  <VideoPlayerModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    // backdrop="static"
+                    keyboard={false}
+                    url={Video_url}
+                    type_url={typeUrl}
+                  // title={Data[0].title}
+                  />
+                </Swiper>
+              </div>
+            </div>
+          ) : null}
 
       {/* ad spaces */}
       {Data.ad_spaces && Data.id == Data.ad_spaces.ad_featured_section_id && Data.news_type === 'breaking_news' ? (
