@@ -189,7 +189,7 @@ const WeatherCard = () => {
               ) : (
                 weather && weatherMode === '1' && (
                   <>
-                    <img src={weather && weather?.current?.condition?.icon} alt='weather news' className='weather_icon' onError={placeholderImage}/>
+                    <img src={weather && weather?.current?.condition?.icon} alt='weather news' className='weather_icon' onError={placeholderImage} />
                     <b className='me-2'>{weather && weather?.current?.temp_c}°C</b>
                     <div className='left-state'>
                       <p className='location-wcard mb-0 '>
@@ -220,9 +220,9 @@ const WeatherCard = () => {
                       <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} />
                     </li>
                   </ul>
-                  <div className='slash-line'></div>
+                {socialMedias?.length > 0 &&  <div className='slash-line'></div>}
                 </>
-                  : <span className='mt-1 fw-bold followUs'>{translate('followus')} :</span>
+                  : socialMedias?.length > 0 && <span className='mt-1 fw-bold followUs'>{translate('followus')} :</span>
               }
               <div className='social_media_top'>
                 {
@@ -236,7 +236,7 @@ const WeatherCard = () => {
                         rel='noreferrer'
                         key={data?.id}
                       >
-                        <img src={data?.image} alt="social-media-icon" className='socialMediaIcons' onError={placeholderImage}/>
+                        <img src={data?.image} alt="social-media-icon" className='socialMediaIcons' onError={placeholderImage} />
                       </a>
                     }) : null
                 }
