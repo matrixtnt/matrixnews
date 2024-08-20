@@ -4201,10 +4201,10 @@ a#social_platforms svg:hover {
 
 .cdbtnReply {
   width: fit-content;
-  background-color: var(--primary-color);
-  color: #ffffff;
+  /* background-color: var(--primary-color); */
+  /* color: #ffffff; */
   border: none;
-  position: absolute;
+  position: absolute !important;
   right: 1%;
   bottom: 6%;
   font-weight: 500;
@@ -4226,8 +4226,8 @@ a#social_platforms svg:hover {
 
 #cdbtnsubReply {
   width: 100%;
-  background-color: var(--secondary-color);
-  color: #ffffff;
+  /* background-color: var(--secondary-color);
+  color: #ffffff; */
   border: none;
 }
 
@@ -6549,8 +6549,8 @@ span {
 }
 
 .profile_submit {
-  background-color: var(--secondary-color);
-  color: #fff;
+  /* background-color: var(--secondary-color); */
+  /* color: #fff; */
   height: 50px;
   width: 100%;
   border-radius: 5px;
@@ -7082,6 +7082,7 @@ span {
 
 #cs-input {
   width: 100%;
+  padding: 6px;
 }
 
 .categoryview_Section #bcb-active-item {

@@ -234,7 +234,7 @@ const ProfileUpdate = () => {
                     />
                   )}
                 </div>
-                <button type='button' className='profile_submit' onClick={e => formDetails(e)}>
+                <button type='button' className='profile_submit commonBtn' onClick={e => formDetails(e)}>
                   {translate('update-profile')}
                 </button>
               </div>

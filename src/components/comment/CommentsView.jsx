@@ -304,7 +304,7 @@ const CommentsView = props => {
                                           }}
                                           placeholder='Share Your reply...'
                                         ></textarea>
-                                        <button id='cdbtnsubReply' type='submit' className='btn'>
+                                        <button id='cdbtnsubReply' type='submit' className='btn commonBtn'>
                                           {translate('submitreply')}
                                         </button>
                                       </form>
@@ -312,7 +312,7 @@ const CommentsView = props => {
                                   </Popover>
                                 }
                               >
-                                <Button id={`${element.id}`} className='cdbtnReply' onClick={() => setReplied(false)} variant='secondary' ref={replyRef}>
+                                <Button id={`${element.id}`} className='cdbtnReply commonBtn' onClick={() => setReplied(false)} variant='secondary' ref={replyRef}>
                                   {translate('reply')}
                                 </Button>
                               </OverlayTrigger>
@@ -387,7 +387,7 @@ const CommentsView = props => {
                                             }}
                                             placeholder='Share Your reply...'
                                           ></textarea>
-                                          <button id='cdbtnsubReply' type='submit' className='btn'>
+                                          <button id='cdbtnsubReply' type='submit' className='btn commonBtn'>
                                             {translate('submitreply')}
                                           </button>
                                         </form>
@@ -395,7 +395,7 @@ const CommentsView = props => {
                                     </Popover>
                                   }
                                 >
-                                  <Button id={`${element.id}`} className='cdbtnReply' variant='secondary' onClick={() => setReplied(false)} ref={replyRef}>
+                                  <Button id={`${element.id}`} className='cdbtnReply commonBtn' variant='secondary' onClick={() => setReplied(false)} ref={replyRef}>
                                     {translate('reply')}
                                   </Button>
                                 </OverlayTrigger>
