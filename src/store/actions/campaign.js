@@ -19,7 +19,8 @@ import {
   setQuestionResult,
   getQuestionResult,
   getBreakingNews,
-  getPages
+  getPages,
+  getPolicyPages
 } from '../../utils/api'
 import { store } from '../store'
 import { apiCallBegan } from './apiActions'
@@ -399,6 +400,7 @@ export const getQuestionResultApi = ({
     })
   )
 }
+
 export const getBreakingNewsApi = ({
   language_id = "",
   slug = "",
@@ -409,6 +411,23 @@ export const getBreakingNewsApi = ({
   store.dispatch(
     apiCallBegan({
       ...getBreakingNews(language_id, slug),
+      displayToast: false,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
+}
+
+export const getPolicyPagesApi = ({
+  language_id = "",
+  onSuccess = () => { },
+  onError = () => { },
+  onStart = () => { }
+}) => {
+  store.dispatch(
+    apiCallBegan({
+      ...getPolicyPages(language_id),
       displayToast: false,
       onStart,
       onSuccess,

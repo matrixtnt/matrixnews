@@ -66,7 +66,7 @@ const Footer = () => {
                           rel='noreferrer'
                           key={data?.id}
                         >
-                          <img src={data?.image} alt="social-media-icon" className='socialMediaIcon' onError={placeholderImage}/>
+                          <img src={data?.image} alt="social-media-icon" className='socialMediaIcon' onError={placeholderImage} />
                         </a>
 
                       })
@@ -218,8 +218,8 @@ const Footer = () => {
               </p>
             </div>
             <div className='ms-2'>
-              <Link href='/terms-condition'> Terms & Condition |</Link>
-              <Link href='privacy-policy'> Privacy Policy</Link>
+              <Link href='/policy-page/terms-condition'> Terms & Condition |</Link>
+              <Link href='/policy-page/privacy-policy'> Privacy Policy</Link>
             </div>
           </div>
         </div>

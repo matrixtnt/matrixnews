@@ -7,6 +7,7 @@ import { getLanguage, getUser } from 'src/utils/api';
 import Card from '../skeletons/Card';
 import { ProgressBar } from 'react-bootstrap';
 import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn';
+import { translate } from 'src/utils';
 
 const Surveys = () => {
     const [submited, setSubmited] = useState(false);
@@ -71,8 +72,12 @@ const Surveys = () => {
     });
 
     const handleSubmit = (id) => {
-        setSubmittedQuestionId(id);
-        setSubmited(true);
+        if(selectedOption){
+            setSubmittedQuestionId(id);
+            setSubmited(true);
+        }else{
+            toast.error(translate('optSel'))
+        }
     };
 
     const handleLoadMore = () => {
@@ -105,7 +110,7 @@ const Surveys = () => {
                                                 </span>
                                             );
                                         })}
-                                        <button className='submitBtn' onClick={() => handleSubmit(survey.id)}>
+                                        <button className='submitBtn commonBtn' onClick={() => handleSubmit(survey.id)}>
                                             Submit
                                         </button>
                                     </div>

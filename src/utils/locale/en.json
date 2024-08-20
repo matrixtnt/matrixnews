@@ -292,5 +292,7 @@
   "underMaintance": "We're Under Maintenance!",
   "pleaseTryagain": "Our website is currently under maintenance. Please check back soon for updates.",
   "or": "OR",
-  "publishDate": "Publish Date"
+  "publishDate": "Publish Date",
+  "policyPages": "Policy Pages",
+  "publishDateRequired": "Publish Date is Required"
 }

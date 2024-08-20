@@ -26,6 +26,7 @@ import { getlocationapi } from 'src/hooks/getlocationApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Input } from 'antd'
+import { IoIosCloseCircle } from 'react-icons/io'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -84,6 +85,10 @@ const CreateNews = () => {
     // All files are images, add them to the state
     setImages([...images, ...imageFiles])
   }
+
+  const handleRemove = (indexToRemove) => {
+    setImages(images.filter((_, index) => index !== indexToRemove));
+  };
 
   // description content
   const handleChangeContent = value => {
@@ -236,6 +241,10 @@ const CreateNews = () => {
 
     if (!DefaultValue.defaultType) {
       toast.error(translate("contentTyperequired"))
+      return
+    }
+    if (!DefaultValue.defualtPublishDate) {
+      toast.error(translate("publishDateRequired"))
       return
     }
 
@@ -508,8 +517,14 @@ const CreateNews = () => {
       description: content,
       image: DefaultValue.defaultImagefile,
       ofile: images,
-      show_till: DefaultValue.defualtStartDate?.toISOString().split('T')[0],
-      published_date: DefaultValue.defualtPublishDate?.toISOString().split('T')[0],
+      show_till: new Date(DefaultValue.defualtStartDate.getTime() - DefaultValue.defualtStartDate.getTimezoneOffset() * 60000)
+        .toISOString()
+        .split('T')[0],
+      published_date: new Date(DefaultValue.defualtPublishDate.getTime() - DefaultValue.defualtPublishDate.getTimezoneOffset() * 60000)
+        .toISOString()
+        .split('T')[0],
+      // show_till: DefaultValue.defualtStartDate?.toISOString().split('T')[0],
+      // published_date: DefaultValue.defualtPublishDate?.toISOString().split('T')[0],
       language_id: createNewsLanguage.id,
       location_id: DefaultValue.defualtLocation ? DefaultValue.defualtLocation : null,
       onSuccess: response => {
@@ -534,7 +549,7 @@ const CreateNews = () => {
         <div className='container'>
           <div className='row'>
             <div className='col-md-7 col-12'>
-              <img className='create-img' src={createnewsimage.src} alt='create news' onError={placeholderImage}/>
+              <img className='create-img' src={createnewsimage.src} alt='create news' onError={placeholderImage} />
             </div>
 
             <div className='col-md-5 col-12'>
@@ -785,24 +800,24 @@ const CreateNews = () => {
                     <div className='show_date mb-2'>
                       <DatePicker
                         dateFormat='yyyy-MM-dd'
-                        selected={DefaultValue.defualtStartDate}
-                        placeholderText={translate('showTilledDate')}
-                        clearButtonTitle
-                        todayButton={'Today'}
-                        minDate={new Date()}
-                        onChange={date => setDefualtValue({ ...DefaultValue, defualtStartDate: date })}
-                      />
-                      <SlCalender className='form-calender' />
-                    </div>
-                    <div className='show_date mb-2'>
-                      <DatePicker
-                        dateFormat='yyyy-MM-dd'
                         selected={DefaultValue.defualtPublishDate}
                         placeholderText={translate('publishDate')}
                         clearButtonTitle
                         todayButton={'Today'}
                         minDate={new Date()}
                         onChange={date => setDefualtValue({ ...DefaultValue, defualtPublishDate: date })}
+                      />
+                      <SlCalender className='form-calender' />
+                    </div>
+                    <div className='show_date mb-2'>
+                      <DatePicker
+                        dateFormat='yyyy-MM-dd'
+                        selected={DefaultValue.defualtStartDate}
+                        placeholderText={translate('showTilledDate')}
+                        clearButtonTitle
+                        todayButton={'Today'}
+                        minDate={new Date()}
+                        onChange={date => setDefualtValue({ ...DefaultValue, defualtStartDate: date })}
                       />
                       <SlCalender className='form-calender' />
                     </div>
@@ -825,7 +840,7 @@ const CreateNews = () => {
                       </label>
                       {DefaultValue.defaultImageData && (
                         <div className='mainimage'>
-                          <img src={DefaultValue.defaultImageData} alt='mainimage' onError={placeholderImage}/>
+                          <img src={DefaultValue.defaultImageData} alt='mainimage' onError={placeholderImage} />
                         </div>
                       )}
                       <input
@@ -854,7 +869,10 @@ const CreateNews = () => {
                       <Swiper {...swiperOption}>
                         {images.map((file, index) => (
                           <SwiperSlide key={index}>
-                            <img src={URL.createObjectURL(file)} alt={`Uploaded ${index}`} />
+                            <div className='otherImgDiv'>
+                              <span onClick={() => handleRemove(index)}><IoIosCloseCircle /> </span>
+                              <img src={URL.createObjectURL(file)} alt={`Uploaded ${index}`} />
+                            </div>
                           </SwiperSlide>
                         ))}
                       </Swiper>

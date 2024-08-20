@@ -18,7 +18,7 @@ import { selectManageNews } from '../../store/reducers/createNewsReducer'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useRouter } from 'next/navigation'
 import { BsFillPlayFill } from 'react-icons/bs'
-import { IoIosClose } from 'react-icons/io'
+import { IoIosClose, IoIosCloseCircle } from 'react-icons/io'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import managenewsimage from '../../../public/assets/images/manage-news.svg'
 import { getTagApi } from 'src/hooks/tagsApi'
@@ -67,7 +67,7 @@ const EditNews = () => {
     categorydefault: manageNews?.category?.category_name,
     standardType: manageNews?.content_type,
     contentValue: manageNews?.content_value,
-    tagValue: manageNews?.tag_name?.split(','),
+    tagValue: manageNews?.tag_name ? manageNews?.tag_name?.split(',') : null,
     dateValue: manageNews?.show_till === '0000-00-00' ? null : new Date(manageNews?.show_till),
     publishDateValue: manageNews?.published_date === '0000-00-00' ? null : new Date(manageNews?.published_date),
     imagedefault: manageNews?.image,
@@ -241,6 +241,10 @@ const EditNews = () => {
 
     if (!DefaultValue.defaultSlug) {
       toast.error(translate("slugrequired"))
+      return
+    }
+    if (!DefaultValue.publishDateValue) {
+      toast.error(translate("publishDateRequired"))
       return
     }
 
@@ -519,10 +523,16 @@ const EditNews = () => {
       description: DefaultValue.descriptionValue,
       image: DefaultValue.imagedefault,
       ofile: images,
-      show_till: DefaultValue.dateValue.toISOString().split('T')[0],
+      // show_till: DefaultValue.dateValue.toISOString().split('T')[0],
+      show_till: new Date(DefaultValue.dateValue.getTime() - DefaultValue.dateValue.getTimezoneOffset() * 60000)
+        .toISOString()
+        .split('T')[0],
       language_id: DefaultValue.languageId,
       location_id: DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
-      published_date: DefaultValue.publishDateValue.toISOString().split('T')[0],
+      // published_date: DefaultValue.publishDateValue.toISOString().split('T')[0],
+      published_date: new Date(DefaultValue.publishDateValue.getTime() - DefaultValue.publishDateValue.getTimezoneOffset() * 60000)
+        .toISOString()
+        .split('T')[0],
       onSuccess: response => {
         toast.success(response.message)
         navigate.push('/manage-news')
@@ -562,6 +572,10 @@ const EditNews = () => {
       }
     })
   }
+
+  const handleRemove = (indexToRemove) => {
+    setImages(images.filter((_, index) => index !== indexToRemove));
+  };
 
   // back button
   const Back = () => {
@@ -841,24 +855,24 @@ const EditNews = () => {
                     <div className='show_date mb-2'>
                       <DatePicker
                         dateFormat='yyyy-MM-dd'
-                        selected={DefaultValue.dateValue}
-                        placeholderText={translate('showTilledDate')}
-                        clearButtonTitle
-                        todayButton={'Today'}
-                        minDate={new Date()}
-                        onChange={date => handleDate(date)}
-                      />
-                      <SlCalender className='form-calender' />
-                    </div>
-                    <div className='show_date mb-2'>
-                      <DatePicker
-                        dateFormat='yyyy-MM-dd'
                         selected={DefaultValue.publishDateValue}
                         placeholderText={translate('publishDate')}
                         clearButtonTitle
                         todayButton={'Today'}
                         minDate={new Date()}
                         onChange={date => handlePublishDate(date)}
+                      />
+                      <SlCalender className='form-calender' />
+                    </div>
+                    <div className='show_date mb-2'>
+                      <DatePicker
+                        dateFormat='yyyy-MM-dd'
+                        selected={DefaultValue.dateValue}
+                        placeholderText={translate('showTilledDate')}
+                        clearButtonTitle
+                        todayButton={'Today'}
+                        minDate={new Date()}
+                        onChange={date => handleDate(date)}
                       />
                       <SlCalender className='form-calender' />
                     </div>
@@ -931,7 +945,10 @@ const EditNews = () => {
 
                         {images.map((file, index) => (
                           <SwiperSlide key={index}>
-                            <img src={URL.createObjectURL(file)} alt={`Uploaded ${index}`} />
+                            <div className='otherImgDiv'>
+                              <span onClick={() => handleRemove(index)}><IoIosCloseCircle /> </span>
+                              <img src={URL.createObjectURL(file)} alt={`Uploaded ${index}`} />
+                            </div>
                           </SwiperSlide>
                         ))}
                       </Swiper>

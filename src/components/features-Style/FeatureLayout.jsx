@@ -138,7 +138,7 @@ const FeatureLayout = () => {
             } else if (item.style_web === 'style_5') {
               return <StyleFive key={index} Data={item} />
             } else if (item.style_web === 'style_6') {
-              return <StyleSix key={index} Data={item} />
+              return <StyleSix key={index} Data={item} isLoading={isLoading} setIsLoading={setIsLoading} />
             }
           } else if (item.news_type === 'breaking_news') {
             if (item.style_web === 'style_1') {
@@ -152,7 +152,7 @@ const FeatureLayout = () => {
             } else if (item.style_web === 'style_5') {
               return <StyleFive key={index} Data={item} />
             } else if (item.style_web === 'style_6') {
-              return <StyleSix key={index} Data={item} />
+              return <StyleSix key={index} Data={item} isLoading={isLoading} setIsLoading={setIsLoading} />
             }
           } else if (item.news_type === 'videos') {
             if (item.style_web === 'style_1') {
@@ -166,7 +166,7 @@ const FeatureLayout = () => {
             } else if (item.style_web === 'style_5') {
               return <StyleFive key={index} Data={item} />
             } else if (item.style_web === 'style_6') {
-              return <StyleSix key={index} Data={item} />
+              return <StyleSix key={index} Data={item} isLoading={isLoading} setIsLoading={setIsLoading} />
             }
           } else if (item.news_type === 'user_choice') {
             if (item.style_web === 'style_1') {
@@ -180,7 +180,7 @@ const FeatureLayout = () => {
             } else if (item.style_web === 'style_5') {
               return <StyleFive key={index} Data={item} />
             } else if (item.style_web === 'style_6') {
-              return <StyleSix key={index} Data={item} />
+              return <StyleSix key={index} Data={item} isLoading={isLoading} setIsLoading={setIsLoading} />
             }
           }
           return null

@@ -16,6 +16,7 @@ export const SET_LIKE_DISLIKE = 'set_like_dislike'
 export const SET_FLAG = 'set_flag'
 export const REGISTER_TOKEN = 'register_token'
 export const GET_WEB_SEO_PAGES = 'get_web_seo_pages'
+export const GET_POLICY_PAGES = 'get_policy_pages'
 
 // User Api
 export const GET_USER_BY_ID = 'get_user_by_id'
@@ -453,7 +454,7 @@ export const getQuestionResult = (language_id, question_id) => {
   }
 }
 
-export const getFeatureSection = (offset, limit, slug, latitude, longitude, section_id,isToken) => {
+export const getFeatureSection = (offset, limit, slug, latitude, longitude, section_id, isToken) => {
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_FEATURE_SECTION}`,
@@ -539,6 +540,19 @@ export const getPages = (
       language_id: language_id,
       slug: slug
 
+    },
+    authorizationHeader: false
+  }
+}
+
+export const getPolicyPages = (
+) => {
+  let { id: language_id } = getLanguage()
+  return {
+    url: `${GET_POLICY_PAGES}`,
+    method: 'GET',
+    params: {
+      language_id: language_id,
     },
     authorizationHeader: false
   }

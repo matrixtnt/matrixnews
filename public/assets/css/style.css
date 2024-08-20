@@ -4768,6 +4768,11 @@ a#social_platforms svg:hover {
   background-color: transparent !important;
 }
 
+
+.ModalWrapper .modal-header {
+  justify-content: space-between;
+}
+
 @media screen and (min-width: 992px) {
   .bordert {
     border-top: 1px solid #aaa;
@@ -4912,6 +4917,18 @@ a#social_platforms svg:hover {
   float: right;
   right: 20px;
   cursor: pointer;
+}
+
+[dir='rtl'] .password-icon,
+[dir='rtl'] .Cpassword-icon {
+  right: unset;
+  float: left;
+  left: 20px;
+}
+
+[dir='rtl'] .form-floating>label {
+  left: unset;
+  right: 0px;
 }
 
 #modal-content {
@@ -6869,6 +6886,12 @@ span {
   align-items: center;
 }
 
+
+[data-bs-theme="dark"] .preview {
+  border: 1px solid #fff;
+  color: #fff;
+}
+
 .all_images {
   position: relative;
 }
@@ -6896,11 +6919,38 @@ span {
   text-align: center;
 }
 
+.create_news .dropzone:focus,
+.create_news .dropzone:focus-visible{
+  outline: none;
+}
+
 .create_news .dropzone input {
   display: block !important;
   visibility: hidden;
   margin-left: -37%;
 }
+
+.create_news .otherImgDiv {
+  position: relative;
+  width: max-content;
+}
+
+.create_news .otherImgDiv span {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background: #000;
+  color: #fff;
+  border-radius: 40px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 
 .profile .profile_content {
   border: 1px solid #dedede;
@@ -7562,8 +7612,6 @@ span {
 }
 
 .surveysSect .card .submitBtn {
-  color: white;
-  background-color: var(--secondary-color);
   border: none;
   border-radius: 6px;
   padding: 12px;

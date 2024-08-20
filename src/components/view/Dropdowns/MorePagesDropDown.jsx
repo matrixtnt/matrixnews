@@ -45,7 +45,7 @@ const MorePagesDropDown = ({ handleClose }) => {
 
 
     // Filter out 'About Us' and 'Contact Us' titles
-    const filteredData = Data.filter(page => page.title !== 'About Us' && page.title !== 'Contact Us');
+    const filteredData = Data.filter(page => page.page_type !== 'about-us' && page.page_type !== 'contact-us' && page.page_type !== 'terms-condition' && page.page_type !== 'privacy-policy');
 
     const items = filteredData.map((page, index) => ({
         key: index + 1,
@@ -65,7 +65,7 @@ const MorePagesDropDown = ({ handleClose }) => {
     }));
 
     return (
-        Data?.length > 0 &&
+        filteredData?.length > 0 &&
         <div>
             <Dropdown
                 menu={{
