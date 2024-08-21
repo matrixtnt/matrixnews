@@ -61,16 +61,12 @@ const OTPModal = props => {
   const generateRecaptcha = () => {
     if (typeof window !== 'undefined') {
       if (!window.recaptchaVerifier) {
-        window.recaptchaVerifier = new RecaptchaVerifier(
-          'recaptcha-container',
-          {
-            size: 'invisible',
-            callback: response => {
-              // reCAPTCHA solved, allow signInWithPhoneNumber.
-            }
-          },
-          authentication
-        )
+        window.recaptchaVerifier = new RecaptchaVerifier(authentication, 'recaptcha-container', {
+          size: 'invisible',
+          callback: () => {
+              console.log('recaptcha resolved..')
+          }
+      });
       }
     }
   }
