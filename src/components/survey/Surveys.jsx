@@ -12,6 +12,7 @@ import { translate } from 'src/utils';
 const Surveys = () => {
     const [submited, setSubmited] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOptionQuesId, setSelectedOptionQuesId] = useState('');
     const [submittedQuestionId, setSubmittedQuestionId] = useState(null);
     const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(2); // Initial count of visible questions
 
@@ -41,6 +42,7 @@ const Surveys = () => {
 
     const handleOptionClick = (options) => {
         setSelectedOption(options.id);
+        setSelectedOptionQuesId(options?.question_id)
         setQuestionResultApi({
             language_id: language_id,
             question_id: options?.question_id,
@@ -72,10 +74,10 @@ const Surveys = () => {
     });
 
     const handleSubmit = (id) => {
-        if(selectedOption){
+        if (selectedOption && selectedOptionQuesId === id) {
             setSubmittedQuestionId(id);
             setSubmited(true);
-        }else{
+        } else {
             toast.error(translate('optSel'))
         }
     };
@@ -110,7 +112,7 @@ const Surveys = () => {
                                                 </span>
                                             );
                                         })}
-                                        <button className='submitBtn commonBtn' onClick={() => handleSubmit(survey.id)}>
+                                        <button className='submitBtn commonBtn' onClick={() => handleSubmit(survey.id,)}>
                                             Submit
                                         </button>
                                     </div>
@@ -132,7 +134,9 @@ const Surveys = () => {
                                                     <ProgressBar now={options.percentage} />
                                                 </span>
                                                 <span className='percentage'>
-                                                    {Math.ceil(options.percentage)}%
+                                                    {parseFloat(options.percentage) % 1 === 0
+                                                        ? options.percentage
+                                                        : parseFloat(options.percentage).toFixed(2)}%
                                                 </span>
                                             </div>
                                         ))
@@ -143,7 +147,7 @@ const Surveys = () => {
                     })}
             {questionsData && visibleQuestionsCount < questionsData.length && (
                 // <button onClick={handleLoadMore} className='loadMoreBtn commonBtn'>Load More</button>
-                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={loadMore}/>
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={loadMore} />
             )}
         </section>
     );
