@@ -222,7 +222,7 @@ const WeatherCard = () => {
                   </ul>
                 {socialMedias?.length > 0 &&  <div className='slash-line'></div>}
                 </>
-                  : socialMedias?.length > 0 && <span className='mt-1 fw-bold followUs'>{translate('followus')} :</span>
+                  : socialMedias?.length > 0 && <span className='fw-bold followUs'>{translate('followus')} :</span>
               }
               <div className='social_media_top'>
                 {

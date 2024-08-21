@@ -308,7 +308,7 @@ const SignInModal = props => {
                       </div>
                     </div>
                     <div className='py-3' id='login'>
-                      <button type='submit' className='btn   btn-lg  w-100' id='loginbutton' onClick={Signin}>
+                      <button type='submit' className='btn btn-lg w-100 commonBtn' id='loginbutton' onClick={Signin}>
                         {translate('loginTxt')}
                       </button>
                     </div>

@@ -290,7 +290,7 @@ const RagisterModalTwo = props => {
                       <p className='error-msg'> {formErrors.confirmPassword}</p>
                     </div>
                     <div className='py-3'>
-                      <button type='submit' className='btn   btn-lg' id='loginbutton2'>
+                      <button type='submit' className='btn btn-lg commonBtn' id='loginbutton2'>
                         {translate('signupLbl')}
                       </button>
                     </div>

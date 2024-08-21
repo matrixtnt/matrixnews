@@ -953,7 +953,7 @@ const EditNews = () => {
                         ))}
                       </Swiper>
                     </div>
-                    <Button type='submit' className='btn btn-secondary next-btn'>
+                    <Button type='submit' className='btn btn-secondary next-btn commonBtn'>
                       {translate('nxt')}
                     </Button>
                   </div>
@@ -969,12 +969,12 @@ const EditNews = () => {
                   </div>
                   <div className='row'>
                     <div className='col-md-6'>
-                      <Button type='button' className='btn btn-secondary backbtn' onClick={Back}>
+                      <Button type='button' className='btn btn-secondary backbtn commonBtn' onClick={Back}>
                         {translate('back')}
                       </Button>
                     </div>
                     <div className='col-md-6'>
-                      <Button type='submit' className=' btn btn-secondary subbtn'>
+                      <Button type='submit' className=' btn btn-secondary subbtn commonBtn'>
                         {translate('submitBtn')}
                       </Button>
                     </div>

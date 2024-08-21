@@ -55,6 +55,7 @@ const CommentsView = props => {
   const { data: Data, isLoading, refetch } = useQuery({
     queryKey: ['getCommentByNews ', Nid],
     queryFn: getCommentByNews,
+    staleTime: 0,
 
   });
 
@@ -431,7 +432,7 @@ const CommentsView = props => {
                 </div>
                 <textarea value={message} name='' id='' cols='30' rows='5' onChange={e => setMessage(e.target.value)} />
                 <div className='comment_bottom d-flex align-items-end justify-content-end'>
-                  <button type='submit' className='btn btn-secondary' onClick={e => submitBtn(e)}>
+                  <button type='submit' className='btn btn-secondary commonBtn' onClick={e => submitBtn(e)}>
                     {translate('submitBtn')}
                   </button>
                 </div>
