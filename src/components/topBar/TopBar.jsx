@@ -106,7 +106,7 @@ const WeatherCard = () => {
   const languageChange = async (name, code, id, display_name) => {
     loadLanguageLabels({ code: code })
     setCurrentLanguage(name, code, id, display_name)
-    if (isLogin()) {
+    if (isLogin() && location.fcmtoken) {
 
       await registerFcmTokenApi({
         token: location.fcmtoken,
@@ -128,16 +128,18 @@ const WeatherCard = () => {
   }, [currentLanguage?.code])
 
   const registerToken = (tokenId) => {
-    registerFcmTokenApi({
-      token: tokenId,
-      latitude: storedLatitude,
-      longitude: storedLongitude,
-      onSuccess: async res => {
-      },
-      onError: async err => {
-        console.log(err);
-      }
-    });
+    if (tokenId) {
+      registerFcmTokenApi({
+        token: tokenId,
+        latitude: storedLatitude,
+        longitude: storedLongitude,
+        onSuccess: async res => {
+        },
+        onError: async err => {
+          console.log(err);
+        }
+      });
+    }
   }
 
   useEffect(() => {
@@ -220,7 +222,7 @@ const WeatherCard = () => {
                       <LanguageDropdown currentLanguage={currentLanguage} languagesData={languagesData} languageChange={languageChange} />
                     </li>
                   </ul>
-                {socialMedias?.length > 0 &&  <div className='slash-line'></div>}
+                  {socialMedias?.length > 0 && <div className='slash-line'></div>}
                 </>
                   : socialMedias?.length > 0 && <span className='fw-bold followUs'>{translate('followus')} :</span>
               }

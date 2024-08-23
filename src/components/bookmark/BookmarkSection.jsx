@@ -36,14 +36,16 @@ const BookmarkSection = () => {
   }
 
   const setbookmarkApi = async (news_id, status) => {
-    try {
-      const { data } = await bookmarkApi.setBookmark({
-        news_id: news_id,
-        status: status
-      })
-      setData(Data.filter(item => item.news_id !== news_id))
-    } catch (error) {
-      console.log(error)
+    if (typeof news_id == 'number' && status) {
+      try {
+        const { data } = await bookmarkApi.setBookmark({
+          news_id: news_id,
+          status: status
+        })
+        setData(Data.filter(item => item.news_id !== news_id))
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -139,7 +141,7 @@ const BookmarkSection = () => {
               // Show "No data found" message if no data is available
               <div className='col-12 no_data mt-5'>
                 <div id='bs-no-main'>
-                  <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' onError={placeholderImage}/>
+                  <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' onError={placeholderImage} />
                   <p id='bs-no-title'>
                     <b>{translate('addbookmark')}</b>
                   </p>

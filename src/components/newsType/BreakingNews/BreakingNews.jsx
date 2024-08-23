@@ -107,7 +107,7 @@ const BreakingNews = () => {
 
   // api call
   const setBreakingNewsViewApi = async () => {
-    if (isLogin() && DetailsPageData) {
+    if (isLogin() && DetailsPageData && !newsViewsIncreament) {
 
       try {
         const { data } = await AllBreakingNewsApi.setBreakingNewsView({

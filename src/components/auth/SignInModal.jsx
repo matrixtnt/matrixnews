@@ -111,17 +111,19 @@ const SignInModal = props => {
           fcm_id: location.fcmtoken,
           onSuccess: async res => {
             toast.success(translate('loginMsg'))
-            setTimeout(async () => {
-              await registerFcmTokenApi({
-                token: res.data.fcm_id,
-                latitude: storedLatitude,
-                longitude: storedLongitude,
-                onSuccess: async res => { },
-                onError: async err => {
-                  console.log(err)
-                }
-              })
-            }, [1000])
+            if (res.data.fcm_id) {
+              setTimeout(async () => {
+                await registerFcmTokenApi({
+                  token: res.data.fcm_id,
+                  latitude: storedLatitude,
+                  longitude: storedLongitude,
+                  onSuccess: async res => { },
+                  onError: async err => {
+                    console.log(err)
+                  }
+                })
+              }, [1000])
+            }
 
             // console.log('resLog',res)
 
@@ -158,17 +160,19 @@ const SignInModal = props => {
             status: '1',
             fcm_id: location.fcmtoken,
             onSuccess: success => {
-              setTimeout(async () => {
-                await registerFcmTokenApi({
-                  token: success.data.fcm_id,
-                  latitude: storedLatitude,
-                  longitude: storedLongitude,
-                  onSuccess: async res => { },
-                  onError: async err => {
-                    console.log(err)
-                  }
-                })
-              }, [1000])
+              if (success.data.fcm_id) {
+                setTimeout(async () => {
+                  await registerFcmTokenApi({
+                    token: success.data.fcm_id,
+                    latitude: storedLatitude,
+                    longitude: storedLongitude,
+                    onSuccess: async res => { },
+                    onError: async err => {
+                      console.log(err)
+                    }
+                  })
+                }, [1000])
+              }
               if (success.data.is_login === '0') {
                 //If new User then show the Update Profile Screen
                 navigate.push('/profile-update')
@@ -239,7 +243,7 @@ const SignInModal = props => {
       >
         <div className='ModalWrapper' id='ModalWrapper'>
           <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img1'>
-            <img className='ModalImg' src={photo.src} alt='login image' onError={placeholderImage}/>
+            <img className='ModalImg' src={photo.src} alt='login image' onError={placeholderImage} />
             <div className='logo-img-overlay'>
               <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo1' onError={placeholderImage} />
             </div>
@@ -319,7 +323,7 @@ const SignInModal = props => {
                 </div>
                 <div className='container px-0' id='social_buttons'>
                   <div className='row'>
-                    <div className={`${process.env.NEXT_PUBLIC_FIREBASE_MOBILE_LOGIN === 'true'? 'col-lg-6' : 'col-lg-12'}  col-12`}>
+                    <div className={`${process.env.NEXT_PUBLIC_FIREBASE_MOBILE_LOGIN === 'true' ? 'col-lg-6' : 'col-lg-12'}  col-12`}>
                       <button id='login-social2' type='button' className=' btn ' onClick={signInWithGoogle}>
                         <FaGoogle />
                         <p>{translate('signin-with-google')}</p>

@@ -82,7 +82,6 @@ const News = () => {
 
   const [newsViewsIncreament, setNewsViewsIncreament] = useState(false)
 
-
   // console.log(query, 'quryy')
 
   // api call
@@ -118,7 +117,7 @@ const News = () => {
 
   // api call
   const setNewsView = async () => {
-    if (isLogin() && Data) {
+    if (isLogin() && Data && !newsViewsIncreament) {
       // console.log('setNewsView called')
       try {
         const { data } = await getNewsApi.setNewsView({

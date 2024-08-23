@@ -64,9 +64,9 @@ const OTPModal = props => {
         window.recaptchaVerifier = new RecaptchaVerifier(authentication, 'recaptcha-container', {
           size: 'invisible',
           callback: () => {
-              console.log('recaptcha resolved..')
+            console.log('recaptcha resolved..')
           }
-      });
+        });
       }
     }
   }
@@ -161,17 +161,20 @@ const OTPModal = props => {
         status: '1',
         fcm_id: location.fcmtoken,
         onSuccess: response => {
-          setTimeout(async () => {
-            await registerFcmTokenApi({
-              token: response.data.fcm_id,
-              latitude: storedLatitude,
-              longitude: storedLongitude,
-              onSuccess: async res => { },
-              onError: async err => {
-                console.log(err)
-              }
-            })
-          }, [1000])
+          if (response.data.fcm_id) {
+            setTimeout(async () => {
+              await registerFcmTokenApi({
+                token: response.data.fcm_id,
+                latitude: storedLatitude,
+                longitude: storedLongitude,
+                onSuccess: async res => { },
+                onError: async err => {
+                  console.log(err)
+                }
+              })
+            }, [1000])
+          }
+
           toast.success('Login Successfully')
           // console.log('phoneRes', response.data)
           if (response.data.is_login === '0') {
@@ -222,11 +225,11 @@ const OTPModal = props => {
         >
           <div className='ModalWrapper55' id='ModalWrapper'>
             <div style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }} id='login_img5'>
-              <img className='ModalImg5' src={photo.src} alt='otp modal image' onError={placeholderImage}/>
+              <img className='ModalImg5' src={photo.src} alt='otp modal image' onError={placeholderImage} />
               <div className='logo-img-overlay'>
                 <img src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} alt='logo image' id='logo5'
-                onError={placeholderImage}
-                 />
+                  onError={placeholderImage}
+                />
               </div>
             </div>
 
