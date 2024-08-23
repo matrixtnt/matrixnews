@@ -63,7 +63,7 @@ const CatNav = () => {
     loadNews({
       offset: page * dataPerPage,
       limit: dataPerPage,
-      get_user_news: '',
+      get_user_news: 0,
       search: '',
       language_id: language_id,
       category_id: catId,
