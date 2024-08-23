@@ -140,7 +140,7 @@ const ManageNews = () => {
                             </div>
                             <div className='manage-date'>
                               <p>
-                                {new Date(element.date).toLocaleTimeString([], {
+                                {new Date(element.created_at).toLocaleTimeString([], {
                                   hour: 'numeric',
                                   minute: 'numeric',
                                   second: 'numeric',

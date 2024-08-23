@@ -5,7 +5,7 @@ import { placeholderImage, translate } from '../../utils'
 import { Button, Form } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import { AiFillPicture, AiOutlineUpload } from 'react-icons/ai'
-import { SlCalender } from 'react-icons/sl'
+import { MdEditCalendar } from "react-icons/md";
 import { deleteImageApi, getSubcategoryByCategoryApi, setNewsApi } from '../../store/actions/campaign'
 import { selectLanguages } from '../../store/reducers/languageReducer'
 import { useSelector } from 'react-redux'
@@ -215,6 +215,20 @@ const EditNews = () => {
     }
   }
 
+
+  const dateConfirmation = () => {
+
+    const showTillDate = DefaultValue.dateValue;
+    const publishDate = DefaultValue.publishDateValue;
+
+    if (publishDate && showTillDate && publishDate > showTillDate) {
+      toast.error(translate('dateConfirmation'));
+      return; // Prevent form submission
+    }
+
+  }
+
+
   // next screen step 2
   const nextStep = e => {
     e.preventDefault()
@@ -224,20 +238,20 @@ const EditNews = () => {
       return
     }
 
-    if (!DefaultValue.defaultMetatitle) {
-      toast.error(translate("metaTitlerequired"))
-      return
-    }
+    // if (!DefaultValue.defaultMetatitle) {
+    //   toast.error(translate("metaTitlerequired"))
+    //   return
+    // }
 
-    if (!DefaultValue.defaultMetaDescription) {
-      toast.error(translate("metaDescriptionrequired"))
-      return
-    }
+    // if (!DefaultValue.defaultMetaDescription) {
+    //   toast.error(translate("metaDescriptionrequired"))
+    //   return
+    // }
 
-    if (!DefaultValue.defaultMetaKeyword) {
-      toast.error(translate("metaKeywordsrequired"))
-      return
-    }
+    // if (!DefaultValue.defaultMetaKeyword) {
+    //   toast.error(translate("metaKeywordsrequired"))
+    //   return
+    // }
 
     if (!DefaultValue.defaultSlug) {
       toast.error(translate("slugrequired"))
@@ -269,8 +283,15 @@ const EditNews = () => {
       }
     }
 
+    dateConfirmation()
+
     setNextStepScreen(true)
   }
+
+  useEffect(() => {
+    dateConfirmation()
+  }, [DefaultValue.dateValue, DefaultValue.publishDateValue])
+
 
   // api call
   const getTag = async () => {
@@ -489,9 +510,9 @@ const EditNews = () => {
 
   useEffect(() => {
     // Check if DefaultValue.descriptionValue is empty or contains only whitespace
-    if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue.trim() == '') {
-      toast.error(translate('descriptionrequired'));
-    }
+    // if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue.trim() == '') {
+    //   toast.error(translate('descriptionrequired'));
+    // }
   }, [DefaultValue.descriptionValue]);
 
   // final submit data
@@ -501,10 +522,10 @@ const EditNews = () => {
     // console.log(DefaultValue.descriptionValue.trim(), 'trim')
     // console.log(DefaultValue.descriptionValue, 'not-trim')
 
-    if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue == "<p><br><\/p>") {
-      toast.error(translate('descriptionrequired'))
-      return
-    }
+    // if (!DefaultValue.descriptionValue || DefaultValue.descriptionValue == "<p><br><\/p>") {
+    //   toast.error(translate('descriptionrequired'))
+    //   return
+    // }
 
 
     const slugValue = await slugConverter()
@@ -862,7 +883,7 @@ const EditNews = () => {
                         minDate={new Date()}
                         onChange={date => handlePublishDate(date)}
                       />
-                      <SlCalender className='form-calender' />
+                      <MdEditCalendar className='form-calender' />
                     </div>
                     <div className='show_date mb-2'>
                       <DatePicker
@@ -874,7 +895,7 @@ const EditNews = () => {
                         minDate={new Date()}
                         onChange={date => handleDate(date)}
                       />
-                      <SlCalender className='form-calender' />
+                      <MdEditCalendar className='form-calender' />
                     </div>
                     <div className='main_image mb-2'>
                       <input

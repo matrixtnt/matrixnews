@@ -257,10 +257,10 @@ const StyleSix = ({ Data, setIsLoading }) => {
 
                           {swiperVideoNewType === 'news' ? (
                             <div id='Top-Deatils'>
-                              {item && item.date ? (
+                              {item && item?.published_date ? (
                                 <p id='Top-Posttime01'>
-                                  {item.date
-                                    ? new Date(item.date).toLocaleString('en-us', {
+                                  {item?.published_date
+                                    ? new Date(item?.published_date).toLocaleString('en-us', {
                                       day: 'numeric',
                                       month: 'short',
                                       year: 'numeric'
@@ -343,8 +343,8 @@ const StyleSix = ({ Data, setIsLoading }) => {
                             </div>
                             <div id='Top-Deatils'>
                               <p id='Top-Posttime01'>
-                                {item.date
-                                  ? new Date(item.date).toLocaleString('en-in', {
+                                {item?.published_date
+                                  ? new Date(item?.published_date).toLocaleString('en-in', {
                                     day: 'numeric',
                                     month: 'short',
                                     year: 'numeric'

@@ -216,10 +216,10 @@ const Header = () => {
       title: 'Delete Account',
       content: (
         <>
-          <p>Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:</p>
-          <li style={{ listStyle: 'disc' }}>Profile information</li>
-          <li style={{ listStyle: 'disc' }}>Settings</li>
-          <li style={{ listStyle: 'disc' }}>And Any associated content</li>
+          <p>{translate('deleteAccWarning')}</p>
+          <li style={{ listStyle: 'disc' }}>{translate('profileInfo')}</li>
+          <li style={{ listStyle: 'disc' }}>{translate('settings')}</li>
+          <li style={{ listStyle: 'disc' }}>{translate('associatedContent')}</li>
         </>
       ),
       centered: true,

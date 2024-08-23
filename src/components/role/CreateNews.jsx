@@ -202,6 +202,18 @@ const CreateNews = () => {
     }
   }
 
+  const dateConfirmation = () => {
+
+    const showTillDate = DefaultValue.defualtStartDate;
+    const publishDate = DefaultValue.defualtPublishDate;
+
+    if (publishDate && showTillDate && publishDate > showTillDate) {
+      toast.error(translate('dateConfirmation'));
+      return; // Prevent form submission
+    }
+
+  }
+
   // next screen step 2
   const nextStep = e => {
     e.preventDefault()
@@ -211,20 +223,20 @@ const CreateNews = () => {
       return
     }
 
-    if (!DefaultValue.defaultMetatitle) {
-      toast.error(translate("metaTitlerequired"))
-      return
-    }
+    // if (!DefaultValue.defaultMetatitle) {
+    //   toast.error(translate("metaTitlerequired"))
+    //   return
+    // }
 
-    if (!DefaultValue.defaultMetaDescription) {
-      toast.error(translate("metaDescriptionrequired"))
-      return
-    }
+    // if (!DefaultValue.defaultMetaDescription) {
+    //   toast.error(translate("metaDescriptionrequired"))
+    //   return
+    // }
 
-    if (!DefaultValue.defaultMetaKeyword) {
-      toast.error(translate("metaKeywordsrequired"))
-      return
-    }
+    // if (!DefaultValue.defaultMetaKeyword) {
+    //   toast.error(translate("metaKeywordsrequired"))
+    //   return
+    // }
 
     if (!DefaultValue.defaultSlug) {
       toast.error(translate("slugrequired"))
@@ -480,27 +492,10 @@ const CreateNews = () => {
 
   // final submit data
   const finalSubmit = async e => {
+
     e.preventDefault()
-    // meta title validation
-    // const isMetaTitleValid = handleMetaTitleChange()
-    // if (!isMetaTitleValid) {
-    //   return // Stop execution if meta title validation fails
-    // }
-
-    // meta description validation
-    // const isMetaDescriptionValid = handleMetaDescriptionChange()
-    // if (!isMetaDescriptionValid) {
-    //   return // Stop execution if meta description validation fails
-    // }
-
-    if (!content) {
-      toast.error(translate('descriptionisrequire'))
-      return
-    }
 
     const slugValue = await slugConverter()
-
-    // console.log(slugValue,'slugvalue')
 
     await setNewsApi({
       action_type: 1,
@@ -517,9 +512,9 @@ const CreateNews = () => {
       description: content,
       image: DefaultValue.defaultImagefile,
       ofile: images,
-      show_till: new Date(DefaultValue.defualtStartDate.getTime() - DefaultValue.defualtStartDate.getTimezoneOffset() * 60000)
+      show_till: DefaultValue.defualtStartDate ? new Date(DefaultValue.defualtStartDate.getTime() - DefaultValue.defualtStartDate.getTimezoneOffset() * 60000)
         .toISOString()
-        .split('T')[0],
+        .split('T')[0] : '',
       published_date: new Date(DefaultValue.defualtPublishDate.getTime() - DefaultValue.defualtPublishDate.getTimezoneOffset() * 60000)
         .toISOString()
         .split('T')[0],
@@ -541,6 +536,11 @@ const CreateNews = () => {
   const Back = () => {
     setNextStepScreen(false)
   }
+
+  useEffect(() => {
+    dateConfirmation()
+  }, [DefaultValue.defualtStartDate, DefaultValue.defualtPublishDate])
+
 
   return (
     <Layout>

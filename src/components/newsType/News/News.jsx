@@ -1,20 +1,18 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
-import { AiOutlineLike, AiTwotoneLike, AiOutlineEye, AiFillLike } from 'react-icons/ai';
+import { AiOutlineLike, AiOutlineEye, AiFillLike } from 'react-icons/ai';
 import { BsBookmark, BsFillBookmarkFill, BsFillPlayFill } from 'react-icons/bs';
 import { FiCalendar } from 'react-icons/fi';
 import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx';
 import TagsSection from '../../tag/TagsSection.jsx';
-import CommentSection from '../../comment/CommentSection.jsx';
-import { BsLink45Deg } from "react-icons/bs";
 
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav.jsx';
 
 import SignInModal from '../../auth/SignInModal.jsx';
 import { setbookmarkApi, setlikedislikeApi } from '../../../store/actions/campaign.js';
 import { getLanguage, getUser } from '../../../utils/api.jsx';
-import { calculateReadTime, extractTextFromHTML, formatDate, isLogin, placeholderImage, translate, NoDataFound } from '../../../utils/index.jsx';
+import { calculateReadTime, extractTextFromHTML, isLogin, placeholderImage, translate, NoDataFound } from '../../../utils/index.jsx';
 import VideoPlayerModal from '../../videoplayer/VideoPlayerModal.jsx';
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer';
 import { useSelector } from 'react-redux';
@@ -305,7 +303,7 @@ const News = () => {
                   <div id='nv-Header' className=''>
                     <div id='nv-left-head'>
                       <p id='head-lables'>
-                        <FiCalendar size={18} id='head-logos' /> {new Date(Data && Data[0]?.date).toLocaleString('en-us', {
+                        <FiCalendar size={18} id='head-logos' /> {new Date(Data && Data[0]?.published_date).toLocaleString('en-us', {
                           day: 'numeric',
                           month: 'short',
                           year: 'numeric'

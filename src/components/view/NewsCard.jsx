@@ -23,7 +23,7 @@ const NewsCard = ({ element, subDropCard, tagCard }) => {
                         !subDropCard &&
                         <p id='cv-card-date'>
                             <FiCalendar size={18} id='cv-logoCalendar' />
-                            {formatDate(element.date)}
+                            {formatDate(element.published_date)}
                         </p>
                     }
                 </div>

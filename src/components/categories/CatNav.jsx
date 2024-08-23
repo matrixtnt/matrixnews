@@ -2,31 +2,17 @@
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentLanguage, selectCurrentLanguageLabels } from '../../store/reducers/languageReducer'
-import SwiperCore, { Navigation, Pagination } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/swiper-bundle.css'
-import { formatDate, placeholderImage, translate } from '../../utils'
+import { translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { locationData, settingsData } from '../../store/reducers/settingsReducer'
-import Link from 'next/link'
-import { CategoriesApi } from 'src/hooks/categoriesApi'
 import { getLanguage } from 'src/utils/api'
-import { useQuery } from '@tanstack/react-query'
-import { loadCategoryCount, loadSubCategories, subCategories } from 'src/store/reducers/tempDataReducer'
 import { useEffect, useState } from 'react'
-import Dropdown from 'react-bootstrap/Dropdown';
 import NoDataFound from '../noDataFound/NoDataFound'
-import { getNewsApi } from 'src/hooks/newsApi'
-import { FiCalendar } from 'react-icons/fi'
 import { FaAngleDown, FaAngleUp, FaChevronRight } from 'react-icons/fa'
-import { IoClose } from "react-icons/io5";
 import Card from '../skeletons/Card'
 import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 import NewsCard from '../view/NewsCard'
-
-
-SwiperCore.use([Navigation, Pagination])
 
 const CatNav = () => {
 

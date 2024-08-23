@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav';
 import { deleteusernotificationApi } from '../../store/actions/campaign';
 import { translate, NoDataFound } from '../../utils';
 import Skeleton from 'react-loading-skeleton';
 import { MdMessage } from 'react-icons/md';
 import { IoMdThumbsUp } from 'react-icons/io';
-import { loaduserNotification } from '../../store/reducers/notificationbadgeReducer';
 import { selectCurrentLanguage } from '../../store/reducers/languageReducer';
 import { useSelector } from 'react-redux';
-import ReactPaginate from 'react-paginate';
 import { useQuery } from '@tanstack/react-query';
 import { getNotificationsApi } from 'src/hooks/getNotificationApi';
 import { getUser } from 'src/utils/api';

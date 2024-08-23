@@ -294,5 +294,10 @@
   "or": "OR",
   "publishDate": "Publish Date",
   "policyPages": "Policy Pages",
-  "publishDateRequired": "Publish Date is Required"
+  "publishDateRequired": "Publish Date is Required",
+  "dateConfirmation": "Please change Show till date , as it can't be set before Publish date",
+  "deleteAccWarning": "Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:",
+  "profileInfo": "Profile information",
+  "settings": "Settings",
+  "associatedContent": "And Any associated content"
 }
