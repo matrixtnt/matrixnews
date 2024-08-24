@@ -30,6 +30,7 @@ import { getsubcategorybycategoryApi } from 'src/hooks/subcategoryByCategoryApi'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Input } from 'antd'
+import { addDays } from 'date-fns'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -892,7 +893,7 @@ const EditNews = () => {
                         placeholderText={translate('showTilledDate')}
                         clearButtonTitle
                         todayButton={'Today'}
-                        minDate={new Date()}
+                        minDate={addDays(new Date(), 1)}
                         onChange={date => handleDate(date)}
                       />
                       <MdEditCalendar className='form-calender' />

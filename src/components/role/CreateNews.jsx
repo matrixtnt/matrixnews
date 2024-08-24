@@ -27,6 +27,7 @@ import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Input } from 'antd'
 import { IoIosCloseCircle } from 'react-icons/io'
+import { addDays } from 'date-fns'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -816,7 +817,7 @@ const CreateNews = () => {
                         placeholderText={translate('showTilledDate')}
                         clearButtonTitle
                         todayButton={'Today'}
-                        minDate={new Date()}
+                        minDate={addDays(new Date(), 1)}
                         onChange={date => setDefualtValue({ ...DefaultValue, defualtStartDate: date })}
                       />
                       <SlCalender className='form-calender' />
