@@ -49,9 +49,9 @@ const CreateNews = () => {
   const getLocation = useSelector(settingsData)
   const [DefaultValue, setDefualtValue] = useState({
     defualtTitle: null,
-    defaultMetatitle: null,
-    defaultMetaDescription: null,
-    defaultMetaKeyword: null,
+    defaultMetatitle: '',
+    defaultMetaDescription: '',
+    defaultMetaKeyword: '',
     defaultSlug: null,
     defualtLanguage: null,
     defualtCategory: null,
