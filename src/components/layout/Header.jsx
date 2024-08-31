@@ -213,7 +213,7 @@ const Header = () => {
   const deleteAccount = async e => {
     e.preventDefault()
     confirm({
-      title: 'Delete Account',
+      title: translate('deleteAcc'),
       content: (
         <>
           <p>{translate('deleteAccWarning')}</p>
@@ -223,7 +223,8 @@ const Header = () => {
         </>
       ),
       centered: true,
-      okText: 'Delete',
+      okText: translate('deleteTxt'),
+      cancelText: translate('cancelBtn'),
       okButtonProps: {
         style: { background: 'red', borderColor: 'red' },
       },

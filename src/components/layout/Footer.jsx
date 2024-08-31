@@ -218,8 +218,8 @@ const Footer = () => {
               </p>
             </div>
             <div className='ms-2'>
-              <Link href='/policy-page/terms-condition'> Terms & Condition |</Link>
-              <Link href='/policy-page/privacy-policy'> Privacy Policy</Link>
+              <Link href='/policy-page/terms-condition'> {translate('termsandcondition')} |</Link>
+              <Link href='/policy-page/privacy-policy'> {translate('priPolicy')} </Link>
             </div>
           </div>
         </div>
