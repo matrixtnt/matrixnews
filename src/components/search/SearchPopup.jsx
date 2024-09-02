@@ -140,7 +140,7 @@ const SearchPopup = () => {
                     <div className='col-12 px-0' key={element.id}>
                       <Link id='Link-all'
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                        as={`/news/${element.slug}`}
+                        // as={`/news/${element.slug}`}
                       >
                         <div id='ts-card' className='card'>
                           <img id='ts-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />

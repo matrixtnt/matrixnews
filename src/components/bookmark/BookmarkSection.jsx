@@ -95,7 +95,7 @@ const BookmarkSection = () => {
                     <div className='bs_image_card'>
                       <Link
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                        as={`/news/${element.slug}`}
+                        // as={`/news/${element.slug}`}
                       >
                         <img
                           id='bs-card-image'
@@ -119,7 +119,7 @@ const BookmarkSection = () => {
                       </button>
                       <Link
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                        as={`/news/${element.slug}`}
+                        // as={`/news/${element.slug}`}
                       >
                         <h5
                           id='bs-card-title'

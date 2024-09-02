@@ -139,7 +139,7 @@ const StyleOne = ({ Data }) => {
                           <div id='Left-first-section' className='my-auto'>
                             <Link id='btnCatagory' className='btn' type='button'
                               href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
-                              as={`/news/${item.slug}`}
+                              // as={`/news/${item.slug}`}
                             >
                               {truncateText(item.category_name, 10)}
                             </Link>
@@ -151,7 +151,7 @@ const StyleOne = ({ Data }) => {
                             <div className='d-flex flex-wrap'>
                               <Link id='btnReadMore' className='mb-0 commonBtn' type='button'
                                 href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
-                                as={`/news/${item.slug}`}
+                                // as={`/news/${item.slug}`}
                               >
                                 <b>{translate('readmore')}</b>
                               </Link>
@@ -222,7 +222,7 @@ const StyleOne = ({ Data }) => {
                               className='btn mb-0'
                               type='button'
                               href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}
-                              as={`/breaking-news/${item.slug}`}
+                              // as={`/breaking-news/${item.slug}`}
                             >
                               <b>{translate('readmore')}</b>
                             </Link>

@@ -172,7 +172,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[0] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id } }}
-                    as={`/news/${Data.news[0].slug}`}
+                    // as={`/news/${Data.news[0].slug}`}
                   >
                     <div
                       className='video_first_top card card_hover'
@@ -190,7 +190,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[1] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id } }}
-                    as={`/news/${Data.news[1].slug}`}
+                    // as={`/news/${Data.news[1].slug}`}
                   >
                     <div
                       className='video_seond_top card card_hover'
@@ -209,7 +209,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[2] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id } }}
-                    as={`/news/${Data.news[2].slug}`}
+                    // as={`/news/${Data.news[2].slug}`}
                   >
                     <div
                       className='video_center card card_hover'
@@ -228,7 +228,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[3] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[3].slug}`, query: { language_id: Data.news[3].language_id } }}
-                    as={`/news/${Data.news[3].slug}`}
+                    // as={`/news/${Data.news[3].slug}`}
                   >
                     <div
                       className='video_top_right card card_hover'
@@ -246,7 +246,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.news[4] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[4].slug}`, query: { language_id: Data.news[4].language_id } }}
-                    as={`/news/${Data.news[4].slug}`}
+                    // as={`/news/${Data.news[4].slug}`}
                   >
                     <div
                       className='video_bottom_right card card_hover'
@@ -284,7 +284,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[0] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}`, query: { language_id: Data.breaking_news[0].language_id } }}
-                    as={`/breaking-news/${Data.breaking_news[0].slug}`}
+                    // as={`/breaking-news/${Data.breaking_news[0].slug}`}
                   >
                     <div
                       className='video_first_top card card_hover'
@@ -305,7 +305,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[1] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}`, query: { language_id: Data.breaking_news[1].language_id } }}
-                    as={`/breaking-news/${Data.breaking_news[1].slug}`}
+                    // as={`/breaking-news/${Data.breaking_news[1].slug}`}
                   >
                     <div
                       className='video_seond_top card card_hover'
@@ -327,7 +327,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[2] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}`, query: { language_id: Data.breaking_news[2].language_id } }}
-                    as={`/breaking-news/${Data.breaking_news[2].slug}`}
+                    // as={`/breaking-news/${Data.breaking_news[2].slug}`}
                   >
                     <div
                       className='video_center card card_hover'
@@ -350,7 +350,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[3] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[3].slug}`, query: { language_id: Data.breaking_news[3].language_id } }}
-                    as={`/breaking-news/${Data.breaking_news[3].slug}`}
+                    // as={`/breaking-news/${Data.breaking_news[3].slug}`}
                   >
                     <div
                       className='video_top_right card card_hover'
@@ -372,7 +372,7 @@ const StyleTwo = ({ Data }) => {
                 {Data.breaking_news[4] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[4].slug}`, query: { language_id: Data.breaking_news[4].language_id } }}
-                    as={`/breaking-news/${Data.breaking_news[4].slug}`}
+                    // as={`/breaking-news/${Data.breaking_news[4].slug}`}
                   >
                     <div
                       className='video_bottom_right card card_hover'

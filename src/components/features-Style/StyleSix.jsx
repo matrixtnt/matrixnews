@@ -218,7 +218,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                   <SwiperSlide key={item.id}>
                     <Link
                       href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
-                      as={`/news/${item.slug}`}
+                      // as={`/news/${item.slug}`}
                     >
                       <div className='card fs-Newscard'>
                         <img
@@ -318,7 +318,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                     <SwiperSlide key={item.id}>
                       <Link
                         href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
-                        as={`/news/${item.slug}`}
+                        // as={`/news/${item.slug}`}
                       >
                         <div className='card fs-Newscard'>
                           <img

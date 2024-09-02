@@ -60,7 +60,7 @@ const RelatedNewsSection = props => {
             Data?.slice(0, 4).map(element => (
               <Link id='Link-all'
                 href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                as={`/news/${element.slug}`}
+                // as={`/news/${element.slug}`}
                 key={element.id}>
                 <div id='RNews-card' className='card' onClick={() => scrollToTop()}>
                   <img id='RNews-image' src={element.image} className='card-img-top' alt={element.title} onError={placeholderImage} />

@@ -114,7 +114,7 @@ const StyleFour = ({ Data, isLoading }) => {
                       <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
                         <Link id='rns-card' className='card card_hover_two'
                           href={{ pathname: `/news/${value.slug}`, query: { language_id: value.language_id } }}
-                          as={`/news/${value.slug}`}
+                          // as={`/news/${value.slug}`}
                         >
                           <div className='banner_thumb'>
                             <img
@@ -170,7 +170,7 @@ const StyleFour = ({ Data, isLoading }) => {
                           id='rns-card'
                           className='card card_hover_two'
                           href={{ pathname: `/breaking-news/${value.slug}`, query: { language_id: value.language_id } }}
-                          as={`/breaking-news/${value.slug}`}
+                          // as={`/breaking-news/${value.slug}`}
                         >
                           <div className='banner_thumb'>
                             <img

@@ -267,7 +267,7 @@ const StyleFive = ({ isLoading, Data }) => {
                           <div id='bns-card' className='card' key={element.id}>
                             <Link id='Link-all'
                               href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                              as={`/news/${element.slug}`}
+                              // as={`/news/${element.slug}`}
                             >
                               <img
                                 id='bns-image'
@@ -354,7 +354,7 @@ const StyleFive = ({ isLoading, Data }) => {
                           <div id='bns-card' className='card' key={element.id}>
                             <Link id='Link-all'
                               href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
-                              as={`/breaking-news/${element.slug}`}
+                              // as={`/breaking-news/${element.slug}`}
                             >
                               <img
                                 id='bns-image'

@@ -121,7 +121,7 @@ const ManageNews = () => {
                       <div className='manage-data'>
                         <Link
                           href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                          as={`/news/${element.slug}`}
+                          // as={`/news/${element.slug}`}
                         >
                           <div className='manage-card'>
 
@@ -153,7 +153,7 @@ const ManageNews = () => {
                         <div className='manage-right'>
                           <Link
                             href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                            as={`/news/${element.slug}`}
+                            // as={`/news/${element.slug}`}
                           >
                             <div className='manage-title'>
                               <p
