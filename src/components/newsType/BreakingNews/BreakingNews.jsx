@@ -46,7 +46,7 @@ const BreakingNews = () => {
   const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router?.asPath}`
 
   const decodedURL = decodeURI(currentUrL)
-
+  const [whatsappImageLoaded, setWhatsappImageLoaded] = useState(false);
 
   const handleCopyUrl = async (e) => {
     e.preventDefault();
@@ -212,7 +212,7 @@ const BreakingNews = () => {
                             </div>
                             {process.env.NEXT_PUBLIC_SEO === 'true' ? (
 
-                              <SeoShare url={decodedURL} title={`${DetailsPageData && DetailsPageData[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} setWhatsappImageLoaded={''} />
+                              <SeoShare url={decodedURL} title={`${DetailsPageData && DetailsPageData[0]?.title} - ${SettingsData && SettingsData?.web_setting?.web_name}`} hashtag={`${SettingsData && SettingsData?.web_setting?.web_name}`} handleCopyUrl={handleCopyUrl} setWhatsappImageLoaded={setWhatsappImageLoaded} />
 
                             ) :
 

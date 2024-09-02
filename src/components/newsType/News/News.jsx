@@ -43,7 +43,7 @@ const News = () => {
   const userData = useSelector(selectUser);
   const SettingsData = useSelector(settingsData);
   const router = useRouter();
-  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router?.asPath}?language_id=${currentLanguage.id}`;
+  const currentUrL = `${process.env.NEXT_PUBLIC_WEB_URL}${router?.asPath}`;
 
   const decodedURL = decodeURI(currentUrL)
 
