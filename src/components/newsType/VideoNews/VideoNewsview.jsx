@@ -13,7 +13,8 @@ import { getFeatureSectionApi } from 'src/hooks/getFeatureSectionApi'
 import { getLanguage, getUser } from 'src/utils/api'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
-import { locationData } from 'src/store/reducers/settingsReducer'
+import { locationData, settingsData } from 'src/store/reducers/settingsReducer'
+import Meta from 'src/components/seo/Meta'
 // import NoDataFound from 'src/components/noDataFound/NoDataFound'
 
 const VideoNewsview = () => {
@@ -63,7 +64,13 @@ const VideoNewsview = () => {
     setTypeUrl(type)
   }
 
+  const settings = useSelector(settingsData)
+
+  const webName = settings?.web_setting?.web_name
+
   return (
+    <>
+     <Meta title={`${webName} | ${translate('videoNews')}`} description='' keywords='' ogImage='' pathName='' schema='' />
     <Layout>
       <BreadcrumbNav SecondElement={'Video News'} />
       <div className='py-5 video_section_all'>
@@ -134,6 +141,7 @@ const VideoNewsview = () => {
         </div>
       </div>
     </Layout>
+    </>
   )
 }
 

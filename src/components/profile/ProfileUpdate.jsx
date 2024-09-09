@@ -11,6 +11,8 @@ import usersvg from '../../../public/assets/images/user.svg'
 import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { useRouter } from 'next/router'
+import Meta from '../seo/Meta'
+import { settingsData } from 'src/store/reducers/settingsReducer'
 
 const ProfileUpdate = () => {
 
@@ -136,7 +138,13 @@ const ProfileUpdate = () => {
     }
   }
 
+  const settings = useSelector(settingsData)
+
+  const webName = settings?.web_setting?.web_name
+
   return (
+    <>
+     <Meta title={`${webName} | ${translate('update-profile')}`} description='' keywords='' ogImage='' pathName='' schema='' />
     <Layout>
       <BreadcrumbNav SecondElement={translate('update-profile')} />
       <section className='profile py-5 bg-white'>
@@ -243,6 +251,7 @@ const ProfileUpdate = () => {
         </div>
       </section>
     </Layout>
+    </>
   )
 }
 

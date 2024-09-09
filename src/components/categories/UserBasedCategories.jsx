@@ -14,6 +14,8 @@ import { getUserManageData, loadGetUserByIdApi, selectUser } from 'src/store/red
 import Loader from './Loader'
 import { useRouter } from 'next/router'
 import AllCategorySkeleton from '../skeletons/AllCategorySkeleton'
+import Meta from '../seo/Meta'
+import { settingsData } from 'src/store/reducers/settingsReducer'
 
 const UserBasedCategories = () => {
   const [data, setData] = useState([])
@@ -149,60 +151,67 @@ const UserBasedCategories = () => {
     marginRight: '3rem'
   }
 
+  const settings = useSelector(settingsData)
+
+  const webName = settings?.web_setting?.web_name
+
   return (
-    <Layout>
-      <section className='manage_preferences py-5'>
-        <div className='container'>
-          {loading ? (
-            <div className='row'>
-              {[...Array(3)].map((_, index) => (
-                <div className='col-md-4 col-12' key={index}>
-                  <AllCategorySkeleton />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <>
+    <>
+      <Meta title={`${webName} | ${translate('userBasedCat')}`} description='' keywords='' ogImage='' pathName='' schema='' />
+      <Layout>
+        <section className='manage_preferences py-5'>
+          <div className='container'>
+            {loading ? (
               <div className='row'>
-                {data && data.length > 0
-                  ? data.map((element) => (
-                    <div className='col-md-4 col-12' key={element.id}>
-                      <div className='manage_card'>
-                        <div className='inner_manage'>
-                          <div className='manage_image'>
-                            <img src={element.image} alt={element.category_name} onError={placeholderImage} />
-                          </div>
-                          <div className='manage_title'>
-                            <p className='mb-0'>{element.category_name}</p>
-                          </div>
-                          <div className='manage_toggle'>
-                            <SwitchButton
-                              checked={element.isToggledOn}
-                              onlabel='ON'
-                              onstyle='success'
-                              offlabel='OFF'
-                              offstyle='danger'
-                              style={switchButtonStyle}
-                              onChange={() => handleSwitchChange(element.id)}
-                            />
+                {[...Array(3)].map((_, index) => (
+                  <div className='col-md-4 col-12' key={index}>
+                    <AllCategorySkeleton />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <>
+                <div className='row'>
+                  {data && data.length > 0
+                    ? data.map((element) => (
+                      <div className='col-md-4 col-12' key={element.id}>
+                        <div className='manage_card'>
+                          <div className='inner_manage'>
+                            <div className='manage_image'>
+                              <img src={element.image} alt={element.category_name} onError={placeholderImage} />
+                            </div>
+                            <div className='manage_title'>
+                              <p className='mb-0'>{element.category_name}</p>
+                            </div>
+                            <div className='manage_toggle'>
+                              <SwitchButton
+                                checked={element.isToggledOn}
+                                onlabel='ON'
+                                onstyle='success'
+                                offlabel='OFF'
+                                offstyle='danger'
+                                style={switchButtonStyle}
+                                onChange={() => handleSwitchChange(element.id)}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))
-                  : null}
-              </div>
-              <button className='finalsumit_btn mb-5 commonBtn' onClick={e => finalSubmit(e)}>
-                {
-                  loader ? <Loader /> : translate('saveLbl')
-                }
-              </button>
-            </>
-          )}
+                    ))
+                    : null}
+                </div>
+                <button className='finalsumit_btn mb-5 commonBtn' onClick={e => finalSubmit(e)}>
+                  {
+                    loader ? <Loader /> : translate('saveLbl')
+                  }
+                </button>
+              </>
+            )}
 
-        </div>
-      </section>
-    </Layout>
+          </div>
+        </section>
+      </Layout>
+    </>
   )
 }
 

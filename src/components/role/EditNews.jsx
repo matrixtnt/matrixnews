@@ -31,6 +31,7 @@ import toast from 'react-hot-toast'
 import Layout from '../layout/Layout'
 import { Input } from 'antd'
 import { addDays } from 'date-fns'
+import Meta from '../seo/Meta'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -604,419 +605,427 @@ const EditNews = () => {
     setNextStepScreen(false)
   }
 
+  const settings = useSelector(settingsData)
+
+  const webName = settings?.web_setting?.web_name
+
   return (
-    <Layout>
-      <BreadcrumbNav SecondElement={translate('editNewsLbl')} />
-      <div className='create_news py-5 bg-white'>
-        <div className='container'>
-          <div className='row'>
-            <div className='col-md-7 col-12'>
-              <img className='edit-img' src={managenewsimage.src} alt='create news' onError={placeholderImage} />
-            </div>
 
-            <div className='col-md-5 col-12'>
-              {!nextStepScreen ? (
-                <Form onSubmit={e => nextStep(e)}>
-                  <div className='form_title'>
-                    <p className='mb-2'>{translate('editNewsLbl')}</p>
-                    <span className='mb-2'>{translate('step1Of2Lbl')}</span>
-                  </div>
+    <>
+      <Meta title={`${webName} | ${translate('editNewsLbl')}`} description='' keywords='' ogImage='' pathName='' schema='' />
+      <Layout>
+        <BreadcrumbNav SecondElement={translate('editNewsLbl')} />
+        <div className='create_news py-5 bg-white'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-md-7 col-12'>
+                <img className='edit-img' src={managenewsimage.src} alt='create news' onError={placeholderImage} />
+              </div>
 
-                  <div className='form_details'>
-                    <div className='input_form mb-2'>
-                      <input
-                        type='text'
-                        defaultValue={DefaultValue.defualTitle}
-                        placeholder={translate('titleLbl')}
-                        onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
-                      />
+              <div className='col-md-5 col-12'>
+                {!nextStepScreen ? (
+                  <Form onSubmit={e => nextStep(e)}>
+                    <div className='form_title'>
+                      <p className='mb-2'>{translate('editNewsLbl')}</p>
+                      <span className='mb-2'>{translate('step1Of2Lbl')}</span>
                     </div>
-                    <div className='input_form textarea mb-2'>
-                      <TextArea
-                        rows={2}
-                        placeholder={translate('meta-title')}
-                        // maxLength={2}
-                        defaultValue={DefaultValue.defaultMetatitle}
-                        onChange={e => setDefaultValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
-                      />
-                      <Alert
-                        closable
-                        showIcon
-                        className='mt-2'
-                        message={translate("metaTitleWarningLbl")}
-                        type='warning'
-                      />
-                    </div>
-                    <div className='input_form mb-2'>
-                      <TextArea
-                        rows={2}
-                        // maxLength={2}
-                        placeholder={translate('meta-description')}
-                        defaultValue={DefaultValue.defaultMetaDescription}
-                        onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
-                      />
-                      <Alert
-                        closable
-                        showIcon
-                        className='mt-2'
-                        message={translate("metaDescriptionWarningLbl")}
-                        type='warning'
-                      />
-                    </div>
-                    <div className='input_form mb-2'>
-                      <TextArea
-                        rows={2}
-                        // maxLength={2}
-                        placeholder={translate('meta-keywords')}
-                        defaultValue={DefaultValue.defaultMetaKeyword}
-                        onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
-                      />
-                      <Alert
-                        closable
-                        showIcon
-                        className='mt-2'
-                        message={translate("metaKeywordWarningLbl")}
-                        type='warning'
-                      />
-                    </div>
-                    <div className='input_form mb-2'>
-                      <input
-                        placeholder={translate('slug')}
-                        defaultValue={DefaultValue.defaultSlug}
-                        onChange={e => setDefaultValue({ ...DefaultValue, defaultSlug: e.target.value })}
-                      />
-                      <Alert
-                        closable
-                        showIcon
-                        className='mt-2'
-                        message={translate("slugWarningLbl")}
-                        type='warning'
-                      />
-                    </div>
-                    <div className='input_form mb-2'>
-                      <input
-                        type='text'
-                        defaultValue={DefaultValue.defualTitle}
-                        placeholder={translate('titleLbl')}
-                        onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
-                      />
-                    </div>
-                    <div className='dropdown_form mb-2'>
-                      <Select
-                        style={{
-                          width: '100%'
-                        }}
-                        defaultValue={DefaultValue.languageName}
-                        placeholder={translate('chooseLanLbl')}
-                        onChange={values => languageSelector(values)}
-                        optionLabelProp='label'
-                      >
-                        {languagesData &&
-                          languagesData.map((elem, id) => (
-                            <Option value={JSON.stringify(elem)} key={id} label={elem.language}>
-                              <Space> {elem.language}</Space>
-                            </Option>
-                          ))}
-                      </Select>
-                    </div>
-                    {showCategory ? (
+
+                    <div className='form_details'>
+                      <div className='input_form mb-2'>
+                        <input
+                          type='text'
+                          defaultValue={DefaultValue.defualTitle}
+                          placeholder={translate('titleLbl')}
+                          onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
+                        />
+                      </div>
+                      <div className='input_form textarea mb-2'>
+                        <TextArea
+                          rows={2}
+                          placeholder={translate('meta-title')}
+                          // maxLength={2}
+                          defaultValue={DefaultValue.defaultMetatitle}
+                          onChange={e => setDefaultValue({ ...DefaultValue, defaultMetatitle: e.target.value })}
+                        />
+                        <Alert
+                          closable
+                          showIcon
+                          className='mt-2'
+                          message={translate("metaTitleWarningLbl")}
+                          type='warning'
+                        />
+                      </div>
+                      <div className='input_form mb-2'>
+                        <TextArea
+                          rows={2}
+                          // maxLength={2}
+                          placeholder={translate('meta-description')}
+                          defaultValue={DefaultValue.defaultMetaDescription}
+                          onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaDescription: e.target.value })}
+                        />
+                        <Alert
+                          closable
+                          showIcon
+                          className='mt-2'
+                          message={translate("metaDescriptionWarningLbl")}
+                          type='warning'
+                        />
+                      </div>
+                      <div className='input_form mb-2'>
+                        <TextArea
+                          rows={2}
+                          // maxLength={2}
+                          placeholder={translate('meta-keywords')}
+                          defaultValue={DefaultValue.defaultMetaKeyword}
+                          onChange={e => setDefaultValue({ ...DefaultValue, defaultMetaKeyword: e.target.value })}
+                        />
+                        <Alert
+                          closable
+                          showIcon
+                          className='mt-2'
+                          message={translate("metaKeywordWarningLbl")}
+                          type='warning'
+                        />
+                      </div>
+                      <div className='input_form mb-2'>
+                        <input
+                          placeholder={translate('slug')}
+                          defaultValue={DefaultValue.defaultSlug}
+                          onChange={e => setDefaultValue({ ...DefaultValue, defaultSlug: e.target.value })}
+                        />
+                        <Alert
+                          closable
+                          showIcon
+                          className='mt-2'
+                          message={translate("slugWarningLbl")}
+                          type='warning'
+                        />
+                      </div>
+                      <div className='input_form mb-2'>
+                        <input
+                          type='text'
+                          defaultValue={DefaultValue.defualTitle}
+                          placeholder={translate('titleLbl')}
+                          onChange={e => setDefaultValue({ ...DefaultValue, defualTitle: e.target.value })}
+                        />
+                      </div>
                       <div className='dropdown_form mb-2'>
                         <Select
                           style={{
                             width: '100%'
                           }}
-                          value={DefaultValue.categorydefault}
-                          placeholder={translate('catLbl')}
-                          onChange={(value, option) => categorySelector(value, option)}
+                          defaultValue={DefaultValue.languageName}
+                          placeholder={translate('chooseLanLbl')}
+                          onChange={values => languageSelector(values)}
                           optionLabelProp='label'
                         >
-                          {category &&
-                            category.map((elem, id) => (
-                              <Option value={elem.id} key={id} label={elem.category_name}>
-                                <Space> {elem.category_name}</Space>
+                          {languagesData &&
+                            languagesData.map((elem, id) => (
+                              <Option value={JSON.stringify(elem)} key={id} label={elem.language}>
+                                <Space> {elem.language}</Space>
                               </Option>
                             ))}
                         </Select>
                       </div>
-                    ) : null}
+                      {showCategory ? (
+                        <div className='dropdown_form mb-2'>
+                          <Select
+                            style={{
+                              width: '100%'
+                            }}
+                            value={DefaultValue.categorydefault}
+                            placeholder={translate('catLbl')}
+                            onChange={(value, option) => categorySelector(value, option)}
+                            optionLabelProp='label'
+                          >
+                            {category &&
+                              category.map((elem, id) => (
+                                <Option value={elem.id} key={id} label={elem.category_name}>
+                                  <Space> {elem.category_name}</Space>
+                                </Option>
+                              ))}
+                          </Select>
+                        </div>
+                      ) : null}
 
-                    {showsubCategory ? (
+                      {showsubCategory ? (
+                        <div className='dropdown_form mb-2'>
+                          <Select
+                            style={{
+                              width: '100%'
+                            }}
+                            value={DefaultValue.subcategorydefault}
+                            placeholder={translate('subcatLbl')}
+                            onChange={(value, option) => subcategorySelector(value, option)}
+                            optionLabelProp='label'
+                          >
+                            {subCategory &&
+                              subCategory.map((elem, id) => (
+                                <Option value={elem.id} key={id} label={elem.subcategory_name}>
+                                  <Space> {elem.subcategory_name}</Space>
+                                </Option>
+                              ))}
+                          </Select>
+                        </div>
+                      ) : null}
+
+                      {getLocationData === '1' ? (
+                        <div className='dropdown_form mb-2'>
+                          <Select
+                            style={{
+                              width: '100%'
+                            }}
+                            value={DefaultValue.defualtLocation} // Use defaultValue here
+                            onChange={value =>
+                              setDefaultValue({ ...DefaultValue, defualtLocationId: value, defualtLocation: value })
+                            } // Update defaultValue using setDefaultValue
+                          >
+                            {locationOptions &&
+                              locationOptions.map(location => (
+                                <Select.Option key={location.id} value={location.id}>
+                                  {location.location_name}
+                                </Select.Option>
+                              ))}
+                          </Select>
+                        </div>
+                      ) : null}
                       <div className='dropdown_form mb-2'>
                         <Select
                           style={{
                             width: '100%'
                           }}
-                          value={DefaultValue.subcategorydefault}
-                          placeholder={translate('subcatLbl')}
-                          onChange={(value, option) => subcategorySelector(value, option)}
+                          value={DefaultValue.standardType}
+                          placeholder={translate('stdPostLbl')}
+                          onChange={(value, option) => postSelector(value, option)}
                           optionLabelProp='label'
                         >
-                          {subCategory &&
-                            subCategory.map((elem, id) => (
-                              <Option value={elem.id} key={id} label={elem.subcategory_name}>
-                                <Space> {elem.subcategory_name}</Space>
+                          {standardPost &&
+                            standardPost.map((elem, id) => (
+                              <Option value={elem.id} key={id} label={JSON.stringify(elem.name)}>
+                                {elem.type}
                               </Option>
                             ))}
                         </Select>
                       </div>
-                    ) : null}
+                      {showUrl ? (
+                        <div className='input_form mb-2'>
+                          <input
+                            type='text'
+                            defaultValue={DefaultValue.contentValue}
+                            className='inputurl'
+                            placeholder={translate('youtubeUrlLbl')}
+                            onChange={e => setUrl(e.target.value)}
+                            required
+                          />
+                        </div>
+                      ) : null}
+                      {otherUrl ? (
+                        <div className='input_form mb-2'>
+                          <input
+                            type='text'
+                            className='inputurl'
+                            defaultValue={DefaultValue.contentValue}
+                            placeholder={translate('otherUrlLbl')}
+                            onChange={e => setUrl(e.target.value)}
+                          />
+                        </div>
+                      ) : null}
+                      {videoUrl ? (
+                        <div className='input_form mb-2 video_url'>
+                          {manageNews?.content_type === 'video_upload' ? (
+                            <div className='preview' onClick={() => handleVideoUrl(manageNews?.content_value)}>
+                              {translate('previewLbl')}
+                              <BsFillPlayFill />
+                            </div>
+                          ) : null}
+                          <input
+                            type='file'
+                            id='videoInput'
+                            name='video'
+                            accept='video/*'
+                            onChange={e => handleVideo(e)}
+                          />
+                          <label htmlFor='videoInput'>
+                            {' '}
+                            {translate('uploadVideoLbl')}
+                            <AiOutlineUpload className='uploadVideo' />
+                          </label>
+                          <input
+                            type='file'
+                            className='form-control'
+                            id='videoInput'
+                            name='video'
+                            accept='video/*'
+                            placeholder='Upload File'
+                            disabled
+                            hidden
+                          />
+                        </div>
+                      ) : null}
 
-                    {getLocationData === '1' ? (
                       <div className='dropdown_form mb-2'>
                         <Select
+                          mode='multiple'
                           style={{
                             width: '100%'
                           }}
-                          value={DefaultValue.defualtLocation} // Use defaultValue here
-                          onChange={value =>
-                            setDefaultValue({ ...DefaultValue, defualtLocationId: value, defualtLocation: value })
-                          } // Update defaultValue using setDefaultValue
+                          defaultValue={DefaultValue?.tagValue}
+                          placeholder={translate('tagLbl')}
+                          onChange={values => handleChange(values)}
+                          optionLabelProp='label'
                         >
-                          {locationOptions &&
-                            locationOptions.map(location => (
-                              <Select.Option key={location.id} value={location.id}>
-                                {location.location_name}
-                              </Select.Option>
+                          {tagsData &&
+                            tagsData.map((elem, id) => (
+                              <Option key={id} value={elem.tag_name} label={elem.tag_name}>
+                                <Space>{elem.tag_name}</Space>
+                              </Option>
                             ))}
                         </Select>
                       </div>
-                    ) : null}
-                    <div className='dropdown_form mb-2'>
-                      <Select
-                        style={{
-                          width: '100%'
-                        }}
-                        value={DefaultValue.standardType}
-                        placeholder={translate('stdPostLbl')}
-                        onChange={(value, option) => postSelector(value, option)}
-                        optionLabelProp='label'
-                      >
-                        {standardPost &&
-                          standardPost.map((elem, id) => (
-                            <Option value={elem.id} key={id} label={JSON.stringify(elem.name)}>
-                              {elem.type}
-                            </Option>
-                          ))}
-                      </Select>
-                    </div>
-                    {showUrl ? (
-                      <div className='input_form mb-2'>
-                        <input
-                          type='text'
-                          defaultValue={DefaultValue.contentValue}
-                          className='inputurl'
-                          placeholder={translate('youtubeUrlLbl')}
-                          onChange={e => setUrl(e.target.value)}
-                          required
+                      <div className='show_date mb-2'>
+                        <DatePicker
+                          dateFormat='yyyy-MM-dd'
+                          selected={DefaultValue.publishDateValue}
+                          placeholderText={translate('publishDate')}
+                          clearButtonTitle
+                          todayButton={'Today'}
+                          minDate={new Date()}
+                          onChange={date => handlePublishDate(date)}
                         />
+                        <MdEditCalendar className='form-calender' />
                       </div>
-                    ) : null}
-                    {otherUrl ? (
-                      <div className='input_form mb-2'>
-                        <input
-                          type='text'
-                          className='inputurl'
-                          defaultValue={DefaultValue.contentValue}
-                          placeholder={translate('otherUrlLbl')}
-                          onChange={e => setUrl(e.target.value)}
+                      <div className='show_date mb-2'>
+                        <DatePicker
+                          dateFormat='yyyy-MM-dd'
+                          selected={DefaultValue.dateValue}
+                          placeholderText={translate('showTilledDate')}
+                          clearButtonTitle
+                          todayButton={'Today'}
+                          minDate={addDays(new Date(), 1)}
+                          onChange={date => handleDate(date)}
                         />
+                        <MdEditCalendar className='form-calender' />
                       </div>
-                    ) : null}
-                    {videoUrl ? (
-                      <div className='input_form mb-2 video_url'>
-                        {manageNews?.content_type === 'video_upload' ? (
-                          <div className='preview' onClick={() => handleVideoUrl(manageNews?.content_value)}>
-                            {translate('previewLbl')}
-                            <BsFillPlayFill />
-                          </div>
-                        ) : null}
+                      <div className='main_image mb-2'>
                         <input
                           type='file'
-                          id='videoInput'
-                          name='video'
-                          accept='video/*'
-                          onChange={e => handleVideo(e)}
+                          name='image'
+                          id='file'
+                          className='file_upload'
+                          onChange={e => handleMainImage(e)}
                         />
-                        <label htmlFor='videoInput'>
+
+                        <label htmlFor='file'>
                           {' '}
-                          {translate('uploadVideoLbl')}
-                          <AiOutlineUpload className='uploadVideo' />
+                          <em>
+                            {DefaultValue.imagedefault ? null : <AiFillPicture />}{' '}
+                            {DefaultValue.imagedefault ? null : translate('uploadMainImageLbl')}
+                          </em>
                         </label>
+                        {mainImage && (
+                          <div className='mainimage'>
+                            <img
+                              src={mainImage && mainImage}
+                              onClick={() => document.getElementById('file').click()}
+                              alt='edit news'
+                            />
+                          </div>
+                        )}
+
+                        {DefaultValue.imagedefault && (
+                          <div className='mainimage'>
+                            <img
+                              src={DefaultValue.imagedefault}
+                              onClick={() => document.getElementById('file').click()}
+                              alt='edit news'
+                              onError={placeholderImage}
+                            />
+                          </div>
+                        )}
                         <input
-                          type='file'
+                          type='text'
                           className='form-control'
-                          id='videoInput'
-                          name='video'
-                          accept='video/*'
                           placeholder='Upload File'
+                          id='file1'
+                          name='myfile'
                           disabled
                           hidden
                         />
                       </div>
-                    ) : null}
-
-                    <div className='dropdown_form mb-2'>
-                      <Select
-                        mode='multiple'
-                        style={{
-                          width: '100%'
-                        }}
-                        defaultValue={DefaultValue?.tagValue}
-                        placeholder={translate('tagLbl')}
-                        onChange={values => handleChange(values)}
-                        optionLabelProp='label'
-                      >
-                        {tagsData &&
-                          tagsData.map((elem, id) => (
-                            <Option key={id} value={elem.tag_name} label={elem.tag_name}>
-                              <Space>{elem.tag_name}</Space>
-                            </Option>
-                          ))}
-                      </Select>
-                    </div>
-                    <div className='show_date mb-2'>
-                      <DatePicker
-                        dateFormat='yyyy-MM-dd'
-                        selected={DefaultValue.publishDateValue}
-                        placeholderText={translate('publishDate')}
-                        clearButtonTitle
-                        todayButton={'Today'}
-                        minDate={new Date()}
-                        onChange={date => handlePublishDate(date)}
-                      />
-                      <MdEditCalendar className='form-calender' />
-                    </div>
-                    <div className='show_date mb-2'>
-                      <DatePicker
-                        dateFormat='yyyy-MM-dd'
-                        selected={DefaultValue.dateValue}
-                        placeholderText={translate('showTilledDate')}
-                        clearButtonTitle
-                        todayButton={'Today'}
-                        minDate={addDays(new Date(), 1)}
-                        onChange={date => handleDate(date)}
-                      />
-                      <MdEditCalendar className='form-calender' />
-                    </div>
-                    <div className='main_image mb-2'>
-                      <input
-                        type='file'
-                        name='image'
-                        id='file'
-                        className='file_upload'
-                        onChange={e => handleMainImage(e)}
-                      />
-
-                      <label htmlFor='file'>
-                        {' '}
-                        <em>
-                          {DefaultValue.imagedefault ? null : <AiFillPicture />}{' '}
-                          {DefaultValue.imagedefault ? null : translate('uploadMainImageLbl')}
-                        </em>
-                      </label>
-                      {mainImage && (
-                        <div className='mainimage'>
-                          <img
-                            src={mainImage && mainImage}
-                            onClick={() => document.getElementById('file').click()}
-                            alt='edit news'
-                          />
-                        </div>
-                      )}
-
-                      {DefaultValue.imagedefault && (
-                        <div className='mainimage'>
-                          <img
-                            src={DefaultValue.imagedefault}
-                            onClick={() => document.getElementById('file').click()}
-                            alt='edit news'
-                            onError={placeholderImage}
-                          />
-                        </div>
-                      )}
-                      <input
-                        type='text'
-                        className='form-control'
-                        placeholder='Upload File'
-                        id='file1'
-                        name='myfile'
-                        disabled
-                        hidden
-                      />
-                    </div>
-                    <div className='other_image mb-2'>
-                      <Dropzone onDrop={handleDrop} multiple={true}>
-                        {({ getRootProps, getInputProps }) => (
-                          <div {...getRootProps()} className='dropzone'>
-                            <input {...getInputProps()} className='' />
-                            <AiFillPicture className='me-1' /> {translate('uploadOtherImageLbl')}
-                          </div>
-                        )}
-                      </Dropzone>
-                    </div>
-                    <div className='image_slider'>
-                      <Swiper {...swiperOption}>
-                        {DefaultValue?.multipleImage?.map((file, index) => (
-                          <SwiperSlide key={index}>
-                            <img src={file.other_image} alt={`Uploaded ${index}`} className='all_images' />
-                            <button onClick={e => handleRemoveImage(e, file.id)} className='close-btn'>
-                              <IoIosClose />
-                            </button>
-                          </SwiperSlide>
-                        ))}
-
-                        {images.map((file, index) => (
-                          <SwiperSlide key={index}>
-                            <div className='otherImgDiv'>
-                              <span onClick={() => handleRemove(index)}><IoIosCloseCircle /> </span>
-                              <img src={URL.createObjectURL(file)} alt={`Uploaded ${index}`} />
+                      <div className='other_image mb-2'>
+                        <Dropzone onDrop={handleDrop} multiple={true}>
+                          {({ getRootProps, getInputProps }) => (
+                            <div {...getRootProps()} className='dropzone'>
+                              <input {...getInputProps()} className='' />
+                              <AiFillPicture className='me-1' /> {translate('uploadOtherImageLbl')}
                             </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
-                    </div>
-                    <Button type='submit' className='btn btn-secondary next-btn commonBtn'>
-                      {translate('nxt')}
-                    </Button>
-                  </div>
-                </Form>
-              ) : (
-                <Form onSubmit={e => finalSubmit(e)}>
-                  <div className='form_title'>
-                    <p className='mb-2'>{translate('createNewsLbl')}</p>
-                    <span className='mb-2'>{translate('step2of2Lbl')}</span>
-                  </div>
-                  <div className='editor'>
-                    <ReactQuill defaultValue={DefaultValue.descriptionValue} onChange={handleChangeContent} />
-                  </div>
-                  <div className='row'>
-                    <div className='col-md-6'>
-                      <Button type='button' className='btn btn-secondary backbtn commonBtn' onClick={Back}>
-                        {translate('back')}
+                          )}
+                        </Dropzone>
+                      </div>
+                      <div className='image_slider'>
+                        <Swiper {...swiperOption}>
+                          {DefaultValue?.multipleImage?.map((file, index) => (
+                            <SwiperSlide key={index}>
+                              <img src={file.other_image} alt={`Uploaded ${index}`} className='all_images' />
+                              <button onClick={e => handleRemoveImage(e, file.id)} className='close-btn'>
+                                <IoIosClose />
+                              </button>
+                            </SwiperSlide>
+                          ))}
+
+                          {images.map((file, index) => (
+                            <SwiperSlide key={index}>
+                              <div className='otherImgDiv'>
+                                <span onClick={() => handleRemove(index)}><IoIosCloseCircle /> </span>
+                                <img src={URL.createObjectURL(file)} alt={`Uploaded ${index}`} />
+                              </div>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                      </div>
+                      <Button type='submit' className='btn btn-secondary next-btn commonBtn'>
+                        {translate('nxt')}
                       </Button>
                     </div>
-                    <div className='col-md-6'>
-                      <Button type='submit' className=' btn btn-secondary subbtn commonBtn'>
-                        {translate('submitBtn')}
-                      </Button>
+                  </Form>
+                ) : (
+                  <Form onSubmit={e => finalSubmit(e)}>
+                    <div className='form_title'>
+                      <p className='mb-2'>{translate('createNewsLbl')}</p>
+                      <span className='mb-2'>{translate('step2of2Lbl')}</span>
                     </div>
-                  </div>
-                </Form>
-              )}
+                    <div className='editor'>
+                      <ReactQuill defaultValue={DefaultValue.descriptionValue} onChange={handleChangeContent} />
+                    </div>
+                    <div className='row'>
+                      <div className='col-md-6'>
+                        <Button type='button' className='btn btn-secondary backbtn commonBtn' onClick={Back}>
+                          {translate('back')}
+                        </Button>
+                      </div>
+                      <div className='col-md-6'>
+                        <Button type='submit' className=' btn btn-secondary subbtn commonBtn'>
+                          {translate('submitBtn')}
+                        </Button>
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </div>
             </div>
           </div>
+          <VideoPlayerModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            // backdrop="static"
+            keyboard={false}
+            url={Video_url}
+            type_url={manageNews?.content_type}
+          // title={Data[0].title}
+          />
         </div>
-        <VideoPlayerModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          // backdrop="static"
-          keyboard={false}
-          url={Video_url}
-          type_url={manageNews?.content_type}
-        // title={Data[0].title}
-        />
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 

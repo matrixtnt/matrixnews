@@ -1,7 +1,7 @@
 'use client'
 import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
-import { locationData } from 'src/store/reducers/settingsReducer'
+import { locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import { useSelector } from 'react-redux'
 import { getNewsApi } from 'src/hooks/newsApi'
 import Layout from '../layout/Layout'
@@ -11,6 +11,8 @@ import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
 import NewsCard from '../view/NewsCard'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav.jsx';
 import { useRouter } from 'next/router'
+import Meta from '../seo/Meta'
+import { translate } from 'src/utils'
 
 const AllRelatedNews = () => {
 
@@ -43,8 +45,8 @@ const AllRelatedNews = () => {
       const { data } = await getNewsApi.getNews({
         offset: offset * dataPerPage,
         limit: dataPerPage,
-        // category_id: catSlug,
-        category_slug: catSlug,
+        category_id: catSlug,
+        // category_slug: catSlug,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude
@@ -80,43 +82,54 @@ const AllRelatedNews = () => {
 
   }, [totalData, isLoading])
 
-  return (
-    <Layout>
-      <>
-        <BreadcrumbNav SecondElement={'Related News'} ThirdElement={catSlug} />
-        <div id='BNV-main' className='mb-5'>
-          <div id='BNV-content' className='container'>
-            {isLoading.loading ? (
-              <div className='row'>
-                {[...Array(4)].map((_, index) => (
-                  <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
-                    <Card isLoading={true} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className='row commonRowGap'>
-                {viewAllData && viewAllData ? (
-                  viewAllData && viewAllData.map(element => (
-                    <div className='col-md-4 col-lg-3 col-sm-6 col-12' key={element.id}>
-                      <NewsCard element={element} />
-                    </div>
-                  ))
-                ) : (
-                  <>
-                    {NoDataFound()}
+  const settings = useSelector(settingsData)
 
-                  </>
-                )}
-              </div>
-            )}
-            {totalData > dataPerPage && totalData !== viewAllData?.length ? (
-              <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
-            ) : null}
+  const webName = settings && settings?.web_setting?.web_name
+
+  return (
+
+    <>
+      {
+        webName &&
+        <Meta title={`${webName} | ${translate('related-news')}`} description='' keywords='' ogImage='' pathName='' schema='' />
+      }
+      <Layout>
+        <>
+          <BreadcrumbNav SecondElement={'Related News'} ThirdElement={catSlug} />
+          <div id='BNV-main' className='mb-5'>
+            <div id='BNV-content' className='container'>
+              {isLoading.loading ? (
+                <div className='row'>
+                  {[...Array(4)].map((_, index) => (
+                    <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
+                      <Card isLoading={true} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className='row commonRowGap'>
+                  {viewAllData && viewAllData ? (
+                    viewAllData && viewAllData.map(element => (
+                      <div className='col-md-4 col-lg-3 col-sm-6 col-12' key={element.id}>
+                        <NewsCard element={element} />
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      {NoDataFound()}
+
+                    </>
+                  )}
+                </div>
+              )}
+              {totalData > dataPerPage && totalData !== viewAllData?.length ? (
+                <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+              ) : null}
+            </div>
           </div>
-        </div>
-      </>
-    </Layout>
+        </>
+      </Layout>
+    </>
   )
 }
 

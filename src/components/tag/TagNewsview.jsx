@@ -1,5 +1,5 @@
 'use client'
-import { NoDataFound } from '../../utils'
+import { NoDataFound, translate } from '../../utils'
 import { useRouter } from 'next/router'
 import { useQuery } from '@tanstack/react-query'
 import { getLanguage } from 'src/utils/api'
@@ -7,6 +7,9 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { getNewsApi } from 'src/hooks/newsApi'
 import NewsCard from '../view/NewsCard'
+import Meta from '../seo/Meta'
+import { settingsData } from 'src/store/reducers/settingsReducer'
+import { useSelector } from 'react-redux'
 
 
 const TagNewsview = () => {
@@ -43,7 +46,14 @@ const TagNewsview = () => {
     }
   }
 
+
+  const settings = useSelector(settingsData)
+
+  const webName = settings?.web_setting?.web_name
+
   return (
+    <>
+     <Meta title={`${webName} | ${translate('tagLbl')}`} description='' keywords='' ogImage='' pathName='' schema='' />
     <Layout>
       <div className='py-5 tagview bg-white'>
         <div className='container'>
@@ -75,6 +85,7 @@ const TagNewsview = () => {
         </div>
       </div>
     </Layout>
+    </>
   )
 }
 

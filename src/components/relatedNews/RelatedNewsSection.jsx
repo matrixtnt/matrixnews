@@ -20,7 +20,7 @@ const RelatedNewsSection = props => {
       const { data } = await getNewsApi.getNews({
         offset: '0',
         limit: '10',
-        category_slug: props.catSlug,
+        category_id: props?.categoryId,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude
@@ -80,7 +80,7 @@ const RelatedNewsSection = props => {
           {
             Data.length > 4 &&
             <div className='mb-4'>
-              <Link href={`/view-all/related-news/${props.catSlug}`}>
+              <Link href={`/view-all/related-news/${props.categoryId}`}>
                 <button className='loadMoreBtn commonBtn'>  {translate('viewall')}</button>
               </Link>
             </div>

@@ -469,8 +469,7 @@ const News = () => {
 
                 <div id='nv-right-section' className='col-lg-4 col-12'>
                   {Data && Data[0]?.category_id ? (
-                    <RelatedNewsSection Cid={Data && Data[0]?.category_id} newsSlug={newsSlug}
-                      catSlug={Data && Data[0]?.category?.category_name}
+                    <RelatedNewsSection categoryId={Data && Data[0]?.category_id} newsSlug={newsSlug}
                     />
                   ) : null}
                   <TagsSection />

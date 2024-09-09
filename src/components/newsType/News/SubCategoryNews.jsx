@@ -2,17 +2,18 @@
 import BreadcrumbNav from '../../breadcrumb/BreadcrumbNav'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from '../../../store/reducers/languageReducer'
-import { NoDataFound } from '../../../utils'
+import { NoDataFound, translate } from '../../../utils'
 import { useRouter } from 'next/router.js'
 import { getLanguage } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
 import Layout from 'src/components/layout/Layout'
 import Card from 'src/components/skeletons/Card'
-import { locationData } from 'src/store/reducers/settingsReducer'
+import { locationData, settingsData } from 'src/store/reducers/settingsReducer'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { useEffect, useState } from 'react'
 import LoadMoreBtn from 'src/components/view/loadMoreBtn/LoadMoreBtn'
 import NewsCard from 'src/components/view/NewsCard'
+import Meta from 'src/components/seo/Meta'
 
 const SubCategory = () => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -94,46 +95,55 @@ const SubCategory = () => {
 
   }, [totalData, isLoading])
 
-  return (
-    <Layout>
-      <section className='categoryview_Section'>
-        {
-          subCatSlug &&
-          <BreadcrumbNav SecondElement={'category'} ThirdElement={'Sub-Category'} FourthElement={subCatSlug} />
-        }
-        <div id='cv-main' className='bg-white py-3'>
-          <div id='cv-content' className='my-5 container'>
-            {isLoading.loading ? (
-              <div className='row'>
-                {[...Array(4)].map((_, index) => (
-                  <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
-                    <Card isLoading={true} />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className='row commonRowGap'>
-                {subCategories && subCategories.length > 0 ? (
-                  subCategories.map(element => (
-                    <div className='col-lg-3 col-sm-6 col-md-4 col-12 ' key={element.id}>
-                      <NewsCard element={element} />
-                    </div>
-                  ))
-                ) : (
-                  <>
-                    {NoDataFound()}
 
-                  </>
-                )}
-                {totalData > dataPerPage && totalData !== subCategories.length ? (
-                  <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
-                ) : null}
-              </div>
-            )}
+  const settings = useSelector(settingsData)
+
+  const webName = settings?.web_setting?.web_name
+
+  return (
+    <>
+      <Meta title={`${webName} | ${translate('subcatLbl')} | ${subCatSlug}`} description='' keywords='' ogImage='' pathName='' schema='' />
+
+      <Layout>
+        <section className='categoryview_Section'>
+          {
+            subCatSlug &&
+            <BreadcrumbNav SecondElement={'category'} ThirdElement={'Sub-Category'} FourthElement={subCatSlug} />
+          }
+          <div id='cv-main' className='bg-white py-3'>
+            <div id='cv-content' className='my-5 container'>
+              {isLoading.loading ? (
+                <div className='row'>
+                  {[...Array(4)].map((_, index) => (
+                    <div className='col-lg-3 col-sm-6 col-md-4 col-12' key={index}>
+                      <Card isLoading={true} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className='row commonRowGap'>
+                  {subCategories && subCategories.length > 0 ? (
+                    subCategories.map(element => (
+                      <div className='col-lg-3 col-sm-6 col-md-4 col-12 ' key={element.id}>
+                        <NewsCard element={element} />
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      {NoDataFound()}
+
+                    </>
+                  )}
+                  {totalData > dataPerPage && totalData !== subCategories.length ? (
+                    <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
+                  ) : null}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
-    </Layout>
+        </section>
+      </Layout>
+    </>
   )
 }
 

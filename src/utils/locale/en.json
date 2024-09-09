@@ -299,5 +299,7 @@
   "deleteAccWarning": "Are you sure you want to delete your account? This action cannot be undone.By deleting your account, you will lose access to:",
   "profileInfo": "Profile information",
   "settings": "Settings",
-  "associatedContent": "And Any associated content"
+  "associatedContent": "And Any associated content",
+  "userBasedCat": "User Based Categories",
+  "videoNews": "Video News"
 }

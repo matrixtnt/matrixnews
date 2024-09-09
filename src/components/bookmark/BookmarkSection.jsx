@@ -12,6 +12,9 @@ import Layout from '../layout/Layout'
 import Card from '../skeletons/Card'
 import { BsBookmark } from 'react-icons/bs';
 import Link from 'next/link'
+import Meta from '../seo/Meta'
+import { settingsData } from 'src/store/reducers/settingsReducer'
+import { useSelector } from 'react-redux'
 
 const BookmarkSection = () => {
   const { id: language_id } = getLanguage()
@@ -72,87 +75,98 @@ const BookmarkSection = () => {
     return new Date(dateString).toLocaleDateString('en-IN', options);
   };
 
+  const settings = useSelector(settingsData)
+
+  const webName = settings && settings?.web_setting?.web_name
+
   return (
-    <Layout>
-      <BreadcrumbNav SecondElement={translate('bookmarkLbl')} />
+    <>
+      {
+        webName &&
+          <Meta title={`${webName} | ${translate('bookmark')}`} description={process.env.NEXT_PUBLIC_DESCRIPTION} keywords={process.env.NEXT_PUBLIC_kEYWORDS} ogImage='' pathName='' schema='' />
+      }
 
-      <div id='bs-main' className='py-5 bookmark_page'>
-        <div id='bs-content' className='container'>
-          <div className='row'>
-            {isLoading ? (
-              <div className='row'>
-                {[...Array(3)].map((_, index) => (
-                  <div className='col-md-4 col-12' key={index}>
-                    <Card isLoading={true} />
-                  </div>
-                ))}
-              </div>
-            ) : Data && Data.length > 0 ? (
-              Data.map(element => (
+      <Layout>
+        <BreadcrumbNav SecondElement={translate('bookmarkLbl')} />
 
-                <div className='col-md-6 col-lg-4 col-12' key={element.id}>
-                  <div id='bs-card' className='card'>
-                    <div className='bs_image_card'>
-                      <Link
-                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
-                        // as={`/news/${element.slug}`}
-                      >
-                        <img
-                          id='bs-card-image'
-                          src={element.image}
-                          className='card-img'
-                          alt='bookmark news'
-                          onError={placeholderImage}
-                        />
-                      </Link>
-                      <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
-                        <BsBookmark id='bs-bookmark-logo' size={18} />
-                      </button>
+        <div id='bs-main' className='py-5 bookmark_page'>
+          <div id='bs-content' className='container'>
+            <div className='row'>
+              {isLoading ? (
+                <div className='row'>
+                  {[...Array(3)].map((_, index) => (
+                    <div className='col-md-4 col-12' key={index}>
+                      <Card isLoading={true} />
                     </div>
-                    <div id='bs-card-body' className='card-body'>
-                      <button
-                        id='bs-btnCatagory'
-                        className='btn btn-sm'
-                        type='button'
-                      >
-                        {element.category_name}
-                      </button>
-                      <Link
-                        href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                  ))}
+                </div>
+              ) : Data && Data.length > 0 ? (
+                Data.map(element => (
+
+                  <div className='col-md-6 col-lg-4 col-12' key={element.id}>
+                    <div id='bs-card' className='card'>
+                      <div className='bs_image_card'>
+                        <Link
+                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                         // as={`/news/${element.slug}`}
-                      >
-                        <h5
-                          id='bs-card-title'
-                          className='card-title'
                         >
-                          {element.title}
-                        </h5>
-                        <p id='bs-card-date'>
-                          <FiCalendar size={18} id='bs-logoCalendar' />
-                          {formatDate(element.date.slice(0, 10))}
-                        </p>
-                      </Link>
+                          <img
+                            id='bs-card-image'
+                            src={element.image}
+                            className='card-img'
+                            alt='bookmark news'
+                            onError={placeholderImage}
+                          />
+                        </Link>
+                        <button id='bs-btnBookmark' className='btn' onClick={e => setbookmarkApi(element.news_id, '0')}>
+                          <BsBookmark id='bs-bookmark-logo' size={18} />
+                        </button>
+                      </div>
+                      <div id='bs-card-body' className='card-body'>
+                        <button
+                          id='bs-btnCatagory'
+                          className='btn btn-sm'
+                          type='button'
+                        >
+                          {element.category_name}
+                        </button>
+                        <Link
+                          href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                        // as={`/news/${element.slug}`}
+                        >
+                          <h5
+                            id='bs-card-title'
+                            className='card-title'
+                          >
+                            {element.title}
+                          </h5>
+                          <p id='bs-card-date'>
+                            <FiCalendar size={18} id='bs-logoCalendar' />
+                            {formatDate(element.date.slice(0, 10))}
+                          </p>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
 
+                  </div>
+                ))
+              ) : (
+                // Show "No data found" message if no data is available
+                <div className='col-12 no_data mt-5'>
+                  <div id='bs-no-main'>
+                    <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' onError={placeholderImage} />
+                    <p id='bs-no-title'>
+                      <b>{translate('addbookmark')}</b>
+                    </p>
+                    <p id='bs-no-text'>{translate('dontforgetbookmark')}</p>
+                  </div>
                 </div>
-              ))
-            ) : (
-              // Show "No data found" message if no data is available
-              <div className='col-12 no_data mt-5'>
-                <div id='bs-no-main'>
-                  <img id='bs-no-image' src={bookmarkIMG.src} alt='bookmark no data found news' onError={placeholderImage} />
-                  <p id='bs-no-title'>
-                    <b>{translate('addbookmark')}</b>
-                  </p>
-                  <p id='bs-no-text'>{translate('dontforgetbookmark')}</p>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 
