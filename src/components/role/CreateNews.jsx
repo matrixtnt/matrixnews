@@ -28,7 +28,6 @@ import Layout from '../layout/Layout'
 import { Input } from 'antd'
 import { IoIosCloseCircle } from 'react-icons/io'
 import { addDays } from 'date-fns'
-import Meta from '../seo/Meta'
 const { TextArea } = Input
 
 const { Option } = Select
@@ -544,13 +543,7 @@ const CreateNews = () => {
   }, [DefaultValue.defualtStartDate, DefaultValue.defualtPublishDate])
 
 
-  const settings = useSelector(settingsData)
-
-  const webName = settings?.web_setting?.web_name
-
   return (
-    <>
-    <Meta title={`${webName} | ${translate('createNewsLbl')}`} description='' keywords='' ogImage='' pathName='' schema='' />
     <Layout>
       <BreadcrumbNav SecondElement={translate('createNewsLbl')} />
       <div className='create_news py-5 bg-white'>
@@ -918,7 +911,6 @@ const CreateNews = () => {
         </div>
       </div>
     </Layout>
-    </>
   )
 }
 

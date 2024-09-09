@@ -8091,6 +8091,11 @@ span {
   box-shadow: none;
 }
 
+[dir="rtl"] .darkModeToggle{
+  margin-left: 28px;
+  flex-direction: row-reverse;
+}
+
 [data-bs-theme="dark"] .commonNewsCard {
   background-color: var(--secondary-color);
 }

@@ -20,7 +20,7 @@ const RelatedNewsSection = props => {
       const { data } = await getNewsApi.getNews({
         offset: '0',
         limit: '10',
-        category_id: props?.categoryId,
+        category_slug: props?.categorySlug,
         language_id: language_id,
         latitude: storedLatitude,
         longitude: storedLongitude
@@ -36,7 +36,7 @@ const RelatedNewsSection = props => {
 
   // react query
   const { isLoading, data: Data } = useQuery({
-    queryKey: ['realated-news-section', props.catSlug, props.newsSlug, location],
+    queryKey: ['realated-news-section', props.categorySlug, props.newsSlug, location],
     queryFn: getNewsByCategoryApi
   })
 
@@ -80,7 +80,7 @@ const RelatedNewsSection = props => {
           {
             Data.length > 4 &&
             <div className='mb-4'>
-              <Link href={`/view-all/related-news/${props.categoryId}`}>
+              <Link href={`/view-all/related-news/${props.categorySlug}`}>
                 <button className='loadMoreBtn commonBtn'>  {translate('viewall')}</button>
               </Link>
             </div>
