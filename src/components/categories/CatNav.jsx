@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentLanguage, selectCurrentLanguageLabels } from '../../store/reducers/languageReducer'
-import { translate } from '../../utils'
+import { getClosest, getSiblings, slideToggle, slideUp, translate } from '../../utils'
 import Skeleton from 'react-loading-skeleton'
 import { locationData, settingsData } from '../../store/reducers/settingsReducer'
 import { getLanguage } from 'src/utils/api'
@@ -13,6 +13,9 @@ import Card from '../skeletons/Card'
 import { loadNews, newsUpdateLanguage } from 'src/store/reducers/newsReducer'
 import { categoriesCacheData } from 'src/store/reducers/CatNavReducers'
 import NewsCard from '../view/NewsCard'
+import Link from 'next/link'
+import { Dropdown } from 'react-bootstrap'
+import toast from 'react-hot-toast'
 
 const CatNav = () => {
 
@@ -121,6 +124,33 @@ const CatNav = () => {
     // }), "subbbbcaaa")
 
   }, [currentCategory])
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const onClickHandler = e => {
+    const target = e.currentTarget
+    const parentEl = target.parentElement
+    if (parentEl?.classList.contains('menu-toggle') || target.classList.contains('menu-toggle')) {
+      const element = target.classList.contains('icon') ? parentEl : target
+      const parent = getClosest(element, 'li')
+      const childNodes = parent.childNodes
+      const parentSiblings = getSiblings(parent)
+      parentSiblings.forEach(sibling => {
+        const sibChildNodes = sibling.childNodes
+        sibChildNodes.forEach(child => {
+          if (child.nodeName === 'UL') {
+            slideUp(child, 1000)
+          }
+        })
+      })
+      childNodes.forEach(child => {
+        if (child.nodeName === 'UL') {
+          slideToggle(child, 1000)
+        }
+      })
+      setIsMenuOpen(!isMenuOpen);
+    }
+  }
 
   return (
     <>
@@ -234,7 +264,7 @@ const CatNav = () => {
                       ))}
                     </div>
 
-                    {categories?.length > 10 ? (
+                    {/* {categories?.length > 10 ? (
                       <button
                         id='catNav-more'
                         onClick={() => {
@@ -243,6 +273,73 @@ const CatNav = () => {
                       >
                         {translate('allLbl')} {">>"}
                       </button>
+                    ) : null} */}
+                    {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
+                      <li className='allCatBtn nav-item has-children'>
+                        {categories && categories.length > 10 ? (
+                          <button
+                            id='catNav-more'
+                            className='menu-toggle' onClick={(e) => onClickHandler(e)}
+                          >
+                            {translate('allLbl')}
+                            <span className='downArr'>
+                              {/* <FaAngleDown /> */}
+                              {isMenuOpen ?
+                                <FaAngleUp />
+                                :
+                                <FaAngleDown />
+                              }
+                            </span>
+                          </button>
+                        ) : null}
+                        {
+                          isMenuOpen &&
+                          <ul className='sub-menu mobile_catogories'>
+                            {categories &&
+                              categories.map((element, index) => (
+                                <li className='nav-item' key={index}>
+                                  {
+                                    element?.sub_categories?.length > 0 ?
+                                      <Dropdown className='subCatdrop'>
+                                        <Dropdown.Toggle className=''>
+                                          {element.category_name}<FaAngleDown />
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu >
+                                          {
+                                            element.sub_categories.map((data, index) => {
+                                              return (
+                                                <Dropdown.Item
+                                                  key={index}
+                                                  onClick={() => handleSubCategoryChange(data.slug)}
+                                                >
+                                                  {data.subcategory_name}
+                                                </Dropdown.Item>
+                                              )
+                                            })}
+                                        </Dropdown.Menu>
+                                      </Dropdown> :
+                                      <Link
+                                        className='catNav-links'
+                                        key={index}
+                                        href={{
+                                          pathname: `/categories-news/${element.slug}`,
+                                          query: {
+                                            category_id: element.id
+                                          }
+                                        }}
+                                      // onClick={handleClose}
+                                      >
+                                        {' '}
+                                        {element.category_name}{' '}
+                                      </Link>
+                                  }
+
+                                </li>
+                              ))}
+                          </ul>
+                        }
+                      </li>
                     ) : null}
                   </div>
                 )}

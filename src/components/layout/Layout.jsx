@@ -215,15 +215,6 @@ const Layout = ({ children }) => {
   }, [currentLanguage])
 
 
-  // to clear cache and siteData every 24 hrs 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     clearAllSiteData()
-  //     window.location.reload(true);
-  //   }, 86400000);
-  // }, [])
-
-
 
   return (
     <>
