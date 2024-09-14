@@ -1,27 +1,67 @@
-'use client'
+
+import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-import { translate } from 'src/utils'
-
+import { extractJSONFromMarkup } from 'src/utils'
+import { GET_PAGES } from 'src/utils/api'
 const PolicyPages = dynamic(() => import('src/components/policyPages/PolicyPages'), { ssr: false })
 
-const Index = () => {
+// This is seo api
+const fetchDataFromSeo = async (slug, language_id) => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}?language_id=${language_id}&slug=${slug}`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
+};
 
-    const webName = process.env.NEXT_PUBLIC_WEB_NAME;
+const Index = ({ seoData, currentURL }) => {
+  let schema = null;
 
-    return (
-        <>
-            <Meta
-                title={`${webName} | ${translate('priPolicy')}`}
-                description={''}
-                keywords={''}
-                ogImage={''}
-                pathName={''}
-                schema={''}
-            />
-            <PolicyPages privacyPolicyPage={true}/>
-        </>
-    )
+  if (seoData && seoData.data && seoData.data.length > 0 && seoData.data[0].schema_markup) {
+    const schemaString = seoData.data[0].schema_markup;
+    schema = extractJSONFromMarkup(schemaString);
+  }
+
+  return (
+    <>
+      <Meta
+        title={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_title}
+        description={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_description}
+        keywords={seoData?.data && seoData.data.length > 0 && seoData.data[0].meta_keyword}
+        ogImage={seoData?.data && seoData.data.length > 0 && seoData.data[0].image}
+        pathName={currentURL}
+        schema={schema}
+      />
+      <PolicyPages privacyPolicyPage={true} />
+    </>
+  );
 }
+
+
+let serverSidePropsFunction = null;
+if (process.env.NEXT_PUBLIC_SEO === "true") {
+  serverSidePropsFunction = async (context) => {
+    const { req } = context; // Extract query and request object from context
+    // console.log(req)
+    const { params } = req[Symbol.for('NextInternalRequestMeta')].match;
+    // Accessing the slug property
+    // const currentURL = req[Symbol.for('NextInternalRequestMeta')].__NEXT_INIT_URL;
+    const { language_id } = req[Symbol.for('NextInternalRequestMeta')].initQuery;
+    const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/policy-page/privacy-policy';
+    const seoData = await fetchDataFromSeo('privacy-policy', language_id);
+    return {
+      props: {
+        seoData,
+        currentURL,
+      },
+    };
+  };
+}
+
+export const getServerSideProps = serverSidePropsFunction
 
 export default Index

@@ -81,7 +81,7 @@ const CategoryNews = () => {
 
   // react query
   const { data: Data } = useQuery({
-    queryKey: ['category-news', language_id, location, catSlug, offset],
+    queryKey: ['category-news', language_id, location, catSlug, offset, query],
     queryFn: () => getNewsByCategoryApi()
   })
 
@@ -96,6 +96,11 @@ const CategoryNews = () => {
   useEffect(() => {
 
   }, [totalData, isLoading])
+
+  useEffect(() => {
+    setLoadMore(false)
+    setOffset(0)
+  }, [catSlug])
 
   // slice the array to get the current posts
   const currentData = Data && Data.data && Data.data.slice(0, dataPerPage)

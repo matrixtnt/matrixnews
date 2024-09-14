@@ -11,11 +11,11 @@ const index = () => {
 
   const router = useRouter();
   const query = router?.query
-  const catSlug = query.slug
+  const slug = query.slug
 
   return (
     <>
-      <Meta title={`${webName} | ${translate('categoryLbl')} | ${catSlug}`} description='' keywords='' ogImage='' pathName='' schema='' />
+      <Meta title={`${webName} | ${translate('categoryLbl')}  ${slug ? `| ${slug}` : ''}`} description='' keywords='' ogImage='' pathName='' schema='' />
       <CategoryNews />
     </>
   )

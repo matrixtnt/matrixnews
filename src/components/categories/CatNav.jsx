@@ -50,6 +50,10 @@ const CatNav = () => {
     }
   }
 
+  const handleDropDownSubCatChange = (slug) => {
+    navigate.push(`/categories-news/sub-category/${slug}`)
+  }
+
   const [currentPage, setCurrentPage] = useState(0)
   const dataPerPage = 4 // number of posts per page
 
@@ -279,11 +283,12 @@ const CatNav = () => {
                         {categories && categories.length > 10 ? (
                           <button
                             id='catNav-more'
-                            className='menu-toggle' onClick={(e) => onClickHandler(e)}
+                            className='menu-toggle' 
+                            // onClick={(e) => onClickHandler(e)}
+                            onMouseEnter={(e) => onClickHandler(e)}
                           >
-                            {translate('allLbl')}
+                            {translate('More >>')}
                             <span className='downArr'>
-                              {/* <FaAngleDown /> */}
                               {isMenuOpen ?
                                 <FaAngleUp />
                                 :
@@ -294,9 +299,9 @@ const CatNav = () => {
                         ) : null}
                         {
                           isMenuOpen &&
-                          <ul className='sub-menu mobile_catogories'>
+                          <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsMenuOpen(false)}>
                             {categories &&
-                              categories.map((element, index) => (
+                              categories?.slice(10, categories?.length)?.map((element, index) => (
                                 <li className='nav-item' key={index}>
                                   {
                                     element?.sub_categories?.length > 0 ?
@@ -311,9 +316,11 @@ const CatNav = () => {
                                               return (
                                                 <Dropdown.Item
                                                   key={index}
-                                                  onClick={() => handleSubCategoryChange(data.slug)}
+                                                  onClick={() => setIsMenuOpen(false)}
                                                 >
-                                                  {data.subcategory_name}
+                                                  <Link href={`/categories-news/sub-category/${data?.slug}`}>
+                                                    {data.subcategory_name}
+                                                  </Link>
                                                 </Dropdown.Item>
                                               )
                                             })}
@@ -323,12 +330,9 @@ const CatNav = () => {
                                         className='catNav-links'
                                         key={index}
                                         href={{
-                                          pathname: `/categories-news/${element.slug}`,
-                                          query: {
-                                            category_id: element.id
-                                          }
+                                          pathname: `/categories-news/${element.slug}`
                                         }}
-                                      // onClick={handleClose}
+                                        onClick={() => setIsMenuOpen(false)}
                                       >
                                         {' '}
                                         {element.category_name}{' '}

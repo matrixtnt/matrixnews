@@ -1,15 +1,28 @@
 import axios from 'axios'
 import dynamic from 'next/dynamic'
 import Meta from 'src/components/seo/Meta'
-import { GET_SETTINGS } from 'src/utils/api'
+import { GET_SETTINGS, GET_WEB_SEO_PAGES } from 'src/utils/api'
 const Home = dynamic(() => import('src/components/home/Home'), { ssr: false })
 
 
+// This is settings api
+const fetchSettings = async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_SETTINGS}`
+    )
+    const data = response.data
+    return data
+  } catch (error) {
+    console.error('Error fetching data:', error)
+    return null
+  }
+}
 // This is seo api
 const fetchDataFromSeo = async () => {
   try {
     const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_SETTINGS}`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=home`
     )
     const data = response.data
     return data
@@ -46,8 +59,8 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
     const { req } = context // Extract query and request object from context
 
     const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
-
-    const settingsData = await fetchDataFromSeo()
+    const seoData = await fetchDataFromSeo(req.url);
+    const settingsData = await fetchSettings()
 
     // console.log(settingsData?.data, "Data")
 
@@ -58,7 +71,9 @@ if (process.env.NEXT_PUBLIC_SEO === 'true') {
     // Pass the fetched data as props to the page component
     return {
       props: {
-        adsenseUrl
+        adsenseUrl,
+        seoData,
+        currentURL,
       }
     }
   }

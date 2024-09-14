@@ -126,7 +126,7 @@ const Notification = () => {
 
   return (
     <Layout>
-      <BreadcrumbNav SecondElement={translate('notificationLbl')} />
+      <BreadcrumbNav SecondElement={translate('personalNotification')} />
 
       <div className='personal_Sec bg-white'>
         <div id='main-Noticard' className='container '>

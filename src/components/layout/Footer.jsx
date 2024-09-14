@@ -32,6 +32,8 @@ const Footer = () => {
 
   const darkThemeMode = useSelector(themeSelector);
 
+  const currentLanguage = useSelector(selectCurrentLanguage)
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -218,8 +220,17 @@ const Footer = () => {
               </p>
             </div>
             <div className='ms-2'>
-              <Link href='/policy-page/terms-condition'> {translate('termsandcondition')} |</Link>
-              <Link href='/policy-page/privacy-policy'> {translate('priPolicy')} </Link>
+              <Link
+                // href='/policy-page/terms-condition'
+                href={{ pathname: `/policy-page/terms-condition`, query: { language_id: currentLanguage?.id } }}
+              > {translate('termsandcondition')} |
+              </Link>
+              <Link 
+              // href='/policy-page/privacy-policy'
+              href={{ pathname: `/policy-page/privacy-policy`, query: { language_id: currentLanguage?.id } }}
+              >
+                {translate('priPolicy')}
+              </Link>
             </div>
           </div>
         </div>

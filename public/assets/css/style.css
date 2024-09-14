@@ -597,7 +597,7 @@ a {
 }
 
 .dropdownItem {
-  color: var(--secondary-color) !important;
+  color: #0f1f40 !important;
   font-weight: 600 !important;
   font-size: 17px;
 }
@@ -948,7 +948,7 @@ a {
 }
 
 .catNav-links {
-  color: var(--secondary-color);
+  color: var(--text-primary-color);
   text-decoration: none;
   /* margin-right: 2rem; */
 }
@@ -6899,7 +6899,7 @@ span {
 }
 
 .create_news .dropzone:focus,
-.create_news .dropzone:focus-visible{
+.create_news .dropzone:focus-visible {
   outline: none;
 }
 
@@ -7394,14 +7394,15 @@ span {
   transition: all 0.3s;
 }
 
-.catSubCatWrapper .allCatBtn{
+.catSubCatWrapper .allCatBtn {
   position: relative;
 }
-.catSubCatWrapper .allCatBtn .downArr svg{
+
+.catSubCatWrapper .allCatBtn .downArr svg {
   margin-left: 2px;
 }
 
-.catSubCatWrapper .sub-menu{
+.catSubCatWrapper .sub-menu {
   position: absolute;
   background-color: var(--body-color);
   z-index: 2;
@@ -7412,20 +7413,25 @@ span {
   margin-top: 2px;
 }
 
-.catSubCatWrapper .sub-menu li{
+[data-bs-theme="dark"] .catSubCatWrapper .sub-menu {
+  border: 1px solid #6c757d;
+}
+
+.catSubCatWrapper .sub-menu li {
   margin: 6px 0px;
   font-weight: 700;
 }
-.catSubCatWrapper .sub-menu li:first-child{
+
+.catSubCatWrapper .sub-menu li:first-child {
   margin-top: 0px;
 }
 
 .catSubCatWrapper .sub-menu li a:hover,
-.catSubCatWrapper .sub-menu .dropdown-toggle:hover{
+.catSubCatWrapper .sub-menu .dropdown-toggle:hover {
   color: var(--primary-color);
 }
 
-.catSubCatWrapper .sub-menu .dropdown-toggle{
+.catSubCatWrapper .sub-menu .dropdown-toggle {
   background-color: transparent;
   border: none;
   color: var(--text-primary-color);
@@ -7433,14 +7439,15 @@ span {
   padding: 0px;
 }
 
-.catSubCatWrapper .sub-menu .dropdown-toggle .dropdown-menu.show{
-  padding: 0px;
+.catSubCatWrapper .sub-menu .dropdown-menu.show {
+  padding: 0px !important;
 }
 
-.catSubCatWrapper .sub-menu .dropdown-toggle .dropdown-menu.show .dropdown-item{
+.catSubCatWrapper .sub-menu .dropdown-menu.show .dropdown-item a{
   font-size: 14px;
   font-weight: 600;
-  color: var(--primary-color);
+  color: var(--text-primary-color);
+  padding: 0px;
 }
 
 [data-bs-theme="dark"] .catSubCatWrapper .subCatDropdown {
@@ -8119,7 +8126,7 @@ span {
   box-shadow: none;
 }
 
-[dir="rtl"] .darkModeToggle{
+[dir="rtl"] .darkModeToggle {
   margin-left: 28px;
   flex-direction: row-reverse;
 }

@@ -7,9 +7,9 @@ import { GET_PAGES } from 'src/utils/api'
 const SocialPages = dynamic(() => import('../../components/staticpages/SocialPages.jsx'), { ssr: false })
 
 // This is seo api
-const fetchDataFromSeo = async (id, language_id) => {
+const fetchDataFromSeo = async (slug, language_id) => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}?language_id=${language_id}&slug=${id}`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}?language_id=${language_id}&slug=${slug}`);
     const data = response.data;
     return data;
   } catch (error) {

@@ -53,7 +53,8 @@ const MorePagesDropDown = ({ handleClose }) => {
             <>
                 <span>
                     <Link
-                        href={`/more-pages/${page?.slug}`}
+                        // href={`/more-pages/${page?.slug}/language_id=${currentLanguage.id}`}
+                        href={{ pathname: `/more-pages/${page?.slug}/`, query: { language_id: currentLanguage?.id } }}
                         className={`dropdownItem ${router === page.url ? 'navActive' : ''}`}
                         onClick={handleClose}
                     >

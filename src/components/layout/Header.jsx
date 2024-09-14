@@ -310,7 +310,8 @@ const Header = () => {
                     exact='true'
                     className={`headerDropdownItem link-color ${router === '/about-us' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    href={`/about-us`}
+                    // href={`/about-us`}
+                    href={{ pathname: `/about-us`, query: { language_id: currentLanguage?.id } }}
                   >
                     {translate('aboutus')}
                   </Link>
@@ -357,7 +358,8 @@ const Header = () => {
                     exact='true'
                     className={`headerDropdownItem link-color ${router === '/contact-us' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    href='/contact-us'
+                    // href='/contact-us'
+                    href={{ pathname: `/contact-us`, query: { language_id: currentLanguage?.id } }}
                   >
                     {translate('contactus')}
                   </Link>

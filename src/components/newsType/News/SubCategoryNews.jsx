@@ -43,11 +43,6 @@ const SubCategory = () => {
     setOffset(offset + 1)
   }
 
-  // handle page change
-  const handlePageChange = ({ selected }) => {
-    setCurrentPage(selected)
-  }
-
   // api call
   const getNewsByCategoryApi = async () => {
     !loadMore ? setIsLoading({ loading: true }) : setIsLoading({ loadMoreLoading: true })
@@ -75,7 +70,7 @@ const SubCategory = () => {
 
   // react query
   const { data: Data } = useQuery({
-    queryKey: ['sub-category-news', catId, changelanguage, location, offset, query],
+    queryKey: ['sub-category-news', catId, changelanguage, location, offset, query, subCatSlug],
     queryFn: () => getNewsByCategoryApi()
   })
 
@@ -86,13 +81,20 @@ const SubCategory = () => {
 
   useEffect(() => {
     if (Data && Data.data) {
-      setSubCategories((prevData) => [...prevData, ...Data.data]);
+      loadMore ? setSubCategories((prevData) => [...prevData, ...Data.data]) :
+      setSubCategories(Data.data);
     }
   }, [Data])
 
   useEffect(() => {
 
   }, [totalData, isLoading])
+
+
+  useEffect(() => {
+    setLoadMore(false)
+    setOffset(0)
+  }, [query])
 
   return (
     <Layout>
