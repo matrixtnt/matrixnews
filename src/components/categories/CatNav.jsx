@@ -50,9 +50,6 @@ const CatNav = () => {
     }
   }
 
-  const handleDropDownSubCatChange = (slug) => {
-    navigate.push(`/categories-news/sub-category/${slug}`)
-  }
 
   const [currentPage, setCurrentPage] = useState(0)
   const dataPerPage = 4 // number of posts per page
