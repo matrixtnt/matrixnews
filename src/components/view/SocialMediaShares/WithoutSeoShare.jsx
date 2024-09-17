@@ -18,10 +18,10 @@ const WithoutSeoShare = ({ handleCopyUrl }) => {
         <div>
             <div className="a2a_kit a2a_kit_size_32 a2a_default_style" id='nv-right-head'>
                 <h6 id='nv-Share-Label'>{translate('shareLbl')}:</h6>
-                <a target='_blank' className="a2a_button_facebook" href={`https://www.addtoany.com/add_to/facebook`}> <FaFacebook size={35} round /></a>
-                <a target='_blank' className="a2a_button_whatsapp" href={`https://www.addtoany.com/add_to/whatsapp`}> <IoLogoWhatsapp size={38} round color='#25dd66' /></a>
-                <a target='_blank' className="a2a_button_x" href={`https://www.addtoany.com/add_to/x`}> <FaSquareXTwitter size={38} round color='#000' /></a>
-                <a className="a2a_dd" href="https://www.addtoany.com/share">
+                <a target='_blank' className="a2a_button_facebook" href={`https://www.addtoany.com/add_to/facebook`} title='Facebook'> <FaFacebook size={35} round /></a>
+                <a target='_blank' className="a2a_button_whatsapp" href={`https://www.addtoany.com/add_to/whatsapp`} title='Whatsapp'> <IoLogoWhatsapp size={38} round color='#25dd66' /></a>
+                <a target='_blank' className="a2a_button_x" href={`https://www.addtoany.com/add_to/x`} title='Twitter'> <FaSquareXTwitter size={38} round color='#000' /></a>
+                <a className="a2a_dd" href="https://www.addtoany.com/share" title='social-medias'>
                     <PiDotsThreeCircleVerticalFill size={44} color='red' />
                 </a>
                 <button onClick={handleCopyUrl} className='copy_url'>

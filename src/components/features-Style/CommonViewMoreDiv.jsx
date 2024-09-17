@@ -25,6 +25,7 @@ const CommonViewMoreDiv = ({ title, desc, link, styleSix }) => {
                 !styleSix ?
                     <Link id='hns-Viewmore'
                         href={{ pathname: link, query: { language_id: currentLanguage?.id } }}
+                        title={translate('viewMore')}
                         // as={link}
                         onClick={() => scrollToTop()} className='commonBtn'>
                         {translate('viewMore')}

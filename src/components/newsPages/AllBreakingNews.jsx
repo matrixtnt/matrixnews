@@ -97,6 +97,7 @@ const AllBreakingNews = () => {
                     <Link id='Link-all'
                       href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
                       // as={`/breaking-news/${element.slug}`}
+                      title='detail-page'
                     >
                       <div id='BNV-card' className='card'>
                         <img

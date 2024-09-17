@@ -140,6 +140,7 @@ const StyleOne = ({ Data }) => {
                             <Link id='btnCatagory' className='btn' type='button'
                               href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                               // as={`/news/${item.slug}`}
+                              title='detail-page'
                             >
                               {truncateText(item.category_name, 10)}
                             </Link>
@@ -152,6 +153,7 @@ const StyleOne = ({ Data }) => {
                               <Link id='btnReadMore' className='mb-0 commonBtn' type='button'
                                 href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                                 // as={`/news/${item.slug}`}
+                                title={translate('readmore')}
                               >
                                 <b>{translate('readmore')}</b>
                               </Link>
@@ -223,6 +225,7 @@ const StyleOne = ({ Data }) => {
                               type='button'
                               href={{ pathname: `/breaking-news/${item.slug}`, query: { language_id: item.language_id } }}
                               // as={`/breaking-news/${item.slug}`}
+                              title={translate('readmore')}
                             >
                               <b>{translate('readmore')}</b>
                             </Link>

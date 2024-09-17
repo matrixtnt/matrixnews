@@ -22,7 +22,7 @@ const NotFound = () => {
             <p>{'This is not a fault, just an accident that was not intentional'}</p>
           </div>
           <div className='error_button'>
-            <Link href='/' className='btn btn-primary'>
+            <Link href='/' className='btn btn-primary' title='back'>
               <i>
                 <FaArrowLeft />
               </i>{' '}

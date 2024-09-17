@@ -59,6 +59,7 @@ const RelatedNewsSection = props => {
           {Data &&
             Data?.slice(0, 4).map(element => (
               <Link id='Link-all'
+                title='detail-page'
                 href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                 // as={`/news/${element.slug}`}
                 key={element.id}>
@@ -80,7 +81,7 @@ const RelatedNewsSection = props => {
           {
             Data.length > 4 &&
             <div className='mb-4'>
-              <Link href={`/view-all/related-news/${props.categorySlug}`}>
+              <Link href={`/view-all/related-news/${props.categorySlug}`} title={translate('viewall')}>
                 <button className='loadMoreBtn commonBtn'>  {translate('viewall')}</button>
               </Link>
             </div>

@@ -219,6 +219,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                     <Link
                       href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                       // as={`/news/${item.slug}`}
+                      title='detail-page'
                     >
                       <div className='card fs-Newscard'>
                         <img
@@ -319,6 +320,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                       <Link
                         href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                         // as={`/news/${item.slug}`}
+                          title='detail-page'
                       >
                         <div className='card fs-Newscard'>
                           <img
@@ -419,6 +421,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                           <Link
                             href={{ pathname: `/breaking-news/${item.slug}`, }}
                             id='Top-Title01'
+                              title='detail-page'
                           >
                             {truncateText(item.title, 35)}
                             {stripHtmlTags(item.description.slice(0, 600))} ...

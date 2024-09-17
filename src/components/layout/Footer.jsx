@@ -45,7 +45,7 @@ const Footer = () => {
           <div className='row'>
             <div className='col-lg-3 col-12'>
               <div className='News'>
-                <Link href='/'>
+                <Link href='/' title={settings && settings?.web_setting?.web_name}>
                   <img id='NewsLogo' src={darkThemeMode ? settings && settings?.web_setting?.dark_header_logo : settings && settings?.web_setting?.light_footer_logo} onError={placeholderImage} alt='footer logo image' />
                 </Link>
               </div>
@@ -82,14 +82,14 @@ const Footer = () => {
               <p id='footer-nav'>{translate('navigations')}</p>
               <ul className='useL'>
                 <li className='nav-item'>
-                  <Link href='/' onClick={() => scrollToTop()}>
+                  <Link href='/' onClick={() => scrollToTop()} title={translate('home')}>
                     {translate('home')}
                   </Link>
                 </li>
                 {
                   settings && settings.live_streaming_mode === '1' && checkNewsData && checkNewsData?.data?.isLiveNewsData ?
                     <li className='nav-item'>
-                      <Link href='/live-news' onClick={() => scrollToTop()}>
+                      <Link href='/live-news' onClick={() => scrollToTop()} title={translate('livenews')}>
                         {translate('livenews')}
                       </Link>
                     </li>
@@ -99,19 +99,19 @@ const Footer = () => {
                 {
                   settings && settings.breaking_news_mode === '1' && checkNewsData && checkNewsData?.data?.isBreakingNewsData ?
                     <li className='nav-item'>
-                      <Link href='/all-breaking-news' onClick={() => scrollToTop()}>
+                      <Link href='/all-breaking-news' onClick={() => scrollToTop()} title={translate('breakingnews')}>
                         {translate('breakingnews')}
                       </Link>
                     </li>
                     : null
                 }
                 <li className='nav-item'>
-                  <Link href='/about-us' onClick={() => scrollToTop()}>
+                  <Link href='/about-us' onClick={() => scrollToTop()} title={translate('aboutus')}>
                     {translate('aboutus')}
                   </Link>
                 </li>
                 <li className='nav-item'>
-                  <Link href='/contact-us' onClick={() => scrollToTop()}>
+                  <Link href='/contact-us' onClick={() => scrollToTop()} title={translate('contactus')}>
                     {translate('contactus')}
                   </Link>
                 </li>
@@ -169,6 +169,7 @@ const Footer = () => {
                             //   category_id: element.id
                             // }
                           }}
+                          title={element.category_name}
                           onClick={scrollToTop}
                         >
                           {element.category_name}{' '}
@@ -194,13 +195,13 @@ const Footer = () => {
                     <div className='appWrapper'>
                       {
                         settings?.web_setting?.android_app_link ?
-                          <Link href={settings?.web_setting?.android_app_link} target='_blank'>
+                          <Link href={settings?.web_setting?.android_app_link} target='_blank' title='play-store'>
                             <Image src={playStore} height={0} width={0} alt='play-store-img' />
                           </Link> : null
                       }
                       {
                         settings?.web_setting?.ios_app_link ?
-                          <Link href={settings?.web_setting?.ios_app_link} target='_blank'>
+                          <Link href={settings?.web_setting?.ios_app_link} target='_blank' title='apple-store'>
                             <Image src={appleStore} height={0} width={0} alt='apple-store-img' />
                           </Link> : null
                       }
@@ -221,13 +222,15 @@ const Footer = () => {
             </div>
             <div className='ms-2'>
               <Link
+                title={translate('termsandcondition')}
                 // href='/policy-page/terms-condition'
                 href={{ pathname: `/policy-page/terms-condition`, query: { language_id: currentLanguage?.id } }}
               > {translate('termsandcondition')} |
               </Link>
-              <Link 
-              // href='/policy-page/privacy-policy'
-              href={{ pathname: `/policy-page/privacy-policy`, query: { language_id: currentLanguage?.id } }}
+              <Link
+                title={translate('priPolicy')}
+                // href='/policy-page/privacy-policy'
+                href={{ pathname: `/policy-page/privacy-policy`, query: { language_id: currentLanguage?.id } }}
               >
                 {translate('priPolicy')}
               </Link>

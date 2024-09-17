@@ -110,6 +110,7 @@ const Categories = () => {
                         //   category_slug: element.slug
                         // }
                       }}
+                      title='category-news'
                     >
                       <img
                         id='cat-section-card-image'

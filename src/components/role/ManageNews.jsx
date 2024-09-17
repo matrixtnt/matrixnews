@@ -122,6 +122,7 @@ const ManageNews = () => {
                         <Link
                           href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                           // as={`/news/${element.slug}`}
+                          title='detail-page'
                         >
                           <div className='manage-card'>
 
@@ -154,6 +155,7 @@ const ManageNews = () => {
                           <Link
                             href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                             // as={`/news/${element.slug}`}
+                            title={element.title}
                           >
                             <div className='manage-title'>
                               <p

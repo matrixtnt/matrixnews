@@ -49,7 +49,7 @@ const StyleThree = ({ Data, isLoading }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/video-news-view/${Data.slug}`}>
+                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/video-news-view/${Data.slug}`} title={translate('viewMore')}>
                   {translate('viewMore')}
                 </Link>
               </div>
@@ -177,6 +177,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id } }}
                       // as={`/news/${Data.news[0].slug}`}
+                        title='detail-page'
                     >
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img id='vps-main-image' src={Data.news[0].image} alt='news' onError={placeholderImage} />
@@ -195,6 +196,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id } }}
                       // as={`/news/${Data.news[1].slug}`}
+                        title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
@@ -219,6 +221,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id } }}
                       // as={`/news/${Data.news[2].slug}`}
+                        title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
@@ -266,6 +269,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}`, query: { language_id: Data.breaking_news[0].language_id } }}
                       // as={`/breaking-news/${Data.breaking_news[0].slug}`}
+                        title='detail-page'
                     >
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img
@@ -288,6 +292,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}`, query: { language_id: Data.breaking_news[1].language_id } }}
                       // as={`/breaking-news/${Data.breaking_news[1].slug}`}
+                        title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
@@ -309,6 +314,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}`, query: { language_id: Data.breaking_news[2].language_id } }}
                       // as={`/breaking-news/${Data.breaking_news[2].slug}`}
+                        title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img

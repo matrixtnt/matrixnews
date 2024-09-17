@@ -281,7 +281,7 @@ const Header = () => {
       <div className='container'>
         <div className='navbar_content'>
           <div id='News-logo' className='News-logo'>
-            <Link href='/' activeclassname='active' exact='true'>
+            <Link href='/' activeclassname='active' exact='true' title={settings && settings?.web_setting?.web_name}>
               <img id='NewsLogo' src={settings && darkThemeMode ? settings?.web_setting?.dark_header_logo : settings?.web_setting?.light_header_logo} onError={placeholderImage} alt='logo' />
             </Link>
           </div>
@@ -297,6 +297,7 @@ const Header = () => {
                     aria-current='page'
                     href='/'
                     className={`headerDropdownItem link-color ${router === '/' ? 'navLinkActive' : ''}`}
+                    title={translate('home')}
                   >
                     {translate('home')}
                   </Link>
@@ -312,6 +313,7 @@ const Header = () => {
                     aria-current='page'
                     // href={`/about-us`}
                     href={{ pathname: `/about-us`, query: { language_id: currentLanguage?.id } }}
+                    title={translate('aboutus')}
                   >
                     {translate('aboutus')}
                   </Link>
@@ -327,6 +329,7 @@ const Header = () => {
                       className={`headerDropdownItem link-color ${router === '/live-news' ? 'navLinkActive' : ''}`}
                       aria-current='page'
                       href='/live-news'
+                      title={translate('livenews')}
                     >
                       {translate('livenews')}
                     </Link>
@@ -343,6 +346,7 @@ const Header = () => {
                       className={`headerDropdownItem link-color ${router === '/all-breaking-news' ? 'navLinkActive' : ''}`}
                       aria-current='page'
                       href='/all-breaking-news'
+                      title={translate('breakingnews')}
                     >
                       {translate('breakingnews')}
                     </Link>
@@ -360,6 +364,7 @@ const Header = () => {
                     aria-current='page'
                     // href='/contact-us'
                     href={{ pathname: `/contact-us`, query: { language_id: currentLanguage?.id } }}
+                    title={translate('contactus')}
                   >
                     {translate('contactus')}
                   </Link>
@@ -390,7 +395,7 @@ const Header = () => {
 
                 {/* notifiaction */}
                 {isLogin() ? (
-                  <Link href='/personal-notification' id='btnNotification' type='button' className='btn'>
+                  <Link href='/personal-notification' id='btnNotification' type='button' className='btn' title='notification'>
                     <BiBell size={23} />
                     <span className='noti_badge_data'></span>
                   </Link>

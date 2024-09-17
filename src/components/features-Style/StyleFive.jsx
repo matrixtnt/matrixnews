@@ -146,6 +146,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       id='btnbnsViewAll'
                       className='btn commonBtn'
                       type='button'
+                      title={translate('viewall')}
                       href={`/video-news-view/${Data.slug}`}
                       onClick={() => scrollToTop()}
                     >
@@ -246,6 +247,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       className='btn commonBtn'
                       type='button'
                       href={`/view-all/${Data.slug}`}
+                      title={translate('viewall')}
                       onClick={() => scrollToTop()}
                     >
                       {translate('viewall')}
@@ -268,6 +270,7 @@ const StyleFive = ({ isLoading, Data }) => {
                             <Link id='Link-all'
                               href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                               // as={`/news/${element.slug}`}
+                              title='detail-page'
                             >
                               <img
                                 id='bns-image'
@@ -333,6 +336,7 @@ const StyleFive = ({ isLoading, Data }) => {
                       className='btn commonBtn'
                       type='button'
                       href={`/view-all/${Data.slug}`}
+                      title={translate('viewall')}
                       onClick={() => scrollToTop()}
                     >
                       {translate('viewall')}
@@ -355,6 +359,7 @@ const StyleFive = ({ isLoading, Data }) => {
                             <Link id='Link-all'
                               href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
                               // as={`/breaking-news/${element.slug}`}
+                              title='detail-page'
                             >
                               <img
                                 id='bns-image'

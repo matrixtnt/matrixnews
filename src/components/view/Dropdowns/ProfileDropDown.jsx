@@ -16,7 +16,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
             label: (
                 <>
                     <span>
-                        <Link href='/bookmark' className={`dropdownItem ${router === '/bookmark' ? 'navActive' : ''}`} onClick={handleClose}>
+                        <Link href='/bookmark' className={`dropdownItem ${router === '/bookmark' ? 'navActive' : ''}`} onClick={handleClose} title={translate('bookmark')}>
                             {translate('bookmark')}
                         </Link>
                     </span>
@@ -28,7 +28,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
             label: (
                 <>
                     <span>
-                        <Link id='btnBookmark' href='/user-based-categories' className={`dropdownItem ${router === '/user-based-categories' ? 'navActive' : ''}`} onClick={handleClose}>
+                        <Link id='btnBookmark' href='/user-based-categories' className={`dropdownItem ${router === '/user-based-categories' ? 'navActive' : ''}`} onClick={handleClose} title={translate('managePreferences')}>
                             {translate('managePreferences')}
                         </Link>
                     </span>
@@ -40,7 +40,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
             label: (
                 <>
                     <span>
-                        <Link id='btnBookmark' href='/profile-update' className={`dropdownItem ${router === '/profile-update' ? 'navActive' : ''}`} onClick={handleClose}>
+                        <Link title={translate('update-profile')} id='btnBookmark' href='/profile-update' className={`dropdownItem ${router === '/profile-update' ? 'navActive' : ''}`} onClick={handleClose}>
                             {translate('update-profile')}
                         </Link>
                     </span>
@@ -53,7 +53,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
                 label: (
                     <>
                         <span>
-                            <Link id='btnBookmark' href='/create-news' className={`dropdownItem ${router === '/create-news' ? 'navActive' : ''}`} onClick={handleClose}>
+                            <Link title={translate('createNewsLbl')} id='btnBookmark' href='/create-news' className={`dropdownItem ${router === '/create-news' ? 'navActive' : ''}`} onClick={handleClose}>
                                 {translate('createNewsLbl')}
                             </Link>
                         </span>
@@ -65,7 +65,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
                 label: (
                     <>
                         <span>
-                            <Link id='btnBookmark' href='/manage-news' className={`dropdownItem ${router === '/manage-news' ? 'navActive' : ''}`} onClick={handleClose}>
+                            <Link title={translate('manageNewsLbl')} id='btnBookmark' href='/manage-news' className={`dropdownItem ${router === '/manage-news' ? 'navActive' : ''}`} onClick={handleClose}>
                                 {translate('manageNewsLbl')}
                             </Link>
                         </span>

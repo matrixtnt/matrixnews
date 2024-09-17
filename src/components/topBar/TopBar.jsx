@@ -237,6 +237,7 @@ const WeatherCard = () => {
                         href={data?.link}
                         rel='noreferrer'
                         key={data?.id}
+                        title='social-media-link'
                       >
                         <img src={data?.image} alt="social-media-icon" className='socialMediaIcons' onError={placeholderImage} />
                       </a>

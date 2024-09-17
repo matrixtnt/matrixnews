@@ -77,7 +77,7 @@ const CookiesComponent = () => {
   return (
     <div className='cookiesComponent'>
       <div className="imgWrapper">
-        <Image src={darkTheme ? cookiesIconDarTheme : cookiesIconLightTheme} height={0} width={0} />
+        <Image src={darkTheme ? cookiesIconDarTheme : cookiesIconLightTheme} height={0} width={0} alt='cookiesImg' />
       </div>
 
       <div className='content'>

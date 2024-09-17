@@ -96,6 +96,7 @@ const BookmarkSection = () => {
                       <Link
                         href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                         // as={`/news/${element.slug}`}
+                        title='detail-page-link'
                       >
                         <img
                           id='bs-card-image'

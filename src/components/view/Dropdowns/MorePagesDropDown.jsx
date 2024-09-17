@@ -57,6 +57,7 @@ const MorePagesDropDown = ({ handleClose }) => {
                         href={{ pathname: `/more-pages/${page?.slug}/`, query: { language_id: currentLanguage?.id } }}
                         className={`dropdownItem ${router === page.url ? 'navActive' : ''}`}
                         onClick={handleClose}
+                        title={page.title}
                     >
                         {page.title || translate('defaultTitle')}
                     </Link>

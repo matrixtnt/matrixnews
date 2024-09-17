@@ -115,6 +115,7 @@ const StyleFour = ({ Data, isLoading }) => {
                         <Link id='rns-card' className='card card_hover_two'
                           href={{ pathname: `/news/${value.slug}`, query: { language_id: value.language_id } }}
                           // as={`/news/${value.slug}`}
+                          title='detail-page'
                         >
                           <div className='banner_thumb'>
                             <img
@@ -171,6 +172,7 @@ const StyleFour = ({ Data, isLoading }) => {
                           className='card card_hover_two'
                           href={{ pathname: `/breaking-news/${value.slug}`, query: { language_id: value.language_id } }}
                           // as={`/breaking-news/${value.slug}`}
+                          title='detail-page'
                         >
                           <div className='banner_thumb'>
                             <img

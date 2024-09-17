@@ -130,6 +130,7 @@ const MobilesideBar = ({
                   type='button'
                   className='btn'
                   onClick={handleClose}
+                  title='notification'
                 >
                   <BiBell size={23} />
                   <span className='noti_badge_data'></span>
@@ -167,6 +168,7 @@ const MobilesideBar = ({
                   href='/'
                   className={`headerDropdownItem link-color ${router === '/' ? 'navLinkActive' : ''}`}
                   onClick={handleClose}
+                  title={translate('home')}
                 >
                   {translate('home')}
                 </Link>
@@ -182,6 +184,7 @@ const MobilesideBar = ({
                   aria-current='page'
                   href={`/about-us`}
                   onClick={handleClose}
+                  title={translate('aboutus')}
                 >
                   {translate('aboutus')}
                 </Link>
@@ -198,6 +201,7 @@ const MobilesideBar = ({
                     aria-current='page'
                     href='/live-news'
                     onClick={handleClose}
+                    title={translate('livenews')}
                   >
                     {translate('livenews')}
                   </Link>
@@ -215,6 +219,7 @@ const MobilesideBar = ({
                     aria-current='page'
                     href='/all-breaking-news'
                     onClick={handleClose}
+                    title={translate('breakingnews')}
                   >
                     {translate('breakingnews')}
                   </Link>
@@ -232,6 +237,7 @@ const MobilesideBar = ({
                   aria-current='page'
                   href='/contact-us'
                   onClick={handleClose}
+                  title={translate('contactus')}
                 >
                   {translate('contactus')}
                 </Link>
@@ -258,7 +264,7 @@ const MobilesideBar = ({
                 ) : null}
                 <ul className='sub-menu mobile_catogories'>
                   {categories &&
-                    categories.slice(0, 12).map((element, index) => (
+                    categories.map((element, index) => (
                       <li className='nav-item' key={index}>
                         {
                           element?.sub_categories?.length > 0 ?
@@ -291,6 +297,7 @@ const MobilesideBar = ({
                                 }
                               }}
                               onClick={handleClose}
+                              title={element.category_name}
                             >
                               {' '}
                               <b>{element.category_name}</b>{' '}
@@ -299,14 +306,14 @@ const MobilesideBar = ({
 
                       </li>
                     ))}
-                  {categories && categories.length > 10 && (
+                  {/* {categories && categories.length > 10 && (
                     <li className='nav-item'>
                       <Link className='catNav-links' href={'/all-categories'} onClick={handleClose}>
                         {' '}
                         <b>{translate('More >>')}</b>{' '}
                       </Link>
                     </li>
-                  )}
+                  )} */}
                 </ul>
               </li>
             ) : null}

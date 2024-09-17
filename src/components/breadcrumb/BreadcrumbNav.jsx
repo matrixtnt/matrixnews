@@ -16,15 +16,14 @@ const Breadcrum = ({ SecondElement, ThirdElement, FourthElement }) => {
   return (
     <div className='breadcrumbWrapper'>
       <div className='pageName container'>
-        <Link href={'/'} className='firstElement'>
+        <Link href={'/'} className='firstElement' title={translate('home')}>
           <FaHome size={25} className='me-1' />
           <span> {translate('home')} </span>
         </Link>
         <span> | </span>
         {
-          SecondElement === 'category'
-            ? <Link href={'/all-categories'}><span>{translate('catLbl')}</span></Link>
-            : <span>{formatElement(SecondElement)}</span>
+          SecondElement &&
+          <span className='contentUpperCase'>{formatElement(SecondElement)}</span>
         }
 
         {ThirdElement && (

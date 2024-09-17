@@ -82,7 +82,7 @@ const TagsSection = () => {
           <div id='tags-tag'>
             {tagsData &&
               tagsData?.map(element => (
-                <Link id='btnTags' key={element.id} href={`/tag/${element.slug}`} className='btn btn-outline-dark'>
+                <Link id='btnTags' key={element.id} href={`/tag/${element.slug}`} className='btn btn-outline-dark' title={element.tag_name}>
                   {/* {console.log(element.slug)} */}
                   {element.tag_name}
                 </Link>

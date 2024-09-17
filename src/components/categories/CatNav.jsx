@@ -315,7 +315,7 @@ const CatNav = () => {
                                                   key={index}
                                                   onClick={() => setIsMenuOpen(false)}
                                                 >
-                                                  <Link href={`/categories-news/sub-category/${data?.slug}`}>
+                                                  <Link href={`/categories-news/sub-category/${data?.slug}`} title={data.subcategory_name}>
                                                     {data.subcategory_name}
                                                   </Link>
                                                 </Dropdown.Item>
@@ -330,6 +330,7 @@ const CatNav = () => {
                                           pathname: `/categories-news/${element.slug}`
                                         }}
                                         onClick={() => setIsMenuOpen(false)}
+                                        title={element.category_name}
                                       >
                                         {' '}
                                         {element.category_name}{' '}
