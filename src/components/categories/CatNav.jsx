@@ -50,7 +50,6 @@ const CatNav = () => {
     }
   }
 
-
   const [currentPage, setCurrentPage] = useState(0)
   const dataPerPage = 4 // number of posts per page
 
@@ -182,7 +181,8 @@ const CatNav = () => {
                                 >
 
                                   <b>{element.category_name} </b> {subCatDrop && currentCategory && currentCategory.id === element.id ? <FaAngleUp /> : <FaAngleDown />}
-                                </span> : <span
+                                </span> : 
+                                <span
                                   className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                                   onClick={() => handleCategoryChange(element)}
                                 >
@@ -276,15 +276,15 @@ const CatNav = () => {
                       </button>
                     ) : null} */}
                     {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
-                      <li className='allCatBtn nav-item has-children'>
+                      <li className='allCatBtn nav-item has-children' onMouseLeave={() => setIsMenuOpen(false)}>
                         {categories && categories.length > 10 ? (
                           <button
                             id='catNav-more'
                             className='menu-toggle' 
-                            // onClick={(e) => onClickHandler(e)}
                             onMouseEnter={(e) => onClickHandler(e)}
+                            onMouseLeave={() => setIsMenuOpen(false)}
                           >
-                            {translate('More >>')}
+                            {translate('More')}
                             <span className='downArr'>
                               {isMenuOpen ?
                                 <FaAngleUp />
@@ -312,7 +312,7 @@ const CatNav = () => {
                                             element.sub_categories.map((data, index) => {
                                               return (
                                                 <Dropdown.Item
-                                                  key={index}
+                                                  key={index} 
                                                   onClick={() => setIsMenuOpen(false)}
                                                 >
                                                   <Link href={`/categories-news/sub-category/${data?.slug}`} title={data.subcategory_name}>

@@ -360,6 +360,22 @@ const Header = () => {
                     id='nav-links'
                     activeclassname='active'
                     exact='true'
+                    className={`headerDropdownItem link-color ${router === '/video-news' ? 'navLinkActive' : ''}`}
+                    aria-current='page'
+                    // href='/contact-us'
+                    href={'video-news'}
+                    title={translate('videoNews')}
+                  >
+                    {translate('videoNews')}
+                  </Link>
+                </b>
+              </li>
+              <li id='NavHover' className='nav-item'>
+                <b>
+                  <Link
+                    id='nav-links'
+                    activeclassname='active'
+                    exact='true'
                     className={`headerDropdownItem link-color ${router === '/contact-us' ? 'navLinkActive' : ''}`}
                     aria-current='page'
                     // href='/contact-us'

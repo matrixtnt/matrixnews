@@ -43,7 +43,7 @@ const Meta = ({ title, description, keywords, ogImage, pathName, schema }) => {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema ? schema : null) }}
         />
       </Head>
-      <h1 className='d-none'>{title ? title : process.env.NEXT_PUBLIC_TITLE}</h1>
+      {/* <h1 className='d-none'>{title ? title : process.env.NEXT_PUBLIC_TITLE}</h1> */}
     </>
   )
 }

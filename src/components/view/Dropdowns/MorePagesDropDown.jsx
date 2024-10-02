@@ -39,8 +39,6 @@ const MorePagesDropDown = ({ handleClose }) => {
     }, [Data])
 
 
-
-
     const router = usePathname();
 
 
@@ -55,7 +53,7 @@ const MorePagesDropDown = ({ handleClose }) => {
                     <Link
                         // href={`/more-pages/${page?.slug}/language_id=${currentLanguage.id}`}
                         href={{ pathname: `/more-pages/${page?.slug}/`, query: { language_id: currentLanguage?.id } }}
-                        className={`dropdownItem ${router === page.url ? 'navActive' : ''}`}
+                        className={`dropdownItem ${router === `/more-pages/${page.slug}` ? 'navActive' : ''}`}
                         onClick={handleClose}
                         title={page.title}
                     >
@@ -65,6 +63,8 @@ const MorePagesDropDown = ({ handleClose }) => {
             </>
         ),
     }));
+
+    const isMorePagesActive = router.startsWith('/more-pages');
 
     return (
         filteredData?.length > 0 &&
@@ -76,7 +76,7 @@ const MorePagesDropDown = ({ handleClose }) => {
                 className="navDropdown commonDropDown"
             >
                 <a onClick={(e) => e.preventDefault()}>
-                    <span className={`nav-link headerDropdownItem ${router === '/terms-condition' || router === '/privacy-policy' ? 'navLinkActive' : ''}`}>
+                    <span className={`nav-link headerDropdownItem ${isMorePagesActive ? 'navLinkActive' : ''}`}>
                         {translate('More Pages')}
                         <FaAngleDown />
                     </span>

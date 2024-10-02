@@ -17,14 +17,6 @@ const Card = ({ catNav }) => {
       </div>
     </div>
 
-    // <div className='textSkeleton'>
-    //   <Skeleton height={300} width={'100%'} />
-    //   <div className='innerDiv'>
-    //     <Skeleton height={30} width={60} className='categoryBadge' />
-    //     <Skeleton height={30} width={'100%'} className='title' />
-    //   </div>
-    // </div>
-
   )
 }
 

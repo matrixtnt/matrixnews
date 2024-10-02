@@ -56,7 +56,7 @@ export const languageSlice = createSlice({
     resetLanguageData: (deafaultState) => {
       deafaultState = initialState;
       return deafaultState;
-  },
+    },
   }
 })
 
@@ -83,18 +83,18 @@ export const loadLanguages = ({
   const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
   // // If API data is fetched within last 10 minutes then don't call the API again
   // if (diffInMinutes < process.env.NEXT_PUBLIC_LOAD_MIN) {
-    store.dispatch(
-      apiCallBegan({
-        ...getLanguagesApi(limit, offset),
-        displayToast: false,
-        onStartDispatch: languagesRequested.type,
-        onSuccessDispatch: languagesReceived.type,
-        onErrorDispatch: languagesRequestFailed.type,
-        onStart,
-        onSuccess,
-        onError
-      })
-    )
+  store.dispatch(
+    apiCallBegan({
+      ...getLanguagesApi(limit, offset),
+      displayToast: false,
+      onStartDispatch: languagesRequested.type,
+      onSuccessDispatch: languagesReceived.type,
+      onErrorDispatch: languagesRequestFailed.type,
+      onStart,
+      onSuccess,
+      onError
+    })
+  )
   // }
 }
 

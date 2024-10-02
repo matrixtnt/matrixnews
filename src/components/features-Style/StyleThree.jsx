@@ -49,7 +49,7 @@ const StyleThree = ({ Data, isLoading }) => {
                   </p>
                   <div className='short_desc'>{Data && Data.short_description}</div>
                 </div>
-                <Link id='vps-Viewmore' onClick={() => scrollToTop()} href={`/video-news-view/${Data.slug}`} title={translate('viewMore')}>
+                <Link className='commonBtn' onClick={() => scrollToTop()} href={`/video-news-view/${Data.slug}`} title={translate('viewMore')}>
                   {translate('viewMore')}
                 </Link>
               </div>

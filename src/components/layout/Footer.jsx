@@ -106,13 +106,18 @@ const Footer = () => {
                     : null
                 }
                 <li className='nav-item'>
-                  <Link href='/about-us' onClick={() => scrollToTop()} title={translate('aboutus')}>
+                  <Link  href={{ pathname: `/about-us`, query: { language_id: currentLanguage?.id } }} onClick={() => scrollToTop()} title={translate('aboutus')}>
                     {translate('aboutus')}
                   </Link>
                 </li>
                 <li className='nav-item'>
-                  <Link href='/contact-us' onClick={() => scrollToTop()} title={translate('contactus')}>
+                  <Link href={{ pathname: `/contact-us`, query: { language_id: currentLanguage?.id } }} onClick={() => scrollToTop()} title={translate('contactus')}>
                     {translate('contactus')}
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link href={'/video-news'} onClick={() => scrollToTop()} title={translate('videoNews')}>
+                    {translate('videoNews')}
                   </Link>
                 </li>
 

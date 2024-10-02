@@ -39,18 +39,17 @@ export const checkPermissionSlice = createSlice({
   }
 })
 
-// Export the categoryCount reducer and action
+
 export const { checkNotificationPermission, checkLocationPermission, isNotificationPermissionCheck, isLocationPermissionCheck, resetPermissionData } = checkPermissionSlice.actions
 export default checkPermissionSlice.reducer
 
-// Function to load category count data
 export const checkNotificationPermissionGranted = data => {
   store.dispatch(checkNotificationPermission({ data }))
 }
 export const checkLocationPermissionGranted = data => {
   store.dispatch(checkLocationPermission({ data }))
 }
-// Function to load category count data
+
 export const isLocationPermissionCheckOnce = data => {
   store.dispatch(checkNotificationPermission({ data }))
 }
@@ -58,10 +57,8 @@ export const isNotificationPermissionCheckOnce = data => {
   store.dispatch(checkLocationPermission({ data }))
 }
 
-// Selector function to get tempdata from the state
 export const checkPermissionsSelector = state => state.checkPermission
 
-// Selector function to get categoryCount from the state
 export const notificationPermissionSelector = createSelector(checkPermissionsSelector, checkPermission => checkPermission.data.isNotificaitonPermission)
 export const locationPermissionSelector = createSelector(checkPermissionsSelector, checkPermission => checkPermission.data.isLocationPermission)
 

@@ -21,7 +21,7 @@ const PolicyPages = ({ privacyPolicyPage }) => {
             language_id: currentLanguage.id,
             onSuccess: (res) => {
                 const resData = res
-                console.log('policy-pages-data =>', resData)
+                // console.log('policy-pages-data =>', resData)
                 setData(resData)
                 setIsLoading(false)
             },
