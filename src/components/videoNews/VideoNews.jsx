@@ -25,7 +25,7 @@ const VideoNews = () => {
 
   const settings = useSelector(settingsData)
 
-  const dataPerPage = 6;
+  const dataPerPage = 2;
 
   const [isLoading, setIsLoading] = useState({
     loading: false,

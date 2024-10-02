@@ -7410,7 +7410,7 @@ span {
   width: 100%;
   border: 1px solid lightgray;
   border-radius: 4px;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 [data-bs-theme="dark"] .catSubCatWrapper .sub-menu {

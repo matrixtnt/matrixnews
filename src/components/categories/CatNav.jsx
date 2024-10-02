@@ -276,13 +276,12 @@ const CatNav = () => {
                       </button>
                     ) : null} */}
                     {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
-                      <li className='allCatBtn nav-item has-children' onMouseLeave={() => setIsMenuOpen(false)}>
+                      <li className='allCatBtn nav-item has-children'>
                         {categories && categories.length > 10 ? (
                           <button
                             id='catNav-more'
                             className='menu-toggle' 
                             onMouseEnter={(e) => onClickHandler(e)}
-                            onMouseLeave={() => setIsMenuOpen(false)}
                           >
                             {translate('More')}
                             <span className='downArr'>
