@@ -35,10 +35,12 @@ const getAllPosts = [
   // Add more sample posts as needed
 ];
 
-let fs;
-if (typeof window === "undefined") {
-  fs = require("fs"); // Require 'fs' only on the server-side
-}
+ // Dynamically import 'fs' only on the server side
+ let fs;
+ if (typeof window === "undefined") {
+   const fsModule = await import("fs");
+   fs = fsModule.default;
+ }
 
 export default async function generateRssFeed(allPosts,logo) {
 
