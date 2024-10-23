@@ -120,7 +120,7 @@ const Categories = () => {
                         onError={placeholderImage}
                       />
                       <div id='cat-section-card-body' className='card-img-overlay'>
-                        <h5 id='cat-card-text' className='card-text mb-0'>
+                        <h5 id='cat-card-text' className='categoryTag'>
                           {element.category_name}
                         </h5>
                         <button id='btn-cat-more' className='btn' type='button'>

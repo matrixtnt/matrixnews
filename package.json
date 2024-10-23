@@ -60,6 +60,7 @@
     "react-spinners": "^0.13.8",
     "react-spring-lightbox": "^1.8.0",
     "redux-persist": "^6.0.0",
+    "rss": "^1.2.2",
     "styled-components": "^6.1.8",
     "swiper": "^8.4.5",
     "validator": "^13.7.0",

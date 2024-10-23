@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { HiOutlineArrowLongRight } from 'react-icons/hi2'
+import { FaArrowRightLong } from "react-icons/fa6";
 import { placeholderImage, translate, truncateText } from '../../utils'
 import { BsFillPlayFill } from 'react-icons/bs'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
@@ -7,6 +7,8 @@ import { useState } from 'react'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
 import StyleFourSkeleton from '../skeletons/StyleFourSkeleton'
+import { IoEye } from "react-icons/io5";
+import { LuCalendarDays } from "react-icons/lu";
 
 const StyleFour = ({ Data, isLoading }) => {
   const scrollToTop = () => {
@@ -72,7 +74,10 @@ const StyleFour = ({ Data, isLoading }) => {
                             </div>
                           </div>
                           <div id='rns-card-body' className='card-block pb-0'>
-                            <p className='card-title mb-0'>{value.title}</p>
+                            <div className='d-flex align-items-center gap-4'>
+                              <span className='d-flex align-items-center gap-2 views'> <IoEye size={20} /> {value?.total_views} {translate('views')}</span>
+                            </div>
+                            <p className='card-title mb-0'>{value?.title}</p>
                           </div>
                         </div>
                       </div>
@@ -127,16 +132,24 @@ const StyleFour = ({ Data, isLoading }) => {
                             />
                           </div>
                           <div id='rns-img-overlay' className=' card-inverse'>
-                            <div id='btnrnsCatagory' className='btn btn-sm' type='button'>
+                            <div className='categoryTag' type='button'>
                               {truncateText(value.category_name, 10)}
                             </div>
                           </div>
                           <div id='rns-card-body' className='card-block'>
-                            <p className='card-title'>{value.title}</p>
-                            <p id='btnrnsRead' className='btn overlay commonBtn' type='button'>
+                            <div className='d-flex align-items-center gap-4'>
+                              <span className='dateSpan d-flex align-items-center gap-2'><LuCalendarDays />20 jun 2024</span>
+                              <span className='d-flex align-items-center gap-2 views'> <IoEye size={20} /> {value?.total_views} {translate('views')}</span>
+
+                            </div>
+                            <p className='card-title'>{value?.title}</p>
+                            <hr />
+                            <Link  href={{ pathname: `/news/${value.slug}`, query: { language_id: value.language_id } }}
+                              // as={`/breaking-news/${value.slug}`}
+                              title='detail-page' className='readMoreBtn'>
                               {translate('readmore')}
-                              <HiOutlineArrowLongRight id='rns-arrow' size={20} />
-                            </p>
+                              <FaArrowRightLong size={20} />
+                            </Link>
                           </div>
                         </Link>
                       </div>
@@ -184,11 +197,17 @@ const StyleFour = ({ Data, isLoading }) => {
                             />
                           </div>
                           <div id='rns-card-body' className='card-block'>
-                            <p className='card-title'>{value.title}</p>
-                            <button id='btnrnsRead' className='commonBtn'>
+                            <div className='d-flex align-items-center gap-4'>
+                              <span className='d-flex align-items-center gap-2 views'> <IoEye size={20} /> {value?.total_views} {translate('views')}</span>
+                            </div>
+                            <p className='card-title'>{value?.title}</p>
+                            <hr />
+                            <Link href={{ pathname: `/breaking-news/${value.slug}`, query: { language_id: value.language_id } }}
+                              // as={`/breaking-news/${value.slug}`}
+                              title='detail-page' className='readMoreBtn'>
                               {translate('readmore')}
-                              <HiOutlineArrowLongRight id='rns-arrow' size={20} />
-                            </button>
+                              <FaArrowRightLong size={20} />
+                            </Link>
                           </div>
                         </Link>
                       </div>

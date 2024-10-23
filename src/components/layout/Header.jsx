@@ -215,12 +215,12 @@ const Header = () => {
     confirm({
       title: translate('deleteAcc'),
       content: (
-        <>
-          <p>{translate('deleteAccWarning')}</p>
-          <li style={{ listStyle: 'disc' }}>{translate('profileInfo')}</li>
-          <li style={{ listStyle: 'disc' }}>{translate('settings')}</li>
-          <li style={{ listStyle: 'disc' }}>{translate('associatedContent')}</li>
-        </>
+        <div>
+          <p className='fw-bold'>{translate('deleteAccWarning')}</p>
+          <li className='fw-bold' style={{ listStyle: 'disc' }}>{translate('profileInfo')}</li>
+          <li className='fw-bold' style={{ listStyle: 'disc' }}>{translate('settings')}</li>
+          <li className='fw-bold' style={{ listStyle: 'disc' }}>{translate('associatedContent')}</li>
+        </div>
       ),
       centered: true,
       okText: translate('deleteTxt'),

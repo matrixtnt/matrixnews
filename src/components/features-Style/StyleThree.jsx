@@ -7,6 +7,7 @@ import { placeholderImage, translate, truncateText } from '../../utils'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
 import StyleThreeSkelton from '../skeletons/StyleThreeSkeleton'
+import { LuCalendarDays } from "react-icons/lu";
 
 const StyleThree = ({ Data, isLoading }) => {
   const [Video_url, setVideo_url] = useState()
@@ -177,12 +178,21 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id } }}
                       // as={`/news/${Data.news[0].slug}`}
-                        title='detail-page'
+                      title='detail-page'
                     >
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img id='vps-main-image' src={Data.news[0].image} alt='news' onError={placeholderImage} />
                       </Card>
-                      <span className='style_three_cat_name'>{truncateText(Data.news[0].category_name, 10)}</span>
+                      <div className='d-flex flex-column gap-4'>
+                        <span className='categoryTag'>{truncateText(Data.news[0].category_name, 10)}</span>
+                        <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
+                          {new Date(Data.news[0]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      </div>
                       <p id='vps-card-title' className='mt-2'>
                         <b>{Data.news[0].title}</b>
                       </p>
@@ -196,9 +206,10 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/news/${Data.news[1].slug}`, query: { language_id: Data.news[1].language_id } }}
                       // as={`/news/${Data.news[1].slug}`}
-                        title='detail-page'
+                      title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black second_video'>
+                        <span className='categoryTag'>{truncateText(Data.news[1].category_name, 10)}</span>
                         <Card.Img
                           id='vps-secondry-images'
                           src={Data.news[1].image}
@@ -207,7 +218,15 @@ const StyleThree = ({ Data, isLoading }) => {
                         />
                         <Card.ImgOverlay>
                           <div className='inner_Card_content'>
-                            <span className='style_three_cat_name'>{truncateText(Data.news[1].category_name, 10)}</span>
+                            <div className='d-flex flex-column gap-4'>
+                              <span className='d-flex align-items-center gap-2 dateSpan'> <LuCalendarDays size={20} />
+                                {new Date(Data.news[1]?.date).toLocaleString('en-us', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric'
+                                })}
+                              </span>
+                            </div>
                             <p id='vps-card-title'>
                               <b>{Data.news[1].title}</b>
                             </p>
@@ -221,9 +240,10 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id } }}
                       // as={`/news/${Data.news[2].slug}`}
-                        title='detail-page'
+                      title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black third_video'>
+                        <span className='categoryTag'>{truncateText(Data.news[2].category_name, 10)}</span>
                         <Card.Img
                           id='vps-secondry-images'
                           src={Data.news[2].image}
@@ -232,7 +252,16 @@ const StyleThree = ({ Data, isLoading }) => {
                         />
                         <Card.ImgOverlay>
                           <div className='inner_Card_content'>
-                            <span className='style_three_cat_name'>{truncateText(Data.news[2].category_name, 10)}</span>
+                            <div className='d-flex flex-column gap-4'>
+
+                              <span className='d-flex align-items-center gap-2 dateSpan'> <LuCalendarDays size={20} />
+                                {new Date(Data.news[2]?.date).toLocaleString('en-us', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric'
+                                })}
+                              </span>
+                            </div>
                             <p id='vps-card-title'>
                               <b>{Data.news[2].title}</b>
                             </p>
@@ -269,7 +298,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}`, query: { language_id: Data.breaking_news[0].language_id } }}
                       // as={`/breaking-news/${Data.breaking_news[0].slug}`}
-                        title='detail-page'
+                      title='detail-page'
                     >
                       <Card id='vps-main-card' className='text-black'>
                         <Card.Img
@@ -279,6 +308,15 @@ const StyleThree = ({ Data, isLoading }) => {
                           onError={placeholderImage}
                         />
                       </Card>
+                      <div className='d-flex flex-column gap-4'>
+                        <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
+                          {new Date(Data.breaking_news[0]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      </div>
                       <p id='vps-card-title'>
                         <b>{Data.breaking_news[0].title}</b>
                       </p>
@@ -292,7 +330,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/breaking-news/${Data.breaking_news[1].slug}`, query: { language_id: Data.breaking_news[1].language_id } }}
                       // as={`/breaking-news/${Data.breaking_news[1].slug}`}
-                        title='detail-page'
+                      title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black second_video'>
                         <Card.Img
@@ -302,6 +340,15 @@ const StyleThree = ({ Data, isLoading }) => {
                           onError={placeholderImage}
                         />
                         <Card.ImgOverlay>
+                          <div className='d-flex flex-column gap-4'>
+                            <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
+                              {new Date(Data.breaking_news[1]?.date).toLocaleString('en-us', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                              })}
+                            </span>
+                          </div>
                           <p id='vps-card-title'>
                             <b>{Data.breaking_news[1].title}</b>
                           </p>
@@ -314,7 +361,7 @@ const StyleThree = ({ Data, isLoading }) => {
                     <Link
                       href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}`, query: { language_id: Data.breaking_news[2].language_id } }}
                       // as={`/breaking-news/${Data.breaking_news[2].slug}`}
-                        title='detail-page'
+                      title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black third_video'>
                         <Card.Img
@@ -324,6 +371,15 @@ const StyleThree = ({ Data, isLoading }) => {
                           onError={placeholderImage}
                         />
                         <Card.ImgOverlay>
+                          <div className='d-flex flex-column gap-4'>
+                            <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
+                              {new Date(Data.breaking_news[2]?.date).toLocaleString('en-us', {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                              })}
+                            </span>
+                          </div>
                           <p id='vps-card-title'>
                             <b>{Data.breaking_news[2].title}</b>
                           </p>

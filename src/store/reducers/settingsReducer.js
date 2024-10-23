@@ -54,16 +54,37 @@ export const settingsSlice = createSlice({
 export const { settingsRequested, settingsSuccess, settingsFailed, latlong, fcmToken, systemTimezone, resetSettingsData } = settingsSlice.actions;
 export default settingsSlice.reducer;
 
+
 // load websettings api call
 export const laodSettingsApi = ({
     type = "",
     onSuccess = () => { },
     onError = () => { },
     onStart = () => { } }) => {
+
+    const firstLoad = sessionStorage.getItem('firstLoad_Settings')
+    const manualRefresh = sessionStorage.getItem('manualRefresh_Settings')
+
+    const shouldFetchData = !firstLoad || manualRefresh === 'true'
+
+
+    if (typeof window !== 'undefined') {
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('manualRefresh_Settings', 'true')
+        })
+
+        window.addEventListener('load', () => {
+            // Check if this is a manual refresh by checking if lastFetch is set
+            if (!sessionStorage.getItem('lastFetch_Settings')) {
+                sessionStorage.setItem('manualRefresh_Settings', 'true')
+            }
+        })
+    }
+
     const { lastFetch } = store.getState().settings;
     const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
     // // If API data is fetched within last 10 minutes then don't call the API again
-    if (diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN || isManualRefresh()) {
+    if (shouldFetchData) {
         store.dispatch(apiCallBegan({
             ...getSettingsApi(type),
             displayToast: false,
@@ -71,32 +92,21 @@ export const laodSettingsApi = ({
             onSuccessDispatch: settingsSuccess.type,
             onErrorDispatch: settingsFailed.type,
             onStart,
-            onSuccess,
+            onSuccess: res => {
+                sessionStorage.setItem('lastFetch_Settings', Date.now())
+            },
             onError
         }))
+        // Clear manualRefresh flag
+        sessionStorage.removeItem('manualRefresh_Settings')
+
+        // Set firstLoad flag to prevent subsequent calls
+        sessionStorage.setItem('firstLoad_Settings', 'true')
+    }
+    else {
+        onSuccess(store.getState().settings)
     }
 };
-
-
-// Helper function to check if the page has been manually refreshed
-const isManualRefresh = () => {
-    const manualRefresh = sessionStorage.getItem("manualRefresh");
-    sessionStorage.removeItem("manualRefresh");
-    return manualRefresh === "true";
-};
-
-// Event listener to set manualRefresh flag when page is manually refreshed
-if (typeof window !== 'undefined') {
-    window.addEventListener("load", () => {
-        if (navigator.userAgent.includes("Mozilla")) {
-            // This is likely a manual refresh
-            sessionStorage.setItem("manualRefresh", "true");
-        } else {
-            // This is the initial page load
-            sessionStorage.removeItem("manualRefresh");
-        }
-    });
-}
 
 
 // load location

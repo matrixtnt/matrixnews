@@ -1,5 +1,5 @@
-"use client"
-import fs from "fs";
+
+// import fs from "fs";
 import { Feed } from "feed";
 import { compareDesc, parseISO } from "date-fns";
  
@@ -35,22 +35,27 @@ const getAllPosts = [
   // Add more sample posts as needed
 ];
 
-export default async function generateRssFeed() {
-  const posts = getAllPosts;
+let fs;
+if (typeof window === "undefined") {
+  fs = require("fs"); // Require 'fs' only on the server-side
+}
+
+export default async function generateRssFeed(allPosts,logo) {
+
+  const posts = allPosts;
+
+  // console.log('genFeed',posts)
+  // console.log('logo',logo)
+
   const siteURL = process.env.NEXT_PUBLIC_WEB_URL;
   const date = new Date();
-  const author = {
-    name: "John Doe",
-    email: "example@gmail.com",
-    link: "https://twitter.com/<username>",
-  };
   
   const feed = new Feed({
-    title: "Your Blog name",
-    description: "Your Blog description",
+    title: process.env.NEXT_PUBLIC_TITLE,
+    description: process.env.NEXT_PUBLIC_DESCRIPTION,
     id: siteURL,
     link: siteURL,
-    image: `${siteURL}/favicon.ico`,
+    image: logo,
     favicon: `${siteURL}/favicon.ico`,
     copyright: `All rights reserved ${date.getFullYear()}`,
     updated: date, // today's date
@@ -59,20 +64,17 @@ export default async function generateRssFeed() {
       rss2: `${siteURL}/rss/feed.xml`,  // xml format
       json: `${siteURL}/rss/feed.json`,// json fromat
     },
-    author,
   });
   
-  posts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).forEach((post) => {
-    const url = `${siteURL}/blog/${post.slug}`;
+  posts?.data.map((post) => {
+    const url = `${siteURL}/news/${post.slug}`;
     feed.addItem({
       title: post.title,
-      id: url,
+      id: post?.id,
       link: url,
       description: post.description,
-      content: post.content,
-      author: [author],
-      contributor: [author],
-      date: parseISO(post.date),
+      content: post?.image,
+      date: parseISO(post.published_date),
     });
   });
  

@@ -16,21 +16,22 @@ const MorePagesDropDown = ({ handleClose }) => {
     const currentLanguage = useSelector(selectCurrentLanguage)
 
     useEffect(() => {
+        if (currentLanguage?.id) {
+            loadMorePages({
 
-        loadMorePages({
+                onSuccess: (res) => {
+                    setData(res.data)
+                    setIsLoading(false)
+                    // console.log('morePages Res =>', res)
+                },
+                onError: (err) => {
+                    console.log('morePages =>', err)
+                    setData([])
+                    setIsLoading(false)
 
-            onSuccess: (res) => {
-                setData(res.data)
-                setIsLoading(false)
-                // console.log('morePages Res =>', res)
-            },
-            onError: (err) => {
-                console.log('morePages =>', err)
-                setData([])
-                setIsLoading(false)
-
-            }
-        })
+                }
+            })
+        }
 
     }, [currentLanguage])
 

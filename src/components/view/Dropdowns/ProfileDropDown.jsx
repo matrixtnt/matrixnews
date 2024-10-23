@@ -106,7 +106,7 @@ const ProfileDropDown = ({ userName, userData, logout, profileimg, profileimgErr
                     <span className={`nav-link headerDropdownItem ${router === '/bookmark' || router === 'user-based-categories' || router === 'profile-update' || router === '/manage-news' || router === '/create-news' ? 'navLinkActive' : ''}`}>
                         <img
                             className='profile_photo'
-                            src={userData.data && userData.data.profile ? userData.data.profile : profileimg}
+                            src={userData?.data && userData?.data?.profile ? userData?.data?.profile : profileimg}
                             onError={profileimgError ? profileimgError : placeholderImage}
                             alt='profile'
                         />

@@ -180,6 +180,28 @@ const Layout = ({ children }) => {
   }, []);
 
 
+
+  // for  live news
+  const firstLoad = sessionStorage.getItem('firstLoad_LiveNews')
+  const manualRefresh = sessionStorage.getItem('manualRefresh_LiveNews')
+
+  const shouldFetchLiveNewsData = !firstLoad || manualRefresh === 'true'
+
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('manualRefresh_LiveNews', 'true')
+    })
+
+    window.addEventListener('load', () => {
+      // Check if this is a manual refresh by checking if lastFetch is set
+      if (!sessionStorage.getItem('lastFetch_LiveNews')) {
+        sessionStorage.setItem('manualRefresh_LiveNews', 'true')
+      }
+    })
+  }
+
+
   // to check live new Data 
   // api call
   const getLiveStreaming = async () => {
@@ -187,8 +209,9 @@ const Layout = ({ children }) => {
       const { data } = await getLiveStreamingApi.getLiveStreaming({
         language_id: currentLanguage.id
       })
-      dispatch(checkLiveNewsData({ data: { liveNewsDataFound: data.data?.length > 0 ? true : false, isLiveNewsApiCallOnce: true } }))
+      dispatch(checkLiveNewsData({ data: { liveNewsDataFound: data.data?.length > 0 ? true : false } }))
       // console.log(data, 'checkLiveData')
+      sessionStorage.setItem('lastFetch_LiveNews', Date.now())
       return data.data
     } catch (error) {
       console.log(error)
@@ -196,11 +219,33 @@ const Layout = ({ children }) => {
   }
 
 
+  // for  breaking news
+  const firstLoadBreakingNews = sessionStorage.getItem('firstLoad_BreakingNews')
+  const manualRefreshBreakingNews = sessionStorage.getItem('manualRefresh_BreakingNews')
+
+  const shouldFetchBreakingNewsData = !firstLoadBreakingNews || manualRefreshBreakingNews === 'true'
+
+
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('manualRefresh_BreakingNews', 'true')
+    })
+
+    window.addEventListener('load', () => {
+      // Check if this is a manual refresh by checking if lastFetch is set
+      if (!sessionStorage.getItem('lastFetch_BreakingNews')) {
+        sessionStorage.setItem('manualRefresh_BreakingNews', 'true')
+      }
+    })
+  }
+
   // api call 
   const getBreakingNewsApi = async () => {
     try {
       const { data } = await AllBreakingNewsApi.getBreakingNews({ language_id: currentLanguage.id, })
-      dispatch(checkBreakingNewsData({ data: { breakingNewsDataFound: data.data?.length > 0 ? true : false, isBreakingNewsApiCallOnce: true, } }))
+      dispatch(checkBreakingNewsData({ data: { breakingNewsDataFound: data.data?.length > 0 ? true : false } }))
+      sessionStorage.setItem('lastFetch_BreakingNews', Date.now())
       return data.data
     } catch (error) {
       console.log(error)
@@ -208,11 +253,19 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (currentLanguage?.id && !isLiveNewsCallOnce && !isBreakingNewsCallOnce) {
+    if (currentLanguage?.id && settings?.live_streaming_mode === '1' && shouldFetchLiveNewsData) {
       getLiveStreaming()
-      getBreakingNewsApi()
+      sessionStorage.removeItem('manualRefresh_LiveNews')
+      // Set firstLoad flag to prevent subsequent calls
+      sessionStorage.setItem('firstLoad_LiveNews', 'true')
     }
-  }, [currentLanguage])
+    if (currentLanguage?.id && settings?.breaking_news_mode === '1' && shouldFetchBreakingNewsData) {
+      getBreakingNewsApi()
+      sessionStorage.removeItem('manualRefresh_BreakingNews')
+      // Set firstLoad flag to prevent subsequent calls
+      sessionStorage.setItem('firstLoad_BreakingNews', 'true')
+    }
+  }, [currentLanguage, settings?.live_streaming_mode, settings?.breaking_news_mode])
 
 
 

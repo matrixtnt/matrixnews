@@ -77,6 +77,7 @@ const BreakingNews = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+  
   useEffect(() => {
     getBreakingNewsApi({
       slug: breakingNewsSlug,
@@ -117,7 +118,7 @@ const BreakingNews = () => {
 
         if (data?.error === false) {
           setNewsViewsIncreament(true)
-          console.log('data.error =>', data.error)
+          // console.log('data.error =>', data.error)
         }
         else {
           console.log('data.error =>', data.error)

@@ -17,6 +17,7 @@ import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
 import StyleSixSkeleton from '../skeletons/StyleSixSkeleton'
 import toast from 'react-hot-toast'
+import { LuCalendarDays } from "react-icons/lu";
 
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
@@ -238,8 +239,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                                   query: { category_id: item.id }
                                 })
                               }
-                              id='btnCatagory'
-                              className='btn'
+                              className='categoryTag'
                               type='button'
                             >
                               {truncateText(item.category_name, 25)}
@@ -260,6 +260,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                             <div id='Top-Deatils'>
                               {item && item?.published_date ? (
                                 <p id='Top-Posttime01'>
+                                  <LuCalendarDays />
                                   {item?.published_date
                                     ? new Date(item?.published_date).toLocaleString('en-us', {
                                       day: 'numeric',
@@ -320,7 +321,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                       <Link
                         href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                         // as={`/news/${item.slug}`}
-                          title='detail-page'
+                        title='detail-page'
                       >
                         <div className='card fs-Newscard'>
                           <img
@@ -332,8 +333,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                           />
                           <div className='card-img-overlay'>
                             <div
-                              id='btnCatagory'
-                              className='btn'
+                              className='categoryTag'
                             // onClick={() =>
                             //   router.push({
                             //     pathname: `/categories-news/${item.slug}`,
@@ -345,6 +345,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                             </div>
                             <div id='Top-Deatils'>
                               <p id='Top-Posttime01'>
+                                <LuCalendarDays />
                                 {item?.published_date
                                   ? new Date(item?.published_date).toLocaleString('en-in', {
                                     day: 'numeric',
@@ -421,7 +422,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                           <Link
                             href={{ pathname: `/breaking-news/${item.slug}`, }}
                             id='Top-Title01'
-                              title='detail-page'
+                            title='detail-page'
                           >
                             {truncateText(item.title, 35)}
                             {stripHtmlTags(item.description.slice(0, 600))} ...

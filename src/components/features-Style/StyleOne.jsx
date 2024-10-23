@@ -137,7 +137,7 @@ const StyleOne = ({ Data }) => {
                       <div className='row'>
                         <div className='col-xl-7 order-1 order-xl-0 col-12 d-flex'>
                           <div id='Left-first-section' className='my-auto'>
-                            <Link id='btnCatagory' className='btn' type='button'
+                            <Link className='categoryTag' type='button'
                               href={{ pathname: `/news/${item.slug}`, query: { language_id: item.language_id } }}
                               // as={`/news/${item.slug}`}
                               title='detail-page'

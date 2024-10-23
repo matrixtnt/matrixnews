@@ -31,7 +31,7 @@ const DefaultNewsStyle = ({ Data }) => {
                                                         />
                                                     </div>
                                                     <div id='rns-img-overlay' className=' card-inverse'>
-                                                        <div id='btnrnsCatagory' className='btn btn-sm' type='button'>
+                                                        <div className='categoryTag' type='button'>
                                                             {truncateText(value?.category?.category_name, 10)}
                                                         </div>
                                                     </div>

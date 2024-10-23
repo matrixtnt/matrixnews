@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import { AiOutlineLike, AiOutlineEye, AiFillLike } from 'react-icons/ai';
 import { BsBookmark, BsFillBookmarkFill, BsFillPlayFill } from 'react-icons/bs';
-import { FiCalendar } from 'react-icons/fi';
+import { LuCalendarDays } from "react-icons/lu";
 import RelatedNewsSection from '../../relatedNews/RelatedNewsSection.jsx';
 import TagsSection from '../../tag/TagsSection.jsx';
 
@@ -303,7 +303,7 @@ const News = () => {
                   <div id='nv-Header' className=''>
                     <div id='nv-left-head'>
                       <p id='head-lables'>
-                        <FiCalendar size={18} id='head-logos' /> {new Date(Data && Data[0]?.published_date).toLocaleString('en-us', {
+                        <LuCalendarDays size={18} id='head-logos' /> {new Date(Data && Data[0]?.published_date).toLocaleString('en-us', {
                           day: 'numeric',
                           month: 'short',
                           year: 'numeric'

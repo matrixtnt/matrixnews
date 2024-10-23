@@ -69,12 +69,32 @@ export const loadCategories = ({
     onError = () => { },
     onStart = () => { }
 }) => {
+
+    const firstLoad = sessionStorage.getItem('firstLoad_Categories')
+    const manualRefresh = sessionStorage.getItem('manualRefresh_Categories')
+
+    const shouldFetchData = !firstLoad || manualRefresh === 'true'
+
+
+    if (typeof window !== 'undefined') {
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('manualRefresh_Categories', 'true')
+        })
+
+        window.addEventListener('load', () => {
+            // Check if this is a manual refresh by checking if lastFetch is set
+            if (!sessionStorage.getItem('lastFetch_Categories')) {
+                sessionStorage.setItem('manualRefresh_Categories', 'true')
+            }
+        })
+    }
+
     const state = store.getState()
     const { currentLanguage } = store.getState().languages
     const { lastFetch, Lang } = store.getState().categoryData ?? {};
     const diffInMinutes = lastFetch ? moment().diff(moment(lastFetch), 'minutes') : process.env.NEXT_PUBLIC_LOAD_MIN + 1
     // If API data is fetched within last 10 minutes then don't call the API again
-    if (currentLanguage?.id != Lang?.language_id || diffInMinutes > process.env.NEXT_PUBLIC_LOAD_MIN || isManualRefresh()) {
+    if (currentLanguage?.id != Lang?.language_id || shouldFetchData) {
         store.dispatch(
             apiCallBegan({
                 ...getCategoriesApi(offset, limit, language_id),
@@ -83,32 +103,21 @@ export const loadCategories = ({
                 onSuccessDispatch: categoriesSuccess.type,
                 onErrorDispatch: categoriesFailed.type,
                 onStart,
-                onSuccess,
+                onSuccess: res => {
+                    sessionStorage.setItem('lastFetch_Categories', Date.now())
+                },
                 onError,
             })
         );
+
+        // Clear manualRefresh flag
+        sessionStorage.removeItem('manualRefresh_Categories')
+
+        // Set firstLoad flag to prevent subsequent calls
+        sessionStorage.setItem('firstLoad_Categories', 'true')
     }
 };
 
-// Helper function to check if the page has been manually refreshed
-const isManualRefresh = () => {
-    const manualRefresh = sessionStorage.getItem("manualRefresh");
-    sessionStorage.removeItem("manualRefresh");
-    return manualRefresh === "true";
-};
-
-// Event listener to set manualRefresh flag when page is manually refreshed
-if (typeof window !== 'undefined') {
-    window.addEventListener("load", () => {
-        if (navigator.userAgent.includes("Mozilla")) {
-            // This is likely a manual refresh
-            sessionStorage.setItem("manualRefresh", "true");
-        } else {
-            // This is the initial page load
-            sessionStorage.removeItem("manualRefresh");
-        }
-    });
-}
 
 export const categoriesCacheData = createSelector(
     (state) => state.categoryData,

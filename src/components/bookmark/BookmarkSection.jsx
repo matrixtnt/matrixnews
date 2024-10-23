@@ -1,6 +1,6 @@
 'use client'
 import bookmarkIMG from '../../../public/assets/images/bookmark.png'
-import { FiCalendar } from 'react-icons/fi'
+import { LuCalendarDays } from "react-icons/lu";
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
 import { placeholderImage, translate } from '../../utils'
 import { useRouter } from 'next/navigation'
@@ -112,8 +112,7 @@ const BookmarkSection = () => {
                     </div>
                     <div id='bs-card-body' className='card-body'>
                       <button
-                        id='bs-btnCatagory'
-                        className='btn btn-sm'
+                        className='categoryTag'
                         type='button'
                       >
                         {element.category_name}
@@ -129,7 +128,7 @@ const BookmarkSection = () => {
                           {element.title}
                         </h5>
                         <p id='bs-card-date'>
-                          <FiCalendar size={18} id='bs-logoCalendar' />
+                          <LuCalendarDays size={18} id='bs-logoCalendar' />
                           {formatDate(element.date.slice(0, 10))}
                         </p>
                       </Link>

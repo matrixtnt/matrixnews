@@ -10,6 +10,8 @@ import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { useState } from 'react'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import StyleFiveSkeleton from '../skeletons/StyleFiveSkeleton'
+import { FaArrowRightLong } from "react-icons/fa6";
+import { IoEye } from "react-icons/io5";
 
 SwiperCore.use([Navigation, Pagination])
 const StyleFive = ({ isLoading, Data }) => {
@@ -29,7 +31,7 @@ const StyleFive = ({ isLoading, Data }) => {
   const showNavigationVideo = Data.videos?.length > 1
 
   const swiperOption = {
-    loop: true,
+    loop: Data?.news?.length > 3 ? true : false,
     speed: 750,
     spaceBetween: 10,
     slidesPerView: 2,
@@ -54,7 +56,7 @@ const StyleFive = ({ isLoading, Data }) => {
   }
 
   const swiperOptionVideo = {
-    loop: true,
+    loop: Data?.videos?.length > 3 ? true : false,
     speed: 750,
     spaceBetween: 10,
     slidesPerView: 2,
@@ -79,7 +81,7 @@ const StyleFive = ({ isLoading, Data }) => {
   }
 
   const swiperOptionBreaking = {
-    loop: true,
+    loop: Data?.breaking_news?.length > 3 ? true : false,
     speed: 750,
     spaceBetween: 10,
     slidesPerView: 2,
@@ -126,7 +128,7 @@ const StyleFive = ({ isLoading, Data }) => {
         <div id='bns-main' className='video_style_five'>
           <div className='container custom-card'>
             <div className='row'>
-              <div className='col-md-4 col-12'>
+              <div className='col-lg-4 col-12'>
                 <div id='bns-main-card' className='card'>
                   <img
                     id='bns-main-image'
@@ -155,7 +157,7 @@ const StyleFive = ({ isLoading, Data }) => {
                   </div>
                 </div>
               </div>
-              <div className='col-md-8 col-12'>
+              <div className='col-lg-8 col-12'>
                 <div id='bns-rest-cards'>
                   <Swiper {...swiperOptionVideo}>
                     {isLoading ? (
@@ -188,6 +190,7 @@ const StyleFive = ({ isLoading, Data }) => {
                               </div>
 
                               <div id='bns-card-body' className='card-body ps-0'>
+                              <span className='d-flex align-items-center gap-2 views'><IoEye size={20}/> {element?.total_views} {translate('views')} </span>
                                 <h5 id='bns-card-text' className=''>
                                   {truncateText(element.title, 34)}
                                 </h5>
@@ -226,7 +229,7 @@ const StyleFive = ({ isLoading, Data }) => {
         <div id='bns-main' className='news_style_five'>
           <div className='container custom-card'>
             <div className='row'>
-              <div className='col-md-4 col-12'>
+              <div className='col-lg-4 col-12'>
                 <div id='bns-main-card' className='card'>
                   <img
                     id='bns-main-image'
@@ -255,7 +258,7 @@ const StyleFive = ({ isLoading, Data }) => {
                   </div>
                 </div>
               </div>
-              <div className='col-md-8 col-12'>
+              <div className='col-lg-8 col-12'>
                 <div id='bns-rest-cards'>
                   <Swiper {...swiperOption}>
                     {isLoading ? (
@@ -281,14 +284,17 @@ const StyleFive = ({ isLoading, Data }) => {
                               />
                               <div id='bns-card-body' className='card-body ps-0'>
                                 <div
-                                  id='btnbnsCatagory'
-                                  className='btn btn-sm mt-2'
+                                  className='categoryTag'
                                 >
                                   {truncateText(element.category_name, 10)}
                                 </div>
                                 <h5 id='bns-card-text' className=''>
                                   {truncateText(element.title, 34)}
                                 </h5>
+                                <Link href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
+                                  // as={`/news/${element.slug}`}
+                                  className='readMoreBtn'
+                                  title='detail-page'>{translate('readMoreLbl')} <FaArrowRightLong /></Link>
                               </div>
                             </Link>
                           </div>
@@ -315,7 +321,7 @@ const StyleFive = ({ isLoading, Data }) => {
         <div id='bns-main'>
           <div className='container custom-card'>
             <div className='row'>
-              <div className='col-md-4 col-12'>
+              <div className='col-lg-4 col-12'>
                 <div id='bns-main-card' className='card'>
                   <img
                     id='bns-main-image'
@@ -344,7 +350,7 @@ const StyleFive = ({ isLoading, Data }) => {
                   </div>
                 </div>
               </div>
-              <div className='col-md-8 col-12'>
+              <div className='col-lg-8 col-12'>
                 <div id='bns-rest-cards'>
                   <Swiper {...swiperOptionBreaking}>
                     {isLoading ? (
@@ -353,9 +359,10 @@ const StyleFive = ({ isLoading, Data }) => {
                         <Skeleton height={20} count={22} />
                       </div>
                     ) : (
-                      Data.breaking_news.map(element => (
-                        <SwiperSlide key={element.id}>
-                          <div id='bns-card' className='card' key={element.id}>
+                      Data?.breaking_news?.map(element => (
+
+                        <SwiperSlide key={element?.slug}>
+                          <div id='bns-card' className='card'>
                             <Link id='Link-all'
                               href={{ pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id } }}
                               // as={`/breaking-news/${element.slug}`}
@@ -372,6 +379,10 @@ const StyleFive = ({ isLoading, Data }) => {
                                 <h5 id='bns-card-text' className=''>
                                   {truncateText(element.title, 34)}
                                 </h5>
+                                <Link href={{pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id }  }}
+                                  // as={`/news/${element.slug}`}
+                                  className='readMoreBtn'
+                                  title='detail-page'>{translate('readMoreLbl')}<FaArrowRightLong /></Link>
                               </div>
                             </Link>
                           </div>

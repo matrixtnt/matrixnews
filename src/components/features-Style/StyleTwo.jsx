@@ -1,12 +1,15 @@
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { placeholderImage, translate, truncateText } from '../../utils'
+import { formatDate, placeholderImage, translate, truncateText } from '../../utils'
 import { useState } from 'react'
 import VideoPlayerModal from '../videoplayer/VideoPlayerModal'
 import { BsFillPlayFill } from 'react-icons/bs'
 import AdSpaces from '../view/adSpaces/AdSpaces'
 import CommonViewMoreDiv from './CommonViewMoreDiv'
 import StyleTwoSkeleton from '../skeletons/StyleTwoSkeleton'
+import { LuCalendarDays } from "react-icons/lu";
+import { IoEye } from "react-icons/io5";
+
 
 const StyleTwo = ({ Data }) => {
 
@@ -46,7 +49,7 @@ const StyleTwo = ({ Data }) => {
               <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/video-news-view/${Data.slug}`} />
             </div>
             <div className='row'>
-              <div className='col-md-3'>
+              <div className='col-12 col-lg-3'>
                 {Data.videos[0] ? (
                   <div
                     className='video_first_top card card_hover'
@@ -83,7 +86,7 @@ const StyleTwo = ({ Data }) => {
                   </div>
                 ) : null}
               </div>
-              <div className='col-md-6'>
+              <div className='col-12 col-lg-6'>
                 {Data.videos[2] ? (
                   <div
                     className='video_center card card_hover'
@@ -102,7 +105,7 @@ const StyleTwo = ({ Data }) => {
                   </div>
                 ) : null}
               </div>
-              <div className='col-md-3'>
+              <div className='col-12 col-lg-3'>
                 {Data.videos[3] ? (
                   <div
                     className='video_top_right card card_hover'
@@ -129,9 +132,9 @@ const StyleTwo = ({ Data }) => {
                       TypeUrl(Data.videos[4].type)
                     }}
                   >
-                    <img src={Data.videos[4] && Data.videos[4].image} alt={Data.videos[4] && Data.videos[4].title} onError={placeholderImage}/>
+                    <img src={Data.videos[4] && Data.videos[4].image} alt={Data.videos[4] && Data.videos[4].title} onError={placeholderImage} />
                     <div className='video_button'>
-                      <BsFillPlayFill className='pulse' fill='white' size={50}  />
+                      <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
                     <div className='content'>
                       <p>{Data.videos[4] && Data.videos[4].title}</p>
@@ -168,7 +171,7 @@ const StyleTwo = ({ Data }) => {
             </div>
             <div className='row'>
 
-              <div className='col-md-3'>
+              <div className='col-12 col-lg-3'>
                 {Data.news[0] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[0].slug}`, query: { language_id: Data.news[0].language_id } }}
@@ -181,8 +184,18 @@ const StyleTwo = ({ Data }) => {
                       <img src={Data.news[0] && Data.news[0].image} alt={truncateText(Data.news[0].category_name, 10)} onError={placeholderImage} />
 
                       <div className='content'>
-                        <span>{truncateText(Data.news[0].category_name, 10)}</span>
+                        <span className='categoryTag'>{truncateText(Data.news[0].category_name, 10)}</span>
                         <p>{Data.news[0] && Data.news[0].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                            {new Date(Data.news[0]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[0]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -200,14 +213,24 @@ const StyleTwo = ({ Data }) => {
                       <img src={Data.news[1] && Data.news[1].image} alt={truncateText(Data.news[1].category_name, 10)} onError={placeholderImage} />
 
                       <div className='content'>
-                        <span>{truncateText(Data.news[1].category_name, 10)}</span>
+                        <span className='categoryTag'>{truncateText(Data.news[1].category_name, 10)}</span>
                         <p>{Data.news[1] && Data.news[1].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                            {new Date(Data.news[1]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[1]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
                 ) : null}
               </div>
-              <div className='col-md-6'>
+              <div className='col-12 col-lg-6'>
                 {Data.news[2] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[2].slug}`, query: { language_id: Data.news[2].language_id } }}
@@ -220,14 +243,24 @@ const StyleTwo = ({ Data }) => {
                       <img src={Data.news[2] && Data.news[2].image} alt={truncateText(Data.news[2].category_name, 10)} onError={placeholderImage} />
 
                       <div className='content'>
-                        <span>{truncateText(Data.news[2].category_name, 10)}</span>
+                        <span className='categoryTag'>{truncateText(Data.news[2].category_name, 10)}</span>
                         <p>{Data.news[2] && Data.news[2].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                            {new Date(Data.news[2]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[2]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
                 ) : null}
               </div>
-              <div className='col-md-3'>
+              <div className='col-12 col-lg-3'>
                 {Data.news[3] ? (
                   <Link
                     href={{ pathname: `/news/${Data.news[3].slug}`, query: { language_id: Data.news[3].language_id } }}
@@ -240,8 +273,18 @@ const StyleTwo = ({ Data }) => {
                       <img src={Data.news[3] && Data.news[3].image} alt={truncateText(Data.news[3].category_name, 10)} onError={placeholderImage} />
 
                       <div className='content'>
-                        <span>{truncateText(Data.news[3].category_name, 10)}</span>
+                        <span className='categoryTag'>{truncateText(Data.news[3].category_name, 10)}</span>
                         <p>{Data.news[3] && Data.news[3].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                            {new Date(Data.news[3]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[3]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -259,8 +302,18 @@ const StyleTwo = ({ Data }) => {
                       <img src={Data.news[4] && Data.news[4].image} alt={truncateText(Data.news[4].category_name, 10)} onError={placeholderImage} />
 
                       <div className='content'>
-                        <span>{truncateText(Data.news[4].category_name, 10)}</span>
+                        <span className='categoryTag'>{truncateText(Data.news[4].category_name, 10)}</span>
                         <p>{Data.news[4] && Data.news[4].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                            {new Date(Data.news[4]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[4 ]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -285,7 +338,7 @@ const StyleTwo = ({ Data }) => {
               <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
             </div>
             <div className='row'>
-              <div className='col-md-3'>
+              <div className='col-12 col-lg-3'>
                 {Data.breaking_news[0] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[0].slug}`, query: { language_id: Data.breaking_news[0].language_id } }}
@@ -330,7 +383,7 @@ const StyleTwo = ({ Data }) => {
                   </Link>
                 ) : null}
               </div>
-              <div className='col-md-6'>
+              <div className='col-12 col-lg-6'>
                 {Data.breaking_news[2] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[2].slug}`, query: { language_id: Data.breaking_news[2].language_id } }}
@@ -354,7 +407,7 @@ const StyleTwo = ({ Data }) => {
                   </Link>
                 ) : null}
               </div>
-              <div className='col-md-3'>
+              <div className='col-12 col-lg-3'>
                 {Data.breaking_news[3] ? (
                   <Link
                     href={{ pathname: `/breaking-news/${Data.breaking_news[3].slug}`, query: { language_id: Data.breaking_news[3].language_id } }}

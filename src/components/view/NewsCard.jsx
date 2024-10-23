@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { FiCalendar } from 'react-icons/fi'
+import { LuCalendarDays } from "react-icons/lu";
 import { formatDate, placeholderImage } from 'src/utils'
 
 const NewsCard = ({ element, subDropCard, tagCard }) => {
@@ -14,7 +14,7 @@ const NewsCard = ({ element, subDropCard, tagCard }) => {
             <div id='cv-card' className='card commonNewsCard'>
                 <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />
                 <div id='cv-card-body' className='card-body'>
-                    <button id='cv-btnCatagory' className='btn btn-sm' type='button'>
+                    <button id='cv-btnCatagory'className='categoryTag' type='button'>
                         {tagCard ? element?.tag_name : element.category.category_name}
                     </button>
                     <p id='cv-card-title' className='card-title'>
@@ -23,7 +23,7 @@ const NewsCard = ({ element, subDropCard, tagCard }) => {
                     {
                         !subDropCard &&
                         <p id='cv-card-date'>
-                            <FiCalendar size={18} id='cv-logoCalendar' />
+                            <LuCalendarDays size={18} id='cv-logoCalendar' />
                             {formatDate(element.published_date)}
                         </p>
                     }

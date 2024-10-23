@@ -25,7 +25,7 @@ const SocialPages = ({ isAboutContactUsPage }) => {
 
   useEffect(() => {
 
-    if (MorePagesData.length === 0 && currentLanguage.id) {
+    if (MorePagesData.length === 0 && language_id) {
       loadMorePages({
         onSuccess: (res) => {
           setData(res.data)

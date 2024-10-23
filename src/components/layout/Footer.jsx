@@ -46,7 +46,7 @@ const Footer = () => {
             <div className='col-lg-3 col-12'>
               <div className='News'>
                 <Link href='/' title={settings && settings?.web_setting?.web_name}>
-                  <img id='NewsLogo' src={darkThemeMode ? settings && settings?.web_setting?.dark_header_logo : settings && settings?.web_setting?.light_footer_logo} onError={placeholderImage} alt='footer logo image' />
+                  <img id='NewsLogo' src={darkThemeMode ? settings && settings?.web_setting?.dark_footer_logo : settings && settings?.web_setting?.light_footer_logo} onError={placeholderImage} alt='footer logo image' />
                 </Link>
               </div>
               <div className='Lorem-text'>

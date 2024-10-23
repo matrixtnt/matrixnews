@@ -13,6 +13,7 @@ export const AllBreakingNewsApi = {
       }
     })
   },
+  
   setBreakingNewsView: requestData => {
     const { breaking_news_id } = requestData
     return Api.post(SET_BREAKING_NEWS_VIEW, {

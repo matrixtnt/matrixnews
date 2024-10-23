@@ -3,6 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectCurrentLanguage } from 'src/store/reducers/languageReducer'
 import { translate } from 'src/utils'
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const CommonViewMoreDiv = ({ title, desc, link, styleSix }) => {
 
@@ -23,12 +24,12 @@ const CommonViewMoreDiv = ({ title, desc, link, styleSix }) => {
             </div>
             {
                 !styleSix ?
-                    <Link id='hns-Viewmore'
+                    <Link 
                         href={{ pathname: link, query: { language_id: currentLanguage?.id } }}
                         title={translate('viewMore')}
                         // as={link}
-                        onClick={() => scrollToTop()} className='commonBtn'>
-                        {translate('viewMore')}
+                        onClick={() => scrollToTop()} className='commonViewAllBtn'>
+                        {translate('viewMore')} <FaArrowRightLong />
                     </Link> : null
             }
         </div>
