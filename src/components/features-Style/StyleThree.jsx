@@ -181,10 +181,10 @@ const StyleThree = ({ Data, isLoading }) => {
                       title='detail-page'
                     >
                       <Card id='vps-main-card' className='text-black'>
+                        <span className='categoryTag'>{truncateText(Data.news[0].category_name, 10)}</span>
                         <Card.Img id='vps-main-image' src={Data.news[0].image} alt='news' onError={placeholderImage} />
                       </Card>
                       <div className='d-flex flex-column gap-4'>
-                        <span className='categoryTag'>{truncateText(Data.news[0].category_name, 10)}</span>
                         <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
                           {new Date(Data.news[0]?.date).toLocaleString('en-us', {
                             day: 'numeric',
