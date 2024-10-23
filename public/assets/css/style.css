@@ -2412,10 +2412,6 @@ a {
   /* z-index: 999 !important; */
 }
 
-[data-bs-theme="dark"] .pulse{
-  background-color: var(--primary-color) !important;
-}
-
 .pulse svg {
   font-size: 20px;
 }
@@ -8594,8 +8590,7 @@ span {
 
 
 [data-bs-theme="dark"] .categoryTag{
-  background-color: var(--primary-color);
-  color: #fff;
+  color: #1B2D51;
 }
 [data-bs-theme="dark"] .commonViewAllBtn{
   border: 1px solid #FFFFFF80;
