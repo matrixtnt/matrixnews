@@ -84,7 +84,7 @@ const FeatureLayout = () => {
       setNewsDataFound(true)
       loadLayout({
         offset: 0,
-        limit: 9,
+        limit: 6,
         isToken: userToken ? true : false,
         onSuccess: (response) => {
           dispatch(layoutUpdateLanguage(currentLanguage.id))
