@@ -11,7 +11,7 @@ const Notification = dynamic(() => import('src/components/notification/Notificat
 // This is seo api
 const fetchDataFromSeo = async () => {
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=personal_notifications`
     )
     const data = response.data

@@ -78,8 +78,8 @@ export const getLanguagesApi = (limit, offset) => {
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_LANGUAGE_LIST}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       language_id: language_id,
       limit: limit,
       offset: offset
@@ -92,8 +92,8 @@ export const getLanguagesApi = (limit, offset) => {
 export const getCategoriesApi = (offset, limit, language_id) => {
   return {
     url: `${GET_CATEGORIES}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       offset: offset,
       limit: limit,
       language_id: language_id
@@ -125,8 +125,8 @@ export const userSignUpApi = (firebase_id, name, email, mobile, type, profile, s
 export const getLanguageJsonDataApi = (code) => {
   return {
     url: `${GET_LANGUAGE_JSON_DATA}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       code: code
     },
     authorizationHeader: false
@@ -198,8 +198,8 @@ export const getUserNotificationApi = (offset, limit) => {
   // let user = getUser()
   return {
     url: `${GET_USER_NOTIFICATION}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       // user_id: user,
       offset: offset,
       limit: limit
@@ -238,8 +238,8 @@ export const setUserCategoriesApi = category_id => {
 export const getSettingsApi = type => {
   return {
     url: `${GET_SETTINGS}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       type: type //optional
     },
     authorizationHeader: false
@@ -348,8 +348,8 @@ export const getsubcategorybycategoryApi = category_id => {
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_SUBCATEGORY_BY_CATEGORY}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       category_id: category_id,
       language_id: language_id
     },
@@ -423,8 +423,8 @@ export const register_Fcmtoken_Api = (token, latitude, longitude) => {
 export const getUserByIdApi = () => {
   return {
     url: `${GET_USER_BY_ID}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
     },
     authorizationHeader: true
   }
@@ -445,8 +445,8 @@ export const setQuestionResult = (language_id, question_id, option_id) => {
 export const getQuestionResult = (language_id, question_id) => {
   return {
     url: `${GET_QUESTION_RESULT}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       language_id,
       question_id
     },
@@ -458,8 +458,8 @@ export const getFeatureSection = (offset, limit, slug, latitude, longitude, sect
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_FEATURE_SECTION}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       language_id: language_id,
       offset: offset,
       limit: limit,
@@ -491,8 +491,8 @@ export const getNews = (
   // console.log("apijsx ",language_id)
   return {
     url: `${GET_NEWS}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       offset: offset,
       limit: limit,
       id: id,
@@ -518,8 +518,8 @@ export const getBreakingNews = (
   // console.log("apijsx ",language_id)
   return {
     url: `${GET_BREAKING_NEWS}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       language_id: language_id,
       slug: slug
 
@@ -535,8 +535,8 @@ export const getPages = (
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_PAGES}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       language_id: language_id,
       slug: slug
 
@@ -550,8 +550,8 @@ export const getPolicyPages = (
   let { id: language_id } = getLanguage()
   return {
     url: `${GET_POLICY_PAGES}`,
-    method: 'GET',
-    params: {
+    method: 'POST',
+    data: {
       language_id: language_id,
     },
     authorizationHeader: false

@@ -8,7 +8,7 @@ const ViewAll = dynamic(() => import('src/components/viewAll/ViewAll'), { ssr: f
 // This is seo api
 const fetchDataFromSeo = async (slugValue, language_id) => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_FEATURE_SECTION}?language_id=${language_id}&slug=${slugValue}`);
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_FEATURE_SECTION}?language_id=${language_id}&slug=${slugValue}`);
     const data = response.data;
     return data;
   } catch (error) {

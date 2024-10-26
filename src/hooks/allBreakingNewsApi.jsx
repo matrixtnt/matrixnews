@@ -4,14 +4,13 @@ import { GET_BREAKING_NEWS, SET_BREAKING_NEWS_VIEW } from 'src/utils/api'
 export const AllBreakingNewsApi = {
   getBreakingNews: requestData => {
     const { language_id, slug, offset, limit } = requestData
-    return Api.get(GET_BREAKING_NEWS, {
-      params: {
+    return Api.post(GET_BREAKING_NEWS, {
         language_id,
         slug,
         offset,
         limit
       }
-    })
+    )
   },
   
   setBreakingNewsView: requestData => {

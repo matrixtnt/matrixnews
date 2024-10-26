@@ -9,7 +9,7 @@ const PolicyPages = dynamic(() => import('src/components/policyPages/PolicyPages
 // This is seo api
 const fetchDataFromSeo = async (slug, language_id) => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}?language_id=${language_id}&slug=${slug}`);
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_PAGES}?language_id=${language_id}&slug=${slug}`);
     const data = response.data;
     return data;
   } catch (error) {

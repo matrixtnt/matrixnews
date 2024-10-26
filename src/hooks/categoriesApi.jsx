@@ -4,13 +4,11 @@ import { GET_CATEGORIES } from 'src/utils/api'
 export const CategoriesApi = {
   getCategories: requestData => {
     const { offset, limit, language_id, slug } = requestData
-    return Api.get(GET_CATEGORIES, {
-      params: {
+    return Api.post(GET_CATEGORIES, {
         offset,
         limit,
         language_id,
         slug
-      }
-    })
+      })
   },
 }

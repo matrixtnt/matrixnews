@@ -4,12 +4,10 @@ import { GET_BOOKMARK, SET_BOOKMARK } from 'src/utils/api'
 export const bookmarkApi = {
   getBookmark: requestData => {
     const { language_id, offset, limit } = requestData
-    return Api.get(GET_BOOKMARK, {
-      params: {
-        language_id,
-        offset,
-        limit
-      }
+    return Api.post(GET_BOOKMARK, {
+      language_id,
+      offset,
+      limit
     })
   },
   setBookmark: requestData => {

@@ -8,7 +8,7 @@ const Home = dynamic(() => import('src/components/home/Home'), { ssr: false })
 // This is settings api
 const fetchSettings = async () => {
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_SETTINGS}`
     )
     const data = response.data
@@ -21,7 +21,7 @@ const fetchSettings = async () => {
 // This is seo api
 const fetchDataFromSeo = async () => {
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=home`
     )
     const data = response.data

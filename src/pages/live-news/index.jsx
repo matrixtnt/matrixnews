@@ -9,7 +9,7 @@ const LiveNews = dynamic(() => import('src/components/newsPages/LiveNews'), { ss
 // This is seo api
 const fetchDataFromSeo = async () => {
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=live_streaming_news`
     )
     const data = response.data

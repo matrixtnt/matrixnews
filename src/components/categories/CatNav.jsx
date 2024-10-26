@@ -281,7 +281,7 @@ const CatNav = () => {
                           <button
                             id='catNav-more'
                             className='menu-toggle' 
-                            onMouseEnter={(e) => onClickHandler(e)}
+                            onClick={(e) => onClickHandler(e)}
                           >
                             {translate('More')}
                             <span className='downArr'>

@@ -265,8 +265,10 @@ const Layout = ({ children }) => {
       // Set firstLoad flag to prevent subsequent calls
       sessionStorage.setItem('firstLoad_BreakingNews', 'true')
     }
-  }, [currentLanguage, settings?.live_streaming_mode, settings?.breaking_news_mode])
 
+  }, [currentLanguage?.id, settings?.live_streaming_mode, settings?.breaking_news_mode])
+
+  
 
 
   return (

@@ -8,7 +8,7 @@ const BreakingNews = dynamic(() => import('src/components/newsType/BreakingNews/
 // This is seo api
 const fetchDataFromSeo = async (id, language_id) => {
   try {
-    const response = await axios.get(
+    const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_BREAKING_NEWS}?language_id=${language_id}&slug=${id}`
     )
     const data = response.data

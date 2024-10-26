@@ -139,7 +139,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
 
   const getFeatureSectionById = async () => {
 
-    !loadMore ? setIsLoading(true) : setIsLoading(false)
+    // !loadMore ? setIsLoading(true) : setIsLoading(false)
 
     try {
       const { data } = await getFeatureSectionApi.getFeatureSection({

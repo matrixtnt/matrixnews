@@ -22,8 +22,7 @@ export const getNewsApi = {
       latitude,
       longitude
     } = requestData
-    return Api.get(GET_NEWS, {
-      params: {
+    return Api.post(GET_NEWS, {
         offset,
         limit,
         id,
@@ -39,8 +38,7 @@ export const getNewsApi = {
         tag_slug,
         latitude,
         longitude
-      }
-    })
+      })
   },
   setNewsView: requestData => {
     const { news_id } = requestData
