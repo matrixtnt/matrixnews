@@ -253,22 +253,26 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (currentLanguage?.id && settings?.live_streaming_mode === '1' && shouldFetchLiveNewsData) {
-      getLiveStreaming()
-      sessionStorage.removeItem('manualRefresh_LiveNews')
-      // Set firstLoad flag to prevent subsequent calls
-      sessionStorage.setItem('firstLoad_LiveNews', 'true')
-    }
-    if (currentLanguage?.id && settings?.breaking_news_mode === '1' && shouldFetchBreakingNewsData) {
-      getBreakingNewsApi()
-      sessionStorage.removeItem('manualRefresh_BreakingNews')
-      // Set firstLoad flag to prevent subsequent calls
-      sessionStorage.setItem('firstLoad_BreakingNews', 'true')
+    if (currentLanguage?.id) {
+      const prevLanguageId = sessionStorage.getItem('curentLangId')
+      if (settings?.live_streaming_mode === '1' && shouldFetchLiveNewsData || Number(prevLanguageId) !== currentLanguage.id) {
+        getLiveStreaming()
+        sessionStorage.removeItem('manualRefresh_LiveNews')
+        // Set firstLoad flag to prevent subsequent calls
+        sessionStorage.setItem('firstLoad_LiveNews', 'true')
+      }
+      if (settings?.breaking_news_mode === '1' && shouldFetchBreakingNewsData || Number(prevLanguageId) !== currentLanguage.id) {
+        getBreakingNewsApi()
+        sessionStorage.removeItem('manualRefresh_BreakingNews')
+        // Set firstLoad flag to prevent subsequent calls
+        sessionStorage.setItem('firstLoad_BreakingNews', 'true')
+      }
+      sessionStorage.setItem('curentLangId', currentLanguage?.id)
     }
 
   }, [currentLanguage?.id, settings?.live_streaming_mode, settings?.breaking_news_mode])
 
-  
+
 
 
   return (

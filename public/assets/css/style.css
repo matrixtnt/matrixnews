@@ -747,6 +747,7 @@ a {
   position: relative;
   color: var(--primary-color);
 }
+
 .noti_badge_data {
   position: absolute;
   top: 5px;
@@ -5817,7 +5818,7 @@ a#social_platforms svg:hover {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
- margin: 12px 0px;
+  margin: 12px 0px;
 }
 
 .new_video_style_two .video_center .content p {
@@ -6918,6 +6919,14 @@ span {
   margin-bottom: 15px;
 }
 
+.manage_news .deactiveNews {
+  background-color: red;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px;
+  font-weight: 600;
+}
+
 .manage_news .manage-data .manage-card {
   margin-right: 20px;
   display: flex;
@@ -7545,7 +7554,8 @@ span {
   font-weight: 700;
   padding: 0px;
 }
-.catSubCatWrapper .sub-menu .dropdown-toggle svg{
+
+.catSubCatWrapper .sub-menu .dropdown-toggle svg {
   margin-top: -2px;
   margin-left: 2px;
 }
@@ -8562,11 +8572,11 @@ span {
   transition: all 0.2s;
 }
 
-.readMoreBtn:hover{
+.readMoreBtn:hover {
   color: var(--primary-color);
 }
 
-.readMoreBtn:hover svg{
+.readMoreBtn:hover svg {
   margin-left: 4px;
 }
 
@@ -8598,14 +8608,15 @@ span {
 }
 
 
-[data-bs-theme="dark"] .categoryTag{
+[data-bs-theme="dark"] .categoryTag {
   color: #1B2D51;
 }
-[data-bs-theme="dark"] .commonViewAllBtn{
+
+[data-bs-theme="dark"] .commonViewAllBtn {
   border: 1px solid #FFFFFF80;
 }
 
-.defaultLangWrapper{
+.defaultLangWrapper {
   width: 100%;
   height: 40px;
   border-radius: 5px;
@@ -8614,4 +8625,5 @@ span {
   background-color: #ffff;
   display: flex;
   align-items: center;
+  color: gray !important;
 }

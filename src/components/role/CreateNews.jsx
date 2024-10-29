@@ -627,22 +627,28 @@ const CreateNews = () => {
                       <Alert closable showIcon className='mt-2' message={translate('slugWarningLbl')} type='warning' />
                     </div>
                     <div className='dropdown_form mb-2'>
-                      <Select
-                        style={{
-                          width: '100%'
-                        }}
-                        defaultValue={DefaultValue.defualtLanguage}
-                        placeholder={translate('chooseLanLbl')}
-                        onChange={values => languageSelector(values)}
-                        optionLabelProp='label'
-                      >
-                        {languagesData &&
-                          languagesData.map((elem, id) => (
-                            <Option value={JSON.stringify(elem)} key={id} label={elem.language}>
-                              <Space> {elem.language}</Space>
-                            </Option>
-                          ))}
-                      </Select>
+                      {
+                        languagesData?.length < 1 ?
+                          <Select
+                            style={{
+                              width: '100%'
+                            }}
+                            defaultValue={DefaultValue.defualtLanguage}
+                            placeholder={translate('chooseLanLbl')}
+                            onChange={values => languageSelector(values)}
+                            optionLabelProp='label'
+                          >
+                            {languagesData &&
+                              languagesData.map((elem, id) => (
+                                <Option value={JSON.stringify(elem)} key={id} label={elem.language}>
+                                  <Space> {elem.language}</Space>
+                                </Option>
+                              ))}
+                          </Select> :
+                          <div className='defaultLangWrapper'>
+                            <span>{getLocation?.default_language?.language}</span>
+                          </div>
+                      }
                     </div>
 
                     {showCategory ? (
