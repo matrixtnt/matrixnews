@@ -26,6 +26,8 @@ const Index = ({ seoData, currentURL }) => {
     const schemaString = seoData.data[0].schema_markup
     schema = extractJSONFromMarkup(schemaString)
   }
+
+
   return (
     <>
       <Meta
@@ -36,6 +38,7 @@ const Index = ({ seoData, currentURL }) => {
         pathName={currentURL}
         schema={schema}
       />
+
       <SocialPages isAboutContactUsPage={true} />
     </>
   )
@@ -52,7 +55,7 @@ if (process.env.NEXT_PUBLIC_SEO === "true") {
     const { language_id } = req[Symbol.for('NextInternalRequestMeta')].initQuery;
     // const currentURL = `${req.headers.host}${req.url}`;
     const currentURL = process.env.NEXT_PUBLIC_WEB_URL + `/${slugValue}/`;
-    const seoData = await fetchDataFromSeo(slugValue,language_id);
+    const seoData = await fetchDataFromSeo(slugValue, language_id);
     // Pass the fetched data as props to the Index component
 
     return {

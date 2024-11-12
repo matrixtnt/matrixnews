@@ -105,6 +105,21 @@ const CreateNews = () => {
     setShowsubCategory(false)
   }
 
+  useEffect(() => {
+    if (languagesData?.length < 2) {
+      setShowCategory(true)
+      setDefualtValue(prevState => ({ ...prevState, defualtLanguage: getLocation?.default_language?.language }));
+      setCreateNewsCurrentLanguage(getLocation?.default_language?.language, getLocation?.default_language?.code, getLocation?.default_language?.id)
+      setDefualtValue(prevState => ({ ...prevState, defualtCategoryID: null, defualtCategory: null }));
+      setShowsubCategory(false)
+    }
+
+    console.log("defualtLanguage",DefaultValue?.defualtLanguage)
+    console.log("name",getLocation?.default_language?.language,'code',getLocation?.default_language?.code,'id',getLocation?.default_language?.id)
+
+  }, [languagesData])
+
+
   // select category
   const categorySelector = (value, option) => {
     const categoryID = JSON.parse(value)
@@ -628,7 +643,7 @@ const CreateNews = () => {
                     </div>
                     <div className='dropdown_form mb-2'>
                       {
-                        languagesData?.length < 1 ?
+                        languagesData?.length > 1 ?
                           <Select
                             style={{
                               width: '100%'

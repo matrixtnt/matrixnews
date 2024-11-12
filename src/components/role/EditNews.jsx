@@ -546,9 +546,9 @@ const EditNews = () => {
       image: DefaultValue.imagedefault,
       ofile: images,
       // show_till: DefaultValue.dateValue.toISOString().split('T')[0],
-      show_till: new Date(DefaultValue.dateValue.getTime() - DefaultValue.dateValue.getTimezoneOffset() * 60000)
+      show_till: DefaultValue.dateValue ? new Date(DefaultValue.dateValue.getTime() - DefaultValue.dateValue.getTimezoneOffset() * 60000)
         .toISOString()
-        .split('T')[0],
+        .split('T')[0] : "",
       language_id: DefaultValue.languageId,
       location_id: DefaultValue.defualtLocationId ? DefaultValue.defualtLocationId : null,
       // published_date: DefaultValue.publishDateValue.toISOString().split('T')[0],

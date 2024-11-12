@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import LoadMoreSpinner from './LoadMoreSpinner'
+import { translate } from 'src/utils'
 
 const LoadMoreBtn = ({ handleLoadMore, loadMoreLoading }) => {
 
@@ -7,7 +8,7 @@ const LoadMoreBtn = ({ handleLoadMore, loadMoreLoading }) => {
         <div className='mt-2'>
             {
                 loadMoreLoading ? <LoadMoreSpinner /> :
-                    <button onClick={handleLoadMore} className='loadMoreBtn commonBtn'>Load More</button>
+                    <button onClick={handleLoadMore} className='loadMoreBtn commonBtn'>{translate('loadMore')}</button>
             }
         </div>
     )

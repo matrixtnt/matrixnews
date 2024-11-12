@@ -5,7 +5,7 @@ import { SetSearchPopUp } from '../../store/stateSlice/clickActionSlice'
 import { store } from '../../store/store'
 import { useRouter } from 'next/navigation'
 import { AiOutlineClose } from 'react-icons/ai'
-import { placeholderImage, truncateText } from '../../utils'
+import { placeholderImage, translate, truncateText } from '../../utils'
 import { getNewsApi } from 'src/hooks/newsApi'
 import { getLanguage, getUser } from 'src/utils/api'
 import { useQuery } from '@tanstack/react-query'
@@ -161,10 +161,10 @@ const SearchPopup = () => {
                       padding: total < 3 || (Data && Data?.error === 'true') || searchValue === '' ? '0px' : '15px'
                     }}
                   >
-                    {Data && Data?.data.length < parseInt(total) && <button onClick={handleLoadMore}>Load More</button>}
+                    {Data && Data?.data.length < parseInt(total) && <button onClick={handleLoadMore}>{translate('loadMore')}</button>}
                   </div>
                 )}
-                {Data && Data?.error === 'true' && <p className='text-dark bg-white p-4 text-center'>No data found</p>}
+                {Data && Data?.error === 'true' && <p className='text-dark bg-white p-4 text-center'>{translate('nodatafound')}</p>}
               </div>
             </div>
           </div>

@@ -366,7 +366,7 @@ const Header = () => {
                     href={'video-news'}
                     title={translate('videoNews')}
                   >
-                    {translate('videoNews')}
+                    Videos
                   </Link>
                 </b>
               </li>

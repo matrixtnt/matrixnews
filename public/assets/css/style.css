@@ -5796,6 +5796,7 @@ a#social_platforms svg:hover {
   justify-content: center;
   align-items: center;
   margin: auto;
+  z-index: 2;
 }
 
 .new_video_style_two .content {
@@ -6923,7 +6924,7 @@ span {
   background-color: red;
   color: #fff;
   border-radius: 4px;
-  padding: 4px;
+  padding: 6px;
   font-weight: 600;
 }
 
@@ -6961,11 +6962,13 @@ span {
 .manage_news .manage-right .manage-buttons {
   display: flex;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.manage_news .manage-right .manage-buttons .manage-button-edit {
+/* .manage_news .manage-right .manage-buttons .manage-button-edit {
   margin-right: 15px;
-}
+} */
 
 .preview {
   border: 1px solid #00000026;
