@@ -1,5 +1,4 @@
 'use client'
-
 import { FaFacebookSquare, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import Link from 'next/link'
 import moment from 'moment/moment'
@@ -15,6 +14,7 @@ import { checkNewsDataSelector } from 'src/store/reducers/CheckNewsDataReducer'
 import { IoMdMail } from 'react-icons/io'
 import { MdCall } from 'react-icons/md'
 import Image from 'next/image'
+import { IoLogoRss } from "react-icons/io";
 
 import playStore from '../../../public/assets/images/playStore.svg'
 import appleStore from '../../../public/assets/images/appleStore.svg'
@@ -55,27 +55,30 @@ const Footer = () => {
                   <br />
                 </p>
               </div>
-              {settings?.social_media?.length > 0 ?
-                <div className='footerMediasWrapper'>
-                  <span className='followUs'>{translate('followus')}</span>
-                  <div className='mediaIconsWrapper'>
-                    {
-                      settings?.social_media?.map((data) => {
-                        return <a
-                          target='_blank'
-                          className='btn btn-outline-white'
-                          href={data?.link}
-                          rel='noreferrer'
-                          key={data?.id}
-                        >
-                          <img src={data?.image} alt="social-media-icon" className='socialMediaIcon' onError={placeholderImage} />
-                        </a>
+              <div className='footerMediasWrapper'>
+                <span className='followUs'>{translate('followus')}</span>
+                <div className='mediaIconsWrapper'>
+                  {
+                    settings?.social_media?.length > 0 && settings?.social_media?.map((data) => {
+                      return <Link
+                        target='_blank'
+                        title='social
+                          -media'
+                        className='btn btn-outline-white'
+                        href={data?.link}
+                        rel='noreferrer'
+                        key={data?.id}
+                      >
+                        <img src={data?.image} alt="social-media-icon" className='socialMediaIcon' onError={placeholderImage} />
+                      </Link>
 
-                      })
-                    }
-                  </div>
+                    })
+                  }
+                  <Link href={'/rss-feed'} title='rss-feed'>
+                    <IoLogoRss className='rssIcon'/>
+                  </Link>
                 </div>
-                : null}
+              </div>
             </div>
 
             <div className='col-lg-3 col-12 navigationWrapper'>
@@ -106,7 +109,7 @@ const Footer = () => {
                     : null
                 }
                 <li className='nav-item'>
-                  <Link  href={{ pathname: `/about-us`, query: { language_id: currentLanguage?.id } }} onClick={() => scrollToTop()} title={translate('aboutus')}>
+                  <Link href={{ pathname: `/about-us`, query: { language_id: currentLanguage?.id } }} onClick={() => scrollToTop()} title={translate('aboutus')}>
                     {translate('aboutus')}
                   </Link>
                 </li>

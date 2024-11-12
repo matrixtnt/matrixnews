@@ -80,9 +80,9 @@ const Layout = ({ children }) => {
       document.documentElement.style.setProperty('--text-secondary-color', settings && settings?.web_setting?.dark_text_secondary_color)
     }
     else {
+      document.documentElement.style.setProperty('--secondary-color', settings && settings?.web_setting?.light_secondary_color)
       document.documentElement.style.setProperty('--body-color', settings && settings?.web_setting?.light_body_color)
       document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.light_primary_color)
-      document.documentElement.style.setProperty('--secondary-color', settings && settings?.web_setting?.light_secondary_color)
       document.documentElement.style.setProperty('--hover--color', settings && settings?.web_setting?.light_hover_color)
       document.documentElement.style.setProperty('--text-primary-color', settings && settings?.web_setting?.light_text_primary_color)
       document.documentElement.style.setProperty('--text-secondary-color', settings && settings?.web_setting?.light_text_secondary_color)
