@@ -17,6 +17,10 @@ import { Modal } from 'antd';
 import NoDataFound from '../noDataFound/NoDataFound'
 import Link from 'next/link'
 import Card from '../skeletons/Card'
+import Image from 'next/image'
+
+import { PiProhibitInsetFill } from "react-icons/pi";
+
 const { confirm } = Modal;
 
 const ManageNews = () => {
@@ -118,7 +122,51 @@ const ManageNews = () => {
                 {Data && Data.length > 0 ? (
                   Data.map((element, id) => (
                     <div className=' col-xl-4 col-md-6 col-12' key={id}>
-                      <div className='manage-data'>
+                      <div className='manageNewsCard'>
+                        <div className='upperDiv'>
+                          <div className='imgCateWrapper'>
+                            <img
+                              src={element.image}
+                              alt='manage news'
+                              onError={placeholderImage}
+                            />
+                            <div>
+                              <h1 className='cate'> {element?.category?.category_name}</h1>
+                              <span className='date'> {new Date(element.created_at).toLocaleTimeString([], {
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                second: 'numeric',
+                                hour12: true
+                              })}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <span className='categoryTag'>{element?.category?.category_name}</span>
+                          </div>
+                        </div>
+                        <div className='midDiv'>
+                          <h2 className='newsTitle'>{element?.title}</h2>
+                          <div className='contentDiv'>
+                            <h3 className='content title'>Sub Category :</h3>
+                            <h4 className='content desc'>FIFA World Cup</h4>
+                          </div>
+                          <div className='contentDiv'>
+                            <h3 className='content title'> {translate('contentTypeLbl')} :</h3>
+                            <h4 className='content desc'>{typeReturn(element.content_type)}</h4>
+                          </div>
+                          <div className='newsStatus'>
+                            <span> <PiProhibitInsetFill /> Expired News</span>
+                            <span> <PiProhibitInsetFill /> Deactivated</span>
+                          </div>
+                        </div>
+                        <div className='lowerDiv'>
+                          <div className='actionBtns'>
+                            <button className='edit'>{translate('editLbl')}</button>
+                            <button className='delete'>{translate('deleteTxt')}</button>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className='manage-data'>
                         <div className='manage-card'>
 
                           <div className='manage-img'>
@@ -189,7 +237,7 @@ const ManageNews = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   ))
                 ) : (

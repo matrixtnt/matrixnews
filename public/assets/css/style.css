@@ -8717,3 +8717,124 @@ span {
     margin: 10px;
   }
 }
+
+.manage_news .manageNewsCard {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.manage_news .manageNewsCard .upperDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.manage_news .manageNewsCard .upperDiv img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+}
+
+.manage_news .manageNewsCard .upperDiv .imgCateWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.manage_news .manageNewsCard .upperDiv .imgCateWrapper .cate {
+  color: var(--text-primary-color);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.manage_news .manageNewsCard .upperDiv .imgCateWrapper .date {
+  color: var(--text-secondary-color);
+  font-weight: 500;
+}
+
+.manage_news .manageNewsCard .upperDiv .imgCateWrapper div {
+  display: flex;
+  flex-direction: column;
+}
+
+.manage_news .manageNewsCard .midDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.manage_news .manageNewsCard .midDiv .newsTitle {
+  color: var(--text-primary-color);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.manage_news .manageNewsCard .midDiv .contentDiv {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.manage_news .manageNewsCard .midDiv .contentDiv .content {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary-color);
+}
+
+.manage_news .manageNewsCard .midDiv .contentDiv .desc {
+  color: var(--text-secondary-color);
+}
+
+.manage_news .manageNewsCard .midDiv .newsStatus {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  border-top: 2px solid #1B2D511A;
+  padding-top: 6px;
+}
+
+.manage_news .manageNewsCard .midDiv .newsStatus span {
+  color: #ce0c0c;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.manage_news .manageNewsCard .midDiv .newsStatus span svg {
+  margin-top: -4px;
+}
+
+
+.manage_news .manageNewsCard .lowerDiv {
+  border-top: 2px solid #1B2D511A;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-top: 16px;
+}
+
+.manage_news .manageNewsCard .lowerDiv .actionBtns {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.manage_news .manageNewsCard .lowerDiv .actionBtns button {
+  border: 1px solid var(--text-primary-color);
+  background-color: var(--secondary-color);
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--text-primary-color);
+}
+
+.manage_news .manageNewsCard .lowerDiv .actionBtns .edit{
+  color: #fff;
+}
+
+.manage_news .manageNewsCard .lowerDiv .actionBtns .delete{
+  background: transparent;
+}
