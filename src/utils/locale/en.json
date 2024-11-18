@@ -307,5 +307,6 @@
   "loadMore": "Load More",
   "recentNews": "Recent News",
   "expireNews" : "Expired News",
-  "deactiveNews": "Deactivated"
+  "deactiveNews": "Deactivated",
+  "filerBy": "Filter By"
 }

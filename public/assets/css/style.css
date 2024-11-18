@@ -156,6 +156,7 @@ a {
 
 .custom-card .swiper-wrapper {
   padding-bottom: 100px;
+  padding-top: 12px;
 }
 
 .custom-card .swiper-button-prev::after,
@@ -1508,6 +1509,7 @@ a {
   object-fit: cover;
   border-radius: 16px;
   position: relative;
+  height: 238px;
 }
 
 #bns-card-text {
@@ -1622,7 +1624,7 @@ a {
   border: none;
   border-radius: 16px;
   /* height: 356px; */
-  height: 510px;
+  height: 472px;
   overflow: hidden;
 }
 
@@ -1630,9 +1632,7 @@ a {
   background-color: var(--secondary-color);
   border: 1px solid #113476;
 }
-
-
-
+/* 
 .defaultStyleSect #rns-card {
   height: 342px;
 }
@@ -1665,43 +1665,49 @@ a {
   .defaultStyleSect #rns-card {
     height: auto;
   }
-}
+} */
 
 .video_style_four #rns-card {
-  height: 400px;
+  height: 404px;
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
   #rns-card {
-    height: 390px;
+    height: 402px;
   }
 
   .video_style_four #rns-card {
-    height: 340px;
+    height: 345px;
   }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   #rns-card {
-    height: 350px;
+    height: 364px;
   }
 
   .video_style_four #rns-card {
-    height: 300px;
+    height: 304px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   #rns-card {
-    height: 296px;
+    height: 390px;
   }
 
   .video_style_four #rns-card {
-    height: 250px;
+    height: 334px;
   }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
+  #rns-card{
+    height: auto;
+  }
+}
+
+/* @media (min-width: 576px) and (max-width: 767px) {
   #rns-card {
     height: 318px;
   }
@@ -1709,7 +1715,7 @@ a {
   .video_style_four #rns-card {
     height: 270px;
   }
-}
+} */
 
 @media (max-width: 575px) {
 
@@ -2371,6 +2377,7 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -5599,7 +5606,7 @@ a#social_platforms svg:hover {
 
 .video_style_four .card-block .card-title {
   -webkit-line-clamp: 2;
-  font-weight: 400;
+  /* font-weight: 400; */
 }
 
 .video #rns-card {
@@ -6096,7 +6103,7 @@ span {
 .video_style_three #vps-body-left,
 .video_style_three #vps-image-cards {
   background-color: var(--body-color);
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 10px;
 }
 
@@ -8594,6 +8601,7 @@ span {
 }
 
 .news_style_four .dateSpan,
+.video_style_four .dateSpan,
 .views {
   color: var(--text-secondary-color);
   font-size: 16px;
@@ -8716,7 +8724,6 @@ span {
 .rssFeedSect .feedFilterWrapper .feedFilter:focus {
   outline: none;
 }
-
 
 .recentNewsSect #RNews-main {
   border: 1px solid #1B2D511A;

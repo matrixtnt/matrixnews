@@ -63,7 +63,18 @@ const StyleTwo = ({ Data }) => {
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
                     <div className='content'>
+                      <span className='categoryTag'>{truncateText(Data.videos[0].category_name, 10)}</span>
                       <p>{Data.videos[0] && Data.videos[0].title}</p>
+                      <div className='view_Date_Wrapper'>
+                        <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
+                          {new Date(Data.videos[0]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.videos[0]?.total_views} {translate('views')}</span>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -81,7 +92,18 @@ const StyleTwo = ({ Data }) => {
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
                     <div className='content'>
+                      <span className='categoryTag'>{truncateText(Data.videos[1].category_name, 10)}</span>
                       <p>{Data.videos[1] && Data.videos[1].title}</p>
+                      <div className='view_Date_Wrapper'>
+                        <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
+                          {new Date(Data.videos[1]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.videos[1]?.total_views} {translate('views')}</span>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -100,7 +122,18 @@ const StyleTwo = ({ Data }) => {
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
                     <div className='content'>
+                      <span className='categoryTag'>{truncateText(Data.videos[2].category_name, 10)}</span>
                       <p>{Data.videos[2] && Data.videos[2].title}</p>
+                      <div className='view_Date_Wrapper'>
+                        <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
+                          {new Date(Data.videos[2]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.videos[2]?.total_views} {translate('views')}</span>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -119,7 +152,18 @@ const StyleTwo = ({ Data }) => {
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
                     <div className='content'>
+                      <span className='categoryTag'>{truncateText(Data.videos[3].category_name, 10)}</span>
                       <p>{Data.videos[3] && Data.videos[3].title}</p>
+                      <div className='view_Date_Wrapper'>
+                        <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
+                          {new Date(Data.videos[3]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.videos[3]?.total_views} {translate('views')}</span>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -137,7 +181,18 @@ const StyleTwo = ({ Data }) => {
                       <BsFillPlayFill className='pulse' fill='white' size={50} />
                     </div>
                     <div className='content'>
+                      <span className='categoryTag'>{truncateText(Data.videos[4].category_name, 10)}</span>
                       <p>{Data.videos[4] && Data.videos[4].title}</p>
+                      <div className='view_Date_Wrapper'>
+                        <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
+                          {new Date(Data.videos[4]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                        <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.videos[4]?.total_views} {translate('views')}</span>
+                      </div>
                     </div>
                   </div>
                 ) : null}
@@ -187,14 +242,14 @@ const StyleTwo = ({ Data }) => {
                         <span className='categoryTag'>{truncateText(Data.news[0].category_name, 10)}</span>
                         <p>{Data.news[0] && Data.news[0].title}</p>
                         <div className='view_Date_Wrapper'>
-                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
                             {new Date(Data.news[0]?.date).toLocaleString('en-us', {
                               day: 'numeric',
                               month: 'short',
                               year: 'numeric'
                             })}
                           </span>
-                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[0]?.total_views} {translate('views')}</span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.news[0]?.total_views} {translate('views')}</span>
                         </div>
                       </div>
                     </div>
@@ -216,14 +271,14 @@ const StyleTwo = ({ Data }) => {
                         <span className='categoryTag'>{truncateText(Data.news[1].category_name, 10)}</span>
                         <p>{Data.news[1] && Data.news[1].title}</p>
                         <div className='view_Date_Wrapper'>
-                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
                             {new Date(Data.news[1]?.date).toLocaleString('en-us', {
                               day: 'numeric',
                               month: 'short',
                               year: 'numeric'
                             })}
                           </span>
-                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[1]?.total_views} {translate('views')}</span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.news[1]?.total_views} {translate('views')}</span>
                         </div>
                       </div>
                     </div>
@@ -246,14 +301,14 @@ const StyleTwo = ({ Data }) => {
                         <span className='categoryTag'>{truncateText(Data.news[2].category_name, 10)}</span>
                         <p>{Data.news[2] && Data.news[2].title}</p>
                         <div className='view_Date_Wrapper'>
-                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
                             {new Date(Data.news[2]?.date).toLocaleString('en-us', {
                               day: 'numeric',
                               month: 'short',
                               year: 'numeric'
                             })}
                           </span>
-                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[2]?.total_views} {translate('views')}</span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.news[2]?.total_views} {translate('views')}</span>
                         </div>
                       </div>
                     </div>
@@ -276,14 +331,14 @@ const StyleTwo = ({ Data }) => {
                         <span className='categoryTag'>{truncateText(Data.news[3].category_name, 10)}</span>
                         <p>{Data.news[3] && Data.news[3].title}</p>
                         <div className='view_Date_Wrapper'>
-                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
                             {new Date(Data.news[3]?.date).toLocaleString('en-us', {
                               day: 'numeric',
                               month: 'short',
                               year: 'numeric'
                             })}
                           </span>
-                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[3]?.total_views} {translate('views')}</span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.news[3]?.total_views} {translate('views')}</span>
                         </div>
                       </div>
                     </div>
@@ -305,14 +360,14 @@ const StyleTwo = ({ Data }) => {
                         <span className='categoryTag'>{truncateText(Data.news[4].category_name, 10)}</span>
                         <p>{Data.news[4] && Data.news[4].title}</p>
                         <div className='view_Date_Wrapper'>
-                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20}/>
+                          <span className='d-flex align-items-center gap-2'> <LuCalendarDays size={20} />
                             {new Date(Data.news[4]?.date).toLocaleString('en-us', {
                               day: 'numeric',
                               month: 'short',
                               year: 'numeric'
                             })}
                           </span>
-                          <span className='d-flex align-items-center gap-2'> <IoEye size={20}/> {Data.news[4 ]?.total_views} {translate('views')}</span>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.news[4]?.total_views} {translate('views')}</span>
                         </div>
                       </div>
                     </div>
@@ -353,9 +408,12 @@ const StyleTwo = ({ Data }) => {
                         alt={Data.breaking_news[0] && Data.breaking_news[0].title}
                         onError={placeholderImage}
                       />
-
                       <div className='content'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <p>{Data.breaking_news[0] && Data.breaking_news[0].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.breaking_news[0]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -377,7 +435,11 @@ const StyleTwo = ({ Data }) => {
                       />
 
                       <div className='content'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <p>{Data.breaking_news[1] && Data.breaking_news[1].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.breaking_news[1]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -401,7 +463,11 @@ const StyleTwo = ({ Data }) => {
                       />
 
                       <div className='content'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <p>{Data.breaking_news[2] && Data.breaking_news[2].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.breaking_news[2]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -425,7 +491,11 @@ const StyleTwo = ({ Data }) => {
                       />
 
                       <div className='content'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <p>{Data.breaking_news[3] && Data.breaking_news[3].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.breaking_news[3]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -448,7 +518,11 @@ const StyleTwo = ({ Data }) => {
                       />
 
                       <div className='content'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <p>{Data.breaking_news[4] && Data.breaking_news[4].title}</p>
+                        <div className='view_Date_Wrapper'>
+                          <span className='d-flex align-items-center gap-2'> <IoEye size={20} /> {Data.breaking_news[4]?.total_views} {translate('views')}</span>
+                        </div>
                       </div>
                     </div>
                   </Link>

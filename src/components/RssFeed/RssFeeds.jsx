@@ -92,7 +92,7 @@ const RssFeeds = () => {
                 <div className='row container mainRow'>
                     <div className="col-12 filterDiv mb-2">
                         <div className='d-flex align-items-center gap-2 flex-wrap'>
-                            <h1>Filer By : </h1>
+                            <h1>{translate('filerBy')} : </h1>
                             <div className='feedFilterWrapper'>
                                 <div className='d-flex justify-content-between align-items-center px-1 filterSelect' onClick={() => setIsFilter(true)}>
                                     <h2>{selectedCate ? selectedCate : translate('selCatLbl')} </h2>

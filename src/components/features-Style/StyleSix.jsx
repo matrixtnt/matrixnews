@@ -233,12 +233,6 @@ const StyleSix = ({ Data, setIsLoading }) => {
                         <div className='card-img-overlay'>
                           {item && item.category_name ? (
                             <div
-                              onClick={() =>
-                                router.push({
-                                  pathname: `/categories-news/${item.slug}`,
-                                  query: { category_id: item.id }
-                                })
-                              }
                               className='categoryTag'
                               type='button'
                             >
@@ -334,12 +328,6 @@ const StyleSix = ({ Data, setIsLoading }) => {
                           <div className='card-img-overlay'>
                             <div
                               className='categoryTag'
-                            // onClick={() =>
-                            //   router.push({
-                            //     pathname: `/categories-news/${item.slug}`,
-                            //     query: { category_id: item.id }
-                            //   })
-                            // }
                             >
                               {truncateText(item.category_name, 25)}
                             </div>
@@ -407,6 +395,12 @@ const StyleSix = ({ Data, setIsLoading }) => {
                         onError={placeholderImage}
                       />
                       <div className='card-img-overlay'>
+                        <div
+                          className='categoryTag'
+                          type='button'
+                        >
+                          {translate('breakingnews')}
+                        </div>
                         {item.content_value ? (
                           <div
                             className='video_slider_button'

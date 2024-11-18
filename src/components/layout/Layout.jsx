@@ -89,6 +89,7 @@ const Layout = ({ children }) => {
     }
   }, [settings, darkThemeMode])
 
+
   // Check if the user is authenticated based on the presence of the token
   const isAuthenticated = userData && userData?.data?.token
 

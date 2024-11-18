@@ -182,7 +182,7 @@ const MobilesideBar = ({
                   exact='true'
                   className={`headerDropdownItem link-color ${router === '/about-us' ? 'navLinkActive' : ''}`}
                   aria-current='page'
-                  href={`/about-us`}
+                  href={{ pathname: `/about-us`, query: { language_id: currentLanguage?.id } }}
                   onClick={handleClose}
                   title={translate('aboutus')}
                 >
@@ -217,7 +217,7 @@ const MobilesideBar = ({
                     exact='true'
                     className={`headerDropdownItem link-color ${router === '/all-breaking-news' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    href='/all-breaking-news'
+                    href={{ pathname: `/all-breaking-news`, query: { language_id: currentLanguage?.id } }}
                     onClick={handleClose}
                     title={translate('breakingnews')}
                   >
@@ -235,7 +235,7 @@ const MobilesideBar = ({
                   exact='true'
                   className={`headerDropdownItem link-color ${router === '/contact-us' ? 'navLinkActive' : ''}`}
                   aria-current='page'
-                  href='/contact-us'
+                  href={{ pathname: `/contact-us`, query: { language_id: currentLanguage?.id } }}
                   onClick={handleClose}
                   title={translate('contactus')}
                 >

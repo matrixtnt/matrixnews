@@ -363,9 +363,9 @@ const Header = () => {
                     className={`headerDropdownItem link-color ${router === '/video-news' ? 'navLinkActive' : ''}`}
                     aria-current='page'
                     href={{ pathname: `/video-news`, query: { language_id: currentLanguage?.id } }}
-                    title={translate('videoNews')}
+                    title={translate('videosLbl')}
                   >
-                    Videos
+                    {translate('videosLbl')}
                   </Link>
                 </b>
               </li>
@@ -377,7 +377,6 @@ const Header = () => {
                     exact='true'
                     className={`headerDropdownItem link-color ${router === '/contact-us' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    // href='/contact-us'
                     href={{ pathname: `/contact-us`, query: { language_id: currentLanguage?.id } }}
                     title={translate('contactus')}
                   >

@@ -141,9 +141,6 @@ const StyleFive = ({ isLoading, Data }) => {
                     <p id='bns-logo-col' className='card-text'>
                       <b>{Data.title}</b>
                     </p>
-                    <p id='bns-logo-row' className='card-text'>
-                      <b>{Data.title}</b>
-                    </p>
                     <Link
                       id='btnbnsViewAll'
                       className='btn commonBtn'
@@ -192,7 +189,7 @@ const StyleFive = ({ isLoading, Data }) => {
                               <div id='bns-card-body' className='card-body ps-0'>
                               <span className='d-flex align-items-center gap-2 views'><IoEye size={20}/> {element?.total_views} {translate('views')} </span>
                                 <h5 id='bns-card-text' className=''>
-                                  {truncateText(element.title, 34)}
+                                  {truncateText(element.title, 30)}
                                 </h5>
                               </div>
                             </div>
@@ -242,9 +239,6 @@ const StyleFive = ({ isLoading, Data }) => {
                     <p id='bns-logo-col' className='card-text'>
                       <b>{Data.title}</b>
                     </p>
-                    <p id='bns-logo-row' className='card-text'>
-                      <b>{Data.title}</b>
-                    </p>
                     <Link
                       id='btnbnsViewAll'
                       className='btn commonBtn'
@@ -289,7 +283,7 @@ const StyleFive = ({ isLoading, Data }) => {
                                   {truncateText(element.category_name, 10)}
                                 </div>
                                 <h5 id='bns-card-text' className=''>
-                                  {truncateText(element.title, 34)}
+                                  {truncateText(element.title, 30)}
                                 </h5>
                                 <Link href={{ pathname: `/news/${element.slug}`, query: { language_id: element.language_id } }}
                                   // as={`/news/${element.slug}`}
@@ -334,9 +328,6 @@ const StyleFive = ({ isLoading, Data }) => {
                     <p id='bns-logo-col' className='card-text'>
                       <b>{Data.title}</b>
                     </p>
-                    <p id='bns-logo-row' className='card-text'>
-                      <b>{Data.title}</b>
-                    </p>
                     <Link
                       id='btnbnsViewAll'
                       className='btn commonBtn'
@@ -377,7 +368,7 @@ const StyleFive = ({ isLoading, Data }) => {
                               />
                               <div id='bns-card-body' className='card-body ps-0'>
                                 <h5 id='bns-card-text' className=''>
-                                  {truncateText(element.title, 34)}
+                                  {truncateText(element.title, 30)}
                                 </h5>
                                 <Link href={{pathname: `/breaking-news/${element.slug}`, query: { language_id: element.language_id }  }}
                                   // as={`/news/${element.slug}`}

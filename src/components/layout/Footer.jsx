@@ -92,7 +92,7 @@ const Footer = () => {
                 {
                   settings && settings.live_streaming_mode === '1' && checkNewsData && checkNewsData?.data?.isLiveNewsData ?
                     <li className='nav-item'>
-                      <Link href='/live-news' onClick={() => scrollToTop()} title={translate('livenews')}>
+                      <Link href={{ pathname: `/live-news`, query: { language_id: currentLanguage?.id } }} onClick={() => scrollToTop()} title={translate('livenews')}>
                         {translate('livenews')}
                       </Link>
                     </li>
@@ -102,7 +102,7 @@ const Footer = () => {
                 {
                   settings && settings.breaking_news_mode === '1' && checkNewsData && checkNewsData?.data?.isBreakingNewsData ?
                     <li className='nav-item'>
-                      <Link href='/all-breaking-news' onClick={() => scrollToTop()} title={translate('breakingnews')}>
+                      <Link href={{ pathname: `/all-breaking-news`, query: { language_id: currentLanguage?.id } }}  onClick={() => scrollToTop()} title={translate('breakingnews')}>
                         {translate('breakingnews')}
                       </Link>
                     </li>
@@ -119,8 +119,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className='nav-item'>
-                  <Link href={'/video-news'} onClick={() => scrollToTop()} title={translate('videoNews')}>
-                    {translate('videoNews')}
+                  <Link href={{ pathname: `/video-news`, query: { language_id: currentLanguage?.id } }} onClick={() => scrollToTop()} title={translate('videosLbl')}>
+                  {translate('videosLbl')}
                   </Link>
                 </li>
 

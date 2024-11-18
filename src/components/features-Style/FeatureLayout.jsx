@@ -76,8 +76,6 @@ const FeatureLayout = () => {
     })
   }
 
-
-
   useEffect(() => {
     if (currentLanguage?.id) {
       setIsLoading(true)
@@ -191,7 +189,7 @@ const FeatureLayout = () => {
   const selectedComponent = SelectType()
 
   return (
-    <div className='d-flex flex-column gap-2 mb-4'>
+    <div className='d-flex flex-column gap-2 mb-5'>
       {isLoading ? (
         <>
           <StyleTwoSkeleton />

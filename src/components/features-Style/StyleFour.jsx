@@ -50,7 +50,7 @@ const StyleFour = ({ Data, isLoading }) => {
                 <div className='row'>
                   {Data.videos.map((value, index) => {
                     return (
-                      <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                      <div className='col-xxl-4 col-lg-4 col-md-6 col-12' key={value.id}>
                         <div
                           id='rns-card'
                           className='card card_hover_two'
@@ -75,6 +75,11 @@ const StyleFour = ({ Data, isLoading }) => {
                           </div>
                           <div id='rns-card-body' className='card-block pb-0'>
                             <div className='d-flex align-items-center gap-4'>
+                            <span className='dateSpan d-flex align-items-center gap-2'><LuCalendarDays /> {new Date(value?.date).toLocaleString('en-us', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric'
+                                })}</span>
                               <span className='d-flex align-items-center gap-2 views'> <IoEye size={20} /> {value?.total_views} {translate('views')}</span>
                             </div>
                             <p className='card-title mb-0'>{value?.title}</p>
@@ -113,10 +118,10 @@ const StyleFour = ({ Data, isLoading }) => {
             <div className='row'>
               <div id='rns-cards-main' className=''>
                 <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
-                <div className='row mb-5'>
+                <div className='row'>
                   {Data.news.map((value, index) => {
                     return (
-                      <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                      <div className='col-xxl-4 col-lg-4 col-md-6 col-12' key={value.id}>
                         <Link id='rns-card' className='card card_hover_two'
                           href={{ pathname: `/news/${value.slug}`, query: { language_id: value.language_id } }}
                           // as={`/news/${value.slug}`}
@@ -131,12 +136,7 @@ const StyleFour = ({ Data, isLoading }) => {
                               onError={placeholderImage}
                             />
                           </div>
-                          <div id='rns-img-overlay' className=' card-inverse mt-3'>
-                            <div className='categoryTag' type='button'>
-                              {truncateText(value.category_name, 10)}
-                            </div>
-                          </div>
-                          <div id='rns-card-body' className='card-block'>
+                          <div id='rns-card-body' className='card-block mt-3'>
                             <div className='d-flex align-items-center gap-4'>
                               <span className='dateSpan d-flex align-items-center gap-2'><LuCalendarDays /> {new Date(value?.date).toLocaleString('en-us', {
                                   day: 'numeric',
@@ -180,10 +180,10 @@ const StyleFour = ({ Data, isLoading }) => {
             <div className='row'>
               <div id='rns-cards-main' className=''>
                 <CommonViewMoreDiv title={Data && Data.title} desc={Data && Data.short_description} link={`/view-all/${Data.slug}`} />
-                <div className='row mb-5'>
+                <div className='row'>
                   {Data && Data.breaking_news.map((value, index) => {
                     return (
-                      <div className='col-xxl-4 col-lg-4 col-md-4 col-sm-6 col-12' key={value.id}>
+                      <div className='col-xxl-4 col-lg-4 col-md-6 col-12' key={value.id}>
                         <Link
                           id='rns-card'
                           className='card card_hover_two'

@@ -67,6 +67,7 @@ const StyleThree = ({ Data, isLoading }) => {
                       }}
                     >
                       <Card id='vps-main-card' className='text-black'>
+                        <span className='categoryTag'>{truncateText(Data.videos[0].category_name, 10)}</span>
                         <Card.Img
                           id='vps-main-image'
                           src={Data.videos[0].image}
@@ -80,7 +81,16 @@ const StyleThree = ({ Data, isLoading }) => {
                           </div>
                         </Card.ImgOverlay>
                       </Card>
-                      <p id='vps-card-title'>
+                      <div className='d-flex flex-column gap-4'>
+                        <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
+                          {new Date(Data.videos[0]?.date).toLocaleString('en-us', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      </div>
+                      <p id='vps-card-title' className='mt-2'>
                         <b>{Data.videos[0].title}</b>
                       </p>
                     </div>
@@ -98,6 +108,7 @@ const StyleThree = ({ Data, isLoading }) => {
                         TypeUrl(Data.videos[1].type)
                       }}
                     >
+                      <span className='categoryTag'>{truncateText(Data.videos[1].category_name, 10)}</span>
                       <Card.Img
                         id='vps-secondry-images'
                         src={Data.videos[1].image}
@@ -108,10 +119,21 @@ const StyleThree = ({ Data, isLoading }) => {
                         <div id='vps-btnVideo'>
                           <BsFillPlayFill id='vps-btnVideo-logo' className='pulse' fill='white' size={50} />
                         </div>
+                      <div className='inner_Card_content'>
+                        <div className='d-flex flex-column gap-4'>
+                          <span className='d-flex align-items-center gap-2 dateSpan'> <LuCalendarDays size={20} />
+                            {new Date(Data.videos[1]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                        </div>
+                        <p id='vps-card-title'>
+                          <b>{Data.videos[1].title}</b>
+                        </p>
+                      </div>
                       </Card.ImgOverlay>
-                      <p id='vps-card-title'>
-                        <b>{Data.videos[1].title}</b>
-                      </p>
                     </Card>
                   ) : null}
 
@@ -124,6 +146,7 @@ const StyleThree = ({ Data, isLoading }) => {
                         TypeUrl(Data.videos[2].type)
                       }}
                     >
+                      <span className='categoryTag'>{truncateText(Data.videos[2].category_name, 10)}</span>
                       <Card.Img
                         id='vps-secondry-images'
                         src={Data.videos[2].image}
@@ -134,10 +157,21 @@ const StyleThree = ({ Data, isLoading }) => {
                         <div id='vps-btnVideo'>
                           <BsFillPlayFill id='vps-btnVideo-logo' className='pulse' fill='white' size={50} />
                         </div>
+                      <div className='inner_Card_content'>
+                        <div className='d-flex flex-column gap-4'>
+                          <span className='d-flex align-items-center gap-2 dateSpan'> <LuCalendarDays size={20} />
+                            {new Date(Data.videos[2]?.date).toLocaleString('en-us', {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            })}
+                          </span>
+                        </div>
+                        <p id='vps-card-title'>
+                          <b>{Data.videos[2].title}</b>
+                        </p>
+                      </div>
                       </Card.ImgOverlay>
-                      <p id='vps-card-title'>
-                        <b>{Data.videos[2].title}</b>
-                      </p>
                     </Card>
                   ) : null}
                 </div>
@@ -301,6 +335,7 @@ const StyleThree = ({ Data, isLoading }) => {
                       title='detail-page'
                     >
                       <Card id='vps-main-card' className='text-black'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <Card.Img
                           id='vps-main-image'
                           src={Data.breaking_news[0].image}
@@ -308,15 +343,6 @@ const StyleThree = ({ Data, isLoading }) => {
                           onError={placeholderImage}
                         />
                       </Card>
-                      <div className='d-flex flex-column gap-4'>
-                        <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
-                          {new Date(Data.breaking_news[0]?.date).toLocaleString('en-us', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric'
-                          })}
-                        </span>
-                      </div>
                       <p id='vps-card-title'>
                         <b>{Data.breaking_news[0].title}</b>
                       </p>
@@ -333,6 +359,7 @@ const StyleThree = ({ Data, isLoading }) => {
                       title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black second_video'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <Card.Img
                           id='vps-secondry-images'
                           src={Data.breaking_news[1].image}
@@ -340,15 +367,6 @@ const StyleThree = ({ Data, isLoading }) => {
                           onError={placeholderImage}
                         />
                         <Card.ImgOverlay>
-                          <div className='d-flex flex-column gap-4'>
-                            <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
-                              {new Date(Data.breaking_news[1]?.date).toLocaleString('en-us', {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                              })}
-                            </span>
-                          </div>
                           <p id='vps-card-title'>
                             <b>{Data.breaking_news[1].title}</b>
                           </p>
@@ -364,6 +382,7 @@ const StyleThree = ({ Data, isLoading }) => {
                       title='detail-page'
                     >
                       <Card id='vps-image-cards' className='text-black third_video'>
+                        <span className='categoryTag'>{translate('breakingnews')}</span>
                         <Card.Img
                           id='vps-secondry-images'
                           src={Data.breaking_news[2].image}
@@ -371,15 +390,6 @@ const StyleThree = ({ Data, isLoading }) => {
                           onError={placeholderImage}
                         />
                         <Card.ImgOverlay>
-                          <div className='d-flex flex-column gap-4'>
-                            <span className='d-flex align-items-center gap-2 dateSpan leftDivDateSpan'> <LuCalendarDays size={20} />
-                              {new Date(Data.breaking_news[2]?.date).toLocaleString('en-us', {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                              })}
-                            </span>
-                          </div>
                           <p id='vps-card-title'>
                             <b>{Data.breaking_news[2].title}</b>
                           </p>
