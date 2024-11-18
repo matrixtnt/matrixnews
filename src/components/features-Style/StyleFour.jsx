@@ -131,14 +131,18 @@ const StyleFour = ({ Data, isLoading }) => {
                               onError={placeholderImage}
                             />
                           </div>
-                          <div id='rns-img-overlay' className=' card-inverse'>
+                          <div id='rns-img-overlay' className=' card-inverse mt-3'>
                             <div className='categoryTag' type='button'>
                               {truncateText(value.category_name, 10)}
                             </div>
                           </div>
                           <div id='rns-card-body' className='card-block'>
                             <div className='d-flex align-items-center gap-4'>
-                              <span className='dateSpan d-flex align-items-center gap-2'><LuCalendarDays />20 jun 2024</span>
+                              <span className='dateSpan d-flex align-items-center gap-2'><LuCalendarDays /> {new Date(value?.date).toLocaleString('en-us', {
+                                  day: 'numeric',
+                                  month: 'short',
+                                  year: 'numeric'
+                                })}</span>
                               <span className='d-flex align-items-center gap-2 views'> <IoEye size={20} /> {value?.total_views} {translate('views')}</span>
 
                             </div>

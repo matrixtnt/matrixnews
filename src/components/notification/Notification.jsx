@@ -69,6 +69,7 @@ const Notification = () => {
   const { data: Data, refetch } = useQuery({
     queryKey: ['getuserNotification', currentLanguage, offsetdata, offset],
     queryFn: getUserNotification,
+    staleTime: 0
 
   });
 

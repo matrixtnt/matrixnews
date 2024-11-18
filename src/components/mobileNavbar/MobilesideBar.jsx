@@ -199,7 +199,7 @@ const MobilesideBar = ({
                     exact='true'
                     className={`headerDropdownItem link-color ${router === '/live-news' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    href='/live-news'
+                    href={{ pathname: `/live-news`, query: { language_id: currentLanguage?.id } }}
                     onClick={handleClose}
                     title={translate('livenews')}
                   >

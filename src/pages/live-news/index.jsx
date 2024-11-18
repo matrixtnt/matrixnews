@@ -7,10 +7,12 @@ import { GET_WEB_SEO_PAGES, access_key } from 'src/utils/api'
 const LiveNews = dynamic(() => import('src/components/newsPages/LiveNews'), { ssr: false })
 
 // This is seo api
-const fetchDataFromSeo = async () => {
+const fetchDataFromSeo = async (language_id) => {
+
   try {
+
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=live_streaming_news`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=live_streaming_news&language_id=${language_id}`
     )
     const data = response.data
     return data
@@ -44,21 +46,21 @@ const Index = ({ seoData, currentURL }) => {
 
 let serverSidePropsFunction = null;
 if (process.env.NEXT_PUBLIC_SEO === "true") {
-    serverSidePropsFunction = async (context) => {
-        const { req } = context; // Extract query and request object from context
+  serverSidePropsFunction = async (context) => {
+    const { req } = context; // Extract query and request object from context
+    // console.log(req)
+    const { language_id } = req[Symbol.for('NextInternalRequestMeta')].initQuery;
+    // console.log('language_id', language_id)
 
-        // const currentURL = `${req.headers.host}${req.url}`;
-        const currentURL = process.env.NEXT_PUBLIC_WEB_URL + '/live-news/';
-        const seoData = await fetchDataFromSeo(req.url);
-        // Pass the fetched data as props to the Index component
-
-        return {
-            props: {
-                seoData,
-                currentURL,
-            },
-        };
+    const currentURL = process.env.NEXT_PUBLIC_WEB_URL;
+    const seoData = await fetchDataFromSeo(language_id);
+    return {
+      props: {
+        seoData,
+        currentURL,
+      },
     };
+  };
 }
 
 export const getServerSideProps = serverSidePropsFunction

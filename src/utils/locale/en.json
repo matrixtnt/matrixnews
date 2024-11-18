@@ -142,7 +142,7 @@
   "step1Of2Lbl": "Step 1 of 2",
   "catLbl": "Category",
   "plzSelCatLbl": "Please select category",
-  "subcatLbl": "SubCategory",
+  "subcatLbl": "Sub Category",
   "contentTypeLbl": "Content Type",
   "uploadVideoLbl": "Upload Video",
   "youtubeUrlLbl": "Youtube Url",
@@ -305,5 +305,7 @@
   "personalNotification": "Personal Notifications",
   "views": "Views",
   "loadMore": "Load More",
-  "recentNews": "Recent News"
+  "recentNews": "Recent News",
+  "expireNews" : "Expired News",
+  "deactiveNews": "Deactivated"
 }

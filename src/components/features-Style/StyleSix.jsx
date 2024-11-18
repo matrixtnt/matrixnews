@@ -275,7 +275,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                                 id='Top-Title01'
                               >
                                 {truncateText(item.title, 35)} <br />
-                                {stripHtmlTags(item.description.slice(0, 600))} ...
+                                {/* {stripHtmlTags(item.description.slice(0, 600))} ... */}
                               </div>
                             </div>
                           ) : null}
@@ -425,7 +425,7 @@ const StyleSix = ({ Data, setIsLoading }) => {
                             title='detail-page'
                           >
                             {truncateText(item.title, 35)}
-                            {stripHtmlTags(item.description.slice(0, 600))} ...
+                            {/* {stripHtmlTags(item.description.slice(0, 600))} ... */}
                           </Link>
                         </div>
                       </div>

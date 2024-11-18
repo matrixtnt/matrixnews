@@ -295,7 +295,9 @@ const CatNav = () => {
                         ) : null}
                         {
                           isMenuOpen &&
-                          <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsMenuOpen(false)}>
+                          <ul className='sub-menu mobile_catogories' 
+                          // onMouseLeave={() => setIsMenuOpen(false)}  
+                          >
                             {categories &&
                               categories?.slice(10, categories?.length)?.map((element, index) => (
                                 <li className='nav-item' key={index}>

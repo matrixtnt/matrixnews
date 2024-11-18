@@ -328,7 +328,7 @@ const Header = () => {
                       exact='true'
                       className={`headerDropdownItem link-color ${router === '/live-news' ? 'navLinkActive' : ''}`}
                       aria-current='page'
-                      href='/live-news'
+                      href={{ pathname: `/live-news`, query: { language_id: currentLanguage?.id } }}
                       title={translate('livenews')}
                     >
                       {translate('livenews')}
@@ -345,7 +345,7 @@ const Header = () => {
                       exact='true'
                       className={`headerDropdownItem link-color ${router === '/all-breaking-news' ? 'navLinkActive' : ''}`}
                       aria-current='page'
-                      href='/all-breaking-news'
+                      href={{ pathname: `/all-breaking-news`, query: { language_id: currentLanguage?.id } }}
                       title={translate('breakingnews')}
                     >
                       {translate('breakingnews')}
@@ -362,8 +362,7 @@ const Header = () => {
                     exact='true'
                     className={`headerDropdownItem link-color ${router === '/video-news' ? 'navLinkActive' : ''}`}
                     aria-current='page'
-                    // href='/contact-us'
-                    href={'video-news'}
+                    href={{ pathname: `/video-news`, query: { language_id: currentLanguage?.id } }}
                     title={translate('videoNews')}
                   >
                     Videos

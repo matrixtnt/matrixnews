@@ -66,7 +66,8 @@ const AllRelatedNews = () => {
   // react query
   const { data: Data } = useQuery({
     queryKey: ['realated-news-section', catSlug, location, offset],
-    queryFn: getNewsByCategoryApi
+    queryFn: getNewsByCategoryApi,
+    staleTime: 0
   })
 
   useEffect(() => {

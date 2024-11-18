@@ -61,7 +61,8 @@ const AllBreakingNews = () => {
   // react query
   const { data: Data } = useQuery({
     queryKey: ['all-breaking-news', language_id, currentlanguage, offset],
-    queryFn: getBreakingNewsApi
+    queryFn: getBreakingNewsApi,
+    staleTime: 0
   })
 
 

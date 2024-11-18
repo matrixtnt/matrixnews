@@ -2,157 +2,163 @@
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
     <loc>https://newsweb.wrteam.me/404</loc>
-    <lastmod>2024-11-12T13:52:17.503Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/loading</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/rss</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/all-breaking-news</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/breaking-news/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/bookmark</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/categories-news/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/create-news</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/edit-news</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/live-news</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/manage-news</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/more-pages/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/news/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/personal-notification</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/profile-update</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/tag/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/user-based-categories</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/video-news</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://newsweb.wrteam.me/view-all/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/all-breaking-news</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/bookmark</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/breaking-news/[slug]</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/categories-news/[slug]</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/create-news</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/edit-news</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/live-news</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/manage-news</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/more-pages/[slug]</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/news/[slug]</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/personal-notification</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/profile-update</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/rss-feed</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/tag/[slug]</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/user-based-categories</loc>
+    <lastmod>2024-11-18T11:21:23.878Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/video-news</loc>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/video-news-view/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://newsweb.wrteam.me/view-all/[slug]</loc>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/categories-news/sub-category/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/policy-page/privacy-policy</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/policy-page/terms-condition</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://newsweb.wrteam.me/view-all/related-news/[slug]</loc>
-    <lastmod>2024-11-12T13:52:17.504Z</lastmod>
+    <lastmod>2024-11-18T11:21:23.879Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

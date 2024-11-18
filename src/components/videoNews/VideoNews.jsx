@@ -65,6 +65,7 @@ const VideoNews = () => {
   const { data: Data } = useQuery({
     queryKey: ['getVideoNews', currentLanguage, offset],
     queryFn: getVideoNews,
+    staleTime: 0
   })
 
   useEffect(() => {

@@ -72,9 +72,9 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     if (darkThemeMode) {
+      document.documentElement.style.setProperty('--secondary-color', settings && settings?.web_setting?.dark_secondary_color)
       document.documentElement.style.setProperty('--body-color', settings && settings?.web_setting?.dark_body_color)
       document.documentElement.style.setProperty('--primary-color', settings && settings?.web_setting?.dark_primary_color)
-      document.documentElement.style.setProperty('--secondary-color', settings && settings?.web_setting?.dark_secondary_color)
       document.documentElement.style.setProperty('--hover--color', settings && settings?.web_setting?.dark_hover_color)
       document.documentElement.style.setProperty('--text-primary-color', settings && settings?.web_setting?.dark_text_primary_color)
       document.documentElement.style.setProperty('--text-secondary-color', settings && settings?.web_setting?.dark_text_secondary_color)

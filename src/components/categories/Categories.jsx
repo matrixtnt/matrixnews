@@ -62,7 +62,7 @@ const Categories = () => {
   const { data: Data } = useQuery({
     queryKey: ['categories', currentLanguage.id, offset],
     queryFn: () => categoriesApi(),
-    staleTime: 6000
+    staleTime: 0
   })
 
   useEffect(() => {

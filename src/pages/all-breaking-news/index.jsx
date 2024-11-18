@@ -7,10 +7,10 @@ import { GET_WEB_SEO_PAGES } from 'src/utils/api'
 const AllBreakingNews = dynamic(() => import('src/components/newsPages/AllBreakingNews'), { ssr: false })
 
 // This is seo api
-const fetchDataFromSeo = async () => {
+const fetchDataFromSeo = async (language_id) => {
   try {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=all_breaking_news`
+      `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=all_breaking_news&language_id=${language_id}`
     )
     const data = response.data
     return data
@@ -43,24 +43,23 @@ const Index = ({ seoData, currentURL }) => {
   )
 }
 
-let serverSidePropsFunction = null
-if (process.env.NEXT_PUBLIC_SEO === 'true') {
-  serverSidePropsFunction = async context => {
-    // Retrieve the slug from the URL query parameters
-    const { req } = context // Extract query and request object from context
+let serverSidePropsFunction = null;
+if (process.env.NEXT_PUBLIC_SEO === "true") {
+  serverSidePropsFunction = async (context) => {
+    const { req } = context; // Extract query and request object from context
+    // console.log(req)
+    const { language_id } = req[Symbol.for('NextInternalRequestMeta')].initQuery;
+    // console.log('language_id', language_id)
 
-    const currentURL = req[Symbol.for('NextInternalRequestMeta')].initURL
-
-    const seoData = await fetchDataFromSeo()
-
-    // Pass the fetched data as props to the page component
+    const currentURL = process.env.NEXT_PUBLIC_WEB_URL;
+    const seoData = await fetchDataFromSeo(language_id);
     return {
       props: {
         seoData,
-        currentURL
-      }
-    }
-  }
+        currentURL,
+      },
+    };
+  };
 }
 
 export const getServerSideProps = serverSidePropsFunction

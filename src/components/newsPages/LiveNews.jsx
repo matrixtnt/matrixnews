@@ -65,6 +65,7 @@ const LiveNews = () => {
   const { data: Data } = useQuery({
     queryKey: ['getliveStreaming', currentLanguage, offset],
     queryFn: getLiveStreaming,
+    staleTime: 0,
   })
 
   useEffect(() => {

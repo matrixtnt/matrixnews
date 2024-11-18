@@ -1622,7 +1622,7 @@ a {
   border: none;
   border-radius: 16px;
   /* height: 356px; */
-  height: 462px;
+  height: 510px;
   overflow: hidden;
 }
 
@@ -1639,13 +1639,13 @@ a {
 
 @media screen and (min-width: 1200px) and (max-width: 1399px) {
   .defaultStyleSect #rns-card {
-    height: 356px;
+    height: 496px;
   }
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   .defaultStyleSect #rns-card {
-    height: 344px;
+    height: 445px;
   }
 }
 
@@ -8681,6 +8681,43 @@ span {
   margin-bottom: 0px;
 }
 
+.rssFeedSect .filterDiv h1 {
+  font-size: 20px;
+  color: var(--text-primary-color);
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.rssFeedSect .feedFilterWrapper {
+  background-color: transparent;
+  border: 1px solid #1B2D511A;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.rssFeedSect .feedFilterWrapper h2 {
+  color: var(--text-primary-color);
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.rssFeedSect .feedFilterWrapper .filterSelect,
+.rssFeedSect .feedFilterWrapper .allFeed {
+  cursor: pointer;
+}
+
+.rssFeedSect .feedFilterWrapper .feedFilter {
+  border: none;
+  background-color: transparent;
+}
+
+.rssFeedSect .feedFilterWrapper .feedFilter:focus {
+  outline: none;
+}
+
+
 .recentNewsSect #RNews-main {
   border: 1px solid #1B2D511A;
   border-radius: 16px;
@@ -8698,7 +8735,81 @@ span {
   border: 1px solid #1B2D511A;
   padding: 4px;
   border-radius: 16px;
-  margin: 30px;
+  /* margin: 30px; */
+  margin: 16px;
+}
+
+.rssFeedSect .feedFilterWrapper {
+  position: relative;
+  width: 200px;
+}
+
+.rssFeedSect .sub-menu {
+  position: absolute;
+  left: 0px;
+  background-color: var(--body-color);
+  z-index: 2;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+[data-bs-theme="dark"] .rssFeedSect .sub-menu {
+  border: 1px solid #6c757d;
+}
+
+.rssFeedSect .sub-menu li {
+  margin: 6px 0px;
+  font-weight: 700;
+}
+
+.rssFeedSect .sub-menu li:first-child {
+  margin-top: 0px;
+}
+
+.rssFeedSect .sub-menu li a:hover,
+.rssFeedSect .sub-menu .dropdown-toggle:hover {
+  color: var(--primary-color);
+}
+
+.rssFeedSect .dropdown-toggle::after {
+  content: '';
+  border: none;
+}
+
+.rssFeedSect .sub-menu .dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary-color);
+  font-weight: 700;
+  padding: 0px;
+}
+
+.rssFeedSect .sub-menu .dropdown-toggle svg {
+  margin-top: -2px;
+  margin-left: 2px;
+}
+
+.rssFeedSect .sub-menu .dropdown-menu.show {
+  padding: 0px !important;
+}
+
+.rssFeedSect .sub-menu .dropdown-menu.show .dropdown-item a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary-color);
+  padding: 0px;
+}
+
+[data-bs-theme="dark"] .rssFeedSect .subCatDropdown {
+  background-color: var(--secondary-color);
+  box-shadow: 0px 8px 14px hsl(240, 51.3%, 15.3%);
+}
+
+.rssFeedSect .catNav-links {
+  font-size: 14px;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {
@@ -8709,6 +8820,7 @@ span {
 
 @media screen and (max-width: 575px) {
 
+  .rssFeedSect,
   .recentNewsSect {
     margin-top: 30px;
   }
@@ -8718,13 +8830,29 @@ span {
   }
 }
 
+/* ========================================================= manageNewsCard css=========================================================  */
+
 .manage_news .manageNewsCard {
   display: flex;
   gap: 12px;
   flex-direction: column;
   background-color: #fff;
-  padding: 16px;
   border-radius: 16px;
+  padding: 16px 0px;
+}
+
+[data-bs-theme="dark"] .manage_news .manageNewsCard {
+  background-color: var(--secondary-color);
+}
+
+.manage_news .mainRow {
+  gap: 30px 0px;
+}
+
+.manage_news .manageNewsCard .upperDiv,
+.manage_news .manageNewsCard .midDiv,
+.manage_news .manageNewsCard .lowerDiv {
+  padding: 0px 16px;
 }
 
 .manage_news .manageNewsCard .upperDiv {
@@ -8747,8 +8875,9 @@ span {
 
 .manage_news .manageNewsCard .upperDiv .imgCateWrapper .cate {
   color: var(--text-primary-color);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
+  margin-bottom: 0;
 }
 
 .manage_news .manageNewsCard .upperDiv .imgCateWrapper .date {
@@ -8759,6 +8888,7 @@ span {
 .manage_news .manageNewsCard .upperDiv .imgCateWrapper div {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 
 .manage_news .manageNewsCard .midDiv {
@@ -8792,28 +8922,50 @@ span {
 .manage_news .manageNewsCard .midDiv .newsStatus {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 30px;
   border-top: 2px solid #1B2D511A;
-  padding-top: 6px;
+  padding-top: 10px;
 }
 
 .manage_news .manageNewsCard .midDiv .newsStatus span {
-  color: #ce0c0c;
+  color: #E42B2B;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
 }
 
-.manage_news .manageNewsCard .midDiv .newsStatus span svg {
+.manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg {
+  font-size: 20px;
+}
+
+.manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg,
+.manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg path,
+.manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg g {
+  fill: #E42B2B;
+}
+
+
+[data-bs-theme="dark"] .manage_news .manageNewsCard .midDiv .newsStatus span {
+  color: #F26573;
+}
+
+[data-bs-theme="dark"] .manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg,
+[data-bs-theme="dark"] .manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg path,
+[data-bs-theme="dark"] .manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg g {
+  fill: #F26573;
+}
+
+.manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
   margin-top: -4px;
 }
 
-
 .manage_news .manageNewsCard .lowerDiv {
-  border-top: 2px solid #1B2D511A;
   display: flex;
   align-items: center;
   justify-content: end;
-  padding-top: 16px;
 }
 
 .manage_news .manageNewsCard .lowerDiv .actionBtns {
@@ -8831,10 +8983,54 @@ span {
   color: var(--text-primary-color);
 }
 
-.manage_news .manageNewsCard .lowerDiv .actionBtns .edit{
+.manage_news .manageNewsCard .lowerDiv .actionBtns .edit {
   color: #fff;
 }
 
-.manage_news .manageNewsCard .lowerDiv .actionBtns .delete{
+[data-bs-theme="dark"] .manage_news .manageNewsCard .lowerDiv .actionBtns .edit {
+  background-color: #fff;
+  color: #122342
+}
+
+.manage_news .manageNewsCard .lowerDiv .actionBtns .delete {
   background: transparent;
+}
+
+.manage_news .manageNewsCard hr {
+  margin: 0px;
+  border-top: 2px solid #1B2D511A;
+  opacity: 1;
+}
+
+[data-bs-theme="dark"] .manage_news .manageNewsCard hr,
+[data-bs-theme="dark"] .manage_news .manageNewsCard .midDiv .newsStatus {
+  border-top: 2px solid#6c757d;
+}
+
+
+@media screen and (min-width: 1200px) and (max-width: 1399px) {
+  .manage_news .manageNewsCard .midDiv .newsStatus {
+    gap: 12px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .manage_news .manageNewsCard .midDiv .newsStatus {
+    gap: 12px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .manage_news .manageNewsCard .midDiv .newsStatus {
+    gap: 12px;
+  }
+
+  .manage_news .manageNewsCard .midDiv .newsStatus .statusIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .manage_news .manageNewsCard .midDiv .newsStatus span {
+    font-size: 18px;
+  }
 }

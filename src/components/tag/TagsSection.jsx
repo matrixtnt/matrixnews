@@ -52,7 +52,8 @@ const TagsSection = () => {
   // react query
   const { data: Data } = useQuery({
     queryKey: ['getTagSection', currentLanguage, offset],
-    queryFn: getTag
+    queryFn: getTag,
+    staleTime: 0,
   })
 
 

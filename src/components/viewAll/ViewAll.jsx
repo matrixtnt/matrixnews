@@ -20,7 +20,7 @@ import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn'
 
 const ViewAll = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const dataPerPage = 6 // number of posts per page
+  const dataPerPage = 3 // number of posts per page
   const router = useRouter()
   const query = router.query
   const catid = query.slug
@@ -74,7 +74,8 @@ const ViewAll = () => {
   // react query
   const { data: Data } = useQuery({
     queryKey: ['viewallFeaturebyslug', catid, currentLanguage, location, offset], // Include currentPage in the queryKey
-    queryFn: () => getFeatureSection()
+    queryFn: () => getFeatureSection(),
+    staleTime: 0
   })
 
   useEffect(() => {
@@ -94,6 +95,10 @@ const ViewAll = () => {
   useEffect(() => {
     // console.log(viewAllData, 'currr@@@')
   }, [viewAllData,])
+
+  useEffect(() => {
+    console.log(loadMore, 'cloadMore')
+  }, [loadMore,])
 
 
   const lengthdata = (Data && Data[0]?.news_total) || 0
@@ -150,18 +155,6 @@ const ViewAll = () => {
                 </div>
               )}
               {totalData > dataPerPage && totalData !== currentData?.length ? (
-                // <ReactPaginate
-                //   initialPage={currentPage}
-                //   previousLabel={translate('previous')}
-                //   nextLabel={translate('next')}
-                //   pageCount={Math.ceil(lengthdata / dataPerPage)}
-                //   onPageChange={handlePageChange}
-                //   containerClassName={'pagination'}
-                //   previousLinkClassName={'pagination__link'}
-                //   nextLinkClassName={'pagination__link'}
-                //   disabledClassName={'pagination__link--disabled'}
-                //   activeClassName={'pagination__link--active'}
-                // />
                 <LoadMoreBtn handleLoadMore={handleLoadMore} loadMoreLoading={isLoading.loadMoreLoading} />
               ) : null}
             </div>

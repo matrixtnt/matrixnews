@@ -71,7 +71,8 @@ const SubCategory = () => {
   // react query
   const { data: Data } = useQuery({
     queryKey: ['sub-category-news', catId, changelanguage, location, offset, query, subCatSlug],
-    queryFn: () => getNewsByCategoryApi()
+    queryFn: () => getNewsByCategoryApi(),
+    staleTime: 0
   })
 
   // slice the array to get the current posts
@@ -82,7 +83,7 @@ const SubCategory = () => {
   useEffect(() => {
     if (Data && Data.data) {
       loadMore ? setSubCategories((prevData) => [...prevData, ...Data.data]) :
-      setSubCategories(Data.data);
+        setSubCategories(Data.data);
     }
   }, [Data])
 
