@@ -16,7 +16,7 @@ const DefaultNewsStyle = ({ Data }) => {
                         <div className='row'>
                             <div id='rns-cards-main' className=''>
 
-                                <div className='row mt-5 mb-5'>
+                                <div className='row mt-5'>
                                     {Data && Data?.map((value, index) => {
                                         return (
                                             <div className='col-xxl-4 col-lg-4 col-md-6 col-12' key={value.id}>
