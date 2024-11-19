@@ -110,7 +110,12 @@ const AllBreakingNews = () => {
                         />
                         <div id='BNV-card-body' className='card-body'>
                           <h5 id='BNV-card-title' className='card-title'>
-                            {element.title.slice(0, 150)}...
+                            {
+                              element?.title.length > 120 ?
+                              element.title.slice(0, 150) + '...'  :
+                              element?.title
+                            }
+                            {/* {element.title.slice(0, 150)}... */}
                           </h5>
                         </div>
                       </div>
