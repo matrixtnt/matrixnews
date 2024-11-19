@@ -579,6 +579,19 @@ const EditNews = () => {
     }))
   }
 
+  useEffect(() => {
+    if (languagesData?.length < 2) {
+      setShowCategory(true)
+      setDefaultValue(prevValue => ({
+        ...prevValue,
+        languageId: getLocation?.default_language?.id,
+        languageName: getLocation?.default_language?.language,
+        categorydefault: null
+      }))
+      setShowsubCategory(false)
+    }
+  }, [languagesData])
+
   // remove image
   const handleRemoveImage = (e, id) => {
     e.preventDefault()
@@ -702,22 +715,28 @@ const EditNews = () => {
                       />
                     </div>
                     <div className='dropdown_form mb-2'>
-                      <Select
-                        style={{
-                          width: '100%'
-                        }}
-                        defaultValue={DefaultValue.languageName}
-                        placeholder={translate('chooseLanLbl')}
-                        onChange={values => languageSelector(values)}
-                        optionLabelProp='label'
-                      >
-                        {languagesData &&
-                          languagesData.map((elem, id) => (
-                            <Option value={JSON.stringify(elem)} key={id} label={elem.language}>
-                              <Space> {elem.language}</Space>
-                            </Option>
-                          ))}
-                      </Select>
+                      {
+                        languagesData?.length > 1 ?
+                          <Select
+                            style={{
+                              width: '100%'
+                            }}
+                            defaultValue={DefaultValue.languageName}
+                            placeholder={translate('chooseLanLbl')}
+                            onChange={values => languageSelector(values)}
+                            optionLabelProp='label'
+                          >
+                            {languagesData &&
+                              languagesData.map((elem, id) => (
+                                <Option value={JSON.stringify(elem)} key={id} label={elem.language}>
+                                  <Space> {elem.language}</Space>
+                                </Option>
+                              ))}
+                          </Select> :
+                          <div className='defaultLangWrapper'>
+                            <span>{getLocation?.default_language?.language}</span>
+                          </div>
+                      }
                     </div>
                     {showCategory ? (
                       <div className='dropdown_form mb-2'>

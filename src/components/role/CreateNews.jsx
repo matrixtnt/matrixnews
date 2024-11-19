@@ -114,8 +114,8 @@ const CreateNews = () => {
       setShowsubCategory(false)
     }
 
-    console.log("defualtLanguage",DefaultValue?.defualtLanguage)
-    console.log("name",getLocation?.default_language?.language,'code',getLocation?.default_language?.code,'id',getLocation?.default_language?.id)
+    // console.log("defualtLanguage",DefaultValue?.defualtLanguage)
+    // console.log("name",getLocation?.default_language?.language,'code',getLocation?.default_language?.code,'id',getLocation?.default_language?.id)
 
   }, [languagesData])
 
