@@ -103,7 +103,7 @@ const RssFeeds = () => {
                                     <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsFilter(false)}>
                                         {
                                             selectedCate &&
-                                            <li className='nav-item allFeed' onClick={() => handleSubSelect("", "", "", "")}>All</li>
+                                            <li className='nav-item allFeed' onClick={() => handleSubSelect("", "", "", "")}>{translate('allLbl')}</li>
                                         }
                                         {categories &&
                                             categories?.map((element, index) => (

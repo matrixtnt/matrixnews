@@ -74,7 +74,7 @@ const Footer = () => {
 
                     })
                   }
-                  <Link href={'/rss-feed'} title='rss-feed'>
+                  <Link href={{ pathname: `/rss-feed`, query: { language_id: currentLanguage?.id } }} title='rss-feed'>
                     <IoLogoRss className='rssIcon'/>
                   </Link>
                 </div>
