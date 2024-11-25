@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectUser, updateProfileData, updateProfileImage } from '../../store/reducers/userReducer'
+import { selectUser, updateProfileData, updateProfileImage, userNameSelector} from '../../store/reducers/userReducer'
 import { FaCamera } from 'react-icons/fa'
 import { placeholderImage, profileimgError, translate } from '../../utils'
 import BreadcrumbNav from '../breadcrumb/BreadcrumbNav'
@@ -19,11 +19,15 @@ const ProfileUpdate = () => {
   const [isMobileValid, setIsMobileValid] = useState(true) // State to track mobile number validity
   const [isEmailValid, setIsEmailValid] = useState(true) // State to track email address validity
 
+  const userName = useSelector(userNameSelector)
+
   const [profileData, setProfileData] = useState({
-    name: userData ? userData.data?.name : '',
+    name: userName ? userName : userData.data?.name ? userData.data?.name : '',
     mobile: userData ? userData.data?.mobile : '',
     email: userData ? userData.data?.email : ''
   })
+
+  // console.log('userName',userName)
 
   const handleChange = e => {
     const field_name = e.target.name
@@ -182,7 +186,7 @@ const ProfileUpdate = () => {
                     id='name'
                     placeholder='Enter Your Name'
                     className='profile_input'
-                    defaultValue={userData.data && userData.data.name}
+                    defaultValue={userName && userName? userName : userData.data && userData.data?.name}
                     onChange={e => handleChange(e)}
                     required
                   />

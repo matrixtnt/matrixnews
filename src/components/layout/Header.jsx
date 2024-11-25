@@ -131,6 +131,7 @@ const Header = () => {
                 window.recaptchaVerifier = null
                 setIsLogout(false)
                 navigate.push('/')
+                toast.success(translate('loginOutMsg'))
                 resolve() // Resolve the promise when signOut is successful
               })
               .catch(error => {
@@ -245,6 +246,7 @@ const Header = () => {
                           window.recaptchaVerifier = null
                           setIsLogout(false)
                           navigate.push('/')
+                          toast.success(translate('deletedAcc'))
                         })
                         .catch(error => {
                           toast.error(error.message || 'An error occurred while signing out.')

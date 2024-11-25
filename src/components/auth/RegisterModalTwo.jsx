@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux'
 import { settingsData } from '../../store/reducers/settingsReducer'
 import toast from 'react-hot-toast'
 import { themeSelector } from 'src/store/reducers/CheckThemeReducer'
+import { updateUserNameData } from 'src/store/reducers/userReducer'
 
 const RagisterModalTwo = props => {
   const initialValues = {
@@ -46,7 +47,7 @@ const RagisterModalTwo = props => {
     const { name, value } = e.target
 
     setFormValues({ ...formValues, [name]: value })
-  }
+  }  
 
   const navigate = useRouter()
 
@@ -69,6 +70,7 @@ const RagisterModalTwo = props => {
 
         // Display success message
         toast.success('Email sent! Please check Email')
+        updateUserNameData({data: formValues.username})
         props.onHide()
         props.setLoginModalShow(true)
 

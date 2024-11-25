@@ -9,7 +9,8 @@ const initialState = {
     data: null,
     isLogin: false,
     mobileLoginType: false,
-    userManageData: null
+    userManageData: null,
+    userName: ''
 };
 
 // slice
@@ -37,6 +38,10 @@ export const userSlice = createSlice({
             user.data.mobile = data.mobile
             user.data.email = data.email
         },
+        updateUserName: (state, action) => {
+            const { data } = action.payload.data
+            state.userName = data;
+        },
         mobileTypeSuccess: (user, action) => {
             user.mobileLoginType = action.payload.data
         },
@@ -50,7 +55,7 @@ export const userSlice = createSlice({
 
 });
 
-export const { loginSuccess, logoutSuccess, imageUploadSuccess, profileUpdateDataSuccess, mobileTypeSuccess, userManageDataSuccess } = userSlice.actions;
+export const { loginSuccess, logoutSuccess, imageUploadSuccess, profileUpdateDataSuccess, mobileTypeSuccess, userManageDataSuccess, updateUserName } = userSlice.actions;
 export default userSlice.reducer;
 
 // api calls
@@ -138,6 +143,10 @@ export const loadMobileType = (data) => {
     store.dispatch(mobileTypeSuccess({ data }))
 }
 
+export const updateUserNameData = (data) => {
+    store.dispatch(updateUserName({ data }))
+}
+
 // //  loadUserManageData
 export const loadUserManageData = (data) => {
     store.dispatch(userManageDataSuccess({ data }))
@@ -154,3 +163,5 @@ export const logoutUser = () => {
 export const selectUser = (state) => state.user;
 
 export const getUserManageData = (state) => selectUser(state).userManageData;
+
+export const userNameSelector = (state) => selectUser(state).userName;

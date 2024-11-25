@@ -18,6 +18,8 @@
   "forgotPassLbl": "Forgot Password ?",
   "internetmsg": "Internet Connection not available",
   "loginMsg": "Login Successfully",
+  "loginOutMsg": "Logout Successfully",
+  "deletedAcc" : "Deleted Account Successfully",
   "loginNowLbl": "Login Now",
   "logoutLbl": "Log Out",
   "cancelBtn": "Cancel",
