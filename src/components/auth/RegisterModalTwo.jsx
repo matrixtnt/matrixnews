@@ -153,10 +153,7 @@ const RagisterModalTwo = props => {
       errors.password = 'Password is required!'
     } else if (values.password.length < 6) {
       errors.password = 'Password must be more then 6 characters'
-    } else if (values.password.length > 12) {
-      errors.password = 'Password cannot exceed then 12 characters'
-    }
-    if (!values.confirmpassword) {
+    } else if (!values.confirmpassword) {
       errors.confirmPassword = ' Confirm Password is required!'
     } else if (values.confirmpassword === '' || values.confirmpassword !== values.password) {
       errors.confirmPassword = 'Password is not Matched!'

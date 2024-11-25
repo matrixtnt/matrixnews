@@ -77,8 +77,6 @@ const SignInModal = props => {
       errors.password = 'Password is required!'
     } else if (values.password.length < 6) {
       errors.password = 'Password must be more than 6 characters'
-    } else if (values.password.length > 12) {
-      errors.password = 'Password cannot exceed than 12 characters'
     }
     return errors
   }
