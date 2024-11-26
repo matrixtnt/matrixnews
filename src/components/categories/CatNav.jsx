@@ -152,8 +152,6 @@ const CatNav = () => {
     }
   }
 
-  console.log(categoiresOnOff.subcategory_mode)
-
   return (
     <>
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
@@ -298,7 +296,7 @@ const CatNav = () => {
                         {
                           isMenuOpen &&
                           <ul className='sub-menu mobile_catogories' 
-                          // onMouseLeave={() => setIsMenuOpen(false)}  
+                          onMouseLeave={() => setIsMenuOpen(false)}  
                           >
                             {categories &&
                               categories?.slice(10, categories?.length)?.map((element, index) => (

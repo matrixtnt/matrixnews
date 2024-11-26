@@ -13,6 +13,7 @@ import { Select } from 'antd/lib';
 import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn';
 import { Dropdown } from 'react-bootstrap'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { settingsData } from 'src/store/reducers/settingsReducer';
 
 const RecentNews = dynamic(() => import('./RecentNews'), { ssr: false })
 
@@ -21,6 +22,8 @@ const RssFeeds = () => {
     const currentLanguage = useSelector(selectCurrentLanguage)
 
     const categories = useSelector(categoriesCacheData)
+
+    const settings = useSelector(settingsData)
 
     const dataPerPage = 20;
 
@@ -90,64 +93,69 @@ const RssFeeds = () => {
         <Layout>
             <section className='rssFeedSect'>
                 <div className='row container mainRow'>
-                    <div className="col-12 filterDiv mb-2">
-                        <div className='d-flex align-items-center gap-2 flex-wrap'>
-                            <h1>{translate('filerBy')} : </h1>
-                            <div className='feedFilterWrapper'>
-                                <div className='d-flex justify-content-between align-items-center px-1 filterSelect' onClick={() => setIsFilter(true)}>
-                                    <h2>{selectedCate ? selectedCate : translate('selCatLbl')} </h2>
-                                    <span>{isFilter ? <FaAngleUp /> : <FaAngleDown />} </span>
+                    {
+                        settings?.category_mode === '1' &&
+                        <div className="col-12 filterDiv mb-2">
+                            <div className='d-flex align-items-center gap-2 flex-wrap'>
+                                <h1>{translate('filerBy')} : </h1>
+                                <div className='feedFilterWrapper'>
+
+                                    <div className='d-flex justify-content-between align-items-center px-1 filterSelect' onClick={() => setIsFilter(true)}>
+                                        <h2>{selectedCate ? selectedCate : translate('selCatLbl')} </h2>
+                                        <span>{isFilter ? <FaAngleUp /> : <FaAngleDown />} </span>
+                                    </div>
+                                    {
+                                        isFilter &&
+                                        <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsFilter(false)}>
+                                            {
+                                                selectedCate &&
+                                                <li className='nav-item allFeed' onClick={() => handleSubSelect("", "", "", "")}>{translate('allLbl')}</li>
+                                            }
+                                            {categories &&
+                                                categories?.map((element, index) => (
+                                                    <li className='nav-item' key={index}>
+                                                        {
+                                                            element?.sub_categories?.length > 0 && settings?.subcategory_mode === '1'?
+                                                                <Dropdown className='subCatdrop'>
+                                                                    <Dropdown.Toggle className=''>
+                                                                        {element.category_name} <FaAngleDown />
+                                                                    </Dropdown.Toggle>
+
+                                                                    <Dropdown.Menu >
+                                                                        {
+                                                                            element.sub_categories.map((data, index) => {
+                                                                                return (
+                                                                                    <Dropdown.Item
+                                                                                        key={index}
+                                                                                    >
+                                                                                        <span onClick={() => handleSubSelect(element?.slug, data?.slug, element?.category_name, data?.subcategory_name)}>
+                                                                                            {data.subcategory_name}
+                                                                                        </span>
+                                                                                    </Dropdown.Item>
+                                                                                )
+                                                                            })}
+                                                                    </Dropdown.Menu>
+                                                                </Dropdown> :
+                                                                <span
+                                                                    className='catNav-links'
+                                                                    onClick={() => handleSubSelect(element?.slug, '', element?.category_name, '')}
+                                                                >
+                                                                    {' '}
+                                                                    {element.category_name}{' '}
+                                                                </span>
+                                                        }
+
+                                                    </li>
+                                                ))}
+                                        </ul>
+                                    }
                                 </div>
-                                {
-                                    isFilter &&
-                                    <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsFilter(false)}>
-                                        {
-                                            selectedCate &&
-                                            <li className='nav-item allFeed' onClick={() => handleSubSelect("", "", "", "")}>{translate('allLbl')}</li>
-                                        }
-                                        {categories &&
-                                            categories?.map((element, index) => (
-                                                <li className='nav-item' key={index}>
-                                                    {
-                                                        element?.sub_categories?.length > 0 ?
-                                                            <Dropdown className='subCatdrop'>
-                                                                <Dropdown.Toggle className=''>
-                                                                    {element.category_name} <FaAngleDown />
-                                                                </Dropdown.Toggle>
 
-                                                                <Dropdown.Menu >
-                                                                    {
-                                                                        element.sub_categories.map((data, index) => {
-                                                                            return (
-                                                                                <Dropdown.Item
-                                                                                    key={index}
-                                                                                >
-                                                                                    <span onClick={() => handleSubSelect(element?.slug, data?.slug, element?.category_name, data?.subcategory_name)}>
-                                                                                        {data.subcategory_name}
-                                                                                    </span>
-                                                                                </Dropdown.Item>
-                                                                            )
-                                                                        })}
-                                                                </Dropdown.Menu>
-                                                            </Dropdown> :
-                                                            <span
-                                                                className='catNav-links'
-                                                                onClick={() => handleSubSelect(element?.slug, '', element?.category_name, '')}
-                                                            >
-                                                                {' '}
-                                                                {element.category_name}{' '}
-                                                            </span>
-                                                    }
 
-                                                </li>
-                                            ))}
-                                    </ul>
-                                }
                             </div>
-
-
                         </div>
-                    </div>
+                    }
+
                     <div className="col-lg-8">
                         <div className="row rssFeedsRow">
                             {
@@ -158,7 +166,7 @@ const RssFeeds = () => {
                                     </div>
                                 </div> :
                                     data && data ? data?.map((item) => {
-                                        return <div className="col-12 col-sm-6 col-md-4 col-xxl-3">
+                                        return <div className="col-12 col-sm-6 col-md-4 col-xxl-3" key={item?.feed_name}>
                                             <Link href={item?.feed_url} title={item?.feed_name} target='_blank' className='rssFeedBox'>
                                                 <span><IoLogoRss /></span>
                                                 <h2>{truncateText(item?.feed_name, 14)}</h2>
