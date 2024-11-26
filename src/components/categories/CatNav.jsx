@@ -152,6 +152,8 @@ const CatNav = () => {
     }
   }
 
+  console.log(categoiresOnOff.subcategory_mode)
+
   return (
     <>
       {categoiresOnOff && categoiresOnOff.category_mode === '1' ? (
@@ -173,7 +175,7 @@ const CatNav = () => {
                           <div>
 
                             {
-                              element?.sub_categories?.length > 0 && categoiresOnOff && categoiresOnOff.subcategory_mode === '1' ?
+                              element?.sub_categories?.length > 0 && categoiresOnOff && categoiresOnOff.subcategory_mode == '1' ?
                                 <span
                                   className={`catNav-links  ${subCatDrop && currentCategory && currentCategory.id === element.id ? 'activeSubDrop' : ''}`}
                                   onClick={() => handleSubCatDropdown(element)}
@@ -302,7 +304,7 @@ const CatNav = () => {
                               categories?.slice(10, categories?.length)?.map((element, index) => (
                                 <li className='nav-item' key={index}>
                                   {
-                                    element?.sub_categories?.length > 0 ?
+                                    element?.sub_categories?.length > 0 && categoiresOnOff && categoiresOnOff.subcategory_mode === '1' ?
                                       <Dropdown className='subCatdrop'>
                                         <Dropdown.Toggle className=''>
                                           {element.category_name}<FaAngleDown />
