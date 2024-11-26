@@ -267,7 +267,7 @@ const MobilesideBar = ({
                     categories.map((element, index) => (
                       <li className='nav-item' key={index}>
                         {
-                          element?.sub_categories?.length > 0 ?
+                          element?.sub_categories?.length > 0 && settingsOnOff && settingsOnOff.subcategory_mode === '1'?
                             <Dropdown className='subCatdrop'>
                               <Dropdown.Toggle className=''>
                                 {element.category_name}<FaAngleDown />
