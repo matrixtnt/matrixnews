@@ -6774,6 +6774,14 @@ span {
   background-color: #fff;
 }
 
+/* .create_news .imgWrapper{
+  height: 200px !important;
+} */
+
+.create_news .imgWrapper img{
+  object-fit: contain !important;
+}
+
 .create_news .main_image label {
   color: #000;
 }

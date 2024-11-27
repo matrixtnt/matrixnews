@@ -127,6 +127,14 @@ const WeatherCard = () => {
     }
   }, [currentLanguage?.code])
 
+  useEffect(() => {
+    if (languagesData?.length < 2) {
+      loadLanguageLabels({ code: getLocation?.default_language?.code })
+      setCurrentLanguage(getLocation?.default_language?.language, getLocation?.default_language?.code, getLocation?.default_language?.id, getLocation?.default_language?.display_name)
+    }
+  }, [getLocation])
+
+
   const registerToken = (tokenId) => {
     if (tokenId) {
       registerFcmTokenApi({

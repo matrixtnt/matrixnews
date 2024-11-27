@@ -38,7 +38,6 @@ SwiperCore.use([Navigation, Pagination])
 
 const EditNews = () => {
   const [showCategory, setShowCategory] = useState(false)
-  const [mainImage, setMainImage] = useState(null)
   const [showUrl, setShowURl] = useState(false)
   const [videoUrl, setVideoUrl] = useState(false)
   const [images, setImages] = useState([])
@@ -84,6 +83,8 @@ const EditNews = () => {
     defualtLocationId: manageNews?.location_id,
     defualtLocation: manageNews?.location?.location_name
   })
+
+  const [mainImage, setMainImage] = useState(DefaultValue?.imagedefault)
 
   const handleDate = date => {
     setDefaultValue({ ...DefaultValue, dateValue: date })
@@ -929,30 +930,10 @@ const EditNews = () => {
                       <label htmlFor='file'>
                         {' '}
                         <em>
-                          {DefaultValue.imagedefault ? null : <AiFillPicture />}{' '}
-                          {DefaultValue.imagedefault ? null : translate('uploadMainImageLbl')}
+                          { <AiFillPicture />}{' '}
+                          {translate('uploadMainImageLbl')}
                         </em>
                       </label>
-                      {mainImage && (
-                        <div className='mainimage'>
-                          <img
-                            src={mainImage && mainImage}
-                            onClick={() => document.getElementById('file').click()}
-                            alt='edit news'
-                          />
-                        </div>
-                      )}
-
-                      {DefaultValue.imagedefault && (
-                        <div className='mainimage'>
-                          <img
-                            src={DefaultValue.imagedefault}
-                            onClick={() => document.getElementById('file').click()}
-                            alt='edit news'
-                            onError={placeholderImage}
-                          />
-                        </div>
-                      )}
                       <input
                         type='text'
                         className='form-control'
@@ -963,6 +944,19 @@ const EditNews = () => {
                         hidden
                       />
                     </div>
+                    {
+                      mainImage &&
+                      <div className='image_slider'>
+                        <div className='otherImgDiv'>
+                          <span onClick={() => setMainImage(null)}><IoIosCloseCircle /> </span>
+                          <img
+                            src={mainImage}
+                            alt='edit news'
+                            onError={placeholderImage}
+                          />
+                        </div>
+                      </div>
+                    }
                     <div className='other_image mb-2'>
                       <Dropzone onDrop={handleDrop} multiple={true}>
                         {({ getRootProps, getInputProps }) => (
@@ -1028,11 +1022,9 @@ const EditNews = () => {
         <VideoPlayerModal
           show={modalShow}
           onHide={() => setModalShow(false)}
-          // backdrop="static"
           keyboard={false}
           url={Video_url}
           type_url={manageNews?.content_type}
-        // title={Data[0].title}
         />
       </div>
     </Layout>

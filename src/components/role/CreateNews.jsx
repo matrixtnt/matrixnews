@@ -843,6 +843,7 @@ const CreateNews = () => {
                       />
                       <SlCalender className='form-calender' />
                     </div>
+                    
                     <div className='main_image mb-2'>
                       <input
                         type='file'
@@ -856,15 +857,11 @@ const CreateNews = () => {
                       <label htmlFor='file'>
                         {' '}
                         <em>
-                          {DefaultValue.defaultImageData ? null : <AiFillPicture />}{' '}
-                          {DefaultValue.defaultImageData ? null : translate('uploadMainImageLbl')}
+                          {<AiFillPicture />}{' '}
+                          {translate('uploadMainImageLbl')}
                         </em>
                       </label>
-                      {DefaultValue.defaultImageData && (
-                        <div className='mainimage'>
-                          <img src={DefaultValue.defaultImageData} alt='mainimage' onError={placeholderImage} />
-                        </div>
-                      )}
+                     
                       <input
                         type='text'
                         className='form-control'
@@ -876,6 +873,16 @@ const CreateNews = () => {
                         hidden
                       />
                     </div>
+                    {
+                      DefaultValue?.defaultImageData &&
+                      <div className='image_slider'>
+                        <div className='otherImgDiv'>
+                          <span onClick={() => setDefualtValue({ ...DefaultValue, defaultImageData: null })}><IoIosCloseCircle /> </span>
+                          <img src={DefaultValue.defaultImageData} alt='mainimage' onError={placeholderImage} />
+                        </div>
+                      </div>
+                    }
+
                     <div className='other_image mb-2'>
                       <Dropzone onDrop={handleDrop} multiple={true}>
                         {({ getRootProps, getInputProps }) => (

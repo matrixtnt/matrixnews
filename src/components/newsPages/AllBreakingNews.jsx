@@ -31,6 +31,7 @@ const AllBreakingNews = () => {
   const [breakingNewsData, setBreakingNewsData] = useState([])
   const [offset, setOffset] = useState(0)
   const [totalData, setTotalData] = useState('')
+  const [Data, setData] = useState([])
 
   const handleLoadMore = () => {
     setLoadMore(true)
@@ -50,6 +51,7 @@ const AllBreakingNews = () => {
       setTotalData(data.total)
       setIsLoading({ loading: false })
       setIsLoading({ loadMoreLoading: false })
+      setData(data?.data)
       return data.data
     } catch (error) {
       console.log(error)
@@ -59,11 +61,18 @@ const AllBreakingNews = () => {
   }
 
   // react query
-  const { data: Data } = useQuery({
-    queryKey: ['all-breaking-news', language_id, currentlanguage, offset],
-    queryFn: getBreakingNewsApi,
-    staleTime: 0
-  })
+  // const { data: Data } = useQuery({
+  //   queryKey: ['all-breaking-news', language_id, currentlanguage, offset],
+  //   queryFn: getBreakingNewsApi,
+  //   staleTime: 0
+  // })
+  
+  useEffect(() => {
+    if(language_id){
+      getBreakingNewsApi()
+    }
+  }, [language_id, currentlanguage, offset])
+  
 
 
 
