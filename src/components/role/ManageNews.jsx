@@ -192,22 +192,25 @@ const ManageNews = () => {
                               <h3 className='content title'> {translate('contentTypeLbl')} :</h3>
                               <h4 className='content desc'>{typeReturn(element.content_type)}</h4>
                             </div>
-                            <div className='newsStatus'>
-                              {
-                                element?.is_expired === 1 &&
-                                <div className='d-flex align-items-center gap-2'>
-                                  <span className='statusIcon'>{expireIcon}</span>
-                                  <span>{translate('expireNews')}</span>
-                                </div>
-                              }
-                              {
-                                element?.status === 0 &&
-                                <div className='d-flex align-items-center gap-2'>
-                                  <span className='statusIcon'>{deactivateIcon}</span>
-                                  <span>{translate('deactiveNews')}</span>
-                                </div>
-                              }
-                            </div>
+                            {
+                              element?.is_expired === 1 || element?.status === 0 &&
+                              <div className='newsStatus'>
+                                {
+                                  element?.is_expired === 1 &&
+                                  <div className='d-flex align-items-center gap-2'>
+                                    <span className='statusIcon'>{expireIcon}</span>
+                                    <span>{translate('expireNews')}</span>
+                                  </div>
+                                }
+                                {
+                                  element?.status === 0 &&
+                                  <div className='d-flex align-items-center gap-2'>
+                                    <span className='statusIcon'>{deactivateIcon}</span>
+                                    <span>{translate('deactiveNews')}</span>
+                                  </div>
+                                }
+                              </div>
+                            }
                           </div>
                           <hr />
                           <div className='lowerDiv'>

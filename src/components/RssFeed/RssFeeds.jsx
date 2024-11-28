@@ -40,8 +40,10 @@ const RssFeeds = () => {
     const [totalData, setTotalData] = useState('')
 
     const [isFilter, setIsFilter] = useState(false)
+    const [isSubCateFilter, setIsSubCateFilter] = useState(false)
 
     const [selectedCate, setSelectedCate] = useState('')
+    const [selectedSubCate, setSelectedSubCate] = useState('')
 
     const handleLoadMore = () => {
         setLoadMore(true)
@@ -62,6 +64,7 @@ const RssFeeds = () => {
             }
             setTotalData(data.total)
             setIsFilter(false)
+            setIsSubCateFilter(false)
             setIsLoading({ loading: false })
             setIsLoading({ loadMoreLoading: false })
             return data.data
@@ -80,7 +83,8 @@ const RssFeeds = () => {
 
     const handleSubSelect = (cateSlug, subCateSlug, cateName, subCateName) => {
         getRssFeeds(cateSlug, subCateSlug)
-        setSelectedCate(subCateName ? subCateName : cateName)
+        setSelectedCate(cateName)
+        setSelectedSubCate(subCateName)
         // console.log("cateSlug", cateSlug)
         // console.log("subCateSlug", subCateSlug ? subCateSlug : '')
     };
@@ -89,8 +93,6 @@ const RssFeeds = () => {
     }, [selectedCate])
 
     const selectedCateSubCate = selectedCate && categories.find(cate => cate.category_name === selectedCate)
-
-    console.log(selectedCateSubCate)
 
     return (
         <Layout>
@@ -116,40 +118,6 @@ const RssFeeds = () => {
                                             }
                                             {categories &&
                                                 categories?.map((element, index) => (
-                                                    // <li className='nav-item' key={index}>
-                                                    //     {
-                                                    //         element?.sub_categories?.length > 0 && settings?.subcategory_mode === '1'?
-                                                    //             <Dropdown className='subCatdrop'>
-                                                    //                 <Dropdown.Toggle className=''>
-                                                    //                     {element.category_name} <FaAngleDown />
-                                                    //                 </Dropdown.Toggle>
-
-                                                    //                 <Dropdown.Menu >
-                                                    //                     {
-                                                    //                         element.sub_categories.map((data, index) => {
-                                                    //                             return (
-                                                    //                                 <Dropdown.Item
-                                                    //                                     key={index}
-                                                    //                                 >
-                                                    //                                     <span onClick={() => handleSubSelect(element?.slug, data?.slug, element?.category_name, data?.subcategory_name)}>
-                                                    //                                         {data.subcategory_name}
-                                                    //                                     </span>
-                                                    //                                 </Dropdown.Item>
-                                                    //                             )
-                                                    //                         })}
-                                                    //                 </Dropdown.Menu>
-                                                    //             </Dropdown>
-                                                    //              :
-                                                    //             <span
-                                                    //                 className='catNav-links'
-                                                    //                 onClick={() => handleSubSelect(element?.slug, '', element?.category_name, '')}
-                                                    //             >
-                                                    //                 {' '}
-                                                    //                 {element.category_name}{' '}
-                                                    //             </span>
-                                                    //     }
-
-                                                    // </li>
                                                     <li className='nav-item' key={index}>
                                                         <span
                                                             className='catNav-links'
@@ -165,35 +133,35 @@ const RssFeeds = () => {
                                     }
                                 </div>
 
-                                <div className='feedFilterWrapper'>
+                                {
+                                    selectedCate && settings?.subcategory_mode === '1' && selectedCateSubCate?.sub_categories.length > 0 &&
+                                    <div className='feedFilterWrapper'>
+                                        <div className='d-flex justify-content-between align-items-center px-1 filterSelect' onClick={() => setIsSubCateFilter(true)}>
+                                            <h2>{selectedSubCate ? selectedSubCate : translate('selSubCatLbl')} </h2>
+                                            <span>{isSubCateFilter ? <FaAngleUp /> : <FaAngleDown />} </span>
+                                        </div>
+                                        {
+                                            isSubCateFilter &&
+                                            <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsSubCateFilter(false)}>
 
-                                    <div className='d-flex justify-content-between align-items-center px-1 filterSelect' onClick={() => setIsFilter(true)}>
-                                        <h2>{selectedCate ? selectedCate : translate('selCatLbl')} </h2>
-                                        <span>{isFilter ? <FaAngleUp /> : <FaAngleDown />} </span>
+                                                {
+                                                    selectedCateSubCate?.sub_categories?.map((element, index) => (
+                                                        <li className='nav-item' key={index}>
+                                                            <span
+                                                                className='catNav-links'
+                                                                onClick={() => handleSubSelect(selectedCateSubCate?.slug, element?.slug, selectedCateSubCate?.category_name, element?.subcategory_name)}
+                                                            >
+                                                                {' '}
+                                                                {element?.subcategory_name}{' '}
+                                                            </span>
+
+                                                        </li>
+
+                                                    ))}
+                                            </ul>
+                                        }
                                     </div>
-                                    {
-                                        isFilter &&
-                                        <ul className='sub-menu mobile_catogories' onMouseLeave={() => setIsFilter(false)}>
-
-                                            {selectedCate &&
-                                                selectedCateSubCate?.sub_categories?.map((element, index) => (
-                                                    <li className='nav-item' key={index}>
-                                                        <span
-                                                            className='catNav-links'
-                                                            onClick={() => handleSubSelect(selectedCateSubCate?.slug, item?.slug, element?.category_name, element?.subcategory_name)}
-                                                        >
-                                                            {' '}
-                                                            {element?.subcategory_name}{' '}
-                                                        </span>
-
-                                                    </li>
-
-                                                ))}
-                                        </ul>
-                                    }
-                                </div>
-
-
+                                }
                             </div>
                         </div>
                     }
