@@ -8827,6 +8827,16 @@ span {
   font-size: 14px;
 }
 
+
+[data-bs-theme="dark"] .rssFeedSect .feedFilterWrapper ,
+[data-bs-theme="dark"] .rssFeedSect .rssFeedBox ,
+[data-bs-theme="dark"] .recentNewsSect #RNews-main ,
+[data-bs-theme="dark"] .recentNewsSect #RNews-cat-nav ,
+[data-bs-theme="dark"] .recentNewsSect #RNews-card {
+  border-color: #6c757d;
+  
+}
+
 @media screen and (min-width: 992px) and (max-width: 1199px) {
   .recentNewsSect #RNews-card {
     margin: 10px;
