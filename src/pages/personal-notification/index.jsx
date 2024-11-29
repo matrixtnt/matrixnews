@@ -15,7 +15,6 @@ const fetchDataFromSeo = async () => {
       `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_END_POINT}/${GET_WEB_SEO_PAGES}?type=personal_notifications`
     )
     const data = response.data
-    console.log('perSonal',data)
     return data
   } catch (error) {
     console.error('Error fetching data:', error)
