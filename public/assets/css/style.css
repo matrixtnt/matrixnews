@@ -1632,6 +1632,7 @@ a {
   background-color: var(--secondary-color);
   border: 1px solid #113476;
 }
+
 /* 
 .defaultStyleSect #rns-card {
   height: 342px;
@@ -1702,7 +1703,7 @@ a {
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
-  #rns-card{
+  #rns-card {
     height: auto;
   }
 }
@@ -3568,6 +3569,21 @@ a#social_platforms svg:hover {
   color: var(--text-primary-color);
   font-weight: 600;
   text-align: start;
+}
+
+.card-description {
+  font-size: 16px;
+  line-height: 1.2;
+  margin-top: 2%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  color: var(--text-primary-color);
+  font-weight: 600;
+  text-align: start;
+
 }
 
 #btncvRead {
@@ -6778,7 +6794,7 @@ span {
   height: 200px !important;
 } */
 
-.create_news .imgWrapper img{
+.create_news .imgWrapper img {
   object-fit: contain !important;
 }
 
@@ -8237,6 +8253,10 @@ span {
   padding: 0px 12px;
 }
 
+.rssFeedCard p {
+  padding: 0px 12px;
+}
+
 .commonRowGap {
   gap: 30px 0px;
 }
@@ -8828,13 +8848,13 @@ span {
 }
 
 
-[data-bs-theme="dark"] .rssFeedSect .feedFilterWrapper ,
-[data-bs-theme="dark"] .rssFeedSect .rssFeedBox ,
-[data-bs-theme="dark"] .recentNewsSect #RNews-main ,
-[data-bs-theme="dark"] .recentNewsSect #RNews-cat-nav ,
+[data-bs-theme="dark"] .rssFeedSect .feedFilterWrapper,
+[data-bs-theme="dark"] .rssFeedSect .rssFeedBox,
+[data-bs-theme="dark"] .recentNewsSect #RNews-main,
+[data-bs-theme="dark"] .recentNewsSect #RNews-cat-nav,
 [data-bs-theme="dark"] .recentNewsSect #RNews-card {
   border-color: #6c757d;
-  
+
 }
 
 @media screen and (min-width: 992px) and (max-width: 1199px) {

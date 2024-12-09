@@ -1,5 +1,5 @@
 import Api from 'src/api/AxiosInterceptors'
-import { GET_RSS_FEED } from 'src/utils/api'
+import { GET_RSS_FEED, GET_RSS_FEED_BY_ID } from 'src/utils/api'
 
 export const getRssFeedApi = {
     getRssFeed: requestData => {
@@ -15,6 +15,12 @@ export const getRssFeedApi = {
             tag_id,
             tag_slug,
             search
+        })
+    },
+    getRssFeedDetail: requestData => {
+        const { feed_id } = requestData;
+        return Api.post(GET_RSS_FEED_BY_ID, {
+            id: feed_id
         })
     }
 }

@@ -14,11 +14,15 @@ import LoadMoreBtn from '../view/loadMoreBtn/LoadMoreBtn';
 import { Dropdown } from 'react-bootstrap'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { settingsData } from 'src/store/reducers/settingsReducer';
+import { useRouter } from 'next/router';
+import { setSelectedFeed } from 'src/store/reducers/RssFeedReducer';
+import { useDispatch } from 'react-redux';
 
 const RecentNews = dynamic(() => import('./RecentNews'), { ssr: false })
 
 const RssFeeds = () => {
-
+    const router = useRouter();
+    const dispatch = useDispatch()
     const currentLanguage = useSelector(selectCurrentLanguage)
 
     const categories = useSelector(categoriesCacheData)
@@ -91,6 +95,12 @@ const RssFeeds = () => {
 
     useEffect(() => {
     }, [selectedCate])
+
+    const handleFeedSelection = (item) => {
+        dispatch(setSelectedFeed({ data: item }))
+        const trimmedName = item.feed_name.replace(/ +/g, "")
+        router.push(`/rss-feed/${item.id}`)
+    }
 
     const selectedCateSubCate = selectedCate && categories.find(cate => cate.category_name === selectedCate)
 
@@ -175,12 +185,13 @@ const RssFeeds = () => {
                                         <Skeleton height={20} width={115} />
                                     </div>
                                 </div> :
+                                    // TODO:
                                     data && data ? data?.map((item) => {
                                         return <div className="col-12 col-sm-6 col-md-4 col-xxl-3" key={item?.feed_name}>
-                                            <Link href={item?.feed_url} title={item?.feed_name} target='_blank' className='rssFeedBox'>
+                                            <div onClick={() => handleFeedSelection(item)} target='_blank' className='rssFeedBox'>
                                                 <span><IoLogoRss /></span>
                                                 <h2>{truncateText(item?.feed_name, 14)}</h2>
-                                            </Link>
+                                            </div>
                                         </div>
                                     }) :
                                         <NoDataFound />
@@ -199,7 +210,7 @@ const RssFeeds = () => {
                     </div>
                 </div>
             </section>
-        </Layout>
+        </Layout >
     )
 }
 

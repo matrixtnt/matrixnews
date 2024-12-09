@@ -55,6 +55,7 @@ export const GET_QUESTION = 'get_question'
 export const GET_QUESTION_RESULT = 'get_question_result'
 export const SET_QUESTION_RESULT = 'set_question_result'
 export const GET_RSS_FEED = 'get_rss_feed'
+export const GET_RSS_FEED_BY_ID = 'get_rss_feed_by_id'
 
 //get language from storage
 export const getLanguage = () => {

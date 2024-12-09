@@ -17,6 +17,7 @@ import MorePagesReducers from './reducers/MorePagesReducers';
 import CheckNewsDataReducer from './reducers/CheckNewsDataReducer';
 import CheckPermissionsReducer from './reducers/CheckPermissionsReducer';
 import CheckThemeReducer from './reducers/CheckThemeReducer';
+import RssFeedReducer from "./reducers/RssFeedReducer"
 
 const persistConfig = {
     key: 'root',
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
     checkNewsData: CheckNewsDataReducer,
     checkPermission: CheckPermissionsReducer,
     checkTheme: CheckThemeReducer,
+    rssfeed: RssFeedReducer
 });
 
 export const store = configureStore({
