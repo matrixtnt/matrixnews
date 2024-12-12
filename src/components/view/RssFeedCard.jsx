@@ -10,6 +10,7 @@ const FeedCard = ({ element, subDropCard, tagCard }) => {
             href={{ pathname: element.link }}
             // as={`/news/${element.slug}`}
             title='detail-page'
+            target='_blank'
         >
             <div id='cv-card' className='card rssFeedCard'>
                 {/* <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} /> */}
