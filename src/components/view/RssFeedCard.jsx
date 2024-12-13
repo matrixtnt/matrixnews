@@ -13,7 +13,8 @@ const FeedCard = ({ element, subDropCard, tagCard }) => {
             target='_blank'
         >
             <div id='cv-card' className='card rssFeedCard'>
-                {/* <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} /> */}
+                {element.image && <img id='cv-card-image' src={element.image} className='card-img' alt={element.title} onError={placeholderImage} />}
+
                 <div id='cv-card-body' className='card-body'>
                     <p id='cv-card-title' className='card-title'>
                         {element.title}

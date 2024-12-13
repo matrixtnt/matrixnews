@@ -3539,8 +3539,9 @@ a#social_platforms svg:hover {
 
 #cv-card-image {
   width: 100%;
+  padding: 10px;
   aspect-ratio: 1/1;
-  object-fit: cover;
+  object-fit: contain;
   position: relative;
 }
 
@@ -3581,7 +3582,7 @@ a#social_platforms svg:hover {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   color: var(--text-primary-color);
-  font-weight: 600;
+  font-weight: 400;
   text-align: start;
 
 }
@@ -8251,6 +8252,12 @@ span {
 
 .commonNewsCard p {
   padding: 0px 12px;
+}
+
+.rssFeedCard {
+  display: flex !important;
+  flex-direction: row;
+  align-items: start;
 }
 
 .rssFeedCard p {

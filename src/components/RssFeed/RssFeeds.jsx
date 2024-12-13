@@ -185,7 +185,6 @@ const RssFeeds = () => {
                                         <Skeleton height={20} width={115} />
                                     </div>
                                 </div> :
-                                    // TODO:
                                     data && data ? data?.map((item) => {
                                         return <div className="col-12 col-sm-6 col-md-4 col-xxl-3" key={item?.feed_name}>
                                             <div onClick={() => handleFeedSelection(item)} target='_blank' className='rssFeedBox'>
