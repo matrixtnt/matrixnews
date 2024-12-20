@@ -146,6 +146,18 @@ const SignInModal = props => {
 
   // sign in with email and password
   const Signin = async () => {
+
+    if (formValues.email == "") {
+      toast.error(translate("emailRequired"))
+      return
+    }
+
+    if (formValues.password == "") {
+      toast.error(translate("pwdRequired"))
+      return
+    }
+
+
     await signInWithEmailAndPassword(auth, formValues.email, formValues.password)
       .then(async userCredential => {
         // Signed in
@@ -269,8 +281,8 @@ const SignInModal = props => {
                         <Icon icon={icon} size={20} />
                       </span>
                       <div className='error-msg'>
-                        {' '}
-                        {formErrors.password}
+                        {/* {' '}
+                        {formErrors.password} */}
                         <p
                           onClick={() => {
                             props.onHide()
