@@ -1,170 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-    <loc>https://newsweb.wrteam.me/404</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//404</loc>
+    <lastmod>2025-01-05T15:50:04.021Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//</loc>
+    <lastmod>2025-01-05T15:50:04.023Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/loading</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//loading</loc>
+    <lastmod>2025-01-05T15:50:04.023Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/rss</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//rss</loc>
+    <lastmod>2025-01-05T15:50:04.023Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//all-breaking-news</loc>
+    <lastmod>2025-01-05T15:50:04.023Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/all-breaking-news</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//bookmark</loc>
+    <lastmod>2025-01-05T15:50:04.023Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/bookmark</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//breaking-news/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/breaking-news/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//categories-news/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/categories-news/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//create-news</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/edit-news</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//edit-news</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/create-news</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//live-news</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/live-news</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//manage-news</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/manage-news</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//more-pages/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/more-pages/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//news/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/news/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//personal-notification</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/personal-notification</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//profile-update</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/profile-update</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//rss-feed</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/tag/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//tag/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/rss-feed</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//user-based-categories</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/user-based-categories</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//video-news</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/video-news</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//video-news-view/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/view-all/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//view-all/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/categories-news/sub-category/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/video-news-view/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//categories-news/sub-category/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/policy-page/terms-condition</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//policy-page/privacy-policy</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/policy-page/privacy-policy</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//policy-page/terms-condition</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/rss-feed/[feedid]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//rss-feed/[feedid]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://newsweb.wrteam.me/view-all/related-news/[slug]</loc>
-    <lastmod>2024-12-20T05:23:26.070Z</lastmod>
+    <loc>http://localhost:3000//view-all/related-news/[slug]</loc>
+    <lastmod>2025-01-05T15:50:04.024Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
